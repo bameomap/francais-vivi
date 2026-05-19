@@ -10,10 +10,16 @@ import { Confetti } from "./ui/Minou.jsx";
 
 const SUBJECTS = ["je","tu","il/elle","nous","vous","ils/elles"];
 const TENSES = [
-  { id:"present",   label:"Présent",       color:"#3B82F6" },
-  { id:"passe",     label:"Passé composé", color:"#8E44AD" },
-  { id:"futur",     label:"Futur simple",  color:"#059669" },
-  { id:"imparfait", label:"Imparfait",     color:"#D97706" },
+  // A1
+  { id:"present",    label:"Présent",           color:"#3B82F6", level:"A1" },
+  { id:"futur_pro",  label:"Futur proche",       color:"#0891B2", level:"A1" },
+  { id:"passe",      label:"Passé composé",      color:"#8E44AD", level:"A1" },
+  { id:"futur",      label:"Futur simple",       color:"#059669", level:"A1" },
+  // A2
+  { id:"imparfait",  label:"Imparfait",          color:"#D97706", level:"A2" },
+  { id:"conditionnel",label:"Conditionnel",      color:"#DC2626", level:"A2" },
+  { id:"plusque",    label:"Plus-que-parfait",   color:"#7C3AED", level:"A2" },
+  { id:"subjonctif", label:"Subjonctif présent", color:"#0D9488", level:"A2" },
 ];
 
 const COMMON_VERBS = [
@@ -156,14 +162,19 @@ export default function ConjugaisonPanel() {
       </div>
 
       {/* Tense picker */}
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.4rem" }}>
-        {TENSES.map(t => (
-          <button key={t.id} onClick={()=>{ setTense(t.id); if(result) generate(verb,t.id); }}
-            style={{ padding:"0.5rem", borderRadius:10, border:`1.5px solid ${tense===t.id?t.color:C.border}`, background:tense===t.id?t.color+"18":C.white, color:tense===t.id?t.color:C.gray, fontSize:"0.75rem", cursor:"pointer", fontWeight:tense===t.id?700:400, transition:"all 0.15s" }}>
-            {t.label}
-          </button>
-        ))}
-      </div>
+      {["A1","A2"].map(lv => (
+        <div key={lv}>
+          <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"0.35rem" }}>{lv}</div>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.35rem" }}>
+            {TENSES.filter(t=>t.level===lv).map(t => (
+              <button key={t.id} onClick={()=>{ setTense(t.id); if(result) generate(verb,t.id); }}
+                style={{ padding:"0.45rem 0.5rem", borderRadius:10, border:`1.5px solid ${tense===t.id?t.color:C.border}`, background:tense===t.id?t.color+"18":C.white, color:tense===t.id?t.color:C.gray, fontSize:"0.72rem", cursor:"pointer", fontWeight:tense===t.id?700:400, transition:"all 0.15s", textAlign:"center" }}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
 
       {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1.5rem 0" }}><Spinner /></div>}
       {err && <div style={{ color:C.red, fontSize:"0.78rem", textAlign:"center" }}>⚠ {err}</div>}
