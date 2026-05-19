@@ -7,6 +7,14 @@ import Minou, { Confetti } from "./ui/Minou.jsx";
 
 const NUM_SENTENCES = 5;
 
+// ── Script parser ─────────────────────────────────────────────
+function parseScript(text) {
+  return text
+    .split(/(?<=[.!?»])\s+|(?<=[.!?»])$|\n+/)
+    .map(s => s.replace(/^[«"'\-–—\s]+|[«»"'\s]+$/g, "").trim())
+    .filter(s => s.length > 3 && /[a-zA-ZÀ-ÿ]/.test(s));
+}
+
 // ── Text comparison ──────────────────────────────────────────
 function normalize(s = "") {
   return s.toLowerCase()
@@ -90,15 +98,17 @@ export default function DicteePanel({ words: propWords = [] }) {
     {fr:"manger"},{fr:"aller"},{fr:"beau"},{fr:"jour"},{fr:"ville"},
   ];
 
-  const [phase,     setPhase]     = useState("idle");    // idle | loading | quiz | done
-  const [sentences, setSentences] = useState([]);
-  const [current,   setCurrent]   = useState(0);
-  const [input,     setInput]     = useState("");
-  const [results,   setResults]   = useState([]);        // [{sentence, typed, grade:[]}]
-  const [checked,   setChecked]   = useState(false);
-  const [plays,     setPlays]     = useState(0);         // how many times played this sentence
-  const [confetti,  setConfetti]  = useState(false);
-  const [err,       setErr]       = useState("");
+  const [phase,      setPhase]      = useState("idle");  // idle | loading | quiz | done | review
+  const [mode,       setMode]       = useState("auto"); // auto | script
+  const [scriptText, setScriptText] = useState("");
+  const [sentences,  setSentences]  = useState([]);
+  const [current,    setCurrent]    = useState(0);
+  const [input,      setInput]      = useState("");
+  const [results,    setResults]    = useState([]);
+  const [checked,    setChecked]    = useState(false);
+  const [plays,      setPlays]      = useState(0);
+  const [confetti,   setConfetti]   = useState(false);
+  const [err,        setErr]        = useState("");
   const inputRef = useRef(null);
 
   // Auto-play on new sentence
@@ -111,14 +121,29 @@ export default function DicteePanel({ words: propWords = [] }) {
     }, 400);
   }, [current, phase]);
 
+  const startQuiz = (s) => {
+    setSentences(s); setResults([]); setCurrent(0); setInput(""); setChecked(false); setConfetti(false);
+    setPhase("quiz");
+  };
+
   const start = async () => {
+    if (mode === "script") {
+      const s = parseScript(scriptText);
+      if (s.length < 1) { setErr("Paste đoạn văn tiếng Pháp vào ô bên dưới nhé!"); return; }
+      startQuiz(s);
+      return;
+    }
     setPhase("loading"); setErr("");
     try {
       const s = await generateSentences(words);
       if (s.length < 2) throw new Error("Không đủ câu, thử lại nhé.");
-      setSentences(s); setResults([]); setCurrent(0); setInput(""); setChecked(false); setConfetti(false);
-      setPhase("quiz");
+      startQuiz(s);
     } catch(e) { setErr(e.message); setPhase("idle"); }
+  };
+
+  const restart = () => {
+    if (mode === "script") { startQuiz(parseScript(scriptText)); }
+    else { start(); }
   };
 
   const playAgain = () => {
@@ -156,24 +181,61 @@ export default function DicteePanel({ words: propWords = [] }) {
 
   // ── Idle ──
   if (phase === "idle") return (
-    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
-      <div style={{ background:C.white, borderRadius:20, padding:"1.5rem 1.2rem", border:`1.5px solid ${C.border}`, textAlign:"center" }}>
-        <div style={{ fontSize:"2.5rem", marginBottom:"0.5rem" }}>🎧</div>
-        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>Nghe &amp; chép</div>
-        <div style={{ fontSize:"0.8rem", color:C.gray, marginBottom:"0.75rem", lineHeight:1.7 }}>
-          Nghe câu tiếng Pháp → gõ lại<br/>AI chấm từng chữ, báo lỗi dấu accent
-        </div>
-        <div style={{ display:"flex", justifyContent:"center", gap:"1.5rem", fontSize:"0.75rem", color:C.gray, marginBottom:"1.2rem" }}>
+    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
+
+      {/* Header */}
+      <div style={{ background:C.white, borderRadius:20, padding:"1.2rem 1.2rem 1rem", border:`1.5px solid ${C.border}`, textAlign:"center" }}>
+        <div style={{ fontSize:"2rem", marginBottom:"0.3rem" }}>🎧</div>
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>Nghe &amp; chép</div>
+        <div style={{ display:"flex", justifyContent:"center", gap:"1.2rem", fontSize:"0.72rem", color:C.gray }}>
           <span><span style={{ background:"#ECFDF5", color:C.green, borderRadius:4, padding:"0 4px", fontWeight:700 }}>đúng</span></span>
           <span><span style={{ background:"#FFFBEB", color:"#D97706", borderRadius:4, padding:"0 4px", fontWeight:700 }}>~accent</span></span>
           <span><span style={{ background:"#FEF2F2", color:C.red, borderRadius:4, padding:"0 4px", fontWeight:700 }}>sai</span></span>
         </div>
-        {err && <div style={{ color:C.red, fontSize:"0.78rem", marginBottom:"0.8rem" }}>⚠ {err}</div>}
-        <button onClick={start}
-          style={{ padding:"0.75rem 1.8rem", background:"linear-gradient(135deg,#0891B2,#0D9488)", color:C.white, border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700, boxShadow:"0 6px 20px #0891B244" }}>
-          Bắt đầu ✦
-        </button>
       </div>
+
+      {/* Mode tabs */}
+      <div style={{ display:"flex", background:C.white, borderRadius:14, border:`1.5px solid ${C.border}`, overflow:"hidden" }}>
+        {[["auto","🤖 AI tạo câu"],["script","📝 Script của tôi"]].map(([m, label]) => (
+          <button key={m} onClick={() => { setMode(m); setErr(""); }}
+            style={{ flex:1, padding:"0.65rem", border:"none", background: mode===m ? "linear-gradient(135deg,#0891B2,#0D9488)" : "transparent", color: mode===m ? C.white : C.gray, fontSize:"0.8rem", cursor:"pointer", fontWeight:600, transition:"all 0.2s" }}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Mode content */}
+      {mode === "auto" ? (
+        <div style={{ background:C.white, borderRadius:16, padding:"1rem 1.1rem", border:`1.5px solid ${C.border}`, fontSize:"0.8rem", color:C.gray, lineHeight:1.7 }}>
+          AI tạo <b style={{ color:C.ink }}>{NUM_SENTENCES} câu A1</b> từ bộ từ vựng của bạn.<br/>
+          Nghe → gõ lại → chấm từng chữ.
+        </div>
+      ) : (
+        <div style={{ background:C.white, borderRadius:16, padding:"1rem", border:`1.5px solid ${C.border}` }}>
+          <div style={{ fontSize:"0.7rem", color:C.gray, marginBottom:"0.45rem", textTransform:"uppercase", letterSpacing:1, fontWeight:600 }}>
+            Paste đoạn văn tiếng Pháp
+          </div>
+          <textarea
+            value={scriptText}
+            onChange={e => { setScriptText(e.target.value); setErr(""); }}
+            placeholder={"Ví dụ:\nJe m'appelle Marie. J'habite à Paris.\nJ'aime beaucoup la musique et les livres."}
+            rows={5}
+            style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.65rem 0.8rem", fontSize:"0.84rem", fontFamily:"Georgia,serif", color:C.ink, resize:"vertical", lineHeight:1.7, outline:"none" }}
+          />
+          {scriptText.trim() && (
+            <div style={{ marginTop:"0.4rem", fontSize:"0.7rem", color:C.gray }}>
+              → {parseScript(scriptText).length} câu được nhận diện
+            </div>
+          )}
+        </div>
+      )}
+
+      {err && <div style={{ color:C.red, fontSize:"0.78rem", textAlign:"center" }}>⚠ {err}</div>}
+
+      <button onClick={start}
+        style={{ padding:"0.75rem", background:"linear-gradient(135deg,#0891B2,#0D9488)", color:C.white, border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700, boxShadow:"0 6px 20px #0891B244" }}>
+        Bắt đầu ✦
+      </button>
     </div>
   );
 
@@ -202,7 +264,7 @@ export default function DicteePanel({ words: propWords = [] }) {
           {pct}% từ đúng · {accentWords} lỗi accent
         </div>
         <div style={{ display:"flex", gap:"0.5rem", justifyContent:"center", marginTop:"1rem" }}>
-          <button onClick={start}
+          <button onClick={restart}
             style={{ padding:"0.55rem 1.2rem", background:"linear-gradient(135deg,#0891B2,#0D9488)", color:C.white, border:"none", borderRadius:12, fontSize:"0.82rem", cursor:"pointer", fontWeight:700 }}>
             🔄 Làm lại
           </button>
@@ -226,7 +288,7 @@ export default function DicteePanel({ words: propWords = [] }) {
           <WordDiff result={r.grade} />
         </div>
       ))}
-      <button onClick={start}
+      <button onClick={restart}
         style={{ width:"100%", marginTop:"0.5rem", padding:"0.65rem", background:"linear-gradient(135deg,#0891B2,#0D9488)", color:C.white, border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
         🔄 Làm lại
       </button>
@@ -241,11 +303,17 @@ export default function DicteePanel({ words: propWords = [] }) {
       {/* Progress */}
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
         <div style={{ fontSize:"0.72rem", color:C.gray, fontWeight:600 }}>Câu {current+1}/{sentences.length}</div>
-        <div style={{ display:"flex", gap:4 }}>
-          {sentences.map((_, i) => (
-            <div key={i} style={{ width:28, height:4, borderRadius:999, background: i < current ? C.green : i===current ? C.blue : C.border, transition:"background 0.3s" }}/>
-          ))}
-        </div>
+        {sentences.length <= 10 ? (
+          <div style={{ display:"flex", gap:4 }}>
+            {sentences.map((_, i) => (
+              <div key={i} style={{ width:22, height:4, borderRadius:999, background: i < current ? C.green : i===current ? C.blue : C.border, transition:"background 0.3s" }}/>
+            ))}
+          </div>
+        ) : (
+          <div style={{ width:120, height:6, borderRadius:999, background:C.border, overflow:"hidden" }}>
+            <div style={{ height:"100%", width:`${Math.round((current+1)/sentences.length*100)}%`, background:C.blue, borderRadius:999, transition:"width 0.3s" }}/>
+          </div>
+        )}
       </div>
 
       {/* Play card */}
