@@ -6,6 +6,7 @@ import { C } from "./constants.js";
 
 import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
+import Minou from "./components/ui/Minou.jsx";
 import { SecLabel, QCard, SaveModal, ImportModal } from "./components/ui/SharedUI.jsx";
 import { MCSection, FillSection, MatchSection, DicteeSection, FlashcardSection, AnagrammeSection } from "./components/QuizSections.jsx";
 import ConversationPanel from "./components/ConversationPanel.jsx";
@@ -347,10 +348,19 @@ function AppInner() {
           {/* ── Greeting ── */}
           <div style={{ padding:"1.2rem 1.25rem 0.5rem", animation:"fadeUp 0.4s ease" }}>
             <div style={{ fontSize:"0.78rem", color:C.gray, marginBottom:"0.15rem" }}>Bonjour 🇫🇷</div>
-            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, lineHeight:1.2, marginBottom:"0.6rem" }}>
               {userName || "Bạn ơi"}!
             </div>
-            <div style={{ fontSize:"0.85rem", color:C.gray, marginTop:"0.25rem" }}>Sẵn sàng học bài hôm nay chưa?</div>
+            <Minou
+              mood={streakData.streak >= 7 ? "excited" : srsStats.due === 0 && srsStats.total > 0 ? "proud" : "happy"}
+              message={
+                streakData.streak >= 7 ? `Streak ${streakData.streak} ngày!! Fantastique! 🔥` :
+                srsStats.due === 0 && srsStats.total > 0 ? "Ôn tập xong rồi, bravo! ✨" :
+                srsStats.due > 0 ? `Còn ${srsStats.due} từ chờ ôn nhé~ 📚` :
+                "Bonne chance hôm nay! On y va! 🌟"
+              }
+              align="left"
+            />
           </div>
 
           {/* ── Bài hôm nay (SRS due priority) ── */}
@@ -552,10 +562,12 @@ function AppInner() {
                   );
                 })() : (
                   /* Empty state — no words */
-                  <div style={{ background:C.white, border:`2px dashed ${C.border}`, borderRadius:16, padding:"2rem 1rem", textAlign:"center" }}>
-                    <div style={{ fontSize:"2.5rem", marginBottom:"0.5rem" }}>🚧</div>
-                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, marginBottom:"0.3rem" }}>Chưa có từ vựng</div>
-                    <div style={{ fontSize:"0.78rem", color:C.gray, marginBottom:"1rem", lineHeight:1.6 }}>Khu vực đang thi công!<br/>Thêm từ hoặc chọn bộ từ có sẵn bên dưới nhé.</div>
+                  <div style={{ background:C.white, border:`2px dashed ${C.border}`, borderRadius:16, padding:"1.75rem 1rem", textAlign:"center" }}>
+                    <div style={{ display:"flex", justifyContent:"center", marginBottom:"0.75rem" }}>
+                      <Minou mood="sleeping" message="Chưa có từ vựng nào... Zzz" size="md"/>
+                    </div>
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, marginBottom:"0.3rem" }}>Thêm từ để bắt đầu nhé!</div>
+                    <div style={{ fontSize:"0.75rem", color:C.gray, marginBottom:"0.9rem" }}>Chọn bộ từ có sẵn hoặc nhập thủ công bên dưới.</div>
                     <button onClick={()=>setEditOpen(true)}
                       style={{ padding:"0.55rem 1.2rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:12, fontSize:"0.82rem", cursor:"pointer", fontWeight:600 }}>
                       ✏️ Thêm từ vựng
@@ -634,10 +646,12 @@ function AppInner() {
               <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
                 <div style={{ fontSize:"0.78rem", fontWeight:700, color:C.blue, marginBottom:"0.8rem" }}>📂 Bộ từ đã lưu</div>
                 {sets.length===0
-                  ? <div style={{ textAlign:"center", padding:"2.5rem 1rem" }}>
-                      <div style={{ fontSize:"2.8rem", marginBottom:"0.6rem" }}>🗂️</div>
-                      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, marginBottom:"0.35rem" }}>Chưa có bộ từ nào</div>
-                      <div style={{ fontSize:"0.78rem", color:C.gray, lineHeight:1.7, marginBottom:"1.1rem" }}>Khu vực đang thi công! 🚧<br/>Nhập từ vựng và nhấn <b>💾 Lưu</b> để lưu bộ từ đầu tiên.</div>
+                  ? <div style={{ textAlign:"center", padding:"1.5rem 1rem" }}>
+                      <div style={{ display:"flex", justifyContent:"center", marginBottom:"0.75rem" }}>
+                        <Minou mood="thinking" message="Chưa lưu bộ từ nào..." size="md"/>
+                      </div>
+                      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, marginBottom:"0.3rem" }}>Lưu bộ từ đầu tiên nhé!</div>
+                      <div style={{ fontSize:"0.75rem", color:C.gray, lineHeight:1.6, marginBottom:"0.9rem" }}>Nhập từ vựng và nhấn <b>💾 Lưu</b> để giữ lại.</div>
                       <button onClick={()=>setView("input")} style={{ padding:"0.5rem 1.2rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:12, fontSize:"0.82rem", cursor:"pointer", fontWeight:600 }}>
                         📚 Đến trang từ vựng
                       </button>
@@ -695,10 +709,12 @@ function AppInner() {
                     </div>
                   </div>
                   {entries.length===0
-                    ?<div style={{textAlign:"center",padding:"2.5rem 1rem"}}>
-                      <div style={{fontSize:"2.8rem",marginBottom:"0.6rem"}}>📊</div>
-                      <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"1rem",color:C.ink,marginBottom:"0.35rem"}}>Chưa có dữ liệu</div>
-                      <div style={{fontSize:"0.78rem",color:C.gray,lineHeight:1.7,marginBottom:"1.1rem"}}>Khu vực đang thi công! 🚧<br/>Làm bài tập để bắt đầu theo dõi tiến độ.</div>
+                    ?<div style={{textAlign:"center",padding:"1.5rem 1rem"}}>
+                      <div style={{ display:"flex", justifyContent:"center", marginBottom:"0.75rem" }}>
+                        <Minou mood="thinking" message="Làm bài tập đi rồi mình cùng xem!" size="md"/>
+                      </div>
+                      <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"0.95rem",color:C.ink,marginBottom:"0.3rem"}}>Chưa có dữ liệu</div>
+                      <div style={{fontSize:"0.75rem",color:C.gray,lineHeight:1.6,marginBottom:"0.9rem"}}>Làm bài tập để bắt đầu theo dõi tiến độ.</div>
                       <button onClick={()=>setView("input")} style={{padding:"0.5rem 1.2rem",background:`linear-gradient(135deg,${C.blue},${C.blueDark})`,color:C.white,border:"none",borderRadius:12,fontSize:"0.82rem",cursor:"pointer",fontWeight:600}}>
                         🎯 Luyện tập ngay
                       </button>
