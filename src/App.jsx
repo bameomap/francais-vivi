@@ -16,6 +16,8 @@ import AnalysePanel from "./components/AnalysePanel.jsx";
 import GrammarPanel from "./components/GrammarPanel.jsx";
 import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./components/VocabGenerator.jsx";
 import DefiPanel from "./components/DefiPanel.jsx";
+import SRSPanel from "./components/SRSPanel.jsx";
+import { addWordToSRS, getSRSStats } from "./utils/srs.js";
 
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
@@ -27,13 +29,14 @@ const MODULES = [
   { id:"weakspots",    label:"Điểm yếu",       fr:"Les Points Faibles",icon:"🎯", color:"#E8574A", bg:"#FFF0EF", view:"weakspots"  },
   { id:"analyse",      label:"Phân tích",      fr:"L'Analyse",        icon:"🔍", color:"#10B981", bg:"#ECFDF5", view:"analyse"     },
   { id:"defi",         label:"Thử thách",      fr:"Le Défi du Jour",  icon:"🎲", color:"#8E44AD", bg:"#F5EEFF", view:"defi"        },
+  { id:"srs",          label:"Thẻ ôn tập",     fr:"La Répétition",    icon:"🧠", color:"#0D9488", bg:"#F0FDFA", view:"srs"         },
 ];
 
 const TABS = [
   { id:"home",       icon:"🏠", label:"Trang chủ" },
   { id:"vocab",      icon:"📚", label:"Từ vựng"   },
+  { id:"srs",        icon:"🧠", label:"Ôn tập"    },
   { id:"defi",       icon:"🎲", label:"Thử thách" },
-  { id:"conjugaison",icon:"📖", label:"Động từ"   },
   { id:"more",       icon:"⋯",  label:"Thêm"      },
 ];
 
@@ -68,6 +71,7 @@ function AppInner() {
   const [nameInput, setNameInput]       = useState("");
   const [streakData, setStreakData]     = useState(getStreak);
   const [progress, setProgress]         = useState(getProgress);
+  const [srsStats, setSrsStats]         = useState(getSRSStats);
 
   const words = parseWords(text);
   const CLIENT_TYPES = ["dictee","flashcard","anagramme"];
@@ -91,7 +95,13 @@ function AppInner() {
       const e = prev[word] || { ok:0, wrong:0 };
       return { ...prev, [word]: { ok: e.ok+(isOk?1:0), wrong: e.wrong+(isOk?0:1) } };
     });
-  }, []);
+    // Auto-add word to SRS deck when encountered in quizzes
+    const wordObj = words.find(w => w.fr === word);
+    if (wordObj) {
+      addWordToSRS(wordObj.fr, wordObj.vi);
+      setSrsStats(getSRSStats());
+    }
+  }, [words]);
 
   const recordWrong = useCallback((q) => {
     setWrongAnswers(prev => prev.find(x => x.question===q.question) ? prev : [...prev, q]);
@@ -363,6 +373,12 @@ function AppInner() {
                 <button key={m.id} className="card-hover"
                   onClick={()=>goSection(m.id, m.view)}
                   style={{ background:m.bg, border:`1.5px solid ${m.color}33`, borderRadius:20, padding:"1.1rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.35s ease ${i*0.04}s both`, position:"relative", boxShadow:`0 2px 12px ${m.color}18` }}>
+                  {/* SRS due badge */}
+                  {m.id==="srs" && srsStats.due>0 && (
+                    <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
+                      {srsStats.due}
+                    </div>
+                  )}
                   <div style={{ fontSize:"1.8rem", marginBottom:"0.5rem" }}>{m.icon}</div>
                   <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem" }}>{m.label}</div>
                   <div style={{ fontSize:"0.68rem", color:m.color, fontStyle:"italic", marginBottom: used?"0.5rem":"0" }}>{m.fr}</div>
@@ -630,6 +646,7 @@ function AppInner() {
             {view==="writing"      && <WritingPanel/>}
             {view==="weakspots"    && <WeakSpotsPanel/>}
             {view==="conversation" && <ConversationPanel/>}
+            {view==="srs"          && <SRSPanel currentWords={words} />}
           </div>
         </>
       )}
@@ -655,7 +672,14 @@ function AppInner() {
                 {isActive && (
                   <div style={{ position:"absolute", top:6, width:28, height:3, background:C.blue, borderRadius:999, animation:"pop 0.25s ease" }}/>
                 )}
-                <span style={{ fontSize:"1.25rem", lineHeight:1, marginTop:isActive?6:0, transition:"margin 0.15s" }}>{tab.icon}</span>
+                <div style={{ position:"relative" }}>
+                  <span style={{ fontSize:"1.25rem", lineHeight:1, marginTop:isActive?6:0, transition:"margin 0.15s", display:"block" }}>{tab.icon}</span>
+                  {tab.id==="srs" && srsStats.due>0 && (
+                    <div style={{ position:"absolute", top:-4, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:16, height:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.55rem", fontWeight:700, padding:"0 3px" }}>
+                      {srsStats.due}
+                    </div>
+                  )}
+                </div>
                 <span style={{ fontSize:"0.6rem", color:isActive?C.blue:C.gray, fontWeight:isActive?700:400, letterSpacing:0.2, transition:"color 0.15s" }}>{tab.label}</span>
               </button>
             );
