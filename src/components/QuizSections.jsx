@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { SecLabel, QCard } from "./ui/SharedUI.jsx";
@@ -225,60 +225,193 @@ export function DicteeSection({ words, onRecord }) {
 
 // ── Flashcard Section ───────────────────────────────────────
 export function FlashcardSection({ words, onRecord }) {
-  const [idx, setIdx] = useState(0);
-  const [phase, setPhase] = useState("show");
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState(null);
-  const [score, setScore] = useState({ ok:0, total:0 });
-  const [timeLeft, setTimeLeft] = useState(3);
-  const w = words[idx];
+  const total = words.length;
+  const makeCards = (ws) => ws.map((w, i) => ({ id:`${w.fr}-${i}`, front:w.fr, back:w.vi, status:"unseen" }));
 
-  useEffect(() => {
-    if (phase!=="show") return;
-    setTimeLeft(3);
-    const iv = setInterval(()=>setTimeLeft(t=>{ if(t<=1){clearInterval(iv);setPhase("type");return 0;} return t-1; }),1000);
-    return ()=>clearInterval(iv);
-  }, [phase, idx]);
+  const [deck,         setDeck]         = useState(() => makeCards(words));
+  const [idx,          setIdx]          = useState(0);
+  const [flipped,      setFlipped]      = useState(false);
+  const [learnedCount, setLearnedCount] = useState(0);
+  const touchX = useRef(null);
 
-  const check = () => {
-    const ok = input.trim().toLowerCase()===w.fr.toLowerCase();
-    setResult(ok); setPhase("result");
-    setScore(s=>({ok:s.ok+(ok?1:0),total:s.total+1}));
-    onRecord?.(w.fr, ok);
+  const current  = deck[idx];
+  const done     = deck.length === 0;
+  const pct      = Math.round((learnedCount / total) * 100);
+
+  const flip    = ()  => setFlipped(f => !f);
+
+  const goNext  = ()  => {
+    if (idx >= deck.length - 1) return;
+    setFlipped(false);
+    setTimeout(() => setIdx(i => i + 1), 180);
   };
-  const next = () => { setIdx(i=>Math.min(i+1,words.length-1)); setInput(""); setResult(null); setPhase("show"); };
+
+  const goPrev  = ()  => {
+    if (idx <= 0) return;
+    setFlipped(false);
+    setTimeout(() => setIdx(i => i - 1), 180);
+  };
+
+  const markLearned = () => {
+    onRecord?.(current.front, true);
+    const next = deck.filter((_, i) => i !== idx);
+    setLearnedCount(c => c + 1);
+    setFlipped(false);
+    setDeck(next);
+    setIdx(i => Math.min(i, next.length - 1));
+  };
+
+  const markLearning = () => {
+    onRecord?.(current.front, false);
+    const next = [...deck];
+    const [card] = next.splice(idx, 1);
+    next.push({ ...card, status:"learning" });
+    setFlipped(false);
+    setDeck(next);
+    setIdx(i => Math.min(i, next.length - 1));
+  };
+
+  const shuffle = () => {
+    setDeck(d => [...d].sort(() => Math.random() - 0.5));
+    setIdx(0); setFlipped(false);
+  };
+
+  const reset = () => {
+    setDeck(makeCards(words).sort(() => Math.random() - 0.5));
+    setIdx(0); setFlipped(false); setLearnedCount(0);
+  };
+
+  // Keyboard
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft")  goPrev();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  });
+
+  // Swipe
+  const onTouchStart = (e) => { touchX.current = e.touches[0].clientX; };
+  const onTouchEnd   = (e) => {
+    if (!touchX.current) return;
+    const diff = touchX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 48) { diff > 0 ? goNext() : goPrev(); }
+    touchX.current = null;
+  };
+
+  // ── Completion screen ──
+  if (done) return (
+    <div style={{ textAlign:"center", padding:"2.5rem 1rem", animation:"fadeUp 0.3s ease" }}>
+      <div style={{ fontSize:"3.5rem", marginBottom:"0.6rem" }}>🎉</div>
+      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>Xong hết rồi!</div>
+      <div style={{ fontSize:"0.85rem", color:C.gray, marginBottom:"1.5rem" }}>Đã thuộc {learnedCount}/{total} từ</div>
+      <button onClick={reset}
+        style={{ padding:"0.65rem 1.8rem", background:`linear-gradient(135deg,${C.blue},${C.purple})`, color:C.white, border:"none", borderRadius:14, fontSize:"0.9rem", cursor:"pointer", fontWeight:700, boxShadow:`0 4px 16px ${C.blue}44` }}>
+        🔄 Học lại từ đầu
+      </button>
+    </div>
+  );
 
   return (
     <div>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.7rem" }}>
+      {/* Header */}
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.6rem" }}>
         <SecLabel icon="🃏" text="Flashcard" />
-        <span style={{ fontFamily:"Georgia,serif", color:C.purple, fontSize:"0.88rem" }}>{score.ok}/{score.total}</span>
+        <div style={{ display:"flex", gap:"0.4rem", alignItems:"center" }}>
+          <span style={{ fontSize:"0.68rem", color:C.gray }}>{learnedCount}/{total} thuộc</span>
+          <button onClick={shuffle}
+            style={{ padding:"0.2rem 0.55rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.68rem", cursor:"pointer" }}>
+            🔀 Trộn
+          </button>
+        </div>
       </div>
-      <div style={{ background:C.white, border:`1.5px solid ${phase==="result"?(result?C.green:C.red):C.border}`, borderRadius:12, padding:"1.5rem 1rem", textAlign:"center" }}>
-        <div style={{ fontSize:"0.65rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.7rem" }}>{idx+1} / {words.length}</div>
-        {phase==="show" && <>
-          <div style={{ fontFamily:"Georgia,serif", fontSize:"1.5rem", color:C.purple, marginBottom:"0.3rem" }}>{w.fr} <SpeakBtn text={w.fr} size="1rem"/></div>
-          {w.vi && <div style={{ fontSize:"0.82rem", color:C.gray }}>{w.vi}</div>}
-          <div style={{ marginTop:"1rem", display:"flex", alignItems:"center", justifyContent:"center", gap:"0.5rem" }}>
-            <div style={{ width:36, height:36, borderRadius:"50%", border:`3px solid ${C.purple}`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"Georgia,serif", fontSize:"1.1rem", color:C.purple, fontWeight:600 }}>{timeLeft}</div>
-            <span style={{ fontSize:"0.72rem", color:C.gray }}>Ghi nhớ...</span>
+
+      {/* Progress bar */}
+      <div style={{ height:5, background:C.border, borderRadius:999, marginBottom:"1rem", overflow:"hidden" }}>
+        <div style={{ height:"100%", width:`${pct}%`, background:C.green, borderRadius:999, transition:"width 0.4s ease" }}/>
+      </div>
+
+      {/* Card with 3D flip */}
+      <div
+        onClick={flip} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
+        style={{ perspective:1200, cursor:"pointer", marginBottom:"0.9rem", userSelect:"none" }}>
+        <div style={{
+          position:"relative", height:220,
+          transformStyle:"preserve-3d",
+          transition:"transform 0.42s cubic-bezier(0.4,0,0.2,1)",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}>
+          {/* Front */}
+          <div style={{
+            position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden",
+            background:C.white, border:`1.5px solid ${C.blue}44`, borderRadius:22,
+            display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem",
+            boxShadow:"0 4px 24px rgba(74,144,217,0.10)",
+          }}>
+            <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"1rem" }}>🇫🇷 Tiếng Pháp</div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.blue, fontWeight:700, textAlign:"center", marginBottom:"0.5rem", lineHeight:1.2 }}>
+              {current.front}
+            </div>
+            <SpeakBtn text={current.front} />
+            <div style={{ marginTop:"1.2rem", fontSize:"0.65rem", color:C.gray, display:"flex", alignItems:"center", gap:"0.3rem" }}>
+              <span style={{ background:C.border, borderRadius:4, padding:"0.1rem 0.4rem", fontSize:"0.6rem" }}>Space</span> hoặc nhấn thẻ để xem nghĩa
+            </div>
+            {current.status === "learning" && (
+              <div style={{ position:"absolute", top:12, right:14, fontSize:"0.6rem", color:C.gold, fontWeight:700, background:C.goldL, borderRadius:20, padding:"0.1rem 0.4rem" }}>🔁 Ôn lại</div>
+            )}
           </div>
-        </>}
-        {phase==="type" && <>
-          <div style={{ fontFamily:"Georgia,serif", fontSize:"1rem", color:C.gray, marginBottom:"0.8rem" }}>Viết lại từ vừa thấy:</div>
-          <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&check()} autoFocus
-            placeholder="Nhập từ tiếng Pháp..."
-            style={{ width:"100%", maxWidth:260, border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.5rem 0.8rem", fontSize:"1rem", fontFamily:"Georgia,serif", textAlign:"center", outline:"none", boxSizing:"border-box" }} />
-          <div style={{ marginTop:"0.8rem" }}><button onClick={check} style={{ padding:"0.35rem 1rem", border:"none", borderRadius:6, background:C.purple, color:C.white, fontSize:"0.78rem", cursor:"pointer" }}>Kiểm tra</button></div>
-        </>}
-        {phase==="result" && <>
-          <div style={{ fontFamily:"Georgia,serif", fontSize:"1.3rem", color:result?C.green:C.red, marginBottom:"0.3rem" }}>{input||"—"}</div>
-          {!result && <div style={{ fontSize:"0.82rem", color:C.green, marginBottom:"0.3rem" }}>✓ Đúng: <b>{w.fr}</b></div>}
-          <div style={{ fontSize:"0.78rem", color:result?C.green:C.red, marginBottom:"0.8rem" }}>{result?"✓ Chính xác!":"✗ Chưa đúng"}</div>
-          {idx<words.length-1 ? <button onClick={next} style={{ padding:"0.35rem 1rem", border:"none", borderRadius:6, background:C.purple, color:C.white, fontSize:"0.78rem", cursor:"pointer" }}>Tiếp theo →</button>
-            : <div style={{ color:C.purple, fontFamily:"Georgia,serif" }}>🎉 Xong! {score.ok+(result?1:0)}/{words.length} đúng</div>}
-        </>}
+
+          {/* Back */}
+          <div style={{
+            position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden",
+            transform:"rotateY(180deg)",
+            background:`linear-gradient(135deg, ${C.blueL}, #f0f4ff)`,
+            border:`1.5px solid ${C.blue}88`, borderRadius:22,
+            display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem",
+            boxShadow:"0 4px 24px rgba(74,144,217,0.14)",
+          }}>
+            <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"1rem" }}>🇻🇳 Tiếng Việt</div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.7rem", color:C.ink, fontWeight:700, textAlign:"center", lineHeight:1.3 }}>
+              {current.back || "—"}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Navigation row */}
+      <div style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:"0.75rem", marginBottom:"0.85rem" }}>
+        <button onClick={goPrev} disabled={idx === 0}
+          style={{ width:40, height:40, background:"transparent", border:`1.5px solid ${idx===0?C.border:C.gray}`, color:idx===0?C.border:C.gray, borderRadius:"50%", fontSize:"1rem", cursor:idx===0?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>
+          ←
+        </button>
+        <span style={{ fontSize:"0.72rem", color:C.gray, minWidth:64, textAlign:"center" }}>
+          {idx + 1} / {deck.length}
+        </span>
+        <button onClick={goNext} disabled={idx === deck.length - 1}
+          style={{ width:40, height:40, background:"transparent", border:`1.5px solid ${idx===deck.length-1?C.border:C.gray}`, color:idx===deck.length-1?C.border:C.gray, borderRadius:"50%", fontSize:"1rem", cursor:idx===deck.length-1?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>
+          →
+        </button>
+      </div>
+
+      {/* Status buttons — shown only after flip */}
+      {flipped ? (
+        <div style={{ display:"flex", gap:"0.6rem", animation:"fadeUp 0.2s ease" }}>
+          <button onClick={markLearning}
+            style={{ flex:1, padding:"0.65rem", background:"#FFF7ED", border:"1.5px solid #F97316", color:"#EA580C", borderRadius:14, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, transition:"all 0.15s" }}>
+            🔁 Đang học
+          </button>
+          <button onClick={markLearned}
+            style={{ flex:1, padding:"0.65rem", background:C.greenL, border:`1.5px solid ${C.green}`, color:C.green, borderRadius:14, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, transition:"all 0.15s" }}>
+            ✓ Đã thuộc
+          </button>
+        </div>
+      ) : (
+        <div style={{ textAlign:"center", fontSize:"0.68rem", color:C.gray }}>
+          Lật thẻ để đánh giá mức độ ghi nhớ
+        </div>
+      )}
     </div>
   );
 }
