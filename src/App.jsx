@@ -14,6 +14,7 @@ import GrammarPanel from "./components/GrammarPanel.jsx";
 import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./components/VocabGenerator.jsx";
 import DefiPanel from "./components/DefiPanel.jsx";
 import SRSPanel from "./components/SRSPanel.jsx";
+import ReferencePanel from "./components/ReferencePanel.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 
 // ── Module definitions ──────────────────────────────────────
@@ -24,6 +25,7 @@ const MODULES = [
   { id:"writing",      label:"Luyện viết",    fr:"L'Écriture",      icon:"✍️", color:"#E67E22", bg:"#FEF3E2", view:"writing"     },
   { id:"defi",         label:"Thử thách",     fr:"Le Défi du Jour", icon:"🎲", color:"#8E44AD", bg:"#F5EEFF", view:"defi"        },
   { id:"srs",          label:"Thẻ ôn tập",    fr:"La Répétition",   icon:"🧠", color:"#0D9488", bg:"#F0FDFA", view:"srs"         },
+  { id:"reference",    label:"Cẩm nang",      fr:"La Référence",    icon:"📖", color:"#6D28D9", bg:"#F5F0FF", view:"reference"   },
 ];
 
 const TABS = [
@@ -36,7 +38,7 @@ const TABS = [
 
 const SECTION_TITLE = {
   vocab:"Le Vocabulaire", grammar:"La Grammaire", conversation:"La Conversation",
-  writing:"L'Écriture", defi:"Le Défi du Jour"
+  writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
 };
 
 // ── Main App ────────────────────────────────────────────────
@@ -741,6 +743,7 @@ function AppInner() {
             {view==="writing"      && <WritingPanel/>}
             {view==="conversation" && <ConversationPanel/>}
             {view==="srs"          && <SRSPanel currentWords={words} />}
+            {view==="reference"    && <ReferencePanel/>}
           </div>
         </>
       )}
