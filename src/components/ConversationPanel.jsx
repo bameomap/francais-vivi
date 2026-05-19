@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
+import { awardXP } from "../utils/xp.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 
 export const EDITO_SCENARIOS = [
@@ -55,12 +56,14 @@ function parseMsg(text) {
 }
 
 export default function ConversationPanel() {
-  const [scenario, setScenario] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
+  const [scenario,    setScenario]    = useState(null);
+  const [messages,    setMessages]    = useState([]);
+  const [input,       setInput]       = useState("");
+  const [loading,     setLoading]     = useState(false);
+  const [err,         setErr]         = useState("");
   const [showPhrases, setShowPhrases] = useState(false);
+  const [correcting,  setCorrecting]  = useState(null); // index of msg being corrected
+  const [corrections, setCorrections] = useState({});   // { msgIdx: correctionText }
   const bottomRef = useRef(null);
 
   const startScenario = async (sc) => {
@@ -85,8 +88,21 @@ export default function ConversationPanel() {
       const apiMsgs = newMsgs.map(m => ({ role: m.role, content: m.text }));
       const reply = await callAIText(apiMsgs, scenario.prompt);
       setMessages(m => [...m, { role:"assistant", text: reply }]);
+      awardXP(3);
     } catch(e) { setErr(e.message); }
     setLoading(false);
+  };
+
+  const correctMsg = async (idx, text) => {
+    setCorrecting(idx);
+    try {
+      const fb = await callAIText(
+        [{ role:"user", content:`Câu tiếng Pháp của học sinh: "${text}"\n\nHãy:\n1. Chỉ ra lỗi sai (nếu có) bằng tiếng Việt\n2. Đưa ra câu đúng\n3. Giải thích ngắn gọn lý do\n\nNếu câu đã đúng hoàn toàn, chỉ cần nói "Câu đúng rồi! ✅"` }],
+        "Bạn là giáo viên tiếng Pháp. Trả lời ngắn gọn, thân thiện, bằng tiếng Việt."
+      );
+      setCorrections(c => ({ ...c, [idx]: fb }));
+    } catch(e) { setCorrections(c => ({ ...c, [idx]: "⚠ Không thể phân tích lúc này." })); }
+    setCorrecting(null);
   };
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior:"smooth" }); }, [messages]);
@@ -137,10 +153,24 @@ export default function ConversationPanel() {
         {messages.map((m, i) => {
           const isUser = m.role === "user";
           if (isUser) return (
-            <div key={i} style={{ display:"flex", justifyContent:"flex-end" }}>
-              <div style={{ background:scenario.color, color:C.white, borderRadius:"16px 16px 4px 16px", padding:"0.6rem 0.95rem", maxWidth:"80%", fontSize:"0.88rem", lineHeight:1.6, fontFamily:"Georgia,serif" }}>
-                {m.text}
+            <div key={i} style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"0.3rem" }}>
+              <div style={{ display:"flex", alignItems:"flex-end", gap:"0.4rem", justifyContent:"flex-end" }}>
+                <button
+                  onClick={() => corrections[i] ? setCorrections(c=>({...c,[i]:undefined})) : correctMsg(i, m.text)}
+                  disabled={correcting===i}
+                  style={{ padding:"0.2rem 0.55rem", background:"transparent", border:`1px solid ${scenario.color}66`, borderRadius:20, color:scenario.color, fontSize:"0.62rem", cursor:"pointer", opacity:correcting===i?0.6:1, whiteSpace:"nowrap", flexShrink:0 }}>
+                  {correcting===i ? "…" : corrections[i] ? "Ẩn" : "Sửa câu"}
+                </button>
+                <div style={{ background:scenario.color, color:C.white, borderRadius:"16px 16px 4px 16px", padding:"0.6rem 0.95rem", maxWidth:"75%", fontSize:"0.88rem", lineHeight:1.6, fontFamily:"Georgia,serif" }}>
+                  {m.text}
+                </div>
               </div>
+              {corrections[i] && (
+                <div style={{ background:"#FFFBEB", border:`1.5px solid ${C.gold}55`, borderRadius:"10px 10px 10px 4px", padding:"0.55rem 0.8rem", maxWidth:"82%", animation:"fadeUp 0.2s ease" }}>
+                  <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1, color:C.gold, fontWeight:700, marginBottom:"0.3rem" }}>Phân tích câu</div>
+                  <div style={{ fontSize:"0.75rem", color:"#7a5c00", lineHeight:1.65, whiteSpace:"pre-wrap" }}>{corrections[i]}</div>
+                </div>
+              )}
             </div>
           );
           const { main, corrections } = parseMsg(m.text);
