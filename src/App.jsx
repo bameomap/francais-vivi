@@ -23,6 +23,8 @@ import StatsPanel from "./components/StatsPanel.jsx";
 import PhrasebookPanel from "./components/PhrasebookPanel.jsx";
 import RevisionPanel from "./components/RevisionPanel.jsx";
 import ConjugaisonPanel from "./components/ConjugaisonPanel.jsx";
+import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
+import ListeningQuiz from "./components/ListeningQuiz.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 
@@ -30,6 +32,7 @@ import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./ut
 const MODULES = [
   // Học
   { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"input"        },
+  { id:"topics",       group:"hoc", label:"Chủ đề A1",    fr:"Les Thèmes",       icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"topics"       },
   { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
   { id:"conjugaison",  group:"hoc", label:"Chia động từ",  fr:"La Conjugaison",   icon:"🖊️", color:"#0891B2", bg:"#F0F9FF", view:"conjugaison"  },
   { id:"reference",    group:"hoc", label:"Cẩm nang",      fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference"    },
@@ -41,15 +44,16 @@ const MODULES = [
   { id:"lecture",      group:"luyen", label:"Đọc hiểu",    fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"      },
   { id:"dictee",       group:"luyen", label:"Nghe chép",   fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"dictee"       },
   { id:"srs",          group:"luyen", label:"Thẻ ôn tập",  fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"          },
+  { id:"listening",    group:"luyen", label:"Nghe chọn",   fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"listening"    },
   { id:"revision",     group:"luyen", label:"Ôn sai",      fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"     },
   // Công cụ
   { id:"stats",        group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"        },
 ];
 
 const GROUP_DEFS = [
-  { id:"vocab",    icon:"📖", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","srs"] },
+  { id:"vocab",    icon:"📖", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","topics","srs"] },
   { id:"grammar",  icon:"⚜️", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","conjugaison","reference","phrasebook"] },
-  { id:"practice", icon:"🥐", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee"] },
+  { id:"practice", icon:"🥐", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee","listening"] },
   { id:"progress", icon:"📈", label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
 ];
 
@@ -66,7 +70,7 @@ const SECTION_TITLE = {
   writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée",
   phrasebook:"Le Phrasebook", revision:"La Révision", stats:"Les Statistiques",
-  conjugaison:"La Conjugaison",
+  conjugaison:"La Conjugaison", topics:"Les Thèmes A1", listening:"L'Écoute Active",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -920,6 +924,8 @@ function AppInner() {
             {view==="revision"     && <RevisionPanel />}
             {view==="stats"        && <StatsPanel />}
             {view==="conjugaison"  && <ConjugaisonPanel />}
+            {view==="topics"       && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}
+            {view==="listening"    && <ListeningQuiz />}
           </div>
         </>
       )}

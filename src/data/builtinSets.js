@@ -1,0 +1,115 @@
+export const BUILTIN_SETS = [
+  {
+    id: "couleurs", icon: "🎨", label: "Les couleurs", desc: "Màu sắc", color: "#E67E22",
+    words: [
+      { fr:"rouge",   vi:"màu đỏ" },       { fr:"bleu",    vi:"màu xanh dương" },
+      { fr:"vert",    vi:"màu xanh lá" },   { fr:"jaune",   vi:"màu vàng" },
+      { fr:"blanc",   vi:"màu trắng" },     { fr:"noir",    vi:"màu đen" },
+      { fr:"rose",    vi:"màu hồng" },      { fr:"orange",  vi:"màu cam" },
+      { fr:"violet",  vi:"màu tím" },       { fr:"gris",    vi:"màu xám" },
+      { fr:"marron",  vi:"màu nâu" },
+    ],
+  },
+  {
+    id: "chiffres", icon: "🔢", label: "Les chiffres", desc: "Số đếm 1–20", color: "#4A90D9",
+    words: [
+      { fr:"un",     vi:"một" },    { fr:"deux",   vi:"hai" },    { fr:"trois",  vi:"ba" },
+      { fr:"quatre", vi:"bốn" },    { fr:"cinq",   vi:"năm" },    { fr:"six",    vi:"sáu" },
+      { fr:"sept",   vi:"bảy" },    { fr:"huit",   vi:"tám" },    { fr:"neuf",   vi:"chín" },
+      { fr:"dix",    vi:"mười" },   { fr:"onze",   vi:"mười một" }, { fr:"douze", vi:"mười hai" },
+      { fr:"quinze", vi:"mười lăm" }, { fr:"vingt", vi:"hai mươi" }, { fr:"cent",  vi:"một trăm" },
+    ],
+  },
+  {
+    id: "famille", icon: "🏡", label: "La famille", desc: "Gia đình", color: "#D35400",
+    words: [
+      { fr:"le père",       vi:"bố" },         { fr:"la mère",       vi:"mẹ" },
+      { fr:"le frère",      vi:"anh/em trai" }, { fr:"la sœur",       vi:"chị/em gái" },
+      { fr:"le grand-père", vi:"ông nội/ngoại"}, { fr:"la grand-mère", vi:"bà nội/ngoại" },
+      { fr:"l'oncle",       vi:"chú/bác" },     { fr:"la tante",      vi:"cô/dì" },
+      { fr:"le mari",       vi:"chồng" },        { fr:"la femme",      vi:"vợ" },
+      { fr:"le fils",       vi:"con trai" },     { fr:"la fille",      vi:"con gái" },
+      { fr:"le bébé",       vi:"em bé" },
+    ],
+  },
+  {
+    id: "animaux", icon: "🐱", label: "Les animaux", desc: "Động vật", color: "#7B6CF6",
+    words: [
+      { fr:"le chat",      vi:"con mèo" },    { fr:"le chien",    vi:"con chó" },
+      { fr:"l'oiseau",     vi:"con chim" },   { fr:"le poisson",  vi:"con cá" },
+      { fr:"le lapin",     vi:"con thỏ" },    { fr:"le cheval",   vi:"con ngựa" },
+      { fr:"la vache",     vi:"con bò" },     { fr:"le cochon",   vi:"con lợn" },
+      { fr:"le mouton",    vi:"con cừu" },    { fr:"l'éléphant",  vi:"con voi" },
+      { fr:"le lion",      vi:"con sư tử" },  { fr:"le tigre",    vi:"con hổ" },
+    ],
+  },
+  {
+    id: "nourriture", icon: "🥐", label: "La nourriture", desc: "Đồ ăn & thức uống", color: "#E67E22",
+    words: [
+      { fr:"le pain",          vi:"bánh mì" },       { fr:"le croissant",    vi:"bánh sừng bò" },
+      { fr:"le fromage",       vi:"phô mai" },        { fr:"le beurre",       vi:"bơ" },
+      { fr:"l'œuf",            vi:"quả trứng" },      { fr:"le lait",         vi:"sữa" },
+      { fr:"le café",          vi:"cà phê" },          { fr:"le thé",          vi:"trà" },
+      { fr:"la pomme",         vi:"quả táo" },         { fr:"la banane",       vi:"quả chuối" },
+      { fr:"la viande",        vi:"thịt" },            { fr:"la salade",       vi:"rau trộn" },
+      { fr:"le gâteau",        vi:"bánh ngọt" },       { fr:"l'eau",           vi:"nước" },
+      { fr:"le jus d'orange",  vi:"nước cam" },
+    ],
+  },
+  {
+    id: "jours", icon: "📅", label: "Les jours & mois", desc: "Thứ & tháng trong năm", color: "#059669",
+    words: [
+      { fr:"lundi",     vi:"thứ Hai" },  { fr:"mardi",    vi:"thứ Ba" },     { fr:"mercredi", vi:"thứ Tư" },
+      { fr:"jeudi",     vi:"thứ Năm" },  { fr:"vendredi", vi:"thứ Sáu" },    { fr:"samedi",   vi:"thứ Bảy" },
+      { fr:"dimanche",  vi:"Chủ Nhật" }, { fr:"janvier",  vi:"tháng Một" },  { fr:"février",  vi:"tháng Hai" },
+      { fr:"mars",      vi:"tháng Ba" }, { fr:"avril",    vi:"tháng Tư" },   { fr:"mai",      vi:"tháng Năm" },
+      { fr:"juin",      vi:"tháng Sáu" },{ fr:"juillet",  vi:"tháng Bảy" },  { fr:"août",     vi:"tháng Tám" },
+      { fr:"septembre", vi:"tháng Chín" },{ fr:"octobre", vi:"tháng Mười" }, { fr:"novembre", vi:"tháng 11" },
+      { fr:"décembre",  vi:"tháng 12" },
+    ],
+  },
+  {
+    id: "meteo", icon: "☀️", label: "La météo", desc: "Thời tiết", color: "#0891B2",
+    words: [
+      { fr:"il fait beau",     vi:"trời đẹp" },      { fr:"il fait chaud",   vi:"trời nóng" },
+      { fr:"il fait froid",    vi:"trời lạnh" },      { fr:"il pleut",        vi:"trời mưa" },
+      { fr:"il neige",         vi:"tuyết rơi" },      { fr:"il y a du vent",  vi:"có gió" },
+      { fr:"le soleil",        vi:"mặt trời / nắng" },{ fr:"la pluie",        vi:"mưa" },
+      { fr:"le nuage",         vi:"đám mây" },         { fr:"la neige",        vi:"tuyết" },
+      { fr:"l'orage",          vi:"cơn giông" },       { fr:"le brouillard",   vi:"sương mù" },
+    ],
+  },
+  {
+    id: "corps", icon: "🫀", label: "Le corps humain", desc: "Bộ phận cơ thể", color: "#DC2626",
+    words: [
+      { fr:"la tête",   vi:"cái đầu" },  { fr:"les yeux",   vi:"đôi mắt" },
+      { fr:"le nez",    vi:"cái mũi" },  { fr:"la bouche",  vi:"cái miệng" },
+      { fr:"l'oreille", vi:"cái tai" },  { fr:"le bras",    vi:"cánh tay" },
+      { fr:"la main",   vi:"bàn tay" },  { fr:"la jambe",   vi:"cái chân" },
+      { fr:"le pied",   vi:"bàn chân" }, { fr:"le ventre",  vi:"cái bụng" },
+      { fr:"le dos",    vi:"cái lưng" }, { fr:"le cœur",    vi:"trái tim" },
+    ],
+  },
+  {
+    id: "maison", icon: "🏠", label: "La maison", desc: "Nhà & đồ nội thất", color: "#D97706",
+    words: [
+      { fr:"la chambre",        vi:"phòng ngủ" },     { fr:"la cuisine",   vi:"nhà bếp" },
+      { fr:"le salon",          vi:"phòng khách" },    { fr:"la salle de bain", vi:"phòng tắm" },
+      { fr:"le jardin",         vi:"khu vườn" },       { fr:"le lit",       vi:"cái giường" },
+      { fr:"la table",          vi:"cái bàn" },        { fr:"la chaise",    vi:"cái ghế" },
+      { fr:"le canapé",         vi:"ghế sofa" },       { fr:"la fenêtre",   vi:"cửa sổ" },
+      { fr:"la porte",          vi:"cái cửa" },        { fr:"l'armoire",    vi:"tủ quần áo" },
+    ],
+  },
+  {
+    id: "vetements", icon: "👗", label: "Les vêtements", desc: "Quần áo & phụ kiện", color: "#8E44AD",
+    words: [
+      { fr:"le manteau",    vi:"áo khoác dài" },  { fr:"la veste",       vi:"áo jacket" },
+      { fr:"le pantalon",   vi:"quần dài" },       { fr:"la robe",        vi:"váy đầm" },
+      { fr:"la jupe",       vi:"váy ngắn" },       { fr:"le t-shirt",     vi:"áo phông" },
+      { fr:"la chemise",    vi:"áo sơ mi" },       { fr:"les chaussures", vi:"giày" },
+      { fr:"les chaussettes",vi:"tất/vớ" },        { fr:"le chapeau",     vi:"mũ rộng vành" },
+      { fr:"le sac",        vi:"túi xách" },        { fr:"la ceinture",    vi:"thắt lưng" },
+    ],
+  },
+];
