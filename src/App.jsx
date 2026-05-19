@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
-import { C, DEFAULTS } from "./constants.js";
+import { C } from "./constants.js";
 
 import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
@@ -45,7 +45,7 @@ const SECTION_TITLE = {
 export default function App() { return <AppInner />; }
 
 function AppInner() {
-  const [text, setText]                 = useState(DEFAULTS);
+  const [text, setText]                 = useState(() => localStorage.getItem("vocab_text") || "");
   const [type, setType]                 = useState("multiple_choice");
   const [numQ, setNumQ]                 = useState(8);
   const [quiz, setQuiz]                 = useState(null);
@@ -69,6 +69,7 @@ function AppInner() {
   const [filterMastered, setFilterMastered] = useState(true); // exclude mastered by default
   const [editOpen, setEditOpen]             = useState(false); // textarea hidden by default
 
+  const setTextPersist = (val) => { setText(val); localStorage.setItem("vocab_text", val); };
   const words = parseWords(text);
   const CLIENT_TYPES = ["dictee","flashcard","anagramme"];
   const TYPE_NAMES = { multiple_choice:"Trắc nghiệm", fill_blank:"Điền từ", matching:"Nối từ", dictee:"Dictée", flashcard:"Flashcard", anagramme:"Anagramme", mixed:"Hỗn hợp" };
@@ -223,7 +224,7 @@ function AppInner() {
 
       {/* ── Modals ── */}
       {showSave   && <SaveModal   text={text} onSave={handleSave}                                    onClose={()=>setShowSave(false)}   />}
-      {showImport && <ImportModal onImport={t=>{setText(t);showToast("✓ Import thành công!");}} onClose={()=>setShowImport(false)} />}
+      {showImport && <ImportModal onImport={t=>{setTextPersist(t);showToast("✓ Import thành công!");}} onClose={()=>setShowImport(false)} />}
 
 
       {/* ── ONBOARDING ── */}
@@ -521,10 +522,10 @@ function AppInner() {
                 {/* ── Collapsible Editor ── */}
                 {editOpen && (
                   <div style={{ display:"flex", flexDirection:"column", gap:"0.7rem", animation:"fadeUp 0.2s ease" }}>
-                    <EditoPresets onLoad={u=>{setText(u.words);showToast(`✓ Đã load ${u.title}!`);setEditOpen(false);}}/>
+                    <EditoPresets onLoad={u=>{setTextPersist(u.words);showToast(`✓ Đã load ${u.title}!`);setEditOpen(false);}}/>
                     <VocabGenerator onGenerate={generated=>{
                       const lines = generated.map(w=>`${w.fr} — ${w.vi}`).join("\n");
-                      setText(lines); setView("vocab-table"); setGeneratedVocab(generated); setEditOpen(false);
+                      setTextPersist(lines); setView("vocab-table"); setGeneratedVocab(generated); setEditOpen(false);
                     }}/>
                     <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                       <div style={{ fontSize:"0.72rem", fontWeight:600, color:C.gray }}>📝 Nhập từ vựng thủ công</div>
@@ -533,7 +534,7 @@ function AppInner() {
                         {words.length>=3 && <button onClick={()=>setShowSave(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.blue}`, color:C.blue, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>💾 Lưu</button>}
                       </div>
                     </div>
-                    <textarea value={text} onChange={e=>setText(e.target.value)}
+                    <textarea value={text} onChange={e=>setTextPersist(e.target.value)}
                       placeholder={"la boulangerie — tiệm bánh mì\nle marché — chợ\n..."}
                       style={{ width:"100%", height:145, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.65rem 0.75rem", fontFamily:"inherit", fontSize:"0.85rem", background:C.white, resize:"vertical", color:C.ink, lineHeight:1.7, boxSizing:"border-box" }}/>
                     <div style={{ fontSize:"0.7rem", color:C.gray }}>
@@ -605,7 +606,7 @@ function AppInner() {
                           <div style={{ fontSize:"0.72rem", color:C.gray }}>{s.count} từ · {s.date}</div>
                         </div>
                         <div style={{ display:"flex", gap:"0.35rem" }}>
-                          <button onClick={()=>{setText(s.text);setView("input");showToast("✓ Đã load!");}}
+                          <button onClick={()=>{setTextPersist(s.text);setView("input");showToast("✓ Đã load!");}}
                             style={{ padding:"0.3rem 0.7rem", background:C.blue, color:C.white, border:"none", borderRadius:8, fontSize:"0.72rem", cursor:"pointer", fontWeight:600 }}>Ôn lại</button>
                           <button onClick={()=>{const u=sets.filter(x=>x.id!==s.id);setSets(u);saveSets(u);}}
                             style={{ padding:"0.3rem 0.55rem", background:"transparent", color:C.gray, border:`1.5px solid ${C.border}`, borderRadius:8, fontSize:"0.72rem", cursor:"pointer" }}>🗑</button>
@@ -645,7 +646,7 @@ function AppInner() {
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.85rem"}}>
                     <div style={{fontSize:"0.78rem",fontWeight:700,color:C.blue}}>📊 Thống kê</div>
                     <div style={{display:"flex",gap:"0.4rem"}}>
-                      {weakWords.length>0&&<button onClick={()=>{setText(weakWords.join("\n"));setQuiz(null);setView("input");showToast("✓ Đã load từ yếu!");}} style={{padding:"0.25rem 0.65rem",background:C.blue,color:C.white,border:"none",borderRadius:20,fontSize:"0.65rem",cursor:"pointer",fontWeight:600}}>🎯 Ôn từ yếu ({weak.length})</button>}
+                      {weakWords.length>0&&<button onClick={()=>{setTextPersist(weakWords.join("\n"));setQuiz(null);setView("input");showToast("✓ Đã load từ yếu!");}} style={{padding:"0.25rem 0.65rem",background:C.blue,color:C.white,border:"none",borderRadius:20,fontSize:"0.65rem",cursor:"pointer",fontWeight:600}}>🎯 Ôn từ yếu ({weak.length})</button>}
                       {entries.length>0&&<button onClick={()=>{setStats({});showToast("✓ Đã xóa");}} style={{padding:"0.25rem 0.55rem",background:"transparent",color:C.gray,border:`1.5px solid ${C.border}`,borderRadius:20,fontSize:"0.65rem",cursor:"pointer"}}>🗑</button>}
                     </div>
                   </div>
