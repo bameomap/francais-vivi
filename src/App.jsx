@@ -41,6 +41,50 @@ const SECTION_TITLE = {
   writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
 };
 
+// ── Examples view with bulk select ──────────────────────────
+function ExamplesView({ words }) {
+  const [selected, setSelected] = useState(() => new Set());
+  const [triggers, setTriggers] = useState({});
+  const allSelected = words.length > 0 && selected.size === words.length;
+
+  const toggleAll = () => setSelected(allSelected ? new Set() : new Set(words.map(w => w.fr)));
+  const toggle = fr => setSelected(prev => { const s = new Set(prev); s.has(fr) ? s.delete(fr) : s.add(fr); return s; });
+  const batchGen = () => setTriggers(prev => {
+    const next = { ...prev };
+    for (const fr of selected) next[fr] = (next[fr] || 0) + 1;
+    return next;
+  });
+
+  return (
+    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
+      {/* Header bar */}
+      <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginBottom:"0.75rem", flexWrap:"wrap" }}>
+        <div style={{ fontSize:"0.78rem", fontWeight:700, color:C.blue, flex:1 }}>💬 Câu ví dụ & phân tích</div>
+        <button onClick={toggleAll}
+          style={{ padding:"0.22rem 0.62rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>
+          {allSelected ? "Bỏ chọn tất cả" : "Chọn tất cả"}
+        </button>
+        {selected.size > 0 && (
+          <button onClick={batchGen}
+            style={{ padding:"0.28rem 0.75rem", background:C.purple, color:C.white, border:"none", borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontWeight:600 }}>
+            Tạo {selected.size} từ ✦
+          </button>
+        )}
+      </div>
+
+      {words.map((w, i) => (
+        <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:"0.4rem" }}>
+          <input type="checkbox" checked={selected.has(w.fr)} onChange={() => toggle(w.fr)}
+            style={{ marginTop:"0.78rem", flexShrink:0, cursor:"pointer", accentColor:C.purple, width:15, height:15 }}/>
+          <div style={{ flex:1 }}>
+            <ExampleCard word={w} triggerKey={triggers[w.fr] || 0}/>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Main App ────────────────────────────────────────────────
 export default function App() { return <AppInner />; }
 
@@ -731,12 +775,7 @@ function AppInner() {
             )}
 
             {/* EXAMPLES */}
-            {view==="examples" && (
-              <div style={{padding:"1rem",animation:"fadeUp 0.3s ease"}}>
-                <div style={{fontSize:"0.78rem",fontWeight:700,color:C.blue,marginBottom:"0.8rem"}}>💬 Câu ví dụ & phân tích</div>
-                {words.map((w,i)=><ExampleCard key={i} word={w}/>)}
-              </div>
-            )}
+            {view==="examples" && <ExamplesView words={words}/>}
 
             {/* Panels */}
             {view==="grammar"      && <GrammarPanel/>}

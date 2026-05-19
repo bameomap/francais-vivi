@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI, MODEL } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 
 // ── Example Card ───────────────────────────────────────────
-export function ExampleCard({ word }) {
+export function ExampleCard({ word, triggerKey = 0 }) {
   const [state, setState] = useState("idle");
   const [data, setData] = useState(null);
   const [err, setErr] = useState("");
+  useEffect(() => {
+    if (triggerKey > 0 && state === "idle") gen();
+  }, [triggerKey]);
+
   const gen = async () => {
     setState("loading");
     try {
