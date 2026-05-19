@@ -4,6 +4,7 @@ import { callAI } from "../utils/api.js";
 import { markStudiedToday, loadSets } from "../utils/storage.js";
 import { getAllCards } from "../utils/srs.js";
 import Spinner from "./ui/Spinner.jsx";
+import Minou, { Confetti } from "./ui/Minou.jsx";
 
 const DEFI_KEY = "defi_history";
 
@@ -86,6 +87,7 @@ export default function DefiPanel() {
   const [err, setErr]       = useState("");
   const [done, setDone]     = useState(false);
   const [score, setScore]   = useState({ ok:0, total:0 });
+  const [confetti, setConfetti] = useState(false);
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem(DEFI_KEY) || "[]"); } catch { return []; }
   });
@@ -118,6 +120,7 @@ export default function DefiPanel() {
 
   const finish = (ok, total) => {
     setDone(true); setScore({ ok, total });
+    if (Math.round(ok / total * 100) >= 80) setConfetti(true);
     markStudiedToday();
     const pct   = Math.round(ok / total * 100);
     const label = TYPES.find(t => t.id === mode)?.label || "Thử thách";
@@ -238,20 +241,25 @@ export default function DefiPanel() {
   // ── Result ──
   if (done) {
     const pct = Math.round(score.ok / score.total * 100);
+    const minouMood = pct >= 80 ? "excited" : pct >= 60 ? "happy" : "sad";
+    const minouMsg  = pct >= 80 ? "Parfait! Xuất sắc quá! 🎉" : pct >= 60 ? "Bien joué! Cố lên nha! 💪" : "Không sao, luyện thêm nhé~ 🐱";
     return (
       <div style={{ padding:"1rem" }}>
+        <Confetti active={confetti} onDone={() => setConfetti(false)} />
         <div style={{ background:C.white, border:`1.5px solid ${pctColor(pct)}44`, borderRadius:16, padding:"1.75rem 1.2rem", textAlign:"center", animation:"fadeUp 0.3s ease" }}>
-          <div style={{ fontSize:"3.5rem", marginBottom:"0.4rem" }}>{medal(pct)}</div>
+          <div style={{ marginBottom:"0.9rem", display:"flex", justifyContent:"center" }}>
+            <Minou mood={minouMood} message={minouMsg} size="lg" />
+          </div>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:pctColor(pct), fontWeight:700, lineHeight:1 }}>{score.ok}/{score.total}</div>
           <div style={{ fontSize:"0.82rem", color:C.gray, marginTop:"0.4rem", marginBottom:"1.5rem" }}>
             {pct >= 80 ? "Xuất sắc! 🌟" : pct >= 60 ? "Rất tốt! Tiếp tục nhé!" : "Cần ôn thêm — bạn làm được!"}
           </div>
           <div style={{ display:"flex", gap:"0.5rem" }}>
-            <button onClick={() => generate(mode)}
+            <button onClick={() => { setConfetti(false); generate(mode); }}
               style={{ flex:1, padding:"0.7rem", background:"linear-gradient(135deg,#8e44ad,#6b4fbb)", color:C.white, border:"none", borderRadius:10, fontFamily:"Georgia,serif", fontSize:"0.88rem", cursor:"pointer" }}>
               🔄 Làm lại
             </button>
-            <button onClick={() => { setMode(null); setDefi(null); }}
+            <button onClick={() => { setConfetti(false); setMode(null); setDefi(null); }}
               style={{ flex:1, padding:"0.7rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.ink, borderRadius:10, fontSize:"0.88rem", cursor:"pointer" }}>
               🎲 Đổi loại
             </button>
