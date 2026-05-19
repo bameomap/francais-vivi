@@ -5,6 +5,7 @@ import { markStudiedToday, loadSets } from "../utils/storage.js";
 import { getAllCards } from "../utils/srs.js";
 import Spinner from "./ui/Spinner.jsx";
 import Minou, { Confetti } from "./ui/Minou.jsx";
+import { logMistake } from "../utils/storage.js";
 
 const DEFI_KEY = "defi_history";
 
@@ -331,7 +332,12 @@ export function DefiQuiz({ defi, onFinish }) {
                   } else if (answers[i] === opt) { bg=C.purpleL; bc=C.purple; col=C.purple; }
                   return (
                     <button key={j} disabled={isRevealed}
-                      onClick={() => { setAnswers(a=>({...a,[i]:opt})); setRevealed(r=>({...r,[i]:true})); }}
+                      onClick={() => {
+                        setAnswers(a=>({...a,[i]:opt})); setRevealed(r=>({...r,[i]:true}));
+                        if (opt.toLowerCase() !== (q.answer||"").toLowerCase()) {
+                          logMistake({ fr: q.answer||opt, vi:"", context: q.q, module:"defi" });
+                        }
+                      }}
                       style={{ padding:"0.45rem 0.55rem", border:`1.5px solid ${bc}`, borderRadius:9, background:bg, color:col, fontSize:"0.8rem", cursor:isRevealed?"default":"pointer", textAlign:"left", fontFamily:"inherit", transition:"all 0.12s" }}>
                       {opt}
                     </button>
