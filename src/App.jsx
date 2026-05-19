@@ -16,6 +16,7 @@ import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./comp
 import DefiPanel from "./components/DefiPanel.jsx";
 import SRSPanel from "./components/SRSPanel.jsx";
 import ReferencePanel from "./components/ReferencePanel.jsx";
+import MotDuJour from "./components/MotDuJour.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 
 // ── Module definitions ──────────────────────────────────────
@@ -446,8 +447,11 @@ function AppInner() {
             </div>
           )}
 
+          {/* ── Mot du Jour ── */}
+          <MotDuJour words={words} />
+
           {/* ── Module Grid ── */}
-          <div style={{ padding:"0.25rem 1.25rem 0", fontSize:"0.9rem", fontWeight:700, color:C.ink }}>Khám phá</div>
+          <div style={{ padding:"0.25rem 1.25rem 0", marginTop:"0.85rem", fontSize:"0.9rem", fontWeight:700, color:C.ink }}>Khám phá</div>
           <div className="module-grid" style={{ padding:"0.6rem 1rem 1rem", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem", flex:1 }}>
             {MODULES.map((m, i) => {
               const p = progress[m.id];
