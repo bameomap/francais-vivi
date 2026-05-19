@@ -1,6 +1,7 @@
 import { C } from "../constants.js";
 import { getStreak, getProgress, getStudyHistory, loadSets } from "../utils/storage.js";
 import { getSRSStats, getAllCards } from "../utils/srs.js";
+import { getXPData, getLevel, getNextLevel, getBadges, BADGE_DEFS } from "../utils/xp.js";
 
 const MODULES_META = [
   { id:"vocab",        label:"Từ vựng",    icon:"📚", color:"#4A90D9" },
@@ -145,6 +146,12 @@ export default function StatsPanel() {
   const srsStats = getSRSStats();
   const allCards = getAllCards();
   const sets     = loadSets();
+  const xpData   = getXPData();
+  const xp       = xpData.total || 0;
+  const level    = getLevel(xp);
+  const nextLv   = getNextLevel(xp);
+  const xpPct    = nextLv ? Math.round((xp - level.min) / (nextLv.min - level.min) * 100) : 100;
+  const earnedBadges = getBadges();
 
   const totalVocab  = allCards.length;
   const masteredCnt = srsStats.mastered;
@@ -169,6 +176,38 @@ export default function StatsPanel() {
 
   return (
     <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.75rem", animation:"fadeUp 0.3s ease" }}>
+
+      {/* ── XP & Level ── */}
+      {card(<>
+        {sectionLabel("Cấp độ")}
+        <div style={{ display:"flex", alignItems:"center", gap:"0.85rem", marginBottom:"0.65rem" }}>
+          <span style={{ fontSize:"2rem" }}>{level.icon}</span>
+          <div style={{ flex:1 }}>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:level.color, fontWeight:700 }}>{level.label}</div>
+            <div style={{ fontSize:"0.68rem", color:C.gray }}>{xp} XP{nextLv ? ` · còn ${nextLv.min-xp} XP lên ${nextLv.label}` : " · Cấp tối đa!"}</div>
+          </div>
+        </div>
+        <div style={{ height:8, background:C.border, borderRadius:999, overflow:"hidden" }}>
+          <div style={{ height:"100%", width:`${xpPct}%`, background:level.color, borderRadius:999 }}/>
+        </div>
+      </>)}
+
+      {/* ── Badges ── */}
+      {card(<>
+        {sectionLabel(`Huy hiệu · ${earnedBadges.size}/${BADGE_DEFS.length}`)}
+        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.4rem" }}>
+          {BADGE_DEFS.map(b => {
+            const earned = earnedBadges.has(b.id);
+            return (
+              <div key={b.id} title={`${b.label}: ${b.desc}`}
+                style={{ display:"flex", alignItems:"center", gap:"0.3rem", padding:"0.3rem 0.6rem", background:earned?"#F5F0FF":C.cream, border:`1.5px solid ${earned?"#7C3AED44":C.border}`, borderRadius:20, opacity:earned?1:0.4 }}>
+                <span style={{ fontSize:"0.95rem" }}>{b.icon}</span>
+                <span style={{ fontSize:"0.65rem", color:earned?"#7C3AED":C.gray, fontWeight:earned?700:400 }}>{b.label}</span>
+              </div>
+            );
+          })}
+        </div>
+      </>)}
 
       {/* ── Hero stats ── */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"0.5rem" }}>

@@ -1,207 +1,219 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
+import { awardXP, increment, checkBadges, BADGE_DEFS } from "../utils/xp.js";
+import { getSRSStats } from "../utils/srs.js";
+import { getStreak } from "../utils/storage.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
+import { Confetti } from "./ui/Minou.jsx";
 
+const SUBJECTS = ["je","tu","il/elle","nous","vous","ils/elles"];
 const TENSES = [
-  { id:"présent",         label:"Présent",          desc:"Hiện tại" },
-  { id:"passé composé",   label:"Passé composé",    desc:"Quá khứ hoàn thành" },
-  { id:"imparfait",       label:"Imparfait",         desc:"Quá khứ chưa hoàn thành" },
-  { id:"futur proche",    label:"Futur proche",      desc:"Tương lai gần" },
-  { id:"futur simple",    label:"Futur simple",      desc:"Tương lai đơn" },
-  { id:"conditionnel",    label:"Conditionnel",      desc:"Điều kiện" },
-  { id:"subjonctif",      label:"Subjonctif",        desc:"Giả định" },
-  { id:"impératif",       label:"Impératif",         desc:"Mệnh lệnh" },
+  { id:"present",   label:"Présent",       color:"#3B82F6" },
+  { id:"passe",     label:"Passé composé", color:"#8E44AD" },
+  { id:"futur",     label:"Futur simple",  color:"#059669" },
+  { id:"imparfait", label:"Imparfait",     color:"#D97706" },
 ];
 
-const QUICK_VERBS = ["être","avoir","aller","faire","venir","pouvoir","vouloir","prendre","partir","manger","parler","finir","voir","savoir","mettre"];
+const COMMON_VERBS = [
+  "être","avoir","aller","faire","pouvoir","vouloir","savoir",
+  "venir","voir","prendre","parler","manger","finir","aimer","dormir",
+];
 
-export function ConjugQuizItem({ q, idx }) {
-  const [val, setVal] = useState("");
-  const [done, setDone] = useState(false);
-  const ok = done && val.trim().toLowerCase() === (q.answer||"").toLowerCase();
+function buildPrompt(verb, tense) {
+  const tenseLabel = TENSES.find(t=>t.id===tense)?.label || tense;
+  return {
+    role:"user",
+    content:`Chia động từ "${verb}" ở thì ${tenseLabel} cho 6 ngôi.
+JSON hợp lệ KHÔNG có markdown:
+{"verb":"${verb}","tense":"${tenseLabel}","group":"nhóm (1/2/3/irrégulier)","conjugations":["forme_je","forme_tu","forme_il","forme_nous","forme_vous","forme_ils"],"tip":"mẹo nhớ ngắn tiếng Việt tối đa 15 từ"}`
+  };
+}
+
+function ConjugQuiz({ conjugation, onDone }) {
+  const [inputs,  setInputs]  = useState(Array(6).fill(""));
+  const [checked, setChecked] = useState(false);
+  const refs = useRef([]);
+
+  const norm = s => s.toLowerCase().trim().replace(/['''`]/g,"'");
+  const results = conjugation.conjugations.map((ans,i) => {
+    const t = norm(inputs[i]), a = norm(ans);
+    if (t === a) return "ok";
+    if (a.includes(" ") && a.endsWith(t)) return "ok"; // allow missing aux
+    return "wrong";
+  });
+  const score = results.filter(r=>r==="ok").length;
+  const pct   = Math.round(score/6*100);
+
   return (
-    <div style={{ background:C.white, border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:10, padding:"0.75rem 0.9rem" }}>
-      <div style={{ fontSize:"0.63rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.35rem" }}>
-        Câu {idx+1} · <span style={{ color:"#16a085" }}>{q.tense}</span> · {q.pronoun}
-      </div>
-      <div style={{ fontFamily:"Georgia,serif", fontSize:"0.9rem", marginBottom:"0.5rem", lineHeight:1.5, color:C.ink }}>{q.sentence}</div>
-      {q.hint && <div style={{ fontSize:"0.7rem", color:C.gold, marginBottom:"0.4rem" }}>💡 {q.hint}</div>}
-      <div style={{ display:"flex", gap:"0.38rem", alignItems:"center" }}>
-        <input value={val} disabled={done} onChange={e=>setVal(e.target.value)} onKeyDown={e=>e.key==="Enter"&&!done&&setDone(true)}
-          placeholder={`${q.pronoun} ___`}
-          style={{ border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:6, padding:"0.3rem 0.6rem", fontSize:"0.88rem", fontFamily:"Georgia,serif", width:160, background:done?(ok?"#e8f7f1":"#fde8e6"):C.white, color:done?(ok?C.green:C.red):C.ink, outline:"none" }} />
-        {!done && <button onClick={()=>setDone(true)} style={{ padding:"0.3rem 0.65rem", background:C.purple, color:C.white, border:"none", borderRadius:6, fontSize:"0.73rem", cursor:"pointer" }}>Kiểm tra</button>}
-        {done && <span style={{ fontSize:"0.73rem", color:ok?C.green:C.red, fontWeight:500 }}>{ok ? "✓ Đúng!" : `✗ Đáp án: ${q.answer}`}</span>}
-        {done && !ok && <SpeakBtn text={q.answer} />}
-      </div>
+    <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
+      <div style={{ fontSize:"0.68rem", color:C.gray, textAlign:"center", marginBottom:"0.1rem" }}>Điền dạng chia đúng · Enter để chuyển ô</div>
+      {SUBJECTS.map((sub,i) => {
+        const st = checked ? results[i] : "idle";
+        return (
+          <div key={i} style={{ display:"grid", gridTemplateColumns:"0.7fr 1fr", gap:"0.4rem", alignItems:"center" }}>
+            <div style={{ fontSize:"0.8rem", color:C.gray, fontStyle:"italic", textAlign:"right", paddingRight:"0.3rem" }}>{sub}</div>
+            <div style={{ position:"relative" }}>
+              <input
+                ref={el=>refs.current[i]=el}
+                value={inputs[i]} disabled={checked}
+                onChange={e=>setInputs(v=>v.map((x,j)=>j===i?e.target.value:x))}
+                onKeyDown={e=>{ if(e.key==="Enter"){ if(i<5) refs.current[i+1]?.focus(); else setChecked(true); }}}
+                placeholder="…"
+                style={{ width:"100%", padding:"0.48rem 0.65rem", border:`1.5px solid ${checked?(st==="ok"?C.green:C.red):C.border}`, borderRadius:10, background:checked?(st==="ok"?"#ECFDF5":"#FEF2F2"):C.white, fontSize:"0.88rem", fontFamily:"Georgia,serif", color:C.ink, outline:"none", boxSizing:"border-box" }}
+              />
+              {checked && st==="wrong" && (
+                <div style={{ fontSize:"0.68rem", color:C.green, fontWeight:700, marginTop:"0.15rem" }}>→ {conjugation.conjugations[i]}</div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+      {!checked ? (
+        <button onClick={()=>setChecked(true)}
+          style={{ padding:"0.55rem", background:C.blue, color:C.white, border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, marginTop:"0.25rem" }}>
+          Chấm ✓
+        </button>
+      ) : (
+        <div style={{ textAlign:"center", marginTop:"0.25rem" }}>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.5rem", color:pct>=80?"#059669":pct>=60?C.gold:C.red, fontWeight:700 }}>{score}/6</div>
+          <button onClick={onDone}
+            style={{ marginTop:"0.45rem", padding:"0.4rem 1rem", background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, fontSize:"0.78rem", cursor:"pointer", color:C.ink }}>
+            🔄 Thử lại
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 export default function ConjugaisonPanel() {
-  const [verb, setVerb] = useState("");
-  const [tenses, setTenses] = useState(["présent","passé composé","futur proche"]);
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
-  const [quizMode, setQuizMode] = useState(false);
-  const [quiz, setQuiz] = useState(null);
-  const [quizLoading, setQuizLoading] = useState(false);
+  const [verb,     setVerb]     = useState("");
+  const [tense,    setTense]    = useState("present");
+  const [loading,  setLoading]  = useState(false);
+  const [result,   setResult]   = useState(null);
+  const [err,      setErr]      = useState("");
+  const [mode,     setMode]     = useState("table");
+  const [quizKey,  setQuizKey]  = useState(0);
+  const [confetti, setConfetti] = useState(false);
+  const [toast,    setToast]    = useState("");
 
-  const toggleTense = t => setTenses(prev => prev.includes(t) ? prev.filter(x=>x!==t) : [...prev, t]);
+  const showToast = msg => { setToast(msg); setTimeout(()=>setToast(""),2800); };
 
-  const lookup = async (v) => {
-    const target = v || verb;
-    if (!target.trim()) return;
-    setLoading(true); setErr(""); setResult(null); setQuiz(null); setQuizMode(false);
+  const generate = async (v, t) => {
+    const target = (v||verb).trim();
+    if (!target) return;
+    setLoading(true); setErr(""); setResult(null); setMode("table");
     try {
-      const r = await callAI(`You are a French grammar expert. Conjugate the verb "${target.trim()}" for these tenses: ${tenses.join(", ")}.
-Return ONLY JSON:
-{
-  "verb": "infinitive",
-  "meaning": "Vietnamese meaning",
-  "group": "1er groupe|2e groupe|3e groupe|irrégulier",
-  "auxiliary": "avoir|être",
-  "tenses": [
-    {
-      "tense": "tense name",
-      "tense_vi": "Vietnamese tense name",
-      "usage": "one-line usage tip in Vietnamese",
-      "forms": [
-        {"pronoun":"je","form":"conjugated form","example":"short example sentence"}
-      ]
-    }
-  ]
-}`);
-      setResult(r);
+      const data = await callAI(buildPrompt(target, t||tense));
+      setResult(data);
+      awardXP(5);
+      const conjCount = increment("conjugaison_count");
+      const srs = getSRSStats();
+      const streak = getStreak();
+      const earned = checkBadges({ srsTotal:srs.total, mastered:srs.mastered, streak:streak.streak, conjugaisonCount:conjCount });
+      if (earned.length) {
+        const badge = BADGE_DEFS.find(b=>b.id===earned[0]);
+        if (badge) showToast(`🏅 Badge mới: ${badge.icon} ${badge.label}!`);
+      }
     } catch(e) { setErr(e.message); }
     setLoading(false);
   };
 
-  const generateQuiz = async () => {
-    if (!result) return;
-    setQuizLoading(true); setQuiz(null);
-    try {
-      const r = await callAI(`French teacher. Create 8 fill-in-the-blank conjugation exercises for the verb "${result.verb}" using these tenses: ${tenses.join(", ")}.
-Return ONLY JSON:
-{"questions":[{"sentence":"French sentence with ___ for the verb form","answer":"correct conjugated form","pronoun":"the pronoun used","tense":"tense name","hint":"Vietnamese hint about the tense"}]}`);
-      setQuiz(r);
-    } catch(e) { setErr(e.message); }
-    setQuizLoading(false);
-  };
-
-  const groupColor = g => ({"1er groupe":C.green,"2e groupe":C.purple,"3e groupe":C.gold,"irrégulier":C.red}[g]||C.gray);
+  const tenseColor = TENSES.find(t=>t.id===tense)?.color || C.blue;
 
   return (
-    <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.85rem" }}>
-      <div style={{ fontSize:"0.72rem", fontWeight:600, color:"#16a085" }}>📖 Conjugaison</div>
-      <div style={{ fontSize:"0.73rem", color:C.gray, lineHeight:1.6 }}>Nhập một động từ — xem bảng chia đầy đủ và luyện tập ngay.</div>
+    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
+      <Confetti active={confetti} onDone={()=>setConfetti(false)} />
 
-      {/* Input */}
-      <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.85rem", display:"flex", flexDirection:"column", gap:"0.65rem" }}>
-        <div style={{ display:"flex", gap:"0.5rem" }}>
-          <input value={verb} onChange={e=>setVerb(e.target.value)} onKeyDown={e=>e.key==="Enter"&&lookup()}
-            placeholder="Nhập động từ... vd: manger"
-            style={{ flex:1, border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.5rem 0.75rem", fontSize:"0.88rem", fontFamily:"Georgia,serif", outline:"none", color:C.ink }} />
-          <button onClick={()=>lookup()} disabled={loading||!verb.trim()}
-            style={{ padding:"0.5rem 0.9rem", background: verb.trim()?"#16a085":C.border, color:C.white, border:"none", borderRadius:8, fontSize:"0.82rem", cursor: verb.trim()?"pointer":"default", fontFamily:"Georgia,serif" }}>
-            {loading?"...":"Xem ✦"}
+      {toast && (
+        <div style={{ position:"fixed", top:20, left:"50%", transform:"translateX(-50%)", background:C.ink, color:C.white, padding:"0.55rem 1.2rem", borderRadius:24, fontSize:"0.8rem", zIndex:400, whiteSpace:"nowrap", boxShadow:"0 4px 20px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
+          {toast}
+        </div>
+      )}
+
+      {/* Verb input */}
+      <div style={{ background:C.white, borderRadius:16, padding:"1rem", border:`1.5px solid ${C.border}` }}>
+        <div style={{ fontSize:"0.65rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.5rem", fontWeight:600 }}>Nhập động từ</div>
+        <div style={{ display:"flex", gap:"0.4rem" }}>
+          <input
+            value={verb} onChange={e=>setVerb(e.target.value)}
+            onKeyDown={e=>e.key==="Enter"&&generate()}
+            placeholder="aller, être, parler…"
+            style={{ flex:1, padding:"0.6rem 0.8rem", border:`1.5px solid ${C.border}`, borderRadius:10, fontSize:"0.95rem", fontFamily:"Georgia,serif", color:C.ink, outline:"none" }}
+          />
+          <button onClick={()=>generate()}
+            style={{ padding:"0.6rem 1rem", background:tenseColor, color:C.white, border:"none", borderRadius:10, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap" }}>
+            Chia →
           </button>
         </div>
-
-        {/* Quick verb chips */}
-        <div>
-          <div style={{ fontSize:"0.62rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.3rem" }}>Động từ thông dụng</div>
-          <div style={{ display:"flex", flexWrap:"wrap", gap:"0.28rem" }}>
-            {QUICK_VERBS.map(v => (
-              <button key={v} onClick={()=>{ setVerb(v); lookup(v); }}
-                style={{ padding:"0.18rem 0.55rem", border:`1px solid ${C.border}`, borderRadius:20, background: verb===v?C.purple:C.white, color: verb===v?C.white:C.gray, fontSize:"0.72rem", cursor:"pointer", fontFamily:"Georgia,serif" }}>
-                {v}
-              </button>
-            ))}
-          </div>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.22rem", marginTop:"0.55rem" }}>
+          {COMMON_VERBS.map(v => (
+            <button key={v} onClick={()=>{ setVerb(v); generate(v); }}
+              style={{ padding:"0.15rem 0.52rem", background:C.blueL, border:`1px solid ${C.blue}33`, borderRadius:20, fontSize:"0.68rem", color:C.blue, cursor:"pointer", fontFamily:"Georgia,serif" }}>
+              {v}
+            </button>
+          ))}
         </div>
-
-        {/* Tense selector */}
-        <div>
-          <div style={{ fontSize:"0.62rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.3rem" }}>Thì muốn xem</div>
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.28rem" }}>
-            {TENSES.map(t => (
-              <button key={t.id} onClick={()=>toggleTense(t.id)}
-                style={{ padding:"0.35rem 0.5rem", border:`1.5px solid ${tenses.includes(t.id)?"#16a085":C.border}`, borderRadius:8, background: tenses.includes(t.id)?"#e8f8f5":C.white, color: tenses.includes(t.id)?"#16a085":C.ink, fontSize:"0.72rem", cursor:"pointer", fontFamily:"inherit", textAlign:"left" }}>
-                <div style={{ fontWeight: tenses.includes(t.id)?600:400 }}>{t.label}</div>
-                <div style={{ fontSize:"0.6rem", color: tenses.includes(t.id)?"#16a085":C.gray }}>{t.desc}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-        {err && <div style={{ fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>}
       </div>
 
-      {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1.5rem" }}><Spinner /></div>}
+      {/* Tense picker */}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.4rem" }}>
+        {TENSES.map(t => (
+          <button key={t.id} onClick={()=>{ setTense(t.id); if(result) generate(verb,t.id); }}
+            style={{ padding:"0.5rem", borderRadius:10, border:`1.5px solid ${tense===t.id?t.color:C.border}`, background:tense===t.id?t.color+"18":C.white, color:tense===t.id?t.color:C.gray, fontSize:"0.75rem", cursor:"pointer", fontWeight:tense===t.id?700:400, transition:"all 0.15s" }}>
+            {t.label}
+          </button>
+        ))}
+      </div>
 
-      {/* Result */}
-      {result && !quizMode && (
-        <div style={{ display:"flex", flexDirection:"column", gap:"0.65rem", animation:"fadeUp 0.3s ease" }}>
-          {/* Verb header */}
-          <div style={{ background:C.purple, borderRadius:12, padding:"0.9rem 1rem", display:"flex", alignItems:"center", gap:"0.8rem" }}>
+      {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1.5rem 0" }}><Spinner /></div>}
+      {err && <div style={{ color:C.red, fontSize:"0.78rem", textAlign:"center" }}>⚠ {err}</div>}
+
+      {result && !loading && (
+        <div style={{ background:C.white, borderRadius:16, padding:"1rem 1.1rem", border:`1.5px solid ${tenseColor}44` }}>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"0.75rem" }}>
             <div>
-              <div style={{ fontFamily:"Georgia,serif", fontSize:"1.6rem", color:C.paper }}>{result.verb} <SpeakBtn text={result.verb} size="1rem" /></div>
-              <div style={{ fontSize:"0.78rem", color:"#a0a0b8", marginTop:"0.15rem" }}>{result.meaning}</div>
+              <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
+                <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:C.ink, fontWeight:700 }}>{result.verb}</span>
+                <SpeakBtn text={result.verb} />
+                <span style={{ background:tenseColor+"20", color:tenseColor, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>{result.tense}</span>
+              </div>
+              <div style={{ fontSize:"0.68rem", color:C.gray, marginTop:"0.1rem" }}>Nhóm {result.group}</div>
             </div>
-            <div style={{ marginLeft:"auto", display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"0.3rem" }}>
-              <span style={{ background:`${groupColor(result.group)}33`, color:groupColor(result.group), fontSize:"0.65rem", padding:"0.15rem 0.5rem", borderRadius:20, fontWeight:600 }}>{result.group}</span>
-              {result.auxiliary && <span style={{ background:"#ffffff11", color:"#a0a0b8", fontSize:"0.65rem", padding:"0.15rem 0.5rem", borderRadius:20 }}>aux. {result.auxiliary}</span>}
+            <div style={{ display:"flex", gap:"0.3rem" }}>
+              {[["table","Bảng"],["quiz","Quiz"]].map(([m,l])=>(
+                <button key={m} onClick={()=>{ setMode(m); if(m==="quiz") setQuizKey(k=>k+1); }}
+                  style={{ padding:"0.28rem 0.65rem", borderRadius:20, border:`1.5px solid ${mode===m?tenseColor:C.border}`, background:mode===m?tenseColor:C.white, color:mode===m?C.white:C.gray, fontSize:"0.68rem", cursor:"pointer", fontWeight:600, transition:"all 0.15s" }}>
+                  {l}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Conjugation tables */}
-          {result.tenses?.map((t, ti) => (
-            <div key={ti} style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, overflow:"hidden" }}>
-              <div style={{ background:"#e8f8f5", borderBottom:`1px solid ${C.border}`, padding:"0.6rem 0.9rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                <div>
-                  <span style={{ fontFamily:"Georgia,serif", fontSize:"0.92rem", color:"#16a085", fontWeight:600 }}>{t.tense}</span>
-                  <span style={{ fontSize:"0.72rem", color:C.gray, marginLeft:"0.5rem" }}>— {t.tense_vi}</span>
-                </div>
-              </div>
-              {t.usage && <div style={{ padding:"0.4rem 0.9rem", fontSize:"0.72rem", color:C.gold, background:"#fff8e6", borderBottom:`1px solid ${C.border}` }}>💡 {t.usage}</div>}
-              <div style={{ padding:"0.5rem" }}>
-                {t.forms?.map((f, fi) => (
-                  <div key={fi} style={{ display:"grid", gridTemplateColumns:"80px 1fr", gap:"0.5rem", padding:"0.42rem 0.4rem", background: fi%2===0?C.white:C.cream, borderRadius:6, alignItems:"start" }}>
-                    <div style={{ fontSize:"0.78rem", color:C.gray, fontWeight:600 }}>{f.pronoun}</div>
-                    <div>
-                      <div style={{ display:"flex", alignItems:"center", gap:"0.3rem" }}>
-                        <span style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:C.purple, fontWeight:600 }}>{f.form}</span>
-                        <SpeakBtn text={`${f.pronoun === "il/elle" ? "il" : f.pronoun === "ils/elles" ? "ils" : f.pronoun} ${f.form}`} size="0.75rem" />
-                      </div>
-                      {f.example && <div style={{ fontSize:"0.7rem", color:C.gray, fontStyle:"italic", marginTop:"0.1rem" }}>{f.example}</div>}
+          {mode==="table" ? (
+            <>
+              <div style={{ display:"flex", flexDirection:"column", gap:"0.25rem" }}>
+                {SUBJECTS.map((sub,i) => (
+                  <div key={i} style={{ display:"grid", gridTemplateColumns:"0.7fr 1fr", gap:"0.5rem", alignItems:"center", background:i%2===0?"transparent":C.cream, borderRadius:8, padding:"0.32rem 0.5rem" }}>
+                    <div style={{ fontSize:"0.78rem", color:C.gray, fontStyle:"italic", textAlign:"right" }}>{sub}</div>
+                    <div style={{ display:"flex", alignItems:"center", gap:"0.3rem" }}>
+                      <span style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:tenseColor, fontWeight:700 }}>{result.conjugations[i]}</span>
+                      <SpeakBtn text={`${sub.split("/")[0]} ${result.conjugations[i]}`} size="sm" />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-          ))}
-
-          {/* Quiz button */}
-          <button onClick={()=>{ setQuizMode(true); generateQuiz(); }}
-            style={{ padding:"0.7rem", background:"#16a085", color:C.white, border:"none", borderRadius:8, fontFamily:"Georgia,serif", fontSize:"0.88rem", cursor:"pointer" }}>
-            🧩 Luyện chia động từ này
-          </button>
-        </div>
-      )}
-
-      {/* Quiz mode */}
-      {quizMode && (
-        <div style={{ display:"flex", flexDirection:"column", gap:"0.65rem" }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-            <div style={{ fontFamily:"Georgia,serif", color:"#16a085", fontSize:"0.92rem" }}>🧩 Luyện tập — {result?.verb}</div>
-            <button onClick={()=>setQuizMode(false)} style={{ background:"transparent", border:`1px solid ${C.border}`, borderRadius:20, padding:"0.2rem 0.6rem", fontSize:"0.68rem", color:C.gray, cursor:"pointer" }}>← Bảng chia</button>
-          </div>
-          {quizLoading && <div style={{ display:"flex", justifyContent:"center", padding:"1rem" }}><Spinner /></div>}
-          {quiz?.questions?.map((q, i) => <ConjugQuizItem key={i} q={q} idx={i} />)}
-          {quiz && <button onClick={generateQuiz} style={{ padding:"0.55rem", background:"transparent", border:`1px solid ${C.border}`, borderRadius:8, color:C.gray, fontSize:"0.78rem", cursor:"pointer" }}>🔄 Tạo bài mới</button>}
+              {result.tip && (
+                <div style={{ marginTop:"0.7rem", background:"#FFFBEB", borderRadius:10, padding:"0.5rem 0.75rem", fontSize:"0.75rem", color:"#92400E" }}>
+                  💡 {result.tip}
+                </div>
+              )}
+            </>
+          ) : (
+            <ConjugQuiz key={quizKey} conjugation={result} onDone={()=>setQuizKey(k=>k+1)} />
+          )}
         </div>
       )}
     </div>

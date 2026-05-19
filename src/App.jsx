@@ -22,22 +22,35 @@ import DicteePanel from "./components/DicteePanel.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
 import PhrasebookPanel from "./components/PhrasebookPanel.jsx";
 import RevisionPanel from "./components/RevisionPanel.jsx";
+import ConjugaisonPanel from "./components/ConjugaisonPanel.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
+import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
-  { id:"vocab",        label:"Từ vựng",      fr:"Le Vocabulaire",  icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"input"       },
-  { id:"grammar",      label:"Ngữ pháp",      fr:"La Grammaire",    icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"     },
-  { id:"conversation", label:"Giao tiếp",     fr:"La Conversation", icon:"💬", color:"#2980B9", bg:"#E8F4FD", view:"conversation"},
-  { id:"writing",      label:"Luyện viết",    fr:"L'Écriture",      icon:"✍️", color:"#E67E22", bg:"#FEF3E2", view:"writing"     },
-  { id:"defi",         label:"Thử thách",     fr:"Le Défi du Jour", icon:"🎲", color:"#8E44AD", bg:"#F5EEFF", view:"defi"        },
-  { id:"srs",          label:"Thẻ ôn tập",    fr:"La Répétition",   icon:"🧠", color:"#0D9488", bg:"#F0FDFA", view:"srs"         },
-  { id:"reference",    label:"Cẩm nang",      fr:"La Référence",    icon:"📖", color:"#6D28D9", bg:"#F5F0FF", view:"reference"   },
-  { id:"lecture",      label:"Đọc hiểu",      fr:"La Lecture",      icon:"📰", color:"#059669", bg:"#ECFDF5", view:"lecture"     },
-  { id:"dictee",       label:"Nghe chép",     fr:"La Dictée",       icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"dictee"      },
-  { id:"phrasebook",   label:"Mẫu câu",       fr:"Le Phrasebook",   icon:"💡", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"  },
-  { id:"revision",     label:"Ôn sai",        fr:"La Révision",     icon:"🔁", color:"#DC2626", bg:"#FEF2F2", view:"revision"    },
-  { id:"stats",        label:"Thống kê",      fr:"Les Statistiques",icon:"📊", color:"#0891B2", bg:"#F0F9FF", view:"stats"       },
+  // Học
+  { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"input"        },
+  { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
+  { id:"conjugaison",  group:"hoc", label:"Chia động từ",  fr:"La Conjugaison",   icon:"🔤", color:"#0891B2", bg:"#F0F9FF", view:"conjugaison"  },
+  { id:"reference",    group:"hoc", label:"Cẩm nang",      fr:"La Référence",     icon:"📖", color:"#6D28D9", bg:"#F5F0FF", view:"reference"    },
+  { id:"phrasebook",   group:"hoc", label:"Mẫu câu",       fr:"Le Phrasebook",    icon:"💡", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"   },
+  // Luyện
+  { id:"conversation", group:"luyen", label:"Giao tiếp",   fr:"La Conversation",  icon:"💬", color:"#2980B9", bg:"#E8F4FD", view:"conversation" },
+  { id:"writing",      group:"luyen", label:"Luyện viết",  fr:"L'Écriture",       icon:"✍️", color:"#E67E22", bg:"#FEF3E2", view:"writing"      },
+  { id:"defi",         group:"luyen", label:"Thử thách",   fr:"Le Défi du Jour",  icon:"🎲", color:"#8E44AD", bg:"#F5EEFF", view:"defi"         },
+  { id:"lecture",      group:"luyen", label:"Đọc hiểu",    fr:"La Lecture",       icon:"📰", color:"#059669", bg:"#ECFDF5", view:"lecture"      },
+  { id:"dictee",       group:"luyen", label:"Nghe chép",   fr:"La Dictée",        icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"dictee"       },
+  { id:"srs",          group:"luyen", label:"Thẻ ôn tập",  fr:"La Répétition",    icon:"🧠", color:"#0D9488", bg:"#F0FDFA", view:"srs"          },
+  { id:"revision",     group:"luyen", label:"Ôn sai",      fr:"La Révision",      icon:"🔁", color:"#DC2626", bg:"#FEF2F2", view:"revision"     },
+  // Công cụ
+  { id:"stats",        group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📊", color:"#0891B2", bg:"#F0F9FF", view:"stats"        },
+];
+
+const MODULE_GROUPS = [
+  { id:"all",    label:"Tất cả" },
+  { id:"hoc",    label:"📖 Học" },
+  { id:"luyen",  label:"🎯 Luyện" },
+  { id:"congcu", label:"🔧 Công cụ" },
 ];
 
 const TABS = [
@@ -53,6 +66,7 @@ const SECTION_TITLE = {
   writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée",
   phrasebook:"Le Phrasebook", revision:"La Révision", stats:"Les Statistiques",
+  conjugaison:"La Conjugaison",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -124,8 +138,11 @@ function AppInner() {
   const [streakData, setStreakData]     = useState(getStreak);
   const [progress, setProgress]         = useState(getProgress);
   const [srsStats, setSrsStats]         = useState(getSRSStats);
-  const [filterMastered, setFilterMastered] = useState(true); // exclude mastered by default
-  const [editOpen, setEditOpen]             = useState(false); // textarea hidden by default
+  const [filterMastered, setFilterMastered] = useState(true);
+  const [editOpen, setEditOpen]             = useState(false);
+  const [moduleGroup, setModuleGroup]       = useState("all");
+  const [xpData, setXpData]                 = useState(getXPData);
+  const [badgeToast, setBadgeToast]         = useState("");
 
   const setTextPersist = (val) => { setText(val); localStorage.setItem("vocab_text", val); };
   const words = parseWords(text);
@@ -143,6 +160,15 @@ function AppInner() {
     markModuleUsed(s);
     setStreakData(getStreak());
     setProgress(getProgress());
+    setXpData(getXPData());
+    // Check first_lesson badge
+    const srs = getSRSStats();
+    const streak = getStreak();
+    const earned = checkBadges({ srsTotal: srs.total, mastered: srs.mastered, streak: streak.streak });
+    if (earned.length) {
+      const badge = BADGE_DEFS.find(b => b.id === earned[0]);
+      if (badge) { setBadgeToast(`🏅 ${badge.icon} ${badge.label}!`); setTimeout(()=>setBadgeToast(""), 3000); }
+    }
   };
 
   const recordAnswer = useCallback((word, isOk) => {
@@ -274,9 +300,9 @@ function AppInner() {
       `}</style>
 
       {/* ── Toast ── */}
-      {toast && (
-        <div style={{ position:"fixed", top:20, left:"50%", transform:"translateX(-50%)", background:C.ink, color:C.white, padding:"0.55rem 1.2rem", borderRadius:24, fontSize:"0.8rem", zIndex:400, whiteSpace:"nowrap", boxShadow:"0 4px 20px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
-          {toast}
+      {(toast || badgeToast) && (
+        <div style={{ position:"fixed", top:20, left:"50%", transform:"translateX(-50%)", background:badgeToast?"#7C3AED":C.ink, color:C.white, padding:"0.55rem 1.2rem", borderRadius:24, fontSize:"0.8rem", zIndex:400, whiteSpace:"nowrap", boxShadow:"0 4px 20px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
+          {badgeToast || toast}
         </div>
       )}
 
@@ -462,10 +488,43 @@ function AppInner() {
           {/* ── Mot du Jour ── */}
           <MotDuJour words={words} />
 
+          {/* ── XP Bar ── */}
+          {(() => {
+            const xp    = xpData.total || 0;
+            const level = getLevel(xp);
+            const next  = getNextLevel(xp);
+            const pct   = next ? Math.round((xp - level.min) / (next.min - level.min) * 100) : 100;
+            return (
+              <div style={{ margin:"0.75rem 1.25rem 0", background:C.white, borderRadius:14, padding:"0.65rem 1rem", border:`1.5px solid ${C.border}`, display:"flex", alignItems:"center", gap:"0.75rem" }}>
+                <span style={{ fontSize:"1.2rem" }}>{level.icon}</span>
+                <div style={{ flex:1 }}>
+                  <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"0.25rem" }}>
+                    <span style={{ fontSize:"0.72rem", color:level.color, fontWeight:700 }}>{level.label}</span>
+                    <span style={{ fontSize:"0.68rem", color:C.gray }}>{xp} XP{next?` · còn ${next.min-xp} XP`:""}</span>
+                  </div>
+                  <div style={{ height:5, background:C.border, borderRadius:999, overflow:"hidden" }}>
+                    <div style={{ height:"100%", width:`${pct}%`, background:level.color, borderRadius:999, transition:"width 0.5s ease" }}/>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
           {/* ── Module Grid ── */}
-          <div style={{ padding:"0.25rem 1.25rem 0", marginTop:"0.85rem", fontSize:"0.9rem", fontWeight:700, color:C.ink }}>Khám phá</div>
+          <div style={{ padding:"0.25rem 1.25rem 0", marginTop:"0.85rem" }}>
+            <div style={{ fontSize:"0.9rem", fontWeight:700, color:C.ink, marginBottom:"0.55rem" }}>Khám phá</div>
+            {/* Group filter tabs */}
+            <div style={{ display:"flex", gap:"0.3rem", flexWrap:"wrap" }}>
+              {MODULE_GROUPS.map(g => (
+                <button key={g.id} onClick={()=>setModuleGroup(g.id)}
+                  style={{ padding:"0.25rem 0.65rem", borderRadius:20, border:`1.5px solid ${moduleGroup===g.id?C.blue:C.border}`, background:moduleGroup===g.id?C.blue:"transparent", color:moduleGroup===g.id?C.white:C.gray, fontSize:"0.7rem", cursor:"pointer", fontWeight:600, transition:"all 0.15s" }}>
+                  {g.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="module-grid" style={{ padding:"0.6rem 1rem 1rem", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem", flex:1 }}>
-            {MODULES.map((m, i) => {
+            {MODULES.filter(m => moduleGroup==="all" || m.group===moduleGroup).map((m, i) => {
               const p = progress[m.id];
               const used = p?.count > 0;
               const pct = Math.min((p?.count||0)*8, 100);
@@ -821,6 +880,7 @@ function AppInner() {
             {view==="phrasebook"   && <PhrasebookPanel />}
             {view==="revision"     && <RevisionPanel />}
             {view==="stats"        && <StatsPanel />}
+            {view==="conjugaison"  && <ConjugaisonPanel />}
           </div>
         </>
       )}
