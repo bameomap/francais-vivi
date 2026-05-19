@@ -306,28 +306,79 @@ function AppInner() {
             <div style={{ fontSize:"0.85rem", color:C.gray, marginTop:"0.25rem" }}>Sẵn sàng học bài hôm nay chưa?</div>
           </div>
 
-          {/* ── Next Lesson card ── */}
-          {lastModule ? (
-            <div style={{ margin:"0.85rem 1.25rem", background:`linear-gradient(135deg, ${lastModule.color}ee, ${C.blue}cc)`, borderRadius:22, padding:"1.3rem 1.4rem", color:C.white, boxShadow:`0 8px 30px ${lastModule.color}44`, animation:"fadeUp 0.4s ease 0.05s both" }}>
+          {/* ── Bài hôm nay (SRS due priority) ── */}
+          {srsStats.due > 0 ? (
+            <div style={{ margin:"0.85rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
+              <div style={{ background:"linear-gradient(135deg, #0D9488, #0891B2)", borderRadius:22, padding:"1.1rem 1.4rem", color:C.white, boxShadow:"0 8px 30px #0D948866" }}>
+                <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.25rem" }}>BÀI HÔM NAY</div>
+                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+                  <div>
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700 }}>🧠 Ôn tập SRS</div>
+                    <div style={{ fontSize:"0.82rem", opacity:0.9, marginTop:"0.2rem" }}>
+                      <span style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.4rem", fontWeight:700 }}>{srsStats.due}</span>
+                      {" "}từ đang chờ được ôn lại
+                    </div>
+                  </div>
+                  <button className="card-hover" onClick={()=>goSection("srs","srs")}
+                    style={{ background:C.white, color:"#0D9488", border:"none", borderRadius:999, padding:"0.5rem 1.1rem", fontSize:"0.8rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap", flexShrink:0 }}>
+                    Ôn ngay →
+                  </button>
+                </div>
+              </div>
+              {/* Secondary: last module if exists */}
+              {lastModule && (
+                <div style={{ background:C.white, border:`1.5px solid ${lastModule.color}33`, borderRadius:16, padding:"0.85rem 1.1rem", marginTop:"0.6rem", display:"flex", alignItems:"center", gap:"0.8rem" }}>
+                  <span style={{ fontSize:"1.4rem" }}>{lastModule.icon}</span>
+                  <div style={{ flex:1, minWidth:0 }}>
+                    <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.1rem", textTransform:"uppercase", letterSpacing:1 }}>Tiếp tục</div>
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, fontWeight:700 }}>{lastModule.label}</div>
+                    <div style={{ height:3, background:`${lastModule.color}22`, borderRadius:999, marginTop:"0.35rem" }}>
+                      <div style={{ height:"100%", width:`${moduleProgress}%`, background:lastModule.color, borderRadius:999 }}/>
+                    </div>
+                  </div>
+                  <button onClick={()=>goSection(lastModule.id, lastModule.view)}
+                    style={{ background:lastModule.bg, color:lastModule.color, border:`1.5px solid ${lastModule.color}44`, borderRadius:999, padding:"0.35rem 0.9rem", fontSize:"0.75rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap", flexShrink:0 }}>
+                    →
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : srsStats.total > 0 ? (
+            /* All SRS done today */
+            <div style={{ margin:"0.85rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
+              <div style={{ background:"linear-gradient(135deg, #16A34A, #0D9488)", borderRadius:22, padding:"1rem 1.4rem", color:C.white, boxShadow:"0 8px 30px #16A34A44", display:"flex", alignItems:"center", gap:"1rem" }}>
+                <div style={{ fontSize:"2rem" }}>✅</div>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", fontWeight:700, marginBottom:"0.15rem" }}>Xong hết rồi!</div>
+                  <div style={{ fontSize:"0.78rem", opacity:0.9 }}>Bạn đã ôn xong {srsStats.total} từ hôm nay 🎉</div>
+                </div>
+                {lastModule && (
+                  <button onClick={()=>goSection(lastModule.id, lastModule.view)}
+                    style={{ background:C.white, color:"#16A34A", border:"none", borderRadius:999, padding:"0.4rem 0.9rem", fontSize:"0.75rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap", flexShrink:0 }}>
+                    {lastModule.icon} Tiếp tục
+                  </button>
+                )}
+              </div>
+            </div>
+          ) : lastModule ? (
+            <div style={{ margin:"0.85rem 1.25rem 0", background:`linear-gradient(135deg, ${lastModule.color}ee, ${C.blue}cc)`, borderRadius:22, padding:"1.3rem 1.4rem", color:C.white, boxShadow:`0 8px 30px ${lastModule.color}44`, animation:"fadeUp 0.4s ease 0.05s both" }}>
               <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.35rem" }}>BÀI HỌC TIẾP THEO</div>
               <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", fontWeight:700, marginBottom:"0.9rem" }}>
                 {lastModule.icon} {lastModule.label}
               </div>
-              {/* Progress bar */}
               <div style={{ background:"rgba(255,255,255,0.25)", borderRadius:999, height:7, marginBottom:"0.5rem" }}>
                 <div style={{ height:"100%", width:`${moduleProgress}%`, background:C.white, borderRadius:999, transition:"width 0.8s ease" }}/>
               </div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                 <span style={{ fontSize:"0.75rem", opacity:0.9 }}>{moduleProgress}% hoàn thành</span>
-                <button className="card-hover"
-                  onClick={()=>goSection(lastModule.id, lastModule.view)}
+                <button className="card-hover" onClick={()=>goSection(lastModule.id, lastModule.view)}
                   style={{ background:C.white, color:lastModule.color, border:"none", borderRadius:999, padding:"0.42rem 1.1rem", fontSize:"0.8rem", cursor:"pointer", fontWeight:700 }}>
                   Tiếp tục →
                 </button>
               </div>
             </div>
           ) : (
-            <div style={{ margin:"0.85rem 1.25rem", background:`linear-gradient(135deg, ${C.blue}, ${C.red})`, borderRadius:22, padding:"1.3rem 1.4rem", color:C.white, boxShadow:`0 8px 30px ${C.blue}44`, animation:"fadeUp 0.4s ease 0.05s both" }}>
+            <div style={{ margin:"0.85rem 1.25rem 0", background:`linear-gradient(135deg, ${C.blue}, ${C.red})`, borderRadius:22, padding:"1.3rem 1.4rem", color:C.white, boxShadow:`0 8px 30px ${C.blue}44`, animation:"fadeUp 0.4s ease 0.05s both" }}>
               <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.35rem" }}>BẮT ĐẦU TỪ ĐÂY</div>
               <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, marginBottom:"0.5rem" }}>📚 Học từ vựng đầu tiên</div>
               <div style={{ fontSize:"0.82rem", opacity:0.9, marginBottom:"0.9rem" }}>Nhập từ vựng và luyện tập với AI</div>
