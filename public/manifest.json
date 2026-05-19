@@ -1,0 +1,13 @@
+{
+  "name": "Vivi Learns Français",
+  "short_name": "Français",
+  "description": "Học tiếng Pháp với AI — flashcard, hội thoại, ngữ pháp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F8FF",
+  "theme_color": "#002395",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

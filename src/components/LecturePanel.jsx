@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { C } from "../constants.js";
-import { callAI } from "../utils/api.js";
+import { callAI, callAIText } from "../utils/api.js";
 import { parseWords } from "../utils/helpers.js";
+import { addWordToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import Minou, { Confetti } from "./ui/Minou.jsx";
@@ -32,19 +33,31 @@ Tạo đúng ${cfg.q} câu hỏi. Câu hỏi kiểm tra hiểu nội dung, khôn
   };
 }
 
-// Highlight vocab words in passage
-function HighlightedPassage({ passage, vocab }) {
-  const words = vocab.map(w => w.toLowerCase());
-  // split preserving whitespace and punctuation
-  const tokens = passage.split(/(\s+|[,\.!?;:«»"'()\-—])/);
+// Highlight vocab words + make all content words tappable
+function HighlightedPassage({ passage, vocab, selectedWord, onWordClick }) {
+  const vocabSet = vocab.map(w => w.toLowerCase());
+  const tokens = passage.split(/(\s+|[,\.!?;:«»"'()\-—\n])/);
   return (
     <span>
       {tokens.map((tok, i) => {
-        const clean = tok.replace(/[^a-zA-ZÀ-ÿ]/g, "").toLowerCase();
-        const hit   = words.some(w => w === clean || w === clean + "s" || clean === w + "s");
-        return hit
-          ? <mark key={i} style={{ background:"#FEF9C3", borderRadius:3, padding:"0 2px", fontWeight:600, color:"#92400E" }}>{tok}</mark>
-          : <span key={i}>{tok}</span>;
+        const clean = tok.replace(/[^a-zA-ZÀ-ÿ'-]/g, "").toLowerCase();
+        if (!clean) return <span key={i}>{tok}</span>;
+        const isVocab   = vocabSet.some(w => w === clean || w === clean + "s" || clean === w + "s");
+        const isSelected = selectedWord === clean;
+        return (
+          <span key={i} onClick={() => onWordClick(clean)}
+            style={{
+              cursor: "pointer",
+              background: isSelected ? "#DBEAFE" : isVocab ? "#FEF9C3" : "transparent",
+              borderRadius: 3, padding: "0 2px",
+              fontWeight: isVocab ? 600 : 400,
+              color: isSelected ? C.blue : isVocab ? "#92400E" : C.ink,
+              borderBottom: `1px ${isVocab ? "solid" : "dotted"} ${isSelected ? C.blue : isVocab ? "#D97706" : C.border}`,
+              transition: "background 0.15s",
+            }}>
+            {tok}
+          </span>
+        );
       })}
     </span>
   );
@@ -77,10 +90,37 @@ export default function LecturePanel({ words: propWords = [] }) {
   const [loading,   setLoading]   = useState(false);
   const [lecture,   setLecture]   = useState(null);
   const [err,       setErr]       = useState("");
-  const [answers,   setAnswers]   = useState({});   // { qIdx: chosen letter }
-  const [revealed,  setRevealed]  = useState({});   // { qIdx: true }
+  const [answers,   setAnswers]   = useState({});
+  const [revealed,  setRevealed]  = useState({});
   const [confetti,  setConfetti]  = useState(false);
   const [showText,  setShowText]  = useState(true);
+  const [wordPopup, setWordPopup] = useState(null); // { word, vi, loading, added }
+  const [toast,     setToast]     = useState("");
+
+  const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 2500); };
+
+  const handleWordClick = async (word) => {
+    if (wordPopup?.word === word) { setWordPopup(null); return; }
+    // Check user vocab first (instant)
+    const userWord = words.find(w => w.fr.toLowerCase() === word || w.fr.toLowerCase() === word + "s" || word === w.fr.toLowerCase() + "s");
+    if (userWord?.vi) { setWordPopup({ word, vi: userWord.vi, loading: false, added: false }); return; }
+    // AI lookup
+    setWordPopup({ word, vi: null, loading: true, added: false });
+    try {
+      const vi = await callAIText(
+        [{ role:"user", content:`"${word}" nghĩa tiếng Việt là gì?` }],
+        "Từ điển Pháp-Việt. Chỉ trả lời nghĩa ngắn nhất, tối đa 6 từ, không giải thích."
+      );
+      setWordPopup({ word, vi: vi.trim(), loading: false, added: false });
+    } catch { setWordPopup({ word, vi: "—", loading: false, added: false }); }
+  };
+
+  const addPopupToSRS = () => {
+    if (!wordPopup?.vi || wordPopup.added) return;
+    addWordToSRS(wordPopup.word, wordPopup.vi);
+    setWordPopup(p => ({ ...p, added: true }));
+    showToast(`✓ Đã thêm "${wordPopup.word}" vào SRS!`);
+  };
 
   const generate = async () => {
     setLoading(true); setErr(""); setLecture(null); setAnswers({}); setRevealed({}); setConfetti(false);
@@ -146,6 +186,11 @@ export default function LecturePanel({ words: propWords = [] }) {
   return (
     <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
       <Confetti active={confetti} onDone={() => setConfetti(false)} />
+      {toast && (
+        <div style={{ position:"fixed", top:20, left:"50%", transform:"translateX(-50%)", background:C.ink, color:C.white, padding:"0.5rem 1.1rem", borderRadius:24, fontSize:"0.78rem", zIndex:400, whiteSpace:"nowrap", boxShadow:"0 4px 20px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
+          {toast}
+        </div>
+      )}
 
       {/* Toolbar */}
       <div style={{ display:"flex", gap:"0.4rem", flexWrap:"wrap", alignItems:"center" }}>
@@ -174,15 +219,44 @@ export default function LecturePanel({ words: propWords = [] }) {
             <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700 }}>{lecture.title}</div>
             <SpeakBtn text={lecture.passage} />
           </div>
-          <div style={{ fontSize:"0.88rem", color:C.ink, lineHeight:1.85, fontFamily:"Georgia,serif" }}>
-            <HighlightedPassage passage={lecture.passage} vocab={lecture.vocab_used || []} />
+          <div style={{ fontSize:"0.88rem", color:C.ink, lineHeight:1.95, fontFamily:"Georgia,serif" }}>
+            <HighlightedPassage
+              passage={lecture.passage}
+              vocab={lecture.vocab_used || []}
+              selectedWord={wordPopup?.word}
+              onWordClick={handleWordClick}
+            />
           </div>
+          {/* Word popup */}
+          {wordPopup && (
+            <div style={{ marginTop:"0.75rem", background:"#EFF6FF", border:`1.5px solid ${C.blue}55`, borderRadius:14, padding:"0.75rem 1rem", animation:"fadeUp 0.2s ease", display:"flex", alignItems:"center", gap:"0.75rem" }}>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", marginBottom:"0.2rem" }}>
+                  <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.05rem", color:C.blue, fontWeight:700 }}>{wordPopup.word}</span>
+                  <SpeakBtn text={wordPopup.word} />
+                </div>
+                <div style={{ fontSize:"0.82rem", color:C.ink }}>
+                  {wordPopup.loading ? <span style={{ color:C.gray, fontStyle:"italic" }}>Đang tra…</span> : wordPopup.vi}
+                </div>
+              </div>
+              <div style={{ display:"flex", flexDirection:"column", gap:"0.3rem", flexShrink:0 }}>
+                <button onClick={addPopupToSRS} disabled={wordPopup.loading || wordPopup.added}
+                  style={{ padding:"0.3rem 0.7rem", background:wordPopup.added?C.greenL:C.blue, color:wordPopup.added?C.green:C.white, border:`1.5px solid ${wordPopup.added?C.green:C.blue}`, borderRadius:20, fontSize:"0.68rem", cursor:wordPopup.added?"default":"pointer", fontWeight:700, whiteSpace:"nowrap", transition:"all 0.2s" }}>
+                  {wordPopup.added ? "✓ Đã thêm" : "+ SRS"}
+                </button>
+                <button onClick={() => setWordPopup(null)}
+                  style={{ padding:"0.25rem 0.7rem", background:"transparent", border:`1px solid ${C.border}`, borderRadius:20, fontSize:"0.65rem", color:C.gray, cursor:"pointer" }}>
+                  Đóng
+                </button>
+              </div>
+            </div>
+          )}
           {lecture.vocab_used?.length > 0 && (
             <div style={{ marginTop:"0.8rem", paddingTop:"0.6rem", borderTop:`1px solid ${C.border}` }}>
               <div style={{ fontSize:"0.63rem", color:C.gray, marginBottom:"0.3rem", textTransform:"uppercase", letterSpacing:1 }}>Từ bạn đang học trong bài</div>
               <div style={{ display:"flex", flexWrap:"wrap", gap:"0.25rem" }}>
                 {lecture.vocab_used.map((w, i) => (
-                  <span key={i} style={{ background:"#FEF9C3", border:"1px solid #D97706", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.7rem", color:"#92400E", fontWeight:600 }}>{w}</span>
+                  <span key={i} onClick={() => handleWordClick(w.toLowerCase())} style={{ background:"#FEF9C3", border:"1px solid #D97706", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.7rem", color:"#92400E", fontWeight:600, cursor:"pointer" }}>{w}</span>
                 ))}
               </div>
             </div>

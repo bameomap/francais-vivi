@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
+import { callAIText } from "../utils/api.js";
+import { addWordToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { SecLabel, QCard } from "./ui/SharedUI.jsx";
 
@@ -250,7 +252,25 @@ export function FlashcardSection({ words, onRecord }) {
   const [flipped,      setFlipped]      = useState(false);
   const [batchLearned, setBatchLearned] = useState(0);
   const [batchDone,    setBatchDone]    = useState(false);
+  const [examples,     setExamples]     = useState({}); // { word: { fr, vi } | "loading" }
   const touchX = useRef(null);
+
+  // Fetch example sentence when card is flipped
+  useEffect(() => {
+    if (!flipped || !current) return;
+    const w = current.front;
+    if (examples[w]) return; // already cached
+    setExamples(ex => ({ ...ex, [w]: "loading" }));
+    callAIText(
+      [{ role:"user", content:`Câu ví dụ ngắn (6-10 từ) dùng từ "${w}" bằng tiếng Pháp, kèm dịch tiếng Việt.` }],
+      "Giáo viên tiếng Pháp A1. Trả lời đúng 2 dòng: câu Pháp trước, dịch Việt sau (bắt đầu bằng →). Không thêm gì khác."
+    ).then(raw => {
+      const lines = raw.trim().split("\n").map(l => l.trim()).filter(Boolean);
+      const fr = lines[0] || "";
+      const vi = (lines[1] || "").replace(/^→\s*/, "");
+      setExamples(ex => ({ ...ex, [w]: { fr, vi } }));
+    }).catch(() => setExamples(ex => ({ ...ex, [w]: null })));
+  }, [flipped, current?.front]);
 
   const batchWords = batches[batchIdx];
   const batchSize  = batchWords.length;
@@ -273,6 +293,8 @@ export function FlashcardSection({ words, onRecord }) {
 
   const markLearning = () => {
     onRecord?.(current.front, false);
+    // Auto-add to SRS so SM-2 tracks this word
+    addWordToSRS(current.front, current.back);
     const next = [...deck];
     const [card] = next.splice(idx, 1);
     next.push({ ...card, status:"learning" });
@@ -391,9 +413,21 @@ export function FlashcardSection({ words, onRecord }) {
             )}
           </div>
           {/* Back */}
-          <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", transform:"rotateY(180deg)", background:`linear-gradient(135deg,${C.blueL},#f0f4ff)`, border:`1.5px solid ${C.blue}88`, borderRadius:22, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem", boxShadow:"0 4px 24px rgba(74,144,217,0.14)" }}>
-            <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"1rem" }}>🇻🇳 Tiếng Việt</div>
-            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.7rem", color:C.ink, fontWeight:700, textAlign:"center", lineHeight:1.3 }}>{current.back || "—"}</div>
+          <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", transform:"rotateY(180deg)", background:`linear-gradient(135deg,${C.blueL},#f0f4ff)`, border:`1.5px solid ${C.blue}88`, borderRadius:22, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.2rem 1.5rem", boxShadow:"0 4px 24px rgba(74,144,217,0.14)" }}>
+            <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"0.6rem" }}>🇻🇳 Tiếng Việt</div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.7rem", color:C.ink, fontWeight:700, textAlign:"center", lineHeight:1.3, marginBottom:"0.75rem" }}>{current.back || "—"}</div>
+            {/* Example sentence */}
+            {(() => {
+              const ex = examples[current.front];
+              if (!ex) return null;
+              if (ex === "loading") return <div style={{ fontSize:"0.65rem", color:C.gray, fontStyle:"italic" }}>Đang tải ví dụ…</div>;
+              return (
+                <div style={{ borderTop:`1px solid ${C.blue}33`, paddingTop:"0.6rem", width:"100%", textAlign:"center" }}>
+                  <div style={{ fontSize:"0.78rem", color:C.blue, fontFamily:"Georgia,serif", fontStyle:"italic", marginBottom:"0.2rem", lineHeight:1.5 }}>{ex.fr}</div>
+                  <div style={{ fontSize:"0.68rem", color:C.gray }}>{ex.vi}</div>
+                </div>
+              );
+            })()}
           </div>
         </div>
       </div>
