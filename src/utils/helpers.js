@@ -19,15 +19,34 @@ export function parseWords(text) {
     .filter((w) => w.fr.length > 0);
 }
 
-export function speak(text, onEnd) {
-  if (!window.speechSynthesis) return;
+function speakFallback(text, cb) {
+  if (!window.speechSynthesis) return cb?.();
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "fr-FR";
-  u.rate = 0.85;
+  u.rate = 0.88;
+  u.pitch = 1.0;
   const voices = window.speechSynthesis.getVoices();
-  const fr = voices.find((v) => v.lang.startsWith("fr"));
-  if (fr) u.voice = fr;
-  if (onEnd) u.onend = onEnd;
+  // prefer natural-sounding French voices in order
+  const PREF = ["Thomas", "Amélie", "Google français", "fr-FR", "fr-"];
+  let voice = null;
+  for (const p of PREF) {
+    voice = voices.find(v => v.name.includes(p) || v.lang.startsWith(p));
+    if (voice) break;
+  }
+  if (voice) u.voice = voice;
+  if (cb) u.onend = cb;
   window.speechSynthesis.speak(u);
+}
+
+export async function speak(text, onEnd) {
+  const cb = onEnd || (() => {});
+  try {
+    const audio = new Audio(`/api/tts?text=${encodeURIComponent(text)}`);
+    audio.onended = cb;
+    audio.onerror = () => speakFallback(text, cb);
+    await audio.play();
+  } catch {
+    speakFallback(text, cb);
+  }
 }
