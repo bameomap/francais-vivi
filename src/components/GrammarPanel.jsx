@@ -1440,9 +1440,41 @@ Trop de + nom: "Il y a trop DE bruit."
   },
 ];
 
+function RuleRenderer({ text }) {
+  if (!text) return null;
+  return (
+    <div style={{ display:"flex", flexDirection:"column", gap:"0.18rem" }}>
+      {text.split("\n").map((line, i) => {
+        const t = line.trim();
+        if (!t) return <div key={i} style={{ height:"0.35rem" }}/>;
+        if (t.startsWith("⚠️")) return (
+          <div key={i} style={{ background:"#FFF8E1", border:"1px solid #F59E0B44", borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#92400E", lineHeight:1.55 }}>{t}</div>
+        );
+        if (t.startsWith("💡")) return (
+          <div key={i} style={{ background:"#EFF6FF", borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#1D4ED8", lineHeight:1.55 }}>{t}</div>
+        );
+        if (t.startsWith("✅")) return (
+          <div key={i} style={{ fontSize:"0.73rem", color:"#166534", lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
+        );
+        if (t.startsWith("❌")) return (
+          <div key={i} style={{ fontSize:"0.73rem", color:"#DC2626", lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
+        );
+        if (t.startsWith("•")) return (
+          <div key={i} style={{ fontFamily:"Georgia,serif", fontSize:"0.78rem", color:C.ink, lineHeight:1.65, paddingLeft:"0.4rem" }}>{t}</div>
+        );
+        if (/^[A-ZÀÂÁÉÈÊËÎÏÔÙÛÜ\s()]+:/.test(t) || (t.endsWith(":") && t.length < 50)) return (
+          <div key={i} style={{ fontSize:"0.68rem", color:C.purple, fontWeight:700, textTransform:"uppercase", letterSpacing:0.6, marginTop:"0.3rem", lineHeight:1.4 }}>{t}</div>
+        );
+        return <div key={i} style={{ fontSize:"0.76rem", color:C.ink, lineHeight:1.65 }}>{t}</div>;
+      })}
+    </div>
+  );
+}
+
 export function GrammarPresets({ onLoad }) {
   const [open, setOpen] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState(null);
+  const [openPoints, setOpenPoints] = useState(new Set());
 
   return (
     <div style={{ background:C.white, border:`1.5px solid ${C.purple}33`, borderRadius:12, overflow:"hidden", boxShadow:"0 1px 4px rgba(0,0,0,0.05)" }}>
@@ -1462,7 +1494,7 @@ export function GrammarPresets({ onLoad }) {
         <div style={{ borderTop:`1px solid ${C.border}`, padding:"0.6rem" }}>
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.4rem" }}>
             {EDITO_GRAMMAR.map(u => (
-              <button key={u.id} onClick={()=>setSelectedUnit(u)}
+              <button key={u.id} onClick={()=>{ setSelectedUnit(u); setOpenPoints(new Set()); }}
                 style={{ background:C.cream, border:`1px solid ${C.border}`, borderRadius:8, padding:"0.55rem 0.6rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s" }}
                 onMouseEnter={e=>e.currentTarget.style.background=C.purpleL}
                 onMouseLeave={e=>e.currentTarget.style.background=C.cream}>
@@ -1481,45 +1513,56 @@ export function GrammarPresets({ onLoad }) {
 
       {open && selectedUnit && (
         <div style={{ borderTop:`1px solid ${C.border}` }}>
-          <button onClick={()=>setSelectedUnit(null)}
+          <button onClick={()=>{ setSelectedUnit(null); setOpenPoints(new Set()); }}
             style={{ display:"flex", alignItems:"center", gap:"0.4rem", padding:"0.5rem 0.9rem", background:"transparent", border:"none", cursor:"pointer", fontSize:"0.72rem", color:C.gray, fontFamily:"inherit" }}>
             ← Tất cả unités
           </button>
-          <div style={{ padding:"0 0.75rem 0.75rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
-            {selectedUnit.points.map((p, i) => (
-              <div key={i} style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, overflow:"hidden", boxShadow:"0 2px 8px rgba(91,79,207,0.07)" }}>
-                {/* Header */}
-                <div style={{ background:C.purpleL, padding:"0.55rem 0.75rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                  <div style={{ fontSize:"0.78rem", fontWeight:600, color:C.purple, lineHeight:1.3 }}>{p.topic}</div>
-                  <button onClick={()=>onLoad(p.topic)}
-                    style={{ background:C.purple, color:C.white, border:"none", borderRadius:20, padding:"0.2rem 0.6rem", fontSize:"0.62rem", cursor:"pointer", whiteSpace:"nowrap", marginLeft:"0.5rem", flexShrink:0 }}>
-                    Luyện tập →
-                  </button>
-                </div>
-                {/* Rule */}
-                <div style={{ padding:"0.65rem 0.85rem" }}>
-                  <div style={{ fontSize:"0.73rem", color:C.ink, lineHeight:1.7, marginBottom:"0.65rem", background:C.cream, borderRadius:8, padding:"0.45rem 0.65rem", borderLeft:`3px solid ${C.purple}` }}>📌 {p.rule}</div>
-                  <div style={{ fontSize:"0.63rem", textTransform:"uppercase", letterSpacing:0.8, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>Ví dụ</div>
-                  <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-                    {p.examples.map((ex, j) => {
-                      const parts = ex.split(" — ");
-                      const fr = parts[0] || ex;
-                      const vi = parts[1] || "";
-                      return (
-                        <div key={j} style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:8, padding:"0.45rem 0.65rem" }}>
-                          <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", marginBottom: vi ? "0.25rem" : 0 }}>
-                            <span style={{ fontSize:"0.65rem", color:C.purple, flexShrink:0 }}>▸</span>
-                            <span style={{ fontFamily:"Georgia,serif", fontSize:"0.8rem", color:C.ink, fontStyle:"italic", flex:1 }}>{fr}</span>
-                            <SpeakBtn text={fr} size="0.7rem" />
-                          </div>
-                          {vi && <div style={{ fontSize:"0.72rem", color:C.gray, marginLeft:"1.1rem", lineHeight:1.5 }}>→ {vi}</div>}
-                        </div>
-                      );
-                    })}
+          <div style={{ padding:"0 0.75rem 0.75rem", display:"flex", flexDirection:"column", gap:"0.5rem" }}>
+            {selectedUnit.points.map((p, i) => {
+              const isOpen = openPoints.has(i);
+              const toggle = () => setOpenPoints(prev => { const s=new Set(prev); s.has(i)?s.delete(i):s.add(i); return s; });
+              return (
+                <div key={i} style={{ background:C.white, border:`1.5px solid ${isOpen?C.purple+"55":C.border}`, borderRadius:12, overflow:"hidden", boxShadow:`0 2px 8px rgba(91,79,207,${isOpen?0.1:0.04})`, transition:"border-color 0.2s" }}>
+                  {/* Clickable header */}
+                  <div onClick={toggle} style={{ background:isOpen?C.purpleL:C.white, padding:"0.6rem 0.75rem", display:"flex", justifyContent:"space-between", alignItems:"center", cursor:"pointer", transition:"background 0.2s" }}>
+                    <div style={{ fontSize:"0.78rem", fontWeight:600, color:C.purple, lineHeight:1.3, flex:1 }}>{p.topic}</div>
+                    <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", flexShrink:0 }}>
+                      <button onClick={e=>{ e.stopPropagation(); onLoad(p.topic); }}
+                        style={{ background:C.purple, color:C.white, border:"none", borderRadius:20, padding:"0.2rem 0.6rem", fontSize:"0.62rem", cursor:"pointer", whiteSpace:"nowrap" }}>
+                        Luyện tập →
+                      </button>
+                      <span style={{ color:C.purple, fontSize:"0.75rem", transform:isOpen?"rotate(180deg)":"none", transition:"transform 0.2s" }}>▾</span>
+                    </div>
                   </div>
+                  {/* Collapsible body */}
+                  {isOpen && (
+                    <div style={{ padding:"0.65rem 0.85rem", borderTop:`1px solid ${C.purple}22` }}>
+                      <div style={{ background:C.cream, borderRadius:8, padding:"0.55rem 0.7rem", borderLeft:`3px solid ${C.purple}`, marginBottom:"0.65rem" }}>
+                        <RuleRenderer text={p.rule}/>
+                      </div>
+                      <div style={{ fontSize:"0.63rem", textTransform:"uppercase", letterSpacing:0.8, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>Ví dụ</div>
+                      <div style={{ display:"flex", flexDirection:"column", gap:"0.45rem" }}>
+                        {p.examples.map((ex, j) => {
+                          const parts = ex.split(" — ");
+                          const fr = parts[0] || ex;
+                          const vi = parts[1] || "";
+                          return (
+                            <div key={j} style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:8, padding:"0.45rem 0.65rem" }}>
+                              <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", marginBottom: vi?"0.2rem":0 }}>
+                                <span style={{ fontSize:"0.65rem", color:C.purple, flexShrink:0 }}>▸</span>
+                                <span style={{ fontFamily:"Georgia,serif", fontSize:"0.8rem", color:C.ink, fontStyle:"italic", flex:1 }}>{fr}</span>
+                                <SpeakBtn text={fr} size="0.7rem"/>
+                              </div>
+                              {vi && <div style={{ fontSize:"0.72rem", color:C.gray, marginLeft:"1.1rem", lineHeight:1.5 }}>→ {vi}</div>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -1587,19 +1630,24 @@ export default function GrammarPanel() {
   const [topic, setTopic] = useState("");
   const [level, setLevel] = useState("A1");
   const [gtype, setGtype] = useState("mixed");
-  const [numQ, setNumQ] = useState(6);
+  const [numQ, setNumQ] = useState(12);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [err, setErr] = useState("");
   const [wrongCount, setWrongCount] = useState(0);
   const [formOpen, setFormOpen] = useState(false);
   const formRef = useRef(null);
+  const quizRef = useRef(null);
 
   const generate = async (overrideTopic) => {
     const t = (overrideTopic !== undefined ? overrideTopic : topic).trim();
     if (!t) { setErr("Nhập chủ đề ngữ pháp!"); return; }
     setLoading(true); setErr(""); setResult(null); setWrongCount(0);
-    try { setResult(await callAI(buildGrammarPrompt(t, level, gtype, numQ))); }
+    try {
+      const data = await callAI(buildGrammarPrompt(t, level, gtype, numQ));
+      setResult(data);
+      setTimeout(() => quizRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 150);
+    }
     catch(e) { setErr(e.message); }
     setLoading(false);
   };
@@ -1739,7 +1787,7 @@ export default function GrammarPanel() {
           {/* Num questions */}
           <div style={{display:"flex",alignItems:"center",gap:"0.5rem"}}>
             <span style={{fontSize:"0.65rem",color:C.gray,whiteSpace:"nowrap"}}>Số câu:</span>
-            <input type="range" min={3} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{flex:1,accentColor:C.purple}}/>
+            <input type="range" min={10} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{flex:1,accentColor:C.purple}}/>
             <span style={{fontFamily:"Georgia,serif",fontSize:"0.95rem",color:C.purple,fontWeight:600,minWidth:22}}>{numQ}</span>
           </div>
 
@@ -1767,7 +1815,7 @@ export default function GrammarPanel() {
         </div>
       )}
       {!loading&&result&&(
-        <div>
+        <div ref={quizRef}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.75rem"}}>
             <span style={{background:C.purple,color:C.white,fontSize:"0.6rem",padding:"0.16rem 0.52rem",borderRadius:20,textTransform:"uppercase",letterSpacing:0.5}}>{result.topic} · {result.level}</span>
             <button onClick={generate} style={{padding:"0.23rem 0.6rem",border:`1.5px solid ${C.border}`,borderRadius:20,background:C.white,color:C.ink,fontSize:"0.68rem",cursor:"pointer",fontFamily:"inherit"}}>🔄 Tạo lại</button>
