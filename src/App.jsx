@@ -17,6 +17,8 @@ import DefiPanel from "./components/DefiPanel.jsx";
 import SRSPanel from "./components/SRSPanel.jsx";
 import ReferencePanel from "./components/ReferencePanel.jsx";
 import MotDuJour from "./components/MotDuJour.jsx";
+import LecturePanel from "./components/LecturePanel.jsx";
+import DicteePanel from "./components/DicteePanel.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 
 // ── Module definitions ──────────────────────────────────────
@@ -28,6 +30,8 @@ const MODULES = [
   { id:"defi",         label:"Thử thách",     fr:"Le Défi du Jour", icon:"🎲", color:"#8E44AD", bg:"#F5EEFF", view:"defi"        },
   { id:"srs",          label:"Thẻ ôn tập",    fr:"La Répétition",   icon:"🧠", color:"#0D9488", bg:"#F0FDFA", view:"srs"         },
   { id:"reference",    label:"Cẩm nang",      fr:"La Référence",    icon:"📖", color:"#6D28D9", bg:"#F5F0FF", view:"reference"   },
+  { id:"lecture",      label:"Đọc hiểu",      fr:"La Lecture",      icon:"📰", color:"#059669", bg:"#ECFDF5", view:"lecture"     },
+  { id:"dictee",       label:"Nghe chép",     fr:"La Dictée",       icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"dictee"      },
 ];
 
 const TABS = [
@@ -41,6 +45,7 @@ const TABS = [
 const SECTION_TITLE = {
   vocab:"Le Vocabulaire", grammar:"La Grammaire", conversation:"La Conversation",
   writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
+  lecture:"La Lecture", dictee:"La Dictée",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -804,6 +809,8 @@ function AppInner() {
             {view==="conversation" && <ConversationPanel/>}
             {view==="srs"          && <SRSPanel currentWords={words} />}
             {view==="reference"    && <ReferencePanel/>}
+            {view==="lecture"      && <LecturePanel words={words} />}
+            {view==="dictee"       && <DicteePanel words={words} />}
           </div>
         </>
       )}
