@@ -224,41 +224,51 @@ export function DicteeSection({ words, onRecord }) {
 }
 
 // ── Flashcard Section ───────────────────────────────────────
+const BATCH_SIZE = 20;
+
+function makeFp(words) {
+  const s = words.map(w => w.fr).join("|");
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) & 0xffffffff;
+  return (h >>> 0).toString(36);
+}
+
 export function FlashcardSection({ words, onRecord }) {
-  const total = words.length;
+  const fp      = makeFp(words);
+  const lsKey   = `fc_batch_${fp}`;
+  const batches = [];
+  for (let i = 0; i < words.length; i += BATCH_SIZE) batches.push(words.slice(i, i + BATCH_SIZE));
+  const totalBatches = batches.length;
+
   const makeCards = (ws) => ws.map((w, i) => ({ id:`${w.fr}-${i}`, front:w.fr, back:w.vi, status:"unseen" }));
 
-  const [deck,         setDeck]         = useState(() => makeCards(words));
+  const initBatch = () => Math.min(parseInt(localStorage.getItem(lsKey) || "0"), totalBatches - 1);
+
+  const [batchIdx,     setBatchIdx]     = useState(initBatch);
+  const [deck,         setDeck]         = useState(() => makeCards(batches[initBatch()]));
   const [idx,          setIdx]          = useState(0);
   const [flipped,      setFlipped]      = useState(false);
-  const [learnedCount, setLearnedCount] = useState(0);
+  const [batchLearned, setBatchLearned] = useState(0);
+  const [batchDone,    setBatchDone]    = useState(false);
   const touchX = useRef(null);
 
-  const current  = deck[idx];
-  const done     = deck.length === 0;
-  const pct      = Math.round((learnedCount / total) * 100);
+  const batchWords = batches[batchIdx];
+  const batchSize  = batchWords.length;
+  const current    = deck[idx];
+  const pct        = Math.round((batchLearned / batchSize) * 100);
 
-  const flip    = ()  => setFlipped(f => !f);
-
-  const goNext  = ()  => {
-    if (idx >= deck.length - 1) return;
-    setFlipped(false);
-    setTimeout(() => setIdx(i => i + 1), 180);
-  };
-
-  const goPrev  = ()  => {
-    if (idx <= 0) return;
-    setFlipped(false);
-    setTimeout(() => setIdx(i => i - 1), 180);
-  };
+  const flip   = () => setFlipped(f => !f);
+  const goNext = () => { if (idx >= deck.length - 1) return; setFlipped(false); setTimeout(() => setIdx(i => i + 1), 180); };
+  const goPrev = () => { if (idx <= 0) return; setFlipped(false); setTimeout(() => setIdx(i => i - 1), 180); };
 
   const markLearned = () => {
     onRecord?.(current.front, true);
     const next = deck.filter((_, i) => i !== idx);
-    setLearnedCount(c => c + 1);
+    setBatchLearned(c => c + 1);
     setFlipped(false);
     setDeck(next);
-    setIdx(i => Math.min(i, next.length - 1));
+    if (next.length === 0) setBatchDone(true);
+    else setIdx(i => Math.min(i, next.length - 1));
   };
 
   const markLearning = () => {
@@ -271,25 +281,30 @@ export function FlashcardSection({ words, onRecord }) {
     setIdx(i => Math.min(i, next.length - 1));
   };
 
-  const shuffle = () => {
-    setDeck(d => [...d].sort(() => Math.random() - 0.5));
-    setIdx(0); setFlipped(false);
+  const shuffle = () => { setDeck(d => [...d].sort(() => Math.random() - 0.5)); setIdx(0); setFlipped(false); };
+
+  const goNextBatch = () => {
+    const next = batchIdx + 1;
+    localStorage.setItem(lsKey, String(next));
+    setBatchIdx(next); setDeck(makeCards(batches[next]));
+    setIdx(0); setFlipped(false); setBatchLearned(0); setBatchDone(false);
   };
 
-  const reset = () => {
-    setDeck(makeCards(words).sort(() => Math.random() - 0.5));
-    setIdx(0); setFlipped(false); setLearnedCount(0);
+  const resetAll = () => {
+    localStorage.removeItem(lsKey);
+    setBatchIdx(0); setDeck(makeCards(batches[0]).sort(() => Math.random() - 0.5));
+    setIdx(0); setFlipped(false); setBatchLearned(0); setBatchDone(false);
   };
 
   // Keyboard
   useEffect(() => {
-    const handler = (e) => {
+    const h = (e) => {
       if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
       if (e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft")  goPrev();
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
   });
 
   // Swipe
@@ -301,26 +316,52 @@ export function FlashcardSection({ words, onRecord }) {
     touchX.current = null;
   };
 
-  // ── Completion screen ──
-  if (done) return (
+  // ── Tất cả batch xong ──
+  if (batchDone && batchIdx >= totalBatches - 1) return (
     <div style={{ textAlign:"center", padding:"2.5rem 1rem", animation:"fadeUp 0.3s ease" }}>
       <div style={{ fontSize:"3.5rem", marginBottom:"0.6rem" }}>🎉</div>
-      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>Xong hết rồi!</div>
-      <div style={{ fontSize:"0.85rem", color:C.gray, marginBottom:"1.5rem" }}>Đã thuộc {learnedCount}/{total} từ</div>
-      <button onClick={reset}
+      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>Hoàn thành tất cả!</div>
+      <div style={{ fontSize:"0.85rem", color:C.gray, marginBottom:"1.5rem" }}>{words.length} từ · {totalBatches} bộ</div>
+      <button onClick={resetAll}
         style={{ padding:"0.65rem 1.8rem", background:`linear-gradient(135deg,${C.blue},${C.purple})`, color:C.white, border:"none", borderRadius:14, fontSize:"0.9rem", cursor:"pointer", fontWeight:700, boxShadow:`0 4px 16px ${C.blue}44` }}>
         🔄 Học lại từ đầu
       </button>
     </div>
   );
 
+  // ── Batch hiện tại xong, còn batch tiếp ──
+  if (batchDone) return (
+    <div style={{ textAlign:"center", padding:"2.5rem 1rem", animation:"fadeUp 0.3s ease" }}>
+      <div style={{ fontSize:"3rem", marginBottom:"0.6rem" }}>✅</div>
+      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>
+        Bộ {batchIdx + 1}/{totalBatches} xong!
+      </div>
+      <div style={{ fontSize:"0.85rem", color:C.gray, marginBottom:"0.4rem" }}>Thuộc {batchLearned}/{batchSize} từ trong bộ này</div>
+      <div style={{ fontSize:"0.78rem", color:C.gray, marginBottom:"1.5rem" }}>
+        Còn {totalBatches - batchIdx - 1} bộ · {batches[batchIdx + 1]?.length} từ tiếp theo
+      </div>
+      <button onClick={goNextBatch}
+        style={{ padding:"0.65rem 1.8rem", background:`linear-gradient(135deg,${C.green},#0D9488)`, color:C.white, border:"none", borderRadius:14, fontSize:"0.9rem", cursor:"pointer", fontWeight:700, boxShadow:`0 4px 16px ${C.green}44` }}>
+        Tiếp tục Bộ {batchIdx + 2} →
+      </button>
+    </div>
+  );
+
+  // ── Card UI ──
   return (
     <div>
       {/* Header */}
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.6rem" }}>
-        <SecLabel icon="🃏" text="Flashcard" />
+        <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
+          <SecLabel icon="🃏" text="Flashcard" />
+          {totalBatches > 1 && (
+            <span style={{ fontSize:"0.68rem", color:C.blue, background:C.blueL, borderRadius:20, padding:"0.1rem 0.55rem", fontWeight:600 }}>
+              Bộ {batchIdx + 1}/{totalBatches}
+            </span>
+          )}
+        </div>
         <div style={{ display:"flex", gap:"0.4rem", alignItems:"center" }}>
-          <span style={{ fontSize:"0.68rem", color:C.gray }}>{learnedCount}/{total} thuộc</span>
+          <span style={{ fontSize:"0.68rem", color:C.gray }}>{batchLearned}/{batchSize} thuộc</span>
           <button onClick={shuffle}
             style={{ padding:"0.2rem 0.55rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.68rem", cursor:"pointer" }}>
             🔀 Trộn
@@ -333,27 +374,14 @@ export function FlashcardSection({ words, onRecord }) {
         <div style={{ height:"100%", width:`${pct}%`, background:C.green, borderRadius:999, transition:"width 0.4s ease" }}/>
       </div>
 
-      {/* Card with 3D flip */}
-      <div
-        onClick={flip} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
+      {/* Card 3D */}
+      <div onClick={flip} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
         style={{ perspective:1200, cursor:"pointer", marginBottom:"0.9rem", userSelect:"none" }}>
-        <div style={{
-          position:"relative", height:220,
-          transformStyle:"preserve-3d",
-          transition:"transform 0.42s cubic-bezier(0.4,0,0.2,1)",
-          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}>
+        <div style={{ position:"relative", height:220, transformStyle:"preserve-3d", transition:"transform 0.42s cubic-bezier(0.4,0,0.2,1)", transform:flipped?"rotateY(180deg)":"rotateY(0deg)" }}>
           {/* Front */}
-          <div style={{
-            position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden",
-            background:C.white, border:`1.5px solid ${C.blue}44`, borderRadius:22,
-            display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem",
-            boxShadow:"0 4px 24px rgba(74,144,217,0.10)",
-          }}>
+          <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", background:C.white, border:`1.5px solid ${C.blue}44`, borderRadius:22, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem", boxShadow:"0 4px 24px rgba(74,144,217,0.10)" }}>
             <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"1rem" }}>🇫🇷 Tiếng Pháp</div>
-            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.blue, fontWeight:700, textAlign:"center", marginBottom:"0.5rem", lineHeight:1.2 }}>
-              {current.front}
-            </div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.blue, fontWeight:700, textAlign:"center", marginBottom:"0.5rem", lineHeight:1.2 }}>{current.front}</div>
             <SpeakBtn text={current.front} />
             <div style={{ marginTop:"1.2rem", fontSize:"0.65rem", color:C.gray, display:"flex", alignItems:"center", gap:"0.3rem" }}>
               <span style={{ background:C.border, borderRadius:4, padding:"0.1rem 0.4rem", fontSize:"0.6rem" }}>Space</span> hoặc nhấn thẻ để xem nghĩa
@@ -362,55 +390,37 @@ export function FlashcardSection({ words, onRecord }) {
               <div style={{ position:"absolute", top:12, right:14, fontSize:"0.6rem", color:C.gold, fontWeight:700, background:C.goldL, borderRadius:20, padding:"0.1rem 0.4rem" }}>🔁 Ôn lại</div>
             )}
           </div>
-
           {/* Back */}
-          <div style={{
-            position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden",
-            transform:"rotateY(180deg)",
-            background:`linear-gradient(135deg, ${C.blueL}, #f0f4ff)`,
-            border:`1.5px solid ${C.blue}88`, borderRadius:22,
-            display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem",
-            boxShadow:"0 4px 24px rgba(74,144,217,0.14)",
-          }}>
+          <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", transform:"rotateY(180deg)", background:`linear-gradient(135deg,${C.blueL},#f0f4ff)`, border:`1.5px solid ${C.blue}88`, borderRadius:22, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"1.5rem", boxShadow:"0 4px 24px rgba(74,144,217,0.14)" }}>
             <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"1rem" }}>🇻🇳 Tiếng Việt</div>
-            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.7rem", color:C.ink, fontWeight:700, textAlign:"center", lineHeight:1.3 }}>
-              {current.back || "—"}
-            </div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.7rem", color:C.ink, fontWeight:700, textAlign:"center", lineHeight:1.3 }}>{current.back || "—"}</div>
           </div>
         </div>
       </div>
 
-      {/* Navigation row */}
+      {/* Navigation */}
       <div style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:"0.75rem", marginBottom:"0.85rem" }}>
-        <button onClick={goPrev} disabled={idx === 0}
-          style={{ width:40, height:40, background:"transparent", border:`1.5px solid ${idx===0?C.border:C.gray}`, color:idx===0?C.border:C.gray, borderRadius:"50%", fontSize:"1rem", cursor:idx===0?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>
-          ←
-        </button>
-        <span style={{ fontSize:"0.72rem", color:C.gray, minWidth:64, textAlign:"center" }}>
-          {idx + 1} / {deck.length}
-        </span>
-        <button onClick={goNext} disabled={idx === deck.length - 1}
-          style={{ width:40, height:40, background:"transparent", border:`1.5px solid ${idx===deck.length-1?C.border:C.gray}`, color:idx===deck.length-1?C.border:C.gray, borderRadius:"50%", fontSize:"1rem", cursor:idx===deck.length-1?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>
-          →
-        </button>
+        <button onClick={goPrev} disabled={idx===0}
+          style={{ width:40, height:40, background:"transparent", border:`1.5px solid ${idx===0?C.border:C.gray}`, color:idx===0?C.border:C.gray, borderRadius:"50%", fontSize:"1rem", cursor:idx===0?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>←</button>
+        <span style={{ fontSize:"0.72rem", color:C.gray, minWidth:64, textAlign:"center" }}>{idx+1} / {deck.length}</span>
+        <button onClick={goNext} disabled={idx===deck.length-1}
+          style={{ width:40, height:40, background:"transparent", border:`1.5px solid ${idx===deck.length-1?C.border:C.gray}`, color:idx===deck.length-1?C.border:C.gray, borderRadius:"50%", fontSize:"1rem", cursor:idx===deck.length-1?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>→</button>
       </div>
 
-      {/* Status buttons — shown only after flip */}
+      {/* Status buttons */}
       {flipped ? (
         <div style={{ display:"flex", gap:"0.6rem", animation:"fadeUp 0.2s ease" }}>
           <button onClick={markLearning}
-            style={{ flex:1, padding:"0.65rem", background:"#FFF7ED", border:"1.5px solid #F97316", color:"#EA580C", borderRadius:14, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, transition:"all 0.15s" }}>
+            style={{ flex:1, padding:"0.65rem", background:"#FFF7ED", border:"1.5px solid #F97316", color:"#EA580C", borderRadius:14, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
             🔁 Đang học
           </button>
           <button onClick={markLearned}
-            style={{ flex:1, padding:"0.65rem", background:C.greenL, border:`1.5px solid ${C.green}`, color:C.green, borderRadius:14, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, transition:"all 0.15s" }}>
+            style={{ flex:1, padding:"0.65rem", background:C.greenL, border:`1.5px solid ${C.green}`, color:C.green, borderRadius:14, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
             ✓ Đã thuộc
           </button>
         </div>
       ) : (
-        <div style={{ textAlign:"center", fontSize:"0.68rem", color:C.gray }}>
-          Lật thẻ để đánh giá mức độ ghi nhớ
-        </div>
+        <div style={{ textAlign:"center", fontSize:"0.68rem", color:C.gray }}>Lật thẻ để đánh giá mức độ ghi nhớ</div>
       )}
     </div>
   );
