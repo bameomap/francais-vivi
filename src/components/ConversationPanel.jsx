@@ -6,13 +6,13 @@ import SpeakBtn from "./ui/SpeakBtn.jsx";
 
 export const EDITO_SCENARIOS = [
   {
-    id:"greet", label:"Saluer", icon:"👋", desc:"Chào hỏi & giới thiệu",
+    id:"greet", label:"Saluer", icon:"🥐", desc:"Chào hỏi & giới thiệu",
     color:"#2980B9", bg:"#E8F4FD",
     phrases:["Bonjour !", "Je m'appelle…", "J'ai … ans.", "Je suis vietnamien(ne).", "Et vous ?", "Enchanté(e) !"],
     prompt:"You are a friendly French person at a café. The learner is A1 level. Start with a simple greeting. Keep sentences very short and simple. After each learner reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line. Then continue the conversation naturally.",
   },
   {
-    id:"shop", label:"Faire les courses", icon:"🛒", desc:"Mua sắm tại chợ",
+    id:"shop", label:"Faire les courses", icon:"🛍️", desc:"Mua sắm tại chợ",
     color:"#16A085", bg:"#E6FAF5",
     phrases:["Bonjour, je voudrais…", "Combien ça coûte ?", "Un kilo de…, s'il vous plaît.", "C'est tout, merci.", "Vous avez… ?"],
     prompt:"You are a French market vendor. The learner is A1 level. Start by greeting and asking what they need. Keep sentences very short. After each learner reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line. Then respond as the vendor.",
@@ -24,7 +24,7 @@ export const EDITO_SCENARIOS = [
     prompt:"You are a French waiter at a café. The learner is A1 level. Start by welcoming them. Keep sentences short. After each learner reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line. Then respond as the waiter.",
   },
   {
-    id:"school", label:"À l'école", icon:"🏫", desc:"Nói chuyện tại trường",
+    id:"school", label:"À l'école", icon:"📚", desc:"Nói chuyện tại trường",
     color:"#8E44AD", bg:"#F5EEFF",
     phrases:["Tu t'appelles comment ?", "Tu es en quelle année ?", "J'étudie le français.", "C'est difficile !", "On mange ensemble ?"],
     prompt:"You are a French classmate. The learner is A1 level. Start by introducing yourself and asking their name. Keep it simple. After each learner reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line. Then continue chatting.",
@@ -36,7 +36,7 @@ export const EDITO_SCENARIOS = [
     prompt:"You are a French passerby in the street. The learner is A1 level. Wait for them to ask for directions. Give simple directions. After each reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line.",
   },
   {
-    id:"family", label:"La famille", icon:"👨‍👩‍👧", desc:"Nói về gia đình",
+    id:"family", label:"La famille", icon:"🏡", desc:"Nói về gia đình",
     color:"#D35400", bg:"#FDEBD0",
     phrases:["J'ai … frères et sœurs.", "Mon père s'appelle…", "Ma mère est…", "J'habite avec…", "Tu as des frères ?"],
     prompt:"You are a friendly French neighbor. The learner is A1 level. Start by asking about their family. Keep questions short. After each learner reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line. Then continue.",

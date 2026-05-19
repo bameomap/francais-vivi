@@ -10,20 +10,20 @@ export const LEVELS = [
 ];
 
 export const BADGE_DEFS = [
-  { id:"first_lesson",  icon:"🎓", label:"Première leçon",   desc:"Dùng module đầu tiên"          },
-  { id:"words_10",      icon:"📝", label:"10 từ",             desc:"Thêm 10 từ vào SRS"             },
-  { id:"words_50",      icon:"📚", label:"50 từ",             desc:"Thêm 50 từ vào SRS"             },
-  { id:"words_100",     icon:"🏅", label:"100 từ",            desc:"Thêm 100 từ vào SRS"            },
+  { id:"first_lesson",  icon:"🥐", label:"Première leçon",   desc:"Dùng module đầu tiên"          },
+  { id:"words_10",      icon:"🐱", label:"10 từ",             desc:"Thêm 10 từ vào SRS"             },
+  { id:"words_50",      icon:"😺", label:"50 từ",             desc:"Thêm 50 từ vào SRS"             },
+  { id:"words_100",     icon:"🐈", label:"100 từ",            desc:"Thêm 100 từ vào SRS"            },
   { id:"streak_3",      icon:"🔥", label:"3 ngày liền",       desc:"Học 3 ngày liên tiếp"           },
   { id:"streak_7",      icon:"⚡", label:"7 ngày liền",       desc:"Học 7 ngày liên tiếp"           },
-  { id:"streak_30",     icon:"💫", label:"30 ngày liền",      desc:"Học 30 ngày liên tiếp"          },
-  { id:"first_defi",    icon:"🎲", label:"Premier Défi",      desc:"Hoàn thành thử thách đầu tiên"  },
-  { id:"defi_perfect",  icon:"💯", label:"Défi Parfait",      desc:"Đạt 100% trong Défi"            },
-  { id:"first_dictee",  icon:"🎧", label:"Première Dictée",   desc:"Hoàn thành Dictée đầu tiên"     },
-  { id:"read_5",        icon:"📰", label:"Lecteur",           desc:"Đọc 5 bài Lecture"              },
+  { id:"streak_30",     icon:"🗼", label:"30 ngày liền",      desc:"Học 30 ngày liên tiếp"          },
+  { id:"first_defi",    icon:"⚜️", label:"Premier Défi",      desc:"Hoàn thành thử thách đầu tiên"  },
+  { id:"defi_perfect",  icon:"🥂", label:"Défi Parfait",      desc:"Đạt 100% trong Défi"            },
+  { id:"first_dictee",  icon:"🎵", label:"Première Dictée",   desc:"Hoàn thành Dictée đầu tiên"     },
+  { id:"read_5",        icon:"📜", label:"Lecteur",           desc:"Đọc 5 bài Lecture"              },
   { id:"master_5",      icon:"✨", label:"5 từ thuộc",        desc:"Thuộc 5 từ trong SRS"           },
   { id:"master_20",     icon:"🌟", label:"20 từ thuộc",       desc:"Thuộc 20 từ trong SRS"          },
-  { id:"conjugaison_5", icon:"🔤", label:"Grammairien",       desc:"Luyện chia động từ 5 lần"       },
+  { id:"conjugaison_5", icon:"🖊️", label:"Grammairien",       desc:"Luyện chia động từ 5 lần"       },
 ];
 
 export function getXPData() {

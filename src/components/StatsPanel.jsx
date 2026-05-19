@@ -4,16 +4,16 @@ import { getSRSStats, getAllCards } from "../utils/srs.js";
 import { getXPData, getLevel, getNextLevel, getBadges, BADGE_DEFS } from "../utils/xp.js";
 
 const MODULES_META = [
-  { id:"vocab",        label:"Từ vựng",    icon:"📚", color:"#4A90D9" },
-  { id:"grammar",      label:"Ngữ pháp",   icon:"🧩", color:"#7B6CF6" },
-  { id:"conversation", label:"Giao tiếp",  icon:"💬", color:"#2980B9" },
-  { id:"writing",      label:"Luyện viết", icon:"✍️", color:"#E67E22" },
-  { id:"defi",         label:"Thử thách",  icon:"🎲", color:"#8E44AD" },
-  { id:"srs",          label:"Ôn tập",     icon:"🧠", color:"#0D9488" },
-  { id:"reference",    label:"Cẩm nang",   icon:"📖", color:"#6D28D9" },
-  { id:"lecture",      label:"Đọc hiểu",   icon:"📰", color:"#059669" },
-  { id:"dictee",       label:"Nghe chép",  icon:"🎧", color:"#0891B2" },
-  { id:"phrasebook",   label:"Mẫu câu",    icon:"💡", color:"#D97706" },
+  { id:"vocab",        label:"Từ vựng",    icon:"📖", color:"#4A90D9" },
+  { id:"grammar",      label:"Ngữ pháp",   icon:"⚜️", color:"#7B6CF6" },
+  { id:"conversation", label:"Giao tiếp",  icon:"🥐", color:"#2980B9" },
+  { id:"writing",      label:"Luyện viết", icon:"🖋️", color:"#E67E22" },
+  { id:"defi",         label:"Thử thách",  icon:"🏆", color:"#8E44AD" },
+  { id:"srs",          label:"Ôn tập",     icon:"🃏", color:"#0D9488" },
+  { id:"reference",    label:"Cẩm nang",   icon:"🗺️", color:"#6D28D9" },
+  { id:"lecture",      label:"Đọc hiểu",   icon:"📜", color:"#059669" },
+  { id:"dictee",       label:"Nghe chép",  icon:"🎵", color:"#0891B2" },
+  { id:"phrasebook",   label:"Mẫu câu",    icon:"💬", color:"#D97706" },
 ];
 
 // ── Streak calendar ───────────────────────────────────────────

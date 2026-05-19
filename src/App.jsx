@@ -29,36 +29,36 @@ import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./ut
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
   // Học
-  { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"input"        },
-  { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
-  { id:"conjugaison",  group:"hoc", label:"Chia động từ",  fr:"La Conjugaison",   icon:"🔤", color:"#0891B2", bg:"#F0F9FF", view:"conjugaison"  },
-  { id:"reference",    group:"hoc", label:"Cẩm nang",      fr:"La Référence",     icon:"📖", color:"#6D28D9", bg:"#F5F0FF", view:"reference"    },
-  { id:"phrasebook",   group:"hoc", label:"Mẫu câu",       fr:"Le Phrasebook",    icon:"💡", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"   },
+  { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"input"        },
+  { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
+  { id:"conjugaison",  group:"hoc", label:"Chia động từ",  fr:"La Conjugaison",   icon:"🖊️", color:"#0891B2", bg:"#F0F9FF", view:"conjugaison"  },
+  { id:"reference",    group:"hoc", label:"Cẩm nang",      fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference"    },
+  { id:"phrasebook",   group:"hoc", label:"Mẫu câu",       fr:"Le Phrasebook",    icon:"💬", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"   },
   // Luyện
-  { id:"conversation", group:"luyen", label:"Giao tiếp",   fr:"La Conversation",  icon:"💬", color:"#2980B9", bg:"#E8F4FD", view:"conversation" },
-  { id:"writing",      group:"luyen", label:"Luyện viết",  fr:"L'Écriture",       icon:"✍️", color:"#E67E22", bg:"#FEF3E2", view:"writing"      },
-  { id:"defi",         group:"luyen", label:"Thử thách",   fr:"Le Défi du Jour",  icon:"🎲", color:"#8E44AD", bg:"#F5EEFF", view:"defi"         },
-  { id:"lecture",      group:"luyen", label:"Đọc hiểu",    fr:"La Lecture",       icon:"📰", color:"#059669", bg:"#ECFDF5", view:"lecture"      },
-  { id:"dictee",       group:"luyen", label:"Nghe chép",   fr:"La Dictée",        icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"dictee"       },
-  { id:"srs",          group:"luyen", label:"Thẻ ôn tập",  fr:"La Répétition",    icon:"🧠", color:"#0D9488", bg:"#F0FDFA", view:"srs"          },
-  { id:"revision",     group:"luyen", label:"Ôn sai",      fr:"La Révision",      icon:"🔁", color:"#DC2626", bg:"#FEF2F2", view:"revision"     },
+  { id:"conversation", group:"luyen", label:"Giao tiếp",   fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation" },
+  { id:"writing",      group:"luyen", label:"Luyện viết",  fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"      },
+  { id:"defi",         group:"luyen", label:"Thử thách",   fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"         },
+  { id:"lecture",      group:"luyen", label:"Đọc hiểu",    fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"      },
+  { id:"dictee",       group:"luyen", label:"Nghe chép",   fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"dictee"       },
+  { id:"srs",          group:"luyen", label:"Thẻ ôn tập",  fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"          },
+  { id:"revision",     group:"luyen", label:"Ôn sai",      fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"     },
   // Công cụ
-  { id:"stats",        group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📊", color:"#0891B2", bg:"#F0F9FF", view:"stats"        },
+  { id:"stats",        group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"        },
 ];
 
 const GROUP_DEFS = [
-  { id:"vocab",    icon:"📚", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","srs"] },
-  { id:"grammar",  icon:"🧩", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","conjugaison","reference","phrasebook"] },
-  { id:"practice", icon:"🎯", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee"] },
-  { id:"progress", icon:"📊", label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
+  { id:"vocab",    icon:"📖", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","srs"] },
+  { id:"grammar",  icon:"⚜️", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","conjugaison","reference","phrasebook"] },
+  { id:"practice", icon:"🥐", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee"] },
+  { id:"progress", icon:"📈", label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
 ];
 
 const TABS = [
-  { id:"home",    icon:"🏠", label:"Trang chủ" },
-  { id:"vocab",   icon:"📚", label:"Từ vựng"   },
-  { id:"grammar", icon:"🧩", label:"Ngữ pháp"  },
-  { id:"writing", icon:"✍️", label:"Luyện viết"},
-  { id:"srs",     icon:"🧠", label:"Ôn tập"    },
+  { id:"home",    icon:"🗼", label:"Trang chủ" },
+  { id:"vocab",   icon:"📖", label:"Từ vựng"   },
+  { id:"grammar", icon:"⚜️", label:"Ngữ pháp"  },
+  { id:"writing", icon:"🖋️", label:"Luyện viết"},
+  { id:"srs",     icon:"🃏", label:"Ôn tập"    },
 ];
 
 const SECTION_TITLE = {
@@ -332,9 +332,9 @@ function AppInner() {
               App có <b>8 module</b> học tiếng Pháp. Gợi ý bắt đầu với:
               <div style={{ display:"flex", flexDirection:"column", gap:"0.4rem", marginTop:"0.6rem" }}>
                 {[
-                  {icon:"📚",text:"Từ vựng — nhập từ, luyện flashcard & bài tập"},
-                  {icon:"📖",text:"Chia động từ — tra bảng chia ngay khi cần"},
-                  {icon:"💬",text:"Giao tiếp — roleplay tình huống thực tế với AI"},
+                  {icon:"📖",text:"Từ vựng — nhập từ, luyện flashcard & bài tập"},
+                  {icon:"🖊️",text:"Chia động từ — tra bảng chia ngay khi cần"},
+                  {icon:"🥐",text:"Giao tiếp — roleplay tình huống thực tế với AI"},
                 ].map((s,i)=>(
                   <div key={i} style={{ display:"flex", gap:"0.6rem", alignItems:"center", background:C.blueL, borderRadius:10, padding:"0.5rem 0.75rem" }}>
                     <span style={{ fontSize:"1rem" }}>{s.icon}</span>
