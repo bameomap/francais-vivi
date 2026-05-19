@@ -367,11 +367,7 @@ function AppInner() {
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"1.1rem 1.25rem 0" }}>
             {/* Logo */}
             <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-              <div style={{ display:"flex", gap:3 }}>
-                {["#002395","#FFFFFF","#ED2939"].map((col,i)=>(
-                  <div key={i} style={{ width:4, height:20, background:col, borderRadius:2, border:col==="#FFFFFF"?`1px solid ${C.border}`:"none" }}/>
-                ))}
-              </div>
+              <img src="/logo.svg" alt="Vivi Learns Français" style={{ width:36, height:36, borderRadius:9 }} />
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, letterSpacing:"0.03em" }}>Français</span>
             </div>
             {/* Streak badge */}
