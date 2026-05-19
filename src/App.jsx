@@ -38,19 +38,14 @@ function parseWords(text) {
   }).filter(w => w.fr.length > 0);
 }
 
-// ── API Key (set at runtime) ────────────────────────────────
-let _apiKey = "";
-function setApiKey(k) { _apiKey = k; localStorage.setItem("api_key", k); }
-function getApiKey() { return _apiKey || localStorage.getItem("api_key") || ""; }
+const MODEL = "claude-sonnet-4-20250514";
 
-async function callAI(prompt, apiKey) {
-  const key = apiKey || getApiKey();
-  if (!key) throw new Error("Chưa nhập API key!");
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+async function callAI(prompt) {
+  const res = await fetch("/api/proxy", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
+      model: MODEL,
       max_tokens: 8000,
       system: "You are a JSON API. Output valid JSON only. No markdown, no backticks. Start with { end with }.",
       messages: [{ role: "user", content: prompt }]
@@ -159,12 +154,10 @@ const EDITO_SCENARIOS = [
 ];
 
 async function callAIText(messages, systemPrompt) {
-  const key = getApiKey();
-  if (!key) throw new Error("Chưa nhập API key!");
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/proxy", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 300, system: systemPrompt, messages })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model: MODEL, max_tokens: 300, system: systemPrompt, messages })
   });
   const data = await res.json();
   if (data.error) throw new Error(data.error.message);
@@ -1156,8 +1149,7 @@ function ImportModal({ onImport, onClose }) {
       if (["jpg","jpeg","png","webp","heic","gif"].includes(ext)) {
         const b64 = await new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result.split(",")[1]); r.onerror=rej; r.readAsDataURL(file); });
         const mt = ["jpg","heic"].includes(ext)?"image/jpeg":`image/${ext}`;
-        const key = getApiKey(); if(!key) throw new Error("Chưa nhập API key!");
-        const res = await fetch("https://api.anthropic.com/v1/messages",{ method:"POST", headers:{"Content-Type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"}, body:JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:1000, system:"Extract vocabulary from image. Return each word on its own line as: French — Vietnamese. Only the word list.", messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:mt,data:b64}},{type:"text",text:"Extract vocabulary."}]}] }) });
+        const res = await fetch("/api/proxy",{ method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ model:MODEL, max_tokens:1000, system:"Extract vocabulary from image. Return each word on its own line as: French — Vietnamese. Only the word list.", messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:mt,data:b64}},{type:"text",text:"Extract vocabulary."}]}] }) });
         const d = await res.json(); if(d.error)throw new Error(d.error.message);
         setPreview(d.content.map(c=>c.text||"").join("").trim()); setState("preview"); return;
       }
@@ -1308,7 +1300,7 @@ Chọn 15-20 từ vựng quan trọng nhất và 4-6 điểm ngữ pháp nổi b
       } else if (["jpg","jpeg","png","webp"].includes(ext)) {
         const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(",")[1]);r.onerror=rej;r.readAsDataURL(file);});
         const mt=ext==="jpg"?"image/jpeg":`image/${ext}`;
-        const extractRes=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":getApiKey(),"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:3000,system:"Extract all French text from this image exactly as written. Return only the text.",messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:mt,data:b64}},{type:"text",text:"Extract French text."}]}]})});
+        const extractRes=await fetch("/api/proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:MODEL,max_tokens:3000,system:"Extract all French text from this image exactly as written. Return only the text.",messages:[{role:"user",content:[{type:"image",source:{type:"base64",media_type:mt,data:b64}},{type:"text",text:"Extract French text."}]}]})});
         const ed=await extractRes.json(); if(ed.error)throw new Error(ed.error.message);
         const t=ed.content.map(c=>c.text||"").join("").trim();
         setInputText(t); await analyse(t);
@@ -4437,60 +4429,12 @@ function markModuleUsed(moduleId) {
   } catch {}
 }
 
-// ── API Key Screen ──────────────────────────────────────────
-function ApiKeyScreen({ onSave }) {
-  const [val, setVal] = useState(localStorage.getItem("api_key") || "");
-  const [show, setShow] = useState(false);
-  const [err, setErr] = useState("");
-  const save = () => {
-    if (!val.trim().startsWith("sk-ant-")) { setErr("API key phải bắt đầu bằng sk-ant-..."); return; }
-    setApiKey(val.trim()); onSave(val.trim());
-  };
-  return (
-    <div style={{ minHeight:"100vh", background:C.paper, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"2rem 1.5rem" }}>
-      <div style={{ fontFamily:"Georgia,serif", fontSize:"2.2rem", color:C.ink, marginBottom:"0.4rem" }}>Français</div>
-      <div style={{ width:36, height:2, background:C.gold, marginBottom:"1.6rem" }} />
-      <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:20, padding:"2rem 1.5rem", width:"100%", maxWidth:400, boxShadow:"0 4px 24px rgba(0,0,0,0.08)" }}>
-        <div style={{ fontFamily:"Georgia,serif", color:C.ink, fontSize:"1rem", marginBottom:"0.4rem" }}>🔑 Nhập Anthropic API Key</div>
-        <div style={{ fontSize:"0.75rem", color:C.gray, lineHeight:1.6, marginBottom:"1.2rem" }}>
-          Lấy API key tại{" "}
-          <a href="https://console.anthropic.com/keys" target="_blank" rel="noreferrer" style={{ color:C.purple }}>console.anthropic.com</a>
-          <br/>Key được lưu trong trình duyệt của bạn, không gửi đi đâu khác.
-        </div>
-        <div style={{ position:"relative", marginBottom:"0.8rem" }}>
-          <input
-            type={show ? "text" : "password"}
-            value={val}
-            onChange={e => { setVal(e.target.value); setErr(""); }}
-            onKeyDown={e => e.key === "Enter" && save()}
-            placeholder="sk-ant-api03-..."
-            style={{ width:"100%", boxSizing:"border-box", padding:"0.6rem 2.6rem 0.6rem 0.8rem", border:`1.5px solid ${err?C.red:C.border}`, borderRadius:8, background:"#ffffff0d", color:C.paper, fontSize:"0.82rem", fontFamily:"monospace", outline:"none" }}
-          />
-          <button onClick={() => setShow(s=>!s)} style={{ position:"absolute", right:8, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", color:C.gray, cursor:"pointer", fontSize:"0.9rem" }}>{show?"🙈":"👁"}</button>
-        </div>
-        {err && <div style={{ fontSize:"0.72rem", color:C.red, marginBottom:"0.6rem" }}>{err}</div>}
-        <button onClick={save} style={{ width:"100%", padding:"0.8rem", background:C.purple, color:C.white, border:"none", borderRadius:12, fontFamily:"Georgia,serif", fontSize:"0.92rem", cursor:"pointer", fontWeight:600, boxShadow:"0 4px 12px rgba(91,79,207,0.3)" }}>
-          Bắt đầu học ✦
-        </button>
-      </div>
-    </div>
-  );
-}
-
 // ── Main App ───────────────────────────────────────────────
 export default function App() {
-  const [apiKey, setApiKeyState] = useState(() => localStorage.getItem("api_key") || "");
-
-  const handleApiKeySave = (k) => { setApiKeyState(k); };
-
-  if (!apiKey) return <ApiKeyScreen onSave={handleApiKeySave} />;
-
-  return <AppInner apiKey={apiKey} onChangeKey={() => { localStorage.removeItem("api_key"); _apiKey = ""; setApiKeyState(""); }} />;
+  return <AppInner />;
 }
 
-function AppInner({ apiKey, onChangeKey }) {
-  // init global key
-  useEffect(() => { _apiKey = apiKey; }, [apiKey]);
+function AppInner() {
   const [text, setText] = useState(DEFAULTS);
   const [type, setType] = useState("multiple_choice");
   const [numQ, setNumQ] = useState(8);
@@ -4687,10 +4631,6 @@ function AppInner({ apiKey, onChangeKey }) {
                 );
               })}
             </div>
-            <button onClick={()=>{ setShowMore(false); onChangeKey(); }}
-              style={{ marginTop:"0.8rem", width:"100%", padding:"0.55rem", background:"transparent", border:`1px solid ${C.border}`, borderRadius:8, color:C.gray, fontSize:"0.78rem", cursor:"pointer" }}>
-              🔑 Đổi API key
-            </button>
           </div>
         </div>
       )}
