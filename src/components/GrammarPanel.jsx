@@ -4,6 +4,7 @@ import { callAI } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { SecLabel } from "./ui/SharedUI.jsx";
+import ConjugaisonPanel from "./ConjugaisonPanel.jsx";
 
 const LEVELS = ["A1","A2","B1","B2","C1","C2"];
 const GTYPES = [
@@ -1582,6 +1583,7 @@ export function GrammarExplanation({ rules, text }) {
 }
 
 export default function GrammarPanel() {
+  const [panelTab, setPanelTab] = useState("grammar");
   const [topic, setTopic] = useState("");
   const [level, setLevel] = useState("A1");
   const [gtype, setGtype] = useState("mixed");
@@ -1590,6 +1592,7 @@ export default function GrammarPanel() {
   const [result, setResult] = useState(null);
   const [err, setErr] = useState("");
   const [wrongCount, setWrongCount] = useState(0);
+  const [formOpen, setFormOpen] = useState(false);
   const formRef = useRef(null);
 
   const generate = async (overrideTopic) => {
@@ -1605,10 +1608,8 @@ export default function GrammarPanel() {
     setTopic(t);
     setLevel("A1");
     setResult(null);
-    setTimeout(() => {
-      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      generate(t);
-    }, 80);
+    setFormOpen(false);
+    setTimeout(() => { generate(t); }, 80);
   };
 
   const GRAMMAR_BY_LEVEL = {
@@ -1639,75 +1640,117 @@ export default function GrammarPanel() {
     return null;
   };
 
+  const PANEL_TAB_BAR = (
+    <div style={{ display:"flex", gap:"0.35rem" }}>
+      {[{id:"grammar",label:"🧩 Ngữ pháp"},{id:"conjugaison",label:"📖 Chia động từ"}].map(t=>(
+        <button key={t.id} onClick={()=>setPanelTab(t.id)}
+          style={{ flex:1, padding:"0.5rem 0.3rem", border:`1.5px solid ${panelTab===t.id?C.purple:C.border}`, borderRadius:10, background:panelTab===t.id?C.purple:C.white, color:panelTab===t.id?C.white:C.ink, fontSize:"0.78rem", cursor:"pointer", fontWeight:panelTab===t.id?700:400, fontFamily:"inherit", transition:"all 0.15s" }}>
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+
+  if (panelTab === "conjugaison") return (
+    <div>
+      <div style={{ padding:"1rem 1rem 0" }}>{PANEL_TAB_BAR}</div>
+      <ConjugaisonPanel />
+    </div>
+  );
+
   return (
     <div style={{padding:"1rem",display:"flex",flexDirection:"column",gap:"0.75rem"}}>
+      {PANEL_TAB_BAR}
       {/* Édito Presets */}
       <GrammarPresets onLoad={handlePresetLoad} />
 
-      {/* Input form */}
-      <div ref={formRef} style={{background:C.cream,borderRadius:12,padding:"0.9rem",display:"flex",flexDirection:"column",gap:"0.65rem"}}>
-        <div style={{fontSize:"0.72rem",fontWeight:600,color:C.purple}}>🧩 Bài tập ngữ pháp</div>
-
-        <div>
-          <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Chủ đề ngữ pháp muốn ôn</div>
-          <input value={topic} onChange={e=>setTopic(e.target.value)} onKeyDown={e=>e.key==="Enter"&&generate()}
-            placeholder="vd: chia động từ, mạo từ, thì quá khứ..."
-            style={{width:"100%",border:`1.5px solid ${C.border}`,borderRadius:8,padding:"0.5rem 0.7rem",fontSize:"0.82rem",fontFamily:"inherit",outline:"none",color:C.ink,boxSizing:"border-box"}}/>
+      {/* Empty state / prompt when no result */}
+      {!result && !loading && (
+        <div style={{background:C.white,border:`2px dashed ${C.border}`,borderRadius:16,padding:"1.8rem 1rem",textAlign:"center"}}>
+          <div style={{fontSize:"2.5rem",marginBottom:"0.5rem"}}>🧩</div>
+          <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"0.98rem",color:C.ink,marginBottom:"0.3rem"}}>Chọn bài học ngữ pháp</div>
+          <div style={{fontSize:"0.77rem",color:C.gray,lineHeight:1.7,marginBottom:"1rem"}}>Chọn unité từ <b>Édito A1</b> bên trên,<br/>hoặc nhập chủ đề tùy chỉnh bên dưới.</div>
+          <button onClick={()=>setFormOpen(o=>!o)}
+            style={{padding:"0.5rem 1.2rem",background:formOpen?C.purpleL:`linear-gradient(135deg,${C.purple},#5b4fcf)`,color:formOpen?C.purple:C.white,border:`1.5px solid ${C.purple}`,borderRadius:12,fontSize:"0.82rem",cursor:"pointer",fontWeight:600,transition:"all 0.2s"}}>
+            🎯 {formOpen ? "Đóng form" : "Nhập chủ đề tùy chỉnh"}
+          </button>
         </div>
+      )}
 
-        {/* Quick suggestions by level */}
-        <div>
-          <div style={{fontSize:"0.63rem",color:C.gray,marginBottom:"0.3rem"}}>Gợi ý điểm ngữ pháp {level}:</div>
-          <div style={{display:"flex",flexWrap:"wrap",gap:"0.28rem"}}>
-            {suggestions.map((s,i)=>(
-              <button key={i} onClick={()=>setTopic(s)}
-                style={{padding:"0.18rem 0.5rem",border:`1px solid ${topic===s?C.purple:C.border}`,borderRadius:20,background:topic===s?C.purple:C.white,color:topic===s?C.white:C.gray,fontSize:"0.65rem",cursor:"pointer",fontFamily:"inherit"}}>
-                {s}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Level */}
-        <div>
-          <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Trình độ</div>
-          <div style={{display:"flex",gap:"0.28rem"}}>
-            {LEVELS.map(l=>(
-              <button key={l} onClick={()=>{ setLevel(l); setTopic(""); }}
-                style={{flex:1,padding:"0.35rem 0.2rem",border:`1.5px solid ${level===l?C.purple:C.border}`,borderRadius:7,background:level===l?C.purple:C.white,color:level===l?C.white:C.ink,fontSize:"0.72rem",cursor:"pointer",fontFamily:"inherit"}}>
-                {l}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Type */}
-        <div>
-          <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Dạng bài tập</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0.28rem"}}>
-            {GTYPES.map(t=>(
-              <button key={t.id} onClick={()=>setGtype(t.id)}
-                style={{padding:"0.4rem 0.3rem",border:`1.5px solid ${gtype===t.id?C.purple:C.border}`,borderRadius:8,background:gtype===t.id?C.purple:C.white,color:gtype===t.id?C.white:C.ink,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>
-                {t.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Num questions */}
-        <div style={{display:"flex",alignItems:"center",gap:"0.5rem"}}>
-          <span style={{fontSize:"0.65rem",color:C.gray,whiteSpace:"nowrap"}}>Số câu:</span>
-          <input type="range" min={3} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{flex:1,accentColor:C.purple}}/>
-          <span style={{fontFamily:"Georgia,serif",fontSize:"0.95rem",color:C.purple,fontWeight:600,minWidth:22}}>{numQ}</span>
-        </div>
-
-        {err&&<div style={{color:C.red,fontSize:"0.75rem",padding:"0.38rem 0.58rem",background:"#fde8e6",borderRadius:6}}>⚠ {err}</div>}
-
-        <button onClick={generate} disabled={loading}
-          style={{padding:"0.75rem",background:loading?C.gray:C.ink,color:C.paper,border:"none",borderRadius:8,fontFamily:"Georgia,serif",fontSize:"0.92rem",cursor:loading?"not-allowed":"pointer"}}>
-          {loading?"Đang tạo bài tập...":"Tạo bài tập ✦"}
+      {/* "New quiz" toggle when result already shown */}
+      {result && !loading && (
+        <button onClick={()=>setFormOpen(o=>!o)}
+          style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"0.4rem",padding:"0.45rem 0.9rem",background:formOpen?C.purpleL:"transparent",border:`1.5px solid ${C.purple}44`,color:C.purple,borderRadius:10,fontSize:"0.73rem",cursor:"pointer",fontWeight:600,transition:"all 0.15s"}}>
+          ✏️ {formOpen ? "Đóng" : "Tạo bài tập mới"}
         </button>
-      </div>
+      )}
+
+      {/* Collapsible input form */}
+      {formOpen && (
+        <div ref={formRef} style={{background:C.cream,borderRadius:12,padding:"0.9rem",display:"flex",flexDirection:"column",gap:"0.65rem",animation:"fadeUp 0.2s ease"}}>
+          <div style={{fontSize:"0.72rem",fontWeight:600,color:C.purple}}>🧩 Chủ đề tùy chỉnh</div>
+
+          <div>
+            <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Chủ đề ngữ pháp muốn ôn</div>
+            <input value={topic} onChange={e=>setTopic(e.target.value)} onKeyDown={e=>e.key==="Enter"&&generate()}
+              placeholder="vd: chia động từ, mạo từ, thì quá khứ..."
+              style={{width:"100%",border:`1.5px solid ${C.border}`,borderRadius:8,padding:"0.5rem 0.7rem",fontSize:"0.82rem",fontFamily:"inherit",outline:"none",color:C.ink,boxSizing:"border-box"}}/>
+          </div>
+
+          {/* Quick suggestions by level */}
+          <div>
+            <div style={{fontSize:"0.63rem",color:C.gray,marginBottom:"0.3rem"}}>Gợi ý điểm ngữ pháp {level}:</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:"0.28rem"}}>
+              {suggestions.map((s,i)=>(
+                <button key={i} onClick={()=>setTopic(s)}
+                  style={{padding:"0.18rem 0.5rem",border:`1px solid ${topic===s?C.purple:C.border}`,borderRadius:20,background:topic===s?C.purple:C.white,color:topic===s?C.white:C.gray,fontSize:"0.65rem",cursor:"pointer",fontFamily:"inherit"}}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Level */}
+          <div>
+            <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Trình độ</div>
+            <div style={{display:"flex",gap:"0.28rem"}}>
+              {LEVELS.map(l=>(
+                <button key={l} onClick={()=>{ setLevel(l); setTopic(""); }}
+                  style={{flex:1,padding:"0.35rem 0.2rem",border:`1.5px solid ${level===l?C.purple:C.border}`,borderRadius:7,background:level===l?C.purple:C.white,color:level===l?C.white:C.ink,fontSize:"0.72rem",cursor:"pointer",fontFamily:"inherit"}}>
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Type */}
+          <div>
+            <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Dạng bài tập</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0.28rem"}}>
+              {GTYPES.map(t=>(
+                <button key={t.id} onClick={()=>setGtype(t.id)}
+                  style={{padding:"0.4rem 0.3rem",border:`1.5px solid ${gtype===t.id?C.purple:C.border}`,borderRadius:8,background:gtype===t.id?C.purple:C.white,color:gtype===t.id?C.white:C.ink,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Num questions */}
+          <div style={{display:"flex",alignItems:"center",gap:"0.5rem"}}>
+            <span style={{fontSize:"0.65rem",color:C.gray,whiteSpace:"nowrap"}}>Số câu:</span>
+            <input type="range" min={3} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{flex:1,accentColor:C.purple}}/>
+            <span style={{fontFamily:"Georgia,serif",fontSize:"0.95rem",color:C.purple,fontWeight:600,minWidth:22}}>{numQ}</span>
+          </div>
+
+          {err&&<div style={{color:C.red,fontSize:"0.75rem",padding:"0.38rem 0.58rem",background:"#fde8e6",borderRadius:6}}>⚠ {err}</div>}
+
+          <button onClick={()=>{generate();setFormOpen(false);}} disabled={loading}
+            style={{padding:"0.75rem",background:loading?C.gray:C.ink,color:C.paper,border:"none",borderRadius:8,fontFamily:"Georgia,serif",fontSize:"0.92rem",cursor:loading?"not-allowed":"pointer"}}>
+            {loading?"Đang tạo bài tập...":"Tạo bài tập ✦"}
+          </button>
+        </div>
+      )}
 
       {/* Grammar explanation banner */}
       {(result?.explanationRules?.length > 0 || result?.explanation) && (

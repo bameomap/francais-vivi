@@ -4,8 +4,10 @@ import { callAI } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { logError } from "./WeakSpotsPanel.jsx";
+import AnalysePanel from "./AnalysePanel.jsx";
 
 export default function WritingPanel() {
+  const [tab, setTab] = useState("write");
   const [input, setInput] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -45,8 +47,28 @@ Return ONLY JSON:
   const scoreColor = s => s >= 90 ? C.green : s >= 70 ? C.gold : s >= 50 ? "#e67e22" : C.red;
   const verdictBg = v => ({"Xuất sắc":"#e8f7f1","Tốt":"#eaf4fb","Khá":"#fff8e6","Cần cải thiện":"#fde8e6"}[v] || C.cream);
 
+  // Tab bar shared between write & analyse
+  const TAB_BAR = (
+    <div style={{ display:"flex", gap:"0.35rem", marginBottom:"0.05rem" }}>
+      {[{id:"write",label:"✍️ Luyện viết"},{id:"analyse",label:"🔍 Phân tích"}].map(t=>(
+        <button key={t.id} onClick={()=>setTab(t.id)}
+          style={{ flex:1, padding:"0.5rem 0.3rem", border:`1.5px solid ${tab===t.id?"#e67e22":C.border}`, borderRadius:10, background:tab===t.id?"#e67e22":C.white, color:tab===t.id?C.white:C.ink, fontSize:"0.78rem", cursor:"pointer", fontWeight:tab===t.id?700:400, fontFamily:"inherit", transition:"all 0.15s" }}>
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+
+  if (tab === "analyse") return (
+    <div>
+      <div style={{ padding:"1rem 1rem 0" }}>{TAB_BAR}</div>
+      <AnalysePanel />
+    </div>
+  );
+
   return (
     <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.8rem" }}>
+      {TAB_BAR}
       <div style={{ fontSize:"0.72rem", fontWeight:600, color:"#e67e22", marginBottom:"-0.2rem" }}>✍️ Viết câu tự do</div>
       <div style={{ fontSize:"0.73rem", color:C.gray, lineHeight:1.6 }}>Nhập một câu tiếng Pháp bất kỳ — AI sẽ chấm điểm, chỉ ra lỗi và giải thích bằng tiếng Việt.</div>
 
