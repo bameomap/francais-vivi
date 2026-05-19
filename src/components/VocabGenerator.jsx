@@ -9,12 +9,14 @@ export function ExampleCard({ word, triggerKey = 0 }) {
   const [state, setState] = useState("idle");
   const [data, setData] = useState(null);
   const [err, setErr] = useState("");
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
     if (triggerKey > 0 && state === "idle") gen();
   }, [triggerKey]);
 
   const gen = async () => {
-    setState("loading");
+    setState("loading"); setVisible(true);
     try {
       const r = await callAI(`French teacher. For "${word.fr}"${word.vi?` (${word.vi})`:""},  create 2 example sentences.\nReturn ONLY JSON: {"sentences":[{"fr":"French sentence","vi":"Vietnamese translation","breakdown":[{"token":"word or chunk","role":"grammatical role in Vietnamese","note":"brief note or empty"}]}]}`);
       setData(r); setState("done");
@@ -22,15 +24,18 @@ export function ExampleCard({ word, triggerKey = 0 }) {
   };
   return (
     <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, marginBottom:"0.55rem", overflow:"hidden" }}>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"0.65rem 0.95rem", borderBottom:state==="done"?`1px solid ${C.border}`:"none" }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"0.65rem 0.95rem", borderBottom:(state==="done"&&visible)?`1px solid ${C.border}`:"none" }}>
         <div><span style={{ fontFamily:"Georgia,serif", fontSize:"0.92rem" }}>{word.fr}</span>{word.vi&&<span style={{ fontSize:"0.75rem", color:C.gray, marginLeft:"0.5rem" }}>— {word.vi}</span>}</div>
         {state==="idle"&&<button onClick={gen} style={{ padding:"0.25rem 0.58rem", background:C.purple, color:C.white, border:"none", borderRadius:6, fontSize:"0.7rem", cursor:"pointer" }}>Tạo ví dụ ✦</button>}
         {state==="loading"&&<div style={{ display:"flex", alignItems:"center", gap:"0.35rem", fontSize:"0.7rem", color:C.gray }}><div style={{ width:13,height:13,border:`2px solid ${C.border}`,borderTopColor:C.purple,borderRadius:"50%",animation:"spin 0.8s linear infinite"}}/>Đang tạo...</div>}
-        {state==="done"&&<button onClick={()=>{setState("idle");setData(null);}} style={{ padding:"0.22rem 0.55rem", background:"transparent", color:C.gray, border:`1px solid ${C.border}`, borderRadius:6, fontSize:"0.67rem", cursor:"pointer" }}>Ẩn</button>}
+        {state==="done"&&<div style={{ display:"flex", gap:"0.35rem" }}>
+          <button onClick={()=>setVisible(v=>!v)} style={{ padding:"0.22rem 0.55rem", background:"transparent", color:C.gray, border:`1px solid ${C.border}`, borderRadius:6, fontSize:"0.67rem", cursor:"pointer" }}>{visible?"Ẩn":"Xem lại"}</button>
+          <button onClick={gen} title="Tạo lại ví dụ mới" style={{ padding:"0.22rem 0.45rem", background:"transparent", color:C.purple, border:`1px solid ${C.purple}44`, borderRadius:6, fontSize:"0.67rem", cursor:"pointer" }}>↺</button>
+        </div>}
         {state==="error"&&<button onClick={gen} style={{ padding:"0.22rem 0.55rem", background:"transparent", color:C.red, border:`1px solid ${C.red}`, borderRadius:6, fontSize:"0.67rem", cursor:"pointer" }}>Thử lại</button>}
       </div>
       {state==="error"&&<div style={{ padding:"0.5rem 0.95rem", fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>}
-      {state==="done"&&data?.sentences&&(
+      {state==="done"&&visible&&data?.sentences&&(
         <div style={{ padding:"0.65rem 0.95rem", display:"flex", flexDirection:"column", gap:"0.9rem" }}>
           {data.sentences.map((s,si)=>(
             <div key={si}>
