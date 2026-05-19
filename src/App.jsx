@@ -19,6 +19,9 @@ import ReferencePanel from "./components/ReferencePanel.jsx";
 import MotDuJour from "./components/MotDuJour.jsx";
 import LecturePanel from "./components/LecturePanel.jsx";
 import DicteePanel from "./components/DicteePanel.jsx";
+import StatsPanel from "./components/StatsPanel.jsx";
+import PhrasebookPanel from "./components/PhrasebookPanel.jsx";
+import RevisionPanel from "./components/RevisionPanel.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 
 // ── Module definitions ──────────────────────────────────────
@@ -32,6 +35,9 @@ const MODULES = [
   { id:"reference",    label:"Cẩm nang",      fr:"La Référence",    icon:"📖", color:"#6D28D9", bg:"#F5F0FF", view:"reference"   },
   { id:"lecture",      label:"Đọc hiểu",      fr:"La Lecture",      icon:"📰", color:"#059669", bg:"#ECFDF5", view:"lecture"     },
   { id:"dictee",       label:"Nghe chép",     fr:"La Dictée",       icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"dictee"      },
+  { id:"phrasebook",   label:"Mẫu câu",       fr:"Le Phrasebook",   icon:"💡", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"  },
+  { id:"revision",     label:"Ôn sai",        fr:"La Révision",     icon:"🔁", color:"#DC2626", bg:"#FEF2F2", view:"revision"    },
+  { id:"stats",        label:"Thống kê",      fr:"Les Statistiques",icon:"📊", color:"#0891B2", bg:"#F0F9FF", view:"stats"       },
 ];
 
 const TABS = [
@@ -46,6 +52,7 @@ const SECTION_TITLE = {
   vocab:"Le Vocabulaire", grammar:"La Grammaire", conversation:"La Conversation",
   writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée",
+  phrasebook:"Le Phrasebook", revision:"La Révision", stats:"Les Statistiques",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -811,6 +818,9 @@ function AppInner() {
             {view==="reference"    && <ReferencePanel/>}
             {view==="lecture"      && <LecturePanel words={words} />}
             {view==="dictee"       && <DicteePanel words={words} />}
+            {view==="phrasebook"   && <PhrasebookPanel />}
+            {view==="revision"     && <RevisionPanel />}
+            {view==="stats"        && <StatsPanel />}
           </div>
         </>
       )}

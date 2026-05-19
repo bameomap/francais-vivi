@@ -38,7 +38,48 @@ export function markStudiedToday() {
     if (d.last === today) return;
     const streak = d.last === yesterday ? (d.streak || 1) + 1 : 1;
     localStorage.setItem(STREAK_KEY, JSON.stringify({ last: today, streak }));
+    // Track full history for calendar (last 90 days)
+    const hist = JSON.parse(localStorage.getItem("study_history") || "[]");
+    if (!hist.includes(today)) {
+      hist.push(today);
+      localStorage.setItem("study_history", JSON.stringify(hist.slice(-90)));
+    }
   } catch {}
+}
+
+export function getStudyHistory() {
+  try { return new Set(JSON.parse(localStorage.getItem("study_history") || "[]")); }
+  catch { return new Set(); }
+}
+
+// ── Mistake log (cross-module) ────────────────────────────────
+const MISTAKES_KEY = "mistake_log";
+
+export function logMistake({ fr, vi, context, module }) {
+  try {
+    const log = JSON.parse(localStorage.getItem(MISTAKES_KEY) || "[]");
+    // Avoid exact duplicate in last 20 entries
+    const recent = log.slice(-20);
+    if (recent.some(m => m.fr === fr && m.context === context)) return;
+    log.push({ fr, vi: vi || "", context: context || "", module: module || "unknown", date: new Date().toDateString(), ts: Date.now() });
+    localStorage.setItem(MISTAKES_KEY, JSON.stringify(log.slice(-200)));
+  } catch {}
+}
+
+export function getMistakes() {
+  try { return JSON.parse(localStorage.getItem(MISTAKES_KEY) || "[]"); }
+  catch { return []; }
+}
+
+export function clearMistake(ts) {
+  try {
+    const log = JSON.parse(localStorage.getItem(MISTAKES_KEY) || "[]");
+    localStorage.setItem(MISTAKES_KEY, JSON.stringify(log.filter(m => m.ts !== ts)));
+  } catch {}
+}
+
+export function clearAllMistakes() {
+  localStorage.removeItem(MISTAKES_KEY);
 }
 
 export function getProgress() {

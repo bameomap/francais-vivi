@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import { speak } from "../utils/helpers.js";
+import { logMistake } from "../utils/storage.js";
 import Spinner from "./ui/Spinner.jsx";
 import Minou, { Confetti } from "./ui/Minou.jsx";
 
@@ -155,6 +156,10 @@ export default function DicteePanel({ words: propWords = [] }) {
     if (!input.trim()) return;
     const grade = gradeWords(input, sentences[current]);
     setResults(r => [...r, { sentence: sentences[current], typed: input, grade }]);
+    // Log wrong words as mistakes
+    grade.filter(g => g.status === "wrong").forEach(g => {
+      logMistake({ fr: g.word, vi:"", context: sentences[current], module:"dictee" });
+    });
     setChecked(true);
     setTimeout(() => inputRef.current?.focus(), 100);
   };
