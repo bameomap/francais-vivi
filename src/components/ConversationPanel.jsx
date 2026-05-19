@@ -66,7 +66,10 @@ export default function ConversationPanel() {
   const startScenario = async (sc) => {
     setScenario(sc); setMessages([]); setInput(""); setErr(""); setLoading(true); setShowPhrases(false);
     try {
-      const reply = await callAIText([], sc.prompt + " Begin now.");
+      const reply = await callAIText(
+        [{ role:"user", content:"Commençons." }],
+        sc.prompt + " The learner just said they are ready. Start the conversation now."
+      );
       setMessages([{ role:"assistant", text: reply }]);
     } catch(e) { setErr(e.message); }
     setLoading(false);
