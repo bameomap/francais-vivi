@@ -104,6 +104,22 @@ export function resetSRS() {
   localStorage.removeItem(SRS_KEY);
 }
 
+/**
+ * Returns a Set of French words considered "mastered":
+ * SRS repetitions >= 2 AND interval >= 3 days
+ * Used to exclude these from default quiz generation.
+ */
+export function getMasteredSet() {
+  const data = getSRSData();
+  const mastered = new Set();
+  for (const card of Object.values(data)) {
+    if (card.repetitions >= 2 && card.interval >= 3) {
+      mastered.add(card.fr);
+    }
+  }
+  return mastered;
+}
+
 // ── SM-2 core ───────────────────────────────────────────────
 function calculateNext(card, correct) {
   let { interval, easeFactor, repetitions } = card;

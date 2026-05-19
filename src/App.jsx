@@ -17,7 +17,7 @@ import GrammarPanel from "./components/GrammarPanel.jsx";
 import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./components/VocabGenerator.jsx";
 import DefiPanel from "./components/DefiPanel.jsx";
 import SRSPanel from "./components/SRSPanel.jsx";
-import { addWordToSRS, getSRSStats } from "./utils/srs.js";
+import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
@@ -72,6 +72,7 @@ function AppInner() {
   const [streakData, setStreakData]     = useState(getStreak);
   const [progress, setProgress]         = useState(getProgress);
   const [srsStats, setSrsStats]         = useState(getSRSStats);
+  const [filterMastered, setFilterMastered] = useState(true); // exclude mastered by default
 
   const words = parseWords(text);
   const CLIENT_TYPES = ["dictee","flashcard","anagramme"];
@@ -152,13 +153,24 @@ function AppInner() {
 
   const generate = useCallback(async () => {
     if (words.length < 2) { setError("Cần ít nhất 2 từ!"); return; }
-    if (CLIENT_TYPES.includes(type)) { setQuiz({ type, words }); setView("quiz"); return; }
-    if (words.length < 3) { setError("Cần ít nhất 3 từ!"); return; }
+
+    // Filter out mastered words (SRS repetitions >= 2 & interval >= 3 days)
+    // unless user disabled the filter OR too few words remain
+    let quizWords = words;
+    if (filterMastered && !CLIENT_TYPES.includes(type)) {
+      const mastered = getMasteredSet();
+      const fresh = words.filter(w => !mastered.has(w.fr));
+      if (fresh.length >= 2) quizWords = fresh;
+      // if < 2 fresh words, fall through and use all (let user know below)
+    }
+
+    if (CLIENT_TYPES.includes(type)) { setQuiz({ type, words: quizWords }); setView("quiz"); return; }
+    if (quizWords.length < 3) { setError("Cần ít nhất 3 từ! (Thêm từ mới hoặc tắt bộ lọc.)"); return; }
     setLoading(true); setError(null); setQuiz(null); setView("quiz");
-    try { setQuiz(await callAIBatched(type, words, numQ)); }
+    try { setQuiz(await callAIBatched(type, quizWords, numQ)); }
     catch(e) { setError(e.message); setView("input"); }
     setLoading(false);
-  }, [words, type, numQ]);
+  }, [words, type, numQ, filterMastered]);
 
   const handleSave = async name => {
     const newSet = { id:Date.now(), name, text, count:words.length, date:new Date().toLocaleDateString("vi-VN") };
@@ -449,14 +461,39 @@ function AppInner() {
                   Mỗi dòng: <code style={{ background:C.blueL, color:C.blue, padding:"1px 6px", borderRadius:4, fontSize:"0.7rem" }}>từ pháp — nghĩa</code>
                   {words.length>0 && <span style={{ color:C.blue, marginLeft:8, fontWeight:600 }}>{words.length} từ</span>}
                 </div>
-                {words.length>0 && (
-                  <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem" }}>
-                    {words.slice(0,8).map((w,i)=>(
-                      <span key={i} style={{ background:C.blueL, border:`1px solid ${C.blue}33`, borderRadius:20, padding:"0.12rem 0.5rem", fontSize:"0.72rem", color:C.blue, fontWeight:500 }}>{w.fr}</span>
-                    ))}
-                    {words.length>8 && <span style={{ background:C.cream, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.12rem 0.5rem", fontSize:"0.72rem", color:C.gray }}>+{words.length-8}</span>}
-                  </div>
-                )}
+                {words.length>0 && (() => {
+                  const mastered = getMasteredSet();
+                  const freshCount = words.filter(w=>!mastered.has(w.fr)).length;
+                  const masteredCount = words.length - freshCount;
+                  return (
+                    <>
+                      <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem" }}>
+                        {words.slice(0,8).map((w,i)=>{
+                          const isMastered = mastered.has(w.fr);
+                          return (
+                            <span key={i} style={{ background:isMastered?C.greenL:C.blueL, border:`1px solid ${isMastered?C.green+"44":C.blue+"33"}`, borderRadius:20, padding:"0.12rem 0.5rem", fontSize:"0.72rem", color:isMastered?C.green:C.blue, fontWeight:500 }}>
+                              {isMastered?"✓ ":""}{w.fr}
+                            </span>
+                          );
+                        })}
+                        {words.length>8 && <span style={{ background:C.cream, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.12rem 0.5rem", fontSize:"0.72rem", color:C.gray }}>+{words.length-8}</span>}
+                      </div>
+                      {masteredCount > 0 && (
+                        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", background:C.greenL, border:`1px solid ${C.green}33`, borderRadius:12, padding:"0.55rem 0.75rem" }}>
+                          <div style={{ fontSize:"0.75rem", color:C.ink }}>
+                            <span style={{ color:C.blue, fontWeight:600 }}>{freshCount} từ mới</span>
+                            <span style={{ color:C.gray }}> · </span>
+                            <span style={{ color:C.green, fontWeight:600 }}>✓ {masteredCount} đã thuộc</span>
+                          </div>
+                          <button onClick={()=>setFilterMastered(f=>!f)}
+                            style={{ background:filterMastered?C.green:"transparent", border:`1.5px solid ${C.green}`, color:filterMastered?"#fff":C.green, borderRadius:20, padding:"0.2rem 0.65rem", fontSize:"0.68rem", cursor:"pointer", fontWeight:600, whiteSpace:"nowrap", transition:"all 0.2s" }}>
+                            {filterMastered ? "✓ Bỏ từ đã thuộc" : "Gồm cả đã thuộc"}
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
 
                 {/* Exercise type selector */}
                 <div style={{ background:C.white, borderRadius:16, padding:"0.9rem", border:`1.5px solid ${C.border}` }}>
