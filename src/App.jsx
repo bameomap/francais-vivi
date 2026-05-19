@@ -46,11 +46,11 @@ const MODULES = [
   { id:"stats",        group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📊", color:"#0891B2", bg:"#F0F9FF", view:"stats"        },
 ];
 
-const MODULE_GROUPS = [
-  { id:"all",    label:"Tất cả" },
-  { id:"hoc",    label:"📖 Học" },
-  { id:"luyen",  label:"🎯 Luyện" },
-  { id:"congcu", label:"🔧 Công cụ" },
+const GROUP_DEFS = [
+  { id:"vocab",    icon:"📚", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","srs"] },
+  { id:"grammar",  icon:"🧩", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","conjugaison","reference","phrasebook"] },
+  { id:"practice", icon:"🎯", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee"] },
+  { id:"progress", icon:"📊", label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
 ];
 
 const TABS = [
@@ -140,7 +140,7 @@ function AppInner() {
   const [srsStats, setSrsStats]         = useState(getSRSStats);
   const [filterMastered, setFilterMastered] = useState(true);
   const [editOpen, setEditOpen]             = useState(false);
-  const [moduleGroup, setModuleGroup]       = useState("all");
+  const [activeGroup, setActiveGroup]       = useState(null);
   const [xpData, setXpData]                 = useState(getXPData);
   const [badgeToast, setBadgeToast]         = useState("");
 
@@ -156,7 +156,7 @@ function AppInner() {
 
   const goSection = (s, v) => {
     setSection(s); setView(v || s);
-    setEditOpen(false);
+    setEditOpen(false); setActiveGroup(null);
     markModuleUsed(s);
     setStreakData(getStreak());
     setProgress(getProgress());
@@ -510,49 +510,92 @@ function AppInner() {
             );
           })()}
 
-          {/* ── Module Grid ── */}
+          {/* ── Module Groups ── */}
           <div style={{ padding:"0.25rem 1.25rem 0", marginTop:"0.85rem" }}>
-            <div style={{ fontSize:"0.9rem", fontWeight:700, color:C.ink, marginBottom:"0.55rem" }}>Khám phá</div>
-            {/* Group filter tabs */}
-            <div style={{ display:"flex", gap:"0.3rem", flexWrap:"wrap" }}>
-              {MODULE_GROUPS.map(g => (
-                <button key={g.id} onClick={()=>setModuleGroup(g.id)}
-                  style={{ padding:"0.25rem 0.65rem", borderRadius:20, border:`1.5px solid ${moduleGroup===g.id?C.blue:C.border}`, background:moduleGroup===g.id?C.blue:"transparent", color:moduleGroup===g.id?C.white:C.gray, fontSize:"0.7rem", cursor:"pointer", fontWeight:600, transition:"all 0.15s" }}>
-                  {g.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="module-grid" style={{ padding:"0.6rem 1rem 1rem", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem", flex:1 }}>
-            {MODULES.filter(m => moduleGroup==="all" || m.group===moduleGroup).map((m, i) => {
-              const p = progress[m.id];
-              const used = p?.count > 0;
-              const pct = Math.min((p?.count||0)*8, 100);
-              return (
-                <button key={m.id} className="card-hover"
-                  onClick={()=>goSection(m.id, m.view)}
-                  style={{ background:m.bg, border:`1.5px solid ${m.color}33`, borderRadius:20, padding:"1.1rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.35s ease ${i*0.04}s both`, position:"relative", boxShadow:`0 2px 12px ${m.color}18` }}>
-                  {/* SRS due badge */}
-                  {m.id==="srs" && srsStats.due>0 && (
-                    <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
-                      {srsStats.due}
+            {activeGroup ? (
+              /* ── Sub-module list ── */
+              (() => {
+                const grp = GROUP_DEFS.find(g => g.id === activeGroup);
+                const subModules = MODULES.filter(m => grp.moduleIds.includes(m.id));
+                return (
+                  <>
+                    <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"0.65rem" }}>
+                      <button onClick={()=>setActiveGroup(null)}
+                        style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.65rem", fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
+                        ← Quay lại
+                      </button>
+                      <span style={{ fontSize:"1rem" }}>{grp.icon}</span>
+                      <span style={{ fontWeight:700, color:grp.color, fontSize:"0.9rem" }}>{grp.label}</span>
                     </div>
-                  )}
-                  <div style={{ fontSize:"1.8rem", marginBottom:"0.5rem" }}>{m.icon}</div>
-                  <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem" }}>{m.label}</div>
-                  <div style={{ fontSize:"0.68rem", color:m.color, fontStyle:"italic", marginBottom: used?"0.5rem":"0" }}>{m.fr}</div>
-                  {used && (
-                    <>
-                      <div style={{ height:3, background:`${m.color}22`, borderRadius:999, marginBottom:"0.25rem" }}>
-                        <div style={{ height:"100%", width:`${pct}%`, background:m.color, borderRadius:999 }}/>
-                      </div>
-                      <div style={{ fontSize:"0.62rem", color:m.color, fontWeight:600 }}>{p.count} lần · {pct}%</div>
-                    </>
-                  )}
-                </button>
-              );
-            })}
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem" }}>
+                      {subModules.map((m, i) => {
+                        const p = progress[m.id];
+                        const used = p?.count > 0;
+                        const pct = Math.min((p?.count||0)*8, 100);
+                        return (
+                          <button key={m.id} className="card-hover"
+                            onClick={()=>goSection(m.id, m.view)}
+                            style={{ background:m.bg, border:`1.5px solid ${m.color}33`, borderRadius:20, padding:"1.1rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.25s ease ${i*0.05}s both`, position:"relative", boxShadow:`0 2px 12px ${m.color}18` }}>
+                            {m.id==="srs" && srsStats.due>0 && (
+                              <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
+                                {srsStats.due}
+                              </div>
+                            )}
+                            <div style={{ fontSize:"1.8rem", marginBottom:"0.5rem" }}>{m.icon}</div>
+                            <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem" }}>{m.label}</div>
+                            <div style={{ fontSize:"0.68rem", color:m.color, fontStyle:"italic", marginBottom:used?"0.5rem":"0" }}>{m.fr}</div>
+                            {used && (
+                              <>
+                                <div style={{ height:3, background:`${m.color}22`, borderRadius:999, marginBottom:"0.25rem" }}>
+                                  <div style={{ height:"100%", width:`${pct}%`, background:m.color, borderRadius:999 }}/>
+                                </div>
+                                <div style={{ fontSize:"0.62rem", color:m.color, fontWeight:600 }}>{p.count} lần · {pct}%</div>
+                              </>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              })()
+            ) : (
+              /* ── Group cards 2×2 ── */
+              <>
+                <div style={{ fontSize:"0.9rem", fontWeight:700, color:C.ink, marginBottom:"0.65rem" }}>Khám phá</div>
+                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.75rem" }}>
+                  {GROUP_DEFS.map((g, i) => {
+                    const groupModules = MODULES.filter(m => g.moduleIds.includes(m.id));
+                    const totalUses = groupModules.reduce((sum, m) => sum + (progress[m.id]?.count || 0), 0);
+                    const hasSRSDue = g.moduleIds.includes("srs") && srsStats.due > 0;
+                    return (
+                      <button key={g.id} className="card-hover"
+                        onClick={()=>setActiveGroup(g.id)}
+                        style={{ background:g.bg, border:`1.5px solid ${g.color}44`, borderRadius:22, padding:"1.2rem 1.1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.3s ease ${i*0.06}s both`, position:"relative", boxShadow:`0 3px 16px ${g.color}18` }}>
+                        {hasSRSDue && (
+                          <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
+                            {srsStats.due}
+                          </div>
+                        )}
+                        <div style={{ fontSize:"2rem", marginBottom:"0.55rem" }}>{g.icon}</div>
+                        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>{g.label}</div>
+                        <div style={{ fontSize:"0.67rem", color:g.color, fontWeight:600, marginBottom:"0.5rem" }}>{g.desc}</div>
+                        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem", marginBottom:"0.5rem" }}>
+                          {groupModules.map(m => (
+                            <span key={m.id} style={{ fontSize:"0.6rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.4rem", fontWeight:500 }}>{m.label}</span>
+                          ))}
+                        </div>
+                        {totalUses > 0 && (
+                          <div style={{ fontSize:"0.6rem", color:g.color, opacity:0.8, fontWeight:600 }}>{totalUses} lần học</div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
+          <div style={{ height:"1.5rem" }} />
         </div>
       )}
 
@@ -895,7 +938,7 @@ function AppInner() {
             return (
               <button key={tab.id} className="tab-btn"
                 onClick={()=>{
-                  if (tab.id==="home") { setSection("home"); return; }
+                  if (tab.id==="home") { setSection("home"); setActiveGroup(null); return; }
                   const m = MODULES.find(m=>m.id===tab.id);
                   if (m) goSection(m.id, m.view);
                 }}
