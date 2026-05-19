@@ -23,12 +23,9 @@ const COMMON_VERBS = [
 
 function buildPrompt(verb, tense) {
   const tenseLabel = TENSES.find(t=>t.id===tense)?.label || tense;
-  return {
-    role:"user",
-    content:`Chia động từ "${verb}" ở thì ${tenseLabel} cho 6 ngôi.
+  return `Chia động từ "${verb}" ở thì ${tenseLabel} cho 6 ngôi.
 JSON hợp lệ KHÔNG có markdown:
-{"verb":"${verb}","tense":"${tenseLabel}","group":"nhóm (1/2/3/irrégulier)","conjugations":["forme_je","forme_tu","forme_il","forme_nous","forme_vous","forme_ils"],"tip":"mẹo nhớ ngắn tiếng Việt tối đa 15 từ"}`
-  };
+{"verb":"${verb}","tense":"${tenseLabel}","group":"nhóm (1/2/3/irrégulier)","conjugations":["forme_je","forme_tu","forme_il","forme_nous","forme_vous","forme_ils"],"tip":"mẹo nhớ ngắn tiếng Việt tối đa 15 từ"}`;
 }
 
 function ConjugQuiz({ conjugation, onDone }) {
