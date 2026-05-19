@@ -27,11 +27,11 @@ const MODULES = [
 ];
 
 const TABS = [
-  { id:"home",       icon:"🏠", label:"Trang chủ" },
-  { id:"vocab",      icon:"📚", label:"Từ vựng"   },
-  { id:"srs",        icon:"🧠", label:"Ôn tập"    },
-  { id:"defi",       icon:"🎲", label:"Thử thách" },
-  { id:"more",       icon:"⋯",  label:"Thêm"      },
+  { id:"home",    icon:"🏠", label:"Trang chủ" },
+  { id:"vocab",   icon:"📚", label:"Từ vựng"   },
+  { id:"grammar", icon:"🧩", label:"Ngữ pháp"  },
+  { id:"writing", icon:"✍️", label:"Luyện viết"},
+  { id:"srs",     icon:"🧠", label:"Ôn tập"    },
 ];
 
 const SECTION_TITLE = {
@@ -58,7 +58,6 @@ function AppInner() {
   const [generatedVocab, setGeneratedVocab] = useState([]);
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [section, setSection]           = useState("home");
-  const [showMore, setShowMore]         = useState(false);
   const [onboarded, setOnboarded]       = useState(() => !!localStorage.getItem("onboarded"));
   const [userName, setUserName]         = useState(() => localStorage.getItem("user_name") || "");
   const [nameInput, setNameInput]       = useState("");
@@ -83,7 +82,6 @@ function AppInner() {
     markModuleUsed(s);
     setStreakData(getStreak());
     setProgress(getProgress());
-    setShowMore(false);
   };
 
   const recordAnswer = useCallback((word, isOk) => {
@@ -225,33 +223,6 @@ function AppInner() {
       {showSave   && <SaveModal   text={text} onSave={handleSave}                                    onClose={()=>setShowSave(false)}   />}
       {showImport && <ImportModal onImport={t=>{setText(t);showToast("✓ Import thành công!");}} onClose={()=>setShowImport(false)} />}
 
-      {/* ── More Drawer ── */}
-      {showMore && (
-        <div style={{ position:"fixed", inset:0, zIndex:200, background:"rgba(26,39,68,0.4)" }} onClick={()=>setShowMore(false)}>
-          <div style={{ position:"absolute", bottom:70, left:0, right:0, maxWidth:680, margin:"0 auto", background:C.white, borderRadius:"24px 24px 0 0", padding:"1rem 1rem 1.5rem", boxShadow:"0 -8px 40px rgba(0,0,0,0.15)", animation:"slideUp 0.25s ease" }}
-            onClick={e=>e.stopPropagation()}>
-            <div style={{ width:40, height:4, background:C.border, borderRadius:2, margin:"0 auto 1rem" }}/>
-            <div style={{ fontSize:"0.72rem", fontWeight:600, color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.75rem", paddingLeft:"0.25rem" }}>Thêm tính năng</div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.6rem" }}>
-              {[
-                { id:"conversation", icon:"💬", label:"Giao tiếp",  color:"#2980B9", bg:"#E8F4FD" },
-                { id:"writing",      icon:"✍️", label:"Luyện viết", color:"#E67E22", bg:"#FEF3E2" },
-                { id:"grammar",      icon:"🧩", label:"Ngữ pháp",   color:"#7B6CF6", bg:"#F0EEFF" },
-              ].map(m => {
-                const p = progress[m.id];
-                return (
-                  <button key={m.id} className="card-hover" onClick={()=>goSection(m.id)}
-                    style={{ background:m.bg, border:`1.5px solid ${m.color}22`, borderRadius:16, padding:"0.9rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit" }}>
-                    <div style={{ fontSize:"1.5rem", marginBottom:"0.35rem" }}>{m.icon}</div>
-                    <div style={{ fontSize:"0.85rem", color:C.ink, fontWeight:600 }}>{m.label}</div>
-                    {p && <div style={{ fontSize:"0.65rem", color:m.color, marginTop:"0.2rem", fontWeight:500 }}>{p.count} lần dùng</div>}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ── ONBOARDING ── */}
       {!onboarded && section==="home" && (
@@ -729,12 +700,10 @@ function AppInner() {
       <div style={{ position:"fixed", bottom:0, left:0, right:0, zIndex:150 }}>
         <div style={{ maxWidth:680, margin:"0 auto", background:C.white, borderTop:`1.5px solid ${C.border}`, display:"flex", boxShadow:"0 -4px 24px rgba(74,144,217,0.10)", paddingBottom:"env(safe-area-inset-bottom)" }}>
           {TABS.map(tab => {
-            const isActive = tab.id==="home" ? section==="home" : tab.id==="more" ? showMore : section===tab.id;
+            const isActive = tab.id==="home" ? section==="home" : section===tab.id;
             return (
               <button key={tab.id} className="tab-btn"
                 onClick={()=>{
-                  if (tab.id==="more") { setShowMore(s=>!s); return; }
-                  setShowMore(false);
                   if (tab.id==="home") { setSection("home"); return; }
                   const m = MODULES.find(m=>m.id===tab.id);
                   if (m) goSection(m.id, m.view);
