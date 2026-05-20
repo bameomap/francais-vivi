@@ -25,6 +25,7 @@ import RevisionPanel from "./components/RevisionPanel.jsx";
 import ConjugaisonPanel from "./components/ConjugaisonPanel.jsx";
 import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
 import ListeningQuiz from "./components/ListeningQuiz.jsx";
+import SentenceBuilder from "./components/SentenceBuilder.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 
@@ -34,6 +35,7 @@ const MODULES = [
   { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"input"        },
   { id:"topics",       group:"hoc", label:"Chủ đề A1",    fr:"Les Thèmes",       icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"topics"       },
   { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
+  { id:"sentence",     group:"hoc", label:"Câu ghép từ",   fr:"Les Phrases",      icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"sentence"     },
   { id:"conjugaison",  group:"hoc", label:"Chia động từ",  fr:"La Conjugaison",   icon:"🖊️", color:"#0891B2", bg:"#F0F9FF", view:"conjugaison"  },
   { id:"reference",    group:"hoc", label:"Cẩm nang",      fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference"    },
   { id:"phrasebook",   group:"hoc", label:"Mẫu câu",       fr:"Le Phrasebook",    icon:"💬", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"   },
@@ -52,7 +54,7 @@ const MODULES = [
 
 const GROUP_DEFS = [
   { id:"vocab",    icon:"📖", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","topics","srs"] },
-  { id:"grammar",  icon:"⚜️", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","conjugaison","reference","phrasebook"] },
+  { id:"grammar",  icon:"⚜️", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","conjugaison","sentence","reference","phrasebook"] },
   { id:"practice", icon:"🥐", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee","listening"] },
   { id:"progress", icon:"📈", label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
 ];
@@ -70,7 +72,7 @@ const SECTION_TITLE = {
   writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée",
   phrasebook:"Le Phrasebook", revision:"La Révision", stats:"Les Statistiques",
-  conjugaison:"La Conjugaison", topics:"Les Thèmes A1", listening:"L'Écoute Active",
+  conjugaison:"La Conjugaison", topics:"Les Thèmes A1", listening:"L'Écoute Active", sentence:"Les Phrases",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -926,6 +928,7 @@ function AppInner() {
             {view==="conjugaison"  && <ConjugaisonPanel />}
             {view==="topics"       && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}
             {view==="listening"    && <ListeningQuiz />}
+            {view==="sentence"     && <SentenceBuilder />}
           </div>
         </>
       )}
