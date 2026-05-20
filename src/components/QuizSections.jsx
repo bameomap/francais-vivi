@@ -5,6 +5,21 @@ import { addWordToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { SecLabel, QCard } from "./ui/SharedUI.jsx";
 
+// ── SRS quick-add button ─────────────────────────────────────
+function SRSBtn({ fr, vi, words = [] }) {
+  const [added, setAdded] = useState(false);
+  const match = words.find(w => w.fr === fr || w.vi === fr);
+  const finalFr = match?.fr || fr || "";
+  const finalVi = match?.vi || vi || "";
+  if (!finalFr) return null;
+  return (
+    <button onClick={() => { if (added) return; addWordToSRS(finalFr, finalVi); setAdded(true); }}
+      style={{ padding:"0.15rem 0.5rem", background:added?"#ECFDF5":"transparent", border:`1px solid ${added?"#059669":"#059669"}`, borderRadius:20, fontSize:"0.63rem", color:"#059669", cursor:added?"default":"pointer", fontWeight:600, flexShrink:0, transition:"all 0.2s" }}>
+      {added ? "✓ SRS" : "+ SRS"}
+    </button>
+  );
+}
+
 // ── Exercise MC (used by WeakSpotsPanel) ────────────────────
 export function ExerciseMC({ ex, idx }) {
   const [ans, setAns] = useState(null);
@@ -57,7 +72,7 @@ export function ExerciseFill({ ex, idx }) {
 }
 
 // ── MC Section ──────────────────────────────────────────────
-export function MCSection({ questions, sl, onRecord, onWrong }) {
+export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
   const [ans, setAns] = useState({});
   const normalize = s => (s||"").trim().toLowerCase().replace(/[''`]/g,"'").replace(/\s+/g," ");
   const choose = (i, opt, correct, q) => {
@@ -90,7 +105,10 @@ export function MCSection({ questions, sl, onRecord, onWrong }) {
               {ok
                 ? <span style={{ color:C.green }}>✓ Chính xác!{q.explanation ? ` — ${q.explanation}` : ""}</span>
                 : <><div style={{ color:C.red }}>✗ <b>{a}</b>{q.wrongExplanations?.[a] ? ` — ${q.wrongExplanations[a]}` : ""}</div>
-                   <div style={{ color:C.green }}>✓ <b>{q.answer}</b>{q.explanation ? ` — ${q.explanation}` : ""}</div></>
+                   <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", flexWrap:"wrap" }}>
+                     <span style={{ color:C.green }}>✓ <b>{q.answer}</b>{q.explanation ? ` — ${q.explanation}` : ""}</span>
+                     <SRSBtn fr={q.answer} vi={q.wrongExplanations?.[q.answer]} words={words} />
+                   </div></>
               }
             </div>}
           </QCard>
@@ -101,7 +119,7 @@ export function MCSection({ questions, sl, onRecord, onWrong }) {
 }
 
 // ── Fill Section ────────────────────────────────────────────
-export function FillSection({ questions, sl, onRecord, onWrong }) {
+export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
   const [inp, setInp] = useState({});
   const [chk, setChk] = useState({});
   const doCheck = (i, q, v) => {
@@ -130,6 +148,7 @@ export function FillSection({ questions, sl, onRecord, onWrong }) {
                 style={{ border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:6, padding:"0.3rem 0.55rem", fontSize:"0.83rem", width:160, fontFamily:"inherit", background:done?(ok?"#e8f7f1":"#fde8e6"):C.white, color:done?(ok?C.green:C.red):C.ink, outline:"none" }} />
               {!done && <button onClick={() => doCheck(i,q,v)} style={{ padding:"0.3rem 0.65rem", background:C.purple, color:C.white, border:"none", borderRadius:6, fontSize:"0.73rem", cursor:"pointer", fontFamily:"inherit" }}>Kiểm tra</button>}
               {done && <span style={{ fontSize:"0.73rem", color:ok?C.green:C.red, fontWeight:500 }}>{ok?"✓ Đúng!":`✗ Đáp án: ${q.answer}`}</span>}
+              {done && !ok && <SRSBtn fr={q.answer} vi={q.hint} words={words} />}
             </div>
           </QCard>
         );
@@ -212,8 +231,8 @@ export function DicteeSection({ words, onRecord }) {
         {revealed && !checked && <div style={{ marginTop:"0.5rem", fontSize:"0.88rem", color:C.gold, fontFamily:"Georgia,serif", letterSpacing:"0.1em" }}>{hint}</div>}
         {checked && (
           <div style={{ marginTop:"0.7rem" }}>
-            <div style={{ fontSize:"0.82rem", color:isCorrect?C.green:C.red, marginBottom:"0.3rem" }}>
-              {isCorrect?"✓ Chính xác!":<>✗ Đáp án: <b style={{fontFamily:"Georgia,serif"}}>{w.fr}</b></>}
+            <div style={{ fontSize:"0.82rem", color:isCorrect?C.green:C.red, marginBottom:"0.3rem", display:"flex", alignItems:"center", gap:"0.5rem", justifyContent:"center" }}>
+              {isCorrect?"✓ Chính xác!":<><span>✗ Đáp án: <b style={{fontFamily:"Georgia,serif"}}>{w.fr}</b></span><SRSBtn fr={w.fr} vi={w.vi} /></>}
             </div>
             {idx<words.length-1 && <button onClick={next} style={{ padding:"0.35rem 1rem", border:"none", borderRadius:6, background:C.purple, color:C.white, fontSize:"0.78rem", cursor:"pointer" }}>Tiếp theo →</button>}
             {idx===words.length-1 && <div style={{ color:C.purple, fontFamily:"Georgia,serif" }}>🎉 Xong! {score.ok+1}/{words.length} đúng</div>}
@@ -501,7 +520,9 @@ export function AnagrammeSection({ words, onRecord }) {
           {!checked && <button onClick={()=>reset(w.fr)} style={{ padding:"0.38rem 0.8rem", border:`1px solid ${C.border}`, borderRadius:6, background:C.white, color:C.gray, fontSize:"0.72rem", cursor:"pointer" }}>↺ Reset</button>}
         </div>
         {checked && <div style={{ marginTop:"0.6rem" }}>
-          <div style={{ fontSize:"0.82rem", color:isCorrect?C.green:C.red, marginBottom:"0.4rem" }}>{isCorrect?"✓ Chính xác!":<>✗ Đáp án: <b style={{fontFamily:"Georgia,serif"}}>{w.fr}</b></>}</div>
+          <div style={{ fontSize:"0.82rem", color:isCorrect?C.green:C.red, marginBottom:"0.4rem", display:"flex", alignItems:"center", gap:"0.5rem", justifyContent:"center" }}>
+            {isCorrect?"✓ Chính xác!":<><span>✗ Đáp án: <b style={{fontFamily:"Georgia,serif"}}>{w.fr}</b></span><SRSBtn fr={w.fr} vi={w.vi} /></>}
+          </div>
           {idx<words.length-1 && <button onClick={next} style={{ padding:"0.35rem 1rem", border:"none", borderRadius:6, background:C.purple, color:C.white, fontSize:"0.78rem", cursor:"pointer" }}>Tiếp theo →</button>}
           {idx===words.length-1 && <div style={{ color:C.purple, fontFamily:"Georgia,serif" }}>🎉 Xong! {score.ok+(isCorrect?1:0)}/{words.length} đúng</div>}
         </div>}

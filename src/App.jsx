@@ -273,16 +273,16 @@ function AppInner() {
 
   function renderQuiz() {
     if (!quiz) return null;
-    if (quiz.type==="multiple_choice") return <MCSection questions={quiz.questions} onRecord={recordAnswer} onWrong={recordWrong}/>;
-    if (quiz.type==="fill_blank")      return <FillSection questions={quiz.questions} onRecord={recordAnswer} onWrong={recordWrong}/>;
+    if (quiz.type==="multiple_choice") return <MCSection questions={quiz.questions} words={words} onRecord={recordAnswer} onWrong={recordWrong}/>;
+    if (quiz.type==="fill_blank")      return <FillSection questions={quiz.questions} words={words} onRecord={recordAnswer} onWrong={recordWrong}/>;
     if (quiz.type==="matching")        return <MatchSection pairs={quiz.pairs}/>;
     if (quiz.type==="dictee")          return <DicteeSection words={quiz.words} onRecord={recordAnswer}/>;
     if (quiz.type==="flashcard")       return <FlashcardSection words={quiz.words} onRecord={recordAnswer}/>;
     if (quiz.type==="anagramme")       return <AnagrammeSection words={quiz.words} onRecord={recordAnswer}/>;
     if (quiz.type==="mixed") return quiz.sections.map((sec,i)=>(
       <div key={i}>
-        {sec.sectionType==="multiple_choice"&&<MCSection questions={sec.questions} sl onRecord={recordAnswer} onWrong={recordWrong}/>}
-        {sec.sectionType==="fill_blank"&&<FillSection questions={sec.questions} sl onRecord={recordAnswer} onWrong={recordWrong}/>}
+        {sec.sectionType==="multiple_choice"&&<MCSection questions={sec.questions} words={words} sl onRecord={recordAnswer} onWrong={recordWrong}/>}
+        {sec.sectionType==="fill_blank"&&<FillSection questions={sec.questions} words={words} sl onRecord={recordAnswer} onWrong={recordWrong}/>}
         {sec.sectionType==="matching"&&<MatchSection pairs={sec.pairs} sl/>}
       </div>
     ));

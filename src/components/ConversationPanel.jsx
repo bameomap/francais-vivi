@@ -78,6 +78,17 @@ export default function ConversationPanel() {
     setLoading(false);
   };
 
+  const retry = async () => {
+    setErr(""); setLoading(true);
+    try {
+      const apiMsgs = messages.map(m => ({ role: m.role, content: m.text }));
+      const reply = await callAIText(apiMsgs, scenario.prompt);
+      setMessages(m => [...m, { role:"assistant", text: reply }]);
+      awardXP(3);
+    } catch(e) { setErr(e.message); }
+    setLoading(false);
+  };
+
   const send = async (override) => {
     const txt = (override || input).trim();
     if (!txt || loading) return;
@@ -202,7 +213,12 @@ export default function ConversationPanel() {
             <span>Đang soạn...</span>
           </div>
         )}
-        {err && <div style={{ color:C.red, fontSize:"0.75rem", background:"#fde8e6", borderRadius:8, padding:"0.4rem 0.65rem" }}>⚠ {err}</div>}
+        {err && (
+          <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", background:"#fde8e6", borderRadius:8, padding:"0.4rem 0.65rem" }}>
+            <span style={{ color:C.red, fontSize:"0.75rem", flex:1 }}>⚠ {err}</span>
+            <button onClick={retry} style={{ padding:"0.2rem 0.6rem", background:C.red, color:C.white, border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600, flexShrink:0 }}>↺ Thử lại</button>
+          </div>
+        )}
         <div ref={bottomRef} />
       </div>
 

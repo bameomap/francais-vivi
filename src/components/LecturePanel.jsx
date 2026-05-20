@@ -162,7 +162,12 @@ export default function LecturePanel({ words: propWords = [] }) {
           ))}
         </div>
 
-        {err && <div style={{ color:C.red, fontSize:"0.78rem", marginBottom:"0.8rem" }}>⚠ {err}</div>}
+        {err && (
+          <div style={{ marginBottom:"0.8rem", display:"flex", flexDirection:"column", alignItems:"center", gap:"0.4rem" }}>
+            <div style={{ color:C.red, fontSize:"0.78rem" }}>⚠ {err}</div>
+            <button onClick={generate} style={{ padding:"0.25rem 0.75rem", background:C.red, color:C.white, border:"none", borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
+          </div>
+        )}
         <button onClick={generate}
           style={{ padding:"0.75rem 1.8rem", background:"linear-gradient(135deg,#059669,#0D9488)", color:C.white, border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700, boxShadow:"0 6px 20px #05966944" }}>
           Tạo bài đọc ✦

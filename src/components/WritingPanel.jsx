@@ -76,7 +76,12 @@ Return ONLY JSON:
         <textarea value={input} onChange={e=>setInput(e.target.value)}
           placeholder="Nhập câu tiếng Pháp... vd: Je suis une étudiant."
           style={{ width:"100%", minHeight:80, border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.55rem 0.7rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.6, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
-        {err && <div style={{ fontSize:"0.72rem", color:C.red, marginTop:"0.4rem" }}>⚠ {err}</div>}
+        {err && (
+          <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
+            <div style={{ fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>
+            <button onClick={check} style={{ padding:"0.2rem 0.6rem", background:C.red, color:C.white, border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600, flexShrink:0 }}>↺ Thử lại</button>
+          </div>
+        )}
         <button onClick={check} disabled={loading||!input.trim()}
           style={{ marginTop:"0.6rem", width:"100%", padding:"0.65rem", background: input.trim() ? "#e67e22" : C.border, color:C.white, border:"none", borderRadius:8, fontFamily:"Georgia,serif", fontSize:"0.88rem", cursor: input.trim() ? "pointer" : "default" }}>
           {loading ? "AI đang chấm..." : "Chấm bài ✦"}
