@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
-import { C } from "./constants.js";
+import { C, applyTheme } from "./constants.js";
 
 import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
@@ -148,6 +148,17 @@ function AppInner() {
   const [srsStats, setSrsStats]         = useState(getSRSStats);
   const [filterMastered, setFilterMastered] = useState(true);
   const [vocabSearch, setVocabSearch]       = useState("");
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem("dark_mode") === "1";
+    if (saved) applyTheme(true);
+    return saved;
+  });
+  const toggleDark = () => {
+    const next = !dark;
+    applyTheme(next);
+    localStorage.setItem("dark_mode", next ? "1" : "0");
+    setDark(next);
+  };
   const [editOpen, setEditOpen]             = useState(false);
   const [activeGroup, setActiveGroup]       = useState(null);
   const [fromGroup,   setFromGroup]         = useState(null);
@@ -383,13 +394,20 @@ function AppInner() {
               <img src="/logo.svg" alt="Vivi Learns Français" style={{ width:36, height:36, borderRadius:9 }} />
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, letterSpacing:"0.03em" }}>Français</span>
             </div>
-            {/* Streak badge */}
-            <div style={{ display:"flex", alignItems:"center", gap:"0.35rem", background:streakData.streak>0?C.goldL:C.cream, border:`1.5px solid ${streakData.streak>0?C.gold:C.border}`, borderRadius:24, padding:"0.3rem 0.75rem" }}>
-              <span style={{ fontSize:"0.85rem" }}>{streakData.streak>0?"🔥":"📅"}</span>
-              <span style={{ fontSize:"0.75rem", color:streakData.streak>0?C.gold:C.gray, fontWeight:600 }}>
-                {streakData.streak>0 ? `${streakData.streak} ngày` : "Hôm nay"}
-              </span>
-              {streakData.studiedToday && <span style={{ fontSize:"0.6rem", background:C.green, color:C.white, borderRadius:20, padding:"0.08rem 0.35rem", fontWeight:600 }}>✓</span>}
+            {/* Right: dark toggle + streak */}
+            <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
+              <button onClick={toggleDark}
+                style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.25rem 0.55rem", fontSize:"0.85rem", cursor:"pointer", lineHeight:1 }}
+                title={dark ? "Chế độ sáng" : "Chế độ tối"}>
+                {dark ? "☀️" : "🌙"}
+              </button>
+              <div style={{ display:"flex", alignItems:"center", gap:"0.35rem", background:streakData.streak>0?C.goldL:C.cream, border:`1.5px solid ${streakData.streak>0?C.gold:C.border}`, borderRadius:24, padding:"0.3rem 0.75rem" }}>
+                <span style={{ fontSize:"0.85rem" }}>{streakData.streak>0?"🔥":"📅"}</span>
+                <span style={{ fontSize:"0.75rem", color:streakData.streak>0?C.gold:C.gray, fontWeight:600 }}>
+                  {streakData.streak>0 ? `${streakData.streak} ngày` : "Hôm nay"}
+                </span>
+                {streakData.studiedToday && <span style={{ fontSize:"0.6rem", background:C.green, color:C.white, borderRadius:20, padding:"0.08rem 0.35rem", fontWeight:600 }}>✓</span>}
+              </div>
             </div>
           </div>}
 
@@ -617,15 +635,19 @@ function AppInner() {
         <>
           {/* ── Header ── */}
           <div style={{ background:C.white, padding:"0.6rem 1rem", display:"flex", flexDirection:"column", gap:"0.4rem", borderBottom:`1.5px solid ${C.border}`, position:"sticky", top:0, zIndex:100, boxShadow:"0 1px 12px rgba(74,144,217,0.08)" }}>
-            {/* Row 1: back + title */}
+            {/* Row 1: back + title + dark toggle */}
             <div style={{ display:"flex", alignItems:"center", gap:"0.6rem" }}>
               <button onClick={()=>{ setSection("home"); if (fromGroup) { setActiveGroup(fromGroup); setFromGroup(null); } }}
                 style={{ background:C.blueL, border:`1.5px solid ${C.blue}33`, color:C.blue, cursor:"pointer", fontSize:"0.82rem", padding:"0.3rem 0.65rem", borderRadius:10, fontWeight:600, transition:"all 0.15s", flexShrink:0 }}>
                 ← Về
               </button>
-              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:600 }}>
+              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:600, flex:1 }}>
                 {SECTION_TITLE[section] || section}
               </span>
+              <button onClick={toggleDark}
+                style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.5rem", fontSize:"0.8rem", cursor:"pointer", lineHeight:1, flexShrink:0 }}>
+                {dark ? "☀️" : "🌙"}
+              </button>
             </div>
             {/* Row 2: sub-nav buttons (only when present) */}
             {section==="vocab" && (
