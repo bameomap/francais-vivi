@@ -82,6 +82,11 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
     onRecord?.(correct, isOk);
     if (!isOk) onWrong?.(q);
   };
+
+  const allDone = questions.length > 0 && Object.keys(ans).length === questions.length;
+  const score   = questions.filter((q, i) => ans[i] && normalize(ans[i]) === normalize(q.answer)).length;
+  const pct     = allDone ? Math.round(score / questions.length * 100) : 0;
+
   return (
     <div style={{ marginBottom:"0.5rem" }}>
       {sl && <SecLabel icon="☑" text="Trắc nghiệm" />}
@@ -101,19 +106,35 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
                   style={{ padding:"0.42rem 0.55rem", border:`1.5px solid ${bc}`, borderRadius:8, background:bg, color:col, fontSize:"0.78rem", cursor:a?"default":"pointer", textAlign:"left", fontFamily:"inherit" }}>{opt}</button>;
               })}
             </div>
-            {a && <div style={{ marginTop:"0.4rem", fontSize:"0.72rem", lineHeight:1.7 }}>
-              {ok
-                ? <span style={{ color:C.green }}>✓ Chính xác!{q.explanation ? ` — ${q.explanation}` : ""}</span>
-                : <><div style={{ color:C.red }}>✗ <b>{a}</b>{q.wrongExplanations?.[a] ? ` — ${q.wrongExplanations[a]}` : ""}</div>
-                   <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", flexWrap:"wrap" }}>
-                     <span style={{ color:C.green }}>✓ <b>{q.answer}</b>{q.explanation ? ` — ${q.explanation}` : ""}</span>
-                     <SRSBtn fr={q.answer} vi={q.wrongExplanations?.[q.answer]} words={words} />
-                   </div></>
-              }
-            </div>}
+            {a && (
+              <>
+                <div style={{ marginTop:"0.4rem", fontSize:"0.72rem", lineHeight:1.7 }}>
+                  {ok
+                    ? <span style={{ color:C.green }}>✓ Chính xác!</span>
+                    : <><div style={{ color:C.red }}>✗ <b>{a}</b>{q.wrongExplanations?.[a] ? ` — ${q.wrongExplanations[a]}` : ""}</div>
+                       <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", flexWrap:"wrap", marginTop:"0.15rem" }}>
+                         <span style={{ color:C.green }}>✓ <b>{q.answer}</b></span>
+                         <SRSBtn fr={q.answer} vi={q.wrongExplanations?.[q.answer]} words={words} />
+                       </div></>
+                  }
+                </div>
+                {q.explanation && (
+                  <div style={{ marginTop:"0.35rem", background:"#EFF6FF", border:`1px solid ${C.blue}33`, borderRadius:8, padding:"0.38rem 0.65rem", fontSize:"0.72rem", color:"#2563EB", lineHeight:1.6 }}>
+                    💡 {q.explanation}
+                  </div>
+                )}
+              </>
+            )}
           </QCard>
         );
       })}
+      {allDone && (
+        <div style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+          <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", fontWeight:700, color: pct>=80?C.green:pct>=60?C.gold:C.red }}>{score}/{questions.length}</div>
+          <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>{pct}% · {pct>=80?"Excellent!":pct>=60?"Bien!":"Encore des efforts!"}</div>
+        </div>
+      )}
     </div>
   );
 }
@@ -129,6 +150,11 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
     onRecord?.(q.answer, ok);
     if (!ok) onWrong?.(q);
   };
+
+  const allDone = questions.length > 0 && Object.keys(chk).length === questions.length;
+  const score   = questions.filter((q, i) => chk[i] && (inp[i]||"").trim().toLowerCase() === (q.answer||"").toLowerCase()).length;
+  const pct     = allDone ? Math.round(score / questions.length * 100) : 0;
+
   return (
     <div style={{ marginBottom:"0.5rem" }}>
       {sl && <SecLabel icon="✏️" text="Điền từ" />}
@@ -150,9 +176,21 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
               {done && <span style={{ fontSize:"0.73rem", color:ok?C.green:C.red, fontWeight:500 }}>{ok?"✓ Đúng!":`✗ Đáp án: ${q.answer}`}</span>}
               {done && !ok && <SRSBtn fr={q.answer} vi={q.hint} words={words} />}
             </div>
+            {done && q.explanation && (
+              <div style={{ marginTop:"0.35rem", background:"#EFF6FF", border:`1px solid ${C.blue}33`, borderRadius:8, padding:"0.38rem 0.65rem", fontSize:"0.72rem", color:"#2563EB", lineHeight:1.6 }}>
+                💡 {q.explanation}
+              </div>
+            )}
           </QCard>
         );
       })}
+      {allDone && (
+        <div style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+          <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", fontWeight:700, color: pct>=80?C.green:pct>=60?C.gold:C.red }}>{score}/{questions.length}</div>
+          <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>{pct}% · {pct>=80?"Excellent!":pct>=60?"Bien!":"Encore des efforts!"}</div>
+        </div>
+      )}
     </div>
   );
 }
