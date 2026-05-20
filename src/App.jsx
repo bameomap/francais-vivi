@@ -24,6 +24,7 @@ import PhrasebookPanel from "./components/PhrasebookPanel.jsx";
 import RevisionPanel from "./components/RevisionPanel.jsx";
 import ConjugaisonPanel from "./components/ConjugaisonPanel.jsx";
 import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
+import EditoVocabPanel from "./components/EditoVocabPanel.jsx";
 import ListeningQuiz from "./components/ListeningQuiz.jsx";
 import SentenceBuilder from "./components/SentenceBuilder.jsx";
 import GrammarCheatsheet from "./components/GrammarCheatsheet.jsx";
@@ -33,7 +34,7 @@ import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./ut
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
   // Học
-  { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"input"        },
+  { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"edito"        },
   { id:"topics",       group:"hoc", label:"Chủ đề A1",    fr:"Les Thèmes",       icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"topics"       },
   { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
   { id:"cheatsheet",   group:"hoc", label:"Tra cứu nhanh", fr:"La Référence Rapide", icon:"📋", color:"#7B6CF6", bg:"#F0EEFF", view:"cheatsheet"   },
@@ -652,6 +653,7 @@ function AppInner() {
             {/* Row 2: sub-nav buttons (only when present) */}
             {section==="vocab" && (
               <div style={{ display:"flex", gap:"0.3rem", flexWrap:"nowrap", overflowX:"auto", paddingBottom:"0.1rem" }}>
+                {navBtn("📖 Edito","edito")}
                 {navBtn("✏️ Tự do","input")}
                 {navBtn("📂","history")}
                 {generatedVocab.length>0 && navBtn("📋","vocab-table")}
@@ -663,6 +665,9 @@ function AppInner() {
 
           {/* ── Content ── */}
           <div style={{ minHeight:"calc(100vh - 130px)", paddingBottom:80 }}>
+
+            {/* EDITO VOCAB */}
+            {view==="edito" && <EditoVocabPanel />}
 
             {/* INPUT */}
             {view==="input" && (
@@ -747,7 +752,6 @@ function AppInner() {
                 {/* ── Collapsible Editor ── */}
                 {editOpen && (
                   <div style={{ display:"flex", flexDirection:"column", gap:"0.7rem", animation:"fadeUp 0.2s ease" }}>
-                    <EditoPresets onLoad={u=>{setTextPersist(u.words);showToast(`✓ Đã load ${u.title}!`);setEditOpen(false);}}/>
                     <VocabGenerator onGenerate={generated=>{
                       const lines = generated.map(w=>`${w.fr} — ${w.vi}`).join("\n");
                       setTextPersist(lines); setView("vocab-table"); setGeneratedVocab(generated); setEditOpen(false);
