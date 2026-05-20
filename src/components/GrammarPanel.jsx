@@ -1625,40 +1625,191 @@ export function GrammarExplanation({ rules, text }) {
   );
 }
 
-export default function GrammarPanel() {
-  const [panelTab, setPanelTab] = useState("grammar");
-  const [topic, setTopic] = useState("");
-  const [level, setLevel] = useState("A1");
-  const [gtype, setGtype] = useState("mixed");
-  const [numQ, setNumQ] = useState(12);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [err, setErr] = useState("");
-  const [wrongCount, setWrongCount] = useState(0);
-  const [formOpen, setFormOpen] = useState(false);
-  const formRef = useRef(null);
+// ── Edito unit list (primary grammar view) ────────────────
+function EditoGrammarView() {
+  const [selectedUnit, setSelectedUnit] = useState(null);
+  const [openPoints, setOpenPoints]     = useState(new Set());
+  const [activeExercise, setActiveExercise] = useState(null); // {topic}
+  const [loading, setLoading]   = useState(false);
+  const [result, setResult]     = useState(null);
+  const [err, setErr]           = useState("");
   const quizRef = useRef(null);
 
-  const generate = async (overrideTopic) => {
-    const t = (overrideTopic !== undefined ? overrideTopic : topic).trim();
-    if (!t) { setErr("Nhập chủ đề ngữ pháp!"); return; }
-    setLoading(true); setErr(""); setResult(null); setWrongCount(0);
+  const launchExercise = async (topic) => {
+    setActiveExercise({ topic });
+    setResult(null); setErr(""); setLoading(true);
     try {
-      const data = await callAI(buildGrammarPrompt(t, level, gtype, numQ));
+      const data = await callAI(buildGrammarPrompt(topic, "A1", "mixed", 12));
       setResult(data);
       setTimeout(() => quizRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 150);
-    }
-    catch(e) { setErr(e.message); }
+    } catch(e) { setErr(e.message); }
     setLoading(false);
   };
 
-  const handlePresetLoad = (t) => {
-    setTopic(t);
-    setLevel("A1");
-    setResult(null);
-    setFormOpen(false);
-    setTimeout(() => { generate(t); }, 80);
+  const renderExercises = () => {
+    if (!result) return null;
+    const onW = () => {};
+    if (result.type==="mc") return <GrammarMC exercises={result.exercises} onWrong={onW}/>;
+    if (result.type==="fill") return <GrammarFill exercises={result.exercises}/>;
+    if (result.type==="order") return <GrammarOrder exercises={result.exercises}/>;
+    if (result.type==="mixed") return result.sections?.map((sec,i)=>(
+      <div key={i} style={{marginBottom:"0.5rem"}}>
+        <SecLabel icon={sec.sectionType==="mc"?"☑":sec.sectionType==="fill"?"✏️":"🔀"} text={sec.sectionType==="mc"?"Chọn đáp án":sec.sectionType==="fill"?"Điền vào chỗ trống":"Sắp xếp câu"}/>
+        {sec.sectionType==="mc"&&<GrammarMC exercises={sec.exercises} onWrong={onW}/>}
+        {sec.sectionType==="fill"&&<GrammarFill exercises={sec.exercises}/>}
+        {sec.sectionType==="order"&&<GrammarOrder exercises={sec.exercises}/>}
+      </div>
+    ));
+    return null;
   };
+
+  // Exercise view
+  if (activeExercise) {
+    return (
+      <div style={{ padding:"1rem" }}>
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.9rem" }}>
+          <button onClick={() => { setActiveExercise(null); setResult(null); }}
+            style={{ background:C.purpleL, border:`1.5px solid ${C.purple}33`, color:C.purple, padding:"0.3rem 0.75rem", borderRadius:10, fontSize:"0.78rem", cursor:"pointer", fontWeight:600 }}>
+            ← Quay lại
+          </button>
+          {result && !loading && (
+            <button onClick={() => launchExercise(activeExercise.topic)}
+              style={{ padding:"0.25rem 0.65rem", border:`1.5px solid ${C.border}`, borderRadius:20, background:C.white, color:C.ink, fontSize:"0.68rem", cursor:"pointer" }}>
+              🔄 Tạo lại
+            </button>
+          )}
+        </div>
+        {loading && (
+          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"0.8rem", padding:"2rem", color:C.gray }}>
+            <Spinner /><span style={{ fontSize:"0.88rem" }}>AI đang tạo bài tập...</span>
+          </div>
+        )}
+        {err && <div style={{ color:C.red, padding:"0.75rem", background:"#fde8e6", borderRadius:10, fontSize:"0.82rem" }}>⚠ {err}</div>}
+        {result && !loading && (
+          <>
+            {(result.explanationRules?.length > 0 || result.explanation) && (
+              <div style={{ background:C.purpleL, border:`1px solid #d4c5f5`, borderRadius:12, padding:"0.75rem 0.9rem", marginBottom:"0.75rem" }}>
+                <div style={{ fontSize:"0.65rem", textTransform:"uppercase", letterSpacing:1, color:C.purple, marginBottom:"0.5rem", fontWeight:600 }}>
+                  📖 Lý thuyết — {result.topic}
+                </div>
+                <GrammarExplanation rules={result.explanationRules} text={result.explanation} />
+              </div>
+            )}
+            <div ref={quizRef}>{renderExercises()}</div>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  // Unit detail
+  if (selectedUnit) {
+    return (
+      <div style={{ padding:"1rem" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"1rem" }}>
+          <button onClick={() => { setSelectedUnit(null); setOpenPoints(new Set()); }}
+            style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, padding:"0.2rem 0.65rem", borderRadius:20, fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
+            ← Quay lại
+          </button>
+          <div style={{ background:C.purple, color:"#fff", borderRadius:999, minWidth:28, height:28, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.78rem", fontWeight:700, flexShrink:0 }}>
+            {selectedUnit.num}
+          </div>
+          <div>
+            <div style={{ fontWeight:700, color:C.ink, fontSize:"0.95rem" }}>Unité {selectedUnit.num}</div>
+            <div style={{ fontSize:"0.72rem", color:C.purple, fontStyle:"italic" }}>{selectedUnit.title}</div>
+          </div>
+        </div>
+
+        <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem" }}>
+          {selectedUnit.points.map((p, i) => {
+            const isOpen = openPoints.has(i);
+            const toggle = () => setOpenPoints(prev => { const s=new Set(prev); s.has(i)?s.delete(i):s.add(i); return s; });
+            return (
+              <div key={i} style={{ background:C.white, border:`1.5px solid ${isOpen?C.purple+"55":C.border}`, borderRadius:12, overflow:"hidden", transition:"border-color 0.2s" }}>
+                <div onClick={toggle} style={{ background:isOpen?C.purpleL:C.white, padding:"0.65rem 0.85rem", display:"flex", justifyContent:"space-between", alignItems:"center", cursor:"pointer", transition:"background 0.2s" }}>
+                  <div style={{ fontSize:"0.8rem", fontWeight:600, color:C.purple, lineHeight:1.3, flex:1 }}>{p.topic}</div>
+                  <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", flexShrink:0 }}>
+                    <button onClick={e=>{ e.stopPropagation(); launchExercise(p.topic); }}
+                      style={{ background:C.purple, color:C.white, border:"none", borderRadius:20, padding:"0.22rem 0.65rem", fontSize:"0.63rem", cursor:"pointer", whiteSpace:"nowrap" }}>
+                      Làm bài tập →
+                    </button>
+                    <span style={{ color:C.purple, fontSize:"0.8rem", transform:isOpen?"rotate(180deg)":"none", transition:"transform 0.2s", display:"inline-block" }}>▾</span>
+                  </div>
+                </div>
+                {isOpen && (
+                  <div style={{ padding:"0.65rem 0.85rem", borderTop:`1px solid ${C.purple}22` }}>
+                    <div style={{ background:C.cream, borderRadius:8, padding:"0.55rem 0.7rem", borderLeft:`3px solid ${C.purple}`, marginBottom:"0.65rem" }}>
+                      <RuleRenderer text={p.rule}/>
+                    </div>
+                    <div style={{ fontSize:"0.63rem", textTransform:"uppercase", letterSpacing:0.8, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>Ví dụ</div>
+                    <div style={{ display:"flex", flexDirection:"column", gap:"0.4rem" }}>
+                      {p.examples.map((ex, j) => {
+                        const parts = ex.split(" — ");
+                        const fr = parts[0] || ex;
+                        const vi = parts[1] || "";
+                        return (
+                          <div key={j} style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:8, padding:"0.45rem 0.65rem" }}>
+                            <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", marginBottom:vi?"0.2rem":0 }}>
+                              <span style={{ fontSize:"0.65rem", color:C.purple, flexShrink:0 }}>▸</span>
+                              <span style={{ fontFamily:"Georgia,serif", fontSize:"0.8rem", color:C.ink, fontStyle:"italic", flex:1 }}>{fr}</span>
+                              <SpeakBtn text={fr} size="0.7rem"/>
+                            </div>
+                            {vi && <div style={{ fontSize:"0.72rem", color:C.gray, marginLeft:"1.1rem", lineHeight:1.5 }}>→ {vi}</div>}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Unit list
+  return (
+    <div style={{ padding:"1rem" }}>
+      <div style={{ marginBottom:"1rem" }}>
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>
+          📘 Ngữ pháp Edito A1
+        </div>
+        <div style={{ fontSize:"0.72rem", color:C.gray }}>Chọn unité để xem điểm ngữ pháp & làm bài tập</div>
+      </div>
+      <div style={{ display:"flex", flexDirection:"column", gap:"0.45rem" }}>
+        {EDITO_GRAMMAR.map((u, i) => (
+          <button key={u.id} onClick={() => { setSelectedUnit(u); setOpenPoints(new Set()); }}
+            style={{ display:"flex", alignItems:"center", gap:"0.85rem", background:C.white, border:`1.5px solid ${C.purple}22`, borderRadius:14, padding:"0.75rem 1rem", cursor:"pointer", textAlign:"left", fontFamily:"inherit", animation:`fadeUp 0.2s ease ${i*0.03}s both`, transition:"all 0.15s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = C.purpleL; e.currentTarget.style.borderColor = C.purple; }}
+            onMouseLeave={e => { e.currentTarget.style.background = C.white; e.currentTarget.style.borderColor = `${C.purple}22`; }}>
+            <div style={{ background:C.purple, color:"#fff", borderRadius:999, minWidth:30, height:30, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.75rem", fontWeight:700, flexShrink:0 }}>
+              {u.num}
+            </div>
+            <div style={{ flex:1 }}>
+              <div style={{ fontWeight:700, color:C.ink, fontSize:"0.86rem" }}>Unité {u.num}: {u.title}</div>
+              <div style={{ fontSize:"0.67rem", color:C.gray, marginTop:"0.08rem" }}>{u.points.length} điểm ngữ pháp</div>
+            </div>
+            <span style={{ color:C.gray }}>→</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Free-form exercise generator ──────────────────────────
+function CustomExerciseView() {
+  const [topic, setTopic]     = useState("");
+  const [level, setLevel]     = useState("A1");
+  const [gtype, setGtype]     = useState("mixed");
+  const [numQ, setNumQ]       = useState(12);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult]   = useState(null);
+  const [err, setErr]         = useState("");
+  const [wrongCount, setWrongCount] = useState(0);
+  const quizRef = useRef(null);
 
   const GRAMMAR_BY_LEVEL = {
     A1: ["Động từ être & avoir","Mạo từ le/la/l'/les","Mạo từ un/une/des","Số đếm 0-100","Đại từ nhân xưng","Thì hiện tại (présent)","Phủ định ne...pas","Tính từ sở hữu","Giới từ à & de","Câu hỏi đơn giản"],
@@ -1669,7 +1820,17 @@ export default function GrammarPanel() {
     C2: ["Văn phong văn học","Archaïsmes & néologismes","Nuances du subjonctif","Rhétorique & argumentation","Registres de langue","Ironie & implicite","Syntaxe complexe","Ellipse & anaphore","Figures de style","Cohésion textuelle"],
   };
 
-  const suggestions = GRAMMAR_BY_LEVEL[level] || [];
+  const generate = async (overrideTopic) => {
+    const t = (overrideTopic !== undefined ? overrideTopic : topic).trim();
+    if (!t) { setErr("Nhập chủ đề ngữ pháp!"); return; }
+    setLoading(true); setErr(""); setResult(null); setWrongCount(0);
+    try {
+      const data = await callAI(buildGrammarPrompt(t, level, gtype, numQ));
+      setResult(data);
+      setTimeout(() => quizRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 150);
+    } catch(e) { setErr(e.message); }
+    setLoading(false);
+  };
 
   const renderExercises = () => {
     if (!result) return null;
@@ -1688,141 +1849,111 @@ export default function GrammarPanel() {
     return null;
   };
 
-  const PANEL_TAB_BAR = (
-    <div style={{ display:"flex", gap:"0.35rem" }}>
-      {[{id:"grammar",label:"🧩 Ngữ pháp"},{id:"conjugaison",label:"📖 Chia động từ"}].map(t=>(
-        <button key={t.id} onClick={()=>setPanelTab(t.id)}
-          style={{ flex:1, padding:"0.5rem 0.3rem", border:`1.5px solid ${panelTab===t.id?C.purple:C.border}`, borderRadius:10, background:panelTab===t.id?C.purple:C.white, color:panelTab===t.id?C.white:C.ink, fontSize:"0.78rem", cursor:"pointer", fontWeight:panelTab===t.id?700:400, fontFamily:"inherit", transition:"all 0.15s" }}>
+  return (
+    <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
+      <div style={{ background:C.cream, borderRadius:12, padding:"0.9rem", display:"flex", flexDirection:"column", gap:"0.65rem" }}>
+        <div style={{ fontSize:"0.72rem", fontWeight:600, color:C.purple }}>🎯 Nhập chủ đề tùy chỉnh</div>
+        <div>
+          <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.3rem" }}>Chủ đề ngữ pháp</div>
+          <input value={topic} onChange={e=>setTopic(e.target.value)} onKeyDown={e=>e.key==="Enter"&&generate()}
+            placeholder="vd: chia động từ, mạo từ, thì quá khứ..."
+            style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.5rem 0.7rem", fontSize:"0.82rem", fontFamily:"inherit", outline:"none", color:C.ink, boxSizing:"border-box" }}/>
+        </div>
+        <div>
+          <div style={{ fontSize:"0.63rem", color:C.gray, marginBottom:"0.3rem" }}>Gợi ý {level}:</div>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:"0.28rem" }}>
+            {(GRAMMAR_BY_LEVEL[level]||[]).map((s,i)=>(
+              <button key={i} onClick={()=>setTopic(s)}
+                style={{ padding:"0.18rem 0.5rem", border:`1px solid ${topic===s?C.purple:C.border}`, borderRadius:20, background:topic===s?C.purple:C.white, color:topic===s?C.white:C.gray, fontSize:"0.65rem", cursor:"pointer", fontFamily:"inherit" }}>
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.3rem" }}>Trình độ</div>
+          <div style={{ display:"flex", gap:"0.28rem" }}>
+            {LEVELS.map(l=>(
+              <button key={l} onClick={()=>{ setLevel(l); setTopic(""); }}
+                style={{ flex:1, padding:"0.35rem 0.2rem", border:`1.5px solid ${level===l?C.purple:C.border}`, borderRadius:7, background:level===l?C.purple:C.white, color:level===l?C.white:C.ink, fontSize:"0.72rem", cursor:"pointer", fontFamily:"inherit" }}>
+                {l}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.3rem" }}>Dạng bài tập</div>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.28rem" }}>
+            {GTYPES.map(t=>(
+              <button key={t.id} onClick={()=>setGtype(t.id)}
+                style={{ padding:"0.4rem 0.3rem", border:`1.5px solid ${gtype===t.id?C.purple:C.border}`, borderRadius:8, background:gtype===t.id?C.purple:C.white, color:gtype===t.id?C.white:C.ink, fontSize:"0.73rem", cursor:"pointer", fontFamily:"inherit" }}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
+          <span style={{ fontSize:"0.65rem", color:C.gray, whiteSpace:"nowrap" }}>Số câu:</span>
+          <input type="range" min={10} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{ flex:1, accentColor:C.purple }}/>
+          <span style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:C.purple, fontWeight:600, minWidth:22 }}>{numQ}</span>
+        </div>
+        {err && <div style={{ color:C.red, fontSize:"0.75rem", padding:"0.38rem 0.58rem", background:"#fde8e6", borderRadius:6 }}>⚠ {err}</div>}
+        <button onClick={()=>generate()} disabled={loading}
+          style={{ padding:"0.75rem", background:loading?C.gray:C.ink, color:C.paper, border:"none", borderRadius:8, fontFamily:"Georgia,serif", fontSize:"0.92rem", cursor:loading?"not-allowed":"pointer" }}>
+          {loading?"Đang tạo bài tập...":"Tạo bài tập ✦"}
+        </button>
+      </div>
+
+      {(result?.explanationRules?.length > 0 || result?.explanation) && (
+        <div style={{ background:C.purpleL, border:`1px solid #d4c5f5`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
+          <div style={{ fontSize:"0.65rem", textTransform:"uppercase", letterSpacing:1, color:C.purple, marginBottom:"0.6rem", fontWeight:600 }}>
+            📖 Lý thuyết — {result.topic} · {result.level}
+          </div>
+          <GrammarExplanation rules={result.explanationRules} text={result.explanation} />
+        </div>
+      )}
+      {loading && (
+        <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", height:160, gap:"0.7rem", color:C.gray }}>
+          <Spinner/><span style={{ fontSize:"0.83rem" }}>AI đang tạo bài tập...</span>
+        </div>
+      )}
+      {!loading && result && (
+        <div ref={quizRef}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.75rem" }}>
+            <span style={{ background:C.purple, color:C.white, fontSize:"0.6rem", padding:"0.16rem 0.52rem", borderRadius:20, textTransform:"uppercase", letterSpacing:0.5 }}>{result.topic} · {result.level}</span>
+            <button onClick={()=>generate()} style={{ padding:"0.23rem 0.6rem", border:`1.5px solid ${C.border}`, borderRadius:20, background:C.white, color:C.ink, fontSize:"0.68rem", cursor:"pointer", fontFamily:"inherit" }}>🔄 Tạo lại</button>
+          </div>
+          {renderExercises()}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function GrammarPanel() {
+  const [panelTab, setPanelTab] = useState("edito");
+
+  const TABS = [
+    { id:"edito",  label:"📘 Edito A1"  },
+    { id:"custom", label:"🎯 Tùy chỉnh" },
+  ];
+
+  const tabBar = (
+    <div style={{ display:"flex", gap:"0.3rem", padding:"0.75rem 1rem 0" }}>
+      {TABS.map(t => (
+        <button key={t.id} onClick={() => setPanelTab(t.id)}
+          style={{ flex:1, padding:"0.45rem 0.2rem", border:`1.5px solid ${panelTab===t.id?C.purple:C.border}`, borderRadius:10, background:panelTab===t.id?C.purple:C.white, color:panelTab===t.id?C.white:C.ink, fontSize:"0.7rem", cursor:"pointer", fontWeight:panelTab===t.id?700:400, fontFamily:"inherit", transition:"all 0.15s" }}>
           {t.label}
         </button>
       ))}
     </div>
   );
 
-  if (panelTab === "conjugaison") return (
-    <div>
-      <div style={{ padding:"1rem 1rem 0" }}>{PANEL_TAB_BAR}</div>
-      <ConjugaisonPanel />
-    </div>
-  );
-
   return (
-    <div style={{padding:"1rem",display:"flex",flexDirection:"column",gap:"0.75rem"}}>
-      {PANEL_TAB_BAR}
-      {/* Édito Presets */}
-      <GrammarPresets onLoad={handlePresetLoad} />
-
-      {/* Empty state / prompt when no result */}
-      {!result && !loading && (
-        <div style={{background:C.white,border:`2px dashed ${C.border}`,borderRadius:16,padding:"1.8rem 1rem",textAlign:"center"}}>
-          <div style={{fontSize:"2.5rem",marginBottom:"0.5rem"}}>🧩</div>
-          <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"0.98rem",color:C.ink,marginBottom:"0.3rem"}}>Chọn bài học ngữ pháp</div>
-          <div style={{fontSize:"0.77rem",color:C.gray,lineHeight:1.7,marginBottom:"1rem"}}>Chọn unité từ <b>Édito A1</b> bên trên,<br/>hoặc nhập chủ đề tùy chỉnh bên dưới.</div>
-          <button onClick={()=>setFormOpen(o=>!o)}
-            style={{padding:"0.5rem 1.2rem",background:formOpen?C.purpleL:`linear-gradient(135deg,${C.purple},#5b4fcf)`,color:formOpen?C.purple:C.white,border:`1.5px solid ${C.purple}`,borderRadius:12,fontSize:"0.82rem",cursor:"pointer",fontWeight:600,transition:"all 0.2s"}}>
-            🎯 {formOpen ? "Đóng form" : "Nhập chủ đề tùy chỉnh"}
-          </button>
-        </div>
-      )}
-
-      {/* "New quiz" toggle when result already shown */}
-      {result && !loading && (
-        <button onClick={()=>setFormOpen(o=>!o)}
-          style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"0.4rem",padding:"0.45rem 0.9rem",background:formOpen?C.purpleL:"transparent",border:`1.5px solid ${C.purple}44`,color:C.purple,borderRadius:10,fontSize:"0.73rem",cursor:"pointer",fontWeight:600,transition:"all 0.15s"}}>
-          ✏️ {formOpen ? "Đóng" : "Tạo bài tập mới"}
-        </button>
-      )}
-
-      {/* Collapsible input form */}
-      {formOpen && (
-        <div ref={formRef} style={{background:C.cream,borderRadius:12,padding:"0.9rem",display:"flex",flexDirection:"column",gap:"0.65rem",animation:"fadeUp 0.2s ease"}}>
-          <div style={{fontSize:"0.72rem",fontWeight:600,color:C.purple}}>🧩 Chủ đề tùy chỉnh</div>
-
-          <div>
-            <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Chủ đề ngữ pháp muốn ôn</div>
-            <input value={topic} onChange={e=>setTopic(e.target.value)} onKeyDown={e=>e.key==="Enter"&&generate()}
-              placeholder="vd: chia động từ, mạo từ, thì quá khứ..."
-              style={{width:"100%",border:`1.5px solid ${C.border}`,borderRadius:8,padding:"0.5rem 0.7rem",fontSize:"0.82rem",fontFamily:"inherit",outline:"none",color:C.ink,boxSizing:"border-box"}}/>
-          </div>
-
-          {/* Quick suggestions by level */}
-          <div>
-            <div style={{fontSize:"0.63rem",color:C.gray,marginBottom:"0.3rem"}}>Gợi ý điểm ngữ pháp {level}:</div>
-            <div style={{display:"flex",flexWrap:"wrap",gap:"0.28rem"}}>
-              {suggestions.map((s,i)=>(
-                <button key={i} onClick={()=>setTopic(s)}
-                  style={{padding:"0.18rem 0.5rem",border:`1px solid ${topic===s?C.purple:C.border}`,borderRadius:20,background:topic===s?C.purple:C.white,color:topic===s?C.white:C.gray,fontSize:"0.65rem",cursor:"pointer",fontFamily:"inherit"}}>
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Level */}
-          <div>
-            <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Trình độ</div>
-            <div style={{display:"flex",gap:"0.28rem"}}>
-              {LEVELS.map(l=>(
-                <button key={l} onClick={()=>{ setLevel(l); setTopic(""); }}
-                  style={{flex:1,padding:"0.35rem 0.2rem",border:`1.5px solid ${level===l?C.purple:C.border}`,borderRadius:7,background:level===l?C.purple:C.white,color:level===l?C.white:C.ink,fontSize:"0.72rem",cursor:"pointer",fontFamily:"inherit"}}>
-                  {l}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Type */}
-          <div>
-            <div style={{fontSize:"0.65rem",color:C.gray,marginBottom:"0.3rem"}}>Dạng bài tập</div>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0.28rem"}}>
-              {GTYPES.map(t=>(
-                <button key={t.id} onClick={()=>setGtype(t.id)}
-                  style={{padding:"0.4rem 0.3rem",border:`1.5px solid ${gtype===t.id?C.purple:C.border}`,borderRadius:8,background:gtype===t.id?C.purple:C.white,color:gtype===t.id?C.white:C.ink,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>
-                  {t.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Num questions */}
-          <div style={{display:"flex",alignItems:"center",gap:"0.5rem"}}>
-            <span style={{fontSize:"0.65rem",color:C.gray,whiteSpace:"nowrap"}}>Số câu:</span>
-            <input type="range" min={10} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{flex:1,accentColor:C.purple}}/>
-            <span style={{fontFamily:"Georgia,serif",fontSize:"0.95rem",color:C.purple,fontWeight:600,minWidth:22}}>{numQ}</span>
-          </div>
-
-          {err&&<div style={{color:C.red,fontSize:"0.75rem",padding:"0.38rem 0.58rem",background:"#fde8e6",borderRadius:6}}>⚠ {err}</div>}
-
-          <button onClick={()=>{generate();setFormOpen(false);}} disabled={loading}
-            style={{padding:"0.75rem",background:loading?C.gray:C.ink,color:C.paper,border:"none",borderRadius:8,fontFamily:"Georgia,serif",fontSize:"0.92rem",cursor:loading?"not-allowed":"pointer"}}>
-            {loading?"Đang tạo bài tập...":"Tạo bài tập ✦"}
-          </button>
-        </div>
-      )}
-
-      {/* Grammar explanation banner */}
-      {(result?.explanationRules?.length > 0 || result?.explanation) && (
-        <div style={{background:C.purpleL,border:`1px solid #d4c5f5`,borderRadius:12,padding:"0.75rem 0.9rem"}}>
-          <div style={{fontSize:"0.65rem",textTransform:"uppercase",letterSpacing:1,color:C.purple,marginBottom:"0.6rem",fontWeight:600}}>📖 Lý thuyết — {result.topic} · {result.level}</div>
-          <GrammarExplanation rules={result.explanationRules} text={result.explanation} />
-        </div>
-      )}
-
-      {/* Exercises */}
-      {loading&&(
-        <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:160,gap:"0.7rem",color:C.gray}}>
-          <Spinner/><span style={{fontSize:"0.83rem"}}>AI đang tạo bài tập...</span>
-        </div>
-      )}
-      {!loading&&result&&(
-        <div ref={quizRef}>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.75rem"}}>
-            <span style={{background:C.purple,color:C.white,fontSize:"0.6rem",padding:"0.16rem 0.52rem",borderRadius:20,textTransform:"uppercase",letterSpacing:0.5}}>{result.topic} · {result.level}</span>
-            <button onClick={generate} style={{padding:"0.23rem 0.6rem",border:`1.5px solid ${C.border}`,borderRadius:20,background:C.white,color:C.ink,fontSize:"0.68rem",cursor:"pointer",fontFamily:"inherit"}}>🔄 Tạo lại</button>
-          </div>
-          {renderExercises()}
-        </div>
-      )}
+    <div>
+      {tabBar}
+      {panelTab === "edito"  && <EditoGrammarView />}
+      {panelTab === "custom" && <CustomExerciseView />}
     </div>
   );
 }

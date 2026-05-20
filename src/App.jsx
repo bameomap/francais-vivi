@@ -652,9 +652,8 @@ function AppInner() {
             {/* Row 2: sub-nav buttons (only when present) */}
             {section==="vocab" && (
               <div style={{ display:"flex", gap:"0.3rem", flexWrap:"nowrap", overflowX:"auto", paddingBottom:"0.1rem" }}>
-                {navBtn("✏️","input")}
+                {navBtn("✏️ Tự do","input")}
                 {navBtn("📂","history")}
-                {navBtn("📊","stats")}
                 {generatedVocab.length>0 && navBtn("📋","vocab-table")}
                 {words.length>0 && navBtn("💬","examples")}
                 {(quiz||loading) && navBtn("🎯","quiz")}
