@@ -615,25 +615,28 @@ function AppInner() {
       {section!=="home" && (
         <>
           {/* ── Header ── */}
-          <div style={{ background:C.white, padding:"0.8rem 1rem", display:"flex", alignItems:"center", gap:"0.6rem", borderBottom:`1.5px solid ${C.border}`, position:"sticky", top:0, zIndex:100, boxShadow:"0 1px 12px rgba(74,144,217,0.08)" }}>
-            <button onClick={()=>{ setSection("home"); if (fromGroup) { setActiveGroup(fromGroup); setFromGroup(null); } }}
-              style={{ background:C.blueL, border:`1.5px solid ${C.blue}33`, color:C.blue, cursor:"pointer", fontSize:"0.82rem", padding:"0.3rem 0.65rem", borderRadius:10, fontWeight:600, transition:"all 0.15s" }}>
-              ← Về
-            </button>
-            <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, marginRight:"auto", fontWeight:600 }}>
-              {SECTION_TITLE[section] || section}
-            </span>
-            {/* Sub-nav buttons */}
-            <div style={{ display:"flex", gap:"0.3rem", flexWrap:"wrap" }}>
-              {section==="vocab" && <>
+          <div style={{ background:C.white, padding:"0.6rem 1rem", display:"flex", flexDirection:"column", gap:"0.4rem", borderBottom:`1.5px solid ${C.border}`, position:"sticky", top:0, zIndex:100, boxShadow:"0 1px 12px rgba(74,144,217,0.08)" }}>
+            {/* Row 1: back + title */}
+            <div style={{ display:"flex", alignItems:"center", gap:"0.6rem" }}>
+              <button onClick={()=>{ setSection("home"); if (fromGroup) { setActiveGroup(fromGroup); setFromGroup(null); } }}
+                style={{ background:C.blueL, border:`1.5px solid ${C.blue}33`, color:C.blue, cursor:"pointer", fontSize:"0.82rem", padding:"0.3rem 0.65rem", borderRadius:10, fontWeight:600, transition:"all 0.15s", flexShrink:0 }}>
+                ← Về
+              </button>
+              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:600 }}>
+                {SECTION_TITLE[section] || section}
+              </span>
+            </div>
+            {/* Row 2: sub-nav buttons (only when present) */}
+            {section==="vocab" && (
+              <div style={{ display:"flex", gap:"0.3rem", flexWrap:"nowrap", overflowX:"auto", paddingBottom:"0.1rem" }}>
                 {navBtn("✏️","input")}
                 {navBtn("📂","history")}
                 {navBtn("📊","stats")}
                 {generatedVocab.length>0 && navBtn("📋","vocab-table")}
                 {words.length>0 && navBtn("💬","examples")}
                 {(quiz||loading) && navBtn("🎯","quiz")}
-              </>}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* ── Content ── */}
