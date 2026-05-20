@@ -147,6 +147,7 @@ function AppInner() {
   const [progress, setProgress]         = useState(getProgress);
   const [srsStats, setSrsStats]         = useState(getSRSStats);
   const [filterMastered, setFilterMastered] = useState(true);
+  const [vocabSearch, setVocabSearch]       = useState("");
   const [editOpen, setEditOpen]             = useState(false);
   const [activeGroup, setActiveGroup]       = useState(null);
   const [fromGroup,   setFromGroup]         = useState(null);
@@ -667,17 +668,33 @@ function AppInner() {
                           ✏️ {editOpen ? "Đóng" : "Sửa bộ từ"}
                         </button>
                       </div>
-                      {/* Word chips preview */}
-                      <div style={{ padding:"0 0.9rem 0.75rem", display:"flex", flexWrap:"wrap", gap:"0.28rem" }}>
-                        {words.slice(0,10).map((w,i)=>{
-                          const isMastered = mastered.has(w.fr);
-                          return (
-                            <span key={i} style={{ background:isMastered?C.greenL:C.blueL, border:`1px solid ${isMastered?C.green+"44":C.blue+"33"}`, borderRadius:20, padding:"0.1rem 0.48rem", fontSize:"0.7rem", color:isMastered?C.green:C.blue }}>
-                              {isMastered?"✓ ":""}{w.fr}
-                            </span>
-                          );
-                        })}
-                        {words.length>10 && <span style={{ background:C.cream, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.48rem", fontSize:"0.7rem", color:C.gray }}>+{words.length-10}</span>}
+                      {/* Word chips preview + search */}
+                      <div style={{ padding:"0 0.9rem 0.75rem" }}>
+                        {words.length > 8 && (
+                          <input value={vocabSearch} onChange={e => setVocabSearch(e.target.value)}
+                            placeholder="🔍 Tìm từ..."
+                            style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.28rem 0.55rem", fontSize:"0.75rem", fontFamily:"inherit", color:C.ink, marginBottom:"0.4rem", boxSizing:"border-box", outline:"none", background:C.white }} />
+                        )}
+                        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.28rem" }}>
+                          {(() => {
+                            const q = vocabSearch.toLowerCase();
+                            const filtered = q
+                              ? words.filter(w => w.fr.toLowerCase().includes(q) || (w.vi||"").toLowerCase().includes(q))
+                              : words.slice(0, 10);
+                            return <>
+                              {filtered.map((w,i) => {
+                                const isMastered = mastered.has(w.fr);
+                                return (
+                                  <span key={i} style={{ background:isMastered?C.greenL:C.blueL, border:`1px solid ${isMastered?C.green+"44":C.blue+"33"}`, borderRadius:20, padding:"0.1rem 0.48rem", fontSize:"0.7rem", color:isMastered?C.green:C.blue }}>
+                                    {isMastered?"✓ ":""}{w.fr}{w.vi ? ` — ${w.vi}` : ""}
+                                  </span>
+                                );
+                              })}
+                              {!q && words.length > 10 && <span style={{ background:C.cream, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.48rem", fontSize:"0.7rem", color:C.gray }}>+{words.length-10}</span>}
+                              {q && filtered.length === 0 && <span style={{ fontSize:"0.73rem", color:C.gray, fontStyle:"italic" }}>Không tìm thấy</span>}
+                            </>;
+                          })()}
+                        </div>
                       </div>
                       {/* Mastered filter toggle */}
                       {masteredCount > 0 && (

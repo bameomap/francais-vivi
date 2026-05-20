@@ -5,6 +5,29 @@ import { addWordToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { SecLabel, QCard } from "./ui/SharedUI.jsx";
 
+// ── Confetti burst ──────────────────────────────────────────
+function Confetti() {
+  const COLORS = ["#e67e22","#3498db","#2ecc71","#e74c3c","#9b59b6","#f1c40f"];
+  const pieces = Array.from({ length: 40 }, (_, i) => ({
+    color: COLORS[i % 6],
+    left: `${(i * 2.45) % 97 + 1}%`,
+    delay: `${(i * 0.03) % 0.55}s`,
+    dur: `${1.4 + (i % 5) * 0.15}s`,
+    size: `${6 + (i % 4) * 2}px`,
+    round: i % 3 !== 0,
+  }));
+  return (
+    <>
+      <style>{`@keyframes cfFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}`}</style>
+      <div style={{ position:"fixed", top:0, left:0, width:"100%", height:"100%", pointerEvents:"none", zIndex:9999, overflow:"hidden" }}>
+        {pieces.map((p, i) => (
+          <div key={i} style={{ position:"absolute", top:"-12px", left:p.left, width:p.size, height:p.size, background:p.color, borderRadius:p.round?"50%":"2px", animation:`cfFall ${p.dur} ease-in ${p.delay} forwards` }} />
+        ))}
+      </div>
+    </>
+  );
+}
+
 // ── SRS quick-add button ─────────────────────────────────────
 function SRSBtn({ fr, vi, words = [] }) {
   const [added, setAdded] = useState(false);
@@ -83,6 +106,7 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
     const isOk = normalize(opt) === normalize(correct);
     onRecord?.(correct, isOk);
     if (!isOk) onWrong?.(q);
+    if (navigator.vibrate) navigator.vibrate(isOk ? 50 : [80, 50, 80]);
     setTimeout(() => {
       if (i + 1 < questions.length) qRefs.current[i + 1]?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 500);
@@ -139,6 +163,7 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
           </div>
         );
       })}
+      {allDone && pct >= 90 && <Confetti />}
       {allDone && (
         <div ref={summaryRef} style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
           <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
@@ -162,6 +187,7 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
     setChk(x => ({ ...x, [i]: true }));
     onRecord?.(q.answer, ok);
     if (!ok) onWrong?.(q);
+    if (navigator.vibrate) navigator.vibrate(ok ? 50 : [80, 50, 80]);
     setTimeout(() => {
       if (i + 1 < questions.length) qRefs.current[i + 1]?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 500);
@@ -206,6 +232,7 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
           </div>
         );
       })}
+      {allDone && pct >= 90 && <Confetti />}
       {allDone && (
         <div ref={summaryRef} style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
           <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
@@ -267,6 +294,7 @@ export function DicteeSection({ words, onRecord }) {
     setChecked(true);
     setScore(s=>({ok:s.ok+(ok?1:0),total:s.total+1}));
     onRecord?.(w.fr, ok);
+    if (navigator.vibrate) navigator.vibrate(ok ? 50 : [80, 50, 80]);
   };
   const next = () => { setIdx(i=>Math.min(i+1,words.length-1)); setInput(""); setChecked(false); setRevealed(false); };
   const hint = w.fr.split(" ").map(word => word.length<=2?word:word[0]+"*".repeat(word.length-2)+word[word.length-1]).join(" ");
@@ -558,6 +586,7 @@ export function AnagrammeSection({ words, onRecord }) {
     const ok = answer.join("")===w.fr;
     setChecked(true); setScore(s=>({ok:s.ok+(ok?1:0),total:s.total+1}));
     onRecord?.(w.fr, ok);
+    if (navigator.vibrate) navigator.vibrate(ok ? 50 : [80, 50, 80]);
   };
   return (
     <div>
