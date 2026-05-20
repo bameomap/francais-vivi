@@ -718,6 +718,13 @@ function AppInner() {
                       <div style={{ fontSize:"0.72rem", fontWeight:600, color:C.gray }}>📝 Nhập từ vựng thủ công</div>
                       <div style={{ display:"flex", gap:"0.4rem" }}>
                         <button onClick={()=>setShowImport(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>📁 Import</button>
+                        {words.length>=1 && <button onClick={()=>{
+                          const content = words.map(w=>w.vi?`${w.fr} — ${w.vi}`:w.fr).join("\n");
+                          const a = document.createElement("a");
+                          a.href = URL.createObjectURL(new Blob([content],{type:"text/plain"}));
+                          a.download = `tu-vung-${new Date().toISOString().slice(0,10)}.txt`;
+                          a.click();
+                        }} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>⬇ Export</button>}
                         {words.length>=3 && <button onClick={()=>setShowSave(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.blue}`, color:C.blue, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>💾 Lưu</button>}
                       </div>
                     </div>
