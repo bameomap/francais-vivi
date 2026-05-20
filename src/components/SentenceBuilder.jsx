@@ -12,7 +12,7 @@ function shuffle(arr) {
   return a;
 }
 
-const norm = s => s.trim().replace(/\s+/g, " ");
+const norm = s => s.trim().replace(/\s+/g, " ").replace(/\s+([.,!?;:])/g, "$1");
 
 // ── Single question card ──────────────────────────────────────
 function QuizCard({ sentence, topicColor, onNext, isLast }) {
