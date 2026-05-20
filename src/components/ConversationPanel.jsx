@@ -131,7 +131,7 @@ export default function ConversationPanel() {
 
   // ── Chat screen ──
   return (
-    <div style={{ display:"flex", flexDirection:"column", height:"calc(100vh - 120px)" }}>
+    <div style={{ display:"flex", flexDirection:"column", height:"calc(100dvh - 120px)" }}>
 
       {/* Header */}
       <div style={{ background:C.white, borderBottom:`1.5px solid ${scenario.color}33`, padding:"0.65rem 1rem", display:"flex", alignItems:"center", gap:"0.65rem" }}>
