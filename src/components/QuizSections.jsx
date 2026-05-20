@@ -74,6 +74,8 @@ export function ExerciseFill({ ex, idx }) {
 // ── MC Section ──────────────────────────────────────────────
 export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
   const [ans, setAns] = useState({});
+  const qRefs = useRef([]);
+  const summaryRef = useRef(null);
   const normalize = s => (s||"").trim().toLowerCase().replace(/[''`]/g,"'").replace(/\s+/g," ");
   const choose = (i, opt, correct, q) => {
     if (ans[i]) return;
@@ -81,11 +83,18 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
     const isOk = normalize(opt) === normalize(correct);
     onRecord?.(correct, isOk);
     if (!isOk) onWrong?.(q);
+    setTimeout(() => {
+      if (i + 1 < questions.length) qRefs.current[i + 1]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 500);
   };
 
   const allDone = questions.length > 0 && Object.keys(ans).length === questions.length;
   const score   = questions.filter((q, i) => ans[i] && normalize(ans[i]) === normalize(q.answer)).length;
   const pct     = allDone ? Math.round(score / questions.length * 100) : 0;
+
+  useEffect(() => {
+    if (allDone) setTimeout(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 300);
+  }, [allDone]);
 
   return (
     <div style={{ marginBottom:"0.5rem" }}>
@@ -95,7 +104,8 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
         const norm = s => (s||"").trim().toLowerCase().replace(/[''`]/g,"'").replace(/\s+/g," ");
         const ok = a && norm(a) === norm(q.answer);
         return (
-          <QCard key={i} ok={ok} wrong={a && !ok}>
+          <div key={i} ref={el => qRefs.current[i] = el} style={{ scrollMarginTop: 70 }}>
+          <QCard ok={ok} wrong={a && !ok}>
             <div style={{ fontSize:"0.63rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:4 }}>Câu {i+1}</div>
             <div style={{ fontFamily:"Georgia,serif", fontSize:"0.93rem", marginBottom:"0.6rem", lineHeight:1.5 }}>{q.question}</div>
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.3rem" }}>
@@ -126,10 +136,11 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
               </>
             )}
           </QCard>
+          </div>
         );
       })}
       {allDone && (
-        <div style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+        <div ref={summaryRef} style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
           <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", fontWeight:700, color: pct>=80?C.green:pct>=60?C.gold:C.red }}>{score}/{questions.length}</div>
           <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>{pct}% · {pct>=80?"Excellent!":pct>=60?"Bien!":"Encore des efforts!"}</div>
@@ -143,17 +154,26 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
 export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
   const [inp, setInp] = useState({});
   const [chk, setChk] = useState({});
+  const qRefs = useRef([]);
+  const summaryRef = useRef(null);
   const doCheck = (i, q, v) => {
     if (chk[i]) return;
     const ok = v.trim().toLowerCase() === (q.answer||"").toLowerCase();
     setChk(x => ({ ...x, [i]: true }));
     onRecord?.(q.answer, ok);
     if (!ok) onWrong?.(q);
+    setTimeout(() => {
+      if (i + 1 < questions.length) qRefs.current[i + 1]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 500);
   };
 
   const allDone = questions.length > 0 && Object.keys(chk).length === questions.length;
   const score   = questions.filter((q, i) => chk[i] && (inp[i]||"").trim().toLowerCase() === (q.answer||"").toLowerCase()).length;
   const pct     = allDone ? Math.round(score / questions.length * 100) : 0;
+
+  useEffect(() => {
+    if (allDone) setTimeout(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 300);
+  }, [allDone]);
 
   return (
     <div style={{ marginBottom:"0.5rem" }}>
@@ -162,7 +182,8 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
         const v = inp[i]||"", done = chk[i];
         const ok = done && v.trim().toLowerCase()===(q.answer||"").toLowerCase();
         return (
-          <QCard key={i} ok={done&&ok} wrong={done&&!ok}>
+          <div key={i} ref={el => qRefs.current[i] = el} style={{ scrollMarginTop: 70 }}>
+          <QCard ok={done&&ok} wrong={done&&!ok}>
             <div style={{ fontSize:"0.63rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:4 }}>
               Câu {i+1}{q.hint ? <span style={{ color:C.gold, marginLeft:6, textTransform:"none" }}>· gợi ý: {q.hint}</span> : null}
             </div>
@@ -182,10 +203,11 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
               </div>
             )}
           </QCard>
+          </div>
         );
       })}
       {allDone && (
-        <div style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+        <div ref={summaryRef} style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
           <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", fontWeight:700, color: pct>=80?C.green:pct>=60?C.gold:C.red }}>{score}/{questions.length}</div>
           <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>{pct}% · {pct>=80?"Excellent!":pct>=60?"Bien!":"Encore des efforts!"}</div>
