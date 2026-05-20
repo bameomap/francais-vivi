@@ -149,6 +149,7 @@ function AppInner() {
   const [filterMastered, setFilterMastered] = useState(true);
   const [editOpen, setEditOpen]             = useState(false);
   const [activeGroup, setActiveGroup]       = useState(null);
+  const [fromGroup,   setFromGroup]         = useState(null);
   const [xpData, setXpData]                 = useState(getXPData);
   const [badgeToast, setBadgeToast]         = useState("");
 
@@ -164,7 +165,10 @@ function AppInner() {
 
   const goSection = (s, v) => {
     setSection(s); setView(v || s);
-    setEditOpen(false); setActiveGroup(null);
+    setEditOpen(false);
+    // Remember which group launched this module so "← Về" can return to it
+    setFromGroup(activeGroup);
+    setActiveGroup(null);
     markModuleUsed(s);
     setStreakData(getStreak());
     setProgress(getProgress());
@@ -612,7 +616,7 @@ function AppInner() {
         <>
           {/* ── Header ── */}
           <div style={{ background:C.white, padding:"0.8rem 1rem", display:"flex", alignItems:"center", gap:"0.6rem", borderBottom:`1.5px solid ${C.border}`, position:"sticky", top:0, zIndex:100, boxShadow:"0 1px 12px rgba(74,144,217,0.08)" }}>
-            <button onClick={()=>setSection("home")}
+            <button onClick={()=>{ setSection("home"); if (fromGroup) { setActiveGroup(fromGroup); setFromGroup(null); } }}
               style={{ background:C.blueL, border:`1.5px solid ${C.blue}33`, color:C.blue, cursor:"pointer", fontSize:"0.82rem", padding:"0.3rem 0.65rem", borderRadius:10, fontWeight:600, transition:"all 0.15s" }}>
               ← Về
             </button>
@@ -948,7 +952,7 @@ function AppInner() {
             return (
               <button key={tab.id} className="tab-btn"
                 onClick={()=>{
-                  if (tab.id==="home") { setSection("home"); setActiveGroup(null); return; }
+                  if (tab.id==="home") { setSection("home"); setActiveGroup(null); setFromGroup(null); return; }
                   const m = MODULES.find(m=>m.id===tab.id);
                   if (m) goSection(m.id, m.view);
                 }}
