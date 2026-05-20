@@ -372,7 +372,7 @@ function AppInner() {
         <div style={{ minHeight:"100vh", display:"flex", flexDirection:"column", paddingBottom:80 }}>
 
           {/* ── Top bar ── */}
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"1.1rem 1.25rem 0" }}>
+          {!activeGroup && <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"1.1rem 1.25rem 0" }}>
             {/* Logo */}
             <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
               <img src="/logo.svg" alt="Vivi Learns Français" style={{ width:36, height:36, borderRadius:9 }} />
@@ -386,10 +386,10 @@ function AppInner() {
               </span>
               {streakData.studiedToday && <span style={{ fontSize:"0.6rem", background:C.green, color:C.white, borderRadius:20, padding:"0.08rem 0.35rem", fontWeight:600 }}>✓</span>}
             </div>
-          </div>
+          </div>}
 
           {/* ── Greeting ── */}
-          <div style={{ padding:"1.2rem 1.25rem 0.5rem", animation:"fadeUp 0.4s ease" }}>
+          {!activeGroup && <div style={{ padding:"1.2rem 1.25rem 0.5rem", animation:"fadeUp 0.4s ease" }}>
             <div style={{ fontSize:"0.78rem", color:C.gray, marginBottom:"0.15rem" }}>Bonjour 🇫🇷</div>
             <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, lineHeight:1.2, marginBottom:"0.6rem" }}>
               {userName || "Bạn ơi"}!
@@ -404,9 +404,10 @@ function AppInner() {
               }
               align="left"
             />
-          </div>
+          </div>}
 
-          {/* ── Bài hôm nay (SRS due priority) ── */}
+          {/* ── Bài hôm nay + MotDuJour + XP (hidden when group open) ── */}
+          {!activeGroup && <>
           {srsStats.due > 0 ? (
             <div style={{ margin:"0.85rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
               <div style={{ background:"linear-gradient(135deg, #0D9488, #0891B2)", borderRadius:22, padding:"1.1rem 1.4rem", color:C.white, boxShadow:"0 8px 30px #0D948866" }}>
@@ -513,6 +514,7 @@ function AppInner() {
               </div>
             );
           })()}
+          </>}
 
           {/* ── Module Groups ── */}
           <div style={{ padding:"0.25rem 1.25rem 0", marginTop:"0.85rem" }}>
