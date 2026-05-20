@@ -252,14 +252,19 @@ export function FlashcardSection({ words, onRecord }) {
   const [flipped,      setFlipped]      = useState(false);
   const [batchLearned, setBatchLearned] = useState(0);
   const [batchDone,    setBatchDone]    = useState(false);
-  const [examples,     setExamples]     = useState({}); // { word: { fr, vi } | "loading" }
+  const [examples,     setExamples]     = useState({});
   const touchX = useRef(null);
+
+  // Declare before any useEffect that references them
+  const batchWords = batches[batchIdx];
+  const batchSize  = batchWords.length;
+  const current    = deck[idx];
 
   // Fetch example sentence when card is flipped
   useEffect(() => {
     if (!flipped || !current) return;
     const w = current.front;
-    if (examples[w]) return; // already cached
+    if (examples[w]) return;
     setExamples(ex => ({ ...ex, [w]: "loading" }));
     callAIText(
       [{ role:"user", content:`Câu ví dụ ngắn (6-10 từ) dùng từ "${w}" bằng tiếng Pháp, kèm dịch tiếng Việt.` }],
@@ -271,10 +276,6 @@ export function FlashcardSection({ words, onRecord }) {
       setExamples(ex => ({ ...ex, [w]: { fr, vi } }));
     }).catch(() => setExamples(ex => ({ ...ex, [w]: null })));
   }, [flipped, current?.front]);
-
-  const batchWords = batches[batchIdx];
-  const batchSize  = batchWords.length;
-  const current    = deck[idx];
   const pct        = Math.round((batchLearned / batchSize) * 100);
 
   const flip   = () => setFlipped(f => !f);

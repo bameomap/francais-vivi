@@ -51,9 +51,9 @@ export default function BuiltinSetsPanel({ onAdd }) {
           return (
             <div key={set.id} style={{ background:C.white, border:`1.5px solid ${isDone ? set.color+"44" : C.border}`, borderRadius:16, overflow:"hidden", transition:"border-color 0.2s" }}>
               {/* Header row */}
-              <button
+              <div
                 onClick={() => setExpanded(isExpanded ? null : set.id)}
-                style={{ width:"100%", background:"transparent", border:"none", cursor:"pointer", padding:"0.85rem 1rem", display:"flex", alignItems:"center", gap:"0.75rem", fontFamily:"inherit", textAlign:"left" }}>
+                style={{ width:"100%", background:"transparent", cursor:"pointer", padding:"0.85rem 1rem", display:"flex", alignItems:"center", gap:"0.75rem", fontFamily:"inherit", textAlign:"left", boxSizing:"border-box" }}>
                 <span style={{ fontSize:"1.5rem", flexShrink:0 }}>{set.icon}</span>
                 <div style={{ flex:1, minWidth:0 }}>
                   <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.92rem", color:C.ink, fontWeight:700 }}>{set.label}</div>
@@ -68,7 +68,7 @@ export default function BuiltinSetsPanel({ onAdd }) {
                     </button>
                 }
                 <span style={{ fontSize:"0.7rem", color:C.gray, flexShrink:0 }}>{isExpanded ? "▲" : "▼"}</span>
-              </button>
+              </div>
 
               {/* Word list */}
               {isExpanded && (
