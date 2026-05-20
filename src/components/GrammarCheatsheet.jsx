@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { C } from "../constants.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 
@@ -613,7 +613,21 @@ function TopicContent({ id }) {
 // ── Main ──────────────────────────────────────────────────────
 export default function GrammarCheatsheet() {
   const [active, setActive] = useState("pronoms");
+  const tabRef = useRef(null);
   const topic = TOPICS.find(t => t.id === active);
+
+  const scroll = (dir) => {
+    if (tabRef.current) tabRef.current.scrollBy({ left: dir * 160, behavior: "smooth" });
+  };
+
+  const pick = (id) => {
+    setActive(id);
+    // Scroll the active tab into view
+    setTimeout(() => {
+      const el = tabRef.current?.querySelector(`[data-id="${id}"]`);
+      el?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }, 50);
+  };
 
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
@@ -625,14 +639,24 @@ export default function GrammarCheatsheet() {
         <div style={{ fontSize: "0.72rem", color: C.gray }}>Chọn chủ đề · Không cần AI · Tra nhanh</div>
       </div>
 
-      {/* Tab bar — horizontal scroll */}
-      <div style={{ overflowX: "auto", display: "flex", gap: "0.35rem", padding: "0.65rem 1rem", scrollbarWidth: "none" }}>
-        {TOPICS.map(t => (
-          <button key={t.id} onClick={() => setActive(t.id)}
-            style={{ flexShrink: 0, padding: "0.35rem 0.7rem", background: active === t.id ? t.color : C.white, border: `1.5px solid ${active === t.id ? t.color : C.border}`, color: active === t.id ? "#fff" : C.gray, borderRadius: 20, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", fontWeight: active === t.id ? 700 : 400, whiteSpace: "nowrap", transition: "all 0.15s" }}>
-            {t.icon} {t.label}
-          </button>
-        ))}
+      {/* Tab bar — horizontal scroll + arrow buttons */}
+      <div style={{ display: "flex", alignItems: "center", gap: "0.25rem", padding: "0.5rem 0.75rem" }}>
+        <button onClick={() => scroll(-1)}
+          style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.border}`, background: C.white, color: C.gray, fontSize: "0.8rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+          ‹
+        </button>
+        <div ref={tabRef} style={{ overflowX: "auto", display: "flex", gap: "0.35rem", flex: 1, scrollbarWidth: "none", msOverflowStyle: "none" }}>
+          {TOPICS.map(t => (
+            <button key={t.id} data-id={t.id} onClick={() => pick(t.id)}
+              style={{ flexShrink: 0, padding: "0.35rem 0.7rem", background: active === t.id ? t.color : C.white, border: `1.5px solid ${active === t.id ? t.color : C.border}`, color: active === t.id ? "#fff" : C.gray, borderRadius: 20, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", fontWeight: active === t.id ? 700 : 400, whiteSpace: "nowrap", transition: "all 0.15s" }}>
+              {t.icon} {t.label}
+            </button>
+          ))}
+        </div>
+        <button onClick={() => scroll(1)}
+          style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.border}`, background: C.white, color: C.gray, fontSize: "0.8rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+          ›
+        </button>
       </div>
 
       {/* Content */}
