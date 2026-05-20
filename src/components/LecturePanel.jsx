@@ -16,9 +16,7 @@ const LEVEL_CONFIG = {
 function buildPrompt(wordList, level) {
   const cfg = LEVEL_CONFIG[level];
   const sample = wordList.slice(0, 20).map(w => w.fr).join(", ");
-  return {
-    role: "user",
-    content: `Tạo một bài đọc hiểu tiếng Pháp trình độ ${cfg.label} (khoảng ${cfg.words} từ) sử dụng ít nhất 6 trong các từ sau: ${sample}.
+  return `Tạo một bài đọc hiểu tiếng Pháp trình độ ${cfg.label} (khoảng ${cfg.words} từ) sử dụng ít nhất 6 trong các từ sau: ${sample}.
 
 Trả lời JSON hợp lệ KHÔNG có markdown, đúng schema:
 {
@@ -29,8 +27,7 @@ Trả lời JSON hợp lệ KHÔNG có markdown, đúng schema:
     { "q": "câu hỏi tiếng Việt", "options": ["A. ...", "B. ...", "C. ...", "D. ..."], "answer": "A", "explain": "giải thích ngắn" }
   ]
 }
-Tạo đúng ${cfg.q} câu hỏi. Câu hỏi kiểm tra hiểu nội dung, không hỏi từ vựng.`,
-  };
+Tạo đúng ${cfg.q} câu hỏi. Câu hỏi kiểm tra hiểu nội dung, không hỏi từ vựng.`;
 }
 
 // Highlight vocab words + make all content words tappable
