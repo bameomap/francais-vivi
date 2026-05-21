@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { Home, BookOpen, Award, PenTool, Layers, Target, TrendingUp } from "lucide-react";
+import { Home, BookOpen, Award, PenTool, Layers, Target, TrendingUp, Brain } from "lucide-react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
@@ -439,7 +439,7 @@ function AppInner() {
                 <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.25rem" }}>BÀI HÔM NAY</div>
                 <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
                   <div>
-                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700 }}>🧠 Ôn tập SRS</div>
+                    <div style={{ fontSize:"1.1rem", fontWeight:700, display:"flex", alignItems:"center", gap:"0.4rem" }}><Brain size={20} />Ôn tập SRS</div>
                     <div style={{ fontSize:"0.82rem", opacity:0.9, marginTop:"0.2rem" }}>
                       <span style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.4rem", fontWeight:700 }}>{srsStats.due}</span>
                       {" "}từ đang chờ được ôn lại
@@ -577,12 +577,14 @@ function AppInner() {
                               <div style={{ flex:1, minWidth:0 }}>
                                 <div style={{ fontSize:"0.88rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{m.label}</div>
                                 <div style={{ fontSize:"0.62rem", color:m.color, fontStyle:"italic", marginTop:"0.1rem" }}>{m.fr}</div>
-                                {used && (
+                                {used ? (
                                   <div style={{ marginTop:"0.35rem" }}>
                                     <div style={{ height:3, background:`${m.color}22`, borderRadius:999 }}>
                                       <div style={{ height:"100%", width:`${pct}%`, background:m.color, borderRadius:999 }}/>
                                     </div>
                                   </div>
+                                ) : (
+                                  <div style={{ fontSize:"0.6rem", color:m.color, fontWeight:600, marginTop:"0.25rem", opacity:0.7 }}>Bắt đầu →</div>
                                 )}
                               </div>
                             </div>
@@ -597,7 +599,7 @@ function AppInner() {
               /* ── Group cards 2×2 ── */
               <>
                 <div style={{ fontSize:"0.9rem", fontWeight:700, color:C.ink, marginBottom:"0.65rem" }}>Khám phá</div>
-                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.75rem" }}>
+                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.75rem", alignItems:"start" }}>
                   {GROUP_DEFS.map((g, i) => {
                     const groupModules = MODULES.filter(m => g.moduleIds.includes(m.id));
                     const totalUses = groupModules.reduce((sum, m) => sum + (progress[m.id]?.count || 0), 0);
@@ -621,9 +623,12 @@ function AppInner() {
                           </div>
                         </div>
                         <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem" }}>
-                          {groupModules.map(m => (
+                          {groupModules.slice(0,3).map(m => (
                             <span key={m.id} style={{ fontSize:"0.58rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.38rem", fontWeight:500 }}>{m.label}</span>
                           ))}
+                          {groupModules.length > 3 && (
+                            <span style={{ fontSize:"0.58rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.38rem", fontWeight:500 }}>+{groupModules.length - 3}</span>
+                          )}
                         </div>
                         {totalUses > 0 && (
                           <div style={{ fontSize:"0.58rem", color:g.color, opacity:0.75, fontWeight:600, marginTop:"0.35rem" }}>{totalUses} lần học</div>
@@ -1021,7 +1026,7 @@ function AppInner() {
                 style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0.55rem 0.25rem 0.65rem", background:"transparent", border:"none", cursor:"pointer", gap:"0.18rem", transition:"all 0.15s", position:"relative" }}>
                 <div style={{ position:"relative" }}>
                   <div style={{ width:46, height:40, borderRadius:14, background:isActive?C.blueL:"transparent", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.2s", transform:isActive?"translateY(-2px) scale(1.08)":"none" }}>
-                    <tab.LucideIcon size={22} color={isActive?C.blue:C.gray} strokeWidth={isActive?2.5:2} />
+                    <tab.LucideIcon size={22} color={isActive?C.blue:C.gray} fill={isActive?C.blue:"none"} strokeWidth={isActive?1.5:2} />
                   </div>
                   {tab.id==="srs" && srsStats.due>0 && (
                     <div style={{ position:"absolute", top:-2, right:-4, background:C.red, color:"#fff", borderRadius:999, minWidth:16, height:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.55rem", fontWeight:700, padding:"0 3px" }}>
