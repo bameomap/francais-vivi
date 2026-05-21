@@ -57,50 +57,31 @@ export function Confetti({ active, onDone }) {
 // ── Minou mascot ─────────────────────────────────────────────
 export default function Minou({ mood = "happy", message, size = "md", align = "center" }) {
   const m = MOODS[mood] || MOODS.happy;
-  const fontSize = { sm:"0.85rem", md:"1.05rem", lg:"1.3rem" }[size];
-  const msgSize  = { sm:"0.68rem", md:"0.78rem", lg:"0.88rem" }[size];
+  const fontSize = { sm:"0.82rem", md:"0.95rem", lg:"1.1rem" }[size];
+  const msgSize  = { sm:"0.68rem", md:"0.76rem", lg:"0.86rem" }[size];
 
   return (
-    <div style={{ display:"flex", flexDirection:"column", alignItems: align === "left" ? "flex-start" : "center", gap:"0.45rem" }}>
-      {/* Cat face */}
+    <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", justifyContent: align === "left" ? "flex-start" : "center" }}>
+      {/* Cat face pill */}
       <div style={{
-        display:"inline-flex", alignItems:"center", justifyContent:"center",
-        background:m.bg, border:`2px solid ${m.color}44`,
-        borderRadius:20, padding:"0.45rem 0.85rem",
+        display:"inline-flex", alignItems:"center", flexShrink:0,
+        background:m.bg, border:`1.5px solid ${m.color}44`,
+        borderRadius:20, padding:"0.35rem 0.65rem",
         animation: m.bounce ? "minouBounce 2s ease-in-out infinite" : "none",
-        boxShadow:`0 4px 16px ${m.color}22`,
+        boxShadow:`0 2px 10px ${m.color}18`,
       }}>
-        {/* Beret */}
-        <span style={{ fontSize:"0.7rem", marginRight:"0.3rem", opacity:0.85 }}>🎩</span>
-        {/* ASCII cat face */}
-        <span style={{
-          fontFamily:"'Courier New', monospace",
-          fontSize, color:m.accent, fontWeight:700,
-          letterSpacing:"0.03em",
-        }}>{m.face}</span>
+        <span style={{ fontSize:"0.65rem", marginRight:"0.25rem", opacity:0.85 }}>🎩</span>
+        <span style={{ fontFamily:"'Courier New', monospace", fontSize, color:m.accent, fontWeight:700, letterSpacing:"0.03em" }}>{m.face}</span>
       </div>
 
-      {/* Speech bubble */}
+      {/* Message inline */}
       {message && (
-        <div style={{ position:"relative", maxWidth:220 }}>
-          {/* Bubble tail */}
-          <div style={{
-            position:"absolute", top:-6, left:28,
-            width:0, height:0,
-            borderLeft:"6px solid transparent",
-            borderRight:"6px solid transparent",
-            borderBottom:`6px solid ${m.color}44`,
-          }}/>
-          <div style={{
-            background:m.bg,
-            border:`1.5px solid ${m.color}44`,
-            borderRadius:"4px 16px 16px 16px",
-            padding:"0.42rem 0.75rem",
-            fontSize:msgSize, color:m.accent,
-            fontWeight:600, lineHeight:1.55,
-          }}>
-            {message}
-          </div>
+        <div style={{
+          background:m.bg, border:`1.5px solid ${m.color}44`,
+          borderRadius:20, padding:"0.35rem 0.7rem",
+          fontSize:msgSize, color:m.accent, fontWeight:600, lineHeight:1.4,
+        }}>
+          {message}
         </div>
       )}
     </div>
