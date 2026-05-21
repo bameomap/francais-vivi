@@ -63,6 +63,40 @@ export function updateSRSCard(fr, correct) {
   saveSRSData(data);
 }
 
+/**
+ * 4-button FSRS-style rating:
+ *   0 = Lại  (Again) — due in 10 min
+ *   1 = Khó  (Hard)  — interval * 1.2, ease −0.15
+ *   2 = Tốt  (Good)  — normal SM-2 increment
+ *   3 = Dễ   (Easy)  — interval * ease * 1.3, ease +0.15
+ */
+export function updateSRSCardRating(fr, rating) {
+  const data = getSRSData();
+  if (!data[fr]) return;
+  data[fr] = calculateNextRating(data[fr], rating);
+  saveSRSData(data);
+}
+
+/** Label for interval shown under each button */
+export function ratingIntervalLabel(card, rating) {
+  const { interval = 0, easeFactor = 2.5, repetitions = 0 } = card || {};
+  if (rating === 0) return "10 phút";
+  if (rating === 1) {
+    const days = Math.max(1, Math.round(interval * 1.2)) || 1;
+    return days <= 1 ? "1 ngày" : `${days} ngày`;
+  }
+  if (rating === 2) {
+    let days;
+    if (repetitions === 0)      days = 1;
+    else if (repetitions === 1) days = 3;
+    else                        days = Math.round(interval * easeFactor);
+    return days <= 1 ? "1 ngày" : days < 7 ? `${days} ngày` : `${Math.round(days/7)} tuần`;
+  }
+  // easy
+  const days = Math.max(1, Math.round(interval * easeFactor * 1.3));
+  return days < 7 ? `${days} ngày` : `${Math.round(days/7)} tuần`;
+}
+
 /** Return cards that are due now (dueDate <= now) */
 export function getDueCards() {
   const data = getSRSData();
@@ -125,7 +159,6 @@ function calculateNext(card, correct) {
   let { interval, easeFactor, repetitions } = card;
 
   if (!correct) {
-    // Forgot → reset
     interval    = 1;
     repetitions = 0;
     easeFactor  = Math.max(1.3, easeFactor - 0.2);
@@ -135,7 +168,6 @@ function calculateNext(card, correct) {
     else if (repetitions === 2) interval = 3;
     else                        interval = Math.round(interval * easeFactor);
 
-    // quality 4 = "correct but with effort"
     const q = 4;
     easeFactor = Math.max(1.3, easeFactor + 0.1 - (5-q)*(0.08+(5-q)*0.02));
   }
@@ -148,4 +180,41 @@ function calculateNext(card, correct) {
     dueDate:      Date.now() + interval * 86400000,
     lastReviewed: Date.now(),
   };
+}
+
+// ── 4-button rating core ─────────────────────────────────────
+function calculateNextRating(card, rating) {
+  let { interval = 0, easeFactor = 2.5, repetitions = 0 } = card;
+  let dueMs;
+
+  if (rating === 0) {
+    // Lại — due in 10 minutes, no interval change
+    interval    = 0;
+    repetitions = 0;
+    easeFactor  = Math.max(1.3, easeFactor - 0.2);
+    dueMs       = Date.now() + 10 * 60 * 1000;
+  } else if (rating === 1) {
+    // Khó — small bump
+    interval    = Math.max(1, Math.round(interval * 1.2));
+    easeFactor  = Math.max(1.3, easeFactor - 0.15);
+    repetitions = Math.max(1, repetitions);
+    dueMs       = Date.now() + interval * 86400000;
+  } else if (rating === 2) {
+    // Tốt — standard SM-2
+    repetitions += 1;
+    if      (repetitions === 1) interval = 1;
+    else if (repetitions === 2) interval = 3;
+    else                        interval = Math.round(interval * easeFactor);
+    dueMs = Date.now() + interval * 86400000;
+  } else {
+    // Dễ — big jump
+    repetitions += 1;
+    if      (repetitions === 1) interval = 3;
+    else if (repetitions === 2) interval = 7;
+    else                        interval = Math.round(interval * easeFactor * 1.3);
+    easeFactor = Math.min(3.0, easeFactor + 0.15);
+    dueMs      = Date.now() + interval * 86400000;
+  }
+
+  return { ...card, interval, easeFactor, repetitions, dueDate: dueMs, lastReviewed: Date.now() };
 }

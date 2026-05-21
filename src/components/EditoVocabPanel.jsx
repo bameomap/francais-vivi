@@ -6,6 +6,7 @@ import { addWordToSRS, getSRSStats } from "../utils/srs.js";
 import { MCSection, FillSection, MatchSection, FlashcardSection, AnagrammeSection } from "./QuizSections.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
+import WordDetailSheet from "./ui/WordDetailSheet.jsx";
 
 // ── Study mode selector ────────────────────────────────────
 const MODES = [
@@ -20,16 +21,27 @@ const CLIENT_TYPES = ["flashcard", "anagramme"];
 
 // ── Word list view for a group ─────────────────────────────
 function WordList({ words }) {
+  const [selected, setSelected] = useState(null);
   return (
-    <div style={{ display:"flex", flexDirection:"column", gap:"0.3rem" }}>
-      {words.map((w, i) => (
-        <div key={i} style={{ display:"flex", alignItems:"center", gap:"0.5rem", background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"0.45rem 0.7rem" }}>
-          <span style={{ fontFamily:"Georgia,serif", fontSize:"0.9rem", color:C.ink, flex:1 }}>{w.fr}</span>
-          <SpeakBtn text={w.fr} />
-          <span style={{ fontSize:"0.78rem", color:C.gray, flex:1, textAlign:"right" }}>{w.vi}</span>
-        </div>
-      ))}
-    </div>
+    <>
+      <div style={{ display:"flex", flexDirection:"column", gap:"0.3rem" }}>
+        {words.map((w, i) => (
+          <div key={i}
+            onClick={() => setSelected(w)}
+            style={{ display:"flex", alignItems:"center", gap:"0.5rem", background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"0.45rem 0.7rem", cursor:"pointer", transition:"background 0.15s" }}
+            onPointerDown={e => e.currentTarget.style.background = C.blueL}
+            onPointerUp={e => e.currentTarget.style.background = C.white}
+            onPointerLeave={e => e.currentTarget.style.background = C.white}
+          >
+            <span style={{ fontFamily:"Georgia,serif", fontSize:"0.9rem", color:C.ink, flex:1 }}>{w.fr}</span>
+            <SpeakBtn text={w.fr} />
+            <span style={{ fontSize:"0.78rem", color:C.gray, flex:1, textAlign:"right" }}>{w.vi}</span>
+            <span style={{ fontSize:"0.65rem", color:C.blue, opacity:0.6 }}>›</span>
+          </div>
+        ))}
+      </div>
+      {selected && <WordDetailSheet word={selected} onClose={() => setSelected(null)} />}
+    </>
   );
 }
 
