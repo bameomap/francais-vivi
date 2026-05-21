@@ -453,7 +453,7 @@ function AppInner() {
               {/* Secondary: last module if exists */}
               {lastModule && (
                 <div style={{ background:C.white, border:`1.5px solid ${lastModule.color}33`, borderRadius:16, padding:"0.85rem 1.1rem", marginTop:"0.6rem", display:"flex", alignItems:"center", gap:"0.8rem" }}>
-                  <div style={{ width:48, height:48, borderRadius:13, background:`${lastModule.color}22`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:"1.4rem" }}>{lastModule.icon}</div>
+                  <div style={{ width:48, height:48, borderRadius:13, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:"1.4rem" }}>{lastModule.icon}</div>
                   <div style={{ flex:1, minWidth:0 }}>
                     <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.1rem", textTransform:"uppercase", letterSpacing:1 }}>Tiếp tục</div>
                     <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, fontWeight:700 }}>{lastModule.label}</div>
@@ -571,7 +571,7 @@ function AppInner() {
                                 {srsStats.due}
                               </div>
                             )}
-                            <div style={{ width:46, height:46, borderRadius:13, background:`${m.color}22`, display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.55rem", fontSize:"1.5rem" }}>{m.icon}</div>
+                            <div style={{ width:46, height:46, borderRadius:13, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.55rem", fontSize:"1.5rem" }}>{m.icon}</div>
                             <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem" }}>{m.label}</div>
                             <div style={{ fontSize:"0.68rem", color:m.color, fontStyle:"italic", marginBottom:used?"0.5rem":"0" }}>{m.fr}</div>
                             {used && (
@@ -607,7 +607,7 @@ function AppInner() {
                             {srsStats.due}
                           </div>
                         )}
-                        <div style={{ width:52, height:52, borderRadius:14, background:`${g.color}22`, display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.65rem", fontSize:"1.7rem" }}>{g.icon}</div>
+                        <div style={{ width:52, height:52, borderRadius:14, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 8px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.65rem", fontSize:"1.7rem" }}>{g.icon}</div>
                         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>{g.label}</div>
                         <div style={{ fontSize:"0.67rem", color:g.color, fontWeight:600, marginBottom:"0.5rem" }}>{g.desc}</div>
                         <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem", marginBottom:"0.5rem" }}>
@@ -1010,7 +1010,7 @@ function AppInner() {
                 }}
                 style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0.55rem 0.25rem 0.65rem", background:"transparent", border:"none", cursor:"pointer", gap:"0.18rem", transition:"all 0.15s", position:"relative" }}>
                 <div style={{ position:"relative" }}>
-                  <div style={{ width:46, height:40, borderRadius:14, background:isActive?`${C.blue}18`:"transparent", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.2s", transform:isActive?"translateY(-2px) scale(1.08)":"none" }}>
+                  <div style={{ width:46, height:40, borderRadius:14, background:isActive?C.blueL:"transparent", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.2s", transform:isActive?"translateY(-2px) scale(1.08)":"none" }}>
                     <span style={{ fontSize:"1.3rem", lineHeight:1 }}>{tab.icon}</span>
                   </div>
                   {tab.id==="srs" && srsStats.due>0 && (
