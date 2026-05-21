@@ -613,26 +613,17 @@ function AppInner() {
                             {srsStats.due}
                           </div>
                         )}
-                        <div style={{ display:"flex", alignItems:"center", gap:"0.65rem", marginBottom:"0.55rem" }}>
+                        <div style={{ display:"flex", alignItems:"center", gap:"0.65rem" }}>
                           <div style={{ width:40, height:40, borderRadius:12, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                             <g.LucideIcon size={22} color={g.color} strokeWidth={2} />
                           </div>
-                          <div>
-                            <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{g.label}</div>
-                            <div style={{ fontSize:"0.62rem", color:g.color, fontWeight:600, marginTop:"0.1rem" }}>{g.desc}</div>
+                          <div style={{ flex:1, minWidth:0 }}>
+                            <div style={{ fontSize:"0.92rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{g.label}</div>
+                            <div style={{ fontSize:"0.6rem", color:g.color, fontWeight:500, marginTop:"0.15rem", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>
+                              {totalUses > 0 ? `${totalUses} lần học · ${groupModules.length} bài` : `${groupModules.length} bài học`}
+                            </div>
                           </div>
                         </div>
-                        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem" }}>
-                          {groupModules.slice(0,3).map(m => (
-                            <span key={m.id} style={{ fontSize:"0.58rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.38rem", fontWeight:500 }}>{m.label}</span>
-                          ))}
-                          {groupModules.length > 3 && (
-                            <span style={{ fontSize:"0.58rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.38rem", fontWeight:500 }}>+{groupModules.length - 3}</span>
-                          )}
-                        </div>
-                        {totalUses > 0 && (
-                          <div style={{ fontSize:"0.58rem", color:g.color, opacity:0.75, fontWeight:600, marginTop:"0.35rem" }}>{totalUses} lần học</div>
-                        )}
                       </button>
                     );
                   })}
