@@ -323,6 +323,26 @@ function AppInner() {
         .card-hover:active { transform: scale(0.97); }
         .tab-btn:active { transform: scale(0.9); }
         input:focus, textarea:focus { outline: none; border-color: ${C.blue} !important; box-shadow: 0 0 0 3px ${C.blueL}; }
+        @keyframes fadeUp {
+          from { opacity:0; transform:translateY(10px); }
+          to   { opacity:1; transform:translateY(0);    }
+        }
+        @keyframes pop {
+          0%   { opacity:0; transform:translateX(-50%) scale(0.85); }
+          60%  { transform:translateX(-50%) scale(1.06); }
+          100% { opacity:1; transform:translateX(-50%) scale(1);    }
+        }
+        @keyframes slideUp {
+          from { opacity:0; transform:translateY(40px); }
+          to   { opacity:1; transform:translateY(0);    }
+        }
+        @keyframes minouBounce {
+          0%,100% { transform:translateY(0);   }
+          50%     { transform:translateY(-4px); }
+        }
+        @keyframes confettiFall {
+          to { transform:translateY(110vh) rotate(540deg); opacity:0; }
+        }
       `}</style>
 
       {/* ── Toast ── */}

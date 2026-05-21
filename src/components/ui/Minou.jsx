@@ -61,28 +61,11 @@ export default function Minou({ mood = "happy", message, size = "md", align = "c
   const msgSize  = { sm:"0.68rem", md:"0.76rem", lg:"0.86rem" }[size];
 
   return (
-    <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", justifyContent: align === "left" ? "flex-start" : "center" }}>
-      {/* Cat face pill */}
-      <div style={{
-        display:"inline-flex", alignItems:"center", flexShrink:0,
-        background:m.bg, border:`1.5px solid ${m.color}44`,
-        borderRadius:20, padding:"0.35rem 0.65rem",
-        animation: m.bounce ? "minouBounce 2s ease-in-out infinite" : "none",
-        boxShadow:`0 2px 10px ${m.color}18`,
-      }}>
-        <span style={{ fontSize:"0.65rem", marginRight:"0.25rem", opacity:0.85 }}>🎩</span>
-        <span style={{ fontFamily:"'Courier New', monospace", fontSize, color:m.accent, fontWeight:700, letterSpacing:"0.03em" }}>{m.face}</span>
-      </div>
-
-      {/* Message inline */}
+    <div style={{ display:"inline-flex", alignItems:"center", background:m.bg, border:`1.5px solid ${m.color}44`, borderRadius:20, padding:"0.35rem 0.75rem", animation: m.bounce ? "minouBounce 2s ease-in-out infinite" : "none", boxShadow:`0 2px 10px ${m.color}18`, gap:"0.45rem" }}>
+      <span style={{ fontSize:"0.65rem", opacity:0.85, flexShrink:0 }}>🎩</span>
+      <span style={{ fontFamily:"'Courier New', monospace", fontSize, color:m.accent, fontWeight:700, letterSpacing:"0.03em", flexShrink:0 }}>{m.face}</span>
       {message && (
-        <div style={{
-          background:m.bg, border:`1.5px solid ${m.color}44`,
-          borderRadius:20, padding:"0.35rem 0.7rem",
-          fontSize:msgSize, color:m.accent, fontWeight:600, lineHeight:1.4,
-        }}>
-          {message}
-        </div>
+        <span style={{ fontSize:msgSize, color:m.accent, lineHeight:1.35, opacity:0.92 }}>{message}</span>
       )}
     </div>
   );
