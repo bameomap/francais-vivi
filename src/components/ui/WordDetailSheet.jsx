@@ -61,15 +61,18 @@ export default function WordDetailSheet({ word, onClose }) {
         style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.45)", zIndex:500, animation:"fadeIn 0.2s ease" }}
       />
 
-      {/* Sheet — centered + max-width on desktop */}
+      {/* Outer: centering only, no animation */}
       <div style={{
         position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)",
         width:"100%", maxWidth:560, zIndex:510,
+      }}>
+      {/* Inner: animation only, no conflicting transform */}
+      <div style={{
         background:C.white,
         borderRadius:"24px 24px 0 0",
         maxHeight:"88vh",
         overflowY:"auto",
-        animation:"slideUp 0.3s cubic-bezier(0.32,0.72,0,1)",
+        animation:"sheetSlideUp 0.32s cubic-bezier(0.32,0.72,0,1) both",
         paddingBottom:"env(safe-area-inset-bottom, 16px)",
         boxShadow:"0 -8px 40px rgba(0,0,0,0.18)",
       }}>
@@ -190,9 +193,14 @@ export default function WordDetailSheet({ word, onClose }) {
           </button>
         </div>
       </div>
+      </div>{/* end outer centering wrapper */}
 
       <style>{`
         @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+        @keyframes sheetSlideUp {
+          from { transform: translateY(100%); opacity: 0.6; }
+          to   { transform: translateY(0);    opacity: 1;   }
+        }
       `}</style>
     </>
   );
