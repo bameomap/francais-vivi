@@ -131,50 +131,48 @@ export default function MotDuJour({ words = [] }) {
           ))}
         </div>
 
-        <div style={{ padding:"0.9rem 1.1rem" }}>
+        <div style={{ padding:"0.65rem 0.9rem" }}>
           {/* Label */}
-          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:2.5, color:C.gray, marginBottom:"0.55rem", fontWeight:600 }}>
+          <div style={{ fontSize:"0.56rem", textTransform:"uppercase", letterSpacing:2.5, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>
             Le Mot du Jour · {new Date().toLocaleDateString("vi-VN", { weekday:"long" })}
           </div>
 
           {/* Word row */}
-          <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"0.15rem" }}>
-            <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, lineHeight:1 }}>{word.fr}</span>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+            <div>
+              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.6rem", color:C.ink, fontWeight:700, lineHeight:1 }}>{word.fr}</span>
+              <div style={{ fontSize:"0.78rem", color:C.gray, marginTop:"0.15rem" }}>{word.vi}</div>
+            </div>
             <SpeakBtn text={word.fr} />
           </div>
-          <div style={{ fontSize:"0.82rem", color:C.gray, marginBottom: example || loading ? "0.7rem" : 0 }}>
-            {word.vi}
-          </div>
-
-          {/* Example sentence */}
-          {loading && (
-            <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-              <Spinner size={14} />
-              <span style={{ fontSize:"0.72rem", color:C.gray }}>Đang tạo ví dụ…</span>
-            </div>
-          )}
-          {example && (
-            <div style={{ background:"#F5F8FF", borderRadius:12, padding:"0.55rem 0.8rem", border:`1px solid ${C.border}` }}>
-              <div style={{ display:"flex", alignItems:"flex-start", gap:"0.5rem" }}>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontSize:"0.84rem", color:C.ink, fontStyle:"italic", lineHeight:1.5 }}>{example.fr}</div>
-                  <div style={{ fontSize:"0.74rem", color:C.gray, marginTop:"0.2rem" }}>{example.vi}</div>
-                </div>
-                <SpeakBtn text={example.fr} />
-              </div>
-            </div>
-          )}
 
           {/* Expand / collapse toggle */}
           <button
             onClick={() => setExpanded(v => !v)}
-            style={{ marginTop:"0.65rem", background:"none", border:"none", color:C.blue, fontSize:"0.72rem", cursor:"pointer", fontWeight:600, padding:0 }}>
-            {expanded ? "Thu gọn ▲" : "Xem thêm ▼"}
+            style={{ marginTop:"0.5rem", background:"none", border:"none", color:C.blue, fontSize:"0.7rem", cursor:"pointer", fontWeight:600, padding:0 }}>
+            {expanded ? "Thu gọn ▲" : "Xem ví dụ ▼"}
           </button>
 
-          {/* Expanded: pronunciation tip + grammar note */}
+          {/* Expanded: example + details */}
           {expanded && (
-            <div style={{ marginTop:"0.5rem", animation:"fadeUp 0.25s ease", display:"flex", flexDirection:"column", gap:"0.45rem" }}>
+            <div style={{ marginTop:"0.45rem", animation:"fadeUp 0.25s ease", display:"flex", flexDirection:"column", gap:"0.45rem" }}>
+              {loading && (
+                <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
+                  <Spinner size={14} />
+                  <span style={{ fontSize:"0.72rem", color:C.gray }}>Đang tạo ví dụ…</span>
+                </div>
+              )}
+              {example && (
+                <div style={{ background:"#F5F8FF", borderRadius:12, padding:"0.5rem 0.75rem", border:`1px solid ${C.border}` }}>
+                  <div style={{ display:"flex", alignItems:"flex-start", gap:"0.5rem" }}>
+                    <div style={{ flex:1 }}>
+                      <div style={{ fontSize:"0.82rem", color:C.ink, fontStyle:"italic", lineHeight:1.5 }}>{example.fr}</div>
+                      <div style={{ fontSize:"0.72rem", color:C.gray, marginTop:"0.15rem" }}>{example.vi}</div>
+                    </div>
+                    <SpeakBtn text={example.fr} />
+                  </div>
+                </div>
+              )}
               <WordDetails word={word} />
             </div>
           )}
