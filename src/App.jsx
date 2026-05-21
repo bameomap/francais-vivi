@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { Home, BookOpen, Award, PenTool, Layers, Target, TrendingUp } from "lucide-react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
@@ -56,18 +57,18 @@ const MODULES = [
 ];
 
 const GROUP_DEFS = [
-  { id:"vocab",    icon:"📖", label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","topics","srs"] },
-  { id:"grammar",  icon:"⚜️", label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","cheatsheet","conjugaison","sentence","reference","phrasebook"] },
-  { id:"practice", icon:"🥐", label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee","listening"] },
-  { id:"progress", icon:"📈", label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
+  { id:"vocab",    icon:"📖", LucideIcon:BookOpen,    label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","topics","srs"] },
+  { id:"grammar",  icon:"⚜️", LucideIcon:Award,       label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","cheatsheet","conjugaison","sentence","reference","phrasebook"] },
+  { id:"practice", icon:"🥐", LucideIcon:Target,      label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee","listening"] },
+  { id:"progress", icon:"📈", LucideIcon:TrendingUp,  label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
 ];
 
 const TABS = [
-  { id:"home",    icon:"🗼", label:"Trang chủ" },
-  { id:"vocab",   icon:"📖", label:"Từ vựng"   },
-  { id:"grammar", icon:"⚜️", label:"Ngữ pháp"  },
-  { id:"writing", icon:"🖋️", label:"Luyện viết"},
-  { id:"srs",     icon:"🃏", label:"Ôn tập"    },
+  { id:"home",    icon:"🗼", LucideIcon:Home,       label:"Trang chủ" },
+  { id:"vocab",   icon:"📖", LucideIcon:BookOpen,   label:"Từ vựng"   },
+  { id:"grammar", icon:"⚜️", LucideIcon:Award,      label:"Ngữ pháp"  },
+  { id:"writing", icon:"🖋️", LucideIcon:PenTool,    label:"Luyện viết"},
+  { id:"srs",     icon:"🃏", LucideIcon:Layers,     label:"Ôn tập"    },
 ];
 
 const SECTION_TITLE = {
@@ -554,7 +555,7 @@ function AppInner() {
                         style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.65rem", fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
                         ← Quay lại
                       </button>
-                      <span style={{ fontSize:"1rem" }}>{grp.icon}</span>
+                      <grp.LucideIcon size={18} color={grp.color} strokeWidth={2.5} />
                       <span style={{ fontWeight:700, color:grp.color, fontSize:"0.9rem" }}>{grp.label}</span>
                     </div>
                     <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem" }}>
@@ -607,7 +608,9 @@ function AppInner() {
                             {srsStats.due}
                           </div>
                         )}
-                        <div style={{ width:52, height:52, borderRadius:14, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 8px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.65rem", fontSize:"1.7rem" }}>{g.icon}</div>
+                        <div style={{ width:52, height:52, borderRadius:14, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 8px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.65rem" }}>
+                          <g.LucideIcon size={26} color={g.color} strokeWidth={2} />
+                        </div>
                         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>{g.label}</div>
                         <div style={{ fontSize:"0.67rem", color:g.color, fontWeight:600, marginBottom:"0.5rem" }}>{g.desc}</div>
                         <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem", marginBottom:"0.5rem" }}>
@@ -1011,7 +1014,7 @@ function AppInner() {
                 style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0.55rem 0.25rem 0.65rem", background:"transparent", border:"none", cursor:"pointer", gap:"0.18rem", transition:"all 0.15s", position:"relative" }}>
                 <div style={{ position:"relative" }}>
                   <div style={{ width:46, height:40, borderRadius:14, background:isActive?C.blueL:"transparent", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.2s", transform:isActive?"translateY(-2px) scale(1.08)":"none" }}>
-                    <span style={{ fontSize:"1.3rem", lineHeight:1 }}>{tab.icon}</span>
+                    <tab.LucideIcon size={22} color={isActive?C.blue:C.gray} strokeWidth={isActive?2.5:2} />
                   </div>
                   {tab.id==="srs" && srsStats.due>0 && (
                     <div style={{ position:"absolute", top:-2, right:-4, background:C.red, color:"#fff", borderRadius:999, minWidth:16, height:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.55rem", fontWeight:700, padding:"0 3px" }}>
