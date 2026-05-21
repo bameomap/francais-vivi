@@ -453,7 +453,7 @@ function AppInner() {
               {/* Secondary: last module if exists */}
               {lastModule && (
                 <div style={{ background:C.white, border:`1.5px solid ${lastModule.color}33`, borderRadius:16, padding:"0.85rem 1.1rem", marginTop:"0.6rem", display:"flex", alignItems:"center", gap:"0.8rem" }}>
-                  <span style={{ fontSize:"1.4rem" }}>{lastModule.icon}</span>
+                  <div style={{ width:48, height:48, borderRadius:13, background:`${lastModule.color}22`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:"1.4rem" }}>{lastModule.icon}</div>
                   <div style={{ flex:1, minWidth:0 }}>
                     <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.1rem", textTransform:"uppercase", letterSpacing:1 }}>Tiếp tục</div>
                     <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, fontWeight:700 }}>{lastModule.label}</div>
@@ -571,7 +571,7 @@ function AppInner() {
                                 {srsStats.due}
                               </div>
                             )}
-                            <div style={{ fontSize:"1.8rem", marginBottom:"0.5rem" }}>{m.icon}</div>
+                            <div style={{ width:46, height:46, borderRadius:13, background:`${m.color}22`, display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.55rem", fontSize:"1.5rem" }}>{m.icon}</div>
                             <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem" }}>{m.label}</div>
                             <div style={{ fontSize:"0.68rem", color:m.color, fontStyle:"italic", marginBottom:used?"0.5rem":"0" }}>{m.fr}</div>
                             {used && (
@@ -607,7 +607,7 @@ function AppInner() {
                             {srsStats.due}
                           </div>
                         )}
-                        <div style={{ fontSize:"2rem", marginBottom:"0.55rem" }}>{g.icon}</div>
+                        <div style={{ width:52, height:52, borderRadius:14, background:`${g.color}22`, display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.65rem", fontSize:"1.7rem" }}>{g.icon}</div>
                         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>{g.label}</div>
                         <div style={{ fontSize:"0.67rem", color:g.color, fontWeight:600, marginBottom:"0.5rem" }}>{g.desc}</div>
                         <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem", marginBottom:"0.5rem" }}>
@@ -1009,14 +1009,12 @@ function AppInner() {
                   if (m) goSection(m.id, m.view);
                 }}
                 style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0.55rem 0.25rem 0.65rem", background:"transparent", border:"none", cursor:"pointer", gap:"0.18rem", transition:"all 0.15s", position:"relative" }}>
-                {/* Active indicator pill */}
-                {isActive && (
-                  <div style={{ position:"absolute", top:6, width:28, height:3, background:C.blue, borderRadius:999, animation:"pop 0.25s ease" }}/>
-                )}
                 <div style={{ position:"relative" }}>
-                  <span style={{ fontSize:"1.25rem", lineHeight:1, marginTop:isActive?6:0, transition:"margin 0.15s", display:"block" }}>{tab.icon}</span>
+                  <div style={{ width:46, height:40, borderRadius:14, background:isActive?`${C.blue}18`:"transparent", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.2s", transform:isActive?"translateY(-2px) scale(1.08)":"none" }}>
+                    <span style={{ fontSize:"1.3rem", lineHeight:1 }}>{tab.icon}</span>
+                  </div>
                   {tab.id==="srs" && srsStats.due>0 && (
-                    <div style={{ position:"absolute", top:-4, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:16, height:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.55rem", fontWeight:700, padding:"0 3px" }}>
+                    <div style={{ position:"absolute", top:-2, right:-4, background:C.red, color:"#fff", borderRadius:999, minWidth:16, height:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.55rem", fontWeight:700, padding:"0 3px" }}>
                       {srsStats.due}
                     </div>
                   )}
