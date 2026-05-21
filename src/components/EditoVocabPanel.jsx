@@ -20,23 +20,51 @@ const MODES = [
 const CLIENT_TYPES = ["flashcard", "anagramme"];
 
 // ── Word list view for a group ─────────────────────────────
-function WordList({ words }) {
+function WordList({ words, color = C.blue, bg = C.blueL }) {
   const [selected, setSelected] = useState(null);
   return (
     <>
-      <div style={{ display:"flex", flexDirection:"column", gap:"0.3rem" }}>
+      <div style={{ display:"flex", flexDirection:"column", gap:"0.35rem" }}>
         {words.map((w, i) => (
           <div key={i}
             onClick={() => setSelected(w)}
-            style={{ display:"flex", alignItems:"center", gap:"0.5rem", background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"0.45rem 0.7rem", cursor:"pointer", transition:"background 0.15s" }}
-            onPointerDown={e => e.currentTarget.style.background = C.blueL}
-            onPointerUp={e => e.currentTarget.style.background = C.white}
-            onPointerLeave={e => e.currentTarget.style.background = C.white}
+            style={{
+              display:"flex", alignItems:"stretch", gap:0,
+              background:C.white,
+              border:`1.5px solid ${C.border}`,
+              borderLeft:`4px solid ${color}`,
+              borderRadius:12, overflow:"hidden",
+              cursor:"pointer", transition:"background 0.12s, border-color 0.12s",
+            }}
+            onPointerDown={e => { e.currentTarget.style.background = bg; e.currentTarget.style.borderColor = color; }}
+            onPointerUp={e =>   { e.currentTarget.style.background = C.white; e.currentTarget.style.borderColor = C.border; e.currentTarget.style.borderLeftColor = color; }}
+            onPointerLeave={e =>{ e.currentTarget.style.background = C.white; e.currentTarget.style.borderColor = C.border; e.currentTarget.style.borderLeftColor = color; }}
           >
-            <span style={{ fontFamily:"Georgia,serif", fontSize:"0.9rem", color:C.ink, flex:1 }}>{w.fr}</span>
-            <SpeakBtn text={w.fr} />
-            <span style={{ fontSize:"0.78rem", color:C.gray, flex:1, textAlign:"right" }}>{w.vi}</span>
-            <span style={{ fontSize:"0.65rem", color:C.blue, opacity:0.6 }}>›</span>
+            {/* Number badge */}
+            <div style={{
+              width:36, flexShrink:0,
+              display:"flex", alignItems:"center", justifyContent:"center",
+              background:`${color}18`,
+              borderRight:`1px solid ${color}22`,
+            }}>
+              <span style={{ fontFamily:"'Courier New',monospace", fontSize:"0.62rem", color:color, fontWeight:700, opacity:0.9 }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Word content */}
+            <div style={{ flex:1, padding:"0.5rem 0.65rem", minWidth:0 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:"0.4rem" }}>
+                <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, fontWeight:700, flex:1, lineHeight:1.3 }}>
+                  {w.fr}
+                </span>
+                <SpeakBtn text={w.fr} />
+                <span style={{ fontSize:"0.75rem", color:color, opacity:0.7, flexShrink:0 }}>›</span>
+              </div>
+              <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem", lineHeight:1.3 }}>
+                {w.vi}
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -150,7 +178,7 @@ function GroupStudyView({ group, unit, onBack }) {
       </div>
 
       {/* Word list */}
-      {subView === "list" && <WordList words={group.words} />}
+      {subView === "list" && <WordList words={group.words} color={unit.color} bg={unit.bg} />}
 
       {/* Mode picker */}
       {subView === "pick" && (
