@@ -638,6 +638,40 @@ Các động từ tương tự: réussir (thành công), grossir (tăng cân), m
           "Elle rougit quand elle parle en public. — Cô ấy đỏ mặt khi nói trước đám đông.",
         ]
       },
+      {
+        topic:"Verbes irréguliers — Acheter, Payer, Aller, Faire",
+        rule:`Bốn động từ quan trọng trong Unité 3 — cần học thuộc:
+
+ACHETER (mua) — biến đổi accent:
+• J'achète     • Nous achetons
+• Tu achètes   • Vous achetez
+• Il achète    • Ils achètent
+⚠️ Accent grave xuất hiện ở je/tu/il/ils (trước -e câm)
+
+PAYER (trả tiền) — hai cách chia đều đúng:
+• Je paie / paye    • Nous payons
+• Tu paies / payes  • Vous payez
+• Il paie / paye    • Ils paient / payent
+
+ALLER (đi) — Bất quy tắc hoàn toàn:
+• Je vais    • Nous allons
+• Tu vas     • Vous allez
+• Il va      • Ils vont
+💡 ALLER sert à former le futur proche: Je vais partir.
+
+FAIRE (làm / tạo):
+• Je fais    • Nous faisons
+• Tu fais    • Vous faites ⚠️ (không phải "faisez"!)
+• Il fait    • Ils font`,
+        examples:[
+          "J'achète du pain à la boulangerie chaque matin. — Tôi mua bánh mì ở tiệm bánh mỗi sáng.",
+          "Tu paies comment? Par carte ou en espèces? — Bạn thanh toán thế nào? Thẻ hay tiền mặt?",
+          "Nous allons au marché ce matin. — Chúng tôi đi chợ sáng nay.",
+          "Vous faites quoi ce week-end? — Cuối tuần này bạn làm gì?",
+          "Il fait les courses tous les samedis. — Anh ấy đi mua đồ mỗi thứ Bảy.",
+          "Ils achètent beaucoup de fromage à la fromagerie. — Họ mua nhiều phô mai ở tiệm phô mai.",
+        ]
+      },
     ]
   },
   {
@@ -735,6 +769,37 @@ SANS + NOM/INFINITIF → không có/không làm
           "J'aime ce quartier mais il est bruyant. — Tôi thích khu này nhưng nó ồn ào.",
           "Je prends un café avec du lait et sans sucre. — Tôi uống cà phê có sữa và không đường.",
           "Elle part sans dire au revoir. — Cô ấy ra đi không nói lời tạm biệt.",
+        ]
+      },
+      {
+        topic:"Tần suất (1) — Toujours, Souvent, Jamais",
+        rule:`Ba trạng từ tần suất cơ bản — Unité 4:
+
+• TOUJOURS = luôn luôn (100%)
+  "Je prends toujours le métro."
+
+• SOUVENT = thường xuyên (~70–80%)
+  "Je vais souvent à la boulangerie."
+
+• JAMAIS = không bao giờ (0%) → PHẢI dùng với NE!
+  "Je ne vais jamais au cinéma seul(e)."
+  ⚠️ JAMAIS luôn dùng với NE: "Je ne mange jamais de viande."
+  ❌ "Je vais jamais" (argot — tránh dùng ở trình độ này)
+
+VỊ TRÍ: SAU ĐỘNG TỪ (thì hiện tại)
+"Je vais TOUJOURS au travail à pied."
+"Il mange SOUVENT chez ses parents."
+"Elle ne sort JAMAIS le soir."
+
+Thứ tự tần suất đầy đủ:
+jamais (0%) < rarement < parfois < souvent < toujours (100%)
+💡 Xem thêm: parfois, rarement, tous les… → Unité 6`,
+        examples:[
+          "Je prends toujours le métro pour aller au travail. — Tôi luôn đi tàu điện đến chỗ làm.",
+          "Il va souvent au musée le week-end. — Anh ấy thường đi bảo tàng vào cuối tuần.",
+          "Je ne mange jamais de fast-food. — Tôi không bao giờ ăn đồ ăn nhanh.",
+          "Elle ne sort jamais sans parapluie. — Cô ấy không bao giờ ra ngoài không mang ô.",
+          "Tu vas souvent au cinéma? — Bạn hay đi xem phim không?",
         ]
       },
     ]
@@ -859,6 +924,39 @@ Thêm -CI (gần) hoặc -LÀ (xa) sau danh từ để phân biệt:
           "Ces chaussures sont confortables. — Những đôi giày này thoải mái.",
           "Tu préfères ce modèle-ci ou ce modèle-là? — Bạn thích mẫu này hay mẫu kia?",
           "Cet objet, c'est quoi exactement? — Cái vật này là cái gì vậy?",
+        ]
+      },
+      {
+        topic:"Verbes — Vendre, Mettre, Venir",
+        rule:`Ba động từ quan trọng trong Unité 5:
+
+VENDRE (bán) — nhóm -RE quy tắc:
+• Je vends    • Nous vendons
+• Tu vends    • Vous vendez
+• Il vend (không có -s!) • Ils vendent
+Tương tự: répondre, attendre, entendre, perdre
+
+METTRE (đặt / mặc / bật):
+• Je mets     • Nous mettons
+• Tu mets     • Vous mettez
+• Il met      • Ils mettent
+💡 Dùng: mettre une veste (mặc áo), mettre la table (dọn bàn ăn), mettre de la musique (bật nhạc)
+Tương tự: promettre (hứa), permettre (cho phép)
+
+VENIR (đến) — Bất quy tắc:
+• Je viens    • Nous venons
+• Tu viens    • Vous venez
+• Il vient    • Ils viennent
+⚠️ Venir DE + infinitif = passé récent: "Je viens de manger." (Unité 6)
+⚠️ Venir DE + lieu = xuất xứ: "Je viens du Japon." (Unité 9)
+Tương tự: devenir (trở thành), revenir (quay lại), tenir (giữ)`,
+        examples:[
+          "Ce magasin vend des vêtements à prix réduit. — Cửa hàng này bán quần áo giảm giá.",
+          "Elle met toujours une veste pour aller au bureau. — Cô ấy luôn mặc áo vest đi làm.",
+          "Tu mets combien de temps pour aller au travail? — Bạn mất bao lâu để đến chỗ làm?",
+          "Il vient d'Espagne mais il habite en France. — Anh ấy đến từ Tây Ban Nha nhưng sống ở Pháp.",
+          "Ils viennent nous voir ce week-end. — Cuối tuần này họ đến thăm chúng tôi.",
+          "Nous vendons des accessoires et des vêtements. — Chúng tôi bán phụ kiện và quần áo.",
         ]
       },
     ]
@@ -993,6 +1091,41 @@ PARTIR vs QUITTER vs LAISSER:
           "Ils sortent souvent avec des amis. — Họ thường ra ngoài với bạn bè.",
         ]
       },
+      {
+        topic:"Verbes — Pouvoir et Vouloir",
+        rule:`Hai động từ bất quy tắc rất hay dùng trong Unité 6:
+
+POUVOIR (có thể / được phép):
+• Je peux     • Nous pouvons
+• Tu peux     • Vous pouvez
+• Il peut     • Ils peuvent
+⚠️ Hỏi lịch sự: "Puis-je...?" (đảo ngữ trang trọng)
+
+VOULOIR (muốn):
+• Je veux     • Nous voulons
+• Tu veux     • Vous voulez
+• Il veut     • Ils veulent
+💡 Dạng lịch sự: "Je voudrais..." (conditionnel) — lịch sự hơn "Je veux"
+"Je voudrais un café, s'il vous plaît."
+
+CẤU TRÚC:
+POUVOIR + infinitif = "có thể làm gì"
+"Je peux sortir ce soir." / "Il ne peut pas venir."
+
+VOULOIR + infinitif = "muốn làm gì"
+"Je veux apprendre le français."
+
+VOULOIR + nom = "muốn cái gì"
+"Je veux un café." / "Ils veulent des billets."`,
+        examples:[
+          "Je peux t'aider? — Tôi có thể giúp bạn không?",
+          "Tu peux venir à 18h? — Bạn có thể đến lúc 6 giờ tối không?",
+          "Il ne peut pas sortir, il est malade. — Anh ấy không thể ra ngoài, anh ấy đang bệnh.",
+          "Je veux apprendre à cuisiner. — Tôi muốn học nấu ăn.",
+          "Vous voulez du café ou du thé? — Bạn muốn cà phê hay trà?",
+          "Je voudrais réserver une table pour deux. — Tôi muốn đặt bàn cho hai người.",
+        ]
+      },
     ]
   },
   {
@@ -1121,6 +1254,40 @@ PASSÉ COMPOSÉ: pronom avant l'auxiliaire
           "Vous avez vu Marie? — Oui, je L'ai vue ce matin. — Bạn có gặp Marie không? — Có, tôi đã gặp sáng nay.",
         ]
       },
+      {
+        topic:"Verbe CONNAÎTRE — Biết / Quen biết",
+        rule:`CONNAÎTRE = "biết / quen biết" — phân biệt với SAVOIR!
+
+Chia CONNAÎTRE au présent:
+• Je connais     • Nous connaissons
+• Tu connais     • Vous connaissez
+• Il connaît ⚠️ (accent circonflexe: î)  • Ils connaissent
+
+CONNAÎTRE vs SAVOIR:
+
+CONNAÎTRE + nom (người, nơi chốn, tác phẩm):
+"Je connais Paris." (Tôi biết Paris — đã từng đến/quen thuộc)
+"Tu connais Marie?" (Bạn quen Marie không?)
+"Elle connaît bien ce quartier."
+
+SAVOIR + infinitif (biết cách làm gì — kỹ năng):
+"Je sais nager." (Tôi biết bơi)
+"Il sait parler chinois."
+
+SAVOIR + que/si/quand... (biết thông tin):
+"Je sais qu'il habite ici."
+
+💡 Mẹo nhớ:
+CONNAÎTRE → quen biết (người / nơi)
+SAVOIR → biết cách làm / biết thông tin`,
+        examples:[
+          "Tu connais un bon restaurant dans ce quartier? — Bạn biết nhà hàng ngon nào trong khu này không?",
+          "Je connais bien le centre-ville. — Tôi biết rõ trung tâm thành phố.",
+          "Vous connaissez Marie Dupont? — Bạn có quen Marie Dupont không?",
+          "Il connaît beaucoup de monde ici. — Anh ấy quen biết nhiều người ở đây.",
+          "Je connais ce film, il est excellent! — Tôi biết bộ phim này, tuyệt lắm!",
+        ]
+      },
     ]
   },
   {
@@ -1225,6 +1392,66 @@ DEVOIR au PASSÉ COMPOSÉ: "J'ai dû..." = tôi đã phải...
           "J'ai dû annuler mon cours. — Tôi đã phải hủy bài học.",
         ]
       },
+      {
+        topic:"Le conseil — Pouvoir au présent + infinitif",
+        rule:`POUVOIR + INFINITIF để ĐƯA RA LỜI KHUYÊN (Unité 8):
+
+"Tu peux / Vous pouvez + infinitif"
+"Tu peux faire du sport 3 fois par semaine."
+"Vous pouvez prendre de la vitamine C."
+
+So sánh các cách đưa lời khuyên ở A1:
+1. POUVOIR (lời khuyên thực tế, có thể làm):
+   "Tu peux te reposer plus." (Bạn có thể nghỉ ngơi nhiều hơn.)
+2. DEVOIR (bắt buộc, obligation):
+   "Tu dois prendre ce médicament."
+3. IL FAUT (quy tắc chung):
+   "Il faut boire beaucoup d'eau."
+4. IMPÉRATIF (trực tiếp):
+   "Repose-toi!"
+
+Phủ định → cấm:
+"Tu ne peux pas faire de sport cette semaine."
+"Vous ne pouvez pas consommer d'alcool."`,
+        examples:[
+          "Tu peux prendre du paracétamol pour la fièvre. — Bạn có thể uống paracétamol để hạ sốt.",
+          "Vous pouvez faire de la marche rapide, c'est bon pour la santé. — Bạn có thể đi bộ nhanh, tốt cho sức khỏe.",
+          "Il peut commencer par du yoga pour se détendre. — Anh ấy có thể bắt đầu bằng yoga để thư giãn.",
+          "Tu ne peux pas fumer ici. — Bạn không được hút thuốc ở đây.",
+          "Pour dormir mieux, vous pouvez éviter le café le soir. — Để ngủ ngon hơn, bạn có thể tránh cà phê buổi tối.",
+        ]
+      },
+      {
+        topic:"Verbe BOIRE — Uống",
+        rule:`BOIRE (uống) — Động từ bất quy tắc:
+
+Chia BOIRE au présent:
+• Je bois     • Nous buvons
+• Tu bois     • Vous buvez
+• Il boit     • Ils boivent
+
+Participe passé: BU (bất quy tắc!)
+"J'ai bu beaucoup d'eau aujourd'hui."
+
+Dùng BOIRE với mạo từ phân lượng:
+• de l'eau: "Je bois de l'eau."
+• du café: "Il boit du café le matin."
+• du lait: "Elle boit du lait."
+• du vin / de la bière: "Ils boivent du vin."
+
+💡 Lời khuyên y tế thường gặp:
+"Il faut boire 1,5 litre d'eau par jour."
+"Buvez beaucoup d'eau quand vous êtes malade."
+
+⚠️ Phân biệt: "Je bois" (hành động) ≠ "J'ai soif" (trạng thái khát)`,
+        examples:[
+          "Je bois deux litres d'eau par jour. — Tôi uống hai lít nước mỗi ngày.",
+          "Il boit du café le matin et du thé le soir. — Anh ấy uống cà phê buổi sáng và trà buổi tối.",
+          "Qu'est-ce que vous voulez boire? — Bạn muốn uống gì?",
+          "On boit quelque chose? — Chúng ta uống gì đó nhé?",
+          "J'ai bu trop de café aujourd'hui. — Hôm nay tôi đã uống quá nhiều cà phê.",
+        ]
+      },
     ]
   },
   {
@@ -1324,6 +1551,37 @@ Thường dùng CÙNG NHAU:
           "Il faisait très chaud, environ 35 degrés. — Trời rất nóng, khoảng 35 độ.",
           "Quand nous sommes arrivés, il pleuvait. — Khi chúng tôi đến nơi, trời đang mưa.",
           "L'hôtel était confortable et le personnel était sympa. — Khách sạn thoải mái và nhân viên thân thiện.",
+        ]
+      },
+      {
+        topic:"Giới từ chỉ xuất xứ (2) — De, D', Du, Des",
+        rule:`Giới từ chỉ NƠI ĐẾN TỪ (provenance) — Unité 9:
+
+ĐỐI VỚI THÀNH PHỐ → DE (luôn luôn):
+• Je viens de Paris.
+• Elle arrive de Tokyo.
+• Il revient d'Hanoi. (de → d' trước nguyên âm)
+
+ĐỐI VỚI QUỐC GIA:
+• DE + nước nữ (kết thúc -e): de France, de Chine, d'Espagne
+• DU = DE + LE → nước nam: du Japon, du Canada, du Vietnam
+• DES = DE + LES → nước số nhiều: des États-Unis, des Pays-Bas
+• D' + nguyên âm: d'Iran, d'Angola
+
+SO SÁNH Unité 1 (destination) vs Unité 9 (provenance):
+✅ Je vais AU Japon. (đi đến Nhật — au = à + le)
+✅ Je reviens DU Japon. (từ Nhật về — du = de + le)
+✅ Elle habite EN France. (sống ở Pháp)
+✅ Elle vient DE France. (đến từ Pháp)
+
+💡 Mẹo: À/EN/AU/AUX = đến đâu → DE/D'/DU/DES = từ đâu`,
+        examples:[
+          "Je viens de Paris. — Tôi đến từ Paris.",
+          "Elle revient du Japon après ses vacances. — Cô ấy trở về từ Nhật sau kỳ nghỉ.",
+          "Ils arrivent des États-Unis ce soir. — Họ đến từ Mỹ tối nay.",
+          "Ce fromage vient de France. — Phô mai này đến từ Pháp.",
+          "Tu rentres d'Espagne? — Bạn vừa từ Tây Ban Nha về à?",
+          "Le vol vient du Canada. — Chuyến bay đến từ Canada.",
         ]
       },
     ]
@@ -1434,6 +1692,37 @@ Trop de + nom: "Il y a trop DE bruit."
           "Elle a beaucoup d'expérience dans ce domaine. — Cô ấy có nhiều kinh nghiệm trong lĩnh vực này.",
           "Tu manges un peu trop de sucre. — Bạn ăn hơi nhiều đường đó.",
           "Il a très bien réussi son entretien. — Anh ấy đã vượt qua buổi phỏng vấn rất tốt.",
+        ]
+      },
+      {
+        topic:"Thời gian và tiếp diễn — Pendant, Longtemps, Toujours",
+        rule:`Ba biểu thức chỉ THỜI GIAN và SỰ TIẾP DIỄN — Unité 10:
+
+PENDANT + durée = "trong suốt / trong khoảng thời gian"
+"J'ai travaillé dans cette entreprise PENDANT deux ans."
+"Elle a étudié le français PENDANT six mois."
+→ Dùng với passé composé, chỉ khoảng thời gian đã kết thúc
+
+LONGTEMPS = "lâu / trong thời gian dài" (không chỉ định cụ thể)
+"Il a attendu LONGTEMPS." (Anh ấy đã chờ rất lâu)
+"Je travaille ici depuis LONGTEMPS." (Tôi làm đây lâu rồi)
+
+TOUJOURS — có HAI nghĩa, phân biệt qua ngữ cảnh:
+1. = "vẫn còn" (tiếp diễn): "Il travaille TOUJOURS ici."
+2. = "luôn luôn" (tần suất): "Je prends TOUJOURS le bus."
+
+ENCORE = "vẫn còn" (đồng nghĩa với toujours nghĩa 1)
+"Tu es encore là? — Toujours!" (Bạn vẫn còn đó? — Vẫn!)
+
+⚠️ NE... PLUS = không còn nữa (phủ định của toujours/encore)
+"Il ne travaille PLUS ici." (Anh ấy không còn làm ở đây nữa)`,
+        examples:[
+          "J'ai travaillé dans cette société pendant cinq ans. — Tôi đã làm việc ở công ty đó năm năm.",
+          "Elle a cherché un emploi pendant longtemps. — Cô ấy đã tìm việc trong thời gian dài.",
+          "Il travaille toujours dans la même entreprise. — Anh ấy vẫn còn làm ở cùng công ty.",
+          "Tu attends depuis longtemps? — Bạn đợi lâu chưa?",
+          "Il ne travaille plus ici. — Anh ấy không còn làm ở đây nữa.",
+          "J'ai étudié le français pendant deux ans avant de venir en France. — Tôi đã học tiếng Pháp hai năm trước khi đến Pháp.",
         ]
       },
     ]

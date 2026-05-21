@@ -53,18 +53,24 @@ const Phrase = ({ fr, vi }) => (
 
 // ── Topics ────────────────────────────────────────────────────
 const TOPICS = [
-  { id: "pronoms",      label: "Đại từ",        icon: "👤", color: T.blue   },
-  { id: "articles",     label: "Mạo từ",        icon: "🔤", color: T.purple },
-  { id: "possessifs",   label: "Sở hữu",        icon: "👜", color: T.orange },
-  { id: "etre_avoir",   label: "Être / Avoir",  icon: "⚜️", color: T.purple },
-  { id: "verbes_er",    label: "Động từ -ER",   icon: "🖊️", color: T.teal   },
-  { id: "verbes_irreg", label: "Bất quy tắc",   icon: "⚡", color: T.red    },
-  { id: "adjectifs",   label: "Tính từ",       icon: "🎨", color: T.green  },
-  { id: "negation",    label: "Phủ định",      icon: "🚫", color: T.red    },
-  { id: "questions",   label: "Câu hỏi",       icon: "❓", color: T.gold   },
-  { id: "prepositions",label: "Giới từ",       icon: "📍", color: T.teal   },
-  { id: "futur",       label: "Tương lai gần", icon: "🔮", color: T.purple },
-  { id: "passe",       label: "Passé composé", icon: "📜", color: T.green  },
+  { id: "pronoms",       label: "Đại từ",           icon: "👤", color: T.blue   },
+  { id: "articles",      label: "Mạo từ",           icon: "🔤", color: T.purple },
+  { id: "possessifs",    label: "Sở hữu",           icon: "👜", color: T.orange },
+  { id: "demonstratifs", label: "Chỉ định từ",      icon: "👉", color: T.orange },
+  { id: "etre_avoir",    label: "Être / Avoir",     icon: "⚜️", color: T.purple },
+  { id: "verbes_er",     label: "Động từ -ER/-IR",  icon: "🖊️", color: T.teal   },
+  { id: "verbes_irreg",  label: "Bất quy tắc",      icon: "⚡", color: T.red    },
+  { id: "pronominaux",   label: "Động từ phản thân",icon: "🔄", color: T.teal   },
+  { id: "imperatif",     label: "Câu mệnh lệnh",    icon: "📢", color: T.red    },
+  { id: "adjectifs",     label: "Tính từ",          icon: "🎨", color: T.green  },
+  { id: "negation",      label: "Phủ định",         icon: "🚫", color: T.red    },
+  { id: "questions",     label: "Câu hỏi",          icon: "❓", color: T.gold   },
+  { id: "prepositions",  label: "Giới từ",          icon: "📍", color: T.teal   },
+  { id: "futur",         label: "Tương lai gần",    icon: "🔮", color: T.purple },
+  { id: "passe_recent",  label: "Passé récent",     icon: "⏪", color: T.green  },
+  { id: "passe",         label: "Passé composé",    icon: "📜", color: T.green  },
+  { id: "comparaison",   label: "So sánh",          icon: "⚖️", color: T.gold   },
+  { id: "pronoms_rel",   label: "Đại từ quan hệ",   icon: "🔗", color: T.blue   },
 ];
 
 // ── Content by topic ──────────────────────────────────────────
@@ -602,6 +608,263 @@ function TopicContent({ id }) {
           ["Elle est venue hier.","Cô ấy đã đến hôm qua."],
           ["Nous n'avons pas dormi.","Chúng tôi đã không ngủ."],
           ["Tu as fini tes devoirs ?","Bạn đã làm xong bài tập chưa?"],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+      </div>
+    );
+
+    case "demonstratifs": return (
+      <div>
+        <SectionTitle text="Tính từ chỉ định (Adjectifs démonstratifs)" />
+        <Note text="Dùng để chỉ vào người/vật cụ thể: cái này, cái kia. Hòa hợp với giống và số của danh từ." color={T.orange} />
+        <Table
+          headers={["Giống / Số", "Dạng", "Trước nguyên âm / h câm", "Ví dụ"]}
+          rows={[
+            ["Đực số ít",   "ce",   "cet",  "ce livre / cet homme"],
+            ["Cái số ít",   "cette","cette","cette robe / cette amie"],
+            ["Số nhiều",    "ces",  "ces",  "ces enfants / ces amis"],
+          ]}
+        />
+        <Note text="ce → cet trước nguyên âm hoặc h câm: cet appartement, cet hôtel" color={T.red} />
+
+        <SectionTitle text="Ví dụ thực tế" />
+        {[
+          ["ce pull",          "cái áo len này"],
+          ["cet imperméable",  "cái áo mưa này"],
+          ["cette robe",       "cái váy này"],
+          ["ces chaussures",   "đôi giày này"],
+          ["Je veux ce livre.", "Tôi muốn cuốn sách này."],
+          ["Tu aimes cette couleur ?","Bạn thích màu này không?"],
+          ["Ces vêtements sont chers.","Những bộ quần áo này đắt."],
+          ["Cet homme est sympa.","Người đàn ông này dễ mến."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+      </div>
+    );
+
+    case "pronominaux": return (
+      <div>
+        <SectionTitle text="Verbes pronominaux — Động từ phản thân" />
+        <Note text="Cấu trúc: se + động từ. Đại từ phản thân thay đổi theo ngôi." color={T.teal} />
+        <Table
+          headers={["Ngôi", "Đại từ phản thân", "se lever (thức dậy)"]}
+          rows={[
+            ["je",        "me (m')", "je me lève"],
+            ["tu",        "te (t')", "tu te lèves"],
+            ["il/elle",   "se (s')", "il/elle se lève"],
+            ["nous",      "nous",    "nous nous levons"],
+            ["vous",      "vous",    "vous vous levez"],
+            ["ils/elles", "se (s')", "ils/elles se lèvent"],
+          ]}
+        />
+
+        <SectionTitle text="Động từ phản thân thường dùng nhất" />
+        {[
+          ["se réveiller",       "thức dậy"],
+          ["se lever",           "ngồi dậy"],
+          ["se laver",           "rửa (mặt, tay...)"],
+          ["se doucher",         "tắm vòi sen"],
+          ["se brosser les dents","đánh răng"],
+          ["se coiffer",         "chải đầu"],
+          ["se maquiller",       "trang điểm"],
+          ["s'habiller",         "mặc quần áo"],
+          ["se préparer",        "chuẩn bị"],
+          ["se coucher",         "đi ngủ / nằm xuống"],
+          ["s'appeler",          "tên là"],
+          ["se promener",        "dạo chơi"],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <SectionTitle text="Phủ định" />
+        <Note text="ne...pas kẹp xung quanh đại từ phản thân + động từ:" color={T.red} />
+        {[
+          ["Je ne me lève pas tôt.", "Tôi không dậy sớm."],
+          ["Elle ne se maquille pas.", "Cô ấy không trang điểm."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+      </div>
+    );
+
+    case "imperatif": return (
+      <div>
+        <SectionTitle text="L'impératif — Câu mệnh lệnh" />
+        <Note text="Chỉ chia 3 ngôi: tu, nous, vous. Bỏ đại từ chủ ngữ." color={T.red} />
+        <Table
+          headers={["Ngôi", "parler", "finir", "prendre"]}
+          rows={[
+            ["tu",   "Parle !",   "Finis !",   "Prends !"],
+            ["nous", "Parlons !", "Finissons !","Prenons !"],
+            ["vous", "Parlez !",  "Finissez !","Prenez !"],
+          ]}
+        />
+        <Note text="Động từ -ER: ngôi 'tu' bỏ -s cuối: parle (không phải parles)" color={T.orange} />
+
+        <SectionTitle text="Động từ bất quy tắc" />
+        <Table
+          headers={["Động từ", "tu", "nous", "vous"]}
+          rows={[
+            ["être",  "Sois !",  "Soyons !", "Soyez !"],
+            ["avoir", "Aie !",   "Ayons !",  "Ayez !"],
+            ["aller", "Va !",    "Allons !", "Allez !"],
+            ["savoir","Sache !", "Sachons !", "Sachez !"],
+          ]}
+        />
+
+        <SectionTitle text="Phủ định mệnh lệnh" />
+        <Note text="Cấu trúc: Ne + động từ + pas" color={T.red} />
+        {[
+          ["Écoute !", "Nghe này!"],
+          ["Écoutez !", "Các bạn hãy nghe!"],
+          ["N'écoute pas !", "Đừng nghe!"],
+          ["Soyez ponctuels !", "Hãy đúng giờ!"],
+          ["Allons-y !", "Đi thôi!"],
+          ["Ne fumez pas !", "Không hút thuốc!"],
+          ["Prenez à gauche.", "Rẽ trái."],
+          ["Continuez tout droit.", "Đi thẳng."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <SectionTitle text="Obligation / Interdiction (Unité 7)" />
+        <Table
+          headers={["Cấu trúc", "Nghĩa", "Ví dụ"]}
+          rows={[
+            ["il est interdit de + inf.", "bị cấm", "Il est interdit de fumer."],
+            ["défense de + inf.",         "cấm",    "Défense d'entrer."],
+            ["ne pas + inf.",             "không được","Ne pas stationner."],
+            ["merci de + inf.",           "xin vui lòng","Merci de fermer la porte."],
+            ["prière de + inf.",          "xin vui lòng (trang trọng)","Prière de ne pas déranger."],
+          ]}
+        />
+      </div>
+    );
+
+    case "passe_recent": return (
+      <div>
+        <SectionTitle text="Passé récent — Vừa mới làm gì" />
+        <Note text="Cấu trúc: venir de + infinitif → diễn tả hành động vừa xảy ra" color={T.green} />
+        <Table
+          headers={["Ngôi", "Venir", "Ví dụ"]}
+          rows={[
+            ["je",        "viens de",  "Je viens de manger."],
+            ["tu",        "viens de",  "Tu viens de partir ?"],
+            ["il/elle",   "vient de",  "Elle vient de téléphoner."],
+            ["nous",      "venons de", "Nous venons d'arriver."],
+            ["vous",      "venez de",  "Vous venez de finir ?"],
+            ["ils/elles", "viennent de","Ils viennent de sortir."],
+          ]}
+        />
+
+        <SectionTitle text="Ví dụ thực tế" />
+        {[
+          ["Je viens de me lever.",           "Tôi vừa mới dậy."],
+          ["Il vient de manger.",             "Anh ấy vừa ăn xong."],
+          ["Nous venons d'arriver à Paris.",  "Chúng tôi vừa đến Paris."],
+          ["Elle vient de finir ses études.", "Cô ấy vừa tốt nghiệp."],
+          ["Ils viennent de partir.",         "Họ vừa mới đi."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <Note text="Phủ định: Je ne viens pas de dormir. (ne...pas kẹp venir)" color={T.red} />
+
+        <SectionTitle text="So sánh 3 thì thường dùng" />
+        <Table
+          headers={["Thì", "Cấu trúc", "Ý nghĩa"]}
+          rows={[
+            ["Passé récent",  "venir de + inf.",        "Vừa xảy ra xong"],
+            ["Présent",       "động từ chia hiện tại",  "Đang xảy ra / thói quen"],
+            ["Futur proche",  "aller + inf.",            "Sắp xảy ra"],
+          ]}
+        />
+      </div>
+    );
+
+    case "comparaison": return (
+      <div>
+        <SectionTitle text="La comparaison — So sánh tính từ" />
+        <Note text="Cấu trúc: plus / moins / aussi + adjectif + que" color={T.gold} />
+        <Table
+          headers={["Loại so sánh", "Cấu trúc", "Ví dụ"]}
+          rows={[
+            ["Hơn",   "plus + adj + que",  "Paris est plus grand que Lyon."],
+            ["Kém",   "moins + adj + que", "Cette robe est moins chère que l'autre."],
+            ["Bằng",  "aussi + adj + que", "Il est aussi grand que moi."],
+          ]}
+        />
+
+        <SectionTitle text="Bất quy tắc — bon et mauvais" />
+        <Table
+          headers={["Tính từ", "So sánh hơn", "Cấp cao nhất"]}
+          rows={[
+            ["bon(ne)",     "meilleur(e) que",  "le/la meilleur(e)"],
+            ["mauvais(e)",  "pire que",         "le/la pire"],
+          ]}
+        />
+        {[
+          ["Ce restaurant est meilleur que l'autre.", "Nhà hàng này ngon hơn cái kia."],
+          ["C'est la meilleure pizza de Paris !",     "Đây là pizza ngon nhất Paris!"],
+          ["Ce film est pire que le premier.",        "Bộ phim này tệ hơn phần trước."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <SectionTitle text="Giới từ provenance (Unité 9) — de / d' / du / des" />
+        <Note text="Khi nói xuất phát từ đâu: venir de, partir de, arriver de..." color={T.teal} />
+        <Table
+          headers={["Loại địa danh", "Giới từ", "Ví dụ"]}
+          rows={[
+            ["Thành phố",         "de / d'",     "Je viens de Paris / d'Oslo."],
+            ["Quốc gia giống cái","de / d'",     "Il arrive de France / d'Italie."],
+            ["Quốc gia giống đực","du",          "Elle vient du Japon."],
+            ["Quốc gia số nhiều", "des",         "Nous revenons des États-Unis."],
+          ]}
+        />
+
+        <SectionTitle text="Imparfait impersonnel (Unité 9)" />
+        <Note text="Mô tả thời tiết / bối cảnh trong quá khứ" color={T.orange} />
+        {[
+          ["Il faisait beau.",     "Trời đẹp (hồi đó)."],
+          ["Il faisait chaud.",    "Trời nóng (hồi đó)."],
+          ["Il y avait du vent.",  "Có gió (hồi đó)."],
+          ["C'était magnifique !", "Thật tuyệt vời!"],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+      </div>
+    );
+
+    case "pronoms_rel": return (
+      <div>
+        <SectionTitle text="Pronoms relatifs — Đại từ quan hệ" />
+        <Note text="Dùng để nối hai mệnh đề, tránh lặp từ." color={T.blue} />
+        <Table
+          headers={["Đại từ", "Chức năng", "Ví dụ"]}
+          rows={[
+            ["qui",  "Chủ ngữ của mệnh đề quan hệ",  "C'est l'homme qui parle."],
+            ["que",  "Tân ngữ trực tiếp (COD)",        "Le film que j'aime est français."],
+          ]}
+        />
+
+        <SectionTitle text="QUI — thay thế chủ ngữ" />
+        <Note text="qui đứng trước động từ của mệnh đề quan hệ" color={T.blue} />
+        {[
+          ["J'ai un ami qui parle vietnamien.",       "Tôi có người bạn nói tiếng Việt."],
+          ["C'est le professeur qui explique bien.",  "Đó là giáo viên giải thích hay."],
+          ["Il cherche quelqu'un qui connaît Paris.", "Anh ấy tìm người biết Paris."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <SectionTitle text="QUE — thay thế tân ngữ (COD)" />
+        <Note text="que / qu' đứng trước chủ ngữ mới. Trước nguyên âm: qu'" color={T.purple} />
+        {[
+          ["Le livre que je lis est intéressant.",   "Cuốn sách tôi đang đọc thú vị."],
+          ["La robe qu'elle achète est rouge.",      "Cái váy cô ấy mua màu đỏ."],
+          ["C'est le film que tu m'as recommandé ?","Đây là bộ phim bạn giới thiệu cho tôi?"],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <SectionTitle text="COD (2) — pronoms me / te / nous / vous (Unité 10)" />
+        <Note text="Đại từ COD ngôi 1 và 2 đứng TRƯỚC động từ" color={T.orange} />
+        <Table
+          headers={["Ngôi", "COD", "Ví dụ"]}
+          rows={[
+            ["je",   "me / m'", "Il me regarde. / Il m'aide."],
+            ["tu",   "te / t'", "Je te vois. / Je t'entends."],
+            ["nous", "nous",    "Il nous invite."],
+            ["vous", "vous",    "Je vous remercie."],
+          ]}
+        />
+        {[
+          ["Il me téléphone tous les soirs.", "Anh ấy gọi điện cho tôi mỗi tối."],
+          ["Elle nous attend devant la gare.", "Cô ấy đợi chúng tôi trước ga."],
+          ["Je vous comprends très bien.",    "Tôi hiểu các bạn rất rõ."],
         ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
       </div>
     );
