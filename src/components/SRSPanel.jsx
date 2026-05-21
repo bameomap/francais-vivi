@@ -1,9 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { C } from "../constants.js";
 import { speak } from "../utils/helpers.js";
-import { callAIText } from "../utils/api.js";
-import SpeakBtn from "./ui/SpeakBtn.jsx";
-import Spinner from "./ui/Spinner.jsx";
+import WordCardBack from "./ui/WordCardBack.jsx";
 import {
   getDueCards, getAllCards, getSRSStats,
   updateSRSCardRating, ratingIntervalLabel,
@@ -64,82 +62,6 @@ function RatingBar({ card, onRate }) {
   );
 }
 
-// ── Word detail card (shown on back after flip) ───────────────
-function CardBack({ card }) {
-  const [details, setDetails] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(`srs_det_${card.fr}`)) || null; } catch { return null; }
-  });
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (details) return;
-    setLoading(true);
-    callAIText(
-      [{ role:"user", content:
-        `Từ tiếng Pháp: "${card.fr}" (nghĩa: ${card.vi || "?"}).\n` +
-        `Trả lời đúng 5 dòng, không thêm gì khác:\n` +
-        `POS: <loại từ ngắn: Danh từ / Động từ / Tính từ / ...>\n` +
-        `IPA: <phiên âm IPA>\n` +
-        `DEF: <định nghĩa 1 câu tiếng Việt>\n` +
-        `EX_FR: <1 câu ví dụ ngắn tiếng Pháp>\n` +
-        `EX_VI: <dịch tiếng Việt>`
-      }],
-      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 5 dòng format."
-    ).then(text => {
-      const get = tag => text.match(new RegExp(`^${tag}:\\s*(.+)`, "m"))?.[1]?.trim() || "";
-      const result = { pos:get("POS"), ipa:get("IPA"), def:get("DEF"), ex_fr:get("EX_FR"), ex_vi:get("EX_VI") };
-      localStorage.setItem(`srs_det_${card.fr}`, JSON.stringify(result));
-      setDetails(result);
-    }).catch(() => {}).finally(() => setLoading(false));
-  }, [card.fr]);
-
-  return (
-    <div style={{ width:"100%", height:"100%", display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center", padding:"1.4rem 1.5rem", gap:"0.55rem" }}>
-      {/* Word + POS tag */}
-      <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", flexWrap:"wrap" }}>
-        <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.9rem", color:C.ink, fontWeight:700, lineHeight:1 }}>
-          {card.fr}
-        </span>
-        {details?.pos && (
-          <span style={{ background:C.blue, color:"#fff", fontSize:"0.66rem", fontWeight:700, padding:"0.18rem 0.6rem", borderRadius:20 }}>
-            {details.pos}
-          </span>
-        )}
-      </div>
-
-      {/* Vietnamese translation */}
-      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:C.blue, fontWeight:600 }}>
-        {card.vi || "—"}
-      </div>
-
-      {/* IPA + speak */}
-      <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-        {details?.ipa
-          ? <span style={{ fontFamily:"'Courier New',monospace", fontSize:"0.82rem", color:"#6D28D9", background:"#F5F0FF", borderRadius:8, padding:"0.15rem 0.5rem" }}>/{details.ipa}/</span>
-          : null
-        }
-        <SpeakBtn text={card.fr} />
-      </div>
-
-      {/* Definition */}
-      {loading
-        ? <div style={{ display:"flex", alignItems:"center", gap:"0.4rem" }}><Spinner size={13}/><span style={{ fontSize:"0.7rem", color:C.gray }}>Đang tải…</span></div>
-        : details?.def
-          ? <div style={{ fontSize:"0.8rem", color:C.gray, lineHeight:1.6 }}>{details.def}</div>
-          : null
-      }
-
-      {/* Example */}
-      {details?.ex_fr && (
-        <div style={{ background:"#FFFBEB", borderRadius:12, padding:"0.6rem 0.85rem", border:"1px solid #FDE68A", width:"100%", boxSizing:"border-box" }}>
-          <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1.5, color:"#D97706", fontWeight:700, marginBottom:"0.3rem" }}>✦ Ví dụ</div>
-          <div style={{ fontSize:"0.8rem", color:C.ink, fontStyle:"italic", lineHeight:1.55, marginBottom:"0.2rem" }}>{details.ex_fr}</div>
-          <div style={{ fontSize:"0.72rem", color:C.gray }}>↳ {details.ex_vi}</div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ── Flip card ────────────────────────────────────────────────
 function FlipCard({ card, flipped, onFlip }) {
@@ -187,7 +109,7 @@ function FlipCard({ card, flipped, onFlip }) {
           boxShadow:"0 6px 28px rgba(0,0,0,0.09)", border:`1.5px solid ${C.border}`,
           overflow:"hidden",
         }}>
-          <CardBack card={card} />
+          <WordCardBack word={card} />
         </div>
       </div>
     </div>

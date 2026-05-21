@@ -61,15 +61,17 @@ export default function WordDetailSheet({ word, onClose }) {
         style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.45)", zIndex:500, animation:"fadeIn 0.2s ease" }}
       />
 
-      {/* Sheet */}
+      {/* Sheet — centered + max-width on desktop */}
       <div style={{
-        position:"fixed", bottom:0, left:0, right:0, zIndex:510,
+        position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)",
+        width:"100%", maxWidth:560, zIndex:510,
         background:C.white,
         borderRadius:"24px 24px 0 0",
-        maxHeight:"85vh",
+        maxHeight:"88vh",
         overflowY:"auto",
         animation:"slideUp 0.3s cubic-bezier(0.32,0.72,0,1)",
         paddingBottom:"env(safe-area-inset-bottom, 16px)",
+        boxShadow:"0 -8px 40px rgba(0,0,0,0.18)",
       }}>
         {/* Drag handle */}
         <div style={{ display:"flex", justifyContent:"center", padding:"0.7rem 0 0.2rem" }}>
