@@ -566,23 +566,26 @@ function AppInner() {
                         return (
                           <button key={m.id} className="card-hover"
                             onClick={()=>goSection(m.id, m.view)}
-                            style={{ background:m.bg, border:`1.5px solid ${m.color}33`, borderRadius:20, padding:"1.1rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.25s ease ${i*0.05}s both`, position:"relative", boxShadow:`0 2px 12px ${m.color}18` }}>
+                            style={{ background:m.bg, border:`1.5px solid ${m.color}33`, borderRadius:16, padding:"0.8rem 0.9rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.25s ease ${i*0.05}s both`, position:"relative", boxShadow:`0 2px 12px ${m.color}18` }}>
                             {m.id==="srs" && srsStats.due>0 && (
                               <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
                                 {srsStats.due}
                               </div>
                             )}
-                            <div style={{ width:46, height:46, borderRadius:13, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.55rem", fontSize:"1.5rem" }}>{m.icon}</div>
-                            <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem" }}>{m.label}</div>
-                            <div style={{ fontSize:"0.68rem", color:m.color, fontStyle:"italic", marginBottom:used?"0.5rem":"0" }}>{m.fr}</div>
-                            {used && (
-                              <>
-                                <div style={{ height:3, background:`${m.color}22`, borderRadius:999, marginBottom:"0.25rem" }}>
-                                  <div style={{ height:"100%", width:`${pct}%`, background:m.color, borderRadius:999 }}/>
-                                </div>
-                                <div style={{ fontSize:"0.62rem", color:m.color, fontWeight:600 }}>{p.count} lần · {pct}%</div>
-                              </>
-                            )}
+                            <div style={{ display:"flex", alignItems:"center", gap:"0.6rem" }}>
+                              <div style={{ width:38, height:38, borderRadius:11, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 5px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:"1.3rem" }}>{m.icon}</div>
+                              <div style={{ flex:1, minWidth:0 }}>
+                                <div style={{ fontSize:"0.88rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{m.label}</div>
+                                <div style={{ fontSize:"0.62rem", color:m.color, fontStyle:"italic", marginTop:"0.1rem" }}>{m.fr}</div>
+                                {used && (
+                                  <div style={{ marginTop:"0.35rem" }}>
+                                    <div style={{ height:3, background:`${m.color}22`, borderRadius:999 }}>
+                                      <div style={{ height:"100%", width:`${pct}%`, background:m.color, borderRadius:999 }}/>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
                           </button>
                         );
                       })}
@@ -602,24 +605,28 @@ function AppInner() {
                     return (
                       <button key={g.id} className="card-hover"
                         onClick={()=>setActiveGroup(g.id)}
-                        style={{ background:g.bg, border:`1.5px solid ${g.color}44`, borderRadius:22, padding:"1.2rem 1.1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.3s ease ${i*0.06}s both`, position:"relative", boxShadow:`0 3px 16px ${g.color}18` }}>
+                        style={{ background:g.bg, border:`1.5px solid ${g.color}44`, borderRadius:18, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.3s ease ${i*0.06}s both`, position:"relative", boxShadow:`0 3px 16px ${g.color}18` }}>
                         {hasSRSDue && (
                           <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
                             {srsStats.due}
                           </div>
                         )}
-                        <div style={{ width:52, height:52, borderRadius:14, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 8px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"0.65rem" }}>
-                          <g.LucideIcon size={26} color={g.color} strokeWidth={2} />
+                        <div style={{ display:"flex", alignItems:"center", gap:"0.65rem", marginBottom:"0.55rem" }}>
+                          <div style={{ width:40, height:40, borderRadius:12, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                            <g.LucideIcon size={22} color={g.color} strokeWidth={2} />
+                          </div>
+                          <div>
+                            <div style={{ fontSize:"0.95rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{g.label}</div>
+                            <div style={{ fontSize:"0.62rem", color:g.color, fontWeight:600, marginTop:"0.1rem" }}>{g.desc}</div>
+                          </div>
                         </div>
-                        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>{g.label}</div>
-                        <div style={{ fontSize:"0.67rem", color:g.color, fontWeight:600, marginBottom:"0.5rem" }}>{g.desc}</div>
-                        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem", marginBottom:"0.5rem" }}>
+                        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.2rem" }}>
                           {groupModules.map(m => (
-                            <span key={m.id} style={{ fontSize:"0.6rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.4rem", fontWeight:500 }}>{m.label}</span>
+                            <span key={m.id} style={{ fontSize:"0.58rem", background:`${g.color}18`, color:g.color, borderRadius:20, padding:"0.05rem 0.38rem", fontWeight:500 }}>{m.label}</span>
                           ))}
                         </div>
                         {totalUses > 0 && (
-                          <div style={{ fontSize:"0.6rem", color:g.color, opacity:0.8, fontWeight:600 }}>{totalUses} lần học</div>
+                          <div style={{ fontSize:"0.58rem", color:g.color, opacity:0.75, fontWeight:600, marginTop:"0.35rem" }}>{totalUses} lần học</div>
                         )}
                       </button>
                     );
