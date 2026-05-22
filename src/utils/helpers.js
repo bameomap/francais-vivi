@@ -38,8 +38,16 @@ function speakFallback(text, cb) {
   window.speechSynthesis.speak(u);
 }
 
+let _currentAudio = null;
+let _speakGeneration = 0;
+
+function cancelCurrent() {
+  _speakGeneration++;
+  if (_currentAudio) { _currentAudio.pause(); _currentAudio.src = ""; _currentAudio = null; }
+  window.speechSynthesis?.cancel();
+}
+
 function splitSentences(text) {
-  // Split on sentence-ending punctuation, keep each chunk ≤ 180 chars for Google TTS
   const raw = text.match(/[^.!?…]+[.!?…]*/g) || [text];
   const chunks = [];
   let cur = "";
@@ -51,24 +59,41 @@ function splitSentences(text) {
   return chunks.filter(Boolean);
 }
 
-async function speakChunk(chunk, cb) {
+async function speakChunk(chunk, gen) {
   try {
     const audio = new Audio(`/api/tts?text=${encodeURIComponent(chunk)}`);
+    _currentAudio = audio;
     await new Promise((resolve, reject) => {
       audio.onended = resolve;
       audio.onerror = reject;
       audio.play().catch(reject);
     });
-    cb?.();
+    _currentAudio = null;
   } catch {
-    speakFallback(chunk, cb);
+    if (gen !== _speakGeneration) return;
+    await new Promise(res => {
+      if (!window.speechSynthesis) return res();
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(chunk);
+      u.lang = "fr-FR"; u.rate = 0.88; u.pitch = 1.0;
+      const voices = window.speechSynthesis.getVoices();
+      const PREF = ["Thomas", "Amélie", "Google français", "fr-FR", "fr-"];
+      let voice = null;
+      for (const p of PREF) { voice = voices.find(v => v.name.includes(p) || v.lang.startsWith(p)); if (voice) break; }
+      if (voice) u.voice = voice;
+      u.onend = res;
+      window.speechSynthesis.speak(u);
+    });
   }
 }
 
 export async function speak(text, onEnd) {
+  cancelCurrent();
+  const gen = _speakGeneration;
   const chunks = splitSentences(text);
-  for (let i = 0; i < chunks.length; i++) {
-    const isLast = i === chunks.length - 1;
-    await speakChunk(chunks[i], isLast ? (onEnd || undefined) : undefined);
+  for (const chunk of chunks) {
+    if (gen !== _speakGeneration) return;
+    await speakChunk(chunk, gen);
   }
+  if (gen === _speakGeneration) onEnd?.();
 }
