@@ -23,10 +23,13 @@ export async function callAIText(messages, systemPrompt) {
   const res = await fetch("/api/proxy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 800, system: systemPrompt, messages }),
+    body: JSON.stringify({ model: MODEL, max_tokens: 1024, system: systemPrompt, messages }),
   });
-  const data = await res.json();
+  let data;
+  try { data = await res.json(); }
+  catch { throw new Error(`Lỗi kết nối máy chủ (${res.status}). Vui lòng thử lại.`); }
   if (data.error) throw new Error(data.error.message);
+  if (!data.content) throw new Error("Phản hồi không hợp lệ từ AI. Vui lòng thử lại.");
   return data.content.map((c) => c.text || "").join("").trim();
 }
 
