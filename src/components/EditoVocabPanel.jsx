@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { C } from "../constants.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { callAI, callAIBatched, buildPrompt } from "../utils/api.js";
@@ -284,6 +284,15 @@ function ExtraVocabView({ onBack }) {
 export default function EditoVocabPanel() {
   const [activeUnit, setActiveUnit]   = useState(null);
   const [showExtra, setShowExtra]     = useState(false);
+
+  useEffect(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      const unit = EDITO_VOCAB_UNITS[Number(idx)];
+      if (unit) setActiveUnit(unit.id);
+      localStorage.removeItem("parcours_unit_idx");
+    }
+  }, []);
 
   if (showExtra) return <ExtraVocabView onBack={() => setShowExtra(false)} />;
 

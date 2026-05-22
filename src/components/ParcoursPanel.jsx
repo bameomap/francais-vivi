@@ -161,9 +161,23 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
       markStepDone(unitId, step.id);
       setProgress(getUnitStepProgress(unitId));
     }
-    // Navigate to the relevant module if it has a real view
-    if (["lecture","dictee","conversation"].includes(step.view)) {
-      onNavigate(step.view);
+    const unitIdx = PARCOURS_UNITS.findIndex(u => u.id === unitId);
+    if (step.id === "vocab") {
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
+      onNavigate("vocab", "edito");
+    } else if (step.id === "grammar") {
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
+      onNavigate("grammar", "grammar");
+    } else if (step.id === "lecture") {
+      localStorage.setItem("parcours_writing_idx", String(Math.max(0, unitIdx - 1)));
+      onNavigate("writing", "writing");
+    } else if (step.id === "parler") {
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
+      onNavigate("conversation", "conversation");
+    } else if (step.id === "ecouter") {
+      onNavigate("dictee", "dictee");
+    } else {
+      onNavigate(step.view, step.view);
     }
   }, [unitId, progress, onNavigate]);
 

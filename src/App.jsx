@@ -1002,7 +1002,7 @@ function AppInner() {
             {view==="examples" && <ExamplesView words={words}/>}
 
             {/* Panels */}
-            {view==="parcours"      && <ParcoursPanel onNavigate={v => { setView(v); }} />}
+            {view==="parcours"      && <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} />}
             {view==="grammar"       && <GrammarPanel/>}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && <WritingPanel/>}

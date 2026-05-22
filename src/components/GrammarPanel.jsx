@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -1915,8 +1915,15 @@ export function GrammarExplanation({ rules, text }) {
 }
 
 // ── Edito unit list (primary grammar view) ────────────────
-function EditoGrammarView() {
+function EditoGrammarView({ defaultUnitIndex }) {
   const [selectedUnit, setSelectedUnit] = useState(null);
+
+  useEffect(() => {
+    if (defaultUnitIndex != null) {
+      const unit = EDITO_GRAMMAR[defaultUnitIndex] || EDITO_GRAMMAR[0];
+      if (unit) setSelectedUnit(unit);
+    }
+  }, [defaultUnitIndex]);
   const [openPoints, setOpenPoints]     = useState(new Set());
   const [activeExercise, setActiveExercise] = useState(null); // {topic}
   const [loading, setLoading]   = useState(false);
@@ -2221,6 +2228,11 @@ function CustomExerciseView() {
 
 export default function GrammarPanel() {
   const [panelTab, setPanelTab] = useState("edito");
+  const [initUnit] = useState(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) { localStorage.removeItem("parcours_unit_idx"); return Number(idx); }
+    return null;
+  });
 
   const TABS = [
     { id:"edito",  label:"📘 Edito A1"  },
@@ -2241,7 +2253,7 @@ export default function GrammarPanel() {
   return (
     <div>
       {tabBar}
-      {panelTab === "edito"  && <EditoGrammarView />}
+      {panelTab === "edito"  && <EditoGrammarView defaultUnitIndex={initUnit} />}
       {panelTab === "custom" && <CustomExerciseView />}
     </div>
   );

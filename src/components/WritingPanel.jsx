@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -26,7 +26,16 @@ export default function WritingPanel() {
     try { return JSON.parse(localStorage.getItem("writing_history") || "[]"); } catch { return []; }
   });
   const [editoUnit, setEditoUnit] = useState(0);
-  const [editoTask, setEditoTask] = useState(null); // { title, task }
+  const [editoTask, setEditoTask] = useState(null);
+
+  useEffect(() => {
+    const idx = localStorage.getItem("parcours_writing_idx");
+    if (idx !== null) {
+      setTab("edito");
+      setEditoUnit(Number(idx));
+      localStorage.removeItem("parcours_writing_idx");
+    }
+  }, []); // { title, task }
 
   const check = async (contextTask) => {
     if (!input.trim()) return;

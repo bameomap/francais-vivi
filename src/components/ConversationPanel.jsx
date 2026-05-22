@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+
 import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import { awardXP } from "../utils/xp.js";
@@ -84,9 +85,18 @@ export default function ConversationPanel() {
   const [showPhrases, setShowPhrases] = useState(false);
   const [correcting,  setCorrecting]  = useState(null);
   const [corrections, setCorrections] = useState({});
-  const [mode,        setMode]        = useState("libre"); // "libre" | "edito"
+  const [mode,        setMode]        = useState("libre");
   const [selUnit,     setSelUnit]     = useState(0);
   const bottomRef = useRef(null);
+
+  useEffect(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      setMode("edito");
+      setSelUnit(Number(idx));
+      localStorage.removeItem("parcours_unit_idx");
+    }
+  }, []);
 
   const startScenario = async (sc) => {
     setScenario(sc); setMessages([]); setInput(""); setErr(""); setLoading(true); setShowPhrases(false);
