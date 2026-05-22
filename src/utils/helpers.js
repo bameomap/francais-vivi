@@ -27,7 +27,6 @@ function speakFallback(text, cb) {
   u.rate = 0.88;
   u.pitch = 1.0;
   const voices = window.speechSynthesis.getVoices();
-  // prefer natural-sounding French voices in order
   const PREF = ["Thomas", "Amélie", "Google français", "fr-FR", "fr-"];
   let voice = null;
   for (const p of PREF) {
@@ -39,14 +38,37 @@ function speakFallback(text, cb) {
   window.speechSynthesis.speak(u);
 }
 
-export async function speak(text, onEnd) {
-  const cb = onEnd || (() => {});
+function splitSentences(text) {
+  // Split on sentence-ending punctuation, keep each chunk ≤ 180 chars for Google TTS
+  const raw = text.match(/[^.!?…]+[.!?…]*/g) || [text];
+  const chunks = [];
+  let cur = "";
+  for (const s of raw) {
+    if ((cur + s).length > 180 && cur) { chunks.push(cur.trim()); cur = s; }
+    else cur += s;
+  }
+  if (cur.trim()) chunks.push(cur.trim());
+  return chunks.filter(Boolean);
+}
+
+async function speakChunk(chunk, cb) {
   try {
-    const audio = new Audio(`/api/tts?text=${encodeURIComponent(text)}`);
-    audio.onended = cb;
-    audio.onerror = () => speakFallback(text, cb);
-    await audio.play();
+    const audio = new Audio(`/api/tts?text=${encodeURIComponent(chunk)}`);
+    await new Promise((resolve, reject) => {
+      audio.onended = resolve;
+      audio.onerror = reject;
+      audio.play().catch(reject);
+    });
+    cb?.();
   } catch {
-    speakFallback(text, cb);
+    speakFallback(chunk, cb);
+  }
+}
+
+export async function speak(text, onEnd) {
+  const chunks = splitSentences(text);
+  for (let i = 0; i < chunks.length; i++) {
+    const isLast = i === chunks.length - 1;
+    await speakChunk(chunks[i], isLast ? (onEnd || undefined) : undefined);
   }
 }
