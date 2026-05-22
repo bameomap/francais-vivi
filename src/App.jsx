@@ -16,67 +16,64 @@ import GrammarPanel from "./components/GrammarPanel.jsx";
 import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./components/VocabGenerator.jsx";
 import DefiPanel from "./components/DefiPanel.jsx";
 import SRSPanel from "./components/SRSPanel.jsx";
-import ReferencePanel from "./components/ReferencePanel.jsx";
+import ReferenceHub from "./components/ReferenceHub.jsx";
+import ParcoursPanel from "./components/ParcoursPanel.jsx";
 import MotDuJour from "./components/MotDuJour.jsx";
 import LecturePanel from "./components/LecturePanel.jsx";
 import DicteePanel from "./components/DicteePanel.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
-import PhrasebookPanel from "./components/PhrasebookPanel.jsx";
 import RevisionPanel from "./components/RevisionPanel.jsx";
-import ConjugaisonPanel from "./components/ConjugaisonPanel.jsx";
 import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
 import EditoVocabPanel from "./components/EditoVocabPanel.jsx";
 import ListeningQuiz from "./components/ListeningQuiz.jsx";
 import SentenceBuilder from "./components/SentenceBuilder.jsx";
-import GrammarCheatsheet from "./components/GrammarCheatsheet.jsx";
-import { addWordToSRS, getSRSStats, getMasteredSet } from "./utils/srs.js";
+import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
+import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
+import { PARCOURS_UNITS } from "./data/parcoursData.js";
 
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
   // Học
-  { id:"vocab",        group:"hoc", label:"Từ vựng",      fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"edito"        },
-  { id:"topics",       group:"hoc", label:"Chủ đề A1",    fr:"Les Thèmes",       icon:"📚", color:"#4A90D9", bg:"#EBF4FF", view:"topics"       },
-  { id:"grammar",      group:"hoc", label:"Ngữ pháp",      fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"      },
-  { id:"cheatsheet",   group:"hoc", label:"Tra cứu nhanh", fr:"La Référence Rapide", icon:"📋", color:"#7B6CF6", bg:"#F0EEFF", view:"cheatsheet"   },
-  { id:"sentence",     group:"hoc", label:"Câu ghép từ",   fr:"Les Phrases",      icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"sentence"     },
-  { id:"conjugaison",  group:"hoc", label:"Chia động từ",  fr:"La Conjugaison",   icon:"🖊️", color:"#0891B2", bg:"#F0F9FF", view:"conjugaison"  },
-  { id:"reference",    group:"hoc", label:"Cẩm nang",      fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference"    },
-  { id:"phrasebook",   group:"hoc", label:"Mẫu câu",       fr:"Le Phrasebook",    icon:"💬", color:"#D97706", bg:"#FFFBEB", view:"phrasebook"   },
+  { id:"vocab",         group:"hoc",    label:"Từ vựng",    fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"edito"         },
+  { id:"parcours",      group:"hoc",    label:"Lộ trình",   fr:"Le Parcours",      icon:"🛤️", color:"#E8574A", bg:"#FFF0EF", view:"parcours"      },
+  { id:"grammar",       group:"hoc",    label:"Ngữ pháp",   fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"       },
+  { id:"reference_hub", group:"hoc",    label:"Tra cứu",    fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference_hub" },
+  { id:"sentence",      group:"hoc",    label:"Câu ghép từ",fr:"Les Phrases",      icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"sentence"      },
   // Luyện
-  { id:"conversation", group:"luyen", label:"Giao tiếp",   fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation" },
-  { id:"writing",      group:"luyen", label:"Luyện viết",  fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"      },
-  { id:"defi",         group:"luyen", label:"Thử thách",   fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"         },
-  { id:"lecture",      group:"luyen", label:"Đọc hiểu",    fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"      },
-  { id:"dictee",       group:"luyen", label:"Nghe chép",   fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"dictee"       },
-  { id:"srs",          group:"luyen", label:"Thẻ ôn tập",  fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"          },
-  { id:"listening",    group:"luyen", label:"Nghe chọn",   fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"listening"    },
-  { id:"revision",     group:"luyen", label:"Ôn sai",      fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"     },
+  { id:"conversation",  group:"luyen",  label:"Giao tiếp",  fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation"  },
+  { id:"writing",       group:"luyen",  label:"Luyện viết", fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"       },
+  { id:"defi",          group:"luyen",  label:"Thử thách",  fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"          },
+  { id:"lecture",       group:"luyen",  label:"Đọc hiểu",   fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"       },
+  { id:"dictee",        group:"luyen",  label:"Nghe chép",  fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"dictee"        },
+  { id:"srs",           group:"luyen",  label:"Thẻ ôn tập", fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"           },
+  { id:"listening",     group:"luyen",  label:"Nghe chọn",  fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"listening"     },
+  { id:"revision",      group:"luyen",  label:"Ôn sai",     fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"      },
   // Công cụ
-  { id:"stats",        group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"        },
+  { id:"stats",         group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"         },
 ];
 
 const GROUP_DEFS = [
-  { id:"vocab",    icon:"📖", LucideIcon:BookOpen,    label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",        moduleIds:["vocab","topics","srs"] },
-  { id:"grammar",  icon:"⚜️", LucideIcon:Award,       label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",    moduleIds:["grammar","cheatsheet","conjugaison","sentence","reference","phrasebook"] },
+  { id:"vocab",    icon:"📖", LucideIcon:BookOpen,    label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",         moduleIds:["vocab","parcours","srs"] },
+  { id:"grammar",  icon:"⚜️", LucideIcon:Award,       label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",     moduleIds:["grammar","reference_hub","sentence"] },
   { id:"practice", icon:"🥐", LucideIcon:Target,      label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee","listening"] },
-  { id:"progress", icon:"📈", LucideIcon:TrendingUp,  label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",      moduleIds:["stats","revision"] },
+  { id:"progress", icon:"📈", LucideIcon:TrendingUp,  label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",       moduleIds:["stats","revision"] },
 ];
 
 const TABS = [
-  { id:"home",    icon:"🗼", LucideIcon:Home,       label:"Trang chủ" },
-  { id:"vocab",   icon:"📖", LucideIcon:BookOpen,   label:"Từ vựng"   },
-  { id:"grammar", icon:"⚜️", LucideIcon:Award,      label:"Ngữ pháp"  },
-  { id:"writing", icon:"🖋️", LucideIcon:PenTool,    label:"Luyện viết"},
-  { id:"srs",     icon:"🃏", LucideIcon:Layers,     label:"Ôn tập"    },
+  { id:"home",    glyph:"⌂",  label:"Home",    section:"home",         view:"home",         color:null          },
+  { id:"lire",    glyph:"Aa", label:"Lire",    section:"lecture",      view:"lecture",      color:"#4A90D9"     },
+  { id:"ecouter", glyph:"))", label:"Écouter", section:"dictee",       view:"dictee",       color:"#7B6CF6"     },
+  { id:"parler",  glyph:"••", label:"Parler",  section:"conversation", view:"conversation", color:"#E67E22"     },
+  { id:"ecrire",  glyph:"/",  label:"Écrire",  section:"writing",      view:"writing",      color:"#10B981"     },
 ];
 
 const SECTION_TITLE = {
-  vocab:"Le Vocabulaire", grammar:"La Grammaire", conversation:"La Conversation",
-  writing:"L'Écriture", defi:"Le Défi du Jour", reference:"La Référence",
+  vocab:"Le Vocabulaire", parcours:"Le Parcours", grammar:"La Grammaire", conversation:"La Conversation",
+  writing:"L'Écriture", defi:"Le Défi du Jour", reference_hub:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée",
-  phrasebook:"Le Phrasebook", revision:"La Révision", stats:"Les Statistiques",
-  conjugaison:"La Conjugaison", topics:"Les Thèmes A1", listening:"L'Écoute Active", sentence:"Les Phrases", cheatsheet:"La Référence Rapide",
+  revision:"La Révision", stats:"Les Statistiques",
+  listening:"L'Écoute Active", sentence:"Les Phrases",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -150,6 +147,7 @@ function AppInner() {
   const [srsStats, setSrsStats]         = useState(getSRSStats);
   const [filterMastered, setFilterMastered] = useState(true);
   const [vocabSearch, setVocabSearch]       = useState("");
+  const [vocabFilter, setVocabFilter]       = useState("all");
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem("dark_mode") === "1";
     if (saved) applyTheme(true);
@@ -404,40 +402,37 @@ function AppInner() {
       )}
 
       {/* ══════════════════════════════════════
-          HOME PAGE
+          HOME PAGE — Today Screen
       ══════════════════════════════════════ */}
       {section==="home" && (
         <div style={{ minHeight:"100vh", display:"flex", flexDirection:"column", paddingBottom:80 }}>
 
           {/* ── Top bar ── */}
-          {!activeGroup && <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"1.1rem 1.25rem 0" }}>
-            {/* Logo */}
-            <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-              <img src="/logo.svg" alt="Vivi Learns Français" style={{ width:36, height:36, borderRadius:9 }} />
-              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, letterSpacing:"0.03em" }}>Français</span>
+          <div style={{ padding:"6px 16px 12px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:8 }}>
+            <div style={{ display:"flex", gap:10, alignItems:"center", minWidth:0, flexShrink:1 }}>
+              {/* French flag mini */}
+              <div style={{ width:28, height:28, borderRadius:7, background:"linear-gradient(90deg, #002395 33%, #fff 33%, #fff 66%, #ED2939 66%)", boxShadow:"0 1px 3px rgba(0,0,0,0.1)", flexShrink:0 }}/>
+              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:16, letterSpacing:"-0.01em", color:C.ink, whiteSpace:"nowrap" }}>Français</span>
             </div>
-            {/* Right: dark toggle + streak */}
-            <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
+            <div style={{ display:"flex", gap:6, alignItems:"center", flexShrink:0 }}>
+              {/* Combined streak + XP chip */}
+              <span style={{ background:C.cream, padding:"4px 10px", borderRadius:999, fontWeight:700, display:"inline-flex", alignItems:"center", gap:5, color:C.ink, fontSize:11.5, border:`1px solid ${C.border}` }}>
+                <span style={{ color:C.accent }}>🔥</span>{streakData.streak}
+                <span style={{ color:C.gray2, fontWeight:400 }}>·</span>
+                <span style={{ color:C.gold }}>★</span>{xpData.total||0}
+              </span>
               <button onClick={toggleDark}
-                style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.25rem 0.55rem", fontSize:"0.85rem", cursor:"pointer", lineHeight:1 }}
-                title={dark ? "Chế độ sáng" : "Chế độ tối"}>
+                style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"3px 8px", fontSize:"0.82rem", cursor:"pointer", lineHeight:1 }}>
                 {dark ? "☀️" : "🌙"}
               </button>
-              <div style={{ display:"flex", alignItems:"center", gap:"0.35rem", background:streakData.streak>0?C.goldL:C.cream, border:`1.5px solid ${streakData.streak>0?C.gold:C.border}`, borderRadius:24, padding:"0.3rem 0.75rem" }}>
-                <span style={{ fontSize:"0.85rem" }}>{streakData.streak>0?"🔥":"📅"}</span>
-                <span style={{ fontSize:"0.75rem", color:streakData.streak>0?C.gold:C.gray, fontWeight:600 }}>
-                  {streakData.streak>0 ? `${streakData.streak} ngày` : "Hôm nay"}
-                </span>
-                {streakData.studiedToday && <span style={{ fontSize:"0.6rem", background:C.green, color:C.white, borderRadius:20, padding:"0.08rem 0.35rem", fontWeight:600 }}>✓</span>}
-              </div>
             </div>
-          </div>}
+          </div>
 
-          {/* ── Greeting ── */}
-          {!activeGroup && <div style={{ padding:"1.2rem 1.25rem 0.5rem", animation:"fadeUp 0.4s ease" }}>
-            <div style={{ fontSize:"0.78rem", color:C.gray, marginBottom:"0.15rem" }}>Bonjour 🇫🇷</div>
-            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, lineHeight:1.2, marginBottom:"0.6rem" }}>
-              {userName || "Bạn ơi"}!
+          {/* ── Greeting + Minou ── */}
+          <div style={{ padding:"0 16px 4px", animation:"fadeUp 0.4s ease" }}>
+            <div style={{ fontSize:12, color:C.gray, marginBottom:2 }}>Bonjour,</div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:28, lineHeight:1.1, fontWeight:700, letterSpacing:"-0.02em", color:C.ink, marginBottom:8 }}>
+              {userName || "Bạn"} 🇫🇷
             </div>
             <Minou
               mood={streakData.streak >= 7 ? "excited" : srsStats.due === 0 && srsStats.total > 0 ? "proud" : "happy"}
@@ -449,208 +444,159 @@ function AppInner() {
               }
               align="left"
             />
-          </div>}
+          </div>
 
-          {/* ── Bài hôm nay + MotDuJour + XP (hidden when group open) ── */}
-          {!activeGroup && <>
-          {srsStats.due > 0 ? (
-            <div style={{ margin:"0.85rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
-              <div style={{ background:"linear-gradient(135deg, #0D9488, #0891B2)", borderRadius:22, padding:"1.1rem 1.4rem", color:C.white, boxShadow:"0 8px 30px #0D948866" }}>
-                <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.25rem" }}>BÀI HÔM NAY</div>
-                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-                  <div>
-                    <div style={{ fontSize:"1.1rem", fontWeight:700, display:"flex", alignItems:"center", gap:"0.4rem" }}><Brain size={20} />Ôn tập SRS</div>
-                    <div style={{ fontSize:"0.82rem", opacity:0.9, marginTop:"0.2rem" }}>
-                      <span style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.4rem", fontWeight:700 }}>{srsStats.due}</span>
-                      {" "}từ đang chờ được ôn lại
-                    </div>
-                  </div>
-                  <button className="card-hover" onClick={()=>goSection("srs","srs")}
-                    style={{ background:C.white, color:"#0D9488", border:"none", borderRadius:999, padding:"0.5rem 1.1rem", fontSize:"0.8rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap", flexShrink:0 }}>
-                    Ôn ngay →
-                  </button>
-                </div>
-              </div>
-              {/* Secondary: last module if exists */}
-              {lastModule && (
-                <div style={{ background:C.white, border:`1.5px solid ${lastModule.color}33`, borderRadius:16, padding:"0.85rem 1.1rem", marginTop:"0.6rem", display:"flex", alignItems:"center", gap:"0.8rem" }}>
-                  <div style={{ width:48, height:48, borderRadius:13, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:"1.4rem" }}>{lastModule.icon}</div>
-                  <div style={{ flex:1, minWidth:0 }}>
-                    <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.1rem", textTransform:"uppercase", letterSpacing:1 }}>Tiếp tục</div>
-                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, fontWeight:700 }}>{lastModule.label}</div>
-                    <div style={{ height:3, background:`${lastModule.color}22`, borderRadius:999, marginTop:"0.35rem" }}>
-                      <div style={{ height:"100%", width:`${moduleProgress}%`, background:lastModule.color, borderRadius:999 }}/>
-                    </div>
-                  </div>
-                  <button onClick={()=>goSection(lastModule.id, lastModule.view)}
-                    style={{ background:lastModule.bg, color:lastModule.color, border:`1.5px solid ${lastModule.color}44`, borderRadius:999, padding:"0.35rem 0.9rem", fontSize:"0.75rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap", flexShrink:0 }}>
-                    →
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : srsStats.total > 0 ? (
-            /* All SRS done today */
-            <div style={{ margin:"0.85rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
-              <div style={{ background:"linear-gradient(135deg, #16A34A, #0D9488)", borderRadius:22, padding:"1rem 1.4rem", color:C.white, boxShadow:"0 8px 30px #16A34A44", display:"flex", alignItems:"center", gap:"1rem" }}>
-                <div style={{ fontSize:"2rem" }}>✅</div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", fontWeight:700, marginBottom:"0.15rem" }}>Xong hết rồi!</div>
-                  <div style={{ fontSize:"0.78rem", opacity:0.9 }}>Bạn đã ôn xong {srsStats.total} từ hôm nay 🎉</div>
-                </div>
-                {lastModule && (
-                  <button onClick={()=>goSection(lastModule.id, lastModule.view)}
-                    style={{ background:C.white, color:"#16A34A", border:"none", borderRadius:999, padding:"0.4rem 0.9rem", fontSize:"0.75rem", cursor:"pointer", fontWeight:700, whiteSpace:"nowrap", flexShrink:0 }}>
-                    {lastModule.icon} Tiếp tục
-                  </button>
-                )}
-              </div>
-            </div>
-          ) : lastModule ? (
-            <div style={{ margin:"0.85rem 1.25rem 0", background:`linear-gradient(135deg, ${lastModule.color}ee, ${C.blue}cc)`, borderRadius:22, padding:"1.3rem 1.4rem", color:C.white, boxShadow:`0 8px 30px ${lastModule.color}44`, animation:"fadeUp 0.4s ease 0.05s both" }}>
-              <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.35rem" }}>BÀI HỌC TIẾP THEO</div>
-              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", fontWeight:700, marginBottom:"0.9rem" }}>
-                {lastModule.icon} {lastModule.label}
-              </div>
-              <div style={{ background:"rgba(255,255,255,0.25)", borderRadius:999, height:7, marginBottom:"0.5rem" }}>
-                <div style={{ height:"100%", width:`${moduleProgress}%`, background:C.white, borderRadius:999, transition:"width 0.8s ease" }}/>
-              </div>
-              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                <span style={{ fontSize:"0.75rem", opacity:0.9 }}>{moduleProgress}% hoàn thành</span>
-                <button className="card-hover" onClick={()=>goSection(lastModule.id, lastModule.view)}
-                  style={{ background:C.white, color:lastModule.color, border:"none", borderRadius:999, padding:"0.42rem 1.1rem", fontSize:"0.8rem", cursor:"pointer", fontWeight:700 }}>
-                  Tiếp tục →
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div style={{ margin:"0.85rem 1.25rem 0", background:`linear-gradient(135deg, ${C.blue}, ${C.red})`, borderRadius:22, padding:"1.3rem 1.4rem", color:C.white, boxShadow:`0 8px 30px ${C.blue}44`, animation:"fadeUp 0.4s ease 0.05s both" }}>
-              <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, opacity:0.85, marginBottom:"0.35rem" }}>BẮT ĐẦU TỪ ĐÂY</div>
-              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, marginBottom:"0.5rem" }}>📚 Học từ vựng đầu tiên</div>
-              <div style={{ fontSize:"0.82rem", opacity:0.9, marginBottom:"0.9rem" }}>Nhập từ vựng và luyện tập với AI</div>
-              <button className="card-hover" onClick={()=>goSection("vocab","input")}
-                style={{ background:C.white, color:C.blue, border:"none", borderRadius:999, padding:"0.42rem 1.1rem", fontSize:"0.8rem", cursor:"pointer", fontWeight:700 }}>
-                Bắt đầu →
-              </button>
-            </div>
-          )}
-
-          {/* ── Mot du Jour ── */}
-          <MotDuJour words={words} />
-
-          {/* ── XP Bar ── */}
+          {/* ── Focus card (Parcours-driven) ── */}
           {(() => {
-            const xp    = xpData.total || 0;
-            const level = getLevel(xp);
-            const next  = getNextLevel(xp);
-            const pct   = next ? Math.round((xp - level.min) / (next.min - level.min) * 100) : 100;
+            const statuses = computeUnitStatuses();
+            const focusUnit = PARCOURS_UNITS.find(u => statuses[u.id]?.status === "current")
+              || PARCOURS_UNITS.find(u => statuses[u.id]?.status === "next");
+            const overall = computeOverallProgress();
+            if (!focusUnit) return (
+              <div style={{ margin:"0.75rem 1.25rem 0", background:`linear-gradient(135deg, ${C.green}, #059669)`, borderRadius:18, padding:"1.1rem 1.4rem", color:"#fff", animation:"fadeUp 0.4s ease 0.05s both" }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", fontWeight:700 }}>🎉 Parcours hoàn thành!</div>
+                <div style={{ fontSize:"0.78rem", opacity:0.9, marginTop:4 }}>Bạn đã hoàn thành tất cả units A1.</div>
+              </div>
+            );
+            const { pct } = statuses[focusUnit.id] || { pct:0 };
+            const isCurrent = statuses[focusUnit.id]?.status === "current";
             return (
-              <div style={{ margin:"0.75rem 1.25rem 0", background:C.white, borderRadius:14, padding:"0.65rem 1rem", border:`1.5px solid ${C.border}`, display:"flex", alignItems:"center", gap:"0.75rem" }}>
-                <span style={{ fontSize:"1.2rem" }}>{level.icon}</span>
-                <div style={{ flex:1 }}>
-                  <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"0.25rem" }}>
-                    <span style={{ fontSize:"0.72rem", color:level.color, fontWeight:700 }}>{level.label}</span>
-                    <span style={{ fontSize:"0.68rem", color:C.gray }}>{xp} XP{next?` · còn ${next.min-xp} XP`:""}</span>
+              <div style={{ margin:"0.75rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
+                <div style={{ background:`linear-gradient(135deg, ${C.ink} 0%, #2d4f8a 100%)`, borderRadius:18, padding:"1.15rem 1.35rem", color:"#fff", position:"relative", overflow:"hidden" }}>
+                  <div style={{ position:"absolute", right:-18, top:-18, width:90, height:90, borderRadius:"50%", background:"radial-gradient(circle, #E8574A18 0%, transparent 70%)" }}/>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>
+                    {isCurrent ? `UNIT ${focusUnit.num} · ĐANG HỌC` : `UNIT ${focusUnit.num} · TIẾP THEO`}
                   </div>
-                  <div style={{ height:5, background:C.border, borderRadius:999, overflow:"hidden" }}>
-                    <div style={{ height:"100%", width:`${pct}%`, background:level.color, borderRadius:999, transition:"width 0.5s ease" }}/>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", fontWeight:700, lineHeight:1.1, marginBottom:4 }}>
+                    {focusUnit.emoji} {focusUnit.fr}
+                  </div>
+                  <div style={{ fontSize:"0.75rem", opacity:0.75, marginBottom:12 }}>{focusUnit.vi} · {focusUnit.grammar}</div>
+                  <div style={{ background:"rgba(255,255,255,0.18)", borderRadius:999, height:4, marginBottom:8 }}>
+                    <div style={{ height:"100%", width:`${pct}%`, background:"#fff", borderRadius:999, transition:"width 0.8s ease" }}/>
+                  </div>
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+                    <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.65rem", opacity:0.8 }}>
+                      {pct}% · {overall.done}/{overall.total} steps tổng
+                    </span>
+                    <button onClick={()=>goSection("parcours","parcours")}
+                      style={{ background:"rgba(255,255,255,0.18)", color:"#fff", border:"1px solid rgba(255,255,255,0.4)", borderRadius:999, padding:"0.3rem 0.85rem", fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
+                      {isCurrent ? "Tiếp tục →" : "Bắt đầu →"}
+                    </button>
                   </div>
                 </div>
               </div>
             );
           })()}
-          </>}
 
-          {/* ── Module Groups ── */}
-          <div style={{ padding:"0.25rem 1.25rem 0", marginTop:"0.85rem" }}>
-            {activeGroup ? (
-              /* ── Sub-module list ── */
-              (() => {
-                const grp = GROUP_DEFS.find(g => g.id === activeGroup);
-                const subModules = MODULES.filter(m => grp.moduleIds.includes(m.id));
-                return (
-                  <>
-                    <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"0.65rem" }}>
-                      <button onClick={()=>setActiveGroup(null)}
-                        style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.65rem", fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
-                        ← Quay lại
-                      </button>
-                      <grp.LucideIcon size={18} color={grp.color} strokeWidth={2.5} />
-                      <span style={{ fontWeight:700, color:grp.color, fontSize:"0.9rem" }}>{grp.label}</span>
-                    </div>
-                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.7rem" }}>
-                      {subModules.map((m, i) => {
-                        const p = progress[m.id];
-                        const used = p?.count > 0;
-                        const pct = Math.min((p?.count||0)*8, 100);
-                        return (
-                          <button key={m.id} className="card-hover"
-                            onClick={()=>goSection(m.id, m.view)}
-                            style={{ background:m.bg, border:`1.5px solid ${m.color}33`, borderRadius:16, padding:"0.8rem 0.9rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.25s ease ${i*0.05}s both`, position:"relative", boxShadow:`0 2px 12px ${m.color}18` }}>
-                            {m.id==="srs" && srsStats.due>0 && (
-                              <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
-                                {srsStats.due}
-                              </div>
-                            )}
-                            <div style={{ display:"flex", alignItems:"center", gap:"0.6rem" }}>
-                              <div style={{ width:38, height:38, borderRadius:11, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 5px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, fontSize:"1.3rem" }}>{m.icon}</div>
-                              <div style={{ flex:1, minWidth:0 }}>
-                                <div style={{ fontSize:"0.88rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{m.label}</div>
-                                <div style={{ fontSize:"0.62rem", color:m.color, fontStyle:"italic", marginTop:"0.1rem" }}>{m.fr}</div>
-                                {used ? (
-                                  <div style={{ marginTop:"0.35rem" }}>
-                                    <div style={{ height:3, background:`${m.color}22`, borderRadius:999 }}>
-                                      <div style={{ height:"100%", width:`${pct}%`, background:m.color, borderRadius:999 }}/>
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <div style={{ fontSize:"0.6rem", color:m.color, fontWeight:600, marginTop:"0.25rem", opacity:0.7 }}>Bắt đầu →</div>
-                                )}
-                              </div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </>
-                );
-              })()
-            ) : (
-              /* ── Group cards 2×2 ── */
-              <>
-                <div style={{ fontSize:"0.9rem", fontWeight:700, color:C.ink, marginBottom:"0.65rem" }}>Khám phá</div>
-                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.75rem", alignItems:"start" }}>
-                  {GROUP_DEFS.map((g, i) => {
-                    const groupModules = MODULES.filter(m => g.moduleIds.includes(m.id));
-                    const totalUses = groupModules.reduce((sum, m) => sum + (progress[m.id]?.count || 0), 0);
-                    const hasSRSDue = g.moduleIds.includes("srs") && srsStats.due > 0;
-                    return (
-                      <button key={g.id} className="card-hover"
-                        onClick={()=>setActiveGroup(g.id)}
-                        style={{ background:g.bg, border:`1.5px solid ${g.color}44`, borderRadius:18, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.3s ease ${i*0.06}s both`, position:"relative", boxShadow:`0 3px 16px ${g.color}18` }}>
-                        {hasSRSDue && (
-                          <div style={{ position:"absolute", top:-6, right:-6, background:C.red, color:"#fff", borderRadius:999, minWidth:22, height:22, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:700, padding:"0 5px", boxShadow:`0 2px 8px ${C.red}66` }}>
-                            {srsStats.due}
-                          </div>
-                        )}
-                        <div style={{ display:"flex", alignItems:"center", gap:"0.65rem" }}>
-                          <div style={{ width:40, height:40, borderRadius:12, background:"rgba(255,255,255,0.85)", boxShadow:"0 1px 6px rgba(0,0,0,0.08)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-                            <g.LucideIcon size={22} color={g.color} strokeWidth={2} />
-                          </div>
-                          <div style={{ flex:1, minWidth:0 }}>
-                            <div style={{ fontSize:"0.92rem", color:C.ink, fontWeight:700, lineHeight:1.2 }}>{g.label}</div>
-                            <div style={{ fontSize:"0.6rem", color:g.color, fontWeight:500, marginTop:"0.15rem", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>
-                              {totalUses > 0 ? `${totalUses} lần học · ${groupModules.length} bài` : `${groupModules.length} bài học`}
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </>
-            )}
+          {/* ── 3-stat row ── */}
+          <div style={{ margin:"0.75rem 16px 0", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:7, animation:"fadeUp 0.4s ease 0.1s both" }}>
+            {[
+              { val:srsStats.mastered,    lbl:"Từ thuộc",     color:C.green  },
+              { val:srsStats.due,         lbl:"Cần ôn",       color:C.gold   },
+              { val:wrongAnswers.length,  lbl:"Sai gần đây",  color:C.accent },
+            ].map(({ val, lbl, color }) => (
+              <div key={lbl} style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:12, padding:"10px 8px", textAlign:"center" }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:22, fontWeight:700, color, lineHeight:1 }}>{val}</div>
+                <div style={{ fontSize:10.5, color:C.gray, marginTop:4 }}>{lbl}</div>
+              </div>
+            ))}
           </div>
+
+          {/* ── Mot du Jour ── */}
+          <MotDuJour words={words} />
+
+          {/* ── 4 skill cards ── */}
+          <div style={{ padding:"0 16px", marginTop:14 }}>
+            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, fontWeight:600, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>
+              Luyện theo kỹ năng
+            </div>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
+              {[
+                { fr:"Lire",    vi:"Đọc",  glyph:"Aa", sub:"Đọc hiểu",   color:"#4A90D9", fn:()=>goSection("lecture","lecture")          },
+                { fr:"Écouter", vi:"Nghe", glyph:"))", sub:"Nghe chép",  color:"#7B6CF6", fn:()=>goSection("dictee","dictee")            },
+                { fr:"Parler",  vi:"Nói",  glyph:"••", sub:"Roleplay AI", color:"#E67E22", fn:()=>goSection("conversation","conversation") },
+                { fr:"Écrire",  vi:"Viết", glyph:"/",  sub:"Luyện viết", color:"#10B981", fn:()=>goSection("writing","writing")          },
+              ].map((s, i) => (
+                <button key={s.fr} className="card-hover" onClick={s.fn}
+                  style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:14, padding:"12px 14px", position:"relative", overflow:"hidden", textAlign:"left", cursor:"pointer", fontFamily:"inherit", animation:`fadeUp 0.3s ease ${0.12+i*0.05}s both` }}>
+                  {/* glyph watermark */}
+                  <div style={{ position:"absolute", right:-8, top:-8, fontFamily:"'Playfair Display',Georgia,serif", fontSize:48, fontWeight:700, color:s.color, opacity:0.12, letterSpacing:"-0.05em", lineHeight:1, pointerEvents:"none", userSelect:"none" }}>
+                    {s.glyph}
+                  </div>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:16, color:s.color, lineHeight:1.1 }}>{s.fr}</div>
+                  <div style={{ fontSize:10.5, color:C.gray, marginTop:1 }}>{s.vi}</div>
+                  <div style={{ fontSize:10.5, color:C.ink2, marginTop:8, fontWeight:500 }}>{s.sub}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Module groups ── */}
+          <div style={{ padding:"0 16px", marginTop:14 }}>
+            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, fontWeight:600, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>
+              Tất cả module
+            </div>
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
+              {GROUP_DEFS.map(g => {
+                const isOpen = activeGroup === g.id;
+                return (
+                  <button key={g.id} className="card-hover" onClick={() => setActiveGroup(isOpen ? null : g.id)}
+                    style={{ background:isOpen ? g.bg : C.white, border:`1.5px solid ${isOpen ? g.color : C.border}`, borderRadius:14, padding:"14px 14px", display:"flex", flexDirection:"column", gap:5, cursor:"pointer", fontFamily:"inherit", textAlign:"left", transition:"all 0.15s" }}>
+                    <span style={{ fontSize:22 }}>{g.icon}</span>
+                    <div style={{ fontSize:13, fontWeight:700, color:isOpen ? g.color : C.ink, lineHeight:1.1 }}>{g.label}</div>
+                    <div style={{ fontSize:10, color:C.gray, lineHeight:1.35 }}>{g.desc}</div>
+                  </button>
+                );
+              })}
+            </div>
+            {activeGroup && (() => {
+              const g = GROUP_DEFS.find(x => x.id === activeGroup);
+              if (!g) return null;
+              return (
+                <div style={{ marginTop:10, padding:"12px 14px", background:g.bg, borderRadius:12, border:`1.5px solid ${g.color}33`, animation:"fadeUp 0.2s ease" }}>
+                  <div style={{ fontSize:10, fontWeight:700, color:g.color, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:8 }}>{g.label}</div>
+                  <div style={{ display:"flex", flexWrap:"wrap", gap:7 }}>
+                    {g.moduleIds.map(mid => {
+                      const m = MODULES.find(x => x.id === mid);
+                      if (!m) return null;
+                      return (
+                        <button key={mid} onClick={() => goSection(m.id, m.view)}
+                          style={{ padding:"7px 14px", background:C.white, border:`1.5px solid ${g.color}44`, borderRadius:999, fontSize:12, fontWeight:600, color:g.color, cursor:"pointer", fontFamily:"inherit", boxShadow:"0 1px 3px rgba(0,0,0,0.05)" }}>
+                          {m.icon} {m.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+
+          {/* ── Foundation row ── */}
+          <div style={{ padding:"0 16px", marginTop:14 }}>
+            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, fontWeight:600, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>
+              Nền tảng
+            </div>
+            <div style={{ display:"flex", gap:7 }}>
+              {[
+                { l:"Vocab",     s:`${srsStats.total} từ`,  i:"V", fn:()=>goSection("vocab","edito")                  },
+                { l:"Référence", s:"Tra cứu",                i:"R", fn:()=>goSection("reference_hub","reference_hub")  },
+                { l:"Parcours",  s:(() => { const o = computeOverallProgress(); return `${o.done}/${o.total}`; })(), i:"P", fn:()=>goSection("parcours","parcours") },
+              ].map(f => (
+                <button key={f.l} className="card-hover" onClick={f.fn}
+                  style={{ flex:1, background:C.cream, borderRadius:12, padding:"8px 10px", display:"flex", gap:8, alignItems:"center", border:"none", cursor:"pointer", fontFamily:"inherit" }}>
+                  <div style={{ width:26, height:26, borderRadius:7, background:C.white, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, color:C.blueDark, fontSize:13, flexShrink:0 }}>
+                    {f.i}
+                  </div>
+                  <div>
+                    <div style={{ fontSize:11.5, fontWeight:700, color:C.ink, lineHeight:1.1 }}>{f.l}</div>
+                    <div style={{ fontSize:9.5, color:C.gray }}>{f.s}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div style={{ height:"1.5rem" }} />
         </div>
       )}
@@ -676,15 +622,34 @@ function AppInner() {
                 {dark ? "☀️" : "🌙"}
               </button>
             </div>
-            {/* Row 2: sub-nav buttons (only when present) */}
+            {/* Row 2: segmented vocab tabs */}
             {section==="vocab" && (
-              <div style={{ display:"flex", gap:"0.3rem", flexWrap:"nowrap", overflowX:"auto", paddingBottom:"0.1rem" }}>
-                {navBtn("📖 Edito","edito")}
-                {navBtn("✏️ Tự do","input")}
-                {navBtn("📂","history")}
-                {generatedVocab.length>0 && navBtn("📋","vocab-table")}
-                {words.length>0 && navBtn("💬","examples")}
-                {(quiz||loading) && navBtn("🎯","quiz")}
+              <div style={{ padding:"0 0 10px" }}>
+                <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:11 }}>
+                  {[
+                    { label:"Bộ của tôi", view:"input"   },
+                    { label:"Themes A1",  view:"topics"  },
+                    { label:"Phrasebook", view:"history" },
+                    { label:"Edito",      view:"edito"   },
+                  ].map(t => {
+                    const isActive = t.view === view || (t.view==="input" && !["topics","history","edito","vocab-table","examples","quiz"].includes(view));
+                    return (
+                      <button key={t.label} onClick={()=>setView(t.view)}
+                        style={{
+                          flex:1, padding:"7px 4px",
+                          background:isActive ? C.white : "transparent",
+                          border:"none", borderRadius:8, cursor:"pointer",
+                          fontWeight:isActive ? 700 : 500,
+                          color:isActive ? C.ink : C.gray,
+                          fontFamily:"inherit", fontSize:11,
+                          boxShadow:isActive ? "0 1px 3px rgba(0,0,0,0.06)" : "none",
+                          whiteSpace:"nowrap", transition:"all 0.15s",
+                        }}>
+                        {t.label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
@@ -699,81 +664,118 @@ function AppInner() {
             {view==="input" && (
               <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.85rem", animation:"fadeUp 0.3s ease" }}>
 
-                {/* ── Word Set Summary Card ── */}
-                {words.length > 0 ? (() => {
-                  const mastered = getMasteredSet();
-                  const freshCount = words.filter(w=>!mastered.has(w.fr)).length;
-                  const masteredCount = words.length - freshCount;
-                  return (
-                    <div style={{ background:C.white, border:`1.5px solid ${C.blue}33`, borderRadius:16, overflow:"hidden" }}>
-                      <div style={{ padding:"0.75rem 0.9rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                        <div>
-                          <div style={{ fontSize:"0.72rem", color:C.gray, marginBottom:"0.1rem" }}>Bộ từ hiện tại</div>
-                          <div style={{ fontSize:"0.95rem", fontWeight:700, color:C.ink }}>
-                            <span style={{ color:C.blue }}>{freshCount}</span>
-                            {masteredCount>0 && <><span style={{ color:C.gray, fontWeight:400 }}> từ mới · </span><span style={{ color:C.green }}>✓ {masteredCount} đã thuộc</span></>}
-                            {masteredCount===0 && <span style={{ color:C.gray, fontWeight:400 }}> từ vựng</span>}
-                          </div>
-                        </div>
-                        <button onClick={()=>setEditOpen(o=>!o)}
-                          style={{ display:"flex", alignItems:"center", gap:"0.3rem", padding:"0.35rem 0.75rem", background:editOpen?C.blueL:"transparent", border:`1.5px solid ${C.blue}44`, color:C.blue, borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontWeight:600, transition:"all 0.15s" }}>
-                          ✏️ {editOpen ? "Đóng" : "Sửa bộ từ"}
-                        </button>
-                      </div>
-                      {/* Word chips preview + search */}
-                      <div style={{ padding:"0 0.9rem 0.75rem" }}>
-                        {words.length > 8 && (
-                          <input value={vocabSearch} onChange={e => setVocabSearch(e.target.value)}
-                            placeholder="🔍 Tìm từ..."
-                            style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.28rem 0.55rem", fontSize:"0.75rem", fontFamily:"inherit", color:C.ink, marginBottom:"0.4rem", boxSizing:"border-box", outline:"none", background:C.white }} />
-                        )}
-                        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.28rem" }}>
-                          {(() => {
-                            const q = vocabSearch.toLowerCase();
-                            const filtered = q
-                              ? words.filter(w => w.fr.toLowerCase().includes(q) || (w.vi||"").toLowerCase().includes(q))
-                              : words.slice(0, 10);
-                            return <>
-                              {filtered.map((w,i) => {
-                                const isMastered = mastered.has(w.fr);
-                                return (
-                                  <span key={i} style={{ background:isMastered?C.greenL:C.blueL, border:`1px solid ${isMastered?C.green+"44":C.blue+"33"}`, borderRadius:20, padding:"0.1rem 0.48rem", fontSize:"0.7rem", color:isMastered?C.green:C.blue }}>
-                                    {isMastered?"✓ ":""}{w.fr}{w.vi ? ` — ${w.vi}` : ""}
-                                  </span>
-                                );
-                              })}
-                              {!q && words.length > 10 && <span style={{ background:C.cream, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.48rem", fontSize:"0.7rem", color:C.gray }}>+{words.length-10}</span>}
-                              {q && filtered.length === 0 && <span style={{ fontSize:"0.73rem", color:C.gray, fontStyle:"italic" }}>Không tìm thấy</span>}
-                            </>;
-                          })()}
-                        </div>
-                      </div>
-                      {/* Mastered filter toggle */}
-                      {masteredCount > 0 && (
-                        <div style={{ borderTop:`1px solid ${C.border}`, padding:"0.5rem 0.9rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                          <span style={{ fontSize:"0.72rem", color:C.gray }}>Lọc bài tập</span>
-                          <button onClick={()=>setFilterMastered(f=>!f)}
-                            style={{ background:filterMastered?C.green:"transparent", border:`1.5px solid ${C.green}`, color:filterMastered?"#fff":C.green, borderRadius:20, padding:"0.18rem 0.65rem", fontSize:"0.67rem", cursor:"pointer", fontWeight:600, whiteSpace:"nowrap", transition:"all 0.2s" }}>
-                            {filterMastered ? "✓ Bỏ từ đã thuộc" : "Gồm cả đã thuộc"}
-                          </button>
-                        </div>
-                      )}
+                {/* ── SRS Summary card ── */}
+                <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:14, padding:"12px 14px", display:"flex", alignItems:"center", gap:12 }}>
+                  <div style={{ flex:1 }}>
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:22, fontWeight:700, lineHeight:1 }}>
+                      <span style={{ color:C.blue }}>{srsStats.total}</span>
+                      <span style={{ color:C.gray, fontWeight:400, fontSize:13 }}> · </span>
+                      <span style={{ color:C.green, fontSize:18 }}>{srsStats.mastered} thuộc</span>
                     </div>
-                  );
-                })() : (
-                  /* Empty state — no words */
-                  <div style={{ background:C.white, border:`2px dashed ${C.border}`, borderRadius:16, padding:"1.75rem 1rem", textAlign:"center" }}>
-                    <div style={{ display:"flex", justifyContent:"center", marginBottom:"0.75rem" }}>
-                      <Minou mood="sleeping" message="Chưa có từ vựng nào... Zzz" size="md"/>
-                    </div>
-                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, marginBottom:"0.3rem" }}>Thêm từ để bắt đầu nhé!</div>
-                    <div style={{ fontSize:"0.75rem", color:C.gray, marginBottom:"0.9rem" }}>Chọn bộ từ có sẵn hoặc nhập thủ công bên dưới.</div>
-                    <button onClick={()=>setEditOpen(true)}
-                      style={{ padding:"0.55rem 1.2rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:12, fontSize:"0.82rem", cursor:"pointer", fontWeight:600 }}>
-                      ✏️ Thêm từ vựng
+                    <div style={{ fontSize:11, color:C.gray, marginTop:3 }}>{srsStats.due} cần ôn hôm nay</div>
+                  </div>
+                  <div style={{ display:"flex", gap:6, flexShrink:0 }}>
+                    {srsStats.due > 0 && (
+                      <button onClick={()=>goSection("srs","srs")}
+                        style={{ background:C.accent, color:"#fff", border:"none", padding:"8px 14px", borderRadius:999, fontWeight:700, fontSize:12, cursor:"pointer", whiteSpace:"nowrap" }}>
+                        Ôn {srsStats.due} →
+                      </button>
+                    )}
+                    <button onClick={()=>setEditOpen(o=>!o)}
+                      style={{ background:editOpen?C.blueL:"transparent", border:`1.5px solid ${C.blue}44`, color:C.blue, borderRadius:999, padding:"6px 12px", fontSize:11.5, cursor:"pointer", fontWeight:600 }}>
+                      ✏️
                     </button>
                   </div>
-                )}
+                </div>
+
+                {/* ── Search ── */}
+                <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"8px 12px", display:"flex", alignItems:"center", gap:8 }}>
+                  <span style={{ color:C.gray2, fontSize:16 }}>⌕</span>
+                  <input value={vocabSearch} onChange={e=>setVocabSearch(e.target.value)}
+                    placeholder="Tìm từ tiếng Pháp hoặc nghĩa Việt…"
+                    style={{ border:"none", outline:"none", flex:1, fontSize:12.5, fontFamily:"inherit", color:C.ink, background:"transparent" }}/>
+                </div>
+
+                {/* ── Filter chips ── */}
+                <div style={{ display:"flex", gap:6, flexWrap:"nowrap", overflowX:"auto" }}>
+                  {[
+                    { label:`Tất cả · ${srsStats.total}`,      val:"all"      },
+                    { label:`Cần ôn · ${srsStats.due}`,         val:"due"      },
+                    { label:`Đã thuộc · ${srsStats.mastered}`,  val:"mastered" },
+                    { label:`Mới · ${srsStats.new}`,            val:"new"      },
+                  ].map(chip => (
+                    <button key={chip.val} onClick={()=>setVocabFilter(chip.val)}
+                      style={{
+                        padding:"5px 10px", borderRadius:999, fontSize:11, whiteSpace:"nowrap",
+                        background:vocabFilter===chip.val ? C.ink : C.white,
+                        color:vocabFilter===chip.val ? "#fff" : C.ink2||C.ink,
+                        border:`1px solid ${vocabFilter===chip.val ? C.ink : C.border}`,
+                        fontWeight:vocabFilter===chip.val ? 600 : 500,
+                        cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s",
+                      }}>{chip.label}</button>
+                  ))}
+                </div>
+
+                {/* ── SRS Word list ── */}
+                {(() => {
+                  const now = Date.now();
+                  const allCards = getAllCards();
+                  const q = vocabSearch.toLowerCase();
+                  const getMastery = card => {
+                    if (card.interval >= 21) return 5;
+                    if (card.interval >= 7)  return 4;
+                    if (card.interval >= 3)  return 3;
+                    if (card.interval >= 1)  return 2;
+                    return 1;
+                  };
+                  let filtered = allCards;
+                  if (q) filtered = filtered.filter(c => c.fr.toLowerCase().includes(q) || (c.vi||"").toLowerCase().includes(q));
+                  if (vocabFilter==="due")      filtered = filtered.filter(c => c.dueDate <= now);
+                  if (vocabFilter==="mastered") filtered = filtered.filter(c => c.interval >= 21);
+                  if (vocabFilter==="new")      filtered = filtered.filter(c => c.repetitions === 0);
+                  if (filtered.length === 0) return (
+                    <div style={{ textAlign:"center", padding:"20px 0", color:C.gray, fontSize:12.5 }}>
+                      {allCards.length === 0
+                        ? <Minou mood="sleeping" message="Chưa có từ trong SRS. Học Edito để thêm từ!" size="sm"/>
+                        : "Không có từ nào phù hợp."}
+                    </div>
+                  );
+                  return (
+                    <div style={{ background:C.white, borderRadius:12, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                      {filtered.map((card, i) => {
+                        const mastery = getMastery(card);
+                        const barColor = mastery >= 5 ? C.green : mastery >= 3 ? C.gold : C.accent;
+                        return (
+                          <div key={card.fr} style={{
+                            display:"flex", alignItems:"center", gap:12,
+                            padding:"10px 12px",
+                            borderBottom:i < filtered.length - 1 ? `1px solid ${C.borderSoft||"#EEF2FA"}` : "none",
+                          }}>
+                            <div style={{ display:"flex", flexDirection:"column", gap:1.5, flexShrink:0 }}>
+                              {[5,4,3,2,1].map(n => (
+                                <div key={n} style={{ width:14, height:2.5, borderRadius:999, background:n <= mastery ? barColor : C.borderSoft||"#EEF2FA" }}/>
+                              ))}
+                            </div>
+                            <div style={{ flex:1, minWidth:0 }}>
+                              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:14.5, color:C.ink, letterSpacing:"-0.01em" }}>
+                                {card.fr}
+                              </div>
+                              <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>{card.vi}</div>
+                            </div>
+                            <SpeakBtn text={card.fr} size="sm"/>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+
+                {/* ── Divider before exercise builder ── */}
+                <div style={{ display:"flex", alignItems:"center", gap:8, marginTop:4 }}>
+                  <div style={{ flex:1, height:1, background:C.border }}/>
+                  <span style={{ fontSize:10, fontWeight:700, color:C.gray, letterSpacing:"0.1em", textTransform:"uppercase" }}>Luyện tập tự do</span>
+                  <div style={{ flex:1, height:1, background:C.border }}/>
+                </div>
 
                 {/* ── Collapsible Editor ── */}
                 {editOpen && (
@@ -1000,22 +1002,20 @@ function AppInner() {
             {view==="examples" && <ExamplesView words={words}/>}
 
             {/* Panels */}
-            {view==="grammar"      && <GrammarPanel/>}
-            {view==="defi"         && <DefiPanel/>}
-            {view==="writing"      && <WritingPanel/>}
-            {view==="conversation" && <ConversationPanel/>}
-            {view==="srs"          && <SRSPanel currentWords={words} />}
-            {view==="reference"    && <ReferencePanel/>}
-            {view==="lecture"      && <LecturePanel words={words} />}
-            {view==="dictee"       && <DicteePanel words={words} />}
-            {view==="phrasebook"   && <PhrasebookPanel />}
-            {view==="revision"     && <RevisionPanel />}
-            {view==="stats"        && <StatsPanel />}
-            {view==="conjugaison"  && <ConjugaisonPanel />}
-            {view==="topics"       && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}
-            {view==="listening"    && <ListeningQuiz />}
-            {view==="sentence"     && <SentenceBuilder />}
-            {view==="cheatsheet"   && <GrammarCheatsheet />}
+            {view==="parcours"      && <ParcoursPanel onNavigate={v => { setView(v); }} />}
+            {view==="grammar"       && <GrammarPanel/>}
+            {view==="defi"          && <DefiPanel/>}
+            {view==="writing"       && <WritingPanel/>}
+            {view==="conversation"  && <ConversationPanel/>}
+            {view==="srs"           && <SRSPanel currentWords={words} />}
+            {view==="reference_hub" && <ReferenceHub />}
+            {view==="lecture"       && <LecturePanel words={words} />}
+            {view==="dictee"        && <DicteePanel words={words} />}
+            {view==="revision"      && <RevisionPanel />}
+            {view==="stats"         && <StatsPanel />}
+            {view==="topics"        && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}
+            {view==="listening"     && <ListeningQuiz />}
+            {view==="sentence"      && <SentenceBuilder />}
           </div>
         </>
       )}
@@ -1024,28 +1024,31 @@ function AppInner() {
           BOTTOM TAB BAR (always visible)
       ══════════════════════════════════════ */}
       <div style={{ position:"fixed", bottom:0, left:0, right:0, zIndex:150 }}>
-        <div style={{ maxWidth:680, margin:"0 auto", background:C.white, borderTop:`1.5px solid ${C.border}`, display:"flex", boxShadow:"0 -4px 24px rgba(74,144,217,0.10)", paddingBottom:"env(safe-area-inset-bottom)" }}>
+        <div style={{ maxWidth:680, margin:"0 auto", background:C.white, borderTop:`1px solid ${C.border}`, display:"flex", padding:"8px 2px calc(14px + env(safe-area-inset-bottom))", boxShadow:"0 -2px 16px rgba(74,144,217,0.06)" }}>
           {TABS.map(tab => {
-            const isActive = tab.id==="home" ? section==="home" : section===tab.id;
+            const isActive = section === tab.section;
+            const color = isActive ? (tab.color || C.ink) : C.gray2;
             return (
               <button key={tab.id} className="tab-btn"
                 onClick={()=>{
                   if (tab.id==="home") { setSection("home"); setActiveGroup(null); setFromGroup(null); return; }
-                  const m = MODULES.find(m=>m.id===tab.id);
-                  if (m) goSection(m.id, m.view);
+                  goSection(tab.section, tab.view);
                 }}
-                style={{ flex:1, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"0.55rem 0.25rem 0.65rem", background:"transparent", border:"none", cursor:"pointer", gap:"0.18rem", transition:"all 0.15s", position:"relative" }}>
-                <div style={{ position:"relative" }}>
-                  <div style={{ width:46, height:40, borderRadius:14, background:isActive?C.blueL:"transparent", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.2s", transform:isActive?"translateY(-2px) scale(1.08)":"none" }}>
-                    <tab.LucideIcon size={22} color={isActive?C.blue:C.gray} fill={isActive?C.blue:"none"} strokeWidth={isActive?1.5:2} />
-                  </div>
-                  {tab.id==="srs" && srsStats.due>0 && (
-                    <div style={{ position:"absolute", top:-2, right:-4, background:C.red, color:"#fff", borderRadius:999, minWidth:16, height:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.55rem", fontWeight:700, padding:"0 3px" }}>
-                      {srsStats.due}
-                    </div>
-                  )}
+                style={{ flex:1, textAlign:"center", background:"transparent", border:"none", cursor:"pointer", padding:0 }}>
+                <div style={{
+                  fontFamily:"'Playfair Display',Georgia,serif",
+                  fontSize:17, fontWeight:700, color,
+                  height:24, display:"flex", alignItems:"center", justifyContent:"center",
+                  letterSpacing:"-0.02em",
+                }}>
+                  {tab.glyph}
                 </div>
-                <span style={{ fontSize:"0.6rem", color:isActive?C.blue:C.gray, fontWeight:isActive?700:400, letterSpacing:0.2, transition:"color 0.15s" }}>{tab.label}</span>
+                <div style={{ fontSize:10, color, fontWeight:isActive?700:500, marginTop:1, letterSpacing:"0.02em" }}>
+                  {tab.label}
+                </div>
+                {isActive && (
+                  <div style={{ width:22, height:2.5, background:color, borderRadius:999, margin:"4px auto 0" }}/>
+                )}
               </button>
             );
           })}
