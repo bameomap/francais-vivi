@@ -5,7 +5,9 @@ import { BUILTIN_SETS } from "../data/builtinSets.js";
 import { speak } from "../utils/helpers.js";
 import { awardXP } from "../utils/xp.js";
 
-const ROUND_SIZE = 10;
+const PURPLE = "#7C3AED";
+const PURPLE_L = "#F5F0FF";
+const ROUND_SIZE = 8;
 
 function shuffle(arr) {
   const a = [...arr];
@@ -16,10 +18,10 @@ function shuffle(arr) {
   return a;
 }
 
-function buildWordPool() {
+function buildWordPool(propWords) {
+  if (propWords?.length >= 4) return propWords;
   const srsCards = getAllCards().map(c => ({ fr: c.fr, vi: c.vi }));
-  if (srsCards.length >= 8) return srsCards;
-  // Supplement with built-in sets if SRS is sparse
+  if (srsCards.length >= 4) return srsCards;
   const builtinWords = BUILTIN_SETS.flatMap(s => s.words);
   const merged = [...srsCards];
   const existing = new Set(srsCards.map(c => c.fr));
@@ -38,23 +40,22 @@ function makeRound(pool) {
   });
 }
 
-export default function ListeningQuiz() {
-  const [pool,    setPool]    = useState([]);
-  const [round,   setRound]   = useState([]);
-  const [qIdx,    setQIdx]    = useState(0);
-  const [picked,  setPicked]  = useState(null);   // index of chosen option
-  const [score,   setScore]   = useState(0);
-  const [done,    setDone]    = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [results, setResults] = useState([]);      // {correct, chosen} per question
+export default function ListeningQuiz({ words: propWords = [] }) {
+  const [pool,     setPool]     = useState([]);
+  const [round,    setRound]    = useState([]);
+  const [qIdx,     setQIdx]     = useState(0);
+  const [selected, setSelected] = useState(null);   // index chosen
+  const [checked,  setChecked]  = useState(false);
+  const [score,    setScore]    = useState(0);
+  const [done,     setDone]     = useState(false);
+  const [playing,  setPlaying]  = useState(false);
+  const [playCount,setPlayCount]= useState(0);
+  const [results,  setResults]  = useState([]);
 
   useEffect(() => {
-    const p = buildWordPool();
+    const p = buildWordPool(propWords);
     setPool(p);
-    if (p.length >= 4) {
-      const r = makeRound(p);
-      setRound(r);
-    }
+    if (p.length >= 4) { const r = makeRound(p); setRound(r); }
   }, []);
 
   const current = round[qIdx];
@@ -63,48 +64,41 @@ export default function ListeningQuiz() {
     if (!current || playing) return;
     setPlaying(true);
     speak(current.word.fr, () => setPlaying(false));
+    setPlayCount(n => n + 1);
   }, [current, playing]);
 
-  // Auto-play when question changes
   useEffect(() => {
-    if (current && !picked) {
-      const t = setTimeout(playWord, 300);
+    if (current && !checked) {
+      setSelected(null); setPlayCount(0);
+      const t = setTimeout(playWord, 400);
       return () => clearTimeout(t);
     }
   }, [qIdx, round]);
 
-  const choose = (optIdx) => {
-    if (picked !== null) return;
-    setPicked(optIdx);
-    const isCorrect = current.options[optIdx].fr === current.word.fr;
-    if (isCorrect) {
-      setScore(s => s + 1);
-      awardXP(2);
-    }
-    setResults(r => [...r, { correct: isCorrect, word: current.word, chosen: current.options[optIdx] }]);
-    setTimeout(() => {
-      if (qIdx + 1 >= round.length) {
-        setDone(true);
-      } else {
-        setQIdx(i => i + 1);
-        setPicked(null);
-      }
-    }, 900);
+  const check = () => {
+    if (selected === null || checked) return;
+    setChecked(true);
+    const isCorrect = current.options[selected].fr === current.word.fr;
+    if (isCorrect) { setScore(s => s + 1); awardXP(2); }
+    setResults(r => [...r, { correct: isCorrect, word: current.word, chosen: current.options[selected] }]);
+  };
+
+  const next = () => {
+    if (qIdx + 1 >= round.length) { setDone(true); }
+    else { setQIdx(i => i + 1); setChecked(false); setSelected(null); }
   };
 
   const restart = () => {
     const r = makeRound(pool);
-    setRound(r); setQIdx(0); setPicked(null);
+    setRound(r); setQIdx(0); setSelected(null); setChecked(false);
     setScore(0); setDone(false); setResults([]);
   };
 
   if (pool.length < 4) return (
     <div style={{ padding:"2rem 1rem", textAlign:"center" }}>
-      <div style={{ fontSize:"2.5rem", marginBottom:"0.75rem" }}>🎵</div>
+      <div style={{ width:64, height:64, background:PURPLE_L, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2rem", margin:"0 auto 1rem" }}>🎵</div>
       <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, marginBottom:"0.4rem" }}>Cần thêm từ vựng</div>
-      <div style={{ fontSize:"0.8rem", color:C.gray, lineHeight:1.7 }}>
-        Thêm ít nhất 4 từ vào SRS hoặc dùng bộ từ chủ đề để bắt đầu nghe.
-      </div>
+      <div style={{ fontSize:"0.8rem", color:C.gray, lineHeight:1.7 }}>Chọn unit Édito hoặc thêm từ vào SRS để bắt đầu.</div>
     </div>
   );
 
@@ -112,34 +106,27 @@ export default function ListeningQuiz() {
     const pct = Math.round(score / round.length * 100);
     return (
       <div style={{ padding:"1.5rem 1rem", animation:"fadeUp 0.3s ease" }}>
-        <div style={{ textAlign:"center", marginBottom:"1.25rem" }}>
-          <div style={{ fontSize:"3rem", marginBottom:"0.5rem" }}>{pct >= 80 ? "🎉" : pct >= 50 ? "👍" : "💪"}</div>
-          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>
-            {score}/{round.length} đúng
+        <div style={{ textAlign:"center", marginBottom:"1.5rem" }}>
+          <div style={{ width:72, height:72, borderRadius:"50%", background:PURPLE_L, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2.5rem", margin:"0 auto 0.75rem" }}>
+            {pct>=80?"🎉":pct>=50?"👍":"💪"}
           </div>
-          <div style={{ fontSize:"0.82rem", color:C.gray }}>{pct}% · {pct >= 80 ? "Excellent!" : pct >= 50 ? "Bien!" : "Continue d'essayer!"}</div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.6rem", color:C.ink, fontWeight:700 }}>{score}/{round.length}</div>
+          <div style={{ fontSize:"0.82rem", color:PURPLE, fontWeight:600, marginTop:2 }}>{pct}% · {pct>=80?"Excellent!":pct>=50?"Bien!":"Continue!"}</div>
         </div>
 
-        {/* Results breakdown */}
         <div style={{ background:C.white, borderRadius:16, border:`1.5px solid ${C.border}`, padding:"0.85rem 1rem", marginBottom:"1rem" }}>
-          <div style={{ fontSize:"0.62rem", textTransform:"uppercase", letterSpacing:2, color:C.gray, fontWeight:700, marginBottom:"0.6rem" }}>Kết quả chi tiết</div>
-          <div style={{ display:"flex", flexDirection:"column", gap:"0.4rem" }}>
-            {results.map((r, i) => (
-              <div key={i} style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-                <span style={{ fontSize:"0.85rem" }}>{r.correct ? "✅" : "❌"}</span>
-                <span style={{ fontFamily:"Georgia,serif", fontSize:"0.82rem", color:C.ink, fontWeight:600 }}>{r.word.fr}</span>
-                <span style={{ fontSize:"0.75rem", color:C.gray }}>—</span>
-                <span style={{ fontSize:"0.75rem", color:r.correct ? "#059669" : C.red }}>{r.word.vi}</span>
-                {!r.correct && (
-                  <span style={{ fontSize:"0.68rem", color:C.gray, marginLeft:"auto" }}>bạn chọn: {r.chosen.vi}</span>
-                )}
-              </div>
-            ))}
-          </div>
+          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.12em", color:C.gray, fontWeight:700, marginBottom:"0.6rem" }}>Kết quả chi tiết</div>
+          {results.map((r, i) => (
+            <div key={i} style={{ display:"flex", alignItems:"center", gap:"0.5rem", padding:"0.3rem 0", borderBottom: i<results.length-1?`1px solid ${C.border}`:"none" }}>
+              <span style={{ fontSize:"0.85rem" }}>{r.correct ? "✅" : "❌"}</span>
+              <span style={{ fontFamily:"Georgia,serif", fontSize:"0.85rem", color:C.ink, fontWeight:600 }}>{r.word.fr}</span>
+              <span style={{ fontSize:"0.75rem", color:r.correct?"#059669":C.red, marginLeft:"auto" }}>{r.word.vi}</span>
+            </div>
+          ))}
         </div>
 
         <button onClick={restart}
-          style={{ width:"100%", padding:"0.85rem", background:`linear-gradient(135deg, #0D9488, #0891B2)`, color:"#fff", border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700 }}>
+          style={{ width:"100%", padding:"0.9rem", background:PURPLE, color:"#fff", border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", cursor:"pointer", fontWeight:700 }}>
           🎵 Chơi lại →
         </button>
       </div>
@@ -148,51 +135,88 @@ export default function ListeningQuiz() {
 
   if (!current) return null;
 
-  const totalQ = round.length;
-  const progress = ((qIdx) / totalQ) * 100;
+  const progress = qIdx / round.length;
 
   return (
-    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
-      {/* Progress bar */}
-      <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"1.25rem" }}>
-        <div style={{ flex:1, height:5, background:C.border, borderRadius:999, overflow:"hidden" }}>
-          <div style={{ height:"100%", width:`${progress}%`, background:"#0D9488", borderRadius:999, transition:"width 0.4s ease" }}/>
+    <div style={{ padding:"0 0 1rem", animation:"fadeUp 0.3s ease" }}>
+      {/* Progress */}
+      <div style={{ padding:"0.75rem 1rem 0" }}>
+        <div style={{ display:"flex", gap:3, marginBottom:4 }}>
+          {round.map((_, i) => (
+            <div key={i} style={{ flex:1, height:3, borderRadius:99, background: i < qIdx ? PURPLE : i === qIdx ? `${PURPLE}88` : C.border, transition:"background 0.3s" }}/>
+          ))}
         </div>
-        <span style={{ fontSize:"0.72rem", color:C.gray, whiteSpace:"nowrap" }}>{qIdx + 1}/{totalQ}</span>
-        <span style={{ fontSize:"0.72rem", color:"#059669", fontWeight:700, whiteSpace:"nowrap" }}>✓ {score}</span>
+        <div style={{ display:"flex", justifyContent:"space-between" }}>
+          <span style={{ fontSize:"0.62rem", color:C.gray }}>Câu {qIdx+1}/{round.length}</span>
+          <span style={{ fontSize:"0.62rem", color:"#059669", fontWeight:700 }}>✓ {score} đúng</span>
+        </div>
       </div>
 
-      {/* Speaker card */}
-      <div style={{ background:`linear-gradient(135deg, #0D9488, #0891B2)`, borderRadius:24, padding:"2rem 1.5rem", textAlign:"center", marginBottom:"1.5rem", boxShadow:"0 8px 30px #0D948866" }}>
-        <div style={{ fontSize:"0.75rem", color:"rgba(255,255,255,0.8)", textTransform:"uppercase", letterSpacing:2, marginBottom:"0.75rem" }}>Nghe & chọn nghĩa đúng</div>
-        <button onClick={playWord} disabled={playing}
-          style={{ background:"rgba(255,255,255,0.2)", border:"2.5px solid rgba(255,255,255,0.6)", borderRadius:"50%", width:72, height:72, display:"flex", alignItems:"center", justifyContent:"center", cursor:playing?"not-allowed":"pointer", margin:"0 auto", transition:"all 0.2s", transform:playing?"scale(0.95)":"scale(1)" }}>
-          <span style={{ fontSize:"2rem" }}>{playing ? "🔊" : "🔈"}</span>
-        </button>
-        <div style={{ marginTop:"0.75rem", fontSize:"0.78rem", color:"rgba(255,255,255,0.75)" }}>
-          {playing ? "Đang phát..." : "Nhấn để nghe lại"}
+      {/* Question header */}
+      <div style={{ padding:"0.6rem 1rem 0" }}>
+        <div style={{ fontSize:"0.58rem", fontWeight:700, color:PURPLE, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:2 }}>Nghe &amp; chọn</div>
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", color:C.ink, fontWeight:700 }}>Quel mot entends-tu ?</div>
+      </div>
+
+      {/* Play area */}
+      <div style={{ padding:"0.75rem 1rem" }}>
+        <div style={{ background:`linear-gradient(135deg, ${PURPLE}, #9F67FF)`, borderRadius:20, padding:"1.5rem", textAlign:"center", boxShadow:`0 8px 28px ${PURPLE}44` }}>
+          <button onClick={playWord} disabled={playing}
+            style={{
+              width:80, height:80, borderRadius:"50%",
+              background:"rgba(255,255,255,0.2)", backdropFilter:"blur(8px)",
+              border:"2.5px solid rgba(255,255,255,0.5)",
+              display:"flex", alignItems:"center", justifyContent:"center",
+              cursor:playing?"not-allowed":"pointer", margin:"0 auto",
+              transition:"transform 0.15s, background 0.15s",
+              transform: playing ? "scale(0.93)" : "scale(1)",
+            }}>
+            <span style={{ fontSize:"2.2rem" }}>{playing ? "🔊" : "♪"}</span>
+          </button>
+          <div style={{ marginTop:"0.75rem", fontSize:"0.75rem", color:"rgba(255,255,255,0.85)", letterSpacing:"0.05em" }}>
+            {playing ? "Đang phát…" : playCount === 0 ? "Tap để nghe" : `Đã nghe ${playCount} lần · Tap để nghe lại`}
+          </div>
         </div>
       </div>
 
       {/* Options */}
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.6rem" }}>
-        {current.options.map((opt, i) => {
-          const isCorrectOpt = opt.fr === current.word.fr;
-          const isChosen = picked === i;
-          let bg = C.white, border = `1.5px solid ${C.border}`, color = C.ink;
-          if (picked !== null) {
-            if (isCorrectOpt)        { bg = "#ECFDF5"; border = "1.5px solid #059669"; color = "#059669"; }
-            else if (isChosen)       { bg = "#FEF2F2"; border = "1.5px solid #DC2626"; color = "#DC2626"; }
-          }
-          return (
-            <button key={i} onClick={() => choose(i)} disabled={picked !== null}
-              style={{ background:bg, border, borderRadius:16, padding:"1rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.9rem", color, cursor:picked!==null?"default":"pointer", textAlign:"center", lineHeight:1.4, transition:"all 0.2s", fontWeight:isChosen || (picked !== null && isCorrectOpt) ? 700 : 400 }}>
-              {picked !== null && isCorrectOpt && <span style={{ display:"block", fontSize:"1.1rem" }}>✅</span>}
-              {picked !== null && isChosen && !isCorrectOpt && <span style={{ display:"block", fontSize:"1.1rem" }}>❌</span>}
-              {opt.vi}
-            </button>
-          );
-        })}
+      <div style={{ padding:"0 1rem" }}>
+        <div style={{ fontSize:"0.58rem", fontWeight:700, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>Lựa chọn</div>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.55rem" }}>
+          {current.options.map((opt, i) => {
+            const isCorrect = opt.fr === current.word.fr;
+            const isSelected = selected === i;
+            let bg = C.white, border = `1.5px solid ${C.border}`, wordColor = PURPLE;
+            if (checked) {
+              if (isCorrect)           { bg = "#F0FDF4"; border = `2px solid #059669`; wordColor = "#059669"; }
+              else if (isSelected)     { bg = "#FEF2F2"; border = `2px solid #DC2626`; wordColor = "#DC2626"; }
+            } else if (isSelected)     { bg = PURPLE_L; border = `2px solid ${PURPLE}`; }
+            return (
+              <button key={i} onClick={() => !checked && setSelected(i)} disabled={checked}
+                style={{ background:bg, border, borderRadius:16, padding:"0.9rem 0.7rem", cursor:checked?"default":"pointer", textAlign:"center", transition:"all 0.15s" }}>
+                {checked && isCorrect && <div style={{ fontSize:"0.9rem", marginBottom:2 }}>✅</div>}
+                {checked && isSelected && !isCorrect && <div style={{ fontSize:"0.9rem", marginBottom:2 }}>❌</div>}
+                <div style={{ fontFamily:"Georgia,serif", fontSize:"1rem", fontWeight:700, color:wordColor, lineHeight:1.2 }}>{opt.fr}</div>
+                <div style={{ fontSize:"0.68rem", color:C.gray, marginTop:4 }}>{opt.vi}</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Action button */}
+      <div style={{ padding:"0.75rem 1rem 0" }}>
+        {!checked ? (
+          <button onClick={check} disabled={selected === null}
+            style={{ width:"100%", padding:"0.85rem", background: selected !== null ? PURPLE : C.border, color:"#fff", border:"none", borderRadius:14, fontSize:"0.95rem", fontFamily:"'Playfair Display',Georgia,serif", cursor: selected !== null ? "pointer" : "default", fontWeight:700, transition:"background 0.15s" }}>
+            Kiểm tra
+          </button>
+        ) : (
+          <button onClick={next}
+            style={{ width:"100%", padding:"0.85rem", background:PURPLE, color:"#fff", border:"none", borderRadius:14, fontSize:"0.95rem", fontFamily:"'Playfair Display',Georgia,serif", cursor:"pointer", fontWeight:700 }}>
+            {qIdx + 1 >= round.length ? "Xem kết quả →" : "Câu tiếp →"}
+          </button>
+        )}
       </div>
     </div>
   );
