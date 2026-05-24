@@ -7,6 +7,7 @@ import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import Minou, { Confetti } from "./ui/Minou.jsx";
+import LectureEditoPanel from "./LectureEditoPanel.jsx";
 
 // Map vocab unit id (u0, u1…) → grammar unit points
 function getGrammarPoints(vocabUnitId) {
@@ -105,6 +106,7 @@ const DEFAULT_WORDS = [
 ];
 
 export default function LecturePanel({ words: propWords = [] }) {
+  const [mode,         setMode]         = useState("ai"); // "ai" | "edito"
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [level,        setLevel]        = useState("easy");
   const [loading,      setLoading]      = useState(false);
@@ -198,6 +200,27 @@ export default function LecturePanel({ words: propWords = [] }) {
         </div>
       )}
       <Confetti active={confetti} onDone={() => setConfetti(false)} />
+
+      {/* ── Mode toggle ── */}
+      <div style={{ padding:"0.55rem 1rem 0" }}>
+        <div style={{ display:"flex", gap:3, background:C.cream, padding:4, borderRadius:12 }}>
+          {[
+            { id:"ai",    label:"AI ✦",     desc:"Tạo bài đọc AI" },
+            { id:"edito", label:"📚 Édito A1", desc:"Bài đọc từ sách" },
+          ].map(m => (
+            <button key={m.id} onClick={() => setMode(m.id)}
+              style={{ flex:1, padding:"0.42rem 0.5rem", background:mode===m.id?C.white:"transparent", border:"none", borderRadius:9, cursor:"pointer", fontWeight:mode===m.id?700:500, color:mode===m.id?C.ink:C.gray, fontFamily:"inherit", fontSize:"0.78rem", boxShadow:mode===m.id?"0 1px 4px rgba(0,0,0,0.07)":"none", transition:"all 0.15s", whiteSpace:"nowrap" }}>
+              {m.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Édito mode ── */}
+      {mode === "edito" && <LectureEditoPanel />}
+
+      {/* ── AI mode ── */}
+      {mode === "ai" && <>
 
       {/* ── Unit picker (always visible) ── */}
       <div style={{ padding: "0.6rem 1rem 0.2rem" }}>
@@ -407,6 +430,8 @@ export default function LecturePanel({ words: propWords = [] }) {
           )}
         </div>
       )}
+
+      </>}
     </div>
   );
 }
