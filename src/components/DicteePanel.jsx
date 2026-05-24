@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import { speak } from "../utils/helpers.js";
 import { logMistake } from "../utils/storage.js";
+import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import Spinner from "./ui/Spinner.jsx";
 import Minou, { Confetti } from "./ui/Minou.jsx";
 
@@ -61,10 +62,13 @@ function WordDiff({ result }) {
 }
 
 // ── Sentence generator ───────────────────────────────────────
-async function generateSentences(words) {
+async function generateSentences(words, grammarPoints) {
   const sample = words.slice(0, 15).map(w => w.fr).join(", ");
+  const grammarHint = grammarPoints?.length > 0
+    ? `\nÁp dụng các điểm ngữ pháp sau: ${grammarPoints.slice(0, 4).map(p => p.topic).join(" | ")}.`
+    : "";
   const text = await callAIText(
-    [{ role:"user", content:`Tạo đúng ${NUM_SENTENCES} câu tiếng Pháp A1 ngắn (5-9 từ/câu) sử dụng các từ: ${sample}.\nMỗi câu trên một dòng, không đánh số, không giải thích, không dịch.` }],
+    [{ role:"user", content:`Tạo đúng ${NUM_SENTENCES} câu tiếng Pháp A1 ngắn (5-9 từ/câu) sử dụng các từ: ${sample}.${grammarHint}\nMỗi câu trên một dòng, không đánh số, không giải thích, không dịch.` }],
     "Bạn là giáo viên tiếng Pháp. Chỉ trả lời đúng các câu được yêu cầu, mỗi câu một dòng."
   );
   return text.split("\n")
@@ -93,7 +97,7 @@ function PlayBtn({ text, size = "md", disabled }) {
 }
 
 // ── Main component ───────────────────────────────────────────
-export default function DicteePanel({ words: propWords = [] }) {
+export default function DicteePanel({ words: propWords = [], unitId = null }) {
   const words = propWords.length >= 4 ? propWords : [
     {fr:"famille"},{fr:"maison"},{fr:"école"},{fr:"ami"},{fr:"livre"},
     {fr:"manger"},{fr:"aller"},{fr:"beau"},{fr:"jour"},{fr:"ville"},
@@ -136,7 +140,10 @@ export default function DicteePanel({ words: propWords = [] }) {
     }
     setPhase("loading"); setErr("");
     try {
-      const s = await generateSentences(words);
+      const grammarId = unitId ? "g" + unitId.replace("u", "") : null;
+      const grammarUnit = grammarId ? EDITO_GRAMMAR.find(u => u.id === grammarId) : null;
+      const grammarPoints = grammarUnit?.points || [];
+      const s = await generateSentences(words, grammarPoints);
       if (s.length < 2) throw new Error("Không đủ câu, thử lại nhé.");
       startQuiz(s);
     } catch(e) { setErr(e.message); setPhase("idle"); }

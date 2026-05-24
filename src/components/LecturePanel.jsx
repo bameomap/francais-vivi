@@ -3,9 +3,18 @@ import { C } from "../constants.js";
 import { callAI, callAIText } from "../utils/api.js";
 import { addWordToSRS } from "../utils/srs.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
+import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import Minou, { Confetti } from "./ui/Minou.jsx";
+
+// Map vocab unit id (u0, u1…) → grammar unit points
+function getGrammarPoints(vocabUnitId) {
+  if (!vocabUnitId) return [];
+  const grammarId = "g" + vocabUnitId.replace("u", "");
+  const unit = EDITO_GRAMMAR.find(u => u.id === grammarId);
+  return unit ? unit.points : [];
+}
 
 const LEVEL_CONFIG = {
   easy:   { label:"Dễ (A1)",   words: 50,  q: 3 },
@@ -21,11 +30,16 @@ const getCached  = (uid, lvl) => { try { return JSON.parse(localStorage.getItem(
 const setCached  = (uid, lvl, d) => { try { localStorage.setItem(cacheKey(uid, lvl), JSON.stringify(d)); } catch {} };
 
 // ── Prompt ───────────────────────────────────────────────────
-function buildPrompt(wordList, level, unitTitle) {
+function buildPrompt(wordList, level, unitTitle, grammarPoints) {
   const cfg = LEVEL_CONFIG[level];
   const sample = wordList.slice(0, 20).map(w => w.fr).join(", ");
   const ctx = unitTitle ? `chủ đề "${unitTitle}"` : "tiếng Pháp A1";
-  return `Tạo một bài đọc hiểu tiếng Pháp trình độ ${cfg.label} (khoảng ${cfg.words} từ) về ${ctx}, sử dụng ít nhất 6 trong các từ sau: ${sample}.
+
+  const grammarSection = grammarPoints?.length > 0
+    ? `\nĐiểm ngữ pháp của bài này — hãy áp dụng vào đoạn văn:\n${grammarPoints.map(p => `• ${p.topic}`).join("\n")}\n`
+    : "";
+
+  return `Tạo một bài đọc hiểu tiếng Pháp trình độ ${cfg.label} (khoảng ${cfg.words} từ) về ${ctx}, sử dụng ít nhất 6 trong các từ sau: ${sample}.${grammarSection}
 
 Trả lời JSON hợp lệ KHÔNG có markdown, đúng schema:
 {
@@ -133,7 +147,8 @@ export default function LecturePanel({ words: propWords = [] }) {
   const generate = async () => {
     setLoading(true); setErr(""); setLecture(null); setAnswers({}); setRevealed({}); setConfetti(false); setWordPopup(null);
     try {
-      const data = await callAI(buildPrompt(activeWords, level, unitData?.title));
+      const grammarPoints = getGrammarPoints(selectedUnit);
+      const data = await callAI(buildPrompt(activeWords, level, unitData?.title, grammarPoints));
       setLecture(data);
       if (selectedUnit) setCached(selectedUnit, level, data);
     } catch(e) { setErr(e.message); }

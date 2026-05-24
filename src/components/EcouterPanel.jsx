@@ -88,7 +88,7 @@ export default function EcouterPanel({ words: propWords = [], section }) {
 
       {/* ── Sub-tab content ── */}
       {tab === "chon"  && <ListeningQuiz words={activeWords} />}
-      {tab === "chep"  && <DicteePanel   words={activeWords} />}
+      {tab === "chep"  && <DicteePanel   words={activeWords} unitId={selectedUnit} />}
       {tab === "audio" && <AudioDictee />}
     </div>
   );
