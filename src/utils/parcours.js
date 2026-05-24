@@ -37,11 +37,9 @@ export function computeUnitStatuses() {
     } else if (anyDone) {
       statuses[u.id] = { status: "current", pct: Math.round((done / total) * 100) };
       prevUnlocked = false;
-    } else if (prevUnlocked) {
-      statuses[u.id] = { status: "next", pct: 0 };
-      prevUnlocked = false;
     } else {
-      statuses[u.id] = { status: "locked", pct: 0 };
+      // Free mode: all unstarted units are accessible (status "next")
+      statuses[u.id] = { status: "next", pct: 0 };
     }
   }
   return statuses;

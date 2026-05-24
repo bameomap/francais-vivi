@@ -63,7 +63,7 @@ function UnitList({ onSelect }) {
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12, fontSize: 11.5 }}>
           <span><b style={{ color: C.green }}>{doneCount}</b> <span style={{ color: C.gray }}>xong</span></span>
           <span><b style={{ color: C.accent }}>{currentCount}</b> <span style={{ color: C.gray }}>đang học</span></span>
-          <span><b style={{ color: C.gray2 }}>{lockedCount}</b> <span style={{ color: C.gray }}>chưa mở</span></span>
+          <span><b style={{ color: C.gray2 }}>{lockedCount}</b> <span style={{ color: C.gray }}>chưa học</span></span>
         </div>
       </div>
 

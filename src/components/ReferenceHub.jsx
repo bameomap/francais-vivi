@@ -4,10 +4,12 @@ import ReferencePanel from "./ReferencePanel.jsx";
 import GrammarCheatsheet from "./GrammarCheatsheet.jsx";
 import ConjugaisonPanel from "./ConjugaisonPanel.jsx";
 import PhrasebookPanel from "./PhrasebookPanel.jsx";
+import EditoGrammarPanel from "./EditoGrammarPanel.jsx";
 
 const TABS = [
   { id: "pronunc", label: "Phát âm",      icon: "🔊" },
   { id: "grammar", label: "Ngữ pháp",     icon: "⚜️" },
+  { id: "edito",   label: "Édito",        icon: "📚" },
   { id: "conjug",  label: "Chia động từ", icon: "🖊️" },
   { id: "phrases", label: "Mẫu câu",      icon: "💬" },
 ];
@@ -48,6 +50,7 @@ export default function ReferenceHub() {
 
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
+      {active === "edito"   && <EditoGrammarPanel />}
       {active === "conjug"  && <ConjugaisonPanel />}
       {active === "phrases" && <PhrasebookPanel />}
     </div>

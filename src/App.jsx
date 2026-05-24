@@ -20,13 +20,13 @@ import ReferenceHub from "./components/ReferenceHub.jsx";
 import ParcoursPanel from "./components/ParcoursPanel.jsx";
 import MotDuJour from "./components/MotDuJour.jsx";
 import LecturePanel from "./components/LecturePanel.jsx";
-import DicteePanel from "./components/DicteePanel.jsx";
 import StatsPanel from "./components/StatsPanel.jsx";
 import RevisionPanel from "./components/RevisionPanel.jsx";
 import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
 import EditoVocabPanel from "./components/EditoVocabPanel.jsx";
-import ListeningQuiz from "./components/ListeningQuiz.jsx";
+import EcouterPanel from "./components/EcouterPanel.jsx";
 import SentenceBuilder from "./components/SentenceBuilder.jsx";
+import ProfilPanel from "./components/ProfilPanel.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
@@ -45,9 +45,9 @@ const MODULES = [
   { id:"writing",       group:"luyen",  label:"Luyện viết", fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"       },
   { id:"defi",          group:"luyen",  label:"Thử thách",  fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"          },
   { id:"lecture",       group:"luyen",  label:"Đọc hiểu",   fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"       },
-  { id:"dictee",        group:"luyen",  label:"Nghe chép",  fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"dictee"        },
+  { id:"dictee",        group:"luyen",  label:"Nghe chép",  fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"ecouter"       },
   { id:"srs",           group:"luyen",  label:"Thẻ ôn tập", fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"           },
-  { id:"listening",     group:"luyen",  label:"Nghe chọn",  fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"listening"     },
+  { id:"listening",     group:"luyen",  label:"Nghe chọn",  fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"ecouter"       },
   { id:"revision",      group:"luyen",  label:"Ôn sai",     fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"      },
   // Công cụ
   { id:"stats",         group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"         },
@@ -61,19 +61,20 @@ const GROUP_DEFS = [
 ];
 
 const TABS = [
-  { id:"home",    glyph:"⌂",  label:"Home",    section:"home",         view:"home",         color:null          },
-  { id:"lire",    glyph:"Aa", label:"Lire",    section:"lecture",      view:"lecture",      color:"#4A90D9"     },
-  { id:"ecouter", glyph:"))", label:"Écouter", section:"dictee",       view:"dictee",       color:"#7B6CF6"     },
-  { id:"parler",  glyph:"••", label:"Parler",  section:"conversation", view:"conversation", color:"#E67E22"     },
-  { id:"ecrire",  glyph:"/",  label:"Écrire",  section:"writing",      view:"writing",      color:"#10B981"     },
+  { id:"home",     glyph:"⌂",  label:"Home",      section:"home",          view:"home",          color:null       },
+  { id:"parcours", glyph:"⇢",  label:"Parcours",  section:"parcours",      view:"parcours",      color:"#E8574A"  },
+  { id:"vocab",    glyph:"Aa", label:"Vocab",     section:"vocab",         view:"input",         color:"#4A90D9"  },
+  { id:"ref",      glyph:"ƒ",  label:"Référence", section:"reference_hub", view:"reference_hub", color:"#F5A623"  },
+  { id:"profil",   glyph:"◉",  label:"Profil",    section:"profil",        view:"profil",        color:"#3A4664"  },
 ];
 
 const SECTION_TITLE = {
   vocab:"Le Vocabulaire", parcours:"Le Parcours", grammar:"La Grammaire", conversation:"La Conversation",
   writing:"L'Écriture", defi:"Le Défi du Jour", reference_hub:"La Référence",
-  lecture:"La Lecture", dictee:"La Dictée",
+  lecture:"La Lecture", dictee:"La Dictée", ecouter:"L'Écoute",
   revision:"La Révision", stats:"Les Statistiques",
   listening:"L'Écoute Active", sentence:"Les Phrases",
+  profil:"Mon Profil",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -437,7 +438,7 @@ function AppInner() {
             <Minou
               mood={streakData.streak >= 7 ? "excited" : srsStats.due === 0 && srsStats.total > 0 ? "proud" : "happy"}
               message={
-                streakData.streak >= 7 ? `Streak ${streakData.streak} ngày!! Fantastique! 🔥` :
+                streakData.streak >= 7 ? "Fantastique! Chuỗi ngày học tuyệt vời! 🔥" :
                 srsStats.due === 0 && srsStats.total > 0 ? "Ôn tập xong rồi, bravo! ✨" :
                 srsStats.due > 0 ? `Còn ${srsStats.due} từ chờ ôn nhé~ 📚` :
                 "Bonne chance hôm nay! On y va! 🌟"
@@ -513,7 +514,7 @@ function AppInner() {
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
               {[
                 { fr:"Lire",    vi:"Đọc",  glyph:"Aa", sub:"Đọc hiểu",   color:"#4A90D9", fn:()=>goSection("lecture","lecture")          },
-                { fr:"Écouter", vi:"Nghe", glyph:"))", sub:"Nghe chép",  color:"#7B6CF6", fn:()=>goSection("dictee","dictee")            },
+                { fr:"Écouter", vi:"Nghe", glyph:"))", sub:"Nghe chép",  color:"#7B6CF6", fn:()=>goSection("ecouter","ecouter")          },
                 { fr:"Parler",  vi:"Nói",  glyph:"••", sub:"Roleplay AI", color:"#E67E22", fn:()=>goSection("conversation","conversation") },
                 { fr:"Écrire",  vi:"Viết", glyph:"/",  sub:"Luyện viết", color:"#10B981", fn:()=>goSection("writing","writing")          },
               ].map((s, i) => (
@@ -531,72 +532,6 @@ function AppInner() {
             </div>
           </div>
 
-          {/* ── Module groups ── */}
-          <div style={{ padding:"0 16px", marginTop:14 }}>
-            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, fontWeight:600, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>
-              Tất cả module
-            </div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
-              {GROUP_DEFS.map(g => {
-                const isOpen = activeGroup === g.id;
-                return (
-                  <button key={g.id} className="card-hover" onClick={() => setActiveGroup(isOpen ? null : g.id)}
-                    style={{ background:isOpen ? g.bg : C.white, border:`1.5px solid ${isOpen ? g.color : C.border}`, borderRadius:14, padding:"14px 14px", display:"flex", flexDirection:"column", gap:5, cursor:"pointer", fontFamily:"inherit", textAlign:"left", transition:"all 0.15s" }}>
-                    <span style={{ fontSize:22 }}>{g.icon}</span>
-                    <div style={{ fontSize:13, fontWeight:700, color:isOpen ? g.color : C.ink, lineHeight:1.1 }}>{g.label}</div>
-                    <div style={{ fontSize:10, color:C.gray, lineHeight:1.35 }}>{g.desc}</div>
-                  </button>
-                );
-              })}
-            </div>
-            {activeGroup && (() => {
-              const g = GROUP_DEFS.find(x => x.id === activeGroup);
-              if (!g) return null;
-              return (
-                <div style={{ marginTop:10, padding:"12px 14px", background:g.bg, borderRadius:12, border:`1.5px solid ${g.color}33`, animation:"fadeUp 0.2s ease" }}>
-                  <div style={{ fontSize:10, fontWeight:700, color:g.color, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:8 }}>{g.label}</div>
-                  <div style={{ display:"flex", flexWrap:"wrap", gap:7 }}>
-                    {g.moduleIds.map(mid => {
-                      const m = MODULES.find(x => x.id === mid);
-                      if (!m) return null;
-                      return (
-                        <button key={mid} onClick={() => goSection(m.id, m.view)}
-                          style={{ padding:"7px 14px", background:C.white, border:`1.5px solid ${g.color}44`, borderRadius:999, fontSize:12, fontWeight:600, color:g.color, cursor:"pointer", fontFamily:"inherit", boxShadow:"0 1px 3px rgba(0,0,0,0.05)" }}>
-                          {m.icon} {m.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-
-          {/* ── Foundation row ── */}
-          <div style={{ padding:"0 16px", marginTop:14 }}>
-            <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, fontWeight:600, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>
-              Nền tảng
-            </div>
-            <div style={{ display:"flex", gap:7 }}>
-              {[
-                { l:"Vocab",     s:`${srsStats.total} từ`,  i:"V", fn:()=>goSection("vocab","edito")                  },
-                { l:"Référence", s:"Tra cứu",                i:"R", fn:()=>goSection("reference_hub","reference_hub")  },
-                { l:"Parcours",  s:(() => { const o = computeOverallProgress(); return `${o.done}/${o.total}`; })(), i:"P", fn:()=>goSection("parcours","parcours") },
-              ].map(f => (
-                <button key={f.l} className="card-hover" onClick={f.fn}
-                  style={{ flex:1, background:C.cream, borderRadius:12, padding:"8px 10px", display:"flex", gap:8, alignItems:"center", border:"none", cursor:"pointer", fontFamily:"inherit" }}>
-                  <div style={{ width:26, height:26, borderRadius:7, background:C.white, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, color:C.blueDark, fontSize:13, flexShrink:0 }}>
-                    {f.i}
-                  </div>
-                  <div>
-                    <div style={{ fontSize:11.5, fontWeight:700, color:C.ink, lineHeight:1.1 }}>{f.l}</div>
-                    <div style={{ fontSize:9.5, color:C.gray }}>{f.s}</div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div style={{ height:"1.5rem" }} />
         </div>
       )}
@@ -604,7 +539,7 @@ function AppInner() {
       {/* ══════════════════════════════════════
           APP SHELL (non-home sections)
       ══════════════════════════════════════ */}
-      {section!=="home" && (
+      {section!=="home" && section!=="profil" && (
         <>
           {/* ── Header ── */}
           <div style={{ background:C.white, padding:"0.6rem 1rem", display:"flex", flexDirection:"column", gap:"0.4rem", borderBottom:`1.5px solid ${C.border}`, position:"sticky", top:0, zIndex:100, boxShadow:"0 1px 12px rgba(74,144,217,0.08)" }}>
@@ -1010,14 +945,37 @@ function AppInner() {
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="reference_hub" && <ReferenceHub />}
             {view==="lecture"       && <LecturePanel words={words} />}
-            {view==="dictee"        && <DicteePanel words={words} />}
+            {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} />}
             {view==="revision"      && <RevisionPanel />}
             {view==="stats"         && <StatsPanel />}
             {view==="topics"        && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}
-            {view==="listening"     && <ListeningQuiz />}
             {view==="sentence"      && <SentenceBuilder />}
           </div>
         </>
+      )}
+
+      {/* ══════════════════════════════════════
+          PROFIL PAGE (full-page, no shell header)
+      ══════════════════════════════════════ */}
+      {section==="profil" && (
+        <div style={{ minHeight:"100vh", display:"flex", flexDirection:"column", paddingBottom:80 }}>
+          {/* Top bar */}
+          <div style={{ padding:"6px 16px 12px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+            <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:17, letterSpacing:"-0.01em", color:C.ink }}>Profil</span>
+            <button onClick={toggleDark}
+              style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"3px 8px", fontSize:"0.82rem", cursor:"pointer", lineHeight:1 }}>
+              {dark ? "☀️" : "🌙"}
+            </button>
+          </div>
+          <div style={{ flex:1, overflowY:"auto" }}>
+            <ProfilPanel
+              userName={userName}
+              dark={dark}
+              toggleDark={toggleDark}
+              onNavigate={(s, v) => goSection(s, v || s)}
+            />
+          </div>
+        </div>
       )}
 
       {/* ══════════════════════════════════════
@@ -1032,6 +990,7 @@ function AppInner() {
               <button key={tab.id} className="tab-btn"
                 onClick={()=>{
                   if (tab.id==="home") { setSection("home"); setActiveGroup(null); setFromGroup(null); return; }
+                  if (tab.id==="profil") { setSection("profil"); setView("profil"); return; }
                   goSection(tab.section, tab.view);
                 }}
                 style={{ flex:1, textAlign:"center", background:"transparent", border:"none", cursor:"pointer", padding:0 }}>
