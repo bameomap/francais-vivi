@@ -79,7 +79,7 @@ function parseAIMsg(text) {
 }
 
 // ════════════════════════════════════════════════════════════════
-export default function ConversationPanel() {
+export default function ConversationPanel({ onBackToParcours }) {
   const [scenario,      setScenario]      = useState(null);
   const [messages,      setMessages]      = useState([]);
   const [input,         setInput]         = useState("");
@@ -91,7 +91,11 @@ export default function ConversationPanel() {
   const [selUnit,       setSelUnit]       = useState(0);
   const bottomRef = useRef(null);
 
+  const [fromParcours, setFromParcours] = useState(false);
+
   useEffect(() => {
+    const back = localStorage.getItem("parcours_back");
+    if (back) { localStorage.removeItem("parcours_back"); setFromParcours(true); }
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
       setMode("edito");
@@ -162,6 +166,12 @@ export default function ConversationPanel() {
     const uc   = UNIT_COLORS[selUnit] || UNIT_COLORS[0];
     return (
       <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.9rem" }}>
+
+        {fromParcours && onBackToParcours && (
+          <button onClick={onBackToParcours} style={{ background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
+            ← Parcours
+          </button>
+        )}
 
         {/* Mode toggle */}
         <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:12 }}>

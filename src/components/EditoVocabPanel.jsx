@@ -281,15 +281,16 @@ function ExtraVocabView({ onBack }) {
 }
 
 // ── Main panel ─────────────────────────────────────────────
-export default function EditoVocabPanel() {
-  const [activeUnit, setActiveUnit]   = useState(null);
-  const [showExtra, setShowExtra]     = useState(false);
+export default function EditoVocabPanel({ onBackToParcours }) {
+  const [activeUnit,   setActiveUnit]   = useState(null);
+  const [showExtra,    setShowExtra]    = useState(false);
+  const [fromParcours, setFromParcours] = useState(false);
 
   useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
       const unit = EDITO_VOCAB_UNITS[Number(idx)];
-      if (unit) setActiveUnit(unit.id);
+      if (unit) { setActiveUnit(unit.id); setFromParcours(true); }
       localStorage.removeItem("parcours_unit_idx");
     }
   }, []);
@@ -298,7 +299,10 @@ export default function EditoVocabPanel() {
 
   if (activeUnit) {
     const unit = EDITO_VOCAB_UNITS.find(u => u.id === activeUnit);
-    return <UnitDetailView unit={unit} onBack={() => setActiveUnit(null)} />;
+    const handleBack = fromParcours && onBackToParcours
+      ? () => onBackToParcours()
+      : () => { setActiveUnit(null); setFromParcours(false); };
+    return <UnitDetailView unit={unit} onBack={handleBack} />;
   }
 
   // Unit list

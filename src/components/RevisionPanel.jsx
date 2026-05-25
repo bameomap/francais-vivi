@@ -3,7 +3,6 @@ import { C } from "../constants.js";
 import { getMistakes, clearMistake, clearAllMistakes } from "../utils/storage.js";
 import { speak } from "../utils/helpers.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
-import Minou from "./ui/Minou.jsx";
 
 const MODULE_LABELS = {
   vocab:"Từ vựng", grammar:"Ngữ pháp", conversation:"Giao tiếp",
@@ -31,11 +30,6 @@ function FlashDrill({ mistakes, onDone }) {
     const pct = total > 0 ? Math.round(known.length / total * 100) : 100;
     return (
       <div style={{ padding:"1rem", textAlign:"center" }}>
-        <Minou
-          mood={pct>=80?"excited":pct>=60?"happy":"sad"}
-          message={pct>=80?"Parfait! Nhớ hết rồi! 🎉":pct>=60?"Bien! Ôn thêm nhé 💪":"Tiếp tục ôn lại nhé~ 🐱"}
-          size="md"
-        />
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:pct>=80?"#059669":pct>=60?C.gold:C.red, fontWeight:700, marginTop:"0.8rem" }}>
           {known.length}/{total}
         </div>
@@ -137,7 +131,7 @@ export default function RevisionPanel() {
 
   if (mistakes.length === 0) return (
     <div style={{ padding:"1.5rem 1rem", textAlign:"center" }}>
-      <Minou mood="proud" message="Không có lỗi nào cần ôn — parfait! ✨" size="md" />
+      <div style={{ fontSize:"0.9rem", color:"#059669", fontWeight:600 }}>Không có lỗi nào cần ôn — parfait! ✨</div>
       <div style={{ fontSize:"0.78rem", color:C.gray, marginTop:"1rem", lineHeight:1.7 }}>
         Câu sai trong Défi, Dictée, và Quiz sẽ được<br/>gom về đây để bạn ôn lại.
       </div>

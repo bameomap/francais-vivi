@@ -7,7 +7,6 @@ import { C, applyTheme } from "./constants.js";
 
 import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
-import Minou from "./components/ui/Minou.jsx";
 import { SecLabel, QCard, SaveModal, ImportModal } from "./components/ui/SharedUI.jsx";
 import { MCSection, FillSection, MatchSection, DicteeSection, FlashcardSection, AnagrammeSection } from "./components/QuizSections.jsx";
 import ConversationPanel from "./components/ConversationPanel.jsx";
@@ -25,6 +24,7 @@ import RevisionPanel from "./components/RevisionPanel.jsx";
 import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
 import EditoVocabPanel from "./components/EditoVocabPanel.jsx";
 import EcouterPanel from "./components/EcouterPanel.jsx";
+import UnitQuizPanel from "./components/UnitQuizPanel.jsx";
 import SentenceBuilder from "./components/SentenceBuilder.jsx";
 import ProfilPanel from "./components/ProfilPanel.jsx";
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards } from "./utils/srs.js";
@@ -74,6 +74,7 @@ const SECTION_TITLE = {
   lecture:"La Lecture", dictee:"La Dictée", ecouter:"L'Écoute",
   revision:"La Révision", stats:"Les Statistiques",
   listening:"L'Écoute Active", sentence:"Les Phrases",
+  "quiz-unit":"Le Quiz de l'Unité",
   profil:"Mon Profil",
 };
 
@@ -335,10 +336,7 @@ function AppInner() {
           from { opacity:0; transform:translateY(40px); }
           to   { opacity:1; transform:translateY(0);    }
         }
-        @keyframes minouBounce {
-          0%,100% { transform:translateY(0);   }
-          50%     { transform:translateY(-4px); }
-        }
+
         @keyframes confettiFall {
           to { transform:translateY(110vh) rotate(540deg); opacity:0; }
         }
@@ -429,30 +427,23 @@ function AppInner() {
             </div>
           </div>
 
-          {/* ── Greeting + Minou ── */}
+          {/* ── Greeting ── */}
           <div style={{ padding:"0 16px 4px", animation:"fadeUp 0.4s ease" }}>
             <div style={{ fontSize:12, color:C.gray, marginBottom:2 }}>Bonjour,</div>
             <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:28, lineHeight:1.1, fontWeight:700, letterSpacing:"-0.02em", color:C.ink, marginBottom:8 }}>
               {userName || "Bạn"} 🇫🇷
             </div>
-            <Minou
-              mood={streakData.streak >= 7 ? "excited" : srsStats.due === 0 && srsStats.total > 0 ? "proud" : "happy"}
-              message={
-                streakData.streak >= 7 ? "Fantastique! Chuỗi ngày học tuyệt vời! 🔥" :
-                srsStats.due === 0 && srsStats.total > 0 ? "Ôn tập xong rồi, bravo! ✨" :
-                srsStats.due > 0 ? `Còn ${srsStats.due} từ chờ ôn nhé~ 📚` :
-                "Bonne chance hôm nay! On y va! 🌟"
-              }
-              align="left"
-            />
           </div>
 
           {/* ── Focus card (Parcours-driven) ── */}
           {(() => {
             const statuses = computeUnitStatuses();
-            const focusUnit = PARCOURS_UNITS.find(u => statuses[u.id]?.status === "current")
+            const lastUnitId = localStorage.getItem("parcours_last_unit");
+            const focusUnit = (lastUnitId && PARCOURS_UNITS.find(u => u.id === lastUnitId))
+              || PARCOURS_UNITS.find(u => statuses[u.id]?.status === "current")
               || PARCOURS_UNITS.find(u => statuses[u.id]?.status === "next");
             const overall = computeOverallProgress();
+
             if (!focusUnit) return (
               <div style={{ margin:"0.75rem 1.25rem 0", background:`linear-gradient(135deg, ${C.green}, #059669)`, borderRadius:18, padding:"1.1rem 1.4rem", color:"#fff", animation:"fadeUp 0.4s ease 0.05s both" }}>
                 <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", fontWeight:700 }}>🎉 Parcours hoàn thành!</div>
@@ -462,7 +453,7 @@ function AppInner() {
             const { pct } = statuses[focusUnit.id] || { pct:0 };
             const isCurrent = statuses[focusUnit.id]?.status === "current";
             return (
-              <div style={{ margin:"0.75rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both" }}>
+              <div style={{ margin:"0.75rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both", position:"relative" }}>
                 <div style={{ background:`linear-gradient(135deg, ${C.ink} 0%, #2d4f8a 100%)`, borderRadius:18, padding:"1.15rem 1.35rem", color:"#fff", position:"relative", overflow:"hidden" }}>
                   <div style={{ position:"absolute", right:-18, top:-18, width:90, height:90, borderRadius:"50%", background:"radial-gradient(circle, #E8574A18 0%, transparent 70%)" }}/>
                   <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>
@@ -485,6 +476,7 @@ function AppInner() {
                     </button>
                   </div>
                 </div>
+
               </div>
             );
           })()}
@@ -593,7 +585,7 @@ function AppInner() {
           <div style={{ minHeight:"calc(100vh - 130px)", paddingBottom:80 }}>
 
             {/* EDITO VOCAB */}
-            {view==="edito" && <EditoVocabPanel />}
+            {view==="edito" && <EditoVocabPanel onBackToParcours={() => goSection("parcours","parcours")} />}
 
             {/* INPUT */}
             {view==="input" && (
@@ -671,7 +663,7 @@ function AppInner() {
                   if (filtered.length === 0) return (
                     <div style={{ textAlign:"center", padding:"20px 0", color:C.gray, fontSize:12.5 }}>
                       {allCards.length === 0
-                        ? <Minou mood="sleeping" message="Chưa có từ trong SRS. Học Edito để thêm từ!" size="sm"/>
+                        ? "Chưa có từ trong SRS. Học Edito để thêm từ!"
                         : "Không có từ nào phù hợp."}
                     </div>
                   );
@@ -790,9 +782,6 @@ function AppInner() {
                 <div style={{ fontSize:"0.78rem", fontWeight:700, color:C.blue, marginBottom:"0.8rem" }}>📂 Bộ từ đã lưu</div>
                 {sets.length===0
                   ? <div style={{ textAlign:"center", padding:"1.5rem 1rem" }}>
-                      <div style={{ display:"flex", justifyContent:"center", marginBottom:"0.75rem" }}>
-                        <Minou mood="thinking" message="Chưa lưu bộ từ nào..." size="md"/>
-                      </div>
                       <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, marginBottom:"0.3rem" }}>Lưu bộ từ đầu tiên nhé!</div>
                       <div style={{ fontSize:"0.75rem", color:C.gray, lineHeight:1.6, marginBottom:"0.9rem" }}>Nhập từ vựng và nhấn <b>💾 Lưu</b> để giữ lại.</div>
                       <button onClick={()=>setView("input")} style={{ padding:"0.5rem 1.2rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:12, fontSize:"0.82rem", cursor:"pointer", fontWeight:600 }}>
@@ -853,9 +842,6 @@ function AppInner() {
                   </div>
                   {entries.length===0
                     ?<div style={{textAlign:"center",padding:"1.5rem 1rem"}}>
-                      <div style={{ display:"flex", justifyContent:"center", marginBottom:"0.75rem" }}>
-                        <Minou mood="thinking" message="Làm bài tập đi rồi mình cùng xem!" size="md"/>
-                      </div>
                       <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"0.95rem",color:C.ink,marginBottom:"0.3rem"}}>Chưa có dữ liệu</div>
                       <div style={{fontSize:"0.75rem",color:C.gray,lineHeight:1.6,marginBottom:"0.9rem"}}>Làm bài tập để bắt đầu theo dõi tiến độ.</div>
                       <button onClick={()=>setView("input")} style={{padding:"0.5rem 1.2rem",background:`linear-gradient(135deg,${C.blue},${C.blueDark})`,color:C.white,border:"none",borderRadius:12,fontSize:"0.82rem",cursor:"pointer",fontWeight:600}}>
@@ -938,14 +924,15 @@ function AppInner() {
 
             {/* Panels */}
             {view==="parcours"      && <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} />}
-            {view==="grammar"       && <GrammarPanel/>}
+            {view==="grammar"       && <GrammarPanel onBackToParcours={() => goSection("parcours","parcours")} />}
             {view==="defi"          && <DefiPanel/>}
-            {view==="writing"       && <WritingPanel/>}
-            {view==="conversation"  && <ConversationPanel/>}
+            {view==="writing"       && <WritingPanel onBackToParcours={() => goSection("parcours","parcours")} />}
+            {view==="conversation"  && <ConversationPanel onBackToParcours={() => goSection("parcours","parcours")} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="reference_hub" && <ReferenceHub />}
             {view==="lecture"       && <LecturePanel words={words} />}
-            {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} />}
+            {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={() => goSection("parcours","parcours")} />}
+            {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={() => goSection("parcours","parcours")} />}
             {view==="revision"      && <RevisionPanel />}
             {view==="stats"         && <StatsPanel />}
             {view==="topics"        && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}

@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
+import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 
 // A1 seed words used when user has no vocab yet
 const SEED_WORDS = [
@@ -91,7 +92,11 @@ function getTodayKey() {
 }
 
 export default function MotDuJour({ words = [] }) {
-  const pool  = words.length >= 7 ? words : SEED_WORDS;
+  // Ưu tiên: vocab unit đang học trong parcours → words user → seed
+  const parcoursUnitId = localStorage.getItem("parcours_last_unit");
+  const parcoursUnit   = parcoursUnitId ? EDITO_VOCAB_UNITS.find(u => u.id === parcoursUnitId) : null;
+  const parcoursWords  = parcoursUnit ? parcoursUnit.groups.flatMap(g => g.words) : null;
+  const pool  = parcoursWords || (words.length >= 7 ? words : SEED_WORDS);
   const word  = pool[getDayIndex() % pool.length];
   const cacheKey = getTodayKey() + "_" + word.fr;
 
@@ -134,7 +139,7 @@ export default function MotDuJour({ words = [] }) {
         <div style={{ padding:"0.65rem 0.9rem" }}>
           {/* Label */}
           <div style={{ fontSize:"0.56rem", textTransform:"uppercase", letterSpacing:2.5, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>
-            Le Mot du Jour · {new Date().toLocaleDateString("vi-VN", { weekday:"long" })}
+            Le Mot du Jour · {parcoursUnit ? `Unit ${parcoursUnit.num} · ${parcoursUnit.title}` : new Date().toLocaleDateString("vi-VN", { weekday:"long" })}
           </div>
 
           {/* Word row */}

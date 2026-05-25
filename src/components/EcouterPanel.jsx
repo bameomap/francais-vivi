@@ -17,10 +17,15 @@ const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, fr: u.ti
 const cacheKey  = (uid) => `ecouter_unit_${uid}`;
 const hasCached = (uid) => !!localStorage.getItem(cacheKey(uid));
 
-export default function EcouterPanel({ words: propWords = [], section }) {
+export default function EcouterPanel({ words: propWords = [], section, onBackToParcours }) {
   const defaultTab = section === "listening" ? "chon" : "chep";
   const [tab,          setTab]          = useState(defaultTab);
   const [selectedUnit, setSelectedUnit] = useState(null);
+  const [fromParcours] = useState(() => {
+    const back = localStorage.getItem("parcours_back");
+    if (back) { localStorage.removeItem("parcours_back"); return true; }
+    return false;
+  });
 
   // Active words: unit vocab > user words
   const unitData    = selectedUnit ? EDITO_VOCAB_UNITS.find(u => u.id === selectedUnit) : null;
@@ -33,6 +38,13 @@ export default function EcouterPanel({ words: propWords = [], section }) {
 
   return (
     <div>
+      {fromParcours && onBackToParcours && (
+        <div style={{ padding:"0.5rem 1rem 0" }}>
+          <button onClick={onBackToParcours} style={{ background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
+            ← Parcours
+          </button>
+        </div>
+      )}
       {/* ── Unit picker ── */}
       <div style={{ padding: "0.6rem 1rem 0.4rem", borderBottom: `1px solid ${C.borderSoft || "#EEF2FA"}` }}>
         <div style={{ display:"flex", alignItems:"center", gap:6, marginBottom:5 }}>
@@ -87,9 +99,20 @@ export default function EcouterPanel({ words: propWords = [], section }) {
       </div>
 
       {/* ── Sub-tab content ── */}
-      {tab === "chon"  && <ListeningQuiz words={activeWords} />}
-      {tab === "chep"  && <DicteePanel   words={activeWords} unitId={selectedUnit} />}
       {tab === "audio" && <AudioDictee />}
+      {(tab === "chon" || tab === "chep") && !selectedUnit && (
+        <div style={{ padding:"2.5rem 1.5rem", textAlign:"center" }}>
+          <div style={{ fontSize:"2rem", marginBottom:"0.75rem" }}>🎧</div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700, marginBottom:"0.4rem" }}>
+            Chọn một Unit Édito
+          </div>
+          <div style={{ fontSize:"0.78rem", color:C.gray, lineHeight:1.6 }}>
+            Bấm vào một unit bên trên để khoanh vùng<br/>từ vựng trước khi luyện nghe.
+          </div>
+        </div>
+      )}
+      {tab === "chon" && selectedUnit && <ListeningQuiz words={activeWords} />}
+      {tab === "chep" && selectedUnit && <DicteePanel   words={activeWords} unitId={selectedUnit} />}
     </div>
   );
 }

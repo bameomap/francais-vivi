@@ -2226,8 +2226,13 @@ function CustomExerciseView() {
   );
 }
 
-export default function GrammarPanel() {
+export default function GrammarPanel({ onBackToParcours }) {
   const [panelTab, setPanelTab] = useState("edito");
+  const [fromParcours] = useState(() => {
+    const back = localStorage.getItem("parcours_back");
+    if (back) { localStorage.removeItem("parcours_back"); return true; }
+    return false;
+  });
   const [initUnit] = useState(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) { localStorage.removeItem("parcours_unit_idx"); return Number(idx); }
@@ -2252,6 +2257,11 @@ export default function GrammarPanel() {
 
   return (
     <div>
+      {fromParcours && onBackToParcours && (
+        <button onClick={onBackToParcours} style={{ margin:"0.6rem 1rem 0", background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
+          ← Parcours
+        </button>
+      )}
       {tabBar}
       {panelTab === "edito"  && <EditoGrammarView defaultUnitIndex={initUnit} />}
       {panelTab === "custom" && <CustomExerciseView />}

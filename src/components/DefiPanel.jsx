@@ -4,7 +4,7 @@ import { callAI } from "../utils/api.js";
 import { markStudiedToday, loadSets } from "../utils/storage.js";
 import { getAllCards } from "../utils/srs.js";
 import Spinner from "./ui/Spinner.jsx";
-import Minou, { Confetti } from "./ui/Minou.jsx";
+import { Confetti } from "./ui/Minou.jsx";
 import { logMistake } from "../utils/storage.js";
 
 const DEFI_KEY = "defi_history";
@@ -242,15 +242,11 @@ export default function DefiPanel() {
   // ── Result ──
   if (done) {
     const pct = Math.round(score.ok / score.total * 100);
-    const minouMood = pct >= 80 ? "excited" : pct >= 60 ? "happy" : "sad";
-    const minouMsg  = pct >= 80 ? "Parfait! Xuất sắc quá! 🎉" : pct >= 60 ? "Bien joué! Cố lên nha! 💪" : "Không sao, luyện thêm nhé~ 🐱";
     return (
       <div style={{ padding:"1rem" }}>
         <Confetti active={confetti} onDone={() => setConfetti(false)} />
         <div style={{ background:C.white, border:`1.5px solid ${pctColor(pct)}44`, borderRadius:16, padding:"1.75rem 1.2rem", textAlign:"center", animation:"fadeUp 0.3s ease" }}>
-          <div style={{ marginBottom:"0.9rem", display:"flex", justifyContent:"center" }}>
-            <Minou mood={minouMood} message={minouMsg} size="lg" />
-          </div>
+
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:pctColor(pct), fontWeight:700, lineHeight:1 }}>{score.ok}/{score.total}</div>
           <div style={{ fontSize:"0.82rem", color:C.gray, marginTop:"0.4rem", marginBottom:"1.5rem" }}>
             {pct >= 80 ? "Xuất sắc! 🌟" : pct >= 60 ? "Rất tốt! Tiếp tục nhé!" : "Cần ôn thêm — bạn làm được!"}

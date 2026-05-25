@@ -101,7 +101,7 @@ function UnitList({ onSelect }) {
               {/* card */}
               <button
                 disabled={isLocked}
-                onClick={() => onSelect(u.id)}
+                onClick={() => { localStorage.setItem("parcours_last_unit", u.id); onSelect(u.id); }}
                 style={{
                   flex: 1, minWidth: 0, textAlign: "left",
                   background: isCurrent ? "#FFF0EF" : C.white,
@@ -167,16 +167,25 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
       onNavigate("vocab", "edito");
     } else if (step.id === "grammar") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
+      localStorage.setItem("parcours_back", "1");
       onNavigate("grammar", "grammar");
     } else if (step.id === "lecture") {
-      localStorage.setItem("parcours_writing_idx", String(Math.max(0, unitIdx - 1)));
+      localStorage.setItem("parcours_writing_idx", String(unitIdx));
+      localStorage.setItem("parcours_back", "1");
       onNavigate("writing", "writing");
     } else if (step.id === "parler") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
+      localStorage.setItem("parcours_back", "1");
       onNavigate("conversation", "conversation");
     } else if (step.id === "ecouter") {
+      localStorage.setItem("parcours_back", "1");
       onNavigate("dictee", "dictee");
+    } else if (step.id === "quiz") {
+      localStorage.setItem("parcours_quiz_unit", unitId);
+      localStorage.setItem("parcours_back", "1");
+      onNavigate("quiz-unit", "quiz-unit");
     } else {
+      localStorage.setItem("parcours_back", "1");
       onNavigate(step.view, step.view);
     }
   }, [unitId, progress, onNavigate]);

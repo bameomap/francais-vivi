@@ -5,7 +5,7 @@ import { speak } from "../utils/helpers.js";
 import { logMistake } from "../utils/storage.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import Spinner from "./ui/Spinner.jsx";
-import Minou, { Confetti } from "./ui/Minou.jsx";
+import { Confetti } from "./ui/Minou.jsx";
 
 const PURPLE   = "#7C3AED";
 const PURPLE_L = "#F5F0FF";

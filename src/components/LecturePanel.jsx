@@ -6,7 +6,7 @@ import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
-import Minou, { Confetti } from "./ui/Minou.jsx";
+import { Confetti } from "./ui/Minou.jsx";
 import LectureEditoPanel from "./LectureEditoPanel.jsx";
 
 // Map vocab unit id (u0, u1…) → grammar unit points
@@ -413,11 +413,6 @@ export default function LecturePanel({ words: propWords = [] }) {
           {/* Result */}
           {allAnswered && (
             <div style={{ background:C.white, borderRadius:16, padding:"1.2rem", border:`1.5px solid ${pct>=80?"#059669":pct>=60?C.gold:C.red}44`, textAlign:"center", animation:"fadeUp 0.3s ease" }}>
-              <Minou
-                mood={pct>=80?"excited":pct>=60?"happy":"sad"}
-                message={pct>=80?"Parfait! Bạn đọc rất tốt! 🎉":pct>=60?"Bien! Đọc thêm để quen nhé 💪":"Đọc lại bài và thử lần nữa nhé~ 🐱"}
-                size="md"
-              />
               <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:pct>=80?"#059669":pct>=60?C.gold:C.red, fontWeight:700, marginTop:"0.8rem" }}>
                 {score}/{total}
               </div>

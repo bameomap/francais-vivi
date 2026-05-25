@@ -131,7 +131,7 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
 }
 
 // ════════════════════════════════════════════════════════════════
-export default function WritingPanel() {
+export default function WritingPanel({ onBackToParcours }) {
   const [tab,        setTab]        = useState("write");
   const [input,      setInput]      = useState("");
   const [result,     setResult]     = useState(null);
@@ -143,7 +143,11 @@ export default function WritingPanel() {
   const [editoUnit,  setEditoUnit]  = useState(0);
   const [editoTask,  setEditoTask]  = useState(null);
 
+  const [fromParcours, setFromParcours] = useState(false);
+
   useEffect(() => {
+    const back = localStorage.getItem("parcours_back");
+    if (back) { localStorage.removeItem("parcours_back"); setFromParcours(true); }
     const idx = localStorage.getItem("parcours_writing_idx");
     if (idx !== null) {
       setTab("edito");
@@ -210,6 +214,11 @@ Return ONLY JSON:
     const uc   = UNIT_COLORS[editoUnit] || UNIT_COLORS[0];
     return (
       <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.8rem" }}>
+        {fromParcours && onBackToParcours && (
+          <button onClick={onBackToParcours} style={{ background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
+            ← Parcours
+          </button>
+        )}
         {TAB_BAR}
 
         {!editoTask ? (

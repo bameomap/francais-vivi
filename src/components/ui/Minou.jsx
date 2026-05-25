@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 
 // ── Mood config ──────────────────────────────────────────────
+// frames = number of frames in the sprite sheet (width / 80)
+// fps    = playback speed
 const MOODS = {
-  happy:    { face:"(=^･ω･^=)", color:"#F59E0B", bg:"#FFFBEB", accent:"#D97706", bounce:true  },
-  excited:  { face:"(=^▽^=) ♪", color:"#EC4899", bg:"#FDF2F8", accent:"#BE185D", bounce:true  },
-  proud:    { face:"(=^◕‿◕^=)", color:"#10B981", bg:"#ECFDF5", accent:"#059669", bounce:false },
-  sad:      { face:"(=ㅠ.ㅠ=)",  color:"#6B7280", bg:"#F9FAFB", accent:"#4B5563", bounce:false },
-  sleeping: { face:"(=-..-=) zzz",color:"#8B5CF6",bg:"#F5F3FF", accent:"#7C3AED", bounce:false },
-  thinking: { face:"(=^･_･^=)?",  color:"#3B82F6", bg:"#EFF6FF", accent:"#2563EB", bounce:false },
+  happy:    { sprite:"IDLE",  frames:8,  fps:8,  color:"#F59E0B", bg:"#FFFBEB", accent:"#D97706", bounce:true  },
+  excited:  { sprite:"RUN",   frames:8,  fps:12, color:"#EC4899", bg:"#FDF2F8", accent:"#BE185D", bounce:false },
+  proud:    { sprite:"WALK",  frames:12, fps:8,  color:"#10B981", bg:"#ECFDF5", accent:"#059669", bounce:false },
+  sad:      { sprite:"HURT",  frames:4,  fps:5,  color:"#6B7280", bg:"#F9FAFB", accent:"#4B5563", bounce:false },
+  sleeping: { sprite:"IDLE",  frames:8,  fps:3,  color:"#8B5CF6", bg:"#F5F3FF", accent:"#7C3AED", bounce:false },
+  thinking: { sprite:"IDLE",  frames:8,  fps:5,  color:"#3B82F6", bg:"#EFF6FF", accent:"#2563EB", bounce:false },
 };
+
+const FRAME_W = 80;
+const FRAME_H = 64;
 
 // ── Confetti ─────────────────────────────────────────────────
 const CONFETTI_COLORS = ["#002395","#ED2939","#F59E0B","#10B981","#EC4899","#fff"];
@@ -54,19 +59,49 @@ export function Confetti({ active, onDone }) {
   );
 }
 
+// ── Pixel cat sprite ──────────────────────────────────────────
+function PixelCat({ sprite, frames, fps, size }) {
+  const scale = { sm:1, md:1.5, lg:2 }[size] ?? 1.5;
+  const dur = (frames / fps).toFixed(2);
+  const totalW = frames * FRAME_W;
+  const animName = `sprite_${sprite}_${frames}_${scale}`;
+  const dispW = Math.round(FRAME_W * scale);
+  const dispH = Math.round(FRAME_H * scale);
+
+  return (
+    <>
+      <style>{`
+        @keyframes ${animName} {
+          from { background-position-x: 0px; }
+          to   { background-position-x: -${totalW * scale}px; }
+        }
+      `}</style>
+      <div style={{
+        width: dispW,
+        height: dispH,
+        backgroundImage: `url(/sprites/${sprite}.png)`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "0 0",
+        backgroundSize: `${totalW * scale}px ${dispH}px`,
+        animation: `${animName} ${dur}s steps(${frames}) infinite`,
+        imageRendering: "pixelated",
+        flexShrink: 0,
+      }} />
+    </>
+  );
+}
+
 // ── Minou mascot ─────────────────────────────────────────────
 export default function Minou({ mood = "happy", message, size = "md", align = "center" }) {
   const m = MOODS[mood] || MOODS.happy;
-  const fontSize = { sm:"0.82rem", md:"0.95rem", lg:"1.1rem" }[size];
-  const msgSize  = { sm:"0.68rem", md:"0.76rem", lg:"0.86rem" }[size];
 
   return (
-    <div style={{ display:"inline-flex", alignItems:"center", background:m.bg, border:`1.5px solid ${m.color}44`, borderRadius:20, padding:"0.35rem 0.75rem", animation: m.bounce ? "minouBounce 2s ease-in-out infinite" : "none", boxShadow:`0 2px 10px ${m.color}18`, gap:"0.45rem" }}>
-      <span style={{ fontSize:"0.65rem", opacity:0.85, flexShrink:0 }}>🎩</span>
-      <span style={{ fontFamily:"'Courier New', monospace", fontSize, color:m.accent, fontWeight:700, letterSpacing:"0.03em", flexShrink:0 }}>{m.face}</span>
-      {message && (
-        <span style={{ fontSize:msgSize, color:m.accent, lineHeight:1.35, opacity:0.92 }}>{message}</span>
-      )}
+    <div style={{
+      display: "inline-flex",
+      alignItems: "center",
+      animation: m.bounce ? "minouBounce 2s ease-in-out infinite" : "none",
+    }}>
+      <PixelCat sprite={m.sprite} frames={m.frames} fps={m.fps} size={size} />
     </div>
   );
 }
