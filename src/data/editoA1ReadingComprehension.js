@@ -344,11 +344,12 @@ export const editoA1ReadingComprehension = [
     page: 24,
     title: "Au Festival d'Angoulême",
     instruction: "Lisez la page web du festival et répondez aux questions.",
-    text: `FESTIVAL INTERNATIONAL DE LA BANDE DESSINÉE D'ANGOULÊME\nwww.bdangouleme.com\n\nLe Festival International de la Bande Dessinée a lieu chaque année à Angoulême, en France. C'est l'un des plus grands festivals de BD au monde.\n\nAuteurs invités :\n- Charles Burns — États-Unis\n- Isabelle Pralong — Suisse\n- Jul — France`,
+    text: `Festival International de la Bande Dessinée d'Angoulême — 47e édition — 30 janvier > 2 février 2020 — bdangouleme.com\n\nQuelques auteur(e)s en compétition...\n\nCharles Burns — Il est né le 27 septembre 1955 à Washington, aux États-Unis. Il habite à Philadelphie, aux États-Unis.\n\nAkiko Higashimura — Elle est née et elle habite à Miyazaki, au Japon.\n\nIgnacio Minaverry — Il est né en Argentine en 1978. Il habite à La Plata, en Argentine.\n\nIsabelle Pralong — Elle est née à Sion, en Suisse. Elle habite à Genève, en Suisse.`,
     questions: [
-      { id: "u1-angouleme-q1", type: "multiple_choice", prompt: "C'est quel type de festival ?", options: ["cinéma", "bande dessinée", "musique"], answer: "bande dessinée" },
-      { id: "u1-angouleme-q2", type: "multiple_choice", prompt: "Charles Burns est…", options: ["français", "américain", "belge"], answer: "américain" },
-      { id: "u1-angouleme-q3", type: "matching", prompt: "Associez les auteurs à leur pays.", answer: "Charles Burns → États-Unis\nIsabelle Pralong → Suisse\nJul → France" }
+      { id: "u1-angouleme-q1", type: "open", prompt: "Vous connaissez le Festival d'Angoulême ?" },
+      { id: "u1-angouleme-q2", type: "multiple_choice", prompt: "C'est un festival de :", options: ["musique", "cinéma", "bande dessinée"], answer: "bande dessinée" },
+      { id: "u1-angouleme-q3", type: "multiple_choice", prompt: "Où est né Charles Burns ? Où est-ce qu'il habite ?", options: ["Il est né au Japon et il habite en France.", "Il est né et il habite aux États-Unis.", "Il est né en Argentine et il habite en Suisse."], answer: "Il est né et il habite aux États-Unis." },
+      { id: "u1-angouleme-q4", type: "matching", prompt: "Associez les auteurs à leur nationalité.", answer: "Akiko Higashimura → japonaise\nIgnacio Minaverry → argentin\nIsabelle Pralong → suisse" }
     ]
   },
 
@@ -362,14 +363,14 @@ export const editoA1ReadingComprehension = [
     page: 32,
     title: "Tu habites où ?",
     instruction: "Lisez la conversation et répondez aux questions.",
-    text: `[Chat Milo / Lina]\nMilo : Salut Lina ! Comment tu vas ?\nLina : Ça va bien ! Et toi ? Tu habites où maintenant ?\nMilo : J'habite à Saint-Jean, c'est un village près de Lyon. J'adore ! Il y a une belle place et des commerces sympas. Et toi ?\nLina : Moi, j'habite à Nice avec ma famille. Il fait beau ici !\nMilo : Super ! Tu habites avec tes parents ?\nLina : Oui, avec mes parents et ma sœur.`,
+    text: `[Chat Milo / Lina]\nMilo : Salut Lina ! Ça va ?\nLina : Salut Milo ! Oui, très bien et toi ? Tu habites où ?\nMilo : Ça va bien ! Je suis à Lyon maintenant, à l'université Lumière.\nLina : C'est super ! Et tu habites dans un quartier sympa ?\nMilo : Oui, dans le quartier Saint-Jean. C'est très sympa !\nLina : C'est beau ! Moi, j'habite à Nice !\nMilo : Oh ! C'est bien ! À Nice, il y a la mer, la plage. Et tu habites où à Nice ?\nLina : J'habite un appartement avec des amies, Mira et Julie. On habite dans une rue calme. C'est la rue Mantega.\nMilo : Elles sont super les photos ! Ah ! Vous avez une guitare ?\nLina : Deux guitares ! Et un piano. Ce sont les instruments de musique de Julie et de Mira.`,
     questions: [
-      { id: "u2-tu-habites-q1", type: "short_answer", prompt: "C'est quel type de document ?", answer: "C'est un chat / une conversation en ligne." },
+      { id: "u2-tu-habites-q1", type: "open", prompt: "Observez le document. Qu'est-ce que c'est ?" },
       { id: "u2-tu-habites-q2", type: "short_answer", prompt: "Qui écrit à qui ?", answer: "Milo écrit à Lina." },
-      { id: "u2-tu-habites-q3a", type: "true_false", prompt: "Lina habite à Nice.", answer: true },
-      { id: "u2-tu-habites-q3b", type: "true_false", prompt: "Milo habite à Lyon.", answer: false },
-      { id: "u2-tu-habites-q4", type: "short_answer", prompt: "Pourquoi Milo aime Saint-Jean ?", answer: "Il y a une belle place et des commerces sympas." },
-      { id: "u2-tu-habites-q5", type: "short_answer", prompt: "Lina habite avec qui ?", answer: "Avec ses parents et sa sœur." }
+      { id: "u2-tu-habites-q3", type: "matching", prompt: "Associez les personnes aux villes.", answer: "Lina → Nice\nMilo → Lyon" },
+      { id: "u2-tu-habites-q4", type: "short_answer", prompt: "Pourquoi Milo aime le quartier Saint-Jean ?", answer: "C'est très sympa !" },
+      { id: "u2-tu-habites-q5", type: "short_answer", prompt: "Lina habite avec qui ?", answer: "Avec des amies, Mira et Julie." },
+      { id: "u2-tu-habites-q6", type: "short_answer", prompt: "Lina a un instrument de musique ?", answer: "Non, les guitares et le piano appartiennent à Julie et Mira." }
     ]
   },
   {
@@ -381,14 +382,14 @@ export const editoA1ReadingComprehension = [
     page: 38,
     title: "On invite qui ?",
     instruction: "Lisez la conversation et répondez aux questions.",
-    text: `[Chat Nina / Théo]\nNina : Théo, j'ai commencé la liste des invités pour notre mariage ! Tu peux m'aider ?\nThéo : Oui ! Qui tu invites de ta famille ?\nNina : Mon frère et sa femme. Oh non, il est divorcé maintenant…\nThéo : Ah oui ! Et ma cousine Léa ?\nNina : Bien sûr ! Et ton oncle Paul ?\nThéo : Oui, il vient ! Et Sofia ? Elle a deux enfants maintenant.\nNina : Super, elle vient avec ses enfants !`,
+    text: `[Chat Nina / Théo]\nNina : Théo, je prépare la liste des invités pour notre mariage. Moi, j'invite mes parents, ma grand-mère, mon frère (chez lui, ils sont quatre : lui, sa femme et ses enfants). Et toi ?\nThéo : Moi, j'invite mes parents, ma tante Olivia, mon oncle Paul, mes grands-parents, mon cousin Raphaël et ma cousine Clara, son fils et sa fille.\nNina : Ta cousine Clara est libre ?\nThéo : Oui !\nNina : Super !\nThéo : Ah oui ! Je n'ai pas de frères et sœurs, je suis fils unique, alors mes cousins, c'est important pour moi !\nNina : Oui ! Et mon neveu et ma nièce adorent les enfants de Clara ! Et pour les amis ? On invite qui ?\nThéo : Sofia, son mari et leurs enfants. Et Nessim, le frère de Sofia ! C'est aussi mon ami.\nNina : Il est marié ?\nThéo : Non, il est célibataire.\nNina : Ok ! Il y a aussi nos amis Robin et Aya. Et monsieur Bertoli, l'ami de mon père ? Il est grand-père maintenant ! Son petit-fils a 2 mois !\nThéo : Non… On invite NOS amis !`,
     questions: [
-      { id: "u2-inviter-q1", type: "short_answer", prompt: "Qui sont Nina et Théo ?", answer: "Ce sont deux personnes qui vont se marier / des fiancés." },
+      { id: "u2-inviter-q1", type: "open", prompt: "À votre avis, qui sont Nina et Théo ?" },
       { id: "u2-inviter-q2", type: "short_answer", prompt: "Qu'est-ce que Nina prépare ?", answer: "La liste des invités pour leur mariage." },
       { id: "u2-inviter-q3a", type: "true_false", prompt: "Théo invite son oncle Paul.", answer: true },
-      { id: "u2-inviter-q3b", type: "true_false", prompt: "Théo n'invite pas sa cousine Léa.", answer: false },
-      { id: "u2-inviter-q3c", type: "true_false", prompt: "Le frère de Nina est marié.", answer: false },
-      { id: "u2-inviter-q3d", type: "true_false", prompt: "Sofia a des enfants.", answer: true }
+      { id: "u2-inviter-q3b", type: "true_false", prompt: "Théo n'invite pas sa cousine.", answer: false },
+      { id: "u2-inviter-q3c", type: "true_false", prompt: "Le frère de Nina est marié.", answer: true },
+      { id: "u2-inviter-q3d", type: "true_false", prompt: "Sofia, l'amie de Théo, a des enfants.", answer: true }
     ]
   },
 
@@ -402,14 +403,14 @@ export const editoA1ReadingComprehension = [
     page: 46,
     title: "Mon panier",
     instruction: "Lisez le site internet et répondez aux questions.",
-    text: `www.mon-panier-local.fr\n\nMon panier local, c'est la livraison de paniers de produits bio et locaux directement chez vous !\n\nNos formules :\n• Formule S : 1 panier par semaine, 5 produits, 15 €\n• Formule L : 2 paniers par semaine, 10 produits, 28 €\n\nRetrait possible chez nos partenaires :\n• Laure Fleuriste — disponible le vendredi\n• Bio Market — disponible le mardi et le samedi\n\nAvis clients :\n⭐⭐⭐⭐⭐ « Les légumes sont frais et délicieux ! » — Sophie\n⭐⭐⭐⭐⭐ « Livraison rapide, je recommande ! » — Thomas`,
+    text: `mon-panier-local.fr\n[Accueil | Les paniers bio | Les produits bio | Nos magasins | Contact]\n\nNous proposons des paniers bio avec des fruits, des légumes et des produits de saison.\n\nFormule 1 : Le panier avec des fruits et des légumes — 16,90 €\nFormule 2 : Le panier complet avec des fruits et des légumes, un poulet, six œufs et un fromage de chèvre — 39,40 €\n\nVos commentaires :\nAmélie Deniaud ★★★★★ : J'achète un panier par semaine, les produits sont frais et c'est 100 % local !\nStéphane Petit ★★★★★ : Nous achetons un panier complet par semaine. Les produits sont bio. Et c'est très facile !\n\nVoici les fruits et les légumes de la semaine du 9 au 15 juillet : des fraises, des pêches, des cerises, des abricots, des tomates, une salade, des poivrons, des courgettes, des pommes de terre, des haricots verts.\n\nLes paniers sont disponibles le vendredi : Laure Fleuriste, 8, rue Jean Jaurès.`,
     questions: [
-      { id: "u3-panier-q1", type: "short_answer", prompt: "Qu'est-ce que c'est, mon-panier-local.fr ?", answer: "C'est un site de livraison de paniers de produits bio et locaux." },
-      { id: "u3-panier-q2a", type: "true_false", prompt: "Les produits sont biologiques.", answer: true },
-      { id: "u3-panier-q2b", type: "true_false", prompt: "Il y a trois formules.", answer: false },
-      { id: "u3-panier-q3", type: "short_answer", prompt: "Quelle est la différence entre les formules S et L ?", answer: "La formule S : 1 panier / 5 produits / 15 €. La formule L : 2 paniers / 10 produits / 28 €." },
-      { id: "u3-panier-q4", type: "multiple_choice", prompt: "Vous pouvez retirer votre panier chez Laure Fleuriste quel jour ?", options: ["mardi", "vendredi", "samedi"], answer: "vendredi" },
-      { id: "u3-panier-q5", type: "short_answer", prompt: "Les avis clients sont-ils positifs ou négatifs ?", answer: "Positifs." }
+      { id: "u3-panier-q1", type: "open", prompt: "Regardez le document. Qu'est-ce que c'est ?" },
+      { id: "u3-panier-q2a", type: "true_false", prompt: "Le document propose des produits bio.", answer: true },
+      { id: "u3-panier-q2b", type: "true_false", prompt: "Le document propose trois formules différentes.", answer: false },
+      { id: "u3-panier-q3", type: "short_answer", prompt: "Quelles différences il y a entre les formules ?", answer: "Formule 1 : panier fruits et légumes (16,90 €). Formule 2 : panier complet avec poulet, six œufs et fromage de chèvre (39,40 €)." },
+      { id: "u3-panier-q4", type: "short_answer", prompt: "Quel jour les paniers sont disponibles à « Laure Fleuriste » ?", answer: "Le vendredi." },
+      { id: "u3-panier-q5", type: "short_answer", prompt: "Les avis clients sont positifs ou négatifs ? Pourquoi ?", answer: "Positifs. Les produits sont frais, bio et locaux." }
     ]
   },
   {
@@ -421,12 +422,13 @@ export const editoA1ReadingComprehension = [
     page: 48,
     title: "Les Français et les courses",
     instruction: "Lisez l'infographie et répondez aux questions.",
-    text: `LES FRANÇAIS ET LES COURSES — Infographie\n\nLes commerces les plus importants pour les Français :\n• La boulangerie : 90 %\n• La boucherie : 75 %\n• L'épicerie : 60 %\n\n• 78 % des Français aiment faire leurs courses dans les commerces de leur quartier.\n• Le week-end, les Français aiment faire leurs courses au marché.\n• À l'épicerie et au supermarché : fruits, légumes, produits du quotidien.`,
+    text: `Document a — Infographie : Les commerces de quartier préférés des Français\n90 % → la boulangerie\n70 % → la boucherie\n69 % → l'épicerie\n59 % → la poissonnerie\n51 % → la fromagerie\n\nDocument b — Texte\nEn France, on aime faire ses courses chez les commerçants de son quartier. On achète le pain, la baguette ou les croissants à la boulangerie. Pour le poisson, on va chez le poissonnier, pour la viande, on va à la boucherie. On achète le fromage chez le fromager. Le week-end, les Français aiment aller au marché. Pour les autres produits, par exemple, le beurre, les pâtes, le riz, les Français vont à l'épicerie ou au supermarché. Il y a du monde aux caisses des supermarchés mais c'est pratique !`,
     questions: [
-      { id: "u3-courses-q1", type: "multiple_choice", prompt: "Quel est le commerce le plus important pour les Français ?", options: ["la boucherie", "la boulangerie", "l'épicerie"], answer: "la boulangerie" },
-      { id: "u3-courses-q2", type: "true_false", prompt: "Les Français aiment les commerces de leur quartier.", answer: true },
-      { id: "u3-courses-q3", type: "short_answer", prompt: "Où les Français font-ils leurs courses le week-end ?", answer: "Au marché." },
-      { id: "u3-courses-q4", type: "short_answer", prompt: "Qu'est-ce qu'on achète à l'épicerie et au supermarché ?", answer: "Des fruits, des légumes, des produits du quotidien." }
+      { id: "u3-courses-q1", type: "open", prompt: "Regardez le document a. Quels commerces vous connaissez ?" },
+      { id: "u3-courses-q2", type: "multiple_choice", prompt: "Quel commerce est le plus important pour les Français ?", options: ["la boucherie", "la boulangerie", "la poissonnerie"], answer: "la boulangerie" },
+      { id: "u3-courses-q3", type: "true_false", prompt: "Les Français aiment faire leurs courses dans les commerces de leur quartier.", answer: true },
+      { id: "u3-courses-q4", type: "short_answer", prompt: "Où les Français font-ils leurs courses le samedi ou le dimanche ?", answer: "Au marché." },
+      { id: "u3-courses-q5", type: "short_answer", prompt: "Quels produits les Français achètent à l'épicerie ou au supermarché ?", answer: "Le beurre, les pâtes, le riz, etc." }
     ]
   },
   {
@@ -438,12 +440,12 @@ export const editoA1ReadingComprehension = [
     page: 52,
     title: "Le plat du jour",
     instruction: "Lisez la page Facebook du restaurant Picknick et répondez aux questions.",
-    text: `Picknick Restaurant\nPage Facebook\n\nAujourd'hui chez Picknick :\nPlat du jour 1 : Salade niçoise — 12 €\nPlat du jour 2 : Pâtes au pesto — 12 €\nDessert 1 : Tarte aux pommes — 5,50 €\nDessert 2 : Crème brûlée — 5,50 €\n\nCommentaires clients :\n« Délicieux comme toujours ! » — Marie\n« Le meilleur restaurant du quartier ! » — Paul\n« Très bon rapport qualité-prix ! » — Léa`,
+    text: `Picknick Restaurant [Page Facebook]\n14, rue Fantin-Latour, 38000 Grenoble\nDes produits bio de saison\n\nPicknick Restaurant, mercredi, à 10:00 :\nSalut les gourmands !\nAujourd'hui, les plats du jour du chef (12 €) :\n• magret de canard, mangue et riz sauvage,\n• pâtes fraîches aux 4 fromages et crème de poivrons.\nEt les desserts du jour (5,50 €) :\n• gâteau au chocolat,\n• tarte aux pommes.\nSur place ou à emporter !\n\nCommentaires :\nAssia : « Merci Nicolas ! J'adore ta cuisine ! J'aime tes entrées, tes plats, tes desserts ! C'est délicieux ! »\nFabien : « Mes enfants n'aiment pas le poisson, ils détestent ça mais au Picknick Restaurant, ils commandent du poisson et ils mangent aussi un peu de légumes ! Merci Nico ! »\nClaire : « Je mange le jeudi au Picknick mais aujourd'hui il y a des pâtes aux 4 fromages, hum ! J'arrive ! C'est bon, c'est sûr ! »\nSohan : « Moi, j'aime cuisiner pour ma famille et mes amis. La cuisine des restaurants ? Non ! Ça n'a pas de goût ou c'est mauvais mais au Picknick Restaurant, c'est pas mal. »`,
     questions: [
-      { id: "u3-plat-q1", type: "multiple_choice", prompt: "C'est quel type de document ?", options: ["un site internet", "une page Facebook", "un menu papier"], answer: "une page Facebook" },
-      { id: "u3-plat-q2", type: "short_answer", prompt: "Combien de plats y a-t-il aujourd'hui ?", answer: "2 plats du jour et 2 desserts." },
-      { id: "u3-plat-q3", type: "short_answer", prompt: "Quel est le prix d'un plat du jour ? D'un dessert ?", answer: "12 € pour un plat du jour et 5,50 € pour un dessert." },
-      { id: "u3-plat-q4", type: "short_answer", prompt: "Est-ce que les clients aiment le restaurant ?", answer: "Oui, les commentaires sont très positifs." }
+      { id: "u3-plat-q1", type: "open", prompt: "Observez le document. Qu'est-ce que c'est ?" },
+      { id: "u3-plat-q2", type: "short_answer", prompt: "Combien de plats du jour et de desserts le chef propose aujourd'hui ?", answer: "2 plats du jour et 2 desserts." },
+      { id: "u3-plat-q3", type: "short_answer", prompt: "Combien coûtent un plat du jour et un dessert ?", answer: "Un plat du jour coûte 12 € et un dessert coûte 5,50 €." },
+      { id: "u3-plat-q4", type: "short_answer", prompt: "Les clients aiment les plats et le restaurant ? Pourquoi ?", answer: "Oui, globalement. Assia adore la cuisine. Fabien dit que ses enfants commandent du poisson grâce au restaurant. Claire aime les pâtes aux 4 fromages. Sohan dit que c'est « pas mal »." }
     ]
   },
 
@@ -457,13 +459,14 @@ export const editoA1ReadingComprehension = [
     page: 60,
     title: "Des artistes à Grenoble !",
     instruction: "Lisez le site de l'office du tourisme de Grenoble et répondez aux questions.",
-    text: `Grenoble Tourisme — www.grenoble-tourisme.com\n\nSTREET ART FEST GRENOBLE\n\nChaque année en juin, des artistes du monde entier viennent à Grenoble pour le Street Art Fest ! Des artistes français et internationaux créent des œuvres sur les murs de la ville. Les habitants regardent les artistes travailler dans les rues.\n\nActivités proposées :\n• Visites guidées des œuvres de street art\n• Ateliers de création artistique\n• Expositions en galerie`,
+    text: `grenoble-tourisme.com [Office de Tourisme Grenoble-Alpes Métropole]\n\nÀ Grenoble, au mois de juin, il y a le « Street Art Fest Grenoble-Alpes ». C'est un festival avec des artistes nationaux et internationaux, Snek par exemple. C'est un artiste, il est grenoblois.\n\nDans les quartiers de la ville, au centre-ville et en banlieue, les artistes font des fresques sur les bâtiments. Ils travaillent dans les rues, sur les boulevards et les avenues. Ils utilisent des techniques différentes. Les habitants et les touristes regardent les artistes créer. Le festival propose un programme riche pour découvrir des artistes et leurs pratiques. C'est une expérience unique.\n\nL'Office de Tourisme organise des visites guidées. C'est une visite d'1 heure (6 €) ou d'1 heure 30 (9 €).\n\nOffice de Tourisme Grenoble-Alpes Métropole — 14 rue de la République, 38000 Grenoble`,
     questions: [
-      { id: "u4-artistes-q1", type: "short_answer", prompt: "Quel est l'événement présenté ?", answer: "Le Street Art Fest Grenoble." },
-      { id: "u4-artistes-q2", type: "short_answer", prompt: "Où et quand a lieu cet événement ?", answer: "À Grenoble, en juin." },
-      { id: "u4-artistes-q3a", type: "true_false", prompt: "Tous les artistes sont français.", answer: false },
-      { id: "u4-artistes-q3b", type: "true_false", prompt: "Les artistes travaillent et les habitants regardent.", answer: true },
-      { id: "u4-artistes-q3c", type: "true_false", prompt: "Il y a des visites guidées.", answer: true }
+      { id: "u4-artistes-q1", type: "open", prompt: "Regardez les photos. Qu'est-ce que vous voyez ?" },
+      { id: "u4-artistes-q2", type: "short_answer", prompt: "L'Office de tourisme présente quel événement ?", answer: "Le Street Art Fest Grenoble-Alpes." },
+      { id: "u4-artistes-q3", type: "short_answer", prompt: "Où et quand se passe l'événement ?", answer: "À Grenoble, au mois de juin." },
+      { id: "u4-artistes-q4a", type: "true_false", prompt: "Tous les artistes sont français.", answer: false },
+      { id: "u4-artistes-q4b", type: "true_false", prompt: "Les artistes travaillent et les gens regardent.", answer: true },
+      { id: "u4-artistes-q4c", type: "true_false", prompt: "Il y a des visites guidées des fresques.", answer: true }
     ]
   },
   {
@@ -475,12 +478,13 @@ export const editoA1ReadingComprehension = [
     page: 66,
     title: "Prenez le bus, le tram ou le train !",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `Les transports gratuits au Luxembourg !\n\nDepuis 2020, les transports en commun sont entièrement gratuits au Luxembourg : bus, tram et train. C'est une première en Europe !\n\nPour qui ?\nLes habitants du Luxembourg et les touristes peuvent utiliser tous les transports gratuitement.\n\nPourquoi cette décision ?\n• Les gens utilisent trop leur voiture : il y a beaucoup de pollution.\n• Les transports gratuits représentent des économies importantes pour les habitants.\n\nActivités possibles : visiter les châteaux, explorer la nature, découvrir la capitale Luxembourg-Ville.`,
+    text: `Au Luxembourg, les transports en commun sont gratuits !\n\nLes tramways, les bus et les trains sont maintenant gratuits au Luxembourg pour les habitants et pour les touristes.\n\nC'est une mesure écologique : il y a beaucoup de voitures et de pollution dans le pays. C'est aussi une mesure sociale : 40 % des Luxembourgeois utilisent les transports en commun.\n\nAllez travailler, faites vos courses ou visitez la ville… Se déplacer au Luxembourg, c'est simple avec les transports en commun : montez dans le bus ou dans le tram et n'achetez pas de ticket, n'achetez pas de carte de transport ! Économisez de l'argent ! « C'est fantastique ! On économise 25 euros par mois ! », dit une Luxembourgeoise.\n\nC'est une bonne nouvelle pour vous, amis touristes ! Vous prenez les transports en commun pour visiter le pays ou la ville. Par exemple, pour aller du centre-ville au musée d'Art moderne en tram, prenez la ligne T1, descendez à l'arrêt « Philharmonie », c'est rapide ! Marchez 5 minutes et vous êtes au musée !`,
     questions: [
-      { id: "u4-bus-q1", type: "multiple_choice", prompt: "Dans quel pays les transports sont-ils gratuits ?", options: ["France", "Belgique", "Luxembourg"], answer: "Luxembourg" },
-      { id: "u4-bus-q2", type: "multiple_choice", prompt: "Pour qui les transports sont-ils gratuits ?", options: ["seulement les habitants", "seulement les touristes", "les habitants et les touristes"], answer: "les habitants et les touristes" },
-      { id: "u4-bus-q3", type: "multi_select", prompt: "Pourquoi les transports sont-ils gratuits ? (2 raisons)", options: ["les gens utilisent trop leur voiture et il y a de la pollution", "les transports coûtent trop cher à l'État", "ça représente des économies importantes pour les habitants", "les trains sont trop lents"], answer: ["les gens utilisent trop leur voiture et il y a de la pollution", "ça représente des économies importantes pour les habitants"] },
-      { id: "u4-bus-q4", type: "short_answer", prompt: "Quelles activités sont possibles avec les transports gratuits ?", answer: "Visiter les châteaux, explorer la nature, découvrir la capitale Luxembourg-Ville." }
+      { id: "u4-bus-q1", type: "multiple_choice", prompt: "Regardez le document. Qu'est-ce que c'est ?", options: ["un article de journal", "un blog"], answer: "un article de journal" },
+      { id: "u4-bus-q2", type: "short_answer", prompt: "De quel pays on parle dans le document ?", answer: "Le Luxembourg." },
+      { id: "u4-bus-q3", type: "short_answer", prompt: "Pour qui les transports en commun sont-ils gratuits ?", answer: "Pour les habitants et pour les touristes." },
+      { id: "u4-bus-q4", type: "multi_select", prompt: "Pourquoi les transports en commun sont-ils gratuits ? (2 réponses)", options: ["Les gens utilisent souvent leur voiture et il y a beaucoup de pollution.", "C'est simple pour les touristes.", "Pour 40 % des utilisateurs, ce sont des économies importantes."], answer: ["Les gens utilisent souvent leur voiture et il y a beaucoup de pollution.", "Pour 40 % des utilisateurs, ce sont des économies importantes."] },
+      { id: "u4-bus-q5", type: "short_answer", prompt: "Avec les transports en commun, c'est possible de faire quelles activités ?", answer: "Aller travailler, faire des courses, visiter la ville, visiter le pays (ex : aller au musée d'Art moderne en tram, ligne T1)." }
     ]
   },
   {
@@ -492,11 +496,12 @@ export const editoA1ReadingComprehension = [
     page: 68,
     title: "En métro ou à vélo ?",
     instruction: "Lisez l'infographie sur les transports écologiques et répondez aux questions.",
-    text: `TRANSPORTS ÉCOLOGIQUES EN VILLE — Infographie\n\nPour les petits trajets (moins de 3 km) : le vélo est idéal !\nPour les trajets moyens (3–10 km) : le métro ou le bus.\nPour les longs trajets (plus de 10 km) : le tramway ou le train.\n\nLe vélo et les transports en commun sont des solutions économiques et écologiques.\nMoins de voitures = moins de pollution dans les villes !`,
+    text: `[Infographie : Pour les trajets courts]\nMarche : 0-1 km\nTrottinette : 1-2 km\nVélo : 2-5 km\nVélo électrique : 5-10 km\n[Pour les trajets longs] : Tram + Bus (transports en commun)\n\nMixez les moyens de transport !\n\nLes français utilisent leur voiture parce que c'est pratique. Mais la voiture coûte 5 000 €/an au minimum et elle n'est pas écologique. Comment se déplacer sans polluer et sans payer cher ?\n\nPour faire 1 km, marchez ! Pour faire 2 km, utilisez la trottinette et pour faire entre 2 et 10 km, prenez votre vélo.\n\nPour aller plus loin, sans voiture, prenez le métro, le bus ou le tram !\n\nEt pour faire 30 km et plus, la solution, c'est le covoiturage ! Voyagez avec d'autres personnes !\n\nBien sûr, c'est possible de mixer les moyens de transport. Allez à vélo jusqu'à une station de métro, et après, prenez le bus ou la voiture !`,
     questions: [
-      { id: "u4-metro-q1a", type: "true_false", prompt: "L'infographie parle des transports pour les trajets courts, moyens et longs.", answer: true },
-      { id: "u4-metro-q1b", type: "true_false", prompt: "Le vélo et les transports en commun sont des solutions économiques.", answer: true },
-      { id: "u4-metro-q2", type: "matching", prompt: "Associez les distances aux moyens de transport.", answer: "Moins de 3 km → vélo\n3–10 km → métro / bus\nPlus de 10 km → tramway / train" }
+      { id: "u4-metro-q1", type: "open", prompt: "Est-ce que vous marchez beaucoup ? Combien de kilomètres par jour ?" },
+      { id: "u4-metro-q2a", type: "true_false", prompt: "L'image présente les moyens de transport pour les trajets courts.", answer: true },
+      { id: "u4-metro-q2b", type: "true_false", prompt: "Le texte propose des solutions économiques et écologiques pour se déplacer.", answer: true },
+      { id: "u4-metro-q3", type: "matching", prompt: "Complétez le tableau : associez chaque distance à un moyen de transport.", answer: "1 km → marche (à pied)\n2 km → trottinette\n2-10 km → vélo\n> 30 km → covoiturage" }
     ]
   },
 
@@ -510,13 +515,14 @@ export const editoA1ReadingComprehension = [
     page: 74,
     title: "La mode est à nous !",
     instruction: "Lisez l'article de blog et répondez aux questions.",
-    text: `Blog — La mode est à nous !\n\nVous aimez la mode mais vous n'avez pas beaucoup d'argent ? Essayez Vinted ! C'est une application pour acheter et vendre des vêtements d'occasion.\n\nComment ça marche ?\n• Vous créez un compte sur Vinted.\n• Vous mettez vos vêtements en vente.\n• Vous achetez les vêtements des autres utilisateurs.\n\nVinted, c'est pour tout le monde : femmes, hommes, enfants ! Et c'est écologique aussi.`,
+    text: `Olivia — La mode et moi [Blog]\nAccueil | Style | Conseils | Mode | Beauté | Contact\n\nAujourd'hui, je parle de… Vinted\nQu'est-ce que c'est ? C'est une application pour acheter ou vendre des vêtements et des accessoires d'occasion. Génial, non ?\n\nMoi, j'achète beaucoup de vêtements sur Vinted : des jeans, des jupes, des robes, des tee-shirts ! C'est facile et ce n'est pas cher ! Par exemple, le prix de ma robe noire et de ma jupe bleue : 5 €. Elles sont simples, mais elles sont élégantes ! Le prix de mon pantalon blanc, 7 € et ma veste en cuir… 50 € ! C'est bon marché !\n\nMon frère achète aussi ses vêtements sur Vinted : des chemises, des shorts, des pulls, des costumes et des cravates. Il adore la mode et les styles différents. Un jour, il porte un jean bleu ou un jean noir avec un tee-shirt en coton et des baskets. Un jour, il met un costume élégant. Avec mon frère, nous aimons acheter sur Vinted, mais nous vendons aussi beaucoup. Nous mettons nos vêtements 5 ou 6 mois et après on change !\n\nDonc, avec l'application, on achète et on ne vend pas cher…\n\nAu fait ! Sur Vinted, il y a aussi des accessoires : des chaussures, des ceintures, des lunettes de soleil, des sacs à main et des bijoux !`,
     questions: [
-      { id: "u5-mode-q1", type: "short_answer", prompt: "Quel est le nom de l'application présentée ?", answer: "Vinted." },
-      { id: "u5-mode-q2a", type: "true_false", prompt: "On peut acheter des vêtements d'occasion sur Vinted.", answer: true },
-      { id: "u5-mode-q2b", type: "true_false", prompt: "On peut seulement acheter, pas vendre.", answer: false },
-      { id: "u5-mode-q2c", type: "true_false", prompt: "Il n'y a pas de vêtements pour hommes.", answer: false },
-      { id: "u5-mode-q3", type: "short_answer", prompt: "Pourquoi utiliser Vinted ?", answer: "Pour acheter et vendre des vêtements d'occasion. C'est économique et écologique." }
+      { id: "u5-mode-q1", type: "open", prompt: "Regardez le document. À votre avis, qu'est-ce que c'est ?" },
+      { id: "u5-mode-q2", type: "short_answer", prompt: "De quelle application parle Olivia ?", answer: "Vinted." },
+      { id: "u5-mode-q3a", type: "true_false", prompt: "Sur l'application, on trouve des vêtements et des accessoires d'occasion.", answer: true },
+      { id: "u5-mode-q3b", type: "true_false", prompt: "Sur l'application, on achète mais on ne vend pas.", answer: false },
+      { id: "u5-mode-q3c", type: "true_false", prompt: "Sur l'application, on ne trouve pas de vêtements pour homme.", answer: false },
+      { id: "u5-mode-q4", type: "short_answer", prompt: "Pourquoi Olivia et son frère utilisent beaucoup l'application ?", answer: "C'est facile, ce n'est pas cher, et ils achètent ET vendent leurs vêtements. Ils changent de vêtements après 5 ou 6 mois." }
     ]
   },
   {
@@ -528,13 +534,13 @@ export const editoA1ReadingComprehension = [
     page: 80,
     title: "Vous participez ?",
     instruction: "Lisez la cagnotte Leetchi et répondez aux questions.",
-    text: `Leetchi — Cagnotte en ligne\n\nJOYEUX ANNIVERSAIRE VALENTIN !\nOrganisé par Coline\n\nValentin a 30 ans ! Pour fêter son anniversaire, nous organisons une cagnotte pour lui offrir un beau cadeau.\n\nValentin adore le tennis et les objets high-tech. Coline propose des idées de cadeaux :\n• Une montre connectée — 150 €\n• Une raquette de tennis professionnelle — 80 €\n\nLa montre connectée, à quoi ça sert ?\nElle compte les pas, mesure le rythme cardiaque et peut recevoir les messages du smartphone.\n\nParticipez avant le 15 décembre !`,
+    text: `leetchi.com\n\nBienvenue sur la cagnotte « Anniversaire de Valentin »\n\nC'est bientôt l'anniversaire de Valentin ! Il va avoir 30 ans. Vous êtes d'accord pour acheter un cadeau ensemble ? Si oui, participez ! Il adore le tennis et les objets high-tech, alors, voilà mes idées pour le cadeau :\n• un grand sac de sport ou un sac à dos pour son ordinateur portable ;\n• une jolie tenue pour le tennis ;\n• une petite enceinte Bluetooth pour écouter de la musique ;\n• une montre connectée ;\n• des écouteurs sans fil ;\n• une tablette ;\n• une batterie externe pour son smartphone.\n\nJ'aime beaucoup la montre connectée ! Et il y a des montres bleues, sa couleur préférée. C'est très utile, ça sert à téléphoner, à se repérer avec le GPS, à se connecter à Internet. Ou vous préférez un autre cadeau ? J'attends vos réponses ou vos idées ! Merci !\n\nColine\nOrganisateur : Garnier Coline`,
     questions: [
-      { id: "u5-cagnotte-q1", type: "short_answer", prompt: "Pour quel événement est cette cagnotte ?", answer: "Pour les 30 ans de Valentin." },
-      { id: "u5-cagnotte-q2", type: "true_false", prompt: "La cagnotte est pour les 30 ans de Valentin.", answer: true },
+      { id: "u5-cagnotte-q1", type: "short_answer", prompt: "Regardez le document. Pour quel événement il y a une cagnotte en ligne ?", answer: "Pour l'anniversaire de Valentin (ses 30 ans)." },
+      { id: "u5-cagnotte-q2", type: "true_false", prompt: "La cagnotte en ligne, c'est pour acheter un cadeau à Valentin pour ses 30 ans.", answer: true },
       { id: "u5-cagnotte-q3", type: "short_answer", prompt: "Qu'est-ce que Valentin aime ?", answer: "Le tennis et les objets high-tech." },
-      { id: "u5-cagnotte-q4", type: "multiple_choice", prompt: "Quel est le rôle de Coline ?", options: ["Elle organise la fête", "Elle propose des idées de cadeaux", "Elle paie le cadeau"], answer: "Elle propose des idées de cadeaux" },
-      { id: "u5-cagnotte-q5", type: "short_answer", prompt: "À quoi sert la montre connectée ?", answer: "Elle compte les pas, mesure le rythme cardiaque et peut recevoir les messages du smartphone." }
+      { id: "u5-cagnotte-q4", type: "multiple_choice", prompt: "Coline :", options: ["propose des idées de cadeaux", "préfère acheter un GPS"], answer: "propose des idées de cadeaux" },
+      { id: "u5-cagnotte-q5", type: "short_answer", prompt: "À quoi sert une montre connectée ?", answer: "Ça sert à téléphoner, à se repérer avec le GPS, à se connecter à Internet." }
     ]
   },
   {
@@ -546,12 +552,13 @@ export const editoA1ReadingComprehension = [
     page: 82,
     title: "Personnalisez vos objets !",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `Personnalisez vos objets !\n\nVous voulez offrir un cadeau unique ? Personnalisez un objet ! T-shirts, mugs, coussins… vous pouvez mettre une photo, un prénom ou un message sur votre objet.\n\nCes objets personnalisés ont beaucoup de succès. Les clients adorent l'idée ! Les grandes marques comme Nike ou Adidas proposent aussi des objets personnalisés maintenant.`,
+    text: `Personnalisez vos objets !\n\nTout le monde a un porte-monnaie, un porte-clés, un téléphone portable, des cadres photo… Mais ces objets ne sont pas uniques. Alors aujourd'hui, les gens personnalisent leurs objets, c'est à la mode !\n\nCette coque de téléphone avec la photo de votre chat est originale, ce sac à dos avec le prénom de votre enfant aussi cet étui pour tablette. C'est possible de personnaliser des objets petits ou grands, lourds ou légers, carrés, ronds ou rectangulaires… et des objets de marques aussi, par exemple des portefeuilles ou des valises. Personnaliser les objets du quotidien est original et pratique !`,
     questions: [
-      { id: "u5-objets-q1", type: "true_false", prompt: "Un objet personnalisé est unique.", answer: true },
-      { id: "u5-objets-q2", type: "short_answer", prompt: "Est-ce que ces objets ont du succès ?", answer: "Oui, ils ont beaucoup de succès, les clients adorent l'idée." },
-      { id: "u5-objets-q3", type: "multi_select", prompt: "Avec quoi peut-on personnaliser un objet ? (2 réponses)", options: ["une photo", "un prénom", "une couleur spéciale", "un tissu"], answer: ["une photo", "un prénom"] },
-      { id: "u5-objets-q4", type: "true_false", prompt: "Les grandes marques proposent aussi des objets personnalisés.", answer: true }
+      { id: "u5-objets-q1", type: "open", prompt: "Regardez les photos du document. Quels objets vous connaissez ?" },
+      { id: "u5-objets-q2", type: "true_false", prompt: "Un objet personnalisé est un objet unique.", answer: true },
+      { id: "u5-objets-q3", type: "short_answer", prompt: "Est-ce que les objets personnalisés ont du succès ?", answer: "Oui, c'est à la mode ! Les gens personnalisent beaucoup leurs objets." },
+      { id: "u5-objets-q4", type: "multi_select", prompt: "Les objets présentés dans l'article sont personnalisés avec :", options: ["une photo", "une couleur", "un prénom"], answer: ["une photo", "un prénom"] },
+      { id: "u5-objets-q5", type: "true_false", prompt: "Les grandes marques proposent aussi des objets personnalisés.", answer: true }
     ]
   },
 
@@ -565,16 +572,17 @@ export const editoA1ReadingComprehension = [
     page: 88,
     title: "Une journée active",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `Une journée avec Mathilde Boulesteix, journaliste sportive\n\n7 h 00 — Mathilde se lève et travaille à la maison le matin. Elle prépare ses articles.\n8 h 00 — Elle commence sa journée de travail avec Romain, son collègue, à la télévision.\n8 h 00 – 18 h 00 — Elle travaille à la télévision.\n18 h 30 — Elle fait du sport : des sports de montagne (ski, escalade, randonnée…)\n20 h 00 — Elle rentre à la maison. Elle passe la soirée avec son mari.\n22 h 00 — Elle se couche tôt le soir avant un match ; plus tard les autres jours.`,
+    text: `Une journée avec Mathilde Boulesteix !\n\n« Bonjour, je m'appelle Mathilde Boulesteix. Je suis journaliste sportive à Trek TV. C'est une chaîne de télévision française. Je travaille pour l'émission "Le Spot". Elle présente des sports de montagne, par exemple, le vélo (VTT) en été et le ski en hiver. Voici ma journée ! »\n\n6 h 30 : Je me réveille, j'écoute la radio et je bois un café. Avec mon chien, Léon, nous allons au lac d'Annecy. On aime se promener le matin. C'est calme.\n\n8 h : Je rentre à la maison. Je me douche et je me prépare. Je m'habille : je mets des vêtements de montagne pour mon travail. Je me coiffe et je me maquille. Mon mari se lève, se douche et se rase et nous prenons notre petit déjeuner : des œufs, du pain, du beurre et encore du café !\n\n9 h : Je commence à travailler à la maison. J'organise mes futures émissions. J'utilise beaucoup mon ordinateur !\n\n12 h 30 : Je retrouve Romain, mon collègue. Il est cameraman. Nous mangeons ensemble et nous discutons de notre travail.\n\n14 h : L'après-midi, nous allons voir une compétition sportive. Nous interviewons un sportif. Je pose les questions et Romain filme. À 18 h 30, nous arrêtons de travailler et nous rentrons.\n\n19 h : Je suis à la maison. J'aime lire des livres, écouter de la musique, surfer sur Internet ou faire du bricolage. Mais souvent, je fais du sport. Je fais du jogging.\n\n20 h : C'est l'heure du dîner ! Mon mari fait la cuisine. Je fais la vaisselle. Le soir, nous aimons regarder la télévision ou aller au cinéma. On adore les comédies et les films policiers. Le week-end, nous aimons aussi voir des amis.\n\n22 h 30 : Je me brosse les dents et je me couche. Mon mari et moi, nous ne nous couchons pas à la même heure. Il aime travailler le soir (et jouer à des jeux vidéo !). Il se couche vers minuit. Moi, je préfère travailler le matin !`,
     questions: [
-      { id: "u6-journee-q1a", type: "true_false", prompt: "Mathilde est journaliste à la radio.", answer: false },
-      { id: "u6-journee-q1b", type: "true_false", prompt: "Elle travaille avec Romain.", answer: true },
-      { id: "u6-journee-q1c", type: "true_false", prompt: "Elle travaille de 8 h à 18 h.", answer: true },
-      { id: "u6-journee-q1d", type: "true_false", prompt: "Elle passe la soirée avec son mari.", answer: true },
-      { id: "u6-journee-q2", type: "short_answer", prompt: "Quels types de sports fait-elle ?", answer: "Des sports de montagne (ski, escalade, randonnée…)." },
-      { id: "u6-journee-q3", type: "short_answer", prompt: "Où travaille-t-elle le matin ?", answer: "À la maison." },
-      { id: "u6-journee-q4", type: "short_answer", prompt: "Qu'est-ce qu'elle fait l'après-midi ?", answer: "Elle travaille à la télévision." },
-      { id: "u6-journee-q5", type: "short_answer", prompt: "Pourquoi son heure de coucher change selon les jours ?", answer: "Avant un match elle se couche tôt ; les autres jours elle se couche plus tard." }
+      { id: "u6-journee-q1", type: "open", prompt: "Observez la photo et le titre de l'article. De qui on parle ?" },
+      { id: "u6-journee-q2a", type: "true_false", prompt: "Mathilde est journaliste sportive à la radio.", answer: false },
+      { id: "u6-journee-q2b", type: "true_false", prompt: "Elle travaille avec Romain.", answer: true },
+      { id: "u6-journee-q2c", type: "true_false", prompt: "Elle commence le travail à 8 h et finit à 18 h.", answer: false },
+      { id: "u6-journee-q2d", type: "true_false", prompt: "Le soir, elle est avec son mari.", answer: true },
+      { id: "u6-journee-q3", type: "short_answer", prompt: "Quel type de sports Mathilde présente dans son émission ?", answer: "Des sports de montagne (le vélo VTT en été et le ski en hiver)." },
+      { id: "u6-journee-q4", type: "short_answer", prompt: "Le matin, elle travaille où ?", answer: "À la maison." },
+      { id: "u6-journee-q5", type: "short_answer", prompt: "Qu'est-ce que Mathilde et Romain font l'après-midi ?", answer: "Ils vont voir une compétition sportive. Mathilde pose les questions et Romain filme." },
+      { id: "u6-journee-q6", type: "short_answer", prompt: "Pourquoi Mathilde et son mari ne se couchent pas à la même heure ?", answer: "Son mari aime travailler le soir et jouer à des jeux vidéo (il se couche vers minuit). Mathilde préfère travailler le matin et se couche à 22h30." }
     ]
   },
   {
@@ -586,11 +594,15 @@ export const editoA1ReadingComprehension = [
     page: 94,
     title: "Idées de lecture",
     instruction: "Lisez l'article sur les bandes dessinées francophones et répondez aux questions.",
-    text: `Idées de lecture — BD francophones\n\nLa bande dessinée est née en Belgique et en France.\n\nQuelques personnages célèbres :\n• Lucky Luke — cowboy dans l'Ouest américain (auteur belge)\n• Joséphine — une Parisienne qui adore les sorties et les amis\n• Paul — un homme ordinaire qui a un enfant\n• Aya — une jeune femme de Côte d'Ivoire qui veut devenir médecin`,
+    text: `Tous les lundis, découvrez quatre héros de bande dessinée ! Aujourd'hui : la BD francophone.\n\nPersonnage : Paul\nAuteur : Michel Rabagliati | Pays : Canada (Québec)\nHistoire : C'est la vie de Paul. Il habite à Montréal. Il a une fille et il est auteur de bandes dessinées. Paul est un homme gentil et calme. Il a une vie simple. Il s'occupe de sa mère malade et de sa fille.\n\nPersonnage : Joséphine\nAuteure : Pénélope Bagieu | Pays : France\nHistoire : C'est la vie de Joséphine. Elle habite à Paris. Elle a 30 ans. Elle est célibataire. Elle a un chat. Il s'appelle Bradpitt. Elle est sympathique et drôle. Elle fait beaucoup de sorties avec ses amis, Cyril et Rose. Ils parlent beaucoup parce qu'ils sont bavards !\n\nPersonnage : Aya de Yopougon\nAuteurs : Marguerite Abouet et Clément Oubrerie | Pays : Côte d'Ivoire et France\nHistoire : C'est la vie d'Aya. Elle a 19 ans. Elle habite à Abidjan. Elle est étudiante et veut être médecin. Elle est généreuse : elle fait beaucoup de choses pour ses amies. Elle est sérieuse et elle est parfois stressée.\n\nPersonnage : Lucky Luke\nAuteurs : Morris / Jul, Achdé | Pays : Belgique\nHistoire : C'est la vie de Lucky Luke. Il est en Amérique. Il a un cheval intelligent, Jolly Jumper. Il met des personnes méchantes en prison. Il se promène dans l'ouest de l'Amérique. Il aime l'aventure. C'est un cow-boy gentil et courageux.`,
     questions: [
-      { id: "u6-lecture-q1", type: "short_answer", prompt: "Où est née la bande dessinée ?", answer: "En Belgique et en France." },
-      { id: "u6-lecture-q2", type: "matching", prompt: "Associez les personnages à leur description.", answer: "Lucky Luke → cowboy américain\nJoséphine → adore les sorties\nPaul → a un enfant\nAya → veut devenir médecin" },
-      { id: "u6-lecture-q3", type: "short_answer", prompt: "Quel est le projet professionnel d'Aya ?", answer: "Elle veut devenir médecin." }
+      { id: "u6-lecture-q1", type: "open", prompt: "Observez le document. Qu'est-ce que vous voyez ?" },
+      { id: "u6-lecture-q2", type: "short_answer", prompt: "Quelle est l'origine de ces BD francophones ?", answer: "Paul est canadien (Québec). Joséphine est française. Aya de Yopougon est franco-ivoirienne. Lucky Luke est belge." },
+      { id: "u6-lecture-q3a", type: "short_answer", prompt: "Quel personnage (Paul, Aya, Joséphine ou Lucky Luke) a un enfant ?", answer: "Paul." },
+      { id: "u6-lecture-q3b", type: "short_answer", prompt: "Quel personnage est en Amérique et met des méchants en prison ?", answer: "Lucky Luke." },
+      { id: "u6-lecture-q3c", type: "short_answer", prompt: "Quel personnage aime sortir avec ses amis ?", answer: "Joséphine." },
+      { id: "u6-lecture-q3d", type: "short_answer", prompt: "Quel personnage étudie ?", answer: "Aya." },
+      { id: "u6-lecture-q4", type: "short_answer", prompt: "Quelle profession veut faire Aya ?", answer: "Elle veut être médecin." }
     ]
   },
   {
@@ -602,11 +614,13 @@ export const editoA1ReadingComprehension = [
     page: 96,
     title: "Casting",
     instruction: "Lisez l'annonce de casting et répondez aux questions.",
-    text: `CASTING — Film L'anniversaire\n\nNous recherchons des acteurs et des actrices pour le film L'anniversaire !\n\nHistoire : Des amis se retrouvent au restaurant pour fêter un anniversaire.\n\nProfil recherché : hommes et femmes, 25–45 ans, tous les profils.\n\nComment participer ?\nEnvoyez votre photo à : anniversaire@gmail.com`,
+    text: `CINÉ CASTING [http://www.quefaire.be/]\n\nPour notre film, L'anniversaire, nous cherchons 4 acteurs.\n\nArthur (23 ans) : il a la moustache et les yeux marron. Il est drôle et sociable. Il aime faire la fête avec ses amis. Il sort souvent !\n\nMarion (24 ans) : elle est petite et elle a les cheveux courts. Elle est sympa et bavarde. Elle travaille tard et elle ne dort pas beaucoup.\n\nPatrick, le père d'Arthur (50 ans) : il est mince et il a les cheveux gris. Il est calme, sérieux et timide. Il aime rester à la maison avec son gros chien.\n\nMartine, la mère d'Arthur (50 ans) : elle a les cheveux roux et frisés. Elle est dynamique et généreuse. Elle part souvent en week-end sans son mari.\n\nHistoire : Arthur et ses parents sortent pour fêter l'anniversaire d'Arthur. Ils vont au restaurant. Ils rencontrent Marion, la serveuse, et une aventure étrange commence !\n\nCasting : le 12 et le 13 février\nEnvoyez votre photo à cette adresse : anniversaire@gmail.com`,
     questions: [
-      { id: "u6-casting-q1", type: "short_answer", prompt: "Quel est le titre du film ?", answer: "L'anniversaire." },
-      { id: "u6-casting-q2", type: "short_answer", prompt: "Où se retrouvent les personnages ?", answer: "Au restaurant." },
-      { id: "u6-casting-q3", type: "short_answer", prompt: "Comment participer au casting ?", answer: "Envoyer sa photo à anniversaire@gmail.com." }
+      { id: "u6-casting-q1", type: "open", prompt: "Il y a un casting pour un film dans votre ville. Vous vous présentez ?" },
+      { id: "u6-casting-q2", type: "short_answer", prompt: "Quel est le titre du film ?", answer: "L'anniversaire." },
+      { id: "u6-casting-q3", type: "short_answer", prompt: "Où les quatre personnages se rencontrent-ils dans le film ?", answer: "Au restaurant." },
+      { id: "u6-casting-q4", type: "short_answer", prompt: "Comment participer au casting ?", answer: "Envoyer sa photo à anniversaire@gmail.com. Le casting a lieu le 12 et le 13 février." },
+      { id: "u6-casting-q5", type: "matching", prompt: "Associez les personnages à leurs descriptions physiques.", answer: "Arthur (23 ans) → moustache, yeux marron\nMarion (24 ans) → petite, cheveux courts\nPatrick (50 ans) → mince, cheveux gris\nMartine (50 ans) → cheveux roux et frisés" }
     ]
   },
 
@@ -620,12 +634,13 @@ export const editoA1ReadingComprehension = [
     page: 103,
     title: "Au vide-grenier",
     instruction: "Lisez la conversation et répondez aux questions.",
-    text: `[Chat Marco / David]\nDavid : Salut Marco ! Tu es où ?\nMarco : Je suis au vide-grenier avec Ophélie ! Il y a beaucoup de choses intéressantes ici.\nDavid : Il y a des électroménagers ?\nMarco : Non, pas d'électroménagers. Mais il y a des meubles pas chers ! On a trouvé une belle table.\nDavid : Super ! Il y a encore des vide-greniers ce week-end ?\nMarco : Oui ! Dimanche il y en a un près de chez moi. Tu veux venir ?`,
+    text: `[Chat Marco / David]\nMarco : Salut David ! On est au vide-grenier avec Ophélie. On a acheté une cuisinière et un four à micro-ondes !\nDavid : Vous avez trouvé des meubles ?\nMarco : Oui, un bureau et deux fauteuils. Et pas cher. Mais on n'a pas trouvé de lit.\nDavid : Vous cherchez un lit ? Il y a peut-être un autre vide-grenier ?\nMarco : Oui ! Dimanche, près de chez nous ! On cherche aussi une armoire et des objets de décoration !`,
     questions: [
-      { id: "u7-vide-grenier-q1", type: "short_answer", prompt: "Marco est avec qui ?", answer: "Avec Ophélie." },
-      { id: "u7-vide-grenier-q2a", type: "true_false", prompt: "Il n'y a pas d'électroménagers au vide-grenier.", answer: true },
-      { id: "u7-vide-grenier-q2b", type: "true_false", prompt: "Les meubles sont bon marché.", answer: true },
-      { id: "u7-vide-grenier-q3", type: "short_answer", prompt: "Quand et où est le prochain vide-grenier ?", answer: "Dimanche, près de chez Marco." }
+      { id: "u7-vide-grenier-q1", type: "open", prompt: "Regardez l'affiche du vide-grenier. Qu'est-ce que vous voyez ?" },
+      { id: "u7-vide-grenier-q2", type: "short_answer", prompt: "Marco est avec qui ?", answer: "Avec Ophélie." },
+      { id: "u7-vide-grenier-q3a", type: "true_false", prompt: "Ils n'ont pas acheté d'appareils électroménagers.", answer: false },
+      { id: "u7-vide-grenier-q3b", type: "true_false", prompt: "Les meubles sont bon marché.", answer: true },
+      { id: "u7-vide-grenier-q4", type: "short_answer", prompt: "Quand et où est le prochain vide-grenier ?", answer: "Dimanche, près de chez eux." }
     ]
   },
   {
@@ -637,10 +652,11 @@ export const editoA1ReadingComprehension = [
     page: 108,
     title: "Vivre ensemble !",
     instruction: "Lisez le règlement de l'immeuble et répondez aux questions.",
-    text: `RÈGLEMENT DE L'IMMEUBLE — 12 rue des Lilas\n\nPour vivre ensemble dans le respect :\n\n- Ne pas faire de bruit entre 22 h et 8 h.\n- Mettre les poubelles dans le local poubelles.\n- Les animaux sont acceptés mais ils ne doivent pas faire de bruit.\n- Les vélos doivent être dans le local vélos, pas dans les couloirs.\n- Respecter la propreté des parties communes (couloirs, ascenseur, cave).`,
+    text: `RÈGLEMENT\n\n1. Merci de fermer la porte d'entrée.\n2. Il est interdit de faire des barbecues (dans les jardins et sur les balcons).\n3. Attention au bruit (chez vous, mais aussi dans le hall ou les escaliers) ! Respectez vos voisins !\n4. Interdiction de fumer ou de vapoter dans l'ascenseur et dans les parties communes de l'immeuble.\n5. Tenir les chiens en laisse.\n6. Défense de marcher sur la pelouse de la résidence.\n7. Ne pas laisser votre vélo dans les couloirs.\n8. Prière de trier vos déchets.`,
     questions: [
-      { id: "u7-vivre-q1", type: "multiple_choice", prompt: "Quel est le but de ce document ?", options: ["présenter l'immeuble", "respecter les règles", "décorer l'immeuble"], answer: "respecter les règles" },
-      { id: "u7-vivre-q2", type: "matching", prompt: "Associez les règles aux dessins.", answer: "Pas de bruit 22h–8h / Poubelles dans le local / Animaux silencieux / Vélos dans le local / Propreté des parties communes" }
+      { id: "u7-vivre-q1", type: "open", prompt: "Regardez les documents. Qu'est-ce que vous voyez ?" },
+      { id: "u7-vivre-q2", type: "short_answer", prompt: "À quoi sert le document b (le règlement) ?", answer: "À respecter les règles de l'immeuble / à expliquer ce qu'il faut faire ou ne pas faire." },
+      { id: "u7-vivre-q3", type: "matching", prompt: "Associez les règles du règlement aux dessins.", answer: "Fermer la porte / Pas de barbecue / Attention au bruit / Pas de fumée / Chiens en laisse / Ne pas marcher sur la pelouse / Pas de vélo dans les couloirs / Trier les déchets" }
     ]
   },
 
@@ -690,7 +706,7 @@ export const editoA1ReadingComprehension = [
     page: 124,
     title: "Bougez au quotidien !",
     instruction: "Lisez les documents (infographie et message) et répondez aux questions.",
-    text: `Document a — Calories dépensées selon l'activité\n\n0–150 kcal : jouer avec un animal (20 min), cuisiner (30 min), lire (1 h)\n150–300 kcal : faire de la trottinette (30 min), laver la voiture (1 h), faire le ménage (1 h)\n300–450 kcal : natation (30 min), yoga (1 h), course à pied (30 min)\n> 450 kcal : judo (1 h), tennis (1 h 30), musculation (1 h 30)\n\nDocument b — Message de Louise à son mari\n\nSurprise ! Tu veux perdre des calories… J'ai la solution : fais de la musculation 1 h 30 et tu perds 450 calories ! Ou fais 30 minutes de course à pied, c'est entre 300 et 450 calories. Mais tu peux aussi jardiner ou faire le ménage.\nÀ ce soir ! Louise`,
+    text: `Document a — Les activités sportives et du quotidien (calories dépensées)\n\nLes activités sportives :\n0 à 150 kcal : Corde à sauter (20 min), Marche rapide (30 min), Yoga (1 h)\n150 à 300 kcal : Natation (30 min), Gymnastique (1 h 30), Course à pied (30 min)\n300 à 450 kcal : Judo (1 h), Volley/rugby (1 match), Tennis (1 h 30), Musculation (1 h 30)\n\nLes activités du quotidien :\n0 à 150 kcal : Jouer avec un animal (20 min), Cuisiner (30 min), Lire (1 h)\n150 à 300 kcal : Faire de la trottinette (30 min), Laver la voiture (1 h), Faire le ménage (1 h)\n300 à 450 kcal : Jardiner (1 h 30)\n\nDocument b — Message de Louise à son mari\n\nSurprise ! Tu veux perdre des calories… J'ai la solution : faire de l'activité physique. Regarde ! Tu peux faire 1 h 30 de musculation et tu perds 450 calories. Ou fais 30 minutes de course à pied, c'est entre 300 et 450 calories. Mais tu peux aussi jardiner ou… faire le ménage.\nÀ ce soir ! Louise`,
     questions: [
       { id: "u8-bougez-q1", type: "open", prompt: "À votre avis, combien de calories perd-on quand on fait une heure de yoga ? Vérifiez votre réponse dans le document a." },
       { id: "u8-bougez-q2", type: "short_answer", prompt: "Pour perdre entre 150 et 300 calories, quelles activités du quotidien peut-on faire ?", answer: "Faire de la trottinette (30 min), laver la voiture (1 h) ou faire le ménage (1 h)." },
@@ -709,7 +725,7 @@ export const editoA1ReadingComprehension = [
     page: 130,
     title: "5 idées originales de vacances !",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `5 idées originales de vacances !\n\n1. Les vacances à vélo\nVous êtes sportif/sportive ? Pensez aux vacances à vélo. C'est écologique ! La nuit, vous dormez dans un camping ou une chambre d'hôtes.\n\n2. Voyager en van\nVous détestez organiser vos vacances ? Avec un van, vous avez le transport et l'hébergement. Vous pouvez aller à la mer ou à la montagne.\n\n3. L'échange de maisons ou d'appartements\nVous voulez partir en vacances avec votre famille ? Échangez votre maison. C'est gratuit !\n\n4. Le wwoofing\nVous aimez la campagne et vous n'avez pas beaucoup d'argent ? Avec le wwoofing, vous travaillez dans une ferme biologique et vous dormez et mangez gratuitement.\n\n5. La micro-aventure\nVous êtes courageux/courageuse et vous adorez l'aventure ? Faites une expérience différente près de chez vous : sport extrême, nuit dans un igloo…`,
+    text: `5 idées originales de vacances !\n\n1. Les vacances à vélo\nVous êtes sportif/sportive ? Pensez aux vacances à vélo. C'est plus écologique que l'avion ou la voiture. La nuit, vous dormez sous une tente dans un camping ou dans une chambre d'hôtes. Mais la météo peut être un problème.\n\n2. Voyager en van\nVous détestez organiser vos vacances ? Vous aimez être indépendant(e) ? Avec un van, vous avez le transport et l'hébergement. Vous pouvez aller à la mer ou à la montagne. C'est très pratique !\n\n3. L'échange de maisons ou d'appartements\nVous voulez partir en vacances avec votre famille ? Vous pouvez échanger votre maison ou votre appartement. Vous vivez dans le logement d'une autre famille et cette famille vit chez vous. Ces logements sont aussi confortables que des locations, mais ils sont gratuits !\n\n4. Le wwoofing\nVous aimez la campagne et vous n'avez pas beaucoup d'argent ? Avec le wwoofing, vous travaillez quatre heures par jour dans une ferme biologique et vous y dormez et mangez gratuitement. C'est possible de « wwoofer » dans beaucoup de pays !\n\n5. La micro-aventure\nVous êtes courageux/courageuse et vous adorez l'aventure ? Choisissez la micro-aventure et faites une expérience différente près de chez vous. Sport extrême, nuit dans un igloo : vivez quelques heures extraordinaires !`,
     questions: [
       { id: "u9-vacances-q1", type: "open", prompt: "Observez les photos. À votre avis, quel est le thème du document ?" },
       { id: "u9-vacances-q2", type: "short_answer", prompt: "Ce document propose quel type de vacances ?", answer: "Des idées originales / alternatives de vacances." },
@@ -729,7 +745,7 @@ export const editoA1ReadingComprehension = [
     page: 136,
     title: "Visitez la France avec ses peintres !",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `Visitez la France avec ses peintres !\n\n1. La Franche-Comté avec Gustave Courbet (1819–1877)\nGustave Courbet est né en Franche-Comté. Dans ses tableaux, il y a des rivières, des maisons et des forêts. C'est une belle région !\n\n2. La Provence avec Paul Cézanne (1839–1906)\nPaul Cézanne est né en Provence. On voit des arbres, des champs et la montagne Sainte-Victoire dans ses peintures. C'est un endroit parfait pour la randonnée !\n\n3. La Normandie avec Claude Monet (1840–1926)\nClaude Monet a habité plusieurs années en Normandie. On voit la plage et la mer dans ses tableaux. La mer est froide, mais c'est très joli !\n\n4. La région parisienne avec Berthe Morisot (1841–1895)\nBerthe Morisot a fait beaucoup de peintures de la campagne près de Paris. C'est agréable pour se promener !`,
+    text: `Visitez la France avec ses peintres !\n\n1. La Franche-Comté avec Gustave Courbet (1819–1877)\nGustave Courbet est né en Franche-Comté. À 20 ans, il est allé à Paris, mais il est revenu dans cette région à 30 ans. Sur ce tableau, il y a une rivière, des maisons et de l'herbe verte. Avec ses forêts et sa nature, c'est une belle région !\n\n2. La Provence avec Paul Cézanne (1839–1906)\nPaul Cézanne est né en Provence. Après ses études, il est parti à Paris, mais il est souvent retourné dans sa région. Sur cette peinture, on voit des arbres, des champs et la montagne Sainte-Victoire. C'est un endroit parfait pour la randonnée !\n\n3. La Normandie avec Claude Monet (1840–1926)\nClaude Monet a habité plusieurs années en Normandie. Il est mort dans un petit village normand, Giverny. Sur ce tableau, on voit un chemin, des fleurs, la plage et la mer. En Normandie, la mer est froide, mais c'est très joli !\n\n4. La région parisienne avec Berthe Morisot (1841–1895)\nBerthe Morisot a fait beaucoup de peintures de la campagne près de Paris. Ici, c'est un lac dans le bois de Boulogne. Deux femmes font du bateau. Il y a aussi deux canards. Ce bois est très agréable pour se promener !`,
     questions: [
       { id: "u9-peintres-q1", type: "open", prompt: "Vous connaissez des peintres français ?" },
       { id: "u9-peintres-q2", type: "multiple_choice", prompt: "Que propose ce document ?", options: ["Une exposition de peinture", "La découverte des régions de peintres célèbres", "Des livres sur des peintres"], answer: "La découverte des régions de peintres célèbres" },
@@ -746,13 +762,13 @@ export const editoA1ReadingComprehension = [
     page: 138,
     title: "Bonjour de Marseille !",
     instruction: "Lisez la carte postale et répondez aux questions.",
-    text: `Salut Mehdi !\n\nJe suis en vacances chez des amis à Marseille. C'est génial ! Je vais à la plage, je me baigne dans les Calanques et je bronze !\n\nHier, il ne faisait pas beau. Il y avait des nuages. Alors, j'ai visité le Mucem. C'était très intéressant !\n\nAujourd'hui, j'ai pris le bateau. J'ai visité le château d'If. Tu sais, c'est la prison du « Comte de Monte-Cristo », le roman d'Alexandre Dumas. Il se trouve sur une île à 4 kilomètres de Marseille.\n\nEt demain, je vais faire une randonnée à cheval avec mes amis pour découvrir la Provence.\n\nÀ bientôt,\nCarole`,
+    text: `Salut Mehdi !\n\nJe suis en vacances chez des amis à Marseille. C'est génial ! Je vais à la plage, je me baigne dans les Calanques et je bronze !\n\nHier, il ne faisait pas beau. Il y avait des nuages. Ce n'est pas normal à Marseille ! Alors, j'ai visité le Mucem. C'était très intéressant !\n\nAujourd'hui, j'ai pris le bateau. J'ai visité le château d'If. Tu sais, c'est la prison du « Comte de Monte-Cristo », le roman d'Alexandre Dumas. Il se trouve sur une île à 4 kilomètres de Marseille.\n\nEt demain, je vais faire une randonnée à cheval avec mes amis pour découvrir la Provence. On va pique-niquer, je suis très contente !\n\nÀ bientôt,\nCarole`,
     questions: [
       { id: "u9-marseille-q1", type: "open", prompt: "Regardez la carte postale. Qu'est-ce que vous voyez ?" },
       { id: "u9-marseille-q2", type: "short_answer", prompt: "Qui écrit ? À qui ?", answer: "Carole écrit à Mehdi." },
       { id: "u9-marseille-q3", type: "short_answer", prompt: "Où Carole passe-t-elle ses vacances ?", answer: "À Marseille." },
-      { id: "u9-marseille-q4", type: "short_answer", prompt: "Quelles activités Carole fait tous les jours ? A fait hier ? Va faire demain ?", answer: "Tous les jours : va à la plage, se baigne, bronze. Hier : a visité le Mucem et le château d'If. Demain : randonnée à cheval." },
-      { id: "u9-marseille-q5", type: "short_answer", prompt: "Pourquoi Carole a visité le Mucem ?", answer: "Il faisait mauvais temps et c'était très intéressant." }
+      { id: "u9-marseille-q4", type: "short_answer", prompt: "Quelles activités Carole fait tous les jours ? A fait hier ? A fait aujourd'hui ? Va faire demain ?", answer: "Tous les jours : va à la plage, se baigne, bronze. Hier : a visité le Mucem. Aujourd'hui : a pris le bateau, a visité le château d'If. Demain : randonnée à cheval, pique-nique." },
+      { id: "u9-marseille-q5", type: "short_answer", prompt: "Pourquoi Carole a visité le Mucem ?", answer: "Parce qu'il ne faisait pas beau (il y avait des nuages)." }
     ]
   },
 
@@ -766,7 +782,7 @@ export const editoA1ReadingComprehension = [
     page: 144,
     title: "Rencontrez les étudiants ambassadeurs !",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `Futur étudiant à l'université ?\n\nVous allez commencer des études supérieures et vous hésitez entre plusieurs formations ? Contactez les étudiants ambassadeurs. Ils sont là pour vous !\n\nNoam et Leslie font des études différentes. Noam étudie à Toulouse et Leslie étudie à Montpellier. Ils sont tous les deux étudiants ambassadeurs de leur université. Leur mission ? Ils vous écoutent et répondent à vos questions. Ils vous informent et vous aident à choisir votre formation.\n\n« Les futurs étudiants nous interrogent sur beaucoup de sujets. Quels métiers on peut faire après ces études ? Combien il y a d'heures de cours par semaine ? Comment est le restaurant universitaire ? » explique Noam, étudiant en master d'économie.\n\nPour contacter les étudiants ambassadeurs, allez sur Parcoursup ou demandez au secrétariat de votre future université.`,
+    text: `Vous allez commencer des études supérieures et vous hésitez entre plusieurs formations ? Contactez les étudiants ambassadeurs. Ils sont là pour vous !\n\nNoam et Leslie font des études différentes. Noam étudie à Toulouse et Leslie étudie à Montpellier. Ils sont tous les deux étudiants ambassadeurs de leur université. Leur mission ? Ils vous écoutent et répondent à vos questions. Ils vous informent et vous aident à choisir votre formation.\n\n« Les futurs étudiants nous interrogent sur beaucoup de sujets. Quels métiers on peut faire après ces études ? Combien il y a d'heures de cours par semaine ? Comment est le restaurant universitaire ? Et nous avons souvent la réponse parce que nous sommes étudiants. » explique Noam, étudiant ambassadeur en master d'économie à l'université Toulouse 1 Capitole.\n\n« Pour choisir mes études, j'ai discuté avec beaucoup d'étudiants de sciences, de mathématiques et d'informatique. Nous avons parlé des cours et de l'université. C'était très intéressant. Maintenant, je fais la même chose avec les futurs étudiants ! » raconte Leslie, étudiante en troisième année de licence de mathématiques à Montpellier.\n\nPour contacter les étudiants ambassadeurs, allez sur Parcoursup ou demandez au secrétariat de votre future université.`,
     questions: [
       { id: "u10-ambassadeurs-q1", type: "open", prompt: "Regardez l'affiche. À votre avis, qui sont ces personnes ?" },
       { id: "u10-ambassadeurs-q2", type: "matching", prompt: "Associez : a. Cet article s'adresse à… — b. Noam et Leslie sont…", answer: "a. → des futurs étudiants\nb. → des étudiants ambassadeurs" },
@@ -784,7 +800,7 @@ export const editoA1ReadingComprehension = [
     page: 150,
     title: "L'exposition Hexagone",
     instruction: "Lisez l'article et répondez aux questions.",
-    text: `L'exposition Hexagone\n\nÉric Bouvet et Yan Morvan sont photographes et journalistes. Pendant deux ans, de 2018 à 2020, ils ont voyagé en France pour interviewer et photographier des Françaises et des Français.\n\nAvec les interviews, ils ont fait 80 photographies qui montrent les Français d'aujourd'hui. L'exposition Hexagone présente ces photographies dans deux gares de France : la gare de Lyon à Paris et la gare d'Avignon-TGV. À côté de chaque photographie, un petit texte présente la personne photographiée.\n\nElsa — comédienne et danseuse\n« Je suis artiste. C'est un métier que j'adore mais c'est difficile : j'ai un rythme très différent du rythme des autres Français. »\n\nHana — informaticienne\n« Je suis née en Algérie et je suis arrivée en France à 2 ans. La France est un pays qui change mais qui garde aussi ses traditions. »\n\nCyril — chauffeur\n« Je travaille comme chauffeur. J'ai créé mon entreprise de transport. Être indépendant, c'est une chose que j'aime. Je n'ai pas de chef. »`,
+    text: `L'exposition Hexagone\n\nÉric Bouvet et Yan Morvan sont photographes et journalistes. Pendant deux ans, de 2018 à 2020, ils ont voyagé en France pour interviewer et photographier des Françaises et des Français.\n\nAvec les interviews, ils ont fait 80 photographies qui montrent les Français d'aujourd'hui. Il y a, par exemple, une libraire, un policier, un boucher, un agriculteur, une fleuriste, etc. L'exposition Hexagone présente ces photographies dans deux gares de France : la gare de Lyon à Paris et la gare d'Avignon-TGV. À côté de chaque photographie, un petit texte présente la personne photographiée.\n\nElsa — comédienne et danseuse\n« Je suis comédienne et danseuse. En France ou à l'étranger, je change souvent de ville pour mon travail. Je suis artiste. C'est un métier que j'adore mais, parfois, c'est difficile : j'ai un rythme très différent du rythme des autres Français. »\n\nHana — informaticienne\n« Je suis née en Algérie et je suis arrivée en France à 2 ans. Je suis informaticienne. La France est un pays qui change mais qui garde aussi ses traditions. »\n\nCyril — chauffeur\n« Je travaille comme chauffeur. J'ai créé mon entreprise de transport de personnes. Être indépendant, c'est une chose que j'aime. Je n'ai pas de chef, pas de directeur. Je rêve de développer cette entreprise ! »`,
     questions: [
       { id: "u10-hexagone-q1", type: "open", prompt: "Vous prenez souvent des photos ? Qu'est-ce que vous photographiez ?" },
       { id: "u10-hexagone-q2a", type: "true_false", prompt: "L'exposition Hexagone présente des Françaises et des Français.", answer: true },
@@ -793,7 +809,7 @@ export const editoA1ReadingComprehension = [
       { id: "u10-hexagone-q3", type: "short_answer", prompt: "Où est-ce qu'on peut voir cette exposition ?", answer: "Dans deux gares : la gare de Lyon à Paris et la gare d'Avignon-TGV." },
       { id: "u10-hexagone-q4", type: "short_answer", prompt: "Qu'est-ce qu'Elsa, l'artiste, trouve difficile dans son travail ?", answer: "Elle a un rythme très différent des autres Français." },
       { id: "u10-hexagone-q5", type: "short_answer", prompt: "Qu'est-ce que Hana, l'informaticienne, pense de la France ?", answer: "C'est un pays qui change mais qui garde aussi ses traditions." },
-      { id: "u10-hexagone-q6", type: "short_answer", prompt: "Qu'est-ce que Cyril, le chauffeur, aime dans son travail ?", answer: "Être indépendant et ne pas avoir de chef." }
+      { id: "u10-hexagone-q6", type: "short_answer", prompt: "Qu'est-ce que Cyril, le chauffeur, aime dans son travail ?", answer: "Être indépendant, ne pas avoir de chef (pas de directeur). Il rêve de développer son entreprise." }
     ]
   }
 ];
