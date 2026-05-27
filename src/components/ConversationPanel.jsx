@@ -58,13 +58,18 @@ export const EDITO_SCENARIOS = [
 function parseAIMsg(text) {
   const lines = text.split("\n");
   const correctionLines = [];
+  const suggestionLines = [];
   const mainLines = [];
   for (const line of lines) {
     if (line.startsWith("💡")) correctionLines.push(line.slice(1).trim());
+    else if (line.startsWith("🌟")) suggestionLines.push(line.slice(1).trim());
     else mainLines.push(line);
   }
-  return { main: mainLines.join("\n").trim(), correctionLines };
+  return { main: mainLines.join("\n").trim(), correctionLines, suggestionLines };
 }
+
+// ── Hint instruction appended to every system prompt ───────────
+const HINT_INSTR = "\nAt the end of EVERY response (including your first), on its own line, add a suggestion prefixed EXACTLY with '🌟' (no space before it): in Vietnamese, suggest how the learner can respond next, then show ONE short French example sentence in quotes. Example format: '🌟 Gợi ý: Bạn có thể trả lời \"Je m'appelle...\"'";
 
 // ════════════════════════════════════════════════════════════════
 export default function ConversationPanel({ onBackToParcours }) {
@@ -97,7 +102,7 @@ export default function ConversationPanel({ onBackToParcours }) {
     try {
       const reply = await callAIText(
         [{ role:"user", content:"Commençons." }],
-        sc.prompt + " The learner just said they are ready. Start the conversation now."
+        sc.prompt + " The learner just said they are ready. Start the conversation now." + HINT_INSTR
       );
       setMessages([{ role:"assistant", text: reply }]);
     } catch(e) { setErr(e.message); }
@@ -108,7 +113,7 @@ export default function ConversationPanel({ onBackToParcours }) {
     setErr(""); setLoading(true);
     try {
       const apiMsgs = messages.map(m => ({ role: m.role, content: m.text }));
-      const reply = await callAIText(apiMsgs, scenario.prompt);
+      const reply = await callAIText(apiMsgs, scenario.prompt + HINT_INSTR);
       setMessages(m => [...m, { role:"assistant", text: reply }]);
       awardXP(3);
     } catch(e) { setErr(e.message); }
@@ -123,7 +128,7 @@ export default function ConversationPanel({ onBackToParcours }) {
     setMessages(newMsgs); setInput(""); setLoading(true);
     try {
       const apiMsgs = newMsgs.map(m => ({ role: m.role, content: m.text }));
-      const reply = await callAIText(apiMsgs, scenario.prompt);
+      const reply = await callAIText(apiMsgs, scenario.prompt + HINT_INSTR);
       setMessages(m => [...m, { role:"assistant", text: reply }]);
       awardXP(3);
     } catch(e) { setErr(e.message); }
@@ -306,7 +311,7 @@ export default function ConversationPanel({ onBackToParcours }) {
           );
 
           // AI message
-          const { main, correctionLines } = parseAIMsg(m.text);
+          const { main, correctionLines, suggestionLines } = parseAIMsg(m.text);
           return (
             <div key={i} style={{ display:"flex", flexDirection:"column", alignItems:"flex-start", gap:"0.35rem" }}>
               {/* AI bubble */}
@@ -323,6 +328,27 @@ export default function ConversationPanel({ onBackToParcours }) {
                   ))}
                 </div>
               )}
+              {/* 🌟 Suggestion chip */}
+              {suggestionLines.length > 0 && (() => {
+                const txt = suggestionLines.join(" ");
+                // Extract French example in quotes to make tappable
+                const qMatch = txt.match(/"([^"]+)"/);
+                const frExample = qMatch?.[1] || null;
+                return (
+                  <div style={{ background:C.goldL, border:`1px solid ${C.gold}55`, borderRadius:"4px 14px 14px 14px", padding:"0.42rem 0.75rem", maxWidth:"82%", animation:"fadeUp 0.2s ease" }}>
+                    <div style={{ fontSize:"0.58rem", fontWeight:700, color:"#B45309", letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.2rem" }}>💬 Gợi ý</div>
+                    <div style={{ fontSize:"0.74rem", color:"#78350F", lineHeight:1.55 }}>{txt}</div>
+                    {frExample && (
+                      <button onClick={() => setInput(frExample)}
+                        style={{ marginTop:"0.35rem", padding:"0.2rem 0.6rem", background:"rgba(255,255,255,0.7)", border:`1px solid ${C.gold}55`, borderRadius:20, fontSize:"0.68rem", color:"#92400E", cursor:"pointer", fontFamily:"Georgia,serif", fontStyle:"italic", fontWeight:600 }}>
+                        ✎ Dùng câu này
+                      </button>
+                    )}
+                  </div>
+                );
+              })()}
+              {/* invisible spacer so last item isn't hidden under input bar */}
+              {i === messages.length - 1 && <div style={{ height: 4 }} />}
             </div>
           );
         })}
