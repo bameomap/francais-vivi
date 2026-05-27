@@ -5,18 +5,6 @@ import { awardXP } from "../utils/xp.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 
-const PURPLE   = "#7C3AED";
-const PURPLE_L = "#F5F0FF";
-
-const UNIT_COLORS = [
-  { color:"#2980B9", bg:"#E8F4FD" }, { color:"#8E44AD", bg:"#F5EEFF" },
-  { color:"#16A085", bg:"#E6FAF5" }, { color:"#E67E22", bg:"#FEF3E2" },
-  { color:"#C0392B", bg:"#FDEDEC" }, { color:"#D35400", bg:"#FDEBD0" },
-  { color:"#27AE60", bg:"#EAFAF1" }, { color:"#2471A3", bg:"#EAF4FB" },
-  { color:"#6C3483", bg:"#F5EEF8" }, { color:"#0E6655", bg:"#E8F8F5" },
-  { color:"#784212", bg:"#FEF9E7" },
-];
-
 function buildEditoPrompt(unit, practice) {
   const phrases = practice.usefulPhrases?.length
     ? `\nUseful phrases the learner can use: ${practice.usefulPhrases.join(", ")}.` : "";
@@ -66,7 +54,7 @@ export const EDITO_SCENARIOS = [
   },
 ];
 
-// ── Parse AI message ──────────────────────────────────────────
+// ── Parse AI message ───────────────────────────────────────────
 function parseAIMsg(text) {
   const lines = text.split("\n");
   const correctionLines = [];
@@ -80,15 +68,15 @@ function parseAIMsg(text) {
 
 // ════════════════════════════════════════════════════════════════
 export default function ConversationPanel({ onBackToParcours }) {
-  const [scenario,      setScenario]      = useState(null);
-  const [messages,      setMessages]      = useState([]);
-  const [input,         setInput]         = useState("");
-  const [loading,       setLoading]       = useState(false);
-  const [err,           setErr]           = useState("");
-  const [correcting,    setCorrecting]    = useState(null);
-  const [inlineCorrects,setInlineCorrects]= useState({});
-  const [mode,          setMode]          = useState("libre");
-  const [selUnit,       setSelUnit]       = useState(0);
+  const [scenario,       setScenario]       = useState(null);
+  const [messages,       setMessages]       = useState([]);
+  const [input,          setInput]          = useState("");
+  const [loading,        setLoading]        = useState(false);
+  const [err,            setErr]            = useState("");
+  const [correcting,     setCorrecting]     = useState(null);
+  const [inlineCorrects, setInlineCorrects] = useState({});
+  const [mode,           setMode]           = useState("libre");
+  const [selUnit,        setSelUnit]        = useState(0);
   const bottomRef = useRef(null);
 
   const [fromParcours, setFromParcours] = useState(false);
@@ -150,7 +138,7 @@ export default function ConversationPanel({ onBackToParcours }) {
         "Bạn là giáo viên tiếng Pháp. Trả lời ngắn gọn, thân thiện, bằng tiếng Việt."
       );
       setInlineCorrects(c => ({ ...c, [idx]: fb }));
-    } catch(e) {
+    } catch {
       setInlineCorrects(c => ({ ...c, [idx]: "⚠ Không thể phân tích lúc này." }));
     }
     setCorrecting(null);
@@ -163,87 +151,107 @@ export default function ConversationPanel({ onBackToParcours }) {
   // ════════════════════════════════════════════════════════════════
   if (!scenario) {
     const unit = EDITO_A1_UNITS[selUnit];
-    const uc   = UNIT_COLORS[selUnit] || UNIT_COLORS[0];
     return (
-      <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.9rem" }}>
+      <div style={{ animation:"fadeUp 0.3s ease" }}>
 
-        {fromParcours && onBackToParcours && (
-          <button onClick={onBackToParcours} style={{ background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
-            ← Parcours
-          </button>
-        )}
-
-        {/* Mode toggle */}
-        <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:12 }}>
-          {[{ id:"libre", label:"💬 Tự do" }, { id:"edito", label:"📘 Edito A1" }].map(m => (
-            <button key={m.id} onClick={() => setMode(m.id)}
-              style={{ flex:1, padding:"7px 4px", background: mode===m.id ? C.white : "transparent", border:"none", borderRadius:8, cursor:"pointer", fontWeight: mode===m.id ? 700 : 500, color: mode===m.id ? C.ink : C.gray, fontFamily:"inherit", fontSize:12, boxShadow: mode===m.id ? "0 1px 3px rgba(0,0,0,0.06)" : "none", transition:"all 0.15s" }}>
-              {m.label}
+        {/* Dark hero banner */}
+        <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem" }}>
+          {fromParcours && onBackToParcours && (
+            <button onClick={onBackToParcours} style={{ background:"rgba(255,255,255,0.15)", border:"none", color:"#fff", fontSize:"0.72rem", fontWeight:600, cursor:"pointer", padding:"0.2rem 0.65rem", borderRadius:20, marginBottom:"0.6rem", fontFamily:"inherit" }}>
+              ← Parcours
             </button>
-          ))}
+          )}
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>
+            🥐 La Conversation
+          </div>
+          <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>
+            Roleplay · Sửa lỗi nhẹ nhàng · Tình huống thực tế
+          </div>
         </div>
 
-        {mode === "libre" && (
-          <>
-            <div style={{ fontSize:"0.72rem", color:C.gray }}>AI đóng vai, sửa lỗi nhẹ nhàng bằng tiếng Việt</div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.6rem" }}>
-              {EDITO_SCENARIOS.map(sc => (
-                <button key={sc.id} onClick={() => startScenario(sc)}
-                  style={{ background:sc.bg, border:`1.5px solid ${sc.color}33`, borderRadius:16, padding:"0.9rem 0.85rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s" }}>
-                  <div style={{ fontSize:"1.8rem", marginBottom:"0.35rem" }}>{sc.icon}</div>
-                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.88rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem", lineHeight:1.3 }}>{sc.label}</div>
-                  <div style={{ fontSize:"0.67rem", color:sc.color, fontWeight:600 }}>{sc.desc}</div>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+        <div style={{ padding:"0.75rem 1rem 4rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
 
-        {mode === "edito" && (
-          <>
-            <div style={{ overflowX:"auto", display:"flex", gap:6, paddingBottom:2, scrollbarWidth:"none" }}>
-              {EDITO_A1_UNITS.map((u, i) => {
-                const ucc = UNIT_COLORS[i] || UNIT_COLORS[0];
-                const active = selUnit === i;
-                return (
-                  <button key={u.id} onClick={() => setSelUnit(i)}
-                    style={{ flexShrink:0, padding:"5px 11px", borderRadius:999, fontSize:11.5, fontWeight: active ? 700 : 500, cursor:"pointer", fontFamily:"inherit", whiteSpace:"nowrap", transition:"all 0.15s", background: active ? ucc.color : C.white, color: active ? "#fff" : C.ink, border:`1.5px solid ${active ? ucc.color : C.border}` }}>
-                    U{u.unit} · {u.title}
+          {/* Mode toggle */}
+          <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:12 }}>
+            {[{ id:"libre", label:"💬 Tự do" }, { id:"edito", label:"📘 Édito A1" }].map(m => (
+              <button key={m.id} onClick={() => setMode(m.id)}
+                style={{ flex:1, padding:"7px 4px", background: mode===m.id ? C.white : "transparent", border:"none", borderRadius:8, cursor:"pointer", fontWeight: mode===m.id ? 700 : 500, color: mode===m.id ? C.ink : C.gray, fontFamily:"inherit", fontSize:12, boxShadow: mode===m.id ? "0 1px 3px rgba(0,0,0,0.06)" : "none", transition:"all 0.15s" }}>
+                {m.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ── Libre mode ── */}
+          {mode === "libre" && (
+            <>
+              <div style={{ fontSize:"0.72rem", color:C.gray }}>AI đóng vai · sửa lỗi nhẹ nhàng bằng tiếng Việt</div>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.6rem" }}>
+                {EDITO_SCENARIOS.map(sc => (
+                  <button key={sc.id} onClick={() => startScenario(sc)}
+                    style={{ background:sc.bg, border:`1.5px solid ${sc.color}33`, borderRadius:16, padding:"0.9rem 0.85rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"transform 0.1s, box-shadow 0.15s", boxShadow:`0 2px 8px ${sc.color}18` }}
+                    onPointerDown={e => e.currentTarget.style.transform="scale(0.97)"}
+                    onPointerUp={e => e.currentTarget.style.transform="scale(1)"}
+                    onPointerLeave={e => e.currentTarget.style.transform="scale(1)"}
+                  >
+                    <div style={{ fontSize:"1.8rem", marginBottom:"0.35rem" }}>{sc.icon}</div>
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.88rem", color:C.ink, fontWeight:700, marginBottom:"0.15rem", lineHeight:1.3 }}>{sc.label}</div>
+                    <div style={{ fontSize:"0.67rem", color:sc.color, fontWeight:600 }}>{sc.desc}</div>
                   </button>
-                );
-              })}
-            </div>
-
-            <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-              <div style={{ fontSize:"0.65rem", fontWeight:700, color:uc.color, textTransform:"uppercase", letterSpacing:"0.1em" }}>
-                Unité {unit.unit} — {unit.title}
+                ))}
               </div>
-              {unit.speakingPractice.map((p, i) => (
-                <button key={i} onClick={() => {
-                  const sc = {
-                    id:`edito-${unit.id}-${i}`, label:p.title, icon:"🎙️",
-                    desc: p.task.length > 55 ? p.task.slice(0,55)+"…" : p.task,
-                    color:uc.color, bg:uc.bg,
-                    phrases:p.usefulPhrases || [],
-                    prompt:buildEditoPrompt(unit, p),
-                  };
-                  startScenario(sc);
-                }}
-                  style={{ background:uc.bg, border:`1.5px solid ${uc.color}44`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit" }}>
-                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.9rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>{p.title}</div>
-                  <div style={{ fontSize:"0.73rem", color:C.gray, lineHeight:1.55 }}>{p.task}</div>
-                  {p.usefulPhrases?.length > 0 && (
-                    <div style={{ marginTop:"0.5rem", display:"flex", flexWrap:"wrap", gap:"0.3rem" }}>
-                      {p.usefulPhrases.map((ph, j) => (
-                        <span key={j} style={{ background:C.white, border:`1px solid ${uc.color}44`, borderRadius:20, padding:"2px 8px", fontSize:"0.65rem", color:uc.color, fontFamily:"Georgia,serif" }}>{ph}</span>
-                      ))}
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+            </>
+          )}
+
+          {/* ── Édito mode ── */}
+          {mode === "edito" && (
+            <>
+              <div style={{ overflowX:"auto", display:"flex", gap:6, paddingBottom:2, scrollbarWidth:"none" }}>
+                {EDITO_A1_UNITS.map((u, i) => {
+                  const active = selUnit === i;
+                  return (
+                    <button key={u.id} onClick={() => setSelUnit(i)}
+                      style={{ flexShrink:0, padding:"5px 11px", borderRadius:999, fontSize:11.5, fontWeight: active ? 700 : 500, cursor:"pointer", fontFamily:"inherit", whiteSpace:"nowrap", transition:"all 0.15s", background: active ? C.blue : C.white, color: active ? "#fff" : C.ink, border:`1.5px solid ${active ? C.blue : C.border}` }}>
+                      U{u.unit} · {u.title}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
+                <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, textTransform:"uppercase", letterSpacing:"0.1em" }}>
+                  Unité {unit.unit} — {unit.title}
+                </div>
+                {unit.speakingPractice.map((p, i) => (
+                  <button key={i} onClick={() => {
+                    const sc = {
+                      id:`edito-${unit.id}-${i}`, label:p.title, icon:"🎙️",
+                      desc: p.task.length > 55 ? p.task.slice(0,55)+"…" : p.task,
+                      color: C.blue, bg: C.blueL,
+                      phrases: p.usefulPhrases || [],
+                      prompt: buildEditoPrompt(unit, p),
+                    };
+                    startScenario(sc);
+                  }}
+                    style={{ background:C.white, border:`1.5px solid ${C.border}`, borderLeft:`4px solid ${C.blue}`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"box-shadow 0.15s, transform 0.1s", boxShadow:`0 2px 8px rgba(74,144,217,0.06)` }}
+                    onPointerDown={e => e.currentTarget.style.transform="scale(0.99)"}
+                    onPointerUp={e => e.currentTarget.style.transform="scale(1)"}
+                    onPointerLeave={e => e.currentTarget.style.transform="scale(1)"}
+                  >
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.9rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>{p.title}</div>
+                    <div style={{ fontSize:"0.73rem", color:C.gray, lineHeight:1.55 }}>{p.task}</div>
+                    {p.usefulPhrases?.length > 0 && (
+                      <div style={{ marginTop:"0.5rem", display:"flex", flexWrap:"wrap", gap:"0.3rem" }}>
+                        {p.usefulPhrases.map((ph, j) => (
+                          <span key={j} style={{ background:C.cream, border:`1px solid ${C.blue}33`, borderRadius:20, padding:"2px 8px", fontSize:"0.65rem", color:C.blue, fontFamily:"Georgia,serif" }}>{ph}</span>
+                        ))}
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     );
   }
@@ -254,37 +262,37 @@ export default function ConversationPanel({ onBackToParcours }) {
   return (
     <div style={{ display:"flex", flexDirection:"column", height:"calc(100dvh - 120px)" }}>
 
-      {/* Header */}
-      <div style={{ background:`linear-gradient(135deg, ${PURPLE}, #9F67FF)`, padding:"0.65rem 1rem", display:"flex", alignItems:"center", gap:"0.65rem" }}>
-        <div style={{ width:38, height:38, background:"rgba(255,255,255,0.2)", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.4rem", flexShrink:0 }}>
+      {/* Chat header */}
+      <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.65rem 1rem", display:"flex", alignItems:"center", gap:"0.65rem" }}>
+        <div style={{ width:38, height:38, background:"rgba(255,255,255,0.18)", border:"1.5px solid rgba(255,255,255,0.3)", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.35rem", flexShrink:0 }}>
           {scenario.icon}
         </div>
         <div style={{ flex:1, minWidth:0 }}>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:"#fff", fontWeight:700 }}>{scenario.label}</div>
-          <div style={{ fontSize:"0.65rem", color:"rgba(255,255,255,0.75)", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{scenario.desc}</div>
+          <div style={{ fontSize:"0.65rem", color:"rgba(255,255,255,0.65)", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{scenario.desc}</div>
         </div>
         <button onClick={() => setScenario(null)}
-          style={{ padding:"0.28rem 0.75rem", background:"rgba(255,255,255,0.2)", border:"1px solid rgba(255,255,255,0.35)", color:"#fff", borderRadius:20, fontSize:"0.68rem", cursor:"pointer", flexShrink:0 }}>
+          style={{ padding:"0.28rem 0.75rem", background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.3)", color:"#fff", borderRadius:20, fontSize:"0.68rem", cursor:"pointer", flexShrink:0, fontFamily:"inherit" }}>
           Đổi
         </button>
       </div>
 
       {/* Messages */}
-      <div style={{ flex:1, overflowY:"auto", padding:"0.85rem 1rem", display:"flex", flexDirection:"column", gap:"0.7rem", background:"#F5F0FF22" }}>
+      <div style={{ flex:1, overflowY:"auto", padding:"0.85rem 1rem", display:"flex", flexDirection:"column", gap:"0.7rem", background:C.paper }}>
         {messages.map((m, i) => {
           const isUser = m.role === "user";
 
           if (isUser) return (
             <div key={i} style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"0.3rem" }}>
               {/* User bubble */}
-              <div style={{ background:`linear-gradient(135deg, ${PURPLE}, #9F67FF)`, color:"#fff", borderRadius:"18px 18px 4px 18px", padding:"0.65rem 1rem", maxWidth:"78%", fontSize:"0.88rem", lineHeight:1.6, fontFamily:"Georgia,serif" }}>
+              <div style={{ background:`linear-gradient(135deg, ${C.blue}, #1B3A6B)`, color:"#fff", borderRadius:"18px 18px 4px 18px", padding:"0.65rem 1rem", maxWidth:"78%", fontSize:"0.88rem", lineHeight:1.6, fontFamily:"Georgia,serif" }}>
                 {m.text}
               </div>
-              {/* Correct button */}
+              {/* Analyse button */}
               <button
                 onClick={() => inlineCorrects[i] ? setInlineCorrects(c => ({ ...c, [i]: undefined })) : correctMsg(i, m.text)}
                 disabled={correcting === i}
-                style={{ padding:"0.18rem 0.55rem", background:"transparent", border:`1px solid ${PURPLE}44`, borderRadius:20, color:PURPLE, fontSize:"0.6rem", cursor:"pointer", opacity: correcting===i ? 0.6 : 1 }}>
+                style={{ padding:"0.18rem 0.55rem", background:"transparent", border:`1px solid ${C.blue}44`, borderRadius:20, color:C.blue, fontSize:"0.6rem", cursor:"pointer", opacity: correcting===i ? 0.6 : 1 }}>
                 {correcting===i ? "…" : inlineCorrects[i] ? "Ẩn phân tích" : "💡 Phân tích câu"}
               </button>
               {/* Inline correction */}
@@ -306,7 +314,7 @@ export default function ConversationPanel({ onBackToParcours }) {
                 <div>{main}</div>
                 {main && <div style={{ marginTop:4 }}><SpeakBtn text={main} size="0.75rem" /></div>}
               </div>
-              {/* Correction bubbles */}
+              {/* Grammar correction bubbles */}
               {correctionLines.length > 0 && (
                 <div style={{ background:"#FFFBEB", border:"1.5px solid #FCD34D", borderRadius:12, padding:"0.5rem 0.75rem", maxWidth:"82%", display:"flex", flexDirection:"column", gap:"0.25rem" }}>
                   <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.1em", color:"#D97706", fontWeight:700, marginBottom:2 }}>Nhận xét ngữ pháp</div>
@@ -319,11 +327,12 @@ export default function ConversationPanel({ onBackToParcours }) {
           );
         })}
 
+        {/* Loading dots */}
         {loading && (
           <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", color:C.gray, fontSize:"0.78rem" }}>
-            <div style={{ display:"flex", gap:3 }}>
+            <div style={{ display:"flex", gap:4 }}>
               {[0,1,2].map(i => (
-                <div key={i} style={{ width:7, height:7, background:PURPLE, borderRadius:"50%", opacity:0.5, animation:`pulse 1.2s ease ${i*0.2}s infinite` }}/>
+                <div key={i} style={{ width:7, height:7, background:C.blue, borderRadius:"50%", opacity:0.5, animation:`pulse 1.2s ease ${i*0.2}s infinite` }}/>
               ))}
             </div>
             <span>Đang soạn…</span>
@@ -338,12 +347,12 @@ export default function ConversationPanel({ onBackToParcours }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Phrase chips — always visible */}
+      {/* Phrase chips */}
       {scenario.phrases.length > 0 && (
         <div style={{ background:C.white, borderTop:`1px solid ${C.border}`, padding:"0.5rem 0.75rem 0.3rem", display:"flex", gap:"0.35rem", overflowX:"auto", scrollbarWidth:"none" }}>
           {scenario.phrases.map((p, i) => (
             <button key={i} onClick={() => send(p)}
-              style={{ flexShrink:0, padding:"0.28rem 0.7rem", background:PURPLE_L, border:`1px solid ${PURPLE}33`, color:PURPLE, borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontFamily:"Georgia,serif", fontWeight:500, whiteSpace:"nowrap" }}>
+              style={{ flexShrink:0, padding:"0.28rem 0.7rem", background:C.blueL, border:`1px solid ${C.blue}33`, color:C.blue, borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontFamily:"Georgia,serif", fontWeight:500, whiteSpace:"nowrap" }}>
               {p}
             </button>
           ))}
@@ -356,11 +365,11 @@ export default function ConversationPanel({ onBackToParcours }) {
           onKeyDown={e => e.key === "Enter" && send()}
           placeholder="Écrivez en français…"
           style={{ flex:1, border:`1.5px solid ${C.border}`, borderRadius:22, padding:"0.5rem 0.85rem", fontSize:"0.88rem", fontFamily:"Georgia,serif", outline:"none", color:C.ink, minWidth:0, transition:"border-color 0.15s" }}
-          onFocus={e => e.target.style.borderColor = PURPLE}
+          onFocus={e => e.target.style.borderColor = C.blue}
           onBlur={e => e.target.style.borderColor = C.border}
         />
         <button onClick={() => send()} disabled={loading || !input.trim()}
-          style={{ padding:"0.5rem 1rem", background: input.trim() ? PURPLE : C.border, color:"#fff", border:"none", borderRadius:22, fontSize:"0.82rem", cursor: input.trim() ? "pointer" : "default", fontFamily:"Georgia,serif", fontWeight:700, flexShrink:0, transition:"background 0.15s" }}>
+          style={{ padding:"0.5rem 1rem", background: input.trim() ? `linear-gradient(135deg, ${C.accent}, #c0392b)` : C.border, color:"#fff", border:"none", borderRadius:22, fontSize:"0.82rem", cursor: input.trim() ? "pointer" : "default", fontFamily:"Georgia,serif", fontWeight:700, flexShrink:0, transition:"background 0.15s" }}>
           Gửi
         </button>
       </div>
