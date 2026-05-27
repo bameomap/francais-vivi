@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { C } from "../constants.js";
-import { PARCOURS_UNITS, STEP_DEFS } from "../data/parcoursData.js";
+import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS } from "../data/parcoursData.js";
 import {
   computeUnitStatuses,
   computeOverallProgress,
@@ -22,7 +22,6 @@ function UnitList({ onSelect }) {
 
   const doneCount    = PARCOURS_UNITS.filter(u => statuses[u.id]?.status === "done").length;
   const currentCount = PARCOURS_UNITS.filter(u => statuses[u.id]?.status === "current").length;
-  const lockedCount  = PARCOURS_UNITS.filter(u => ["locked","next"].includes(statuses[u.id]?.status)).length;
 
   return (
     <div style={{ padding: "1rem", animation: "fadeUp 0.3s ease" }}>
@@ -63,13 +62,13 @@ function UnitList({ onSelect }) {
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12, fontSize: 11.5 }}>
           <span><b style={{ color: C.green }}>{doneCount}</b> <span style={{ color: C.gray }}>xong</span></span>
           <span><b style={{ color: C.accent }}>{currentCount}</b> <span style={{ color: C.gray }}>đang học</span></span>
-          <span><b style={{ color: C.gray2 }}>{lockedCount}</b> <span style={{ color: C.gray }}>chưa học</span></span>
+          <span><b style={{ color: C.gray2 }}>{PARCOURS_UNITS.length - doneCount - currentCount}</b> <span style={{ color: C.gray }}>chưa học</span></span>
         </div>
       </div>
 
       {/* ── Units timeline ── */}
       <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10 }}>
-        Units
+        Units · {PARCOURS_UNITS.length} bài
       </div>
 
       <div style={{ position: "relative" }}>
@@ -77,10 +76,9 @@ function UnitList({ onSelect }) {
         <div style={{ position: "absolute", left: 16, top: 8, bottom: 8, width: 1.5, background: C.border, zIndex: 0 }}/>
 
         {PARCOURS_UNITS.map((u) => {
-          const { status, pct } = statuses[u.id] || { status: "locked", pct: 0 };
+          const { status, pct } = statuses[u.id] || { status: "next", pct: 0 };
           const isDone    = status === "done";
           const isCurrent = status === "current";
-          const isLocked  = status === "locked";
           const color     = statusColor(status);
 
           return (
@@ -89,26 +87,24 @@ function UnitList({ onSelect }) {
               <div style={{
                 width: 33, height: 33, borderRadius: "50%", flexShrink: 0,
                 background: isDone ? C.green : isCurrent ? C.accent : C.white,
-                border: `2px solid ${isLocked ? C.border : color}`,
-                color: isDone || isCurrent ? "#fff" : isLocked ? C.gray2 : color,
+                border: `2px solid ${isDone ? C.green : isCurrent ? C.accent : C.border}`,
+                color: isDone || isCurrent ? "#fff" : C.gray2,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: 13,
                 boxShadow: isCurrent ? `0 0 0 4px ${C.accent}22` : "none",
               }}>
-                {isDone ? "✓" : isLocked ? "·" : u.num}
+                {isDone ? "✓" : u.num}
               </div>
 
               {/* card */}
               <button
-                disabled={isLocked}
                 onClick={() => { localStorage.setItem("parcours_last_unit", u.id); onSelect(u.id); }}
                 style={{
                   flex: 1, minWidth: 0, textAlign: "left",
                   background: isCurrent ? "#FFF0EF" : C.white,
                   border: `1px solid ${isCurrent ? C.accent + "55" : C.border}`,
                   borderRadius: 11, padding: "9px 12px",
-                  opacity: isLocked ? 0.5 : 1,
-                  cursor: isLocked ? "default" : "pointer",
+                  cursor: "pointer",
                   transition: "all 0.15s", fontFamily: "inherit",
                 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 6 }}>
@@ -121,7 +117,7 @@ function UnitList({ onSelect }) {
                       {u.emoji} {u.fr}
                     </div>
                     <div style={{ fontSize: 11, color: C.gray, marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                      {u.vi}
+                      {u.vi} · {u.grammar}
                     </div>
                   </div>
                   {isCurrent && (
@@ -129,8 +125,8 @@ function UnitList({ onSelect }) {
                       {pct}%
                     </span>
                   )}
-                  {!isLocked && !isCurrent && !isDone && (
-                    <span style={{ fontSize: 12, color: C.blue, flexShrink: 0 }}>›</span>
+                  {!isCurrent && (
+                    <span style={{ fontSize: 12, color: isDone ? C.green : C.blue, flexShrink: 0 }}>›</span>
                   )}
                 </div>
                 {isCurrent && (
@@ -147,191 +143,233 @@ function UnitList({ onSelect }) {
   );
 }
 
+// ── Step Card ──────────────────────────────────────────────────
+
+function StepCard({ step, done, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        display: "flex", flexDirection: "column", alignItems: "flex-start",
+        gap: "0.3rem",
+        padding: "0.75rem 0.8rem",
+        background: done ? "#F0FDF4" : C.white,
+        border: `1.5px solid ${done ? "#86EFAC" : C.border}`,
+        borderRadius: 12, cursor: "pointer",
+        textAlign: "left", fontFamily: "inherit",
+        transition: "all 0.15s", position: "relative",
+      }}
+    >
+      {/* done badge */}
+      {done && (
+        <span style={{
+          position: "absolute", top: 6, right: 8,
+          fontSize: "0.65rem", color: "#16A34A",
+          fontWeight: 700,
+        }}>✓</span>
+      )}
+
+      {/* icon */}
+      <span style={{
+        width: 32, height: 32, borderRadius: 9,
+        background: done ? `${step.color}20` : `${step.color}18`,
+        border: `1.5px solid ${step.color}40`,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: "1rem", flexShrink: 0,
+      }}>
+        {step.icon}
+      </span>
+
+      {/* text */}
+      <div>
+        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: done ? "#15803D" : C.ink, lineHeight: 1.2 }}>
+          {step.kind}
+        </div>
+        <div style={{ fontSize: "0.65rem", color: C.gray, marginTop: 1, lineHeight: 1.3 }}>
+          {step.sub}
+        </div>
+      </div>
+    </button>
+  );
+}
+
 // ── Unit Detail ────────────────────────────────────────────────
 
 function UnitDetail({ unitId, onBack, onNavigate }) {
-  const unit      = PARCOURS_UNITS.find(u => u.id === unitId);
+  const unit     = PARCOURS_UNITS.find(u => u.id === unitId);
+  const unitIdx  = PARCOURS_UNITS.findIndex(u => u.id === unitId);
   const [progress, setProgress] = useState(() => getUnitStepProgress(unitId));
 
   const doneCount = STEP_DEFS.filter(s => progress[s.id]).length;
   const pct       = Math.round((doneCount / STEP_DEFS.length) * 100);
 
   const handleStep = useCallback((step) => {
+    // Mark as done & refresh progress display
     if (!progress[step.id]) {
       markStepDone(unitId, step.id);
       setProgress(getUnitStepProgress(unitId));
     }
-    const unitIdx = PARCOURS_UNITS.findIndex(u => u.id === unitId);
-    if (step.id === "vocab") {
+
+    localStorage.setItem("parcours_back", "1");
+
+    if (step.refTab) {
+      // Deep-link: open ReferenceHub at specific tab & pre-select unit
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
+      // Opens ReferenceHub at a specific sub-tab
+      localStorage.setItem("parcours_ref_tab", step.refTab);
+      onNavigate(step.section, step.view);
+    } else if (step.id === "vocab") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("vocab", "edito");
     } else if (step.id === "grammar") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
       localStorage.setItem("parcours_back", "1");
       onNavigate("grammar", "grammar");
     } else if (step.id === "lecture") {
-      localStorage.setItem("parcours_writing_idx", String(unitIdx));
       localStorage.setItem("parcours_back", "1");
+      onNavigate("lecture", "lecture");
+    } else if (step.id === "ecouter") {
+      onNavigate("dictee", "ecouter");
+    } else if (step.id === "ecrire") {
       onNavigate("writing", "writing");
     } else if (step.id === "parler") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      localStorage.setItem("parcours_back", "1");
       onNavigate("conversation", "conversation");
-    } else if (step.id === "ecouter") {
-      localStorage.setItem("parcours_back", "1");
-      onNavigate("dictee", "dictee");
     } else if (step.id === "quiz") {
       localStorage.setItem("parcours_quiz_unit", unitId);
-      localStorage.setItem("parcours_back", "1");
       onNavigate("quiz-unit", "quiz-unit");
     } else {
-      localStorage.setItem("parcours_back", "1");
-      onNavigate(step.view, step.view);
+      onNavigate(step.section, step.view);
     }
-  }, [unitId, progress, onNavigate]);
+  }, [unitId, unitIdx, progress, onNavigate]);
 
-  // Compute per-step status: done > current (first undone) > locked
-  const firstUndone = STEP_DEFS.find(s => !progress[s.id]);
-  const getStepStatus = (step) => {
-    if (progress[step.id]) return "done";
-    if (step.id === firstUndone?.id) return "current";
-    return "locked";
-  };
-
-  const currentStep = STEP_DEFS.find(s => getStepStatus(s) === "current");
+  // First undone step for the CTA
+  const nextStep = STEP_DEFS.find(s => !progress[s.id]);
 
   if (!unit) return null;
 
   return (
-    <div style={{ padding: "1rem", animation: "fadeUp 0.3s ease" }}>
+    <div style={{ animation: "fadeUp 0.3s ease" }}>
 
-      {/* back link */}
-      <button
-        onClick={onBack}
-        style={{ background: "transparent", border: "none", color: C.blue, fontSize: "0.82rem", fontWeight: 600, cursor: "pointer", padding: 0, marginBottom: 14, display: "flex", alignItems: "center", gap: 4, fontFamily: "inherit" }}>
-        ← Tất cả units
-      </button>
-
-      {/* Unit hero */}
-      <div style={{ background: C.white, border: `1.5px solid ${C.border}`, borderRadius: 16, overflow: "hidden", marginBottom: 16 }}>
-        <div style={{
-          background: `linear-gradient(135deg, ${C.ink} 0%, #2d4f8a 100%)`,
-          padding: "18px 16px 14px", color: "#fff", position: "relative", overflow: "hidden",
-        }}>
-          <div style={{ position: "absolute", right: -20, top: -20, width: 120, height: 120, borderRadius: "50%", background: "radial-gradient(circle, #E8574A18 0%, transparent 70%)" }}/>
-          <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: "0.15em", opacity: 0.6, marginBottom: 5 }}>
-            UNIT {unit.num} / {PARCOURS_UNITS.length - 1} · A1
-          </div>
-          <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: 26, fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.01em", marginBottom: 3 }}>
-            {unit.emoji} {unit.fr}
-          </div>
-          <div style={{ fontSize: 12, opacity: 0.75 }}>{unit.vi}</div>
-        </div>
-
-        <div style={{ padding: "12px 16px 14px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ flex: 1, height: 5, background: C.cream, borderRadius: 999, overflow: "hidden" }}>
-              <div style={{ height: "100%", width: `${pct}%`, background: C.accent, borderRadius: 999, transition: "width 0.4s ease" }}/>
-            </div>
-            <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: C.accent, fontWeight: 700 }}>
-              {pct}%
-            </span>
-          </div>
-          <div style={{ fontSize: 11.5, color: C.gray, marginTop: 6 }}>
-            Ngữ pháp: <span style={{ color: C.ink2, fontWeight: 600 }}>{unit.grammar}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Steps list */}
-      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
-        Bài học theo thứ tự
-      </div>
-
-      <div style={{ background: C.white, border: `1.5px solid ${C.border}`, borderRadius: 14, overflow: "hidden", marginBottom: 14 }}>
-        {STEP_DEFS.map((step, i) => {
-          const stepStatus = getStepStatus(step);
-          const isDone     = stepStatus === "done";
-          const isCurrent  = stepStatus === "current";
-          const isLocked   = stepStatus === "locked";
-
-          return (
-            <button
-              key={step.id}
-              disabled={isLocked}
-              onClick={() => handleStep(step)}
-              style={{
-                width: "100%", textAlign: "left", fontFamily: "inherit",
-                display: "flex", alignItems: "center", gap: 12,
-                padding: "11px 14px",
-                borderBottom: i < STEP_DEFS.length - 1 ? `1px solid ${C.borderSoft || "#EEF2FA"}` : "none",
-                background: isCurrent ? C.cream : "transparent",
-                opacity: isLocked ? 0.5 : 1,
-                cursor: isLocked ? "default" : "pointer",
-                border: "none", borderRadius: 0,
-                borderBottom: i < STEP_DEFS.length - 1 ? `1px solid ${C.borderSoft || "#EEF2FA"}` : "none",
-                transition: "background 0.15s",
-              }}>
-              {/* icon badge */}
-              <div style={{
-                width: 34, height: 34, borderRadius: 10, flexShrink: 0,
-                background: isDone ? C.greenL || "#ECFDF5" : isCurrent ? C.white : "#F1F5F9",
-                border: `1.5px solid ${isDone ? C.green : isCurrent ? step.color : C.border}`,
-                color: isDone ? C.green : isCurrent ? step.color : C.gray2,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: 14,
-              }}>
-                {isDone ? "✓" : step.icon}
-              </div>
-
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "nowrap" }}>
-                  <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, color: C.gray, letterSpacing: "0.06em", flexShrink: 0 }}>
-                    STEP {i + 1}
-                  </span>
-                  {isCurrent && (
-                    <span style={{ fontSize: 9, background: C.accent, color: "#fff", borderRadius: 999, padding: "1px 6px", fontWeight: 700, letterSpacing: "0.05em", whiteSpace: "nowrap", flexShrink: 0 }}>
-                      ĐANG HỌC
-                    </span>
-                  )}
-                </div>
-                <div style={{ fontWeight: 700, fontSize: 13.5, color: C.ink, marginTop: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {step.kind}
-                </div>
-                <div style={{ fontSize: 11, color: C.gray, marginTop: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {step.sub}
-                </div>
-              </div>
-
-              <div style={{ fontSize: 14, color: isLocked ? C.gray2 : C.ink, flexShrink: 0 }}>
-                {isLocked ? "🔒" : isDone ? "" : "›"}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* CTA */}
-      {currentStep && (
+      {/* ── Sticky header ── */}
+      <div style={{
+        position: "sticky", top: 0, zIndex: 10,
+        background: `linear-gradient(135deg, ${C.ink} 0%, #2d4f8a 100%)`,
+        padding: "12px 16px 10px",
+      }}>
         <button
-          onClick={() => handleStep(currentStep)}
+          onClick={onBack}
           style={{
-            width: "100%", padding: "13px 16px",
-            background: C.ink, color: "#fff",
-            border: "none", borderRadius: 14,
-            fontFamily: "inherit", fontSize: 14, fontWeight: 700,
-            cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center",
-            transition: "opacity 0.15s",
+            background: "rgba(255,255,255,0.15)", border: "none",
+            color: "#fff", fontSize: "0.75rem", fontWeight: 600,
+            cursor: "pointer", padding: "0.2rem 0.6rem",
+            borderRadius: 20, marginBottom: 8,
+            fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4,
           }}>
-          <span>Tiếp tục · {currentStep.kind}</span>
-          <span>→</span>
+          ← Tất cả units
         </button>
-      )}
-      {!currentStep && (
-        <div style={{ textAlign: "center", padding: "16px 0", fontSize: 14, color: C.green, fontWeight: 700 }}>
-          ✓ Unit hoàn thành!
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, letterSpacing: "0.15em", opacity: 0.55, color: "#fff" }}>
+              UNIT {unit.num} · A1 ÉDITO
+            </div>
+            <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: 22, fontWeight: 700, color: "#fff", lineHeight: 1.1, marginTop: 3 }}>
+              {unit.emoji} {unit.fr}
+            </div>
+            <div style={{ fontSize: 11.5, color: "rgba(255,255,255,0.65)", marginTop: 3 }}>{unit.vi}</div>
+          </div>
+          <div style={{ textAlign: "right", flexShrink: 0 }}>
+            <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: 24, fontWeight: 700, color: "#fff" }}>
+              {pct}<span style={{ fontSize: 12, opacity: 0.7 }}>%</span>
+            </div>
+            <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.6)" }}>
+              {doneCount}/{STEP_DEFS.length} bài
+            </div>
+          </div>
         </div>
-      )}
+
+        {/* progress bar */}
+        <div style={{ height: 4, background: "rgba(255,255,255,0.2)", borderRadius: 999, marginTop: 10, overflow: "hidden" }}>
+          <div style={{
+            height: "100%", width: `${pct}%`,
+            background: pct === 100 ? C.green : C.accent,
+            borderRadius: 999, transition: "width 0.4s ease",
+          }}/>
+        </div>
+
+        {/* grammar note */}
+        <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.55)", marginTop: 6 }}>
+          ⚜️ {unit.grammar}
+        </div>
+      </div>
+
+      {/* ── Step groups ── */}
+      <div style={{ padding: "1rem" }}>
+        {STEP_GROUPS.map(group => (
+          <div key={group.id} style={{ marginBottom: "1.2rem" }}>
+
+            {/* group header */}
+            <div style={{
+              display: "flex", alignItems: "center", gap: "0.4rem",
+              marginBottom: "0.55rem",
+            }}>
+              <span style={{ fontSize: "0.95rem" }}>{group.emoji}</span>
+              <span style={{
+                fontFamily: "'JetBrains Mono',monospace",
+                fontSize: "0.68rem", fontWeight: 700,
+                color: C.gray, letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}>
+                {group.label}
+              </span>
+              <span style={{ fontSize: "0.65rem", color: C.gray2, marginLeft: "auto" }}>
+                {group.steps.filter(s => progress[s.id]).length}/{group.steps.length}
+              </span>
+            </div>
+
+            {/* step cards grid */}
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: group.steps.length === 1 ? "1fr" : "repeat(2, 1fr)",
+              gap: "0.5rem",
+            }}>
+              {group.steps.map(step => (
+                <StepCard
+                  key={step.id}
+                  step={step}
+                  done={!!progress[step.id]}
+                  onClick={() => handleStep(step)}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {/* ── CTA ── */}
+        {pct < 100 && nextStep && (
+          <button
+            onClick={() => handleStep(nextStep)}
+            style={{
+              width: "100%", padding: "13px 16px",
+              background: C.ink, color: "#fff",
+              border: "none", borderRadius: 14,
+              fontFamily: "inherit", fontSize: 14, fontWeight: 700,
+              cursor: "pointer",
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              transition: "opacity 0.15s", marginTop: "0.5rem",
+            }}>
+            <span>Tiếp tục · {nextStep.icon} {nextStep.kind}</span>
+            <span>→</span>
+          </button>
+        )}
+        {pct === 100 && (
+          <div style={{
+            textAlign: "center", padding: "16px 0",
+            fontSize: 14, color: C.green, fontWeight: 700,
+          }}>
+            🎉 Unit hoàn thành!
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -339,13 +377,15 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
 // ── Main export ────────────────────────────────────────────────
 
 export default function ParcoursPanel({ onNavigate }) {
-  const [selectedUnit, setSelectedUnit] = useState(null);
+  const [selectedUnit, setSelectedUnit] = useState(() =>
+    localStorage.getItem("parcours_last_unit") || null
+  );
 
   if (selectedUnit) {
     return (
       <UnitDetail
         unitId={selectedUnit}
-        onBack={() => setSelectedUnit(null)}
+        onBack={() => { setSelectedUnit(null); localStorage.removeItem("parcours_last_unit"); }}
         onNavigate={onNavigate}
       />
     );

@@ -521,7 +521,14 @@ function UnitDetail({ unit, onBack }) {
 
 /* ── MAIN COMPONENT ───────────────────────────────────────── */
 export default function EditoPhonoPanel() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      localStorage.removeItem("parcours_unit_idx");
+      return EDITO_A1_PHONO[Number(idx)] ?? null;
+    }
+    return null;
+  });
 
   return (
     <div>

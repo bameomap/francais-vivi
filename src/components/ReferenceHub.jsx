@@ -19,7 +19,11 @@ const TABS = [
 ];
 
 export default function ReferenceHub() {
-  const [active, setActive] = useState("pronunc");
+  const [active, setActive] = useState(() => {
+    const tab = localStorage.getItem("parcours_ref_tab");
+    if (tab) { localStorage.removeItem("parcours_ref_tab"); return tab; }
+    return "pronunc";
+  });
 
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>

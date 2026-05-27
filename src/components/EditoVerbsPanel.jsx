@@ -562,7 +562,14 @@ function UnitExerciseView({ unit, onBack }) {
 
 // ── Unit list (main view) ─────────────────────────────────────
 export default function EditoVerbsPanel() {
-  const [activeUnit, setActiveUnit] = useState(null);
+  const [activeUnit, setActiveUnit] = useState(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      localStorage.removeItem("parcours_unit_idx");
+      return EDITO_A1_VERB_UNITS[Number(idx)]?.unitId ?? null;
+    }
+    return null;
+  });
 
   if (activeUnit) {
     const unit = EDITO_A1_VERB_UNITS.find(u => u.unitId === activeUnit);
