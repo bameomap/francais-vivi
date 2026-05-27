@@ -6,11 +6,13 @@ import ConjugaisonPanel from "./ConjugaisonPanel.jsx";
 import PhrasebookPanel from "./PhrasebookPanel.jsx";
 import EditoGrammarPanel from "./EditoGrammarPanel.jsx";
 import EditoVerbsPanel from "./EditoVerbsPanel.jsx";
+import EditoPhonoPanel from "./EditoPhonoPanel.jsx";
 
 const TABS = [
   { id: "pronunc",    label: "Phát âm",      icon: "🔊" },
   { id: "grammar",   label: "Ngữ pháp",     icon: "⚜️" },
   { id: "edito",     label: "Édito",        icon: "📚" },
+  { id: "phono",     label: "Phono",        icon: "🎵" },
   { id: "verbes",    label: "Động từ",      icon: "🖊️" },
   { id: "conjug",    label: "Chia tự do",   icon: "✏️" },
   { id: "phrases",   label: "Mẫu câu",      icon: "💬" },
@@ -53,6 +55,7 @@ export default function ReferenceHub() {
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
       {active === "edito"   && <EditoGrammarPanel />}
+      {active === "phono"   && <EditoPhonoPanel />}
       {active === "verbes"  && <EditoVerbsPanel />}
       {active === "conjug"  && <ConjugaisonPanel />}
       {active === "phrases" && <PhrasebookPanel />}
