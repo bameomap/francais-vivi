@@ -18,9 +18,10 @@ export function shuffleArray(arr) {
 }
 
 // Build audio URL from track number
+// Files are hosted on GitHub Releases (free, no size limit issue)
+const AUDIO_BASE = "https://github.com/bameomap/francais-vivi/releases/download/v1.0-audio";
 function url(n) {
-  const s = n < 10 ? `0${n}` : `${n}`;
-  return `/audio/${s}_Edito_A1_Livre.mp3`;
+  return `${AUDIO_BASE}/${n}_Edito_A1_Livre.mp3`;
 }
 
 export const EDITO_AUDIO = {
