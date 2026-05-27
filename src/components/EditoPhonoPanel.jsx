@@ -4,23 +4,13 @@ import { EDITO_A1_PHONO } from "../data/editoPhono.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { speak } from "../utils/helpers.js";
 
-/* ── helpers ──────────────────────────────────────────────── */
-function Badge({ text, bg = "#E8F0FE", color = "#3B5BDB" }) {
-  return (
-    <span style={{
-      display: "inline-block", padding: "0.15rem 0.45rem",
-      background: bg, color, borderRadius: 20,
-      fontSize: "0.68rem", fontWeight: 600, fontFamily: "monospace",
-    }}>{text}</span>
-  );
-}
-
+/* ── Tag chip ─────────────────────────────────────────────── */
 function Tag({ text }) {
   return (
     <span style={{
       display: "inline-block", padding: "0.1rem 0.4rem",
-      background: "#F3F4F6", color: "#6B7280", borderRadius: 12,
-      fontSize: "0.66rem", fontFamily: "monospace",
+      background: C.cream, color: C.gray2, borderRadius: 10,
+      fontSize: "0.64rem", fontFamily: "monospace", border: `1px solid ${C.border}`,
     }}>{text}</span>
   );
 }
@@ -28,93 +18,114 @@ function Tag({ text }) {
 /* ── UNIT LIST ────────────────────────────────────────────── */
 function UnitList({ onSelect }) {
   return (
-    <div style={{ padding: "1rem" }}>
-      <p style={{ fontSize: "0.78rem", color: C.gray, marginBottom: "0.8rem" }}>
-        Chọn bài để luyện phát âm theo từng đơn vị Édito A1.
-      </p>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
-        {EDITO_A1_PHONO.map(unit => (
-          <button
-            key={unit.unitId}
-            onClick={() => onSelect(unit)}
-            style={{
-              display: "flex", alignItems: "center", gap: "0.75rem",
-              padding: "0.7rem 0.9rem",
-              background: unit.bg,
-              border: `1.5px solid ${unit.color}30`,
-              borderRadius: 12, cursor: "pointer",
-              textAlign: "left", width: "100%",
-              transition: "box-shadow 0.15s",
-            }}
-          >
-            {/* unit badge */}
-            <span style={{
-              minWidth: 32, height: 32, borderRadius: 8,
-              background: unit.color, color: "#fff",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontWeight: 700, fontSize: "0.75rem", flexShrink: 0,
-            }}>
-              {unit.unitNum}
-            </span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontWeight: 600, fontSize: "0.8rem", color: "#1F2937" }}>
-                Unité {unit.unitNum} · {unit.title}
+    <div style={{ animation: "fadeUp 0.3s ease" }}>
+      {/* Hero banner */}
+      <div style={{
+        background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        padding: "1rem 1rem 0.85rem",
+      }}>
+        <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1.15rem", color: "#fff", fontWeight: 800 }}>
+          🎵 Phono-graphie Édito A1
+        </div>
+        <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.65)", marginTop: 4 }}>
+          11 bài · Âm vị · Cặp từ tối thiểu · Luyện nghe phân biệt
+        </div>
+      </div>
+
+      <div style={{ padding: "0.85rem 1rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {EDITO_A1_PHONO.map((unit, i) => (
+            <button
+              key={unit.unitId}
+              onClick={() => onSelect(unit)}
+              style={{
+                display: "flex", alignItems: "center", gap: "0.75rem",
+                padding: 0,
+                background: C.white,
+                border: `1.5px solid ${C.border}`,
+                borderLeft: `4px solid ${unit.color}`,
+                borderRadius: 14, cursor: "pointer",
+                textAlign: "left", width: "100%", overflow: "hidden",
+                animation: `fadeUp 0.2s ease ${i * 0.03}s both`,
+                transition: "box-shadow 0.15s, transform 0.1s",
+                boxShadow: "0 2px 8px rgba(74,144,217,0.08)",
+              }}
+              onPointerDown={e => e.currentTarget.style.transform = "scale(0.99)"}
+              onPointerUp={e => e.currentTarget.style.transform = "scale(1)"}
+              onPointerLeave={e => e.currentTarget.style.transform = "scale(1)"}
+            >
+              {/* unit badge */}
+              <div style={{
+                width: 44, height: 52, flexShrink: 0,
+                background: `${unit.color}18`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontFamily: "'Playfair Display',Georgia,serif",
+                fontWeight: 800, fontSize: 16, color: unit.color,
+              }}>
+                {unit.unitNum}
               </div>
-              <div style={{ fontSize: "0.72rem", color: unit.color, fontWeight: 500, marginTop: 2 }}>
-                🎵 {unit.topic}
+
+              <div style={{ flex: 1, minWidth: 0, padding: "0.6rem 0.4rem 0.6rem 0" }}>
+                <div style={{ fontWeight: 700, fontSize: "0.85rem", color: C.ink, lineHeight: 1.2 }}>
+                  {unit.title}
+                </div>
+                <div style={{ fontSize: "0.72rem", color: C.blue, fontWeight: 600, marginTop: 2 }}>
+                  🎵 {unit.topic}
+                </div>
+                <div style={{ fontSize: "0.65rem", color: C.gray, marginTop: 1 }}>
+                  {unit.topicVi}
+                </div>
               </div>
-              <div style={{ fontSize: "0.67rem", color: C.gray, marginTop: 1 }}>
-                {unit.topicVi}
-              </div>
-            </div>
-            <span style={{ color: unit.color, fontSize: "0.8rem", flexShrink: 0 }}>›</span>
-          </button>
-        ))}
+              <span style={{ color: C.gray2, fontSize: 18, flexShrink: 0, paddingRight: 12 }}>›</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 /* ── SOUND CARD ───────────────────────────────────────────── */
-function SoundCard({ sound, unitColor, unitBg }) {
+function SoundCard({ sound, unitColor }) {
   const [open, setOpen] = useState(true);
   return (
     <div style={{
-      border: `1.5px solid ${unitColor}30`,
+      border: `1.5px solid ${open ? C.blue + "40" : C.border}`,
       borderRadius: 12, overflow: "hidden",
-      marginBottom: "0.6rem",
+      marginBottom: "0.6rem", transition: "border-color 0.15s",
     }}>
-      {/* header */}
       <button
         onClick={() => setOpen(o => !o)}
         style={{
           width: "100%", display: "flex", alignItems: "center",
           gap: "0.6rem", padding: "0.6rem 0.8rem",
-          background: unitBg, border: "none", cursor: "pointer",
-          textAlign: "left",
+          background: open ? C.blueL : C.white,
+          border: "none", cursor: "pointer", textAlign: "left",
+          transition: "background 0.15s",
         }}
       >
+        {/* phoneme bubble — keeps unit color as it's content identity */}
         <span style={{
-          fontSize: "1.2rem", fontWeight: 800, fontFamily: "monospace",
-          color: unitColor, minWidth: 40,
+          minWidth: 44, height: 36, borderRadius: 8,
+          background: `${unitColor}18`, border: `1.5px solid ${unitColor}40`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: "1rem", fontWeight: 800, fontFamily: "monospace",
+          color: unitColor, flexShrink: 0, padding: "0 0.3rem",
         }}>{sound.phoneme}</span>
+
         <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 600, fontSize: "0.8rem", color: "#1F2937" }}>
-            {sound.label}
-          </div>
-          <div style={{ fontSize: "0.7rem", color: "#6B7280", marginTop: 1 }}>
-            {sound.description}
-          </div>
+          <div style={{ fontWeight: 600, fontSize: "0.8rem", color: C.ink }}>{sound.label}</div>
+          <div style={{ fontSize: "0.68rem", color: C.gray, marginTop: 1 }}>{sound.description}</div>
         </div>
-        <span style={{ color: C.gray, fontSize: "0.75rem" }}>{open ? "▲" : "▼"}</span>
+        <span style={{ color: C.gray, fontSize: "0.72rem" }}>{open ? "▲" : "▼"}</span>
       </button>
 
       {open && (
-        <div style={{ padding: "0.7rem 0.9rem", background: "#fff" }}>
+        <div style={{ padding: "0.7rem 0.9rem", background: C.white }}>
           {/* Vietnamese tip */}
           <p style={{
-            fontSize: "0.74rem", color: "#374151", lineHeight: 1.5,
-            background: `${unitColor}10`, borderLeft: `3px solid ${unitColor}`,
+            fontSize: "0.74rem", color: C.ink, lineHeight: 1.5,
+            background: C.blueL, borderLeft: `3px solid ${C.blue}`,
             padding: "0.4rem 0.6rem", borderRadius: "0 6px 6px 0",
             marginBottom: "0.6rem",
           }}>
@@ -129,7 +140,7 @@ function SoundCard({ sound, unitColor, unitBg }) {
             ))}
           </div>
 
-          {/* examples */}
+          {/* examples grid */}
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))",
@@ -138,25 +149,20 @@ function SoundCard({ sound, unitColor, unitBg }) {
             {sound.examples.map((ex, i) => (
               <div key={i} style={{
                 display: "flex", alignItems: "center", gap: "0.3rem",
-                background: "#F9FAFB", borderRadius: 8, padding: "0.3rem 0.5rem",
+                background: C.cream, borderRadius: 8, padding: "0.3rem 0.5rem",
+                border: `1px solid ${C.border}`,
               }}>
                 <SpeakBtn text={ex.word} size="0.78rem" />
                 <div>
-                  <div style={{ fontWeight: 600, fontSize: "0.78rem", color: "#111827" }}>
-                    {ex.word}
-                  </div>
-                  <div style={{ fontSize: "0.65rem", color: "#9CA3AF" }}>{ex.vi}</div>
+                  <div style={{ fontWeight: 600, fontSize: "0.78rem", color: C.ink }}>{ex.word}</div>
+                  <div style={{ fontSize: "0.63rem", color: C.gray }}>{ex.vi}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* tip */}
           {sound.tip && (
-            <p style={{
-              fontSize: "0.7rem", color: "#6B7280", fontStyle: "italic",
-              marginTop: "0.3rem", lineHeight: 1.5,
-            }}>
+            <p style={{ fontSize: "0.7rem", color: C.gray, fontStyle: "italic", lineHeight: 1.5 }}>
               ⚡ {sound.tip}
             </p>
           )}
@@ -167,14 +173,11 @@ function SoundCard({ sound, unitColor, unitBg }) {
 }
 
 /* ── MINIMAL PAIRS ────────────────────────────────────────── */
-function MinimalPairs({ pairs, unitColor }) {
+function MinimalPairs({ pairs }) {
   if (!pairs || pairs.length === 0) return null;
   return (
     <div style={{ marginBottom: "1rem" }}>
-      <h4 style={{
-        fontSize: "0.78rem", fontWeight: 700, color: "#374151",
-        marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: 6,
-      }}>
+      <h4 style={{ fontSize: "0.72rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
         🔀 Cặp từ tối thiểu
       </h4>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
@@ -182,47 +185,41 @@ function MinimalPairs({ pairs, unitColor }) {
           <div key={i} style={{
             display: "flex", alignItems: "center", gap: "0.5rem",
             padding: "0.5rem 0.7rem",
-            background: "#F9FAFB", borderRadius: 10,
-            border: "1px solid #E5E7EB",
+            background: C.white, borderRadius: 10, border: `1.5px solid ${C.border}`,
           }}>
             {/* word A */}
             <div style={{
-              flex: 1, background: `${unitColor}15`,
-              borderRadius: 8, padding: "0.35rem 0.5rem",
+              flex: 1, background: C.blueL, borderRadius: 8,
+              padding: "0.35rem 0.5rem",
               display: "flex", alignItems: "center", gap: "0.35rem",
+              border: `1px solid ${C.blue}30`,
             }}>
               <SpeakBtn text={p.a} size="0.75rem" />
               <div>
-                <div style={{ fontWeight: 700, fontSize: "0.8rem", color: unitColor }}>
-                  {p.a}
-                </div>
-                <div style={{ fontSize: "0.63rem", color: "#6B7280" }}>{p.aVi}</div>
+                <div style={{ fontWeight: 700, fontSize: "0.8rem", color: C.blue }}>{p.a}</div>
+                <div style={{ fontSize: "0.63rem", color: C.gray }}>{p.aVi}</div>
               </div>
             </div>
 
-            {/* vs */}
-            <span style={{ fontSize: "0.65rem", color: "#9CA3AF", flexShrink: 0 }}>↔</span>
+            <span style={{ fontSize: "0.65rem", color: C.gray2, flexShrink: 0 }}>↔</span>
 
             {/* word B */}
             <div style={{
-              flex: 1, background: "#FFF3CD",
-              borderRadius: 8, padding: "0.35rem 0.5rem",
+              flex: 1, background: C.goldL, borderRadius: 8,
+              padding: "0.35rem 0.5rem",
               display: "flex", alignItems: "center", gap: "0.35rem",
+              border: `1px solid ${C.gold}40`,
             }}>
               <SpeakBtn text={p.b} size="0.75rem" />
               <div>
-                <div style={{ fontWeight: 700, fontSize: "0.8rem", color: "#B45309" }}>
-                  {p.b}
-                </div>
-                <div style={{ fontSize: "0.63rem", color: "#6B7280" }}>{p.bVi}</div>
+                <div style={{ fontWeight: 700, fontSize: "0.8rem", color: "#92400E" }}>{p.b}</div>
+                <div style={{ fontSize: "0.63rem", color: C.gray }}>{p.bVi}</div>
               </div>
             </div>
 
-            {/* note */}
-            <div style={{
-              fontSize: "0.62rem", color: "#6B7280", flexShrink: 0,
-              maxWidth: 56, textAlign: "center", lineHeight: 1.3,
-            }}>{p.note}</div>
+            <div style={{ fontSize: "0.62rem", color: C.gray, flexShrink: 0, maxWidth: 56, textAlign: "center", lineHeight: 1.3 }}>
+              {p.note}
+            </div>
           </div>
         ))}
       </div>
@@ -231,7 +228,7 @@ function MinimalPairs({ pairs, unitColor }) {
 }
 
 /* ── PRACTICE SENTENCES ───────────────────────────────────── */
-function PracticeSection({ practice, unitColor }) {
+function PracticeSection({ practice }) {
   const [playing, setPlaying] = useState(false);
   const stopRef = useRef(false);
 
@@ -242,7 +239,7 @@ function PracticeSection({ practice, unitColor }) {
     for (const sentence of practice) {
       if (stopRef.current) break;
       await new Promise(res => speak(sentence, res));
-      await new Promise(res => setTimeout(res, 400)); // small gap
+      await new Promise(res => setTimeout(res, 400));
     }
     setPlaying(false);
   }
@@ -250,16 +247,17 @@ function PracticeSection({ practice, unitColor }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-        <h4 style={{ fontSize: "0.78rem", fontWeight: 700, color: "#374151" }}>
+        <h4 style={{ fontSize: "0.72rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.1em" }}>
           🗣️ Câu luyện tập
         </h4>
         <button
           onClick={playAll}
           style={{
-            padding: "0.2rem 0.6rem",
-            background: playing ? "#EF4444" : unitColor,
+            padding: "0.22rem 0.65rem",
+            background: playing ? C.accent : C.blue,
             color: "#fff", border: "none", borderRadius: 20,
             fontSize: "0.67rem", cursor: "pointer", fontFamily: "inherit",
+            fontWeight: 600,
           }}
         >
           {playing ? "⏹ Dừng" : "▶ Đọc tất cả"}
@@ -269,11 +267,11 @@ function PracticeSection({ practice, unitColor }) {
         {practice.map((s, i) => (
           <div key={i} style={{
             display: "flex", alignItems: "center", gap: "0.5rem",
-            background: "#F9FAFB", borderRadius: 8, padding: "0.4rem 0.6rem",
-            border: "1px solid #E5E7EB",
+            background: C.white, borderRadius: 8, padding: "0.4rem 0.6rem",
+            border: `1px solid ${C.border}`,
           }}>
             <SpeakBtn text={s} size="0.75rem" />
-            <span style={{ fontSize: "0.79rem", color: "#1F2937", fontStyle: "italic" }}>{s}</span>
+            <span style={{ fontSize: "0.79rem", color: C.ink, fontStyle: "italic" }}>{s}</span>
           </div>
         ))}
       </div>
@@ -282,9 +280,9 @@ function PracticeSection({ practice, unitColor }) {
 }
 
 /* ── LISTENING QUIZ ───────────────────────────────────────── */
-function ListeningQuiz({ quiz, sounds, unitColor }) {
+function ListeningQuiz({ quiz, sounds }) {
   const [idx, setIdx] = useState(0);
-  const [answered, setAnswered] = useState(null); // null | "correct" | "wrong"
+  const [answered, setAnswered] = useState(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
   const [heard, setHeard] = useState(false);
@@ -294,10 +292,7 @@ function ListeningQuiz({ quiz, sounds, unitColor }) {
   const total = quiz.length;
   const current = quiz[idx];
 
-  function hear() {
-    speak(current.word, null);
-    setHeard(true);
-  }
+  function hear() { speak(current.word, null); setHeard(true); }
 
   function choose(soundId) {
     if (answered) return;
@@ -305,33 +300,22 @@ function ListeningQuiz({ quiz, sounds, unitColor }) {
     setAnswered(correct ? "correct" : "wrong");
     if (correct) setScore(s => s + 1);
     setTimeout(() => {
-      if (idx + 1 >= total) {
-        setDone(true);
-      } else {
-        setIdx(i => i + 1);
-        setAnswered(null);
-        setHeard(false);
-      }
+      if (idx + 1 >= total) { setDone(true); }
+      else { setIdx(i => i + 1); setAnswered(null); setHeard(false); }
     }, 900);
   }
 
-  function restart() {
-    setIdx(0); setAnswered(null); setScore(0);
-    setDone(false); setHeard(false);
-  }
+  function restart() { setIdx(0); setAnswered(null); setScore(0); setDone(false); setHeard(false); }
 
   return (
-    <div style={{
-      border: `2px solid ${unitColor}40`,
-      borderRadius: 14, overflow: "hidden",
-    }}>
+    <div style={{ border: `2px solid ${C.blue}30`, borderRadius: 14, overflow: "hidden" }}>
       {/* header */}
       <div style={{
-        background: `${unitColor}15`,
-        padding: "0.5rem 0.8rem",
+        background: C.blueL, padding: "0.5rem 0.8rem",
         display: "flex", alignItems: "center", justifyContent: "space-between",
+        borderBottom: `1px solid ${C.blue}20`,
       }}>
-        <span style={{ fontWeight: 700, fontSize: "0.78rem", color: unitColor }}>
+        <span style={{ fontWeight: 700, fontSize: "0.78rem", color: C.blue }}>
           🎧 Nghe & Phân biệt
         </span>
         {!done && (
@@ -347,42 +331,34 @@ function ListeningQuiz({ quiz, sounds, unitColor }) {
             <div style={{ fontSize: "2rem", marginBottom: "0.4rem" }}>
               {score >= total * 0.8 ? "🏆" : score >= total * 0.5 ? "👍" : "😅"}
             </div>
-            <div style={{ fontWeight: 700, fontSize: "0.9rem", color: "#1F2937", marginBottom: 4 }}>
+            <div style={{ fontWeight: 700, fontSize: "0.9rem", color: C.ink, marginBottom: 4 }}>
               {score}/{total} đúng
             </div>
             <div style={{ fontSize: "0.72rem", color: C.gray, marginBottom: "0.8rem" }}>
               {score >= total * 0.8 ? "Tuyệt vời! Tai nghe rất tốt 👂" :
                score >= total * 0.5 ? "Khá tốt! Luyện thêm nhé." : "Thử lại — lắng nghe thật kỹ!"}
             </div>
-            <button
-              onClick={restart}
-              style={{
-                padding: "0.35rem 1rem",
-                background: unitColor, color: "#fff",
-                border: "none", borderRadius: 20,
-                fontSize: "0.75rem", cursor: "pointer", fontFamily: "inherit",
-              }}
-            >
-              🔄 Làm lại
-            </button>
+            <button onClick={restart} style={{
+              padding: "0.35rem 1rem",
+              background: C.accent, color: "#fff",
+              border: "none", borderRadius: 20,
+              fontSize: "0.75rem", cursor: "pointer", fontFamily: "inherit", fontWeight: 600,
+            }}>🔄 Làm lại</button>
           </div>
         ) : (
           <>
             {/* listen button */}
             <div style={{ textAlign: "center", marginBottom: "0.9rem" }}>
-              <button
-                onClick={hear}
-                style={{
-                  padding: "0.6rem 1.4rem",
-                  background: heard ? "#E5E7EB" : unitColor,
-                  color: heard ? "#374151" : "#fff",
-                  border: "none", borderRadius: 24,
-                  fontSize: "1rem", cursor: "pointer",
-                  fontFamily: "inherit", fontWeight: 600,
-                  display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                  transition: "all 0.15s",
-                }}
-              >
+              <button onClick={hear} style={{
+                padding: "0.6rem 1.4rem",
+                background: heard ? C.cream : C.blue,
+                color: heard ? C.ink : "#fff",
+                border: `2px solid ${heard ? C.border : C.blue}`,
+                borderRadius: 24, fontSize: "1rem", cursor: "pointer",
+                fontFamily: "inherit", fontWeight: 600,
+                display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                transition: "all 0.15s",
+              }}>
                 {heard ? "🔊" : "🔈"} {current.word}
               </button>
               {!heard && (
@@ -401,31 +377,27 @@ function ListeningQuiz({ quiz, sounds, unitColor }) {
               {sounds.map(sound => {
                 const isTarget = sound.id === current.target;
                 const chosen = answered !== null;
-                let bg = "#F3F4F6";
-                let border = "1.5px solid #E5E7EB";
-                let color = "#374151";
+                let bg = C.cream, border = `1.5px solid ${C.border}`, color = C.ink;
                 if (chosen && isTarget) {
-                  bg = "#D1FAE5"; border = "1.5px solid #10B981"; color = "#065F46";
+                  bg = C.greenL; border = `1.5px solid ${C.green}`; color = "#065F46";
                 } else if (chosen && !isTarget && sound.id === current.target) {
                   bg = "#FEE2E2"; border = "1.5px solid #EF4444"; color = "#991B1B";
                 }
                 return (
-                  <button
-                    key={sound.id}
-                    onClick={() => choose(sound.id)}
+                  <button key={sound.id} onClick={() => choose(sound.id)}
                     disabled={!!answered || !heard}
                     style={{
-                      padding: "0.5rem",
-                      background: !heard ? "#F9FAFB" : bg,
-                      border, borderRadius: 10, cursor: heard && !answered ? "pointer" : "default",
-                      color: !heard ? "#9CA3AF" : color,
+                      padding: "0.5rem", background: !heard ? C.cream : bg,
+                      border, borderRadius: 10,
+                      cursor: heard && !answered ? "pointer" : "default",
+                      color: !heard ? C.gray2 : color,
                       fontFamily: "monospace", fontWeight: 700, fontSize: "0.9rem",
                       textAlign: "center", transition: "all 0.15s",
-                      opacity: !heard ? 0.6 : 1,
+                      opacity: !heard ? 0.55 : 1,
                     }}
                   >
                     {sound.phoneme}
-                    <div style={{ fontWeight: 400, fontSize: "0.62rem", fontFamily: "inherit", marginTop: 2 }}>
+                    <div style={{ fontWeight: 400, fontSize: "0.6rem", fontFamily: "inherit", marginTop: 2 }}>
                       {sound.label.split("—")[0].trim()}
                     </div>
                   </button>
@@ -437,7 +409,7 @@ function ListeningQuiz({ quiz, sounds, unitColor }) {
               <div style={{
                 marginTop: "0.6rem", textAlign: "center",
                 fontSize: "0.78rem", fontWeight: 600,
-                color: answered === "correct" ? "#059669" : "#DC2626",
+                color: answered === "correct" ? C.green : C.accent,
               }}>
                 {answered === "correct" ? "✅ Chính xác!" : `❌ Đáp án đúng: ${current.label}`}
               </div>
@@ -452,68 +424,52 @@ function ListeningQuiz({ quiz, sounds, unitColor }) {
 /* ── UNIT DETAIL ──────────────────────────────────────────── */
 function UnitDetail({ unit, onBack }) {
   return (
-    <div>
-      {/* top bar */}
+    <div style={{ animation: "fadeUp 0.25s ease" }}>
+      {/* Sticky gradient header */}
       <div style={{
-        display: "flex", alignItems: "center", gap: "0.6rem",
-        padding: "0.7rem 1rem",
-        borderBottom: `1px solid ${C.border}`,
-        background: unit.bg,
-        position: "sticky", top: 0, zIndex: 5,
+        background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        padding: "0.85rem 1rem 0.9rem",
+        position: "sticky", top: 0, zIndex: 10,
       }}>
-        <button
-          onClick={onBack}
-          style={{
-            background: "none", border: "none", cursor: "pointer",
-            fontSize: "0.9rem", color: unit.color, padding: "0.1rem 0.3rem",
-          }}
-        >←</button>
-        <span style={{
-          background: unit.color, color: "#fff",
-          borderRadius: 6, padding: "0.1rem 0.45rem",
-          fontWeight: 700, fontSize: "0.72rem",
-        }}>
-          U{unit.unitNum}
-        </span>
-        <div>
-          <div style={{ fontWeight: 700, fontSize: "0.82rem", color: "#1F2937" }}>
-            {unit.title}
-          </div>
-          <div style={{ fontSize: "0.7rem", color: unit.color }}>
-            🎵 {unit.topic}
+        <button onClick={onBack} style={{
+          background: "rgba(255,255,255,0.15)", border: "none",
+          color: "#fff", fontSize: "0.72rem", fontWeight: 600,
+          cursor: "pointer", padding: "0.2rem 0.65rem",
+          borderRadius: 20, marginBottom: "0.6rem", fontFamily: "inherit",
+        }}>← Quay lại</button>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{
+            background: `${unit.color}30`, border: `2px solid ${unit.color}60`,
+            color: "#fff", borderRadius: 10,
+            minWidth: 40, height: 40,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontWeight: 800, fontSize: "0.9rem", flexShrink: 0,
+          }}>{unit.unitNum}</div>
+
+          <div style={{ flex: 1 }}>
+            <div style={{ fontWeight: 800, color: "#fff", fontSize: "1rem", fontFamily: "'Playfair Display',Georgia,serif", lineHeight: 1.1 }}>
+              {unit.title}
+            </div>
+            <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.7)", marginTop: 2 }}>
+              🎵 {unit.topic} · {unit.topicVi}
+            </div>
           </div>
         </div>
       </div>
 
       <div style={{ padding: "0.9rem 1rem" }}>
         {/* sounds */}
-        <h4 style={{
-          fontSize: "0.78rem", fontWeight: 700, color: "#374151",
-          marginBottom: "0.55rem",
-        }}>
+        <div style={{ fontSize: "0.6rem", color: C.gray, textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 700, marginBottom: "0.55rem" }}>
           🔤 Âm mục tiêu
-        </h4>
+        </div>
         {unit.sounds.map(sound => (
-          <SoundCard
-            key={sound.id}
-            sound={sound}
-            unitColor={unit.color}
-            unitBg={unit.bg}
-          />
+          <SoundCard key={sound.id} sound={sound} unitColor={unit.color} />
         ))}
 
-        {/* minimal pairs */}
-        <MinimalPairs pairs={unit.pairs} unitColor={unit.color} />
-
-        {/* practice */}
-        <PracticeSection practice={unit.practice} unitColor={unit.color} />
-
-        {/* quiz */}
-        <ListeningQuiz
-          quiz={unit.quiz}
-          sounds={unit.sounds}
-          unitColor={unit.color}
-        />
+        <MinimalPairs pairs={unit.pairs} />
+        <PracticeSection practice={unit.practice} />
+        <ListeningQuiz quiz={unit.quiz} sounds={unit.sounds} />
       </div>
     </div>
   );

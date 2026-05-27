@@ -493,11 +493,11 @@ function UnitExerciseView({ unit, onBack }) {
                     display:"flex", flexDirection:"column", alignItems:"center",
                     gap:"0.2rem", padding:"0.6rem 0.75rem",
                     minWidth:72, flexShrink:0,
-                    background: active ? t.color : C.white,
-                    border: `2px solid ${active ? t.color : C.border}`,
+                    background: active ? C.blue : C.white,
+                    border: `2px solid ${active ? C.blue : C.border}`,
                     borderRadius:14, cursor:"pointer",
                     transition:"all 0.15s", fontFamily:"inherit",
-                    boxShadow: active ? `0 4px 12px ${t.color}40` : "none",
+                    boxShadow: active ? `0 4px 12px ${C.blue}30` : "none",
                     transform: active ? "translateY(-1px)" : "none",
                   }}>
                   <span style={{ fontSize:"1.3rem", lineHeight:1 }}>{t.icon}</span>
@@ -512,12 +512,12 @@ function UnitExerciseView({ unit, onBack }) {
           <div style={{
             display:"inline-flex", alignItems:"center", gap:6,
             marginTop:"0.5rem",
-            background:`${activeType.color}15`,
-            border:`1px solid ${activeType.color}40`,
+            background:C.blueL,
+            border:`1px solid ${C.blue}40`,
             borderRadius:20, padding:"0.2rem 0.65rem",
           }}>
             <span style={{ fontSize:"0.85rem" }}>{activeType.icon}</span>
-            <span style={{ fontSize:"0.68rem", color:activeType.color, fontWeight:600 }}>{activeType.desc}</span>
+            <span style={{ fontSize:"0.68rem", color:C.blue, fontWeight:600 }}>{activeType.desc}</span>
           </div>
         </div>
 
@@ -534,12 +534,12 @@ function UnitExerciseView({ unit, onBack }) {
                   <button key={i} onClick={() => setVerbIdx(i)}
                     style={{
                       padding:"0.45rem 0.4rem",
-                      background: sel ? unit.color : C.white,
-                      border: `1.5px solid ${sel ? unit.color : C.border}`,
+                      background: sel ? C.blue : C.white,
+                      border: `1.5px solid ${sel ? C.blue : C.border}`,
                       borderRadius:10, cursor:"pointer",
                       textAlign:"left", fontFamily:"inherit",
                       transition:"all 0.12s",
-                      boxShadow: sel ? `0 3px 8px ${unit.color}35` : "none",
+                      boxShadow: sel ? `0 3px 8px ${C.blue}30` : "none",
                     }}>
                     <div style={{ fontFamily:"Georgia,serif", fontStyle:"italic", fontWeight:700, fontSize:"0.8rem", color:sel?"#fff":C.ink, lineHeight:1 }}>
                       {v.infinitive}
@@ -564,14 +564,14 @@ function UnitExerciseView({ unit, onBack }) {
               {unit.verbs.map((v, i) => (
                 <span key={i} style={{
                   padding:"0.2rem 0.6rem",
-                  background:unit.bg, border:`1.5px solid ${unit.color}33`,
+                  background:C.blueL, border:`1.5px solid ${C.blue}33`,
                   borderRadius:20, fontSize:"0.71rem",
-                  color:unit.color,
+                  color:C.blue,
                   fontFamily:"Georgia,serif", fontStyle:"italic",
                   fontWeight:600,
                 }}>
                   {v.infinitive}
-                  <span style={{ fontFamily:"inherit", fontStyle:"normal", fontSize:"0.58rem", color:`${unit.color}99`, marginLeft:4 }}>
+                  <span style={{ fontFamily:"inherit", fontStyle:"normal", fontSize:"0.58rem", color:`${C.blue}88`, marginLeft:4 }}>
                     {v.meaning}
                   </span>
                 </span>
@@ -593,13 +593,13 @@ function UnitExerciseView({ unit, onBack }) {
                   <button key={i} onClick={() => setTenseIdx(i)}
                     style={{
                       padding:"0.4rem 0.85rem",
-                      background: sel ? `linear-gradient(135deg, ${unit.color}, ${unit.color}BB)` : C.white,
-                      border: `2px solid ${sel ? unit.color : C.border}`,
+                      background: sel ? C.blue : C.white,
+                      border: `2px solid ${sel ? C.blue : C.border}`,
                       borderRadius:20, cursor:"pointer",
                       fontFamily:"inherit", fontWeight: sel ? 700 : 500,
                       fontSize:"0.78rem",
                       color: sel ? "#fff" : C.ink,
-                      boxShadow: sel ? `0 3px 10px ${unit.color}35` : "none",
+                      boxShadow: sel ? `0 3px 10px ${C.blue}30` : "none",
                       transition:"all 0.15s",
                     }}>
                     {t.label}
@@ -618,22 +618,22 @@ function UnitExerciseView({ unit, onBack }) {
         {/* ── Transform banner ────────────────────────────── */}
         {exType === "transform" && (
           <div style={{
-            background: `linear-gradient(135deg, ${unit.bg}, #fff)`,
-            border:`1.5px solid ${unit.color}30`,
+            background: C.blueL,
+            border:`1.5px solid ${C.blue}30`,
             borderRadius:14, padding:"0.85rem 1rem",
             marginBottom:"0.9rem",
             display:"flex", alignItems:"center", justifyContent:"center", gap:"0.75rem",
           }}>
             <div style={{ textAlign:"center" }}>
               <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:3 }}>Từ</div>
-              <div style={{ fontSize:"0.95rem", fontWeight:800, color:unit.color }}>{unit.tenses[0].label}</div>
+              <div style={{ fontSize:"0.95rem", fontWeight:800, color:C.blue }}>{unit.tenses[0].label}</div>
             </div>
-            <div style={{ fontSize:"1.5rem", color:`${unit.color}80` }}>→</div>
+            <div style={{ fontSize:"1.5rem", color:`${C.blue}60` }}>→</div>
             <div style={{ textAlign:"center" }}>
               <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:3 }}>Sang</div>
-              <div style={{ fontSize:"0.95rem", fontWeight:800, color:unit.color }}>{unit.tenses[1].label}</div>
+              <div style={{ fontSize:"0.95rem", fontWeight:800, color:C.blue }}>{unit.tenses[1].label}</div>
             </div>
-            <div style={{ borderLeft:`1px solid ${unit.color}30`, paddingLeft:"0.75rem", fontSize:"0.68rem", color:C.gray, lineHeight:1.5 }}>
+            <div style={{ borderLeft:`1px solid ${C.blue}30`, paddingLeft:"0.75rem", fontSize:"0.68rem", color:C.gray, lineHeight:1.5 }}>
               AI tạo 5 câu<br/>chuyển thì
             </div>
           </div>
@@ -642,15 +642,15 @@ function UnitExerciseView({ unit, onBack }) {
         {/* ── Match banner ─────────────────────────────────── */}
         {exType === "match" && (
           <div style={{
-            background:`linear-gradient(135deg, #FDF2F8, #FFF0F7)`,
-            border:"1.5px solid #EC489930",
+            background: C.blueL,
+            border:`1.5px solid ${C.blue}30`,
             borderRadius:14, padding:"0.85rem 1rem",
             marginBottom:"0.9rem",
             display:"flex", alignItems:"center", gap:"0.75rem",
           }}>
             <span style={{ fontSize:"1.6rem" }}>🔗</span>
             <div>
-              <div style={{ fontWeight:700, fontSize:"0.82rem", color:"#BE185D" }}>Ghép nghĩa nhanh</div>
+              <div style={{ fontWeight:700, fontSize:"0.82rem", color:C.blue }}>Ghép nghĩa nhanh</div>
               <div style={{ fontSize:"0.68rem", color:C.gray, marginTop:2 }}>
                 Ghép 6 động từ với nghĩa tiếng Việt · Không cần internet
               </div>
@@ -663,10 +663,10 @@ function UnitExerciseView({ unit, onBack }) {
           <button onClick={generate} disabled={loading}
             style={{
               width:"100%", padding:"0.85rem",
-              background:`linear-gradient(135deg, ${unit.color} 0%, ${unit.color}BB 100%)`,
+              background:`linear-gradient(135deg, ${C.accent} 0%, #c0392b 100%)`,
               color:"#fff", border:"none", borderRadius:16,
               fontWeight:800, fontSize:"1rem", cursor:"pointer",
-              boxShadow:`0 6px 20px ${unit.color}45`,
+              boxShadow:`0 6px 20px ${C.accent}40`,
               transition:"all 0.15s",
               fontFamily:"inherit",
               display:"flex", alignItems:"center", justifyContent:"center", gap:"0.5rem",
@@ -814,9 +814,9 @@ export default function EditoVerbsPanel() {
                 {unit.verbs.slice(0, 10).map((v, j) => (
                   <span key={j} style={{
                     padding:"0.08rem 0.45rem",
-                    background:unit.bg, border:`1px solid ${unit.color}28`,
+                    background:C.cream, border:`1px solid ${C.border}`,
                     borderRadius:20, fontSize:"0.66rem",
-                    color:unit.color,
+                    color:C.gray,
                     fontFamily:"Georgia,serif", fontStyle:"italic",
                   }}>
                     {v.infinitive}
