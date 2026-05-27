@@ -5,8 +5,6 @@ import { BUILTIN_SETS } from "../data/builtinSets.js";
 import { speak } from "../utils/helpers.js";
 import { awardXP } from "../utils/xp.js";
 
-const PURPLE = "#7C3AED";
-const PURPLE_L = "#F5F0FF";
 const ROUND_SIZE = 8;
 
 function shuffle(arr) {
@@ -96,7 +94,7 @@ export default function ListeningQuiz({ words: propWords = [] }) {
 
   if (pool.length < 4) return (
     <div style={{ padding:"2rem 1rem", textAlign:"center" }}>
-      <div style={{ width:64, height:64, background:PURPLE_L, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2rem", margin:"0 auto 1rem" }}>🎵</div>
+      <div style={{ width:64, height:64, background:C.blueL, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2rem", margin:"0 auto 1rem" }}>🎵</div>
       <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, marginBottom:"0.4rem" }}>Cần thêm từ vựng</div>
       <div style={{ fontSize:"0.8rem", color:C.gray, lineHeight:1.7 }}>Chọn unit Édito hoặc thêm từ vào SRS để bắt đầu.</div>
     </div>
@@ -107,11 +105,11 @@ export default function ListeningQuiz({ words: propWords = [] }) {
     return (
       <div style={{ padding:"1.5rem 1rem", animation:"fadeUp 0.3s ease" }}>
         <div style={{ textAlign:"center", marginBottom:"1.5rem" }}>
-          <div style={{ width:72, height:72, borderRadius:"50%", background:PURPLE_L, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2.5rem", margin:"0 auto 0.75rem" }}>
+          <div style={{ width:72, height:72, borderRadius:"50%", background:C.blueL, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"2.5rem", margin:"0 auto 0.75rem" }}>
             {pct>=80?"🎉":pct>=50?"👍":"💪"}
           </div>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.6rem", color:C.ink, fontWeight:700 }}>{score}/{round.length}</div>
-          <div style={{ fontSize:"0.82rem", color:PURPLE, fontWeight:600, marginTop:2 }}>{pct}% · {pct>=80?"Excellent!":pct>=50?"Bien!":"Continue!"}</div>
+          <div style={{ fontSize:"0.82rem", color:C.blue, fontWeight:600, marginTop:2 }}>{pct}% · {pct>=80?"Excellent!":pct>=50?"Bien!":"Continue!"}</div>
         </div>
 
         <div style={{ background:C.white, borderRadius:16, border:`1.5px solid ${C.border}`, padding:"0.85rem 1rem", marginBottom:"1rem" }}>
@@ -126,7 +124,7 @@ export default function ListeningQuiz({ words: propWords = [] }) {
         </div>
 
         <button onClick={restart}
-          style={{ width:"100%", padding:"0.9rem", background:PURPLE, color:"#fff", border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", cursor:"pointer", fontWeight:700 }}>
+          style={{ width:"100%", padding:"0.9rem", background:`linear-gradient(135deg,${C.accent},#c0392b)`, color:"#fff", border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", cursor:"pointer", fontWeight:700 }}>
           🎵 Chơi lại →
         </button>
       </div>
@@ -143,7 +141,7 @@ export default function ListeningQuiz({ words: propWords = [] }) {
       <div style={{ padding:"0.75rem 1rem 0" }}>
         <div style={{ display:"flex", gap:3, marginBottom:4 }}>
           {round.map((_, i) => (
-            <div key={i} style={{ flex:1, height:3, borderRadius:99, background: i < qIdx ? PURPLE : i === qIdx ? `${PURPLE}88` : C.border, transition:"background 0.3s" }}/>
+            <div key={i} style={{ flex:1, height:3, borderRadius:99, background: i < qIdx ? C.blue : i === qIdx ? `${C.blue}88` : C.border, transition:"background 0.3s" }}/>
           ))}
         </div>
         <div style={{ display:"flex", justifyContent:"space-between" }}>
@@ -154,13 +152,13 @@ export default function ListeningQuiz({ words: propWords = [] }) {
 
       {/* Question header */}
       <div style={{ padding:"0.6rem 1rem 0" }}>
-        <div style={{ fontSize:"0.58rem", fontWeight:700, color:PURPLE, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:2 }}>Nghe &amp; chọn</div>
+        <div style={{ fontSize:"0.58rem", fontWeight:700, color:C.blue, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:2 }}>Nghe &amp; chọn</div>
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", color:C.ink, fontWeight:700 }}>Quel mot entends-tu ?</div>
       </div>
 
       {/* Play area */}
       <div style={{ padding:"0.75rem 1rem" }}>
-        <div style={{ background:`linear-gradient(135deg, ${PURPLE}, #9F67FF)`, borderRadius:20, padding:"1.5rem", textAlign:"center", boxShadow:`0 8px 28px ${PURPLE}44` }}>
+        <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", borderRadius:20, padding:"1.5rem", textAlign:"center" }}>
           <button onClick={playWord} disabled={playing}
             style={{
               width:80, height:80, borderRadius:"50%",
@@ -186,11 +184,11 @@ export default function ListeningQuiz({ words: propWords = [] }) {
           {current.options.map((opt, i) => {
             const isCorrect = opt.fr === current.word.fr;
             const isSelected = selected === i;
-            let bg = C.white, border = `1.5px solid ${C.border}`, wordColor = PURPLE;
+            let bg = C.white, border = `1.5px solid ${C.border}`, wordColor = C.blue;
             if (checked) {
               if (isCorrect)           { bg = "#F0FDF4"; border = `2px solid #059669`; wordColor = "#059669"; }
               else if (isSelected)     { bg = "#FEF2F2"; border = `2px solid #DC2626`; wordColor = "#DC2626"; }
-            } else if (isSelected)     { bg = PURPLE_L; border = `2px solid ${PURPLE}`; }
+            } else if (isSelected)     { bg = C.blueL; border = `2px solid ${C.blue}`; }
             return (
               <button key={i} onClick={() => !checked && setSelected(i)} disabled={checked}
                 style={{ background:bg, border, borderRadius:16, padding:"0.9rem 0.7rem", cursor:checked?"default":"pointer", textAlign:"center", transition:"all 0.15s" }}>
@@ -208,12 +206,12 @@ export default function ListeningQuiz({ words: propWords = [] }) {
       <div style={{ padding:"0.75rem 1rem 0" }}>
         {!checked ? (
           <button onClick={check} disabled={selected === null}
-            style={{ width:"100%", padding:"0.85rem", background: selected !== null ? PURPLE : C.border, color:"#fff", border:"none", borderRadius:14, fontSize:"0.95rem", fontFamily:"'Playfair Display',Georgia,serif", cursor: selected !== null ? "pointer" : "default", fontWeight:700, transition:"background 0.15s" }}>
+            style={{ width:"100%", padding:"0.85rem", background: selected !== null ? C.accent : C.border, color:"#fff", border:"none", borderRadius:14, fontSize:"0.95rem", fontFamily:"'Playfair Display',Georgia,serif", cursor: selected !== null ? "pointer" : "default", fontWeight:700, transition:"background 0.15s" }}>
             Kiểm tra
           </button>
         ) : (
           <button onClick={next}
-            style={{ width:"100%", padding:"0.85rem", background:PURPLE, color:"#fff", border:"none", borderRadius:14, fontSize:"0.95rem", fontFamily:"'Playfair Display',Georgia,serif", cursor:"pointer", fontWeight:700 }}>
+            style={{ width:"100%", padding:"0.85rem", background:C.accent, color:"#fff", border:"none", borderRadius:14, fontSize:"0.95rem", fontFamily:"'Playfair Display',Georgia,serif", cursor:"pointer", fontWeight:700 }}>
             {qIdx + 1 >= round.length ? "Xem kết quả →" : "Câu tiếp →"}
           </button>
         )}

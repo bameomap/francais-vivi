@@ -2190,7 +2190,7 @@ function CustomExerciseView() {
         </div>
         <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
           <span style={{ fontSize:"0.65rem", color:C.gray, whiteSpace:"nowrap" }}>Số câu:</span>
-          <input type="range" min={10} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{ flex:1, accentColor:C.purple }}/>
+          <input type="range" min={10} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{ flex:1, accentColor:C.blue }}/>
           <span style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:C.purple, fontWeight:600, minWidth:22 }}>{numQ}</span>
         </div>
         {err && <div style={{ color:C.red, fontSize:"0.75rem", padding:"0.38rem 0.58rem", background:"#fde8e6", borderRadius:6 }}>⚠ {err}</div>}
@@ -2245,10 +2245,17 @@ export default function GrammarPanel({ onBackToParcours }) {
   ];
 
   const tabBar = (
-    <div style={{ display:"flex", gap:"0.3rem", padding:"0.75rem 1rem 0" }}>
+    <div style={{ display:"flex", background:C.white, borderBottom:`1px solid ${C.border}` }}>
       {TABS.map(t => (
         <button key={t.id} onClick={() => setPanelTab(t.id)}
-          style={{ flex:1, padding:"0.45rem 0.2rem", border:`1.5px solid ${panelTab===t.id?C.purple:C.border}`, borderRadius:10, background:panelTab===t.id?C.purple:C.white, color:panelTab===t.id?C.white:C.ink, fontSize:"0.7rem", cursor:"pointer", fontWeight:panelTab===t.id?700:400, fontFamily:"inherit", transition:"all 0.15s" }}>
+          style={{
+            flex:1, padding:"0.6rem 0.3rem",
+            border:"none", background:"transparent",
+            borderBottom: panelTab===t.id ? `2.5px solid ${C.blue}` : "2.5px solid transparent",
+            color: panelTab===t.id ? C.blue : C.gray,
+            fontSize:"0.72rem", fontWeight:panelTab===t.id?700:500,
+            cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s",
+          }}>
           {t.label}
         </button>
       ))}
@@ -2256,12 +2263,21 @@ export default function GrammarPanel({ onBackToParcours }) {
   );
 
   return (
-    <div>
-      {fromParcours && onBackToParcours && (
-        <button onClick={onBackToParcours} style={{ margin:"0.6rem 1rem 0", background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
-          ← Parcours
-        </button>
-      )}
+    <div style={{ animation:"fadeUp 0.3s ease" }}>
+      {/* ── Dark hero banner ── */}
+      <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem" }}>
+        {fromParcours && onBackToParcours && (
+          <button onClick={onBackToParcours} style={{ background:"rgba(255,255,255,0.15)", border:"none", color:"#fff", fontSize:"0.72rem", fontWeight:600, cursor:"pointer", padding:"0.2rem 0.65rem", borderRadius:20, marginBottom:"0.6rem", fontFamily:"inherit" }}>
+            ← Parcours
+          </button>
+        )}
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>
+          📘 La Grammaire
+        </div>
+        <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>
+          Ngữ pháp Édito A1 · lý thuyết & luyện tập
+        </div>
+      </div>
       {tabBar}
       {panelTab === "edito"  && <EditoGrammarView defaultUnitIndex={initUnit} />}
       {panelTab === "custom" && <CustomExerciseView />}

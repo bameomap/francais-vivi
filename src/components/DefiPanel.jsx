@@ -136,11 +136,13 @@ export default function DefiPanel() {
 
   // ── Selection screen ──
   if (!mode && !loading) return (
-    <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.85rem" }}>
-      <div>
-        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:C.ink, fontWeight:700 }}>🎲 Défi du Jour</div>
-        <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>Mỗi ngày một thử thách — làm xong tích streak 🔥</div>
+    <div style={{ animation:"fadeUp 0.3s ease" }}>
+      {/* ── Dark hero banner ── */}
+      <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem", marginBottom:"0.85rem" }}>
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>🎲 Le Défi</div>
+        <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>Mỗi ngày một thử thách — làm xong tích streak 🔥</div>
       </div>
+    <div style={{ padding:"0 1rem 1rem", display:"flex", flexDirection:"column", gap:"0.85rem" }}>
 
       {todayDefi && (
         <div style={{ background:C.white, border:`1.5px solid ${pctColor(todayDefi.pct)}33`, borderRadius:12, padding:"0.75rem 1rem", display:"flex", alignItems:"center", gap:"0.7rem" }}>
@@ -159,7 +161,7 @@ export default function DefiPanel() {
         <div style={{ display:"flex", gap:"0.35rem" }}>
           {[10, 15, 20].map(n => (
             <button key={n} onClick={() => setNumQ(n)}
-              style={{ flex:1, padding:"0.42rem", border:`1.5px solid ${numQ===n?"#8E44AD":C.border}`, borderRadius:8, background:numQ===n?"#8E44AD":C.white, color:numQ===n?C.white:C.ink, fontSize:"0.85rem", fontWeight:numQ===n?700:400, cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s" }}>
+              style={{ flex:1, padding:"0.42rem", border:`1.5px solid ${numQ===n?C.blue:C.border}`, borderRadius:8, background:numQ===n?C.blue:C.white, color:numQ===n?C.white:C.ink, fontSize:"0.85rem", fontWeight:numQ===n?700:400, cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s" }}>
               {n}
             </button>
           ))}
@@ -204,6 +206,7 @@ export default function DefiPanel() {
         </div>
       )}
     </div>
+    </div>
   );
 
   // ── Loading ──
@@ -229,7 +232,7 @@ export default function DefiPanel() {
       <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.65rem" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <div>
-            <div style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:"#8e44ad", fontWeight:700 }}>{modeInfo?.icon} {defi.title}</div>
+            <div style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:C.blue, fontWeight:700 }}>{modeInfo?.icon} {defi.title}</div>
             <div style={{ fontSize:"0.67rem", color:C.gray, marginTop:"0.1rem" }}>{defi.questions?.length} câu · {modeInfo?.label}</div>
           </div>
           <button onClick={() => setMode(null)} style={{ padding:"0.25rem 0.65rem", border:`1px solid ${C.border}`, borderRadius:20, background:"transparent", color:C.gray, fontSize:"0.68rem", cursor:"pointer" }}>← Đổi</button>
@@ -253,7 +256,7 @@ export default function DefiPanel() {
           </div>
           <div style={{ display:"flex", gap:"0.5rem" }}>
             <button onClick={() => { setConfetti(false); generate(mode); }}
-              style={{ flex:1, padding:"0.7rem", background:"linear-gradient(135deg,#8e44ad,#6b4fbb)", color:C.white, border:"none", borderRadius:10, fontFamily:"Georgia,serif", fontSize:"0.88rem", cursor:"pointer" }}>
+              style={{ flex:1, padding:"0.7rem", background:`linear-gradient(135deg,${C.accent},#c0392b)`, color:C.white, border:"none", borderRadius:10, fontFamily:"Georgia,serif", fontSize:"0.88rem", cursor:"pointer" }}>
               🔄 Làm lại
             </button>
             <button onClick={() => { setConfetti(false); setMode(null); setDefi(null); }}
@@ -325,7 +328,7 @@ export function DefiQuiz({ defi, onFinish }) {
                   if (isRevealed) {
                     if (opt.toLowerCase() === (q.answer||"").toLowerCase()) { bg="#e8f7f1"; bc=C.green; col=C.green; }
                     else if (opt === answers[i]) { bg="#fde8e6"; bc=C.red; col=C.red; }
-                  } else if (answers[i] === opt) { bg=C.purpleL; bc=C.purple; col=C.purple; }
+                  } else if (answers[i] === opt) { bg=C.blueL; bc=C.blue; col=C.blue; }
                   return (
                     <button key={j} disabled={isRevealed}
                       onClick={() => {
@@ -349,7 +352,7 @@ export function DefiQuiz({ defi, onFinish }) {
                   style={{ flex:1, border:`1.5px solid ${isRevealed?(correct?C.green:C.red):C.border}`, borderRadius:9, padding:"0.45rem 0.7rem", fontSize:"0.85rem", fontFamily:"Georgia,serif", background:isRevealed?(correct?"#e8f7f1":"#fde8e6"):C.white, color:isRevealed?(correct?C.green:C.red):C.ink, outline:"none" }}/>
                 {!isRevealed && (
                   <button onClick={() => submitInput(i,q)}
-                    style={{ padding:"0.45rem 0.8rem", background:"#8E44AD", color:C.white, border:"none", borderRadius:9, fontSize:"0.8rem", cursor:"pointer", whiteSpace:"nowrap" }}>
+                    style={{ padding:"0.45rem 0.8rem", background:C.accent, color:C.white, border:"none", borderRadius:9, fontSize:"0.8rem", cursor:"pointer", whiteSpace:"nowrap" }}>
                     OK
                   </button>
                 )}
