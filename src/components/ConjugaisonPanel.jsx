@@ -11,14 +11,14 @@ import { Confetti } from "./ui/Minou.jsx";
 const SUBJECTS = ["je", "tu", "il/elle", "nous", "vous", "ils/elles"];
 
 const TENSES = [
-  { id:"present",     label:"Présent",           level:"A1" },
-  { id:"futur_pro",   label:"Futur proche",       level:"A1" },
-  { id:"passe",       label:"Passé composé",      level:"A1" },
-  { id:"futur",       label:"Futur simple",       level:"A1" },
-  { id:"imparfait",   label:"Imparfait",          level:"A2" },
-  { id:"conditionnel",label:"Conditionnel",       level:"A2" },
-  { id:"plusque",     label:"Plus-que-parfait",   level:"A2" },
-  { id:"subjonctif",  label:"Subjonctif présent", level:"A2" },
+  { id:"present",      label:"Présent",           level:"A1" },
+  { id:"futur_pro",    label:"Futur proche",       level:"A1" },
+  { id:"passe",        label:"Passé composé",      level:"A1" },
+  { id:"futur",        label:"Futur simple",       level:"A1" },
+  { id:"imparfait",    label:"Imparfait",          level:"A2" },
+  { id:"conditionnel", label:"Conditionnel",       level:"A2" },
+  { id:"plusque",      label:"Plus-que-parfait",   level:"A2" },
+  { id:"subjonctif",   label:"Subjonctif présent", level:"A2" },
 ];
 
 const COMMON_VERBS = [
@@ -70,7 +70,7 @@ function ConjugQuiz({ conjugation, onDone }) {
                   width:"100%", padding:"0.48rem 0.65rem",
                   border:`1.5px solid ${checked ? (st==="ok" ? C.green : C.red) : C.border}`,
                   borderRadius:10,
-                  background:checked ? (st==="ok" ? "#ECFDF5" : "#FEF2F2") : C.white,
+                  background:checked ? (st==="ok" ? C.greenL : "#FEF2F2") : C.white,
                   fontSize:"0.88rem", fontFamily:"Georgia,serif", color:C.ink,
                   outline:"none", boxSizing:"border-box",
                 }}
@@ -86,16 +86,16 @@ function ConjugQuiz({ conjugation, onDone }) {
       })}
       {!checked ? (
         <button onClick={() => setChecked(true)}
-          style={{ padding:"0.55rem", background:"#1E293B", color:C.white, border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, marginTop:"0.25rem" }}>
+          style={{ padding:"0.55rem", background:C.blue, color:C.white, border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700, marginTop:"0.25rem" }}>
           Chấm ✓
         </button>
       ) : (
         <div style={{ textAlign:"center", marginTop:"0.25rem" }}>
-          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.5rem", color:pct>=80?"#059669":pct>=60?C.gold:C.red, fontWeight:700 }}>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.5rem", color:pct>=80?C.green:pct>=60?C.gold:C.red, fontWeight:700 }}>
             {score}/6
           </div>
           <button onClick={onDone}
-            style={{ marginTop:"0.45rem", padding:"0.4rem 1rem", background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, fontSize:"0.78rem", cursor:"pointer", color:C.ink }}>
+            style={{ marginTop:"0.45rem", padding:"0.4rem 1rem", background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, fontSize:"0.78rem", cursor:"pointer", color:C.ink, fontFamily:"inherit" }}>
             🔄 Thử lại
           </button>
         </div>
@@ -115,6 +115,7 @@ export default function ConjugaisonPanel() {
   const [quizKey,  setQuizKey]  = useState(0);
   const [confetti, setConfetti] = useState(false);
   const [toast,    setToast]    = useState("");
+  const inputRef = useRef(null);
 
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(""), 2800); };
 
@@ -153,27 +154,44 @@ export default function ConjugaisonPanel() {
         </div>
       )}
 
-      {/* ── Input ─────────────────────────────────────────── */}
-      <div style={{ padding:"0.85rem 1rem 0.6rem" }}>
-        <div style={{ display:"flex", gap:"0.4rem" }}>
+      {/* ── Hero header ──────────────────────────────────────── */}
+      <div style={{
+        background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        padding:"0.9rem 1rem 0.85rem",
+      }}>
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800 }}>
+          ✏️ Chia động từ tự do
+        </div>
+        <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:3 }}>
+          Nhập bất kỳ động từ · 8 thì A1–A2 · Bảng chia + Quiz điền
+        </div>
+
+        {/* ── Search input ── */}
+        <div style={{ display:"flex", gap:"0.4rem", marginTop:"0.75rem" }}>
           <input
+            ref={inputRef}
             value={verb}
             onChange={e => setVerb(e.target.value)}
             onKeyDown={e => e.key === "Enter" && generate()}
-            placeholder="Nhập động từ: aller, être, parler…"
+            placeholder="être, aller, manger…"
             style={{
               flex:1, padding:"0.6rem 0.9rem",
-              border:`1.5px solid ${C.border}`, borderRadius:12,
-              fontSize:"0.9rem", fontFamily:"Georgia,serif",
-              color:C.ink, outline:"none", background:C.white,
+              border:"1.5px solid rgba(255,255,255,0.25)",
+              borderRadius:12, fontSize:"0.9rem",
+              fontFamily:"Georgia,serif",
+              color:C.ink, outline:"none", background:"#fff",
             }}
           />
           <button
             onClick={() => generate()}
             style={{
-              padding:"0.6rem 1rem", background:"#1E293B", color:"#fff",
-              border:"none", borderRadius:12, fontSize:"0.85rem",
-              cursor:"pointer", fontWeight:700, whiteSpace:"nowrap",
+              padding:"0.6rem 1.1rem",
+              background:`linear-gradient(135deg, ${C.accent}, #c0392b)`,
+              color:"#fff", border:"none", borderRadius:12,
+              fontSize:"0.88rem", cursor:"pointer",
+              fontWeight:700, whiteSpace:"nowrap",
+              fontFamily:"inherit",
+              boxShadow:`0 3px 10px ${C.accent}40`,
             }}
           >
             Chia →
@@ -181,17 +199,17 @@ export default function ConjugaisonPanel() {
         </div>
 
         {/* Quick-pick verbs */}
-        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.22rem", marginTop:"0.5rem" }}>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.22rem", marginTop:"0.55rem" }}>
           {COMMON_VERBS.map(v => (
             <button key={v} onClick={() => { setVerb(v); generate(v); }}
               style={{
                 padding:"0.15rem 0.52rem",
-                background: verb === v ? "#1E293B" : C.blueL,
-                border:`1px solid ${verb===v ? "#1E293B" : C.blue+"33"}`,
+                background: verb === v ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.15)",
+                border:`1px solid ${verb === v ? "transparent" : "rgba(255,255,255,0.25)"}`,
                 borderRadius:20, fontSize:"0.68rem",
-                color: verb === v ? "#fff" : C.blue,
+                color: verb === v ? C.blue : "rgba(255,255,255,0.85)",
                 cursor:"pointer", fontFamily:"Georgia,serif",
-                transition:"all 0.15s",
+                transition:"all 0.15s", fontWeight: verb === v ? 700 : 400,
               }}>
               {v}
             </button>
@@ -199,10 +217,12 @@ export default function ConjugaisonPanel() {
         </div>
       </div>
 
-      {/* ── Tense tabs (horizontal scroll) ────────────────── */}
+      {/* ── Tense tabs ───────────────────────────────────────── */}
       <div style={{
         display:"flex", gap:"0.3rem", overflowX:"auto", scrollbarWidth:"none",
-        padding:"0 1rem 0.7rem", borderBottom:`1px solid ${C.border}`,
+        padding:"0.6rem 1rem 0.55rem",
+        borderBottom:`1px solid ${C.border}`,
+        background:C.white,
       }}>
         {TENSES.map(t => {
           const active = tense === t.id;
@@ -212,12 +232,13 @@ export default function ConjugaisonPanel() {
               style={{
                 flexShrink:0, padding:"0.3rem 0.75rem",
                 borderRadius:20,
-                border:`1.5px solid ${active ? "#1E293B" : C.border}`,
-                background: active ? "#1E293B" : C.white,
+                border:`1.5px solid ${active ? C.blue : C.border}`,
+                background: active ? C.blue : C.white,
                 color: active ? "#fff" : C.gray,
                 fontSize:"0.7rem", cursor:"pointer",
                 fontWeight: active ? 600 : 400,
                 transition:"all 0.15s", fontFamily:"inherit",
+                boxShadow: active ? `0 2px 8px ${C.blue}30` : "none",
               }}>
               {t.label}
               {t.level === "A2" && (
@@ -228,10 +249,11 @@ export default function ConjugaisonPanel() {
         })}
       </div>
 
-      {/* ── Loading / error ────────────────────────────────── */}
+      {/* ── Loading / error ───────────────────────────────────── */}
       {loading && (
-        <div style={{ display:"flex", justifyContent:"center", padding:"2rem 0" }}>
+        <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"0.5rem", padding:"2.5rem 0" }}>
           <Spinner />
+          <div style={{ fontSize:"0.78rem", color:C.gray }}>Đang tra bảng chia…</div>
         </div>
       )}
       {err && (
@@ -240,50 +262,36 @@ export default function ConjugaisonPanel() {
         </div>
       )}
 
-      {/* ── Result ────────────────────────────────────────── */}
+      {/* ── Result ───────────────────────────────────────────── */}
       {result && !loading && (
         <div style={{ display:"flex", flexDirection:"column" }}>
 
-          {/* Hero card */}
+          {/* Verb hero card */}
           <div style={{
             margin:"0.85rem 1rem 0",
-            background:"#1E293B", borderRadius:16,
+            background:"#1B3A6B", borderRadius:16,
             padding:"1rem 1.2rem 0.9rem",
             position:"relative", overflow:"hidden",
           }}>
-            {/* Watermark */}
             <div style={{
               position:"absolute", right:-8, bottom:-18,
               fontSize:88, opacity:0.07, color:"#fff",
               fontFamily:"'Playfair Display',Georgia,serif",
-              fontWeight:700, pointerEvents:"none", userSelect:"none",
-              lineHeight:1,
+              fontWeight:700, pointerEvents:"none", userSelect:"none", lineHeight:1,
             }}>
               {result.verb}
             </div>
-
-            {/* Meta */}
-            <div style={{
-              fontSize:"0.58rem", letterSpacing:"0.13em", color:"#94A3B8",
-              textTransform:"uppercase", fontWeight:600, marginBottom:6,
-            }}>
-              Verbe &nbsp;·&nbsp; {result.group} &nbsp;·&nbsp; {TENSES.find(t=>t.id===tense)?.label}
+            <div style={{ fontSize:"0.58rem", letterSpacing:"0.13em", color:"rgba(255,255,255,0.5)", textTransform:"uppercase", fontWeight:600, marginBottom:6 }}>
+              {result.group} &nbsp;·&nbsp; {TENSES.find(t => t.id === tense)?.label}
             </div>
-
-            {/* Verb name + speak */}
             <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-              <span style={{
-                fontFamily:"'Playfair Display',Georgia,serif",
-                fontSize:"2rem", color:"#fff", fontWeight:700, lineHeight:1,
-              }}>
+              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:"#fff", fontWeight:700, lineHeight:1 }}>
                 {result.verb}
               </span>
               <SpeakBtn text={result.verb} />
             </div>
-
-            {/* Meaning */}
             {result.meaning && (
-              <div style={{ fontSize:"0.72rem", color:"#94A3B8", marginTop:4 }}>
+              <div style={{ fontSize:"0.72rem", color:"rgba(255,255,255,0.55)", marginTop:4 }}>
                 {result.meaning}
               </div>
             )}
@@ -296,11 +304,12 @@ export default function ConjugaisonPanel() {
                 onClick={() => { setMode(m); if (m === "quiz") setQuizKey(k => k+1); }}
                 style={{
                   padding:"0.28rem 0.7rem", borderRadius:20,
-                  border:`1.5px solid ${mode===m ? "#1E293B" : C.border}`,
-                  background: mode===m ? "#1E293B" : C.white,
+                  border:`1.5px solid ${mode===m ? C.blue : C.border}`,
+                  background: mode===m ? C.blue : C.white,
                   color: mode===m ? "#fff" : C.gray,
                   fontSize:"0.68rem", cursor:"pointer",
                   fontWeight:600, transition:"all 0.15s", fontFamily:"inherit",
+                  boxShadow: mode===m ? `0 2px 8px ${C.blue}30` : "none",
                 }}>
                 {l}
               </button>
@@ -310,84 +319,43 @@ export default function ConjugaisonPanel() {
           {/* Conjugation table */}
           {mode === "table" ? (
             <div style={{ padding:"0.5rem 1rem 0" }}>
-              <div style={{
-                background:C.white, borderRadius:14,
-                border:`1px solid ${C.border}`, overflow:"hidden",
-              }}>
+              <div style={{ background:C.white, borderRadius:14, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                 {SUBJECTS.map((sub, i) => (
                   <div key={i} style={{
-                    display:"grid",
-                    gridTemplateColumns:"1fr 1.4fr auto",
-                    alignItems:"center",
-                    padding:"0.55rem 1rem",
+                    display:"grid", gridTemplateColumns:"1fr 1.4fr auto",
+                    alignItems:"center", padding:"0.55rem 1rem",
                     borderBottom: i < 5 ? `1px solid ${C.border}` : "none",
-                    background: C.white,
+                    background: i % 2 === 0 ? C.white : C.cream,
                   }}>
-                    {/* Pronoun */}
-                    <div style={{
-                      fontSize:"0.78rem", color:C.gray,
-                      fontStyle:"italic",
-                    }}>
-                      {sub}
-                    </div>
-                    {/* Conjugated form */}
-                    <div style={{
-                      fontFamily:"Georgia,serif", fontSize:"1rem",
-                      color:"#1E293B", fontWeight:700,
-                    }}>
+                    <div style={{ fontSize:"0.78rem", color:C.gray, fontStyle:"italic" }}>{sub}</div>
+                    <div style={{ fontFamily:"Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:700 }}>
                       {result.conjugations[i]}
                     </div>
-                    {/* Speak */}
                     <SpeakBtn text={`${sub.split("/")[0]} ${result.conjugations[i]}`} size="sm" />
                   </div>
                 ))}
               </div>
 
-              {/* Tip */}
               {result.tip && (
-                <div style={{
-                  marginTop:"0.7rem",
-                  background:"#FFFBEB", borderRadius:10,
-                  padding:"0.5rem 0.75rem",
-                  fontSize:"0.75rem", color:"#92400E",
-                }}>
+                <div style={{ marginTop:"0.7rem", background:C.goldL, borderRadius:10, padding:"0.5rem 0.75rem", fontSize:"0.75rem", color:"#92400E", border:`1px solid ${C.gold}40` }}>
                   💡 {result.tip}
                 </div>
               )}
 
-              {/* Example sentence */}
               {result.example && (() => {
-                const dashIdx = result.example.indexOf(" — ");
-                const fr = dashIdx >= 0 ? result.example.slice(0, dashIdx) : result.example;
-                const vi = dashIdx >= 0 ? result.example.slice(dashIdx + 3) : null;
+                const di = result.example.indexOf(" — ");
+                const fr = di >= 0 ? result.example.slice(0, di) : result.example;
+                const vi = di >= 0 ? result.example.slice(di + 3) : null;
                 return (
-                  <div style={{ marginTop:"0.6rem 0 1rem" }}>
-                    <div style={{
-                      fontSize:"0.58rem", fontWeight:700, color:C.gray,
-                      textTransform:"uppercase", letterSpacing:"0.12em", marginBottom:6,
-                    }}>
+                  <div style={{ marginTop:"0.6rem", marginBottom:"1rem" }}>
+                    <div style={{ fontSize:"0.58rem", fontWeight:700, color:C.gray, textTransform:"uppercase", letterSpacing:"0.12em", marginBottom:6 }}>
                       Câu ví dụ
                     </div>
-                    <div style={{
-                      background:C.white, borderRadius:12,
-                      borderLeft:`3px solid #1E293B`,
-                      padding:"0.65rem 0.9rem",
-                      border:`1px solid ${C.border}`,
-                      borderLeftWidth:3, borderLeftColor:"#1E293B",
-                    }}>
-                      <div style={{
-                        fontFamily:"Georgia,serif", fontSize:"0.88rem",
-                        color:"#1E293B", fontStyle:"italic",
-                      }}>
+                    <div style={{ background:C.white, borderRadius:12, border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.blue}`, padding:"0.65rem 0.9rem" }}>
+                      <div style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.ink, fontStyle:"italic" }}>
                         &laquo; {fr} &raquo;
                       </div>
-                      {vi && (
-                        <div style={{
-                          fontSize:"0.75rem", color:C.gray, marginTop:4,
-                        }}>
-                          {vi}
-                        </div>
-                      )}
+                      {vi && <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:4 }}>{vi}</div>}
                     </div>
                   </div>
                 );
@@ -400,6 +368,15 @@ export default function ConjugaisonPanel() {
           )}
 
           <div style={{ height:"3rem" }} />
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!result && !loading && !err && (
+        <div style={{ textAlign:"center", padding:"3rem 1rem 2rem", color:C.gray }}>
+          <div style={{ fontSize:"2.5rem", marginBottom:"0.6rem" }}>✏️</div>
+          <div style={{ fontSize:"0.82rem", fontWeight:600, color:C.ink2, marginBottom:"0.3rem" }}>Nhập động từ để bắt đầu</div>
+          <div style={{ fontSize:"0.72rem" }}>Hoặc chọn nhanh từ gợi ý ở trên</div>
         </div>
       )}
     </div>

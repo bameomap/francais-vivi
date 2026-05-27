@@ -83,9 +83,9 @@ function TableQuiz({ data, unit, onNext }) {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem" }}>
-      <div style={{ background:unit.bg, borderRadius:12, padding:"0.65rem 0.9rem", borderLeft:`4px solid ${unit.color}` }}>
+      <div style={{ background:C.blueL, borderRadius:12, padding:"0.65rem 0.9rem", borderLeft:`4px solid ${C.blue}` }}>
         <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-          <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, color:unit.color, fontStyle:"italic" }}>{data.verb}</span>
+          <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, color:C.blue, fontStyle:"italic" }}>{data.verb}</span>
           <SpeakBtn text={data.verb} />
           <span style={{ fontSize:"0.7rem", color:C.gray, marginLeft:"auto" }}>{data.meaning}</span>
         </div>
@@ -126,13 +126,13 @@ function TableQuiz({ data, unit, onNext }) {
             const fr = s >= 0 ? data.example.slice(0, s) : data.example;
             const vi = s >= 0 ? data.example.slice(s + 3) : null;
             return (
-              <div style={{ background:C.white, border:`1px solid ${C.border}`, borderLeft:`3px solid ${unit.color}`, borderRadius:10, padding:"0.55rem 0.8rem", marginBottom:"0.4rem" }}>
+              <div style={{ background:C.white, border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.blue}`, borderRadius:10, padding:"0.55rem 0.8rem", marginBottom:"0.4rem" }}>
                 <div style={{ fontFamily:"Georgia,serif", fontSize:"0.85rem", color:"#1E293B", fontStyle:"italic" }}>« {fr} »</div>
                 {vi && <div style={{ fontSize:"0.72rem", color:C.gray, marginTop:"0.2rem" }}>{vi}</div>}
               </div>
             );
           })()}
-          <ResultFooter score={score} total={6} color={unit.color} onNext={onNext} />
+          <ResultFooter score={score} total={6} color={C.blue} onNext={onNext} />
         </div>
       )}
     </div>
@@ -177,7 +177,7 @@ function FillQuiz({ data, unit, onNext }) {
       {!checked ? (
         <button onClick={() => setChecked(true)} style={{ padding:"0.55rem", background:"#1E293B", color:C.white, border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>Chấm ✓</button>
       ) : (
-        <ResultFooter score={score} total={qs.length} color={unit.color} onNext={onNext} />
+        <ResultFooter score={score} total={qs.length} color={C.blue} onNext={onNext} />
       )}
     </div>
   );
@@ -202,7 +202,7 @@ function ChoiceQuiz({ data, unit, onNext }) {
           <div key={i} style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
             <div style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#1E293B", fontStyle:"italic", marginBottom:"0.25rem" }}>
               {parts[0] && parts[0].trim()}
-              <span style={{ background:unit.bg, padding:"0 5px", borderRadius:4, color:unit.color, fontWeight:700, margin:"0 2px" }}>___</span>
+              <span style={{ background:C.blueL, padding:"0 5px", borderRadius:4, color:C.blue, fontWeight:700, margin:"0 2px" }}>___</span>
               {parts[1] && parts[1].trim()}
             </div>
             <div style={{ fontSize:"0.7rem", color:C.gray, marginBottom:"0.45rem" }}>{q.vi}</div>
@@ -214,7 +214,7 @@ function ChoiceQuiz({ data, unit, onNext }) {
                 if (checked) {
                   if (isCorrect)          { bg = "#ECFDF5"; border = "#059669"; color = "#059669"; }
                   else if (isChosen)      { bg = "#FEF2F2"; border = C.red;     color = C.red;     }
-                } else if (isChosen)      { bg = unit.bg;   border = unit.color; color = unit.color; }
+                } else if (isChosen)      { bg = C.blueL;   border = C.blue;     color = C.blue;    }
                 return (
                   <button key={oi} onClick={() => { if (!checked) setAnswers(v => v.map((x, j) => j === i ? oi : x)); }}
                     style={{ padding:"0.45rem 0.6rem", background:bg, border:`1.5px solid ${border}`, borderRadius:10, color, fontFamily:"Georgia,serif", fontSize:"0.85rem", cursor:checked?"default":"pointer", fontWeight:isChosen||isCorrect?700:400, transition:"all 0.12s" }}>
@@ -233,7 +233,7 @@ function ChoiceQuiz({ data, unit, onNext }) {
           Chấm ✓
         </button>
       ) : (
-        <ResultFooter score={score} total={qs.length} color={unit.color} onNext={onNext} />
+        <ResultFooter score={score} total={qs.length} color={C.blue} onNext={onNext} />
       )}
     </div>
   );
@@ -255,7 +255,7 @@ function TransformQuiz({ data, unit, onNext }) {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:"0.65rem" }}>
-      <div style={{ background:unit.bg, borderRadius:10, padding:"0.45rem 0.85rem", fontSize:"0.75rem", textAlign:"center", color:unit.color, fontWeight:700 }}>
+      <div style={{ background:C.blueL, borderRadius:10, padding:"0.45rem 0.85rem", fontSize:"0.75rem", textAlign:"center", color:C.blue, fontWeight:700 }}>
         {data.from} → {data.to}
       </div>
 
@@ -286,7 +286,7 @@ function TransformQuiz({ data, unit, onNext }) {
       {!checked ? (
         <button onClick={() => setChecked(true)} style={{ padding:"0.55rem", background:"#1E293B", color:C.white, border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>Chấm ✓</button>
       ) : (
-        <ResultFooter score={score} total={qs.length} color={unit.color} onNext={onNext} />
+        <ResultFooter score={score} total={qs.length} color={C.blue} onNext={onNext} />
       )}
     </div>
   );
@@ -347,7 +347,7 @@ function MatchQuiz({ unit, onNext }) {
             const isWrong    = flash === "wrong" && leftSel === i;
             return (
               <button key={i} onClick={() => pickLeft(i)} disabled={isMatched}
-                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?"#059669":isWrong?C.red:isSelected?unit.color:C.border}`, background:isMatched?"#ECFDF5":isWrong?"#FEF2F2":isSelected?unit.bg:C.white, color:isMatched?"#059669":isWrong?C.red:isSelected?unit.color:C.ink, fontFamily:"Georgia,serif", fontStyle:"italic", fontSize:"0.82rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
+                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.border}`, background:isMatched?"#ECFDF5":isWrong?"#FEF2F2":isSelected?C.blueL:C.white, color:isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.ink, fontFamily:"Georgia,serif", fontStyle:"italic", fontSize:"0.82rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
                 {isMatched ? "✓ " : ""}{v.infinitive}
               </button>
             );
@@ -362,7 +362,7 @@ function MatchQuiz({ unit, onNext }) {
             const isWrong    = flash === "wrong" && rightSel === mi;
             return (
               <button key={mi} onClick={() => pickRight(mi)} disabled={isMatched}
-                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?"#059669":isWrong?C.red:isSelected?unit.color:C.border}`, background:isMatched?"#ECFDF5":isWrong?"#FEF2F2":isSelected?unit.bg:C.white, color:isMatched?"#059669":isWrong?C.red:isSelected?unit.color:C.ink, fontSize:"0.78rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
+                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.border}`, background:isMatched?"#ECFDF5":isWrong?"#FEF2F2":isSelected?C.blueL:C.white, color:isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.ink, fontSize:"0.78rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
                 {isMatched ? "✓ " : ""}{verbs[verbIdx].meaning}
               </button>
             );
@@ -373,7 +373,7 @@ function MatchQuiz({ unit, onNext }) {
       {done && (
         <div style={{ textAlign:"center", marginTop:"0.3rem" }}>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, color:"#059669" }}>🎉 Hoàn thành!</div>
-          <button onClick={onNext} style={{ marginTop:"0.4rem", padding:"0.5rem 1.5rem", background:unit.color, color:"#fff", border:"none", borderRadius:20, fontSize:"0.82rem", cursor:"pointer", fontWeight:700 }}>Tiếp theo →</button>
+          <button onClick={onNext} style={{ marginTop:"0.4rem", padding:"0.5rem 1.5rem", background:C.accent, color:"#fff", border:"none", borderRadius:20, fontSize:"0.82rem", cursor:"pointer", fontWeight:700 }}>Tiếp theo →</button>
         </div>
       )}
     </div>
@@ -432,7 +432,7 @@ function UnitExerciseView({ unit, onBack }) {
 
       {/* ── Gradient header ────────────────────────────────── */}
       <div style={{
-        background: `linear-gradient(135deg, ${unit.color} 0%, ${unit.color}CC 100%)`,
+        background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
         padding: "0.85rem 1rem 1rem",
         position: "sticky", top: 0, zIndex: 10,
       }}>
@@ -683,7 +683,7 @@ function UnitExerciseView({ unit, onBack }) {
           <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"0.75rem", padding:"2.5rem 0" }}>
             <Spinner />
             <div style={{ fontSize:"0.82rem", color:C.gray }}>AI đang tạo bài tập…</div>
-            <div style={{ fontSize:"0.68rem", color:`${unit.color}99` }}>Chờ tí nhé 🤓</div>
+            <div style={{ fontSize:"0.68rem", color:C.gray }}>Chờ tí nhé 🤓</div>
           </div>
         )}
 
