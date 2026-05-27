@@ -18,8 +18,8 @@ export function shuffleArray(arr) {
 }
 
 // Build audio URL from track number
-// Files are hosted on GitHub Releases (free, no size limit issue)
-const AUDIO_BASE = "https://github.com/bameomap/francais-vivi/releases/download/v1.0-audio";
+// Files hosted on GitHub Pages (branch: audio) — direct CDN, no redirect, works on iOS
+const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
 function url(n) {
   return `${AUDIO_BASE}/${n}_Edito_A1_Livre.mp3`;
 }
