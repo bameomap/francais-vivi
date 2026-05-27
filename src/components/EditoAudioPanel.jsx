@@ -22,16 +22,63 @@ function parseSubQ(text) {
   return text.split(" / ").map(s => s.trim()).filter(Boolean);
 }
 
-// ── Word-level diff for dictée ────────────────────────────────────
+// ── Strip "Speaker : " prefix from dictée sentences ──────────────
+// "Lars : Bonjour…"  →  "Bonjour…"
+// "La mère : Merci" →  "Merci"
+function stripSpeaker(s) {
+  return s.replace(/^[^:]+:\s+/, "").trim();
+}
+
+// ── Normalise a word for lenient comparison ───────────────────────
+// • lowercase  • remove accents  • ligatures oe/ae  • strip punctuation
+function normWord(w) {
+  return w
+    .toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")   // accents
+    .replace(/œ/g, "oe").replace(/æ/g, "ae")            // ligatures
+    .replace(/[''ʼ]/g, "'")                              // apostrophe variants → '
+    .replace(/[^a-z0-9']/g, "")                         // strip all punctuation
+    .trim();
+}
+
+// ── LCS-based word diff (position-independent) ────────────────────
+// Strips speaker label then aligns expected vs typed using LCS so
+// one missing/extra word doesn't cascade wrong marks across the line.
 function diffWords(expected, typed) {
-  const norm = s => s.toLowerCase().replace(/[.,!?;:«»""]/g, "").trim();
-  const eWords = expected.trim().split(/\s+/);
-  const tWords = typed.trim().split(/\s+/);
-  return eWords.map((word, i) => ({
-    word,
-    ok: norm(word) === norm(tWords[i] || ""),
-    typed: tWords[i] || "",
-  }));
+  const exp     = stripSpeaker(expected);
+  const eWords  = exp.trim().split(/\s+/).filter(Boolean);
+  const tWords  = (typed || "").trim().split(/\s+/).filter(Boolean);
+
+  if (eWords.length === 0) return [];
+  if (tWords.length === 0) return eWords.map(w => ({ word: w, ok: false, typed: "" }));
+
+  const ne = eWords.map(normWord);
+  const nt = tWords.map(normWord);
+  const n  = ne.length, m = nt.length;
+
+  // Build LCS table
+  const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  for (let i = 1; i <= n; i++)
+    for (let j = 1; j <= m; j++)
+      dp[i][j] = ne[i-1] === nt[j-1]
+        ? dp[i-1][j-1] + 1
+        : Math.max(dp[i-1][j], dp[i][j-1]);
+
+  // Backtrack to align
+  const result = [];
+  let i = n, j = m;
+  while (i > 0) {
+    if (j > 0 && ne[i-1] === nt[j-1]) {
+      result.unshift({ word: eWords[i-1], ok: true,  typed: tWords[j-1] });
+      i--; j--;
+    } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+      j--;          // extra typed word — skip silently
+    } else {
+      result.unshift({ word: eWords[i-1], ok: false, typed: "" });
+      i--;
+    }
+  }
+  return result;
 }
 
 // ── Call /api/proxy to grade an answer ───────────────────────────
@@ -463,9 +510,23 @@ export default function EditoAudioPanel() {
 
                       ) : (
                         <>
-                          <div style={{ fontSize: "0.68rem", color: C.gray, marginBottom: "0.4rem" }}>
-                            Nghe audio phía trên rồi chép lại câu {idx + 1}:
-                          </div>
+                          {/* Speaker hint */}
+                          {(() => {
+                            const raw = track.sentences[idx] || "";
+                            const m   = raw.match(/^([^:]+):\s+/);
+                            const speaker = m ? m[1].trim() : null;
+                            return (
+                              <div style={{ fontSize: "0.68rem", color: C.gray, marginBottom: "0.4rem", display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
+                                <span>Chép lại câu {idx + 1}:</span>
+                                {speaker && (
+                                  <span style={{ background: track.colorLight, color: track.color, borderRadius: 10, padding: "0.05rem 0.5rem", fontWeight: 700, fontSize: "0.65rem" }}>
+                                    💬 {speaker}
+                                  </span>
+                                )}
+                                <span style={{ color: "#9CA3AF", fontSize: "0.62rem" }}>(không cần gõ tên)</span>
+                              </div>
+                            );
+                          })()}
 
                           {/* ── Input (not yet submitted) ── */}
                           {!result && (
@@ -508,19 +569,7 @@ export default function EditoAudioPanel() {
                                   Kiểm tra ↵
                                 </button>
                                 <button
-                                  onClick={() => {
-                                    // skip: show answer directly
-                                    const diff = diffWords(track.sentences[idx], "");
-                                    setDictee(prev => {
-                                      const s = prev[track.id];
-                                      return { ...prev, [track.id]: { ...s, results: { ...s.results, [idx]: { ok: false, diff: diffWords(track.sentences[idx], typed || "") } } } };
-                                    });
-                                    if (!typed.trim()) {
-                                      dicteeSubmit(track.id, track.sentences);
-                                    } else {
-                                      dicteeSubmit(track.id, track.sentences);
-                                    }
-                                  }}
+                                  onClick={() => dicteeSubmit(track.id, track.sentences)}
                                   style={{
                                     padding: "0.42rem 0.75rem",
                                     background: "transparent",
@@ -545,7 +594,7 @@ export default function EditoAudioPanel() {
                                 marginBottom: "0.4rem",
                               }}>
                                 <div style={{ fontSize: "0.65rem", fontWeight: 700, color: result.ok ? "#15803D" : "#BE123C", marginBottom: "0.35rem" }}>
-                                  {result.ok ? "✅ Chính xác!" : "❌ Có lỗi — đáp án đúng:"}
+                                  {result.ok ? "✅ Chính xác!" : "❌ Có lỗi — chữ đỏ là chỗ sai:"}
                                 </div>
                                 {/* Word-by-word diff */}
                                 <div style={{ fontSize: "0.8rem", lineHeight: 1.8 }}>
