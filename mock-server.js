@@ -42,15 +42,27 @@ const server = http.createServer((req, res) => {
     try {
       const { messages } = JSON.parse(body);
       const prompt = messages?.[0]?.content || "";
-      // Extract verb from prompt
-      const match = prompt.match(/động từ "([^"]+)"/);
-      const verb = match?.[1]?.toLowerCase() || "être";
-      const data = MOCK[verb] || { ...MOCK.être, verb };
-      // Return in Anthropic API format
-      const response = {
-        content: [{ type: "text", text: JSON.stringify(data) }],
-        model: "mock", usage: {},
-      };
+
+      let text;
+
+      // ── Grade request (EditoAudioPanel) ──────────────────────────
+      if (prompt.includes("Câu hỏi:") && prompt.includes("Câu trả lời của học sinh:")) {
+        const correctGuess = prompt.includes("Vrai") || prompt.includes("vrai") || prompt.length < 300;
+        text = JSON.stringify({
+          correct: correctGuess,
+          feedback: "(Mock) Câu trả lời có vẻ đúng — chạy production để chấm AI thật.",
+          hint: correctGuess ? "" : "Xem lại script để tìm đáp án.",
+        });
+
+      // ── Conjugation request (legacy) ─────────────────────────────
+      } else {
+        const match = prompt.match(/động từ "([^"]+)"/);
+        const verb = match?.[1]?.toLowerCase() || "être";
+        const data = MOCK[verb] || { ...MOCK.être, verb };
+        text = JSON.stringify(data);
+      }
+
+      const response = { content: [{ type: "text", text }], model: "mock", usage: {} };
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(response));
     } catch (e) {
