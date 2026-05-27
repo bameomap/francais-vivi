@@ -7,23 +7,11 @@ import { logError } from "./WeakSpotsPanel.jsx";
 import AnalysePanel from "./AnalysePanel.jsx";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 
-const PURPLE   = "#7C3AED";
-const PURPLE_L = "#F5F0FF";
-
-const UNIT_COLORS = [
-  { color:"#2980B9", bg:"#E8F4FD" }, { color:"#8E44AD", bg:"#F5EEFF" },
-  { color:"#16A085", bg:"#E6FAF5" }, { color:"#E67E22", bg:"#FEF3E2" },
-  { color:"#C0392B", bg:"#FDEDEC" }, { color:"#D35400", bg:"#FDEBD0" },
-  { color:"#27AE60", bg:"#EAFAF1" }, { color:"#2471A3", bg:"#EAF4FB" },
-  { color:"#6C3483", bg:"#F5EEF8" }, { color:"#0E6655", bg:"#E8F8F5" },
-  { color:"#784212", bg:"#FEF9E7" },
-];
-
 // ── Grade helpers ───────────────────────────────────────────────
 function scoreToGrade(s) {
   if (s >= 95) return { letter:"A+", color:"#059669" };
   if (s >= 87) return { letter:"A",  color:"#059669" };
-  if (s >= 78) return { letter:"B+", color:PURPLE     };
+  if (s >= 78) return { letter:"B+", color:C.blue    };
   if (s >= 68) return { letter:"B",  color:"#2563EB" };
   if (s >= 55) return { letter:"C",  color:"#D97706" };
   return              { letter:"D",  color:"#DC2626" };
@@ -33,8 +21,8 @@ const ERROR_TYPE_STYLE = {
   "Ngữ pháp":  { color:"#DC2626", bg:"#FEF2F2", border:"#FCA5A5" },
   "Từ vựng":   { color:"#D97706", bg:"#FFFBEB", border:"#FCD34D" },
   "Chính tả":  { color:"#2563EB", bg:"#EFF6FF", border:"#93C5FD" },
-  "Giới từ":   { color:PURPLE,    bg:PURPLE_L,  border:`${PURPLE}55` },
-  "Mạo từ":    { color:"#059669", bg:"#F0FDF4", border:"#6EE7B7" },
+  "Giới từ":   { color:C.blue,    bg:C.blueL,   border:`${C.blue}55` },
+  "Mạo từ":    { color:"#059669", bg:"#F0FDF4",  border:"#6EE7B7" },
 };
 const DEFAULT_ERR_STYLE = { color:"#DC2626", bg:"#FEF2F2", border:"#FCA5A5" };
 
@@ -42,9 +30,8 @@ const DEFAULT_ERR_STYLE = { color:"#DC2626", bg:"#FEF2F2", border:"#FCA5A5" };
 function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
   const grade = scoreToGrade(result.score);
 
-  // Group errors by type
   const grammarErrors = result.errors?.filter(e => ["Ngữ pháp","Giới từ","Mạo từ"].includes(e.type)) || [];
-  const vocabErrors   = result.errors?.filter(e => ["Từ vựng","Chính tả"].includes(e.type)) || [];
+  const vocabErrors   = result.errors?.filter(e => ["Từ vựng","Chính tả"].includes(e.type))           || [];
   const otherErrors   = result.errors?.filter(e => !["Ngữ pháp","Giới từ","Mạo từ","Từ vựng","Chính tả"].includes(e.type)) || [];
 
   return (
@@ -52,7 +39,6 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
 
       {/* ── Score hero ── */}
       <div style={{ background:`linear-gradient(135deg, ${grade.color}11, ${grade.color}06)`, border:`1.5px solid ${grade.color}33`, borderRadius:18, padding:"1rem 1.2rem", display:"flex", alignItems:"center", gap:"1rem" }}>
-        {/* Grade circle */}
         <div style={{ width:68, height:68, borderRadius:"50%", background:`${grade.color}18`, border:`2.5px solid ${grade.color}55`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.6rem", color:grade.color, fontWeight:800, lineHeight:1 }}>{grade.letter}</div>
           <div style={{ fontSize:"0.58rem", color:grade.color, opacity:0.7 }}>{result.score}/100</div>
@@ -60,9 +46,8 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
         <div style={{ flex:1 }}>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:grade.color, fontWeight:700, marginBottom:"0.2rem" }}>{result.verdict}</div>
           {result.tip && <div style={{ fontSize:"0.74rem", color:C.gray, lineHeight:1.5 }}>{result.tip}</div>}
-          {/* Mini score breakdown */}
           {(grammarErrors.length > 0 || vocabErrors.length > 0) && (
-            <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.4rem" }}>
+            <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.4rem", flexWrap:"wrap" }}>
               {grammarErrors.length > 0 && (
                 <span style={{ fontSize:"0.62rem", background:"#FEF2F2", color:"#DC2626", border:"1px solid #FCA5A5", borderRadius:20, padding:"0.1rem 0.45rem", fontWeight:700 }}>
                   Ngữ pháp ×{grammarErrors.length}
@@ -123,7 +108,7 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
       )}
 
       <button onClick={onRedo}
-        style={{ padding:"0.55rem", background:"transparent", border:`1.5px solid ${C.border}`, borderRadius:12, color:C.gray, fontSize:"0.78rem", cursor:"pointer" }}>
+        style={{ padding:"0.55rem", background:"transparent", border:`1.5px solid ${C.border}`, borderRadius:12, color:C.gray, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit" }}>
         {redoLabel}
       </button>
     </div>
@@ -132,17 +117,16 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
 
 // ════════════════════════════════════════════════════════════════
 export default function WritingPanel({ onBackToParcours }) {
-  const [tab,        setTab]        = useState("write");
-  const [input,      setInput]      = useState("");
-  const [result,     setResult]     = useState(null);
-  const [loading,    setLoading]    = useState(false);
-  const [err,        setErr]        = useState("");
-  const [history,    setHistory]    = useState(() => {
+  const [tab,       setTab]       = useState("write");
+  const [input,     setInput]     = useState("");
+  const [result,    setResult]    = useState(null);
+  const [loading,   setLoading]   = useState(false);
+  const [err,       setErr]       = useState("");
+  const [history,   setHistory]   = useState(() => {
     try { return JSON.parse(localStorage.getItem("writing_history") || "[]"); } catch { return []; }
   });
-  const [editoUnit,  setEditoUnit]  = useState(0);
-  const [editoTask,  setEditoTask]  = useState(null);
-
+  const [editoUnit, setEditoUnit] = useState(0);
+  const [editoTask, setEditoTask] = useState(null);
   const [fromParcours, setFromParcours] = useState(false);
 
   useEffect(() => {
@@ -184,183 +168,211 @@ Return ONLY JSON:
     setLoading(false);
   };
 
-  // ── Tab bar ─────────────────────────────────────────────────
-  const TAB_BAR = (
-    <div style={{ display:"flex", gap:"0.35rem", marginBottom:"0.05rem" }}>
+  const switchTab = (id) => { setTab(id); setResult(null); setInput(""); setEditoTask(null); };
+
+  // ── Shared: dark hero banner ────────────────────────────────
+  const heroBanner = (
+    <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem" }}>
+      {fromParcours && onBackToParcours && (
+        <button onClick={onBackToParcours} style={{ background:"rgba(255,255,255,0.15)", border:"none", color:"#fff", fontSize:"0.72rem", fontWeight:600, cursor:"pointer", padding:"0.2rem 0.65rem", borderRadius:20, marginBottom:"0.6rem", fontFamily:"inherit" }}>
+          ← Parcours
+        </button>
+      )}
+      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>
+        🖋️ L'Écriture
+      </div>
+      <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>
+        Luyện viết · Chấm bài AI · Phân tích văn bản
+      </div>
+    </div>
+  );
+
+  // ── Shared: tab bar ─────────────────────────────────────────
+  const tabBar = (
+    <div style={{ display:"flex", gap:"0.35rem", padding:"0.65rem 1rem 0" }}>
       {[
-        { id:"write",   label:"✍️ Tự do" },
-        { id:"edito",   label:"📘 Edito"  },
-        { id:"analyse", label:"🔍 Phân tích" },
+        { id:"write",   label:"✍️ Tự do"      },
+        { id:"edito",   label:"📘 Édito"       },
+        { id:"analyse", label:"🔍 Phân tích"   },
       ].map(t => (
-        <button key={t.id} onClick={() => { setTab(t.id); setResult(null); setInput(""); setEditoTask(null); }}
-          style={{ flex:1, padding:"0.5rem 0.3rem", border:`1.5px solid ${tab===t.id ? PURPLE : C.border}`, borderRadius:10, background: tab===t.id ? PURPLE : C.white, color: tab===t.id ? "#fff" : C.ink, fontSize:"0.75rem", cursor:"pointer", fontWeight: tab===t.id ? 700 : 400, fontFamily:"inherit", transition:"all 0.15s" }}>
+        <button key={t.id} onClick={() => switchTab(t.id)}
+          style={{ flex:1, padding:"0.5rem 0.3rem", border:`1.5px solid ${tab===t.id ? C.blue : C.border}`, borderRadius:10, background: tab===t.id ? C.blue : C.white, color: tab===t.id ? "#fff" : C.ink, fontSize:"0.75rem", cursor:"pointer", fontWeight: tab===t.id ? 700 : 400, fontFamily:"inherit", transition:"all 0.15s" }}>
           {t.label}
         </button>
       ))}
     </div>
   );
 
-  // ── Analyse tab ────────────────────────────────────────────
+  // ── Analyse tab ─────────────────────────────────────────────
   if (tab === "analyse") return (
-    <div>
-      <div style={{ padding:"1rem 1rem 0" }}>{TAB_BAR}</div>
+    <div style={{ animation:"fadeUp 0.3s ease" }}>
+      {heroBanner}
+      {tabBar}
       <AnalysePanel />
     </div>
   );
 
-  // ── Edito tab ──────────────────────────────────────────────
+  // ── Edito tab ───────────────────────────────────────────────
   if (tab === "edito") {
     const unit = EDITO_A1_UNITS[editoUnit];
-    const uc   = UNIT_COLORS[editoUnit] || UNIT_COLORS[0];
     return (
-      <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.8rem" }}>
-        {fromParcours && onBackToParcours && (
-          <button onClick={onBackToParcours} style={{ background:"transparent", border:"none", color:C.blue, fontSize:"0.82rem", fontWeight:600, cursor:"pointer", padding:0, display:"flex", alignItems:"center", gap:4, fontFamily:"inherit" }}>
-            ← Parcours
-          </button>
-        )}
-        {TAB_BAR}
+      <div style={{ animation:"fadeUp 0.3s ease" }}>
+        {heroBanner}
+        {tabBar}
+        <div style={{ padding:"0.75rem 1rem 4rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
 
-        {!editoTask ? (
-          <>
-            {/* Unit chips */}
-            <div style={{ overflowX:"auto", display:"flex", gap:6, paddingBottom:2, scrollbarWidth:"none" }}>
-              {EDITO_A1_UNITS.map((u, i) => {
-                const ucc = UNIT_COLORS[i] || UNIT_COLORS[0];
-                const active = editoUnit === i;
-                return (
-                  <button key={u.id} onClick={() => setEditoUnit(i)}
-                    style={{ flexShrink:0, padding:"5px 11px", borderRadius:999, fontSize:11, fontWeight: active ? 700 : 500, cursor:"pointer", fontFamily:"inherit", whiteSpace:"nowrap", transition:"all 0.15s", background: active ? ucc.color : C.white, color: active ? "#fff" : C.ink, border:`1.5px solid ${active ? ucc.color : C.border}` }}>
-                    U{u.unit} · {u.title}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div style={{ fontSize:"0.65rem", fontWeight:700, color:uc.color, textTransform:"uppercase", letterSpacing:"0.1em" }}>
-              Unité {unit.unit} — {unit.title}
-            </div>
-
-            {unit.writingPractice.map((p, i) => (
-              <button key={i} onClick={() => { setEditoTask(p); setInput(""); setResult(null); }}
-                style={{ background:uc.bg, border:`1.5px solid ${uc.color}44`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit" }}>
-                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.9rem", color:C.ink, fontWeight:700, marginBottom:"0.25rem" }}>{p.title}</div>
-                <div style={{ fontSize:"0.73rem", color:C.gray, lineHeight:1.55 }}>{p.task}</div>
-              </button>
-            ))}
-          </>
-        ) : (
-          <>
-            {/* Task context */}
-            <div style={{ background:uc.bg, border:`1.5px solid ${uc.color}44`, borderRadius:12, padding:"0.85rem 1rem" }}>
-              <div style={{ fontSize:"0.6rem", fontWeight:700, color:uc.color, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:4 }}>Đề bài · {editoTask.title}</div>
-              <div style={{ fontSize:"0.83rem", color:C.ink, lineHeight:1.6, fontFamily:"Georgia,serif" }}>{editoTask.task}</div>
-            </div>
-
-            {!result && (
-              <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.85rem" }}>
-                <textarea value={input} onChange={e => setInput(e.target.value)}
-                  placeholder="Écrivez votre réponse en français…"
-                  rows={4}
-                  style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.55rem 0.7rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.6, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
-                {err && (
-                  <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
-                    <div style={{ fontSize:"0.72rem", color:"#DC2626" }}>⚠ {err}</div>
-                    <button onClick={() => check(editoTask.task)} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
-                  </div>
-                )}
-                <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.6rem" }}>
-                  <button onClick={() => { setEditoTask(null); setResult(null); setInput(""); }}
-                    style={{ padding:"0.6rem 0.8rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:10, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit" }}>
-                    ← Đổi đề
-                  </button>
-                  <button onClick={() => check(editoTask.task)} disabled={loading || !input.trim()}
-                    style={{ flex:1, padding:"0.65rem", background: input.trim() ? PURPLE : C.border, color:"#fff", border:"none", borderRadius:10, fontFamily:"Georgia,serif", fontSize:"0.88rem", cursor: input.trim() ? "pointer" : "default", fontWeight:700, transition:"background 0.15s" }}>
-                    {loading ? "AI đang chấm…" : "Chấm bài ✦"}
-                  </button>
-                </div>
+          {!editoTask ? (
+            <>
+              {/* Unit chips */}
+              <div style={{ overflowX:"auto", display:"flex", gap:6, paddingBottom:4, scrollbarWidth:"none" }}>
+                {EDITO_A1_UNITS.map((u, i) => {
+                  const active = editoUnit === i;
+                  return (
+                    <button key={u.id} onClick={() => { setEditoUnit(i); setResult(null); }}
+                      style={{ flexShrink:0, padding:"5px 11px", borderRadius:999, fontSize:11, fontWeight: active ? 700 : 500, cursor:"pointer", fontFamily:"inherit", whiteSpace:"nowrap", transition:"all 0.15s", background: active ? C.blue : C.white, color: active ? "#fff" : C.ink, border:`1.5px solid ${active ? C.blue : C.border}` }}>
+                      U{u.unit} · {u.title}
+                    </button>
+                  );
+                })}
               </div>
-            )}
 
-            {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1rem" }}><Spinner /></div>}
+              {/* Unit label */}
+              <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, textTransform:"uppercase", letterSpacing:"0.1em" }}>
+                Unité {unit.unit} — {unit.title}
+              </div>
 
-            {result && (
-              <ResultBlock
-                result={result}
-                onRedo={() => { setInput(""); setResult(null); }}
-                redoLabel="✏️ Viết lại"
-              />
-            )}
-          </>
-        )}
+              {/* Task cards */}
+              {unit.writingPractice.map((p, i) => (
+                <button key={i} onClick={() => { setEditoTask(p); setInput(""); setResult(null); }}
+                  style={{ background:C.white, border:`1.5px solid ${C.border}`, borderLeft:`4px solid ${C.blue}`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"box-shadow 0.15s, transform 0.1s", boxShadow:`0 2px 8px rgba(74,144,217,0.06)` }}
+                  onPointerDown={e => e.currentTarget.style.transform="scale(0.99)"}
+                  onPointerUp={e => e.currentTarget.style.transform="scale(1)"}
+                  onPointerLeave={e => e.currentTarget.style.transform="scale(1)"}
+                >
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.92rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>{p.title}</div>
+                  <div style={{ fontSize:"0.74rem", color:C.gray, lineHeight:1.6 }}>{p.task}</div>
+                  <div style={{ marginTop:"0.55rem", fontSize:"0.7rem", color:C.blue, fontWeight:600 }}>Bắt đầu viết →</div>
+                </button>
+              ))}
+            </>
+          ) : (
+            <>
+              {/* Task context */}
+              <div style={{ background:C.blueL, border:`1.5px solid ${C.blue}33`, borderRadius:14, padding:"0.85rem 1rem", borderLeft:`4px solid ${C.blue}` }}>
+                <div style={{ fontSize:"0.6rem", fontWeight:700, color:C.blue, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:5 }}>📘 Đề bài · {editoTask.title}</div>
+                <div style={{ fontSize:"0.85rem", color:C.ink, lineHeight:1.65, fontFamily:"Georgia,serif" }}>{editoTask.task}</div>
+              </div>
+
+              {!result && (
+                <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.85rem" }}>
+                  <textarea value={input} onChange={e => setInput(e.target.value)}
+                    placeholder="Écrivez votre réponse en français…"
+                    rows={5}
+                    style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.6rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.7, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
+                  {err && (
+                    <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
+                      <div style={{ fontSize:"0.72rem", color:"#DC2626" }}>⚠ {err}</div>
+                      <button onClick={() => check(editoTask.task)} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
+                    </div>
+                  )}
+                  <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.7rem" }}>
+                    <button onClick={() => { setEditoTask(null); setResult(null); setInput(""); }}
+                      style={{ padding:"0.6rem 0.85rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:10, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit" }}>
+                      ← Đổi đề
+                    </button>
+                    <button onClick={() => check(editoTask.task)} disabled={loading || !input.trim()}
+                      style={{ flex:1, padding:"0.65rem", background: input.trim() ? `linear-gradient(135deg, ${C.accent}, #c0392b)` : C.border, color:"#fff", border:"none", borderRadius:10, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.9rem", cursor: input.trim() ? "pointer" : "default", fontWeight:700, transition:"background 0.15s", boxShadow: input.trim() ? `0 4px 14px ${C.accent}44` : "none" }}>
+                      {loading ? "AI đang chấm…" : "Chấm bài ✦"}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1.5rem" }}><Spinner /></div>}
+
+              {result && (
+                <ResultBlock
+                  result={result}
+                  onRedo={() => { setInput(""); setResult(null); }}
+                  redoLabel="✏️ Viết lại"
+                />
+              )}
+            </>
+          )}
+        </div>
       </div>
     );
   }
 
-  // ════════════════════════════════════════════════════════════════
+  // ════════════════════════════════════════════════════════════
   // FREE WRITING TAB
-  // ════════════════════════════════════════════════════════════════
+  // ════════════════════════════════════════════════════════════
   return (
-    <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.8rem" }}>
-      {TAB_BAR}
+    <div style={{ animation:"fadeUp 0.3s ease" }}>
+      {heroBanner}
+      {tabBar}
 
-      <div style={{ background:`linear-gradient(135deg, ${PURPLE}11, ${PURPLE}06)`, border:`1.5px solid ${PURPLE}22`, borderRadius:14, padding:"0.85rem 1rem" }}>
-        <div style={{ fontSize:"0.65rem", fontWeight:700, color:PURPLE, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:3 }}>✍️ Viết câu tự do</div>
-        <div style={{ fontSize:"0.74rem", color:C.gray, lineHeight:1.6 }}>
-          Nhập câu tiếng Pháp — AI chấm điểm, phân loại lỗi và giải thích bằng tiếng Việt.
+      <div style={{ padding:"0.75rem 1rem 4rem", display:"flex", flexDirection:"column", gap:"0.8rem" }}>
+
+        {/* Hint banner */}
+        <div style={{ background:C.blueL, border:`1.5px solid ${C.blue}22`, borderRadius:14, padding:"0.85rem 1rem" }}>
+          <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:3 }}>✍️ Viết câu tự do</div>
+          <div style={{ fontSize:"0.74rem", color:C.gray, lineHeight:1.6 }}>
+            Nhập câu tiếng Pháp — AI chấm điểm, phân loại lỗi và giải thích bằng tiếng Việt.
+          </div>
         </div>
-      </div>
 
-      {!result && (
-        <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.85rem" }}>
-          <textarea value={input} onChange={e => setInput(e.target.value)}
-            placeholder="Nhập câu tiếng Pháp… vd: Je suis une étudiant."
-            rows={3}
-            style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.55rem 0.7rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.6, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
-          {err && (
-            <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
-              <div style={{ fontSize:"0.72rem", color:"#DC2626" }}>⚠ {err}</div>
-              <button onClick={() => check()} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
-            </div>
-          )}
-          <button onClick={() => check()} disabled={loading || !input.trim()}
-            style={{ marginTop:"0.6rem", width:"100%", padding:"0.7rem", background: input.trim() ? PURPLE : C.border, color:"#fff", border:"none", borderRadius:12, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.92rem", cursor: input.trim() ? "pointer" : "default", fontWeight:700, transition:"background 0.15s" }}>
-            {loading ? "AI đang chấm…" : "Chấm bài ✦"}
-          </button>
-        </div>
-      )}
-
-      {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1rem" }}><Spinner /></div>}
-
-      {result && (
-        <ResultBlock
-          result={result}
-          onRedo={() => { setInput(""); setResult(null); }}
-          redoLabel="✏️ Viết câu khác"
-        />
-      )}
-
-      {/* History */}
-      {history.length > 0 && !result && !loading && (
-        <div>
-          <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:"0.12em", color:C.gray, marginBottom:"0.5rem", fontWeight:700 }}>📜 Câu đã viết</div>
-          {history.slice(0, 5).map((h, i) => {
-            const g = scoreToGrade(h.result.score);
-            return (
-              <div key={i} onClick={() => { setInput(h.sentence); setResult(h.result); }}
-                style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"0.55rem 0.75rem", marginBottom:"0.35rem", cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", gap:"0.5rem" }}
-                onMouseEnter={e => e.currentTarget.style.background = C.cream}
-                onMouseLeave={e => e.currentTarget.style.background = C.white}>
-                <div style={{ flex:1, minWidth:0 }}>
-                  <div style={{ fontFamily:"Georgia,serif", fontSize:"0.83rem", color:C.ink, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{h.sentence}</div>
-                  <div style={{ fontSize:"0.62rem", color:C.gray, marginTop:"0.1rem" }}>{h.date}</div>
-                </div>
-                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:g.color, fontWeight:800, flexShrink:0 }}>{g.letter}</div>
+        {!result && (
+          <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.85rem" }}>
+            <textarea value={input} onChange={e => setInput(e.target.value)}
+              placeholder="Nhập câu tiếng Pháp… vd: Je suis une étudiant."
+              rows={4}
+              style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.6rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.7, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
+            {err && (
+              <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
+                <div style={{ fontSize:"0.72rem", color:"#DC2626" }}>⚠ {err}</div>
+                <button onClick={() => check()} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
               </div>
-            );
-          })}
-        </div>
-      )}
+            )}
+            <button onClick={() => check()} disabled={loading || !input.trim()}
+              style={{ marginTop:"0.7rem", width:"100%", padding:"0.75rem", background: input.trim() ? `linear-gradient(135deg, ${C.accent}, #c0392b)` : C.border, color:"#fff", border:"none", borderRadius:12, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.92rem", cursor: input.trim() ? "pointer" : "default", fontWeight:700, transition:"background 0.15s", boxShadow: input.trim() ? `0 4px 14px ${C.accent}44` : "none" }}>
+              {loading ? "AI đang chấm…" : "Chấm bài ✦"}
+            </button>
+          </div>
+        )}
+
+        {loading && <div style={{ display:"flex", justifyContent:"center", padding:"1.5rem" }}><Spinner /></div>}
+
+        {result && (
+          <ResultBlock
+            result={result}
+            onRedo={() => { setInput(""); setResult(null); }}
+            redoLabel="✏️ Viết câu khác"
+          />
+        )}
+
+        {/* History */}
+        {history.length > 0 && !result && !loading && (
+          <div>
+            <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:"0.12em", color:C.gray, marginBottom:"0.5rem", fontWeight:700 }}>📜 Câu đã viết</div>
+            {history.slice(0, 5).map((h, i) => {
+              const g = scoreToGrade(h.result.score);
+              return (
+                <div key={i} onClick={() => { setInput(h.sentence); setResult(h.result); }}
+                  style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"0.55rem 0.75rem", marginBottom:"0.35rem", cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", gap:"0.5rem" }}
+                  onMouseEnter={e => e.currentTarget.style.background = C.blueL}
+                  onMouseLeave={e => e.currentTarget.style.background = C.white}>
+                  <div style={{ flex:1, minWidth:0 }}>
+                    <div style={{ fontFamily:"Georgia,serif", fontSize:"0.83rem", color:C.ink, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{h.sentence}</div>
+                    <div style={{ fontSize:"0.62rem", color:C.gray, marginTop:"0.1rem" }}>{h.date}</div>
+                  </div>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:g.color, fontWeight:800, flexShrink:0 }}>{g.letter}</div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
