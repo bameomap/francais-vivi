@@ -213,7 +213,7 @@ Giải thích công thức giao tiếp: "${heading}"
 Công thức trong bài: ${phrases.join(" / ")}
 
 Trả về JSON thuần (không markdown):
-{"vi":"Dùng khi nào, hoàn cảnh nào (2-3 câu ngắn tiếng Việt)","ja":"いつ・どんな場面で使うか (日本語で2〜3文、N4-N5レベル)","examples":["câu ví dụ 1 tiếng Pháp","câu ví dụ 2","câu ví dụ 3"],"tip":"ghi chú ngữ pháp ngắn hoặc null"}` }],
+{"vi":"Dùng khi nào, hoàn cảnh nào (2-3 câu ngắn tiếng Việt)","ja":"いつ・どんな場面で使うか (日本語で2〜3文、N4-N5レベル)","examples":[{"fr":"câu ví dụ 1 tiếng Pháp","ja":"例文1の日本語訳"},{"fr":"câu ví dụ 2","ja":"例文2の日本語訳"},{"fr":"câu ví dụ 3","ja":"例文3の日本語訳"}],"tip":"ghi chú ngữ pháp ngắn hoặc null"}` }],
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -539,10 +539,24 @@ Trả về JSON thuần (không markdown):
                               )}
                               {exp.content.examples?.length > 0 && (
                                 <div style={{ marginBottom: "0.2rem" }}>
-                                  <div style={{ fontSize: "0.58rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.2rem" }}>Thêm ví dụ</div>
-                                  {exp.content.examples.map((ex, ei) => (
-                                    <div key={ei} style={{ fontSize: "0.73rem", color: track.color, fontStyle: "italic", lineHeight: 1.65 }}>› {ex}</div>
-                                  ))}
+                                  <div style={{ fontSize: "0.58rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.3rem" }}>Thêm ví dụ</div>
+                                  <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                                    {exp.content.examples.map((ex, ei) => {
+                                      const fr = typeof ex === "string" ? ex : ex.fr;
+                                      const ja = typeof ex === "object" ? ex.ja : null;
+                                      return (
+                                        <div key={ei} style={{ paddingLeft: "0.5rem", borderLeft: `2px solid ${track.color}50` }}>
+                                          <div style={{ fontSize: "0.73rem", color: track.color, fontStyle: "italic", lineHeight: 1.6 }}>› {fr}</div>
+                                          {ja && (
+                                            <div style={{ fontSize: "0.67rem", color: "#C0392B", lineHeight: 1.5, marginTop: "0.1rem", display: "flex", gap: "0.3rem", alignItems: "flex-start" }}>
+                                              <span style={{ background: "#FFF0F0", color: "#C0392B", fontSize: "0.52rem", fontWeight: 700, padding: "0.05rem 0.28rem", borderRadius: 4, flexShrink: 0, marginTop: "0.1rem" }}>JA</span>
+                                              {ja}
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
                                 </div>
                               )}
                               {exp.content.tip && exp.content.tip !== "null" && (
