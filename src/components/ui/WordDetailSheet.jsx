@@ -29,10 +29,11 @@ export default function WordDetailSheet({ word, onClose }) {
         `IPA: <phiên âm IPA chính xác>\n` +
         `DEF_FR: <định nghĩa 1 câu bằng tiếng Pháp đơn giản A1-A2>\n` +
         `DEF_VI: <định nghĩa 1 câu bằng tiếng Việt>\n` +
+        `DEF_JA: <日本語で1文の簡単な意味 (N4-N5レベル)>\n` +
         `EX_FR: <1 câu ví dụ ngắn tiếng Pháp (6-10 từ) dùng từ này>\n` +
         `EX_VI: <dịch tiếng Việt của câu ví dụ>`
       }],
-      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 6 dòng format yêu cầu."
+      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 7 dòng format yêu cầu."
     ).then(text => {
       const get = tag => text.match(new RegExp(`^${tag}:\\s*(.+)`, "m"))?.[1]?.trim() || "";
       const result = {
@@ -40,6 +41,7 @@ export default function WordDetailSheet({ word, onClose }) {
         ipa:    get("IPA"),
         def_fr: get("DEF_FR"),
         def_vi: get("DEF_VI"),
+        def_ja: get("DEF_JA"),
         ex_fr:  get("EX_FR"),
         ex_vi:  get("EX_VI"),
       };
@@ -143,10 +145,16 @@ export default function WordDetailSheet({ word, onClose }) {
             <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1.5, color:C.blue, fontWeight:700, marginBottom:"0.4rem" }}>
               Bản dịch
             </div>
-            <div style={{ display:"flex", gap:"0.5rem", alignItems:"center" }}>
+            <div style={{ display:"flex", gap:"0.5rem", alignItems:"center", marginBottom: details?.def_ja ? "0.35rem" : 0 }}>
               <span style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, minWidth:20 }}>VI</span>
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.05rem", color:C.blue, fontWeight:700 }}>{word.vi || "—"}</span>
             </div>
+            {details?.def_ja && (
+              <div style={{ display:"flex", gap:"0.5rem", alignItems:"flex-start" }}>
+                <span style={{ fontSize:"0.65rem", fontWeight:700, color:"#C0392B", minWidth:20, marginTop:"0.1rem" }}>JA</span>
+                <span style={{ fontSize:"0.85rem", color:"#C0392B", lineHeight:1.5 }}>{details.def_ja}</span>
+              </div>
+            )}
           </div>
 
           {/* ── Ví dụ ── */}

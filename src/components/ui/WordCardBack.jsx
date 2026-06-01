@@ -22,17 +22,19 @@ export default function WordCardBack({ word }) {
     callAIText(
       [{ role:"user", content:
         `Từ tiếng Pháp: "${word.fr}" (nghĩa: ${word.vi || "?"}).\n` +
-        `Trả lời đúng 5 dòng, không thêm gì khác:\n` +
+        `Trả lời đúng 7 dòng, không thêm gì khác:\n` +
         `POS: <loại từ: Danh từ / Động từ / Tính từ / ...>\n` +
         `IPA: <phiên âm IPA>\n` +
         `DEF: <định nghĩa 1 câu tiếng Việt>\n` +
+        `DEF_JA: <日本語で1文の簡単な意味 (N4-N5レベル)>\n` +
         `EX_FR: <1 câu ví dụ ngắn tiếng Pháp (6-10 từ)>\n` +
-        `EX_VI: <dịch tiếng Việt>`
+        `EX_VI: <dịch tiếng Việt>\n` +
+        `EX_JA: <例文の日本語訳>`
       }],
-      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 5 dòng format."
+      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 7 dòng format."
     ).then(text => {
       const get = tag => text.match(new RegExp(`^${tag}:\\s*(.+)`, "m"))?.[1]?.trim() || "";
-      const result = { pos:get("POS"), ipa:get("IPA"), def:get("DEF"), ex_fr:get("EX_FR"), ex_vi:get("EX_VI") };
+      const result = { pos:get("POS"), ipa:get("IPA"), def:get("DEF"), def_ja:get("DEF_JA"), ex_fr:get("EX_FR"), ex_vi:get("EX_VI"), ex_ja:get("EX_JA") };
       localStorage.setItem(cacheKey, JSON.stringify(result));
       setDetails(result);
     }).catch(() => {}).finally(() => setLoading(false));
@@ -60,6 +62,12 @@ export default function WordCardBack({ word }) {
       <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:C.blue, fontWeight:700 }}>
         {word.vi || "—"}
       </div>
+      {details?.def_ja && (
+        <div style={{ fontSize:"0.74rem", color:"#C0392B", lineHeight:1.5, display:"flex", gap:"0.35rem", alignItems:"flex-start" }}>
+          <span style={{ background:"#FFF0F0", color:"#C0392B", fontSize:"0.55rem", fontWeight:700, padding:"0.08rem 0.3rem", borderRadius:4, flexShrink:0, marginTop:"0.1rem" }}>日本語</span>
+          {details.def_ja}
+        </div>
+      )}
 
       {/* IPA + speak */}
       <div style={{ display:"flex", alignItems:"center", gap:"0.45rem" }}>
@@ -84,6 +92,12 @@ export default function WordCardBack({ word }) {
           <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:1.5, color:"#D97706", fontWeight:700, marginBottom:"0.3rem" }}>✦ Ví dụ</div>
           <div style={{ fontSize:"0.78rem", color:C.ink, fontStyle:"italic", lineHeight:1.55 }}>{details.ex_fr}</div>
           <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.2rem" }}>↳ {details.ex_vi}</div>
+          {details?.ex_ja && (
+            <div style={{ fontSize:"0.68rem", color:"#C0392B", marginTop:"0.15rem", display:"flex", gap:"0.3rem", alignItems:"flex-start" }}>
+              <span style={{ background:"#FFF0F0", color:"#C0392B", fontSize:"0.52rem", fontWeight:700, padding:"0.06rem 0.28rem", borderRadius:4, flexShrink:0, marginTop:"0.1rem" }}>JA</span>
+              {details.ex_ja}
+            </div>
+          )}
         </div>
       )}
     </div>

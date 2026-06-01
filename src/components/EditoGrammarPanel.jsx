@@ -1,11 +1,35 @@
 import { useState } from "react";
 import { C } from "../constants.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
+import { callAIText } from "../utils/api.js";
 
 const EMOJIS = { g0:"👋", g1:"🪪", g2:"🏘️", g3:"🥐", g4:"🗺️", g5:"👗", g6:"📅", g7:"🏠", g8:"💪", g9:"🌴", g10:"💼" };
 
 // ── Grammar accordion card ────────────────────────────────────
 function GrammarCard({ point, isOpen, onToggle }) {
+  const [jp, setJp] = useState(null); // null | { loading } | { text }
+
+  const handleJP = async (e) => {
+    e.stopPropagation();
+    if (jp?.loading || jp?.text) return;
+    setJp({ loading: true });
+    const ruleSummary = point.rule.split("\n").slice(0, 6).join(" ").slice(0, 300);
+    try {
+      const text = await callAIText(
+        [{ role: "user", content:
+`フランス語A1の文法ポイント: "${point.topic}"
+ルール概要: ${ruleSummary}
+例文: ${(point.examples || []).slice(0, 3).join(" / ")}
+
+このA1文法ポイントをN4-N5レベルの日本語で3〜4文で簡潔に説明し、フランス語の例文1〜2個と日本語訳を付けてください。` }],
+        "フランス語教師。日本語でシンプルに説明。"
+      );
+      setJp({ text });
+    } catch {
+      setJp({ text: "エラーが発生しました。もう一度お試しください。" });
+    }
+  };
+
   return (
     <div style={{
       border: `1.5px solid ${isOpen ? C.blue + "55" : C.border}`,
@@ -89,9 +113,24 @@ function GrammarCard({ point, isOpen, onToggle }) {
           </div>
 
           {point.examples?.length > 0 && (
-            <div style={{ padding:"0.4rem 1rem 0.9rem", borderTop:`1px dashed ${C.border}` }}>
-              <div style={{ fontSize:"0.58rem", fontWeight:700, color:C.gray, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>
-                Ví dụ
+            <div style={{ padding:"0.4rem 1rem 0.6rem", borderTop:`1px dashed ${C.border}` }}>
+              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:6 }}>
+                <div style={{ fontSize:"0.58rem", fontWeight:700, color:C.gray, textTransform:"uppercase", letterSpacing:"0.1em" }}>
+                  Ví dụ
+                </div>
+                <button
+                  onClick={handleJP}
+                  style={{
+                    background: jp?.text ? "#FFF0F0" : jp?.loading ? "#FFF0F0" : "#fff",
+                    border: `1.5px solid ${jp?.text ? "#C0392B" : "#E5E7EB"}`,
+                    color: jp?.text ? "#C0392B" : "#6B7280",
+                    fontSize: "0.6rem", fontWeight: 700,
+                    padding: "0.12rem 0.55rem", borderRadius: 10,
+                    cursor: jp?.text ? "default" : "pointer",
+                    fontFamily: "inherit",
+                  }}>
+                  {jp?.loading ? "⏳" : jp?.text ? "🇯🇵 ✓" : "🇯🇵 日本語"}
+                </button>
               </div>
               {point.examples.map((ex, i) => {
                 const di = ex.indexOf(" — ");
@@ -108,6 +147,16 @@ function GrammarCard({ point, isOpen, onToggle }) {
                   </div>
                 );
               })}
+            </div>
+          )}
+          {jp?.text && (
+            <div style={{ padding:"0.55rem 1rem 0.9rem", borderTop:`1px solid #FECACA`, background:"#FFF5F5" }}>
+              <div style={{ fontSize:"0.58rem", fontWeight:700, color:"#C0392B", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.45rem" }}>
+                🇯🇵 日本語解説
+              </div>
+              {jp.text.split("\n").filter(l => l.trim()).map((line, i) => (
+                <div key={i} style={{ fontSize:"0.78rem", color:"#374151", lineHeight:1.7 }}>{line}</div>
+              ))}
             </div>
           )}
         </div>

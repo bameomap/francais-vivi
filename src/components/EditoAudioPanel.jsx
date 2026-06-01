@@ -208,12 +208,12 @@ export default function EditoAudioPanel() {
         body: JSON.stringify({
           max_tokens: 400,
           messages: [{ role: "user", content:
-`Bạn là giáo viên tiếng Pháp A1, dạy cho học sinh Việt Nam.
+`Bạn là giáo viên tiếng Pháp A1, dạy cho học sinh Việt Nam và Nhật Bản.
 Giải thích công thức giao tiếp: "${heading}"
 Công thức trong bài: ${phrases.join(" / ")}
 
 Trả về JSON thuần (không markdown):
-{"vi":"Dùng khi nào, hoàn cảnh nào (2-3 câu ngắn tiếng Việt)","examples":["câu ví dụ 1 tiếng Pháp","câu ví dụ 2","câu ví dụ 3"],"tip":"ghi chú ngữ pháp ngắn hoặc null"}` }],
+{"vi":"Dùng khi nào, hoàn cảnh nào (2-3 câu ngắn tiếng Việt)","ja":"いつ・どんな場面で使うか (日本語で2〜3文、N4-N5レベル)","examples":["câu ví dụ 1 tiếng Pháp","câu ví dụ 2","câu ví dụ 3"],"tip":"ghi chú ngữ pháp ngắn hoặc null"}` }],
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -526,8 +526,15 @@ Trả về JSON thuần (không markdown):
                           {exp && !exp.loading && exp.content && (
                             <div style={{ background: "#FAFAFA", padding: "0.5rem 0.75rem", borderTop: `1px dashed ${track.color}30` }}>
                               {exp.content.vi && (
-                                <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.3rem" }}>
-                                  💬 <em>{exp.content.vi}</em>
+                                <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.25rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
+                                  <span style={{ background: "#EFF6FF", color: "#2563EB", fontSize: "0.56rem", fontWeight: 700, padding: "0.1rem 0.35rem", borderRadius: 5, flexShrink: 0, marginTop: "0.15rem" }}>VI</span>
+                                  <em>{exp.content.vi}</em>
+                                </div>
+                              )}
+                              {exp.content.ja && (
+                                <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.3rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
+                                  <span style={{ background: "#FFF0F0", color: "#C0392B", fontSize: "0.56rem", fontWeight: 700, padding: "0.1rem 0.35rem", borderRadius: 5, flexShrink: 0, marginTop: "0.15rem" }}>日本語</span>
+                                  <em>{exp.content.ja}</em>
                                 </div>
                               )}
                               {exp.content.examples?.length > 0 && (
