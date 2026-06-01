@@ -7,6 +7,7 @@ import { useState } from "react";
 import { C } from "../constants.js";
 import { EDITO_AUDIO } from "../data/editoAudio.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
+import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
 
 const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
@@ -130,6 +131,8 @@ export default function EditoAudioPanel() {
   const [grades, setGrades]             = useState({});
   // Dictée state: { [tid]: { current:number, typed:{[i]:str}, results:{[i]:{ok,diff}} } }
   const [dictee, setDictee]             = useState({});
+  // Note expansions: { [tid|ni]: { loading, content } }
+  const [noteExpansions, setNoteExpansions] = useState({});
 
   const tracks   = selectedUnit ? (EDITO_AUDIO[selectedUnit] || []) : [];
   const unitData = EDITO_UNITS.find(u => u.id === selectedUnit);
@@ -193,6 +196,36 @@ export default function EditoAudioPanel() {
 
   const dicteeReset = tid =>
     setDictee(prev => ({ ...prev, [tid]: { current: 0, typed: {}, results: {} } }));
+
+  // ── AI expand Pour note ───────────────────────────────────────
+  const handleExpandNote = async (tid, ni, heading, phrases) => {
+    const key = `${tid}|${ni}`;
+    setNoteExpansions(prev => ({ ...prev, [key]: { loading: true } }));
+    try {
+      const res = await fetch("/api/proxy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          max_tokens: 400,
+          messages: [{ role: "user", content:
+`Bạn là giáo viên tiếng Pháp A1, dạy cho học sinh Việt Nam.
+Giải thích công thức giao tiếp: "${heading}"
+Công thức trong bài: ${phrases.join(" / ")}
+
+Trả về JSON thuần (không markdown):
+{"vi":"Dùng khi nào, hoàn cảnh nào (2-3 câu ngắn tiếng Việt)","examples":["câu ví dụ 1 tiếng Pháp","câu ví dụ 2","câu ví dụ 3"],"tip":"ghi chú ngữ pháp ngắn hoặc null"}` }],
+        }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const raw = data.content?.[0]?.text || "{}";
+      const match = raw.match(/\{[\s\S]*\}/);
+      const content = JSON.parse(match ? match[0] : "{}");
+      setNoteExpansions(prev => ({ ...prev, [key]: { loading: false, content } }));
+    } catch {
+      setNoteExpansions(prev => ({ ...prev, [key]: { loading: false, content: { vi: "Lỗi kết nối AI. Thử lại nhé! 😢" } } }));
+    }
+  };
 
   // ── Render ────────────────────────────────────────────────────
   return (
@@ -298,27 +331,33 @@ export default function EditoAudioPanel() {
                 </div>
 
                 {/* ── Action buttons ── */}
-                <div style={{ display: "flex", gap: 0, borderTop: `1px solid ${C.border}`, borderBottom: mode ? `1px solid ${C.border}` : "none" }}>
-                  {[
-                    { id: "questions", icon: "📋", label: "Câu hỏi",  action: () => togglePanel(track.id, "questions") },
-                    { id: "script",    icon: "📖", label: "Script",   action: () => togglePanel(track.id, "script") },
-                    { id: "dictee",    icon: "✏️",  label: "Chép",    action: () => openDictee(track.id) },
-                  ].map((btn, bi) => (
-                    <button key={btn.id} onClick={btn.action}
-                      style={{
-                        flex: 1, padding: "0.45rem 0.2rem",
-                        background: mode === btn.id ? track.colorLight : "transparent",
-                        border: "none",
-                        borderRight: bi < 2 ? `1px solid ${C.border}` : "none",
-                        color: mode === btn.id ? track.color : C.gray,
-                        fontSize: "0.68rem", fontWeight: mode === btn.id ? 700 : 500,
-                        cursor: "pointer", fontFamily: "inherit",
-                        transition: "all 0.13s",
-                      }}>
-                      {btn.icon} {btn.label}
-                    </button>
-                  ))}
-                </div>
+                {(() => {
+                  const btns = [
+                    { id: "questions", icon: "📋", label: "Câu hỏi", action: () => togglePanel(track.id, "questions") },
+                    { id: "script",    icon: "📖", label: "Script",  action: () => togglePanel(track.id, "script") },
+                    { id: "dictee",    icon: "✏️",  label: "Chép",   action: () => openDictee(track.id) },
+                    ...(EDITO_POUR_NOTES[track.id] ? [{ id: "notes", icon: "📝", label: "Note", action: () => togglePanel(track.id, "notes") }] : []),
+                  ];
+                  return (
+                    <div style={{ display: "flex", gap: 0, borderTop: `1px solid ${C.border}`, borderBottom: mode ? `1px solid ${C.border}` : "none" }}>
+                      {btns.map((btn, bi) => (
+                        <button key={btn.id} onClick={btn.action}
+                          style={{
+                            flex: 1, padding: "0.45rem 0.2rem",
+                            background: mode === btn.id ? track.colorLight : "transparent",
+                            border: "none",
+                            borderRight: bi < btns.length - 1 ? `1px solid ${C.border}` : "none",
+                            color: mode === btn.id ? track.color : C.gray,
+                            fontSize: "0.68rem", fontWeight: mode === btn.id ? 700 : 500,
+                            cursor: "pointer", fontFamily: "inherit",
+                            transition: "all 0.13s",
+                          }}>
+                          {btn.icon} {btn.label}
+                        </button>
+                      ))}
+                    </div>
+                  );
+                })()}
 
                 {/* ══ PANEL: Questions ══════════════════════════════ */}
                 {mode === "questions" && (
@@ -452,6 +491,63 @@ export default function EditoAudioPanel() {
                         </li>
                       ))}
                     </ol>
+                  </div>
+                )}
+
+                {/* ══ PANEL: Notes (Pour communiquer) ══════════════ */}
+                {mode === "notes" && EDITO_POUR_NOTES[track.id] && (
+                  <div style={{ padding: "0.7rem 0.85rem", display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                    <div style={{ fontSize: "0.6rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                      📝 Pour communiquer — Piste {track.trackNum}
+                    </div>
+                    {EDITO_POUR_NOTES[track.id].map((note, ni) => {
+                      const expKey = `${track.id}|${ni}`;
+                      const exp = noteExpansions[expKey];
+                      return (
+                        <div key={ni} style={{ borderRadius: 10, border: `1.5px solid ${track.color}30`, overflow: "hidden" }}>
+                          {/* Heading row */}
+                          <div style={{ background: track.color, color: "#fff", padding: "0.35rem 0.75rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
+                            <span style={{ fontSize: "0.69rem", fontWeight: 700, lineHeight: 1.3 }}>{note.heading}</span>
+                            <button
+                              onClick={() => !exp?.loading && handleExpandNote(track.id, ni, note.heading, note.phrases)}
+                              style={{ background: "rgba(255,255,255,0.22)", border: "none", color: "#fff", fontSize: "0.6rem", fontWeight: 700, padding: "0.12rem 0.55rem", borderRadius: 10, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", flexShrink: 0 }}>
+                              {exp?.loading ? "⏳" : exp?.content ? "✓ AI" : "AI ✦"}
+                            </button>
+                          </div>
+                          {/* Phrases */}
+                          <div style={{ background: track.colorLight, padding: "0.45rem 0.75rem 0.5rem" }}>
+                            <ul style={{ margin: 0, paddingLeft: "1.1rem" }}>
+                              {note.phrases.map((p, pi) => (
+                                <li key={pi} style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.75, fontStyle: "italic" }}>{p}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          {/* AI expansion */}
+                          {exp && !exp.loading && exp.content && (
+                            <div style={{ background: "#FAFAFA", padding: "0.5rem 0.75rem", borderTop: `1px dashed ${track.color}30` }}>
+                              {exp.content.vi && (
+                                <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.3rem" }}>
+                                  💬 <em>{exp.content.vi}</em>
+                                </div>
+                              )}
+                              {exp.content.examples?.length > 0 && (
+                                <div style={{ marginBottom: "0.2rem" }}>
+                                  <div style={{ fontSize: "0.58rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.2rem" }}>Thêm ví dụ</div>
+                                  {exp.content.examples.map((ex, ei) => (
+                                    <div key={ei} style={{ fontSize: "0.73rem", color: track.color, fontStyle: "italic", lineHeight: 1.65 }}>› {ex}</div>
+                                  ))}
+                                </div>
+                              )}
+                              {exp.content.tip && exp.content.tip !== "null" && (
+                                <div style={{ fontSize: "0.67rem", color: "#6D28D9", background: "#F5F3FF", borderRadius: 6, padding: "0.28rem 0.5rem", marginTop: "0.25rem" }}>
+                                  📌 {exp.content.tip}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
 
