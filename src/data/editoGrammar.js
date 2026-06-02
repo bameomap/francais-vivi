@@ -697,14 +697,51 @@ THÀNH LẬP SỐ NHIỀU:
 • Đã có -S/-X: gros→gros, heureux→heureux
 • -EAU → -EAUX: beau→beaux, nouveau→nouveaux
 
-⚠️ Màu sắc từ tên vật → KHÔNG ĐỔI: orange, marron, kaki, crème
-"Des chaussures orange." (không phải oranges)`,
+⚠️ MÀU SẮC ĐẶC BIỆT — KHÔNG BAO GIỜ ĐỔI HÌNH THÁI (invariable)
+
+📌 TẠI SAO? Những màu này bắt nguồn từ TÊN SỰ VẬT (trái cây, thực vật, khoáng sản).
+Chúng vẫn là "danh từ dùng như tính từ" → không có giống cái / số nhiều.
+
+DANH SÁCH PHỔ BIẾN:
+• orange → quả cam: une robe orange, des robes orange
+• marron → quả dẻ: un sac marron, des sacs marron
+• kaki → quả hồng / vải kaki: un pantalon kaki, des pantalons kaki
+• crème → kem: une chemise crème, des chemises crème
+• citron → quả chanh: une veste citron, des vestes citron
+• cerise → quả cherry: un chapeau cerise, des chapeaux cerise
+• chocolat → sô-cô-la: un manteau chocolat, des manteaux chocolat
+• caramel → kẹo caramel: des chaussures caramel
+• marine → biển: un pull marine, des pulls marine
+• olive → quả ô-liu: des pantalons olive
+• saumon → cá hồi: une veste saumon
+• or → vàng (kim loại): des boutons or
+• argent → bạc (kim loại): une ceinture argent
+
+❌ LỖI HAY GẶP:
+des chaussures oranges ❌ → des chaussures orange ✅
+des sacs marrons ❌ → des sacs marron ✅
+des robes crèmes ❌ → des robes crème ✅
+une veste citrons ❌ → une veste citron ✅
+
+⚠️ CHÚ Ý: rose, mauve, lilas, turquoise — theo lý thuyết cũng bất biến
+(bắt nguồn từ tên hoa/đá quý), nhưng trong thực tế người Pháp HAY thêm -s
+→ ở trình độ A1, cả hai đều được chấp nhận.
+
+💡 MÀU GHÉP → LUÔN KHÔNG ĐỔI:
+Khi ghép 2 từ màu hoặc màu + bổ nghĩa → không bao giờ thêm -e / -s
+• bleu marine → des chaussettes bleu marine (KHÔNG phải bleus marines)
+• bleu clair → des yeux bleu clair
+• rouge foncé → des rideaux rouge foncé
+• gris clair → une veste gris clair
+• vert olive → des pantalons vert olive`,
         examples:[
           "Un pull noir, une robe noire, des pulls noirs, des robes noires.",
           "Il est actif. Elle est active. Ils sont actifs. Elles sont actives.",
           "C'est un beau sac! C'est une belle robe! Ce sont de beaux vêtements!",
           "Un gilet gris, une veste grise, des chaussures grises.",
-          "Des chaussures marron. (couleur = invariable!)",
+          "Des chaussures marron, des sacs orange, des manteaux chocolat. — Invariable!",
+          "Un pull marine, des pulls marine. (KHÔNG phải marines)",
+          "Des chaussettes bleu marine. (màu ghép → không đổi)",
           "Elle porte une jupe longue et un pull court.",
         ]
       },
