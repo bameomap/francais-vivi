@@ -896,6 +896,84 @@ Tương tự: devenir (trở thành), revenir (quay lại), tenir (giữ)`,
           "Nous vendons des accessoires et des vêtements. — Chúng tôi bán phụ kiện và quần áo.",
         ]
       },
+      {
+        topic:"Dans un magasin — Poids, Taille, Matière, Prix",
+        rule:`KHI MUA SẮM — 4 chủ đề cần nắm chắc (Production orale):
+
+⚖️ POIDS — Cân nặng:
+
+Với NGƯỜI (động từ PESER):
+• Tu pèses combien ? / Vous pesez combien ?
+• Quel est ton/votre poids ?
+→ Je pèse [60] kilos. / Mon poids est de [60] kilos.
+
+Với ĐỒ VẬT:
+• Quel est le poids de [la valise] ?
+→ Elle pèse [10] kilos. / Son poids est de [10] kilos.
+→ Il/Elle est de [X] kilos.
+Ví dụ: Mon sac pèse 1 kilo. = Mon sac est de 1 kilo.
+
+📏 TAILLE — Kích cỡ:
+
+Chiều cao (động từ MESURER / FAIRE):
+• Quelle est ta taille ?
+→ Je mesure 1m65. / Je fais 1m70.
+
+Cỡ quần áo (FAIRE DU + số/chữ):
+• Quelle est ta taille ? / Vous faites quelle taille ?
+→ Je fais du M. / Je fais du 38. / Je fais du L.
+⚠️ Dùng FAIRE DU, không phải "je suis taille M"
+
+Cỡ giày (CHAUSSER / FAIRE DU):
+• Tu chausses combien ? / Vous faites quelle taille ?
+→ Je chausse du 39. / Je fais du 39.
+
+🧵 MATIÈRE — Chất liệu:
+
+EN + matière = làm bằng... (KHÔNG có mạo từ sau EN!)
+• en coton   = bằng cotton/vải bông
+• en laine   = bằng len
+• en cuir    = bằng da
+• en plastique = bằng nhựa
+• en tissu   = bằng vải
+• en métal   = bằng kim loại
+• en soie    = bằng lụa
+• en bois    = bằng gỗ
+
+Hỏi chất liệu — 2 cách:
+• Quelle est la matière de [la valise] ?
+• De quelle matière est [la valise] ?
+→ C'est en cuir. / Elle est en plastique. / Mon tee-shirt est en coton.
+
+⚠️ Không nói "C'est fait de cuir" ở trình độ A1 → dùng "C'est en cuir"
+
+💰 PRIX — Giá:
+
+Hỏi giá — 3 cách đều đúng:
+• Quel est le prix ? / Quel est le prix de [la valise] ?
+• Combien ça coûte ?
+• C'est combien ?
+→ C'est [20] euros. / Ça coûte [20] euros.
+
+👗 MÔ TẢ ĐỒ VẬT VÀ TRANG PHỤC:
+
+Quels objets technologiques avez-vous / as-tu ?
+→ J'ai un smartphone / une tablette / un ordinateur portable / une montre connectée.
+
+Quels vêtements / accessoires portez-vous aujourd'hui ?
+→ Je porte une robe / un tee-shirt / une ceinture / des lunettes.
+→ Je porte des chaussures. / Je porte une paire de chaussures.`,
+        examples:[
+          "Tu pèses combien? — Je pèse 65 kilos. / Mon poids est de 65 kilos.",
+          "Quel est le poids de la valise? — Elle pèse 8 kilos. / Son poids est de 8 kilos.",
+          "Quelle est ta taille? — Je mesure 1m70. / Je fais du 40.",
+          "Tu chausses combien? — Je chausse du 38. / Je fais du 38.",
+          "De quelle matière est ce sac? — C'est en cuir. Il est très solide!",
+          "Quelle est la matière de cette veste? — Elle est en laine. C'est chaud!",
+          "Combien ça coûte? / C'est combien? — Ça coûte 45 euros. / C'est 45 euros.",
+          "Quels vêtements portez-vous aujourd'hui? — Je porte un jean et un tee-shirt en coton.",
+        ]
+      },
     ]
   },
   {
