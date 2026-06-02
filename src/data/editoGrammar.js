@@ -42,12 +42,39 @@ Bảng chia:
 • Ils/Elles ont → Họ có
 
 Dùng avoir để:
-✅ Nói tuổi (quan trọng!): J'ai 20 ans. (KHÔNG nói "Je suis 20 ans")
-✅ Nói có/sở hữu: Tu as une voiture?
-✅ Diễn đạt cảm giác thể chất: Il a faim (đói), il a soif (khát), il a froid (lạnh)
+✅ Nói tuổi: J'ai 20 ans. (KHÔNG nói "Je suis 20 ans")
+✅ Sở hữu: Tu as une voiture? / J'ai un chien.
 
-⚠️ Lỗi thường gặp: Nói tuổi dùng AVOIR, không dùng être!
-❌ Je suis 25 ans.   ✅ J'ai 25 ans.`,
+CÁC CỤM "AVOIR + NOM" CỰC KỲ HAY DÙNG:
+
+🔴 Cảm giác thể chất (KHÔNG dùng être!):
+• avoir faim     → đói:           J'ai faim! On mange?
+• avoir soif     → khát:          Tu as soif? Prends de l'eau.
+• avoir chaud    → nóng (người):  J'ai chaud, j'enlève ma veste.
+• avoir froid    → lạnh (người):  Elle a froid, elle met un pull.
+• avoir sommeil  → buồn ngủ:      Il a sommeil, il va se coucher.
+• avoir mal à    → đau...:        J'ai mal à la tête / à la gorge / au ventre / au dos.
+• avoir de la fièvre → bị sốt:   Elle a de la fièvre, 39 degrés.
+
+🟡 Tâm trạng & nhu cầu:
+• avoir peur (de)   → sợ:            J'ai peur des araignées.
+• avoir envie (de)  → muốn / thèm:   J'ai envie de chocolat! Il a envie de sortir.
+• avoir besoin (de) → cần:           J'ai besoin d'aide. Tu as besoin de quelque chose?
+• avoir honte (de)  → xấu hổ:        Il a honte de son erreur.
+• avoir du mal (à)  → gặp khó khăn:  J'ai du mal à comprendre.
+
+🟢 Đánh giá & may mắn:
+• avoir raison    → đúng:        Tu as raison!
+• avoir tort      → sai:         Non, tu as tort!
+• avoir de la chance → may mắn:  Elle a de la chance!
+• avoir l'air + adj → trông có vẻ: Il a l'air fatigué. (trông mệt, dù có thể không mệt thật)
+
+⚠️ LỖI HAY GẶP: Nói tuổi dùng AVOIR, KHÔNG dùng être!
+❌ Je suis 25 ans.   ✅ J'ai 25 ans.
+
+⚠️ "avoir chaud/froid" ≠ "il fait chaud/froid":
+• J'ai chaud.    = Tôi (cảm thấy) nóng. → nói về người
+• Il fait chaud. = Trời nóng.            → nói về thời tiết`,
         examples:[
           "J'ai 22 ans. — Tôi 22 tuổi.",
           "Tu as un stylo? — Bạn có cây bút không?",
@@ -1407,23 +1434,45 @@ Plus / Autant / Moins + que (pas d'adjectif)
         topic:"Passé composé avec ÊTRE — Verbes de mouvement et d'état",
         rule:`Một số động từ dùng ÊTRE thay vì AVOIR ở passé composé!
 
-DANH SÁCH PHẢI NHỚ (nhớ qua từ "DR & MRS VANT P" hoặc "la maison d'être"):
-aller↔venir, partir↔arriver, entrer↔sortir,
-monter↔descendre, naître↔mourir, rester, tomber,
-passer, retourner, rentrer, devenir, revenir
+14 ĐỘNG TỪ DÙNG ÊTRE — HỌC THUỘC LÒNG:
 
-⚠️ Với ÊTRE: PARTICIPE PASSÉ S'ACCORDE avec le SUJET!
-• Masculin sg: Il est allé.
-• Féminin sg: Elle est allée. (ajout de -E)
-• Masculin pl: Ils sont allés. (ajout de -S)
-• Féminin pl: Elles sont allées. (ajout de -ES)
+Các cặp đối nghĩa (dễ nhớ theo cặp):
+• aller   ↔  venir:     Je suis allé(e).  /  Il est venu.
+• partir  ↔  arriver:   Elle est partie.  /  Ils sont arrivés.
+• entrer  ↔  sortir:    Tu es entré(e).   /  Elle est sortie.
+• monter  ↔  descendre: Il est monté.     /  Elle est descendue.
+• naître  ↔  mourir:    Elle est née.     /  Il est mort.
 
-⚠️ Verbes pronominaux → TOUJOURS avec ÊTRE:
-"Je me suis levé(e)." "Il s'est habillé."
+Còn lại (5 động từ):
+• rester   → Nous sommes restés (à la maison).
+• tomber   → Il est tombé dans l'escalier.
+• passer   → Elle est passée me voir.
+• retourner → Ils sont retournés en France.
+• rentrer  → Tu es rentré(e) tard hier soir.
 
-⚠️ ATTENTION: monter/descendre/sortir/rentrer/passer avec COD → AVOIR!
-"Elle est montée." (sans COD, être)
-"Elle a monté les bagages." (avec COD, avoir)`,
+Các động từ có tiền tố (devenir, revenir...) → cũng dùng ÊTRE:
+• devenir → Elle est devenue médecin.
+• revenir → Il est revenu du Japon.
+
+💡 Mẹo nhớ bằng tiếng Việt — nghĩ về "chuyển động + trạng thái sống":
+ĐI (aller/partir) · ĐẾN (venir/arriver) · VÀO (entrer) · RA (sortir)
+LÊN (monter) · XUỐNG (descendre) · NGÃ (tomber) · Ở LẠI (rester)
+SINH (naître) · CHẾT (mourir) · QUAY LẠI (retourner/revenir/rentrer)
+TRỞ THÀNH (devenir) · ĐI QUA (passer)
+
+⚠️ ACCORD PARTICIPE PASSÉ với CHỦ NGỮ (khác với avoir!):
+• Nam sg:  Il est allé.
+• Nữ sg:   Elle est allée.   (+E)
+• Nam pl:  Ils sont allés.   (+S)
+• Nữ pl:   Elles sont allées.(+ES)
+
+⚠️ Verbes pronominaux → LUÔN DÙNG ÊTRE:
+"Je me suis levé(e)." / "Il s'est habillé." / "Elle s'est couchée."
+
+⚠️ NGOẠI LỆ quan trọng: monter/descendre/sortir/rentrer/passer
+→ Có COD (bổ ngữ trực tiếp) → dùng AVOIR!
+"Elle est montée." (không có COD → être)
+"Elle a monté les bagages." (COD = les bagages → avoir, không accord với sujet)`,
         examples:[
           "Je suis allé(e) à la plage hier. — Tôi đã đến bãi biển hôm qua.",
           "Elle est arrivée à 8h du matin. — Cô ấy đã đến lúc 8 giờ sáng.",
@@ -1605,27 +1654,44 @@ Trop de + nom: "Il y a trop DE bruit."
         ]
       },
       {
-        topic:"Thời gian và tiếp diễn — Pendant, Longtemps, Toujours",
-        rule:`Ba biểu thức chỉ THỜI GIAN và SỰ TIẾP DIỄN — Unité 10:
+        topic:"Thời gian và tiếp diễn — Depuis, Pendant, Longtemps, Toujours",
+        rule:`Các biểu thức chỉ THỜI GIAN và SỰ TIẾP DIỄN — Unité 10:
 
-PENDANT + durée = "trong suốt / trong khoảng thời gian"
-"J'ai travaillé dans cette entreprise PENDANT deux ans."
+DEPUIS — rất quan trọng, hay bị nhầm!
+
+DEPUIS + durée = "từ ... đến nay" / "được ... rồi" (còn đang tiếp diễn)
+→ Dùng với THÌ HIỆN TẠI (présent), KHÔNG phải passé composé!
+"J'habite ici DEPUIS deux ans." = Tôi sống đây được 2 năm rồi (vẫn đang sống)
+"Il travaille dans cette entreprise DEPUIS cinq ans." (vẫn đang làm)
+"Tu attends depuis longtemps?" / "Je travaille ici depuis 2020."
+
+DEPUIS + point de départ = "từ khi..."
+"Il est malade depuis lundi." (từ thứ Hai đến nay)
+"Elle apprend le français depuis septembre."
+
+⚠️ DEPUIS vs IL Y A:
+• DEPUIS → hành động BẮT ĐẦU và VẪN TIẾP DIỄN (présent)
+  "Je travaille ici DEPUIS 3 ans." (đang làm, còn tiếp tục)
+• IL Y A → hành động đã XẢY RA trong quá khứ, ĐÃ XONG (passé composé)
+  "Je suis arrivé IL Y A 3 ans." (đến 3 năm trước, hành động đã hoàn thành)
+
+PENDANT + durée = "trong suốt / trong khoảng thời gian" (đã kết thúc)
+"J'ai travaillé dans cette entreprise PENDANT deux ans." (không còn làm nữa)
 "Elle a étudié le français PENDANT six mois."
-→ Dùng với passé composé, chỉ khoảng thời gian đã kết thúc
+→ Dùng với passé composé hoặc thì đã hoàn thành
 
 LONGTEMPS = "lâu / trong thời gian dài" (không chỉ định cụ thể)
-"Il a attendu LONGTEMPS." (Anh ấy đã chờ rất lâu)
-"Je travaille ici depuis LONGTEMPS." (Tôi làm đây lâu rồi)
+"Il a attendu LONGTEMPS." / "Je travaille ici depuis longtemps."
 
 TOUJOURS — có HAI nghĩa, phân biệt qua ngữ cảnh:
 1. = "vẫn còn" (tiếp diễn): "Il travaille TOUJOURS ici."
 2. = "luôn luôn" (tần suất): "Je prends TOUJOURS le bus."
 
 ENCORE = "vẫn còn" (đồng nghĩa với toujours nghĩa 1)
-"Tu es encore là? — Toujours!" (Bạn vẫn còn đó? — Vẫn!)
+"Tu es encore là? — Toujours!"
 
 ⚠️ NE... PLUS = không còn nữa (phủ định của toujours/encore)
-"Il ne travaille PLUS ici." (Anh ấy không còn làm ở đây nữa)`,
+"Il ne travaille PLUS ici."`,
         examples:[
           "J'ai travaillé dans cette société pendant cinq ans. — Tôi đã làm việc ở công ty đó năm năm.",
           "Elle a cherché un emploi pendant longtemps. — Cô ấy đã tìm việc trong thời gian dài.",
