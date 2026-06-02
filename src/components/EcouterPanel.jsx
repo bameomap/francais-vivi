@@ -5,11 +5,13 @@ import DicteePanel from "./DicteePanel.jsx";
 import ListeningQuiz from "./ListeningQuiz.jsx";
 import AudioDictee from "./AudioDictee.jsx";
 import EditoAudioPanel from "./EditoAudioPanel.jsx";
+import PourPracticePanel from "./PourPracticePanel.jsx";
 
 // ── Main tabs ──────────────────────────────────────────────────────
 const MAIN_TABS = [
-  { id: "edito",  label: "📚 Édito" },
-  { id: "luyen",  label: "🎧 Luyện nghe" },
+  { id: "edito",    label: "📚 Édito"      },
+  { id: "luyen",    label: "🎧 Luyện nghe" },
+  { id: "practice", label: "🎯 Luyện tập"  },
 ];
 
 // ── Sub-tabs inside "Luyện nghe" ───────────────────────────────────
@@ -42,9 +44,10 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
 
   // Hero subtitle
   const heroSub =
-    mainTab === "edito" ? "Nghe & học theo sách Édito A1" :
-    subTab  === "chon"  ? "Nghe & chọn đáp án" :
-    subTab  === "chep"  ? "Nghe & chép chính tả" : "File audio của bạn";
+    mainTab === "edito"    ? "Nghe & học theo sách Édito A1"       :
+    mainTab === "practice" ? "AI tạo tình huống · Bạn viết · AI chấm" :
+    subTab  === "chon"     ? "Nghe & chọn đáp án"                  :
+    subTab  === "chep"     ? "Nghe & chép chính tả"                : "File audio của bạn";
 
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
@@ -84,6 +87,9 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
 
       {/* ══ TAB: Édito ══════════════════════════════════════════════ */}
       {mainTab === "edito" && <EditoAudioPanel />}
+
+      {/* ══ TAB: Luyện tập ══════════════════════════════════════════ */}
+      {mainTab === "practice" && <PourPracticePanel />}
 
       {/* ══ TAB: Luyện nghe ════════════════════════════════════════ */}
       {mainTab === "luyen" && (
