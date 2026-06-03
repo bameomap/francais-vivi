@@ -24,8 +24,8 @@ function WordDiff({ result }) {
   return (
     <div style={{ lineHeight: 2.1, fontSize: "0.88rem", fontFamily: "Georgia,serif" }}>
       {result.map((r, i) => {
-        const color = r.status === "ok" ? C.green : r.status === "accent" ? "#D97706" : C.red;
-        const bg    = r.status === "ok" ? "#ECFDF5" : r.status === "accent" ? "#FFFBEB" : "#FEF2F2";
+        const color = r.status === "ok" ? C.green : r.status === "accent" ? C.gold : C.red;
+        const bg    = r.status === "ok" ? C.greenL : r.status === "accent" ? C.goldL : C.redL;
         return (
           <span key={i} style={{ marginRight: "0.35rem", display: "inline-block" }}>
             <span style={{ background: bg, color, borderRadius: 4, padding: "0 3px", fontWeight: 600 }}>
@@ -35,7 +35,7 @@ function WordDiff({ result }) {
               <span style={{ fontSize: "0.68rem", color: C.gray, marginLeft: 2 }}>({r.typed})</span>
             )}
             {r.status === "accent" && (
-              <span style={{ fontSize: "0.62rem", color: "#D97706", marginLeft: 1 }}>~accent</span>
+              <span style={{ fontSize: "0.62rem", color: C.gold, marginLeft: 1 }}>~accent</span>
             )}
           </span>
         );
@@ -137,7 +137,7 @@ export default function AudioDictee() {
             <audio ref={audioRef} src={audioUrl} controls style={{ width: "100%", borderRadius: 10, marginBottom: "0.5rem" }} />
             <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
               <button onClick={replay5}
-                style={{ padding: "0.3rem 0.85rem", background: "#EFF6FF", border: "1.5px solid #0891B233", color: "#0891B2", borderRadius: 999, fontSize: "0.72rem", fontWeight: 600, cursor: "pointer" }}>
+                style={{ padding: "0.3rem 0.85rem", background: C.blueL, border: "1.5px solid #0891B233", color: "#0891B2", borderRadius: 999, fontSize: "0.72rem", fontWeight: 600, cursor: "pointer" }}>
                 ↩ -5s
               </button>
               <button onClick={() => { setAudioUrl(null); setFileName(""); if (fileRef.current) fileRef.current.value = ""; }}
@@ -257,7 +257,7 @@ export default function AudioDictee() {
     <div style={{ padding: "1rem", animation: "fadeUp 0.3s ease" }}>
       <div style={{ background: C.white, borderRadius: 20, padding: "1.4rem 1.2rem", border: `1.5px solid ${C.border}`, textAlign: "center" }}>
         <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>{pct >= 80 ? "🎉" : pct >= 60 ? "👍" : "💪"}</div>
-        <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "2rem", color: pct >= 80 ? "#059669" : pct >= 60 ? C.gold : C.red, fontWeight: 700 }}>
+        <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "2rem", color: pct >= 80 ? C.green : pct >= 60 ? C.gold : C.red, fontWeight: 700 }}>
           {okWords}/{totalWords}
         </div>
         <div style={{ fontSize: "0.75rem", color: C.gray, marginTop: "0.2rem", marginBottom: "1rem" }}>

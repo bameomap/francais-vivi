@@ -118,7 +118,7 @@ export default function ListeningQuiz({ words: propWords = [] }) {
             <div key={i} style={{ display:"flex", alignItems:"center", gap:"0.5rem", padding:"0.3rem 0", borderBottom: i<results.length-1?`1px solid ${C.border}`:"none" }}>
               <span style={{ fontSize:"0.85rem" }}>{r.correct ? "✅" : "❌"}</span>
               <span style={{ fontFamily:"Georgia,serif", fontSize:"0.85rem", color:C.ink, fontWeight:600 }}>{r.word.fr}</span>
-              <span style={{ fontSize:"0.75rem", color:r.correct?"#059669":C.red, marginLeft:"auto" }}>{r.word.vi}</span>
+              <span style={{ fontSize:"0.75rem", color:r.correct?C.green:C.red, marginLeft:"auto" }}>{r.word.vi}</span>
             </div>
           ))}
         </div>
@@ -146,7 +146,7 @@ export default function ListeningQuiz({ words: propWords = [] }) {
         </div>
         <div style={{ display:"flex", justifyContent:"space-between" }}>
           <span style={{ fontSize:"0.62rem", color:C.gray }}>Câu {qIdx+1}/{round.length}</span>
-          <span style={{ fontSize:"0.62rem", color:"#059669", fontWeight:700 }}>✓ {score} đúng</span>
+          <span style={{ fontSize:"0.62rem", color:C.green, fontWeight:700 }}>✓ {score} đúng</span>
         </div>
       </div>
 
@@ -186,8 +186,8 @@ export default function ListeningQuiz({ words: propWords = [] }) {
             const isSelected = selected === i;
             let bg = C.white, border = `1.5px solid ${C.border}`, wordColor = C.blue;
             if (checked) {
-              if (isCorrect)           { bg = "#F0FDF4"; border = `2px solid #059669`; wordColor = "#059669"; }
-              else if (isSelected)     { bg = "#FEF2F2"; border = `2px solid #DC2626`; wordColor = "#DC2626"; }
+              if (isCorrect)           { bg = C.greenL; border = `2px solid #059669`; wordColor = C.green; }
+              else if (isSelected)     { bg = C.redL; border = `2px solid #DC2626`; wordColor = C.red; }
             } else if (isSelected)     { bg = C.blueL; border = `2px solid ${C.blue}`; }
             return (
               <button key={i} onClick={() => !checked && setSelected(i)} disabled={checked}

@@ -71,7 +71,7 @@ function ConjugQuiz({ conjugation, onDone }) {
                   width:"100%", padding:"0.48rem 0.65rem",
                   border:`1.5px solid ${checked ? (st==="ok" ? C.green : C.red) : C.border}`,
                   borderRadius:10,
-                  background:checked ? (st==="ok" ? C.greenL : "#FEF2F2") : C.white,
+                  background:checked ? (st==="ok" ? C.greenL : C.redL) : C.white,
                   fontSize:"0.88rem", fontFamily:"Georgia,serif", color:C.ink,
                   outline:"none", boxSizing:"border-box",
                 }}
@@ -342,7 +342,7 @@ export default function ConjugaisonPanel() {
               </div>
 
               {result.tip && (
-                <div style={{ marginTop:"0.7rem", background:C.goldL, borderRadius:10, padding:"0.5rem 0.75rem", fontSize:"0.75rem", color:"#92400E", border:`1px solid ${C.gold}40` }}>
+                <div style={{ marginTop:"0.7rem", background:C.goldL, borderRadius:10, padding:"0.5rem 0.75rem", fontSize:"0.75rem", color:C.gold, border:`1px solid ${C.gold}40` }}>
                   💡 {result.tip}
                 </div>
               )}

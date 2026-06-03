@@ -13,8 +13,8 @@ const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u
 
 // ── Question group styles ──────────────────────────────────────────
 const Q_STYLE = {
-  "Entrée en matière": { bg: "#FFFBEB", border: "#D97706", chip: "#D97706", icon: "🔍" },
-  "1ère écoute":       { bg: "#EFF6FF", border: "#2563EB", chip: "#2563EB", icon: "👂" },
+  "Entrée en matière": { bg: C.goldL, border: C.gold, chip: C.gold, icon: "🔍" },
+  "1ère écoute":       { bg: C.blueL, border: "#2563EB", chip: "#2563EB", icon: "👂" },
   "2e écoute":         { bg: "#F5F3FF", border: "#7C3AED", chip: "#7C3AED", icon: "👂👂" },
 };
 
@@ -375,7 +375,7 @@ Trả về JSON thuần (không markdown):
                             {qs.icon} {qGroup.label}
                           </div>
                           {/* Sub-questions */}
-                          <div style={{ background: qs.bg }}>
+                          <div style={{ background: `${qs.border}14` }}>
                             {subQs.map((q, qIdx) => {
                               const key   = `${track.id}|${gIdx}|${qIdx}`;
                               const grade = grades[key];
@@ -444,13 +444,13 @@ Trả về JSON thuần (không markdown):
                                   {/* Grade result */}
                                   {!isWarmup && graded && (
                                     <div style={{
-                                      background: grade.correct ? "#F0FDF4" : "#FFF1F2",
-                                      border: `1px solid ${grade.correct ? "#86EFAC" : "#FCA5A5"}`,
+                                      background: grade.correct ? C.greenL : C.redL,
+                                      border: `1px solid ${grade.correct ? C.green : C.red}`,
                                       borderRadius: 8, padding: "0.5rem 0.65rem",
                                     }}>
                                       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.25rem" }}>
                                         <span style={{ fontSize: "1.05rem" }}>{grade.correct ? "✅" : "❌"}</span>
-                                        <span style={{ fontSize: "0.7rem", fontWeight: 700, color: grade.correct ? "#15803D" : "#BE123C", flex: 1 }}>
+                                        <span style={{ fontSize: "0.7rem", fontWeight: 700, color: grade.correct ? C.green : C.red, flex: 1 }}>
                                           {grade.correct ? "Đúng rồi!" : "Chưa đúng"}
                                         </span>
                                         <button onClick={() => resetGrade(track.id, gIdx, qIdx)}
@@ -537,7 +537,7 @@ Trả về JSON thuần (không markdown):
                             <div style={{ background: "#FAFAFA", padding: "0.5rem 0.75rem", borderTop: `1px dashed ${track.color}30` }}>
                               {exp.content.vi && (
                                 <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.25rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
-                                  <span style={{ background: "#EFF6FF", color: "#2563EB", fontSize: "0.56rem", fontWeight: 700, padding: "0.1rem 0.35rem", borderRadius: 5, flexShrink: 0, marginTop: "0.15rem" }}>VI</span>
+                                  <span style={{ background: C.blueL, color: "#2563EB", fontSize: "0.56rem", fontWeight: 700, padding: "0.1rem 0.35rem", borderRadius: 5, flexShrink: 0, marginTop: "0.15rem" }}>VI</span>
                                   <em>{exp.content.vi}</em>
                                 </div>
                               )}
@@ -715,12 +715,12 @@ Trả về JSON thuần (không markdown):
                           {result && (
                             <div>
                               <div style={{
-                                background: result.ok ? "#F0FDF4" : "#FFF1F2",
-                                border: `1px solid ${result.ok ? "#86EFAC" : "#FCA5A5"}`,
+                                background: result.ok ? C.greenL : C.redL,
+                                border: `1px solid ${result.ok ? C.green : C.red}`,
                                 borderRadius: 8, padding: "0.55rem 0.7rem",
                                 marginBottom: "0.4rem",
                               }}>
-                                <div style={{ fontSize: "0.65rem", fontWeight: 700, color: result.ok ? "#15803D" : "#BE123C", marginBottom: "0.35rem" }}>
+                                <div style={{ fontSize: "0.65rem", fontWeight: 700, color: result.ok ? C.green : C.red, marginBottom: "0.35rem" }}>
                                   {result.ok ? "✅ Chính xác!" : "❌ Có lỗi — chữ đỏ là chỗ sai:"}
                                 </div>
                                 {/* Word-by-word diff */}
@@ -729,7 +729,7 @@ Trả về JSON thuần (không markdown):
                                     <span key={wi}>
                                       <span style={{
                                         background: w.ok ? "transparent" : "#FEE2E2",
-                                        color: w.ok ? "#15803D" : "#DC2626",
+                                        color: w.ok ? C.green : C.red,
                                         borderBottom: w.ok ? "none" : "2px solid #DC2626",
                                         padding: "0 1px",
                                         fontWeight: w.ok ? 400 : 700,

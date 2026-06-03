@@ -42,7 +42,7 @@ export const EDITO_SCENARIOS = [
   },
   {
     id:"direction", label:"Demander le chemin", icon:"🗺️", desc:"Hỏi đường trong phố",
-    color:"#C0392B", bg:"#FDEDEC",
+    color:"#C0392B", bg:C.redL,
     phrases:["Excusez-moi !","Où est… ?","C'est loin ?","À gauche ou à droite ?","Merci, au revoir !"],
     prompt:"You are a French passerby in the street. The learner is A1 level. Wait for them to ask for directions. Give simple directions. After each reply, if there are mistakes put a correction note prefixed EXACTLY with '💡' on its own line.",
   },
@@ -221,7 +221,7 @@ export default function ConversationPanel({ onBackToParcours }) {
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.6rem" }}>
                 {EDITO_SCENARIOS.map(sc => (
                   <button key={sc.id} onClick={() => startScenario(sc)}
-                    style={{ background:sc.bg, border:`1.5px solid ${sc.color}33`, borderRadius:16, padding:"0.9rem 0.85rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"transform 0.1s, box-shadow 0.15s", boxShadow:`0 2px 8px ${sc.color}18` }}
+                    style={{ background:C.white, border:`1.5px solid ${sc.color}33`, borderRadius:16, padding:"0.9rem 0.85rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"transform 0.1s, box-shadow 0.15s", boxShadow:`0 2px 8px ${sc.color}18` }}
                     onPointerDown={e => e.currentTarget.style.transform="scale(0.97)"}
                     onPointerUp={e => e.currentTarget.style.transform="scale(1)"}
                     onPointerLeave={e => e.currentTarget.style.transform="scale(1)"}
@@ -330,9 +330,9 @@ export default function ConversationPanel({ onBackToParcours }) {
               </button>
               {/* Inline correction */}
               {inlineCorrects[i] && (
-                <div style={{ background:"#FFFBEB", border:"1.5px solid #FCD34D", borderRadius:"10px 10px 10px 4px", padding:"0.55rem 0.8rem", maxWidth:"82%", animation:"fadeUp 0.2s ease" }}>
-                  <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.1em", color:"#D97706", fontWeight:700, marginBottom:4 }}>Phân tích</div>
-                  <div style={{ fontSize:"0.75rem", color:"#7a5c00", lineHeight:1.65, whiteSpace:"pre-wrap" }}>{inlineCorrects[i]}</div>
+                <div style={{ background:C.goldL, border:`1.5px solid ${C.gold}55`, borderRadius:"10px 10px 10px 4px", padding:"0.55rem 0.8rem", maxWidth:"82%", animation:"fadeUp 0.2s ease" }}>
+                  <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.1em", color:C.gold, fontWeight:700, marginBottom:4 }}>Phân tích</div>
+                  <div style={{ fontSize:"0.75rem", color:C.ink, lineHeight:1.65, whiteSpace:"pre-wrap" }}>{inlineCorrects[i]}</div>
                 </div>
               )}
             </div>
@@ -349,10 +349,10 @@ export default function ConversationPanel({ onBackToParcours }) {
               </div>
               {/* Grammar correction bubbles */}
               {correctionLines.length > 0 && (
-                <div style={{ background:"#FFFBEB", border:"1.5px solid #FCD34D", borderRadius:12, padding:"0.5rem 0.75rem", maxWidth:"82%", display:"flex", flexDirection:"column", gap:"0.25rem" }}>
-                  <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.1em", color:"#D97706", fontWeight:700, marginBottom:2 }}>Nhận xét ngữ pháp</div>
+                <div style={{ background:C.goldL, border:`1.5px solid ${C.gold}55`, borderRadius:12, padding:"0.5rem 0.75rem", maxWidth:"82%", display:"flex", flexDirection:"column", gap:"0.25rem" }}>
+                  <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.1em", color:C.gold, fontWeight:700, marginBottom:2 }}>Nhận xét ngữ pháp</div>
                   {correctionLines.map((c, j) => (
-                    <div key={j} style={{ fontSize:"0.75rem", color:"#7a5c00", lineHeight:1.55 }}>💡 {c}</div>
+                    <div key={j} style={{ fontSize:"0.75rem", color:C.ink, lineHeight:1.55 }}>💡 {c}</div>
                   ))}
                 </div>
               )}
@@ -364,11 +364,11 @@ export default function ConversationPanel({ onBackToParcours }) {
                 const frExample = qMatch?.[1] || null;
                 return (
                   <div style={{ background:C.goldL, border:`1px solid ${C.gold}55`, borderRadius:"4px 14px 14px 14px", padding:"0.42rem 0.75rem", maxWidth:"82%", animation:"fadeUp 0.2s ease" }}>
-                    <div style={{ fontSize:"0.58rem", fontWeight:700, color:"#B45309", letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.2rem" }}>💬 Gợi ý</div>
-                    <div style={{ fontSize:"0.74rem", color:"#78350F", lineHeight:1.55 }}>{txt}</div>
+                    <div style={{ fontSize:"0.58rem", fontWeight:700, color:C.gold, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:"0.2rem" }}>💬 Gợi ý</div>
+                    <div style={{ fontSize:"0.74rem", color:C.ink, lineHeight:1.55 }}>{txt}</div>
                     {frExample && (
                       <button onClick={() => setInput(frExample)}
-                        style={{ marginTop:"0.35rem", padding:"0.2rem 0.6rem", background:"rgba(255,255,255,0.7)", border:`1px solid ${C.gold}55`, borderRadius:20, fontSize:"0.68rem", color:"#92400E", cursor:"pointer", fontFamily:"Georgia,serif", fontStyle:"italic", fontWeight:600 }}>
+                        style={{ marginTop:"0.35rem", padding:"0.2rem 0.6rem", background:C.white, border:`1px solid ${C.gold}55`, borderRadius:20, fontSize:"0.68rem", color:C.gold, cursor:"pointer", fontFamily:"Georgia,serif", fontStyle:"italic", fontWeight:600 }}>
                         ✎ Dùng câu này
                       </button>
                     )}
@@ -393,9 +393,9 @@ export default function ConversationPanel({ onBackToParcours }) {
           </div>
         )}
         {err && (
-          <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", background:"#FEF2F2", borderRadius:8, padding:"0.4rem 0.65rem" }}>
-            <span style={{ color:"#DC2626", fontSize:"0.75rem", flex:1 }}>⚠ {err}</span>
-            <button onClick={retry} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
+          <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", background:C.redL, borderRadius:8, padding:"0.4rem 0.65rem" }}>
+            <span style={{ color:C.red, fontSize:"0.75rem", flex:1 }}>⚠ {err}</span>
+            <button onClick={retry} style={{ padding:"0.2rem 0.6rem", background:C.red, color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
           </div>
         )}
         <div ref={bottomRef} />

@@ -99,7 +99,7 @@ function GrammarCard({ point, isOpen, onToggle }) {
                 <div key={i} style={{
                   fontSize: isHeader ? "0.62rem" : "0.8rem",
                   fontWeight: isHeader ? 700 : 400,
-                  color: isWarning ? "#E67E22" : isTip ? "#0891B2" : isOk ? "#059669" : isWrong ? "#DC2626" : isHeader ? C.gray : C.ink,
+                  color: isWarning ? "#E67E22" : isTip ? "#0891B2" : isOk ? C.green : isWrong ? C.red : isHeader ? C.gray : C.ink,
                   letterSpacing: isHeader ? "0.1em" : 0,
                   textTransform: isHeader ? "uppercase" : "none",
                   fontFamily: isBullet || isOk || isWrong ? "Georgia,serif" : "inherit",

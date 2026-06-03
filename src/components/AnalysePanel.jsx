@@ -255,7 +255,7 @@ ${inputText?`<div class="orig">${inputText.slice(0,600)}${inputText.length>600?"
           <textarea value={inputText} onChange={e=>setInputText(e.target.value)}
             placeholder="Dán văn bản tiếng Pháp vào đây..."
             style={{ width:"100%", height:120, border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.6rem", fontFamily:"inherit", fontSize:"0.82rem", background:C.white, resize:"vertical", color:C.ink, lineHeight:1.6, outline:"none", boxSizing:"border-box" }}/>
-          {err && <div style={{ color:"#DC2626", fontSize:"0.75rem", padding:"0.38rem 0.58rem", background:"#FEF2F2", borderRadius:6, border:"1px solid #FCA5A5" }}>⚠ {err}</div>}
+          {err && <div style={{ color:C.red, fontSize:"0.75rem", padding:"0.38rem 0.58rem", background:C.redL, borderRadius:6, border:`1px solid ${C.red}55` }}>⚠ {err}</div>}
           <button onClick={()=>inputText.trim()&&analyse(inputText)} disabled={!inputText.trim()||state==="loading"}
             style={{ padding:"0.75rem", background: inputText.trim() ? `linear-gradient(135deg, ${C.accent}, #c0392b)` : C.border, color:C.white, border:"none", borderRadius:10, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.92rem", cursor:!inputText.trim()?"not-allowed":"pointer", fontWeight:700, transition:"background 0.15s", boxShadow: inputText.trim() ? `0 4px 14px ${C.accent}44` : "none" }}>
             Phân tích ✦

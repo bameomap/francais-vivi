@@ -11,9 +11,9 @@ const MODULES_META = [
   { id:"defi",         label:"Thử thách",  icon:"🏆", color:"#8E44AD" },
   { id:"srs",          label:"Ôn tập",     icon:"🃏", color:"#0D9488" },
   { id:"reference",    label:"Cẩm nang",   icon:"🗺️", color:"#6D28D9" },
-  { id:"lecture",      label:"Đọc hiểu",   icon:"📜", color:"#059669" },
+  { id:"lecture",      label:"Đọc hiểu",   icon:"📜", color:C.green },
   { id:"dictee",       label:"Nghe chép",  icon:"🎵", color:"#0891B2" },
-  { id:"phrasebook",   label:"Mẫu câu",    icon:"💬", color:"#D97706" },
+  { id:"phrasebook",   label:"Mẫu câu",    icon:"💬", color:C.gold },
 ];
 
 // ── Streak calendar ───────────────────────────────────────────
@@ -53,7 +53,7 @@ function StreakCalendar({ history }) {
             <div key={i} title={d.toLocaleDateString("vi-VN")}
               style={{
                 aspectRatio:"1", borderRadius:5,
-                background: future ? "transparent" : studied ? "#059669" : "#F3F4F6",
+                background: future ? "transparent" : studied ? C.green : "#F3F4F6",
                 border: isToday ? `2px solid ${C.blue}` : "none",
                 opacity: future ? 0.2 : 1,
                 transition:"background 0.2s",
@@ -64,7 +64,7 @@ function StreakCalendar({ history }) {
       </div>
       <div style={{ display:"flex", gap:"0.75rem", marginTop:"0.6rem", fontSize:"0.65rem", color:C.gray }}>
         <span><span style={{ display:"inline-block", width:10, height:10, background:"#F3F4F6", borderRadius:3, marginRight:3 }}/>Chưa học</span>
-        <span><span style={{ display:"inline-block", width:10, height:10, background:"#059669", borderRadius:3, marginRight:3 }}/>Đã học</span>
+        <span><span style={{ display:"inline-block", width:10, height:10, background:C.green, borderRadius:3, marginRight:3 }}/>Đã học</span>
       </div>
     </div>
   );
@@ -83,7 +83,7 @@ function SRSBar({ stats }) {
   const segments = [
     { label:"Mới",       n: newW,     color:"#94A3B8" },
     { label:"Đang học",  n: learning, color:"#3B82F6" },
-    { label:"Thuộc",     n: mastered, color:"#059669" },
+    { label:"Thuộc",     n: mastered, color:C.green },
   ].filter(s => s.n > 0);
 
   return (
@@ -212,9 +212,9 @@ export default function StatsPanel() {
       {/* ── Hero stats ── */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"0.5rem" }}>
         {[
-          { icon:"🔥", value: streak.streak || 0, label:"Ngày streak", color:streak.streak>0?"#D97706":"#9CA3AF" },
+          { icon:"🔥", value: streak.streak || 0, label:"Ngày streak", color:streak.streak>0?C.gold:"#9CA3AF" },
           { icon:"📚", value: totalVocab,          label:"Từ trong SRS", color:C.blue },
-          { icon:"✅", value: masteredCnt,          label:"Đã thuộc",    color:"#059669" },
+          { icon:"✅", value: masteredCnt,          label:"Đã thuộc",    color:C.green },
         ].map((s, i) => (
           <div key={i} style={{ background:C.white, borderRadius:14, padding:"0.85rem 0.6rem", border:`1.5px solid ${C.border}`, textAlign:"center" }}>
             <div style={{ fontSize:"1.5rem", marginBottom:"0.2rem" }}>{s.icon}</div>
@@ -253,7 +253,7 @@ export default function StatsPanel() {
         {sectionLabel(`Tiến độ SRS · ${totalVocab} từ`)}
         <SRSBar stats={srsStats} />
         {srsStats.due > 0 && (
-          <div style={{ marginTop:"0.75rem", background:"#FEF2F2", borderRadius:10, padding:"0.45rem 0.75rem", fontSize:"0.75rem", color:C.red, fontWeight:600 }}>
+          <div style={{ marginTop:"0.75rem", background:C.redL, borderRadius:10, padding:"0.45rem 0.75rem", fontSize:"0.75rem", color:C.red, fontWeight:600 }}>
             ⚡ Còn {srsStats.due} từ cần ôn hôm nay!
           </div>
         )}

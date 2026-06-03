@@ -12,7 +12,7 @@ const MODULE_LABELS = {
 const MODULE_COLORS = {
   vocab:"#4A90D9", grammar:"#7B6CF6", conversation:"#2980B9",
   writing:"#E67E22", defi:"#8E44AD", srs:"#0D9488",
-  lecture:"#059669", dictee:"#0891B2", unknown:"#9CA3AF",
+  lecture:C.green, dictee:"#0891B2", unknown:"#9CA3AF",
 };
 
 // ── Flashcard drill ───────────────────────────────────────────
@@ -30,7 +30,7 @@ function FlashDrill({ mistakes, onDone }) {
     const pct = total > 0 ? Math.round(known.length / total * 100) : 100;
     return (
       <div style={{ padding:"1rem", textAlign:"center" }}>
-        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:pct>=80?"#059669":pct>=60?C.gold:C.red, fontWeight:700, marginTop:"0.8rem" }}>
+        <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:pct>=80?C.green:pct>=60?C.gold:C.red, fontWeight:700, marginTop:"0.8rem" }}>
           {known.length}/{total}
         </div>
         <div style={{ fontSize:"0.78rem", color:C.gray, marginTop:"0.2rem", marginBottom:"1.2rem" }}>đã nhớ</div>
@@ -61,7 +61,7 @@ function FlashDrill({ mistakes, onDone }) {
       {/* Card */}
       <div
         onClick={() => setFlipped(v => !v)}
-        style={{ background: flipped ? "#ECFDF5" : C.white, borderRadius:20, padding:"2rem 1.2rem", border:`1.5px solid ${flipped?"#059669":C.border}`, textAlign:"center", cursor:"pointer", minHeight:180, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0.75rem", transition:"background 0.2s, border-color 0.2s", animation:"pop 0.25s ease" }}>
+        style={{ background: flipped ? C.greenL : C.white, borderRadius:20, padding:"2rem 1.2rem", border:`1.5px solid ${flipped?C.green:C.border}`, textAlign:"center", cursor:"pointer", minHeight:180, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0.75rem", transition:"background 0.2s, border-color 0.2s", animation:"pop 0.25s ease" }}>
         <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:2, color:C.gray }}>
           {flipped ? "Nghĩa" : "Nhấn để lật"}
         </div>
@@ -80,7 +80,7 @@ function FlashDrill({ mistakes, onDone }) {
           </>
         ) : (
           <>
-            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:"#059669", fontWeight:700 }}>{card.vi || "—"}</div>
+            <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.4rem", color:C.green, fontWeight:700 }}>{card.vi || "—"}</div>
             <div style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.ink, fontStyle:"italic" }}>{card.fr}</div>
             {card.context && (
               <div style={{ fontSize:"0.75rem", color:C.gray, fontStyle:"italic", maxWidth:240 }}>"{card.context}"</div>
@@ -94,12 +94,12 @@ function FlashDrill({ mistakes, onDone }) {
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.5rem" }}>
           <button
             onClick={() => { setAgain(a => [...a, card.ts]); setIdx(0); setFlipped(false); }}
-            style={{ padding:"0.7rem", background:"#FEF2F2", border:`1.5px solid ${C.red}44`, borderRadius:12, color:C.red, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
+            style={{ padding:"0.7rem", background:C.redL, border:`1.5px solid ${C.red}44`, borderRadius:12, color:C.red, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
             ↩ Chưa nhớ
           </button>
           <button
             onClick={() => { setKnown(k => [...k, card.ts]); clearMistake(card.ts); setIdx(0); setFlipped(false); }}
-            style={{ padding:"0.7rem", background:"#ECFDF5", border:`1.5px solid #05966944`, borderRadius:12, color:"#059669", fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
+            style={{ padding:"0.7rem", background:C.greenL, border:`1.5px solid #05966944`, borderRadius:12, color:C.green, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
             ✅ Đã nhớ
           </button>
         </div>
@@ -131,7 +131,7 @@ export default function RevisionPanel() {
 
   if (mistakes.length === 0) return (
     <div style={{ padding:"1.5rem 1rem", textAlign:"center" }}>
-      <div style={{ fontSize:"0.9rem", color:"#059669", fontWeight:600 }}>Không có lỗi nào cần ôn — parfait! ✨</div>
+      <div style={{ fontSize:"0.9rem", color:C.green, fontWeight:600 }}>Không có lỗi nào cần ôn — parfait! ✨</div>
       <div style={{ fontSize:"0.78rem", color:C.gray, marginTop:"1rem", lineHeight:1.7 }}>
         Câu sai trong Défi, Dictée, và Quiz sẽ được<br/>gom về đây để bạn ôn lại.
       </div>
@@ -157,7 +157,7 @@ export default function RevisionPanel() {
       </div>
 
       {showClearConfirm && (
-        <div style={{ background:"#FEF2F2", border:`1.5px solid ${C.red}44`, borderRadius:12, padding:"0.75rem 1rem", display:"flex", alignItems:"center", gap:"0.75rem", animation:"fadeUp 0.2s ease" }}>
+        <div style={{ background:C.redL, border:`1.5px solid ${C.red}44`, borderRadius:12, padding:"0.75rem 1rem", display:"flex", alignItems:"center", gap:"0.75rem", animation:"fadeUp 0.2s ease" }}>
           <div style={{ flex:1, fontSize:"0.78rem", color:C.red }}>Xóa hết {mistakes.length} lỗi?</div>
           <button onClick={clearAll} style={{ padding:"0.3rem 0.7rem", background:C.red, color:C.white, border:"none", borderRadius:8, fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>Xóa</button>
           <button onClick={() => setShowClearConfirm(false)} style={{ padding:"0.3rem 0.7rem", background:"transparent", border:`1px solid ${C.border}`, borderRadius:8, fontSize:"0.72rem", cursor:"pointer" }}>Hủy</button>

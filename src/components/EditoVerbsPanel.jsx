@@ -53,7 +53,7 @@ function ResultFooter({ score, total, color, onNext }) {
       <div style={{
         fontFamily:"'Playfair Display',Georgia,serif",
         fontSize:"1.6rem", fontWeight:700,
-        color: pct >= 0.8 ? "#059669" : pct >= 0.5 ? C.gold : C.red,
+        color: pct >= 0.8 ? C.green : pct >= 0.5 ? C.gold : C.red,
       }}>
         {score}/{total}
       </div>
@@ -106,9 +106,9 @@ function TableQuiz({ data, unit, onNext }) {
                 onChange={e => setInputs(v => v.map((x, j) => j === i ? e.target.value : x))}
                 onKeyDown={e => { if (e.key === "Enter") { if (i < 5) refs.current[i+1]?.focus(); else setChecked(true); } }}
                 placeholder="…"
-                style={{ width:"100%", padding:"0.45rem 0.6rem", border:`1.5px solid ${checked?(st==="ok"?"#059669":C.red):C.border}`, borderRadius:10, background:checked?(st==="ok"?"#ECFDF5":"#FEF2F2"):C.white, fontSize:"0.88rem", fontFamily:"Georgia,serif", color:C.ink, outline:"none", boxSizing:"border-box" }}
+                style={{ width:"100%", padding:"0.45rem 0.6rem", border:`1.5px solid ${checked?(st==="ok"?C.green:C.red):C.border}`, borderRadius:10, background:checked?(st==="ok"?C.greenL:C.redL):C.white, fontSize:"0.88rem", fontFamily:"Georgia,serif", color:C.ink, outline:"none", boxSizing:"border-box" }}
               />
-              {checked && st === "wrong" && <div style={{ fontSize:"0.68rem", color:"#059669", fontWeight:700, marginTop:"0.1rem" }}>→ {data.conjugations[i]}</div>}
+              {checked && st === "wrong" && <div style={{ fontSize:"0.68rem", color:C.green, fontWeight:700, marginTop:"0.1rem" }}>→ {data.conjugations[i]}</div>}
             </div>
           </div>
         );
@@ -120,7 +120,7 @@ function TableQuiz({ data, unit, onNext }) {
         </button>
       ) : (
         <div>
-          {data.tip && <div style={{ background:"#FFFBEB", borderRadius:10, padding:"0.45rem 0.75rem", fontSize:"0.72rem", color:"#92400E", margin:"0.4rem 0" }}>💡 {data.tip}</div>}
+          {data.tip && <div style={{ background:C.goldL, borderRadius:10, padding:"0.45rem 0.75rem", fontSize:"0.72rem", color:C.gold, margin:"0.4rem 0" }}>💡 {data.tip}</div>}
           {data.example && (() => {
             const s = data.example.indexOf(" — ");
             const fr = s >= 0 ? data.example.slice(0, s) : data.example;
@@ -157,19 +157,19 @@ function FillQuiz({ data, unit, onNext }) {
         const st = checked ? results[i] : "idle";
         const parts = q.fr.split("___");
         return (
-          <div key={i} style={{ background:C.white, border:`1.5px solid ${checked?(st==="ok"?"#059669":C.red):C.border}`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
+          <div key={i} style={{ background:C.white, border:`1.5px solid ${checked?(st==="ok"?C.green:C.red):C.border}`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
             <div style={{ display:"flex", alignItems:"center", flexWrap:"wrap", gap:"0.25rem", marginBottom:"0.3rem" }}>
               {parts[0] && <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#1E293B", fontStyle:"italic" }}>{parts[0].trim()}</span>}
               <input
                 value={inputs[i]} disabled={checked}
                 onChange={e => setInputs(v => v.map((x, j) => j === i ? e.target.value : x))}
                 placeholder="…"
-                style={{ padding:"0.2rem 0.5rem", border:`1.5px solid ${checked?(st==="ok"?"#059669":C.red):C.border}`, borderRadius:8, fontSize:"0.85rem", fontFamily:"Georgia,serif", color:C.ink, background:checked?(st==="ok"?"#ECFDF5":"#FEF2F2"):C.white, width:96, outline:"none" }}
+                style={{ padding:"0.2rem 0.5rem", border:`1.5px solid ${checked?(st==="ok"?C.green:C.red):C.border}`, borderRadius:8, fontSize:"0.85rem", fontFamily:"Georgia,serif", color:C.ink, background:checked?(st==="ok"?C.greenL:C.redL):C.white, width:96, outline:"none" }}
               />
               {parts[1] && <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#1E293B", fontStyle:"italic" }}>{parts[1].trim()}</span>}
             </div>
             <div style={{ fontSize:"0.7rem", color:C.gray }}>{q.vi}</div>
-            {checked && st === "wrong" && <div style={{ fontSize:"0.72rem", color:"#059669", fontWeight:700, marginTop:"0.2rem" }}>→ {q.answer}</div>}
+            {checked && st === "wrong" && <div style={{ fontSize:"0.72rem", color:C.green, fontWeight:700, marginTop:"0.2rem" }}>→ {q.answer}</div>}
           </div>
         );
       })}
@@ -212,8 +212,8 @@ function ChoiceQuiz({ data, unit, onNext }) {
                 const isCorrect = oi === q.correct;
                 let bg = C.white, border = C.border, color = C.ink;
                 if (checked) {
-                  if (isCorrect)          { bg = "#ECFDF5"; border = "#059669"; color = "#059669"; }
-                  else if (isChosen)      { bg = "#FEF2F2"; border = C.red;     color = C.red;     }
+                  if (isCorrect)          { bg = C.greenL; border = C.green; color = C.green; }
+                  else if (isChosen)      { bg = C.redL; border = C.red;     color = C.red;     }
                 } else if (isChosen)      { bg = C.blueL;   border = C.blue;     color = C.blue;    }
                 return (
                   <button key={oi} onClick={() => { if (!checked) setAnswers(v => v.map((x, j) => j === i ? oi : x)); }}
@@ -262,7 +262,7 @@ function TransformQuiz({ data, unit, onNext }) {
       {qs.map((q, i) => {
         const st = checked ? results[i] : "idle";
         return (
-          <div key={i} style={{ background:C.white, border:`1.5px solid ${checked?(st==="ok"?"#059669":C.red):C.border}`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
+          <div key={i} style={{ background:C.white, border:`1.5px solid ${checked?(st==="ok"?C.green:C.red):C.border}`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
             <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.2rem" }}>Câu gốc ({data.from})</div>
             <div style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#1E293B", fontStyle:"italic", marginBottom:"0.15rem" }}>« {q.original} »</div>
             <div style={{ fontSize:"0.7rem", color:C.gray, marginBottom:"0.45rem" }}>{q.original_vi}</div>
@@ -271,11 +271,11 @@ function TransformQuiz({ data, unit, onNext }) {
               value={inputs[i]} disabled={checked}
               onChange={e => setInputs(v => v.map((x, j) => j === i ? e.target.value : x))}
               placeholder="…"
-              style={{ width:"100%", padding:"0.45rem 0.6rem", border:`1.5px solid ${checked?(st==="ok"?"#059669":C.red):C.border}`, borderRadius:10, background:checked?(st==="ok"?"#ECFDF5":"#FEF2F2"):C.white, fontSize:"0.85rem", fontFamily:"Georgia,serif", color:C.ink, outline:"none", boxSizing:"border-box" }}
+              style={{ width:"100%", padding:"0.45rem 0.6rem", border:`1.5px solid ${checked?(st==="ok"?C.green:C.red):C.border}`, borderRadius:10, background:checked?(st==="ok"?C.greenL:C.redL):C.white, fontSize:"0.85rem", fontFamily:"Georgia,serif", color:C.ink, outline:"none", boxSizing:"border-box" }}
             />
             {checked && st === "wrong" && (
               <div style={{ marginTop:"0.3rem" }}>
-                <div style={{ fontSize:"0.72rem", color:"#059669", fontWeight:700 }}>→ {q.answer}</div>
+                <div style={{ fontSize:"0.72rem", color:C.green, fontWeight:700 }}>→ {q.answer}</div>
                 {q.answer_vi && <div style={{ fontSize:"0.68rem", color:C.gray }}>{q.answer_vi}</div>}
               </div>
             )}
@@ -347,7 +347,7 @@ function MatchQuiz({ unit, onNext }) {
             const isWrong    = flash === "wrong" && leftSel === i;
             return (
               <button key={i} onClick={() => pickLeft(i)} disabled={isMatched}
-                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.border}`, background:isMatched?"#ECFDF5":isWrong?"#FEF2F2":isSelected?C.blueL:C.white, color:isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.ink, fontFamily:"Georgia,serif", fontStyle:"italic", fontSize:"0.82rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
+                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?C.green:isWrong?C.red:isSelected?C.blue:C.border}`, background:isMatched?C.greenL:isWrong?C.redL:isSelected?C.blueL:C.white, color:isMatched?C.green:isWrong?C.red:isSelected?C.blue:C.ink, fontFamily:"Georgia,serif", fontStyle:"italic", fontSize:"0.82rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
                 {isMatched ? "✓ " : ""}{v.infinitive}
               </button>
             );
@@ -362,7 +362,7 @@ function MatchQuiz({ unit, onNext }) {
             const isWrong    = flash === "wrong" && rightSel === mi;
             return (
               <button key={mi} onClick={() => pickRight(mi)} disabled={isMatched}
-                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.border}`, background:isMatched?"#ECFDF5":isWrong?"#FEF2F2":isSelected?C.blueL:C.white, color:isMatched?"#059669":isWrong?C.red:isSelected?C.blue:C.ink, fontSize:"0.78rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
+                style={{ padding:"0.5rem 0.6rem", borderRadius:10, border:`1.5px solid ${isMatched?C.green:isWrong?C.red:isSelected?C.blue:C.border}`, background:isMatched?C.greenL:isWrong?C.redL:isSelected?C.blueL:C.white, color:isMatched?C.green:isWrong?C.red:isSelected?C.blue:C.ink, fontSize:"0.78rem", cursor:isMatched?"default":"pointer", fontWeight:isSelected?700:400, transition:"all 0.15s", textAlign:"left" }}>
                 {isMatched ? "✓ " : ""}{verbs[verbIdx].meaning}
               </button>
             );
@@ -372,7 +372,7 @@ function MatchQuiz({ unit, onNext }) {
 
       {done && (
         <div style={{ textAlign:"center", marginTop:"0.3rem" }}>
-          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, color:"#059669" }}>🎉 Hoàn thành!</div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, color:C.green }}>🎉 Hoàn thành!</div>
           <button onClick={onNext} style={{ marginTop:"0.4rem", padding:"0.5rem 1.5rem", background:C.accent, color:"#fff", border:"none", borderRadius:20, fontSize:"0.82rem", cursor:"pointer", fontWeight:700 }}>Tiếp theo →</button>
         </div>
       )}
@@ -689,7 +689,7 @@ function UnitExerciseView({ unit, onBack }) {
 
         {/* ── Error ───────────────────────────────────────── */}
         {err && (
-          <div style={{ color:"#DC2626", fontSize:"0.78rem", padding:"0.75rem", background:"#FEF2F2", borderRadius:10, marginTop:"0.5rem" }}>
+          <div style={{ color:C.red, fontSize:"0.78rem", padding:"0.75rem", background:C.redL, borderRadius:10, marginTop:"0.5rem" }}>
             ⚠ {err}
           </div>
         )}

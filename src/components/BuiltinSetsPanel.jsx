@@ -60,7 +60,7 @@ export default function BuiltinSetsPanel({ onAdd }) {
                   <div style={{ fontSize:"0.68rem", color:set.color, fontWeight:600 }}>{set.desc} · {set.words.length} từ</div>
                 </div>
                 {isDone
-                  ? <span style={{ fontSize:"0.7rem", background:"#ECFDF5", color:"#059669", border:"1.5px solid #059669", borderRadius:20, padding:"0.15rem 0.55rem", fontWeight:700, flexShrink:0 }}>✓ SRS</span>
+                  ? <span style={{ fontSize:"0.7rem", background:C.greenL, color:C.green, border:"1.5px solid #059669", borderRadius:20, padding:"0.15rem 0.55rem", fontWeight:700, flexShrink:0 }}>✓ SRS</span>
                   : <button
                       onClick={e => { e.stopPropagation(); addSet(set); }}
                       style={{ padding:"0.3rem 0.75rem", background:set.color, color:"#fff", border:"none", borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontWeight:700, flexShrink:0, whiteSpace:"nowrap" }}>

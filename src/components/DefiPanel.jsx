@@ -92,7 +92,7 @@ export default function DefiPanel() {
   const todayDefi  = history.find(h => h.date === today);
 
   const TYPES = [
-    { id:"weak",   icon:"🎯", label:"Ôn từ yếu",        color:C.red,      bg:"#FFF0EF",
+    { id:"weak",   icon:"🎯", label:"Ôn từ yếu",        color:C.red,      bg:C.redL,
       desc: weakWords.length >= 5  ? `${weakWords.length} từ cần ôn`  : "Chưa có — làm bài tập thêm nhé",
       disabled: weakWords.length < 5 },
     { id:"vocab",  icon:"📚", label:"Từ vựng đang học",  color:C.blue,     bg:C.blueL,
@@ -213,7 +213,7 @@ export default function DefiPanel() {
   // ── Error ──
   if (err) return (
     <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
-      <div style={{ color:C.red, fontSize:"0.8rem", padding:"0.75rem", background:"#fde8e6", borderRadius:10 }}>⚠ {err}</div>
+      <div style={{ color:C.red, fontSize:"0.8rem", padding:"0.75rem", background:C.redL, borderRadius:10 }}>⚠ {err}</div>
       <button onClick={() => { setMode(null); setErr(""); }} style={{ padding:"0.5rem 1rem", border:`1px solid ${C.border}`, borderRadius:20, background:"transparent", color:C.gray, fontSize:"0.78rem", cursor:"pointer" }}>← Chọn lại</button>
     </div>
   );
@@ -319,8 +319,8 @@ export function DefiQuiz({ defi, onFinish }) {
                 {q.options.map((opt, j) => {
                   let bg = C.white, bc = C.border, col = C.ink;
                   if (isRevealed) {
-                    if (opt.toLowerCase() === (q.answer||"").toLowerCase()) { bg="#e8f7f1"; bc=C.green; col=C.green; }
-                    else if (opt === answers[i]) { bg="#fde8e6"; bc=C.red; col=C.red; }
+                    if (opt.toLowerCase() === (q.answer||"").toLowerCase()) { bg=C.greenL; bc=C.green; col=C.green; }
+                    else if (opt === answers[i]) { bg=C.redL; bc=C.red; col=C.red; }
                   } else if (answers[i] === opt) { bg=C.blueL; bc=C.blue; col=C.blue; }
                   return (
                     <button key={j} disabled={isRevealed}
@@ -342,7 +342,7 @@ export function DefiQuiz({ defi, onFinish }) {
                   onChange={e => setInputVals(v=>({...v,[i]:e.target.value}))}
                   onKeyDown={e => { if(e.key==="Enter"&&!isRevealed) submitInput(i,q); }}
                   placeholder="Nhập câu tiếng Pháp..."
-                  style={{ flex:1, border:`1.5px solid ${isRevealed?(correct?C.green:C.red):C.border}`, borderRadius:9, padding:"0.45rem 0.7rem", fontSize:"0.85rem", fontFamily:"Georgia,serif", background:isRevealed?(correct?"#e8f7f1":"#fde8e6"):C.white, color:isRevealed?(correct?C.green:C.red):C.ink, outline:"none" }}/>
+                  style={{ flex:1, border:`1.5px solid ${isRevealed?(correct?C.green:C.red):C.border}`, borderRadius:9, padding:"0.45rem 0.7rem", fontSize:"0.85rem", fontFamily:"Georgia,serif", background:isRevealed?(correct?C.greenL:C.redL):C.white, color:isRevealed?(correct?C.green:C.red):C.ink, outline:"none" }}/>
                 {!isRevealed && (
                   <button onClick={() => submitInput(i,q)}
                     style={{ padding:"0.45rem 0.8rem", background:C.accent, color:C.white, border:"none", borderRadius:9, fontSize:"0.8rem", cursor:"pointer", whiteSpace:"nowrap" }}>
@@ -353,7 +353,7 @@ export function DefiQuiz({ defi, onFinish }) {
             )}
 
             {isRevealed && (
-              <div style={{ marginTop:"0.5rem", fontSize:"0.72rem", lineHeight:1.6, padding:"0.4rem 0.6rem", background:correct?"#e8f7f1":"#fde8e6", borderRadius:7 }}>
+              <div style={{ marginTop:"0.5rem", fontSize:"0.72rem", lineHeight:1.6, padding:"0.4rem 0.6rem", background:correct?C.greenL:C.redL, borderRadius:7 }}>
                 {correct
                   ? <span style={{ color:C.green, fontWeight:600 }}>✓ Chính xác!</span>
                   : <span style={{ color:C.red }}>✗ Đáp án: <b style={{ fontFamily:"Georgia,serif" }}>{q.answer}</b></span>

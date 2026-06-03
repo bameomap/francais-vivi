@@ -67,8 +67,8 @@ function WordDiff({ result }) {
   return (
     <div style={{ lineHeight:2.1, fontSize:"0.88rem", fontFamily:"Georgia,serif" }}>
       {result.map((r, i) => {
-        const color = r.status==="ok" ? "#059669" : r.status==="accent" ? "#D97706" : "#DC2626";
-        const bg    = r.status==="ok" ? "#ECFDF5"  : r.status==="accent" ? "#FFFBEB"  : "#FEF2F2";
+        const color = r.status==="ok" ? C.green : r.status==="accent" ? C.gold : C.red;
+        const bg    = r.status==="ok" ? C.greenL  : r.status==="accent" ? C.goldL  : C.redL;
         return (
           <span key={i} style={{ marginRight:"0.35rem", display:"inline-block" }}>
             <span style={{ background:bg, color, borderRadius:4, padding:"0 3px", fontWeight:600 }}>{r.word}</span>
@@ -76,7 +76,7 @@ function WordDiff({ result }) {
               <span style={{ fontSize:"0.65rem", color:C.gray, marginLeft:2 }}>({r.typed})</span>
             )}
             {r.status === "accent" && (
-              <span style={{ fontSize:"0.6rem", color:"#D97706", marginLeft:1 }}>~accent</span>
+              <span style={{ fontSize:"0.6rem", color:C.gold, marginLeft:1 }}>~accent</span>
             )}
           </span>
         );
@@ -538,7 +538,7 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
           </div>
         )}
 
-        {err && <div style={{ color:"#DC2626", fontSize:"0.78rem", textAlign:"center" }}>⚠ {err}</div>}
+        {err && <div style={{ color:C.red, fontSize:"0.78rem", textAlign:"center" }}>⚠ {err}</div>}
 
         <button onClick={start}
           style={{ padding:"0.8rem", background:`linear-gradient(135deg,${C.accent},#c0392b)`, color:"#fff", border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700 }}>
@@ -637,7 +637,7 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
         </div>
         <div style={{ display:"flex", justifyContent:"space-between" }}>
           <span style={{ fontSize:"0.62rem", color:C.gray }}>Câu {current+1}/{sentences.length}</span>
-          <span style={{ fontSize:"0.62rem", color:"#059669", fontWeight:700 }}>✓ {results.filter(r=>r.grade.every(g=>g.status==="ok")).length} hoàn hảo</span>
+          <span style={{ fontSize:"0.62rem", color:C.green, fontWeight:700 }}>✓ {results.filter(r=>r.grade.every(g=>g.status==="ok")).length} hoàn hảo</span>
         </div>
       </div>
 

@@ -158,8 +158,8 @@ export default function WordDetailSheet({ word, onClose }) {
 
           {/* ── Ví dụ ── */}
           {details?.ex_fr && (
-            <div style={{ background:"#FFFBEB", border:"1px solid #FDE68A", borderRadius:14, padding:"0.9rem 1rem", marginBottom:"0.9rem" }}>
-              <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1.5, color:"#D97706", fontWeight:700, marginBottom:"0.5rem" }}>
+            <div style={{ background:C.goldL, border:`1px solid ${C.gold}55`, borderRadius:14, padding:"0.9rem 1rem", marginBottom:"0.9rem" }}>
+              <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1.5, color:C.gold, fontWeight:700, marginBottom:"0.5rem" }}>
                 ✦ Ví dụ
               </div>
               <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:"0.5rem" }}>

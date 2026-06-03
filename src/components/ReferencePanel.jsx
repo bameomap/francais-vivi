@@ -287,7 +287,7 @@ function AlphabetSection() {
                   <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", flexWrap:"wrap" }}>
                     <span style={{ fontFamily:"Georgia,serif", fontSize:"0.9rem", color:COLOR, fontWeight:700 }}>{r.pattern}</span>
                     <span style={{ fontSize:"0.72rem", color:C.gray }}>→</span>
-                    <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#D97706", fontWeight:600 }}>{r.reads}</span>
+                    <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.gold, fontWeight:600 }}>{r.reads}</span>
                   </div>
                 </div>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem", marginBottom:"0.3rem" }}>
@@ -309,7 +309,7 @@ function AlphabetSection() {
                   <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.ink }}>{l.example}</span>
                   {l.pronunc !== "—" && <SpeakBtn text={l.example} size="0.65rem"/>}
                   {l.pronunc !== "—" && <span style={{ fontSize:"0.75rem", color:C.gray }}>→</span>}
-                  {l.pronunc !== "—" && <span style={{ fontFamily:"Georgia,serif", fontSize:"0.82rem", color:"#D97706", fontStyle:"italic" }}>{l.pronunc}</span>}
+                  {l.pronunc !== "—" && <span style={{ fontFamily:"Georgia,serif", fontSize:"0.82rem", color:C.gold, fontStyle:"italic" }}>{l.pronunc}</span>}
                 </div>
                 <div style={{ fontSize:"0.7rem", color:C.gray }}>💡 {l.note}</div>
               </div>
@@ -354,7 +354,7 @@ function NumbersSection() {
       </div>
 
       {/* Tips */}
-      <div style={{ background:"#EFF6FF", border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.65rem 0.75rem", marginBottom:"0.6rem" }}>
+      <div style={{ background:C.blueL, border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.65rem 0.75rem", marginBottom:"0.6rem" }}>
         <div style={{ fontSize:"0.62rem", color:COLOR, fontWeight:700, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.4rem" }}>💡 Mẹo nhớ</div>
         {NUMBER_TIPS.map((t,i) => <div key={i} style={{ fontSize:"0.73rem", color:C.ink, lineHeight:1.6, marginBottom:"0.15rem" }}>• {t}</div>)}
       </div>
@@ -382,7 +382,7 @@ function NumbersSection() {
 // ── Days & Months Section ────────────────────────────────────────────────────
 
 function DateSection() {
-  const COLOR = "#B45309";
+  const COLOR = C.gold;
   return (
     <div style={{ padding:"0.75rem 0.9rem 0.9rem" }}>
       <CatLabel label="Các ngày trong tuần" color={COLOR}/>

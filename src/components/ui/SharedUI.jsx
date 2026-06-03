@@ -88,7 +88,7 @@ export function ImportModal({ onImport, onClose }) {
               </label>
             ))}
           </div>
-          {state==="error"&&<div style={{ color:C.red,fontSize:"0.75rem",padding:"0.4rem 0.6rem",background:"#fde8e6",borderRadius:6 }}>⚠ {err}</div>}
+          {state==="error"&&<div style={{ color:C.red,fontSize:"0.75rem",padding:"0.4rem 0.6rem",background:C.redL,borderRadius:6 }}>⚠ {err}</div>}
         </>}
         {state==="loading"&&<div style={{ display:"flex",flexDirection:"column",alignItems:"center",gap:"0.7rem",padding:"1.5rem",color:C.gray }}><Spinner/><span style={{ fontSize:"0.83rem" }}>Đang đọc file...</span></div>}
         {state==="preview"&&<>

@@ -212,7 +212,7 @@ function MinimalPairs({ pairs }) {
             }}>
               <SpeakBtn text={p.b} size="0.75rem" />
               <div>
-                <div style={{ fontWeight: 700, fontSize: "0.8rem", color: "#92400E" }}>{p.b}</div>
+                <div style={{ fontWeight: 700, fontSize: "0.8rem", color: C.gold }}>{p.b}</div>
                 <div style={{ fontSize: "0.63rem", color: C.gray }}>{p.bVi}</div>
               </div>
             </div>
@@ -379,7 +379,7 @@ function ListeningQuiz({ quiz, sounds }) {
                 const chosen = answered !== null;
                 let bg = C.cream, border = `1.5px solid ${C.border}`, color = C.ink;
                 if (chosen && isTarget) {
-                  bg = C.greenL; border = `1.5px solid ${C.green}`; color = "#065F46";
+                  bg = C.greenL; border = `1.5px solid ${C.green}`; color = C.green;
                 } else if (chosen && !isTarget && sound.id === current.target) {
                   bg = "#FEE2E2"; border = "1.5px solid #EF4444"; color = "#991B1B";
                 }

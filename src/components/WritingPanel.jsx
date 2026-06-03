@@ -9,22 +9,22 @@ import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 
 // ── Grade helpers ───────────────────────────────────────────────
 function scoreToGrade(s) {
-  if (s >= 95) return { letter:"A+", color:"#059669" };
-  if (s >= 87) return { letter:"A",  color:"#059669" };
+  if (s >= 95) return { letter:"A+", color:C.green };
+  if (s >= 87) return { letter:"A",  color:C.green };
   if (s >= 78) return { letter:"B+", color:C.blue    };
   if (s >= 68) return { letter:"B",  color:"#2563EB" };
-  if (s >= 55) return { letter:"C",  color:"#D97706" };
-  return              { letter:"D",  color:"#DC2626" };
+  if (s >= 55) return { letter:"C",  color:C.gold };
+  return              { letter:"D",  color:C.red };
 }
 
 const ERROR_TYPE_STYLE = {
-  "Ngữ pháp":  { color:"#DC2626", bg:"#FEF2F2", border:"#FCA5A5" },
-  "Từ vựng":   { color:"#D97706", bg:"#FFFBEB", border:"#FCD34D" },
-  "Chính tả":  { color:"#2563EB", bg:"#EFF6FF", border:"#93C5FD" },
+  "Ngữ pháp":  { color:C.red, bg:C.redL, border:C.red },
+  "Từ vựng":   { color:C.gold, bg:C.goldL, border:C.gold },
+  "Chính tả":  { color:"#2563EB", bg:C.blueL, border:"#93C5FD" },
   "Giới từ":   { color:C.blue,    bg:C.blueL,   border:`${C.blue}55` },
-  "Mạo từ":    { color:"#059669", bg:"#F0FDF4",  border:"#6EE7B7" },
+  "Mạo từ":    { color:C.green, bg:C.greenL,  border:C.green },
 };
-const DEFAULT_ERR_STYLE = { color:"#DC2626", bg:"#FEF2F2", border:"#FCA5A5" };
+const DEFAULT_ERR_STYLE = { color:C.red, bg:C.redL, border:C.red };
 
 // ── Shared result block ─────────────────────────────────────────
 function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
@@ -49,12 +49,12 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
           {(grammarErrors.length > 0 || vocabErrors.length > 0) && (
             <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.4rem", flexWrap:"wrap" }}>
               {grammarErrors.length > 0 && (
-                <span style={{ fontSize:"0.62rem", background:"#FEF2F2", color:"#DC2626", border:"1px solid #FCA5A5", borderRadius:20, padding:"0.1rem 0.45rem", fontWeight:700 }}>
+                <span style={{ fontSize:"0.62rem", background:C.redL, color:C.red, border:`1px solid ${C.red}`, borderRadius:20, padding:"0.1rem 0.45rem", fontWeight:700 }}>
                   Ngữ pháp ×{grammarErrors.length}
                 </span>
               )}
               {vocabErrors.length > 0 && (
-                <span style={{ fontSize:"0.62rem", background:"#FFFBEB", color:"#D97706", border:"1px solid #FCD34D", borderRadius:20, padding:"0.1rem 0.45rem", fontWeight:700 }}>
+                <span style={{ fontSize:"0.62rem", background:C.goldL, color:C.gold, border:`1px solid ${C.gold}`, borderRadius:20, padding:"0.1rem 0.45rem", fontWeight:700 }}>
                   Từ vựng ×{vocabErrors.length}
                 </span>
               )}
@@ -85,7 +85,7 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
       {/* ── Errors ── */}
       {result.errors?.length > 0 && (
         <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.85rem 1rem" }}>
-          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.12em", color:"#DC2626", fontWeight:700, marginBottom:10 }}>
+          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.12em", color:C.red, fontWeight:700, marginBottom:10 }}>
             Lỗi cần sửa ({result.errors.length})
           </div>
           {[...grammarErrors, ...vocabErrors, ...otherErrors].map((e, i) => {
@@ -93,9 +93,9 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
             return (
               <div key={i} style={{ borderLeft:`3px solid ${st.border}`, paddingLeft:"0.75rem", marginBottom:"0.75rem", paddingBottom: i < result.errors.length - 1 ? "0.75rem" : 0, borderBottom: i < result.errors.length - 1 ? `1px solid ${C.border}` : "none" }}>
                 <div style={{ display:"flex", gap:"0.45rem", alignItems:"center", marginBottom:"0.3rem", flexWrap:"wrap" }}>
-                  <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#DC2626", textDecoration:"line-through" }}>{e.original}</span>
+                  <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.red, textDecoration:"line-through" }}>{e.original}</span>
                   <span style={{ color:C.gray, fontSize:"0.8rem" }}>→</span>
-                  <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:"#059669", fontWeight:700 }}>{e.correction}</span>
+                  <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.green, fontWeight:700 }}>{e.correction}</span>
                   <span style={{ background:st.bg, color:st.color, border:`1px solid ${st.border}`, fontSize:"0.58rem", padding:"0.1rem 0.45rem", borderRadius:20, fontWeight:700 }}>
                     {e.type}
                   </span>
@@ -386,7 +386,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                 );
               })()}
               {sample?.startsWith("⚠") && (
-                <div style={{ fontSize:"0.75rem", color:"#DC2626", padding:"0.4rem 0.6rem", background:"#FEF2F2", borderRadius:8 }}>{sample}</div>
+                <div style={{ fontSize:"0.75rem", color:C.red, padding:"0.4rem 0.6rem", background:C.redL, borderRadius:8 }}>{sample}</div>
               )}
 
               {!result && (
@@ -397,8 +397,8 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                     style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.6rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.7, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
                   {err && (
                     <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
-                      <div style={{ fontSize:"0.72rem", color:"#DC2626" }}>⚠ {err}</div>
-                      <button onClick={() => check(editoTask.task)} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
+                      <div style={{ fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>
+                      <button onClick={() => check(editoTask.task)} style={{ padding:"0.2rem 0.6rem", background:C.red, color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
                     </div>
                   )}
                   <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.7rem" }}>
@@ -456,8 +456,8 @@ vocab: 5-7 key words/phrases relevant to the task.`);
               style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.6rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.7, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
             {err && (
               <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
-                <div style={{ fontSize:"0.72rem", color:"#DC2626" }}>⚠ {err}</div>
-                <button onClick={() => check()} style={{ padding:"0.2rem 0.6rem", background:"#DC2626", color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
+                <div style={{ fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>
+                <button onClick={() => check()} style={{ padding:"0.2rem 0.6rem", background:C.red, color:"#fff", border:"none", borderRadius:20, fontSize:"0.65rem", cursor:"pointer", fontWeight:600 }}>↺ Thử lại</button>
               </div>
             )}
             <button onClick={() => check()} disabled={loading || !input.trim()}

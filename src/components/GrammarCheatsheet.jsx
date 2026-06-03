@@ -4,9 +4,9 @@ import SpeakBtn from "./ui/SpeakBtn.jsx";
 
 // ── Design tokens ─────────────────────────────────────────────
 const T = {
-  blue:   "#4A90D9", purple: "#7B6CF6", green:  "#059669",
-  orange: "#E67E22", red:    "#DC2626", teal:   "#0891B2",
-  gold:   "#D97706", pink:   "#DB2777",
+  blue:   "#4A90D9", purple: "#7B6CF6", green:  C.green,
+  orange: "#E67E22", red:    C.red, teal:   "#0891B2",
+  gold:   C.gold, pink:   "#DB2777",
 };
 
 // ── Helpers ───────────────────────────────────────────────────

@@ -237,7 +237,7 @@ function WordDetails({ word }) {
       {details.tip && (
         <div style={{ display:"flex", alignItems:"flex-start", gap:"0.5rem" }}>
           <span style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1, color:C.gray, fontWeight:600, minWidth:36, paddingTop:"0.1rem" }}>Mẹo</span>
-          <span style={{ fontSize:"0.78rem", color:"#B45309", background:"#FFFBEB", borderRadius:8, padding:"0.2rem 0.55rem", lineHeight:1.45 }}>💡 {details.tip}</span>
+          <span style={{ fontSize:"0.78rem", color:C.gold, background:C.goldL, borderRadius:8, padding:"0.2rem 0.55rem", lineHeight:1.45 }}>💡 {details.tip}</span>
         </div>
       )}
     </>

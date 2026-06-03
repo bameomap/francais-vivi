@@ -42,9 +42,9 @@ function TrueFalseQ({ q, ans, onAnswer }) {
           }
           const S = {
             idle:    { bg: C.white,    border: C.border, color: C.ink   },
-            correct: { bg: "#ECFDF5",  border: C.green,  color: C.green },
-            wrong:   { bg: "#FEF2F2",  border: C.red,    color: C.red   },
-            missed:  { bg: "#ECFDF5",  border: C.green,  color: C.green },
+            correct: { bg: C.greenL,  border: C.green,  color: C.green },
+            wrong:   { bg: C.redL,  border: C.red,    color: C.red   },
+            missed:  { bg: C.greenL,  border: C.green,  color: C.green },
           }[state];
           return (
             <button key={String(val)} onClick={() => !done && onAnswer(q.id, val)}
@@ -75,9 +75,9 @@ function MultipleChoiceQ({ q, ans, onAnswer }) {
         }
         const S = {
           idle:    { bg: C.white,   border: C.border, color: C.ink   },
-          correct: { bg: "#ECFDF5", border: C.green,  color: C.green },
-          wrong:   { bg: "#FEF2F2", border: C.red,    color: C.red   },
-          missed:  { bg: "#ECFDF5", border: C.green,  color: C.green },
+          correct: { bg: C.greenL, border: C.green,  color: C.green },
+          wrong:   { bg: C.redL, border: C.red,    color: C.red   },
+          missed:  { bg: C.greenL, border: C.green,  color: C.green },
         }[state];
         return (
           <button key={i} onClick={() => !done && onAnswer(q.id, opt)}
@@ -120,7 +120,7 @@ function MultiSelectQ({ q, ans, onAnswer }) {
           ? (state === "correct" || state === "missed" ? C.green : state === "wrong" ? C.red : C.border)
           : (isChecked ? C.blue : C.border);
         const bgColor = done
-          ? (state === "correct" || state === "missed" ? "#ECFDF5" : state === "wrong" ? "#FEF2F2" : C.white)
+          ? (state === "correct" || state === "missed" ? C.greenL : state === "wrong" ? C.redL : C.white)
           : (isChecked ? C.blueL : C.white);
         const textColor = done
           ? (state === "correct" || state === "missed" ? C.green : state === "wrong" ? C.red : C.ink)
@@ -169,7 +169,7 @@ function ShortAnswerQ({ q, revealed, onReveal }) {
             style={{ marginTop: "0.3rem", padding: "0.38rem 0.9rem", background: C.cream, border: `1px solid ${C.border}`, borderRadius: 10, fontSize: "0.78rem", color: C.gray, cursor: "pointer", fontFamily: "inherit" }}>
             Xem đáp án 👁
           </button>
-        : <div style={{ marginTop: "0.3rem", background: "#EFF6FF", border: `1.5px solid ${C.blue}44`, borderRadius: 10, padding: "0.6rem 0.85rem", fontSize: "0.82rem", color: C.ink, lineHeight: 1.55, animation: "fadeUp 0.2s ease" }}>
+        : <div style={{ marginTop: "0.3rem", background: C.blueL, border: `1.5px solid ${C.blue}44`, borderRadius: 10, padding: "0.6rem 0.85rem", fontSize: "0.82rem", color: C.ink, lineHeight: 1.55, animation: "fadeUp 0.2s ease" }}>
             💡 {q.answer}
           </div>
       }
@@ -189,7 +189,7 @@ function RevealQ({ q, revealed, onReveal }) {
             style={{ padding: "0.38rem 0.9rem", background: C.cream, border: `1px solid ${C.border}`, borderRadius: 10, fontSize: "0.78rem", color: C.gray, cursor: "pointer", fontFamily: "inherit" }}>
             Xem đáp án 👁
           </button>
-        : <div style={{ background: "#EFF6FF", border: `1.5px solid ${C.blue}44`, borderRadius: 10, padding: "0.6rem 0.85rem", fontSize: "0.82rem", color: C.ink, lineHeight: 1.55, animation: "fadeUp 0.2s ease" }}>
+        : <div style={{ background: C.blueL, border: `1.5px solid ${C.blue}44`, borderRadius: 10, padding: "0.6rem 0.85rem", fontSize: "0.82rem", color: C.ink, lineHeight: 1.55, animation: "fadeUp 0.2s ease" }}>
             💡 {Array.isArray(q.answer)
               ? q.answer.join(" · ")
               : typeof q.answer === "boolean"
@@ -360,8 +360,8 @@ function ActivityView({ activity, onBack }) {
 
       {/* Score */}
       {allAnswered && pct !== null && (
-        <div style={{ background: C.white, borderRadius: 16, padding: "1.1rem", border: `1.5px solid ${pct >= 80 ? "#059669" : pct >= 60 ? C.gold : C.red}44`, textAlign: "center", animation: "fadeUp 0.3s ease" }}>
-          <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "2rem", color: pct >= 80 ? "#059669" : pct >= 60 ? C.gold : C.red, fontWeight: 700 }}>
+        <div style={{ background: C.white, borderRadius: 16, padding: "1.1rem", border: `1.5px solid ${pct >= 80 ? C.green : pct >= 60 ? C.gold : C.red}44`, textAlign: "center", animation: "fadeUp 0.3s ease" }}>
+          <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "2rem", color: pct >= 80 ? C.green : pct >= 60 ? C.gold : C.red, fontWeight: 700 }}>
             {score}/{scoreable.length}
           </div>
           <div style={{ fontSize: "0.75rem", color: C.gray, marginTop: "0.2rem" }}>

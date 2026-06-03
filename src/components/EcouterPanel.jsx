@@ -112,9 +112,9 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
                 return (
                   <button key={u.id} onClick={() => selectUnit(u.id)} style={{
                     flexShrink: 0, padding: "0.28rem 0.65rem",
-                    background: isActive ? C.blue : cached ? "#ECFDF5" : C.cream,
-                    border: `1.5px solid ${isActive ? C.blue : cached ? "#059669" : C.border}`,
-                    color: isActive ? "#fff" : cached ? "#059669" : C.ink,
+                    background: isActive ? C.blue : cached ? C.greenL : C.cream,
+                    border: `1.5px solid ${isActive ? C.blue : cached ? C.green : C.border}`,
+                    color: isActive ? "#fff" : cached ? C.green : C.ink,
                     borderRadius: 20, fontSize: "0.68rem", cursor: "pointer",
                     fontFamily: "inherit", fontWeight: isActive ? 700 : 400,
                     whiteSpace: "nowrap", transition: "all 0.15s",

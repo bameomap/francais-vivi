@@ -12,7 +12,7 @@ import Spinner from "./ui/Spinner.jsx";
 const SKILLS = {
   vocab:          { label:"Vocabulaire", color:"#4A90D9", bg:"#EBF4FF", icon:"V" },
   grammaire:      { label:"Grammaire",   color:"#7B6CF6", bg:"#F0EEFF", icon:"G" },
-  comprehension:  { label:"Compréhension", color:"#059669", bg:"#ECFDF5", icon:"C" },
+  comprehension:  { label:"Compréhension", color:C.green, bg:C.greenL, icon:"C" },
   ecriture:       { label:"Écriture",    color:"#E67E22", bg:"#FEF3E2", icon:"É" },
 };
 
@@ -82,7 +82,7 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
   );
 
   return (
-    <div style={{ background: C.white, border: `1.5px solid ${revealed ? (correct ? "#059669" : C.accent) : C.border}44`, borderRadius: 16, padding: "1rem", marginBottom: "0.75rem", transition: "border-color 0.2s" }}>
+    <div style={{ background: C.white, border: `1.5px solid ${revealed ? (correct ? C.green : C.accent) : C.border}44`, borderRadius: 16, padding: "1rem", marginBottom: "0.75rem", transition: "border-color 0.2s" }}>
 
       {/* Skill badge */}
       <div style={{ display:"flex", alignItems:"center", gap:6, marginBottom:"0.5rem" }}>
@@ -94,7 +94,7 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
 
       {/* Passage hint for comprehension */}
       {q.skill === "comprehension" && passage && (
-        <div style={{ background:"#F0FDF4", border:"1px solid #6EE7B7", borderRadius:10, padding:"0.6rem 0.8rem", marginBottom:"0.6rem", fontSize:"0.78rem", color:C.ink, fontStyle:"italic", lineHeight:1.6 }}>
+        <div style={{ background:C.greenL, border:`1px solid ${C.green}`, borderRadius:10, padding:"0.6rem 0.8rem", marginBottom:"0.6rem", fontSize:"0.78rem", color:C.ink, fontStyle:"italic", lineHeight:1.6 }}>
           {passage}
         </div>
       )}
@@ -116,9 +116,9 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
                 style={{
                   textAlign:"left", padding:"0.5rem 0.8rem", borderRadius:10, cursor: revealed ? "default" : "pointer",
                   fontFamily:"inherit", fontSize:"0.82rem",
-                  background: isCorrect ? "#ECFDF5" : isWrong ? "#FEF2F2" : isSelected ? C.cream : C.cream,
-                  border: `1.5px solid ${isCorrect ? "#059669" : isWrong ? C.accent : isSelected ? C.blue : C.border}`,
-                  color: isCorrect ? "#059669" : isWrong ? C.accent : C.ink,
+                  background: isCorrect ? C.greenL : isWrong ? C.redL : isSelected ? C.cream : C.cream,
+                  border: `1.5px solid ${isCorrect ? C.green : isWrong ? C.accent : isSelected ? C.blue : C.border}`,
+                  color: isCorrect ? C.green : isWrong ? C.accent : C.ink,
                   fontWeight: isCorrect || isWrong ? 700 : 400,
                   transition: "all 0.15s",
                 }}>
@@ -137,7 +137,7 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === "Enter" && submit()}
             placeholder={q.type === "fill" ? "Điền vào chỗ trống..." : "Dịch sang tiếng Pháp..."}
-            style={{ flex:1, padding:"0.5rem 0.75rem", borderRadius:10, border:`1.5px solid ${revealed ? (correct ? "#059669" : C.accent) : C.border}`, fontSize:"0.85rem", fontFamily:"inherit", outline:"none", background: revealed ? (correct ? "#ECFDF5" : "#FEF2F2") : C.white, color: revealed ? (correct ? "#059669" : C.accent) : C.ink }}
+            style={{ flex:1, padding:"0.5rem 0.75rem", borderRadius:10, border:`1.5px solid ${revealed ? (correct ? C.green : C.accent) : C.border}`, fontSize:"0.85rem", fontFamily:"inherit", outline:"none", background: revealed ? (correct ? C.greenL : C.redL) : C.white, color: revealed ? (correct ? C.green : C.accent) : C.ink }}
           />
           {!revealed && (
             <button onClick={() => submit()} style={{ padding:"0.5rem 0.9rem", background:C.ink, color:"#fff", border:"none", borderRadius:10, fontSize:"0.78rem", cursor:"pointer", fontWeight:700, fontFamily:"inherit" }}>
@@ -149,14 +149,14 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
 
       {/* Feedback */}
       {revealed && (
-        <div style={{ marginTop:"0.55rem", padding:"0.4rem 0.7rem", borderRadius:8, background: correct ? "#ECFDF5" : "#FEF2F2", border:`1px solid ${correct ? "#6EE7B7" : "#FCA5A5"}` }}>
+        <div style={{ marginTop:"0.55rem", padding:"0.4rem 0.7rem", borderRadius:8, background: correct ? C.greenL : C.redL, border:`1px solid ${correct ? C.green : C.red}` }}>
           {!correct && (
             <div style={{ fontSize:"0.78rem", color: C.accent, fontWeight:700, marginBottom:2 }}>
               Đáp án: <span style={{ fontStyle:"italic" }}>{q.answer}</span>
             </div>
           )}
           {q.explain && (
-            <div style={{ fontSize:"0.72rem", color: correct ? "#059669" : "#B45309" }}>
+            <div style={{ fontSize:"0.72rem", color: correct ? C.green : C.gold }}>
               {correct ? "✓ " : "💡 "}{q.explain}
             </div>
           )}
@@ -170,7 +170,7 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
 function ResultScreen({ score, total, unitId, onRetry, onBack }) {
   const pct = Math.round(score / total * 100);
   const passed = pct >= 70;
-  const color = pct >= 80 ? "#059669" : pct >= 60 ? C.gold : C.accent;
+  const color = pct >= 80 ? C.green : pct >= 60 ? C.gold : C.accent;
 
   useEffect(() => {
     if (passed) markStepDone(unitId, "quiz");

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
+import { C } from "../../constants.js";
 
 // ── Mood config ──────────────────────────────────────────────
 // frames = number of frames in the sprite sheet (width / 80)
 // fps    = playback speed
 const MOODS = {
-  happy:    { sprite:"IDLE",  frames:8,  fps:8,  color:"#F59E0B", bg:"#FFFBEB", accent:"#D97706", bounce:true  },
+  happy:    { sprite:"IDLE",  frames:8,  fps:8,  color:"#F59E0B", bg:C.goldL, accent:C.gold, bounce:true  },
   excited:  { sprite:"RUN",   frames:8,  fps:12, color:"#EC4899", bg:"#FDF2F8", accent:"#BE185D", bounce:false },
-  proud:    { sprite:"WALK",  frames:12, fps:8,  color:"#10B981", bg:"#ECFDF5", accent:"#059669", bounce:false },
+  proud:    { sprite:"WALK",  frames:12, fps:8,  color:"#10B981", bg:C.greenL, accent:C.green, bounce:false },
   sad:      { sprite:"HURT",  frames:4,  fps:5,  color:"#6B7280", bg:"#F9FAFB", accent:"#4B5563", bounce:false },
   sleeping: { sprite:"IDLE",  frames:8,  fps:3,  color:"#8B5CF6", bg:"#F5F3FF", accent:"#7C3AED", bounce:false },
-  thinking: { sprite:"IDLE",  frames:8,  fps:5,  color:"#3B82F6", bg:"#EFF6FF", accent:"#2563EB", bounce:false },
+  thinking: { sprite:"IDLE",  frames:8,  fps:5,  color:"#3B82F6", bg:C.blueL, accent:"#2563EB", bounce:false },
 };
 
 const FRAME_W = 80;

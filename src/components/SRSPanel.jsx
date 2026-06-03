@@ -33,10 +33,10 @@ function intervalLabel(days) {
 
 // ── Rating bar ───────────────────────────────────────────────────
 const RATINGS = [
-  { id:0, label:"Lại",  emoji:"😵", bg:"#FEF2F2", border:"#FCA5A5", fg:"#DC2626" },
-  { id:1, label:"Khó",  emoji:"😓", bg:"#FFFBEB", border:"#FCD34D", fg:"#D97706" },
-  { id:2, label:"Tốt",  emoji:"😊", bg:"#F0FDF4", border:"#6EE7B7", fg:"#059669" },
-  { id:3, label:"Dễ",   emoji:"😎", bg:"#EFF6FF", border:"#93C5FD", fg:"#2563EB" },
+  { id:0, label:"Lại",  emoji:"😵", bg:C.redL, border:C.red, fg:C.red },
+  { id:1, label:"Khó",  emoji:"😓", bg:C.goldL, border:C.gold, fg:C.gold },
+  { id:2, label:"Tốt",  emoji:"😊", bg:C.greenL, border:C.green, fg:C.green },
+  { id:3, label:"Dễ",   emoji:"😎", bg:C.blueL, border:"#93C5FD", fg:"#2563EB" },
 ];
 
 function RatingBar({ card, onRate }) {
@@ -243,7 +243,7 @@ export default function SRSPanel({ currentWords = [] }) {
       <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:16, padding:"1rem", marginBottom:"0.75rem" }}>
         <div style={{ fontSize:"0.78rem", fontWeight:700, color:C.ink, marginBottom:"0.65rem" }}>📅 Lịch ôn sắp tới</div>
         {[
-          { label:"Hôm nay",  val:stats.today, color:"#DC2626" },
+          { label:"Hôm nay",  val:stats.today, color:C.red },
           { label:"Tuần này", val:stats.week,  color:PURPLE     },
           { label:"Tổng",     val:stats.total, color:C.gray     },
         ].map((r, i) => (
@@ -282,7 +282,7 @@ export default function SRSPanel({ currentWords = [] }) {
             ← Dừng
           </button>
           <span style={{ fontSize:"0.62rem", color:C.gray }}>
-            {idx+1}/{queue.length} · <span style={{ color:"#059669" }}>✓{session.correct}</span> · <span style={{ color:"#DC2626" }}>✗{session.wrong}</span>
+            {idx+1}/{queue.length} · <span style={{ color:C.green }}>✓{session.correct}</span> · <span style={{ color:C.red }}>✗{session.wrong}</span>
           </span>
         </div>
       </div>
@@ -330,13 +330,13 @@ export default function SRSPanel({ currentWords = [] }) {
 
       {/* Score breakdown */}
       <div style={{ display:"flex", gap:"0.5rem", marginBottom:"1rem" }}>
-        <div style={{ flex:1, background:"#F0FDF4", border:"1.5px solid #6EE7B7", borderRadius:16, padding:"0.85rem", textAlign:"center" }}>
-          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:"#059669", fontWeight:700 }}>{session.correct}</div>
-          <div style={{ fontSize:"0.68rem", color:"#059669", fontWeight:600 }}>Tốt + Dễ</div>
+        <div style={{ flex:1, background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:16, padding:"0.85rem", textAlign:"center" }}>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:C.green, fontWeight:700 }}>{session.correct}</div>
+          <div style={{ fontSize:"0.68rem", color:C.green, fontWeight:600 }}>Tốt + Dễ</div>
         </div>
-        <div style={{ flex:1, background:"#FEF2F2", border:"1.5px solid #FCA5A5", borderRadius:16, padding:"0.85rem", textAlign:"center" }}>
-          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:"#DC2626", fontWeight:700 }}>{session.wrong}</div>
-          <div style={{ fontSize:"0.68rem", color:"#DC2626", fontWeight:600 }}>Lại + Khó</div>
+        <div style={{ flex:1, background:C.redL, border:`1.5px solid ${C.red}`, borderRadius:16, padding:"0.85rem", textAlign:"center" }}>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:C.red, fontWeight:700 }}>{session.wrong}</div>
+          <div style={{ fontSize:"0.68rem", color:C.red, fontWeight:600 }}>Lại + Khó</div>
         </div>
       </div>
 
@@ -372,7 +372,7 @@ export default function SRSPanel({ currentWords = [] }) {
         </button>
         <div style={{ fontSize:"0.78rem", fontWeight:700, color:C.ink }}>⚙️ Quản lý thẻ</div>
         <button onClick={() => { if (window.confirm("Xóa toàn bộ thẻ SRS?")) { resetSRS(); refreshStats(); setMode("home"); } }}
-          style={{ background:"transparent", border:`1px solid #DC2626`, color:"#DC2626", borderRadius:8, padding:"0.25rem 0.55rem", fontSize:"0.7rem", cursor:"pointer" }}>
+          style={{ background:"transparent", border:`1px solid ${C.red}`, color:C.red, borderRadius:8, padding:"0.25rem 0.55rem", fontSize:"0.7rem", cursor:"pointer" }}>
           Xóa tất cả
         </button>
       </div>
@@ -384,7 +384,7 @@ export default function SRSPanel({ currentWords = [] }) {
               <div style={{ fontSize:"0.7rem", color:C.gray }}>{card.vi} · ôn lần {card.repetitions} · {fmtDate(card.dueDate)}</div>
             </div>
             <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
-              <span style={{ fontSize:"0.62rem", background: card.interval>=21 ? "#F0FDF4" : card.interval>=7 ? PURPLE_L : "#FEF2F2", color: card.interval>=21 ? "#059669" : card.interval>=7 ? PURPLE : "#DC2626", padding:"0.1rem 0.45rem", borderRadius:20, fontWeight:600 }}>
+              <span style={{ fontSize:"0.62rem", background: card.interval>=21 ? C.greenL : card.interval>=7 ? PURPLE_L : C.redL, color: card.interval>=21 ? C.green : card.interval>=7 ? PURPLE : C.red, padding:"0.1rem 0.45rem", borderRadius:20, fontWeight:600 }}>
                 {intervalLabel(card.interval)}
               </span>
               <button onClick={() => { removeFromSRS(card.fr); refreshStats(); showToast("Đã xóa"); }}

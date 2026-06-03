@@ -167,7 +167,7 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
           {mistakes.length > 0 && (
             <div style={{
               position: "absolute", top: 8, right: 8,
-              background: C.accentL || "#FFF0EF", color: C.accent,
+              background: C.accentL || C.redL, color: C.accent,
               fontSize: 9.5, fontWeight: 700, padding: "2px 6px",
               borderRadius: 999, letterSpacing: "0.05em"
             }}>{mistakes.length} lỗi</div>

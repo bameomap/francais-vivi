@@ -37,12 +37,12 @@ function QuizCard({ sentence, topicColor, onNext, isLast }) {
       </div>
 
       {/* Answer tray */}
-      <div style={{ minHeight:52, background:C.white, border:`2px dashed ${checked?(correct?"#059669":C.red):C.blue+"55"}`, borderRadius:14, padding:"0.6rem 0.75rem", marginBottom:"0.75rem", display:"flex", flexWrap:"wrap", gap:"0.35rem", alignItems:"center", transition:"border-color 0.2s" }}>
+      <div style={{ minHeight:52, background:C.white, border:`2px dashed ${checked?(correct?C.green:C.red):C.blue+"55"}`, borderRadius:14, padding:"0.6rem 0.75rem", marginBottom:"0.75rem", display:"flex", flexWrap:"wrap", gap:"0.35rem", alignItems:"center", transition:"border-color 0.2s" }}>
         {answer.length === 0
           ? <span style={{ fontSize:"0.78rem", color:C.gray, fontStyle:"italic" }}>Nhấn từ bên dưới để ghép câu...</span>
           : answer.map(tile => (
             <button key={tile.id} onClick={() => remove(tile)} disabled={checked}
-              style={{ padding:"0.35rem 0.7rem", background:checked?(correct?"#ECFDF5":"#FEF2F2"):C.blueL, border:`1.5px solid ${checked?(correct?"#059669":C.red):C.blue}`, borderRadius:20, fontSize:"0.88rem", color:checked?(correct?"#059669":C.red):C.blue, cursor:checked?"default":"pointer", fontFamily:"Georgia,serif", fontWeight:600 }}>
+              style={{ padding:"0.35rem 0.7rem", background:checked?(correct?C.greenL:C.redL):C.blueL, border:`1.5px solid ${checked?(correct?C.green:C.red):C.blue}`, borderRadius:20, fontSize:"0.88rem", color:checked?(correct?C.green:C.red):C.blue, cursor:checked?"default":"pointer", fontFamily:"Georgia,serif", fontWeight:600 }}>
               {tile.w}
             </button>
           ))
@@ -51,9 +51,9 @@ function QuizCard({ sentence, topicColor, onNext, isLast }) {
 
       {/* Feedback */}
       {checked && (
-        <div style={{ background:correct?"#ECFDF5":"#FEF2F2", border:`1.5px solid ${correct?"#059669":C.red}`, borderRadius:12, padding:"0.65rem 1rem", marginBottom:"0.75rem", animation:"fadeUp 0.2s ease" }}>
+        <div style={{ background:correct?C.greenL:C.redL, border:`1.5px solid ${correct?C.green:C.red}`, borderRadius:12, padding:"0.65rem 1rem", marginBottom:"0.75rem", animation:"fadeUp 0.2s ease" }}>
           {correct
-            ? <div style={{ fontSize:"0.85rem", color:"#059669", fontWeight:700 }}>✓ Chính xác! +3 XP</div>
+            ? <div style={{ fontSize:"0.85rem", color:C.green, fontWeight:700 }}>✓ Chính xác! +3 XP</div>
             : <>
                 <div style={{ fontSize:"0.82rem", color:C.red, fontWeight:700, marginBottom:"0.2rem" }}>✗ Chưa đúng</div>
                 <div style={{ fontSize:"0.72rem", color:C.gray }}>Đáp án:</div>
@@ -98,7 +98,7 @@ function QuizCard({ sentence, topicColor, onNext, isLast }) {
               </button>
             )}
             <button onClick={() => onNext(correct)}
-              style={{ flex:1, padding:"0.6rem", background:correct?"#059669":topicColor, color:"#fff", border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
+              style={{ flex:1, padding:"0.6rem", background:correct?C.green:topicColor, color:"#fff", border:"none", borderRadius:12, fontSize:"0.85rem", cursor:"pointer", fontWeight:700 }}>
               {isLast ? "Xem kết quả 🎉" : "Câu tiếp →"}
             </button>
           </>
@@ -185,7 +185,7 @@ export default function SentenceBuilder() {
         <span style={{ fontSize:"0.95rem" }}>{topic.icon}</span>
         <span style={{ fontWeight:700, color:topic.color, fontSize:"0.88rem", flex:1 }}>{topic.label}</span>
         <span style={{ fontSize:"0.72rem", color:C.gray }}>{qIdx+1}/{topic.sentences.length}</span>
-        <span style={{ fontSize:"0.72rem", color:"#059669", fontWeight:700 }}>✓ {score}</span>
+        <span style={{ fontSize:"0.72rem", color:C.green, fontWeight:700 }}>✓ {score}</span>
       </div>
       <div style={{ height:4, background:C.border, borderRadius:999, marginBottom:"1rem", overflow:"hidden" }}>
         <div style={{ height:"100%", width:`${progress}%`, background:topic.color, borderRadius:999, transition:"width 0.4s ease" }}/>

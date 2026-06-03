@@ -37,7 +37,7 @@ export function GrammarMC({ exercises, onWrong }) {
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.3rem" }}>
           {q.options.map((opt,j) => {
             let bg=C.white,bc=C.border,col=C.ink;
-            if(a){if(opt===q.answer){bg="#e8f7f1";bc=C.green;col=C.green;}else if(opt===a){bg="#fde8e6";bc=C.red;col=C.red;}}
+            if(a){if(opt===q.answer){bg=C.greenL;bc=C.green;col=C.green;}else if(opt===a){bg=C.redL;bc=C.red;col=C.red;}}
             return <button key={j} disabled={!!a} onClick={()=>{setAns(x=>({...x,[i]:opt}));if(opt!==q.answer)onWrong?.(q);}}
               style={{padding:"0.42rem 0.55rem",border:`1.5px solid ${bc}`,borderRadius:8,background:bg,color:col,fontSize:"0.78rem",cursor:a?"default":"pointer",textAlign:"left",fontFamily:"inherit"}}>{opt}</button>;
           })}
@@ -67,7 +67,7 @@ export function GrammarFill({ exercises }) {
           <input value={v} disabled={done} onChange={e=>setInp(x=>({...x,[i]:e.target.value}))}
             onKeyDown={e=>e.key==="Enter"&&!done&&setChk(x=>({...x,[i]:true}))}
             placeholder="Nhập từ / dạng đúng..."
-            style={{border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`,borderRadius:6,padding:"0.3rem 0.55rem",fontSize:"0.83rem",width:180,fontFamily:"inherit",background:done?(ok?"#e8f7f1":"#fde8e6"):C.white,color:done?(ok?C.green:C.red):C.ink,outline:"none"}}/>
+            style={{border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`,borderRadius:6,padding:"0.3rem 0.55rem",fontSize:"0.83rem",width:180,fontFamily:"inherit",background:done?(ok?C.greenL:C.redL):C.white,color:done?(ok?C.green:C.red):C.ink,outline:"none"}}/>
           {!done&&<button onClick={()=>setChk(x=>({...x,[i]:true}))} style={{padding:"0.3rem 0.65rem",background:C.purple,color:C.white,border:"none",borderRadius:6,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>Kiểm tra</button>}
           {done&&<span style={{fontSize:"0.73rem",color:ok?C.green:C.red,fontWeight:500}}>{ok?"✓ Đúng!":`✗ Đáp án: ${q.answer}`}</span>}
         </div>
@@ -1737,16 +1737,16 @@ function RuleRenderer({ text }) {
         const t = line.trim();
         if (!t) return <div key={i} style={{ height:"0.35rem" }}/>;
         if (t.startsWith("⚠️")) return (
-          <div key={i} style={{ background:"#FFF8E1", border:"1px solid #F59E0B44", borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#92400E", lineHeight:1.55 }}>{t}</div>
+          <div key={i} style={{ background:C.goldL, border:"1px solid #F59E0B44", borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:C.gold, lineHeight:1.55 }}>{t}</div>
         );
         if (t.startsWith("💡")) return (
-          <div key={i} style={{ background:"#EFF6FF", borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#1D4ED8", lineHeight:1.55 }}>{t}</div>
+          <div key={i} style={{ background:C.blueL, borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#1D4ED8", lineHeight:1.55 }}>{t}</div>
         );
         if (t.startsWith("✅")) return (
           <div key={i} style={{ fontSize:"0.73rem", color:"#166534", lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
         );
         if (t.startsWith("❌")) return (
-          <div key={i} style={{ fontSize:"0.73rem", color:"#DC2626", lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
+          <div key={i} style={{ fontSize:"0.73rem", color:C.red, lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
         );
         if (t.startsWith("•")) return (
           <div key={i} style={{ fontFamily:"Georgia,serif", fontSize:"0.78rem", color:C.ink, lineHeight:1.65, paddingLeft:"0.4rem" }}>{t}</div>
@@ -1980,7 +1980,7 @@ function EditoGrammarView({ defaultUnitIndex }) {
             <Spinner /><span style={{ fontSize:"0.88rem" }}>AI đang tạo bài tập...</span>
           </div>
         )}
-        {err && <div style={{ color:C.red, padding:"0.75rem", background:"#fde8e6", borderRadius:10, fontSize:"0.82rem" }}>⚠ {err}</div>}
+        {err && <div style={{ color:C.red, padding:"0.75rem", background:C.redL, borderRadius:10, fontSize:"0.82rem" }}>⚠ {err}</div>}
         {result && !loading && (
           <>
             {(result.explanationRules?.length > 0 || result.explanation) && (
@@ -2193,7 +2193,7 @@ function CustomExerciseView() {
           <input type="range" min={10} max={20} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{ flex:1, accentColor:C.blue }}/>
           <span style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", color:C.purple, fontWeight:600, minWidth:22 }}>{numQ}</span>
         </div>
-        {err && <div style={{ color:C.red, fontSize:"0.75rem", padding:"0.38rem 0.58rem", background:"#fde8e6", borderRadius:6 }}>⚠ {err}</div>}
+        {err && <div style={{ color:C.red, fontSize:"0.75rem", padding:"0.38rem 0.58rem", background:C.redL, borderRadius:6 }}>⚠ {err}</div>}
         <button onClick={()=>generate()} disabled={loading}
           style={{ padding:"0.75rem", background:loading?C.gray:C.ink, color:C.paper, border:"none", borderRadius:8, fontFamily:"Georgia,serif", fontSize:"0.92rem", cursor:loading?"not-allowed":"pointer" }}>
           {loading?"Đang tạo bài tập...":"Tạo bài tập ✦"}

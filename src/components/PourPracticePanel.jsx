@@ -38,10 +38,10 @@ const UNIT_KEYS  = [...new Set(ALL_ITEMS.map(i => i.unitKey))]
 
 // ── Score config ──────────────────────────────────────────────────
 const SCORE = {
-  perfect: { emoji:"🎉", color:"#059669", bg:"#ECFDF5", border:"#86EFAC", label:"Hoàn hảo!"  },
-  good:    { emoji:"👍", color:"#2563EB", bg:"#EFF6FF", border:"#93C5FD", label:"Tốt lắm!"   },
-  partial: { emoji:"💪", color:"#D97706", bg:"#FFFBEB", border:"#FCD34D", label:"Gần đúng!"  },
-  wrong:   { emoji:"❌", color:"#DC2626", bg:"#FFF1F2", border:"#FCA5A5", label:"Chưa đúng"  },
+  perfect: { emoji:"🎉", color:C.green, bg:C.greenL, border:C.green, label:"Hoàn hảo!"  },
+  good:    { emoji:"👍", color:"#2563EB", bg:C.blueL, border:"#93C5FD", label:"Tốt lắm!"   },
+  partial: { emoji:"💪", color:C.gold, bg:C.goldL, border:C.gold, label:"Gần đúng!"  },
+  wrong:   { emoji:"❌", color:C.red, bg:C.redL, border:C.red, label:"Chưa đúng"  },
 };
 
 // ── API helpers ───────────────────────────────────────────────────
@@ -325,8 +325,8 @@ export default function PourPracticePanel() {
             </button>
 
             {showHint && (
-              <div style={{ marginTop: "0.4rem", background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 9, padding: "0.5rem 0.75rem", animation: "fadeUp 0.15s ease" }}>
-                <div style={{ fontSize: "0.6rem", fontWeight: 700, color: "#D97706", marginBottom: "0.28rem" }}>
+              <div style={{ marginTop: "0.4rem", background: C.goldL, border: `1px solid ${C.gold}55`, borderRadius: 9, padding: "0.5rem 0.75rem", animation: "fadeUp 0.15s ease" }}>
+                <div style={{ fontSize: "0.6rem", fontWeight: 700, color: C.gold, marginBottom: "0.28rem" }}>
                   {currentItem.heading}
                 </div>
                 <ul style={{ margin: 0, paddingLeft: "1rem" }}>

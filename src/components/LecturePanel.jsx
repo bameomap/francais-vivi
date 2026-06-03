@@ -66,8 +66,8 @@ function HighlightedPassage({ passage, vocab, selectedWord, onWordClick }) {
             background: isSelected ? C.blueL : isVocab ? "#FEF9C3" : "transparent",
             borderRadius: 3, padding: "0 2px",
             fontWeight: isVocab ? 600 : 400,
-            color: isSelected ? C.blue : isVocab ? "#92400E" : C.ink,
-            borderBottom: `1px ${isVocab ? "solid" : "dotted"} ${isSelected ? C.blue : isVocab ? "#D97706" : C.border}`,
+            color: isSelected ? C.blue : isVocab ? C.gold : C.ink,
+            borderBottom: `1px ${isVocab ? "solid" : "dotted"} ${isSelected ? C.blue : isVocab ? C.gold : C.border}`,
             transition: "background 0.15s",
           }}>{tok}</span>
         );
@@ -80,9 +80,9 @@ function HighlightedPassage({ passage, vocab, selectedWord, onWordClick }) {
 function OptionBtn({ label, state, onClick }) {
   const colors = {
     idle:    { bg: C.white,    border: C.border, color: C.ink   },
-    correct: { bg: "#ECFDF5",  border: C.green,  color: C.green },
-    wrong:   { bg: "#FEF2F2",  border: C.red,    color: C.red   },
-    missed:  { bg: "#ECFDF5",  border: C.green,  color: C.green },
+    correct: { bg: C.greenL,  border: C.green,  color: C.green },
+    wrong:   { bg: C.redL,  border: C.red,    color: C.red   },
+    missed:  { bg: C.greenL,  border: C.green,  color: C.green },
   };
   const s = colors[state] || colors.idle;
   return (
@@ -241,9 +241,9 @@ export default function LecturePanel({ words: propWords = [] }) {
               return (
                 <button key={u.id} onClick={() => selectUnit(u.id)} style={{
                   flexShrink: 0, padding: "0.28rem 0.65rem",
-                  background: isActive ? C.blue : hasCached ? "#ECFDF5" : C.cream,
-                  border: `1.5px solid ${isActive ? C.blue : hasCached ? "#059669" : C.border}`,
-                  color: isActive ? "#fff" : hasCached ? "#059669" : C.ink,
+                  background: isActive ? C.blue : hasCached ? C.greenL : C.cream,
+                  border: `1.5px solid ${isActive ? C.blue : hasCached ? C.green : C.border}`,
+                  color: isActive ? "#fff" : hasCached ? C.green : C.ink,
                   borderRadius: 20, fontSize: "0.68rem", cursor: "pointer",
                   fontFamily: "inherit", fontWeight: isActive ? 700 : 400,
                   whiteSpace: "nowrap", transition: "all 0.15s",
@@ -357,7 +357,7 @@ export default function LecturePanel({ words: propWords = [] }) {
                     </div>
                     <div style={{ display:"flex", flexDirection:"column", gap:"0.3rem", flexShrink:0 }}>
                       <button onClick={addPopupToSRS} disabled={wordPopup.loading || wordPopup.added}
-                        style={{ padding:"0.3rem 0.7rem", background:wordPopup.added?"#ECFDF5":C.blue, color:wordPopup.added?C.green:C.white, border:`1.5px solid ${wordPopup.added?C.green:C.blue}`, borderRadius:20, fontSize:"0.68rem", cursor:wordPopup.added?"default":"pointer", fontWeight:700, whiteSpace:"nowrap", transition:"all 0.2s" }}>
+                        style={{ padding:"0.3rem 0.7rem", background:wordPopup.added?C.greenL:C.blue, color:wordPopup.added?C.green:C.white, border:`1.5px solid ${wordPopup.added?C.green:C.blue}`, borderRadius:20, fontSize:"0.68rem", cursor:wordPopup.added?"default":"pointer", fontWeight:700, whiteSpace:"nowrap", transition:"all 0.2s" }}>
                         {wordPopup.added ? "✓ Đã thêm" : "+ SRS"}
                       </button>
                       <button onClick={() => setWordPopup(null)}
@@ -372,7 +372,7 @@ export default function LecturePanel({ words: propWords = [] }) {
                     <div style={{ fontSize:"0.63rem", color:C.gray, marginBottom:"0.3rem", textTransform:"uppercase", letterSpacing:1 }}>Từ unit trong bài</div>
                     <div style={{ display:"flex", flexWrap:"wrap", gap:"0.25rem" }}>
                       {lecture.vocab_used.map((w, i) => (
-                        <span key={i} onClick={() => handleWordClick(w.toLowerCase())} style={{ background:"#FEF9C3", border:"1px solid #D97706", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.7rem", color:"#92400E", fontWeight:600, cursor:"pointer" }}>{w}</span>
+                        <span key={i} onClick={() => handleWordClick(w.toLowerCase())} style={{ background:"#FEF9C3", border:"1px solid #D97706", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.7rem", color:C.gold, fontWeight:600, cursor:"pointer" }}>{w}</span>
                       ))}
                     </div>
                   </div>
@@ -412,8 +412,8 @@ export default function LecturePanel({ words: propWords = [] }) {
 
             {/* Result */}
             {allAnswered && (
-              <div style={{ background:C.white, borderRadius:16, padding:"1.2rem", border:`1.5px solid ${pct>=80?"#059669":pct>=60?C.gold:C.red}44`, textAlign:"center", animation:"fadeUp 0.3s ease" }}>
-                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:pct>=80?"#059669":pct>=60?C.gold:C.red, fontWeight:700, marginTop:"0.8rem" }}>
+              <div style={{ background:C.white, borderRadius:16, padding:"1.2rem", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}44`, textAlign:"center", animation:"fadeUp 0.3s ease" }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.8rem", color:pct>=80?C.green:pct>=60?C.gold:C.red, fontWeight:700, marginTop:"0.8rem" }}>
                   {score}/{total}
                 </div>
                 <div style={{ fontSize:"0.78rem", color:C.gray, marginTop:"0.25rem", marginBottom:"1rem" }}>{pct}% đúng</div>

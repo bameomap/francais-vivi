@@ -38,7 +38,7 @@ function SRSBtn({ fr, vi, words = [] }) {
   if (!finalFr) return null;
   return (
     <button onClick={() => { if (added) return; addWordToSRS(finalFr, finalVi); setAdded(true); }}
-      style={{ padding:"0.15rem 0.5rem", background:added?"#ECFDF5":"transparent", border:`1px solid ${added?"#059669":"#059669"}`, borderRadius:20, fontSize:"0.63rem", color:"#059669", cursor:added?"default":"pointer", fontWeight:600, flexShrink:0, transition:"all 0.2s" }}>
+      style={{ padding:"0.15rem 0.5rem", background:added?C.greenL:"transparent", border:`1px solid ${added?C.green:C.green}`, borderRadius:20, fontSize:"0.63rem", color:C.green, cursor:added?"default":"pointer", fontWeight:600, flexShrink:0, transition:"all 0.2s" }}>
       {added ? "✓ SRS" : "+ SRS"}
     </button>
   );
@@ -57,7 +57,7 @@ export function ExerciseMC({ ex, idx }) {
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.28rem" }}>
         {ex.options?.map((opt,j) => {
           let bg=C.white,bc=C.border,col=C.ink;
-          if(ans){if(norm(opt)===norm(ex.answer)){bg="#e8f7f1";bc=C.green;col=C.green;}else if(norm(opt)===norm(ans)){bg="#fde8e6";bc=C.red;col=C.red;}}
+          if(ans){if(norm(opt)===norm(ex.answer)){bg=C.greenL;bc=C.green;col=C.green;}else if(norm(opt)===norm(ans)){bg=C.redL;bc=C.red;col=C.red;}}
           return <button key={j} disabled={!!ans} onClick={()=>setAns(opt)}
             style={{padding:"0.38rem 0.5rem",border:`1.5px solid ${bc}`,borderRadius:8,background:bg,color:col,fontSize:"0.77rem",cursor:ans?"default":"pointer",textAlign:"left",fontFamily:"inherit"}}>{opt}</button>;
         })}
@@ -86,7 +86,7 @@ export function ExerciseFill({ ex, idx }) {
       <div style={{ display:"flex", gap:"0.38rem", alignItems:"center" }}>
         <input value={val} disabled={done} onChange={e=>setVal(e.target.value)} onKeyDown={e=>e.key==="Enter"&&!done&&setDone(true)}
           placeholder="Điền vào..."
-          style={{ border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`,borderRadius:6,padding:"0.3rem 0.55rem",fontSize:"0.83rem",width:160,fontFamily:"inherit",background:done?(ok?"#e8f7f1":"#fde8e6"):C.white,color:done?(ok?C.green:C.red):C.ink,outline:"none"}}/>
+          style={{ border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`,borderRadius:6,padding:"0.3rem 0.55rem",fontSize:"0.83rem",width:160,fontFamily:"inherit",background:done?(ok?C.greenL:C.redL):C.white,color:done?(ok?C.green:C.red):C.ink,outline:"none"}}/>
         {!done && <button onClick={()=>setDone(true)} style={{padding:"0.3rem 0.65rem",background:C.purple,color:C.white,border:"none",borderRadius:6,fontSize:"0.73rem",cursor:"pointer"}}>Kiểm tra</button>}
         {done && <span style={{fontSize:"0.73rem",color:ok?C.green:C.red,fontWeight:500}}>{ok?"✓ Đúng!":`✗ Đáp án: ${ex.answer}`}</span>}
       </div>
@@ -136,7 +136,7 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.3rem" }}>
               {q.options.map((opt, j) => {
                 let bg = C.white, bc = C.border, col = C.ink;
-                if (a) { if (norm(opt)===norm(q.answer)){bg="#e8f7f1";bc=C.green;col=C.green;} else if(norm(opt)===norm(a)){bg="#fde8e6";bc=C.red;col=C.red;} }
+                if (a) { if (norm(opt)===norm(q.answer)){bg=C.greenL;bc=C.green;col=C.green;} else if(norm(opt)===norm(a)){bg=C.redL;bc=C.red;col=C.red;} }
                 return <button key={j} disabled={!!a} onClick={() => choose(i, opt, q.answer, q)}
                   style={{ padding:"0.42rem 0.55rem", border:`1.5px solid ${bc}`, borderRadius:8, background:bg, color:col, fontSize:"0.78rem", cursor:a?"default":"pointer", textAlign:"left", fontFamily:"inherit" }}>{opt}</button>;
               })}
@@ -154,7 +154,7 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
                   }
                 </div>
                 {q.explanation && (
-                  <div style={{ marginTop:"0.35rem", background:"#EFF6FF", border:`1px solid ${C.blue}33`, borderRadius:8, padding:"0.38rem 0.65rem", fontSize:"0.72rem", color:"#2563EB", lineHeight:1.6 }}>
+                  <div style={{ marginTop:"0.35rem", background:C.blueL, border:`1px solid ${C.blue}33`, borderRadius:8, padding:"0.38rem 0.65rem", fontSize:"0.72rem", color:"#2563EB", lineHeight:1.6 }}>
                     💡 {q.explanation}
                   </div>
                 )}
@@ -166,7 +166,7 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
       })}
       {allDone && pct >= 90 && <Confetti />}
       {allDone && (
-        <div ref={summaryRef} style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+        <div ref={summaryRef} style={{ background: pct>=80?C.greenL:pct>=60?C.goldL:C.redL, border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
           <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", fontWeight:700, color: pct>=80?C.green:pct>=60?C.gold:C.red }}>{score}/{questions.length}</div>
           <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>{pct}% · {pct>=80?"Excellent!":pct>=60?"Bien!":"Encore des efforts!"}</div>
@@ -219,13 +219,13 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
               <input value={v} disabled={done} onChange={e => setInp(x=>({...x,[i]:e.target.value}))}
                 onKeyDown={e => e.key==="Enter" && doCheck(i,q,v)}
                 placeholder="Nhập từ..."
-                style={{ border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:6, padding:"0.3rem 0.55rem", fontSize:"0.83rem", width:160, fontFamily:"inherit", background:done?(ok?"#e8f7f1":"#fde8e6"):C.white, color:done?(ok?C.green:C.red):C.ink, outline:"none" }} />
+                style={{ border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:6, padding:"0.3rem 0.55rem", fontSize:"0.83rem", width:160, fontFamily:"inherit", background:done?(ok?C.greenL:C.redL):C.white, color:done?(ok?C.green:C.red):C.ink, outline:"none" }} />
               {!done && <button onClick={() => doCheck(i,q,v)} style={{ padding:"0.3rem 0.65rem", background:C.purple, color:C.white, border:"none", borderRadius:6, fontSize:"0.73rem", cursor:"pointer", fontFamily:"inherit" }}>Kiểm tra</button>}
               {done && <span style={{ fontSize:"0.73rem", color:ok?C.green:C.red, fontWeight:500 }}>{ok?"✓ Đúng!":`✗ Đáp án: ${q.answer}`}</span>}
               {done && !ok && <SRSBtn fr={q.answer} vi={q.hint} words={words} />}
             </div>
             {done && q.explanation && (
-              <div style={{ marginTop:"0.35rem", background:"#EFF6FF", border:`1px solid ${C.blue}33`, borderRadius:8, padding:"0.38rem 0.65rem", fontSize:"0.72rem", color:"#2563EB", lineHeight:1.6 }}>
+              <div style={{ marginTop:"0.35rem", background:C.blueL, border:`1px solid ${C.blue}33`, borderRadius:8, padding:"0.38rem 0.65rem", fontSize:"0.72rem", color:"#2563EB", lineHeight:1.6 }}>
                 💡 {q.explanation}
               </div>
             )}
@@ -235,7 +235,7 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
       })}
       {allDone && pct >= 90 && <Confetti />}
       {allDone && (
-        <div ref={summaryRef} style={{ background: pct>=80?"#ECFDF5":pct>=60?"#FFFBEB":"#FEF2F2", border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+        <div ref={summaryRef} style={{ background: pct>=80?C.greenL:pct>=60?C.goldL:C.redL, border:`1.5px solid ${pct>=80?C.green:pct>=60?C.gold:C.red}55`, borderRadius:16, padding:"1rem 1.2rem", marginTop:"0.5rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
           <div style={{ fontSize:"1.8rem", marginBottom:"0.2rem" }}>{pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.2rem", fontWeight:700, color: pct>=80?C.green:pct>=60?C.gold:C.red }}>{score}/{questions.length}</div>
           <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.15rem" }}>{pct}% · {pct>=80?"Excellent!":pct>=60?"Bien!":"Encore des efforts!"}</div>
@@ -269,11 +269,11 @@ export function MatchSection({ pairs, sl }) {
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.45rem" }}>
         <div>
           <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1, color:C.gray, marginBottom:"0.27rem" }}>Tiếng Pháp</div>
-          {pairs.map((p,i) => { const isM=!!matched[p.fr],isSel=selFr===p.fr,isW=wrongKey&&wrongKey.startsWith(p.fr+"|"); return <div key={i} onClick={()=>clickFr(p.fr)} style={{ padding:"0.43rem 0.62rem", border:`1.5px solid ${isM?C.green:isSel?C.purple:isW?C.red:C.border}`, borderRadius:8, marginBottom:"0.28rem", fontSize:"0.78rem", cursor:isM?"default":"pointer", background:isM?"#e8f7f1":isSel?C.purpleL:C.white, color:isM?C.green:isSel?C.purple:C.ink, transition:"all 0.15s", userSelect:"none" }}>{p.fr}</div>; })}
+          {pairs.map((p,i) => { const isM=!!matched[p.fr],isSel=selFr===p.fr,isW=wrongKey&&wrongKey.startsWith(p.fr+"|"); return <div key={i} onClick={()=>clickFr(p.fr)} style={{ padding:"0.43rem 0.62rem", border:`1.5px solid ${isM?C.green:isSel?C.purple:isW?C.red:C.border}`, borderRadius:8, marginBottom:"0.28rem", fontSize:"0.78rem", cursor:isM?"default":"pointer", background:isM?C.greenL:isSel?C.purpleL:C.white, color:isM?C.green:isSel?C.purple:C.ink, transition:"all 0.15s", userSelect:"none" }}>{p.fr}</div>; })}
         </div>
         <div>
           <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1, color:C.gray, marginBottom:"0.27rem" }}>Tiếng Việt</div>
-          {shuffled.map((p,i) => { const isM=!!matched[p.fr],isW=wrongKey&&wrongKey.endsWith("|"+p.fr); return <div key={i} onClick={()=>clickVi(p)} style={{ padding:"0.43rem 0.62rem", border:`1.5px solid ${isM?C.green:isW?C.red:C.border}`, borderRadius:8, marginBottom:"0.28rem", fontSize:"0.78rem", cursor:isM?"default":"pointer", background:isM?"#e8f7f1":C.white, color:isM?C.green:C.ink, transition:"all 0.15s", userSelect:"none" }}>{p.vi}</div>; })}
+          {shuffled.map((p,i) => { const isM=!!matched[p.fr],isW=wrongKey&&wrongKey.endsWith("|"+p.fr); return <div key={i} onClick={()=>clickVi(p)} style={{ padding:"0.43rem 0.62rem", border:`1.5px solid ${isM?C.green:isW?C.red:C.border}`, borderRadius:8, marginBottom:"0.28rem", fontSize:"0.78rem", cursor:isM?"default":"pointer", background:isM?C.greenL:C.white, color:isM?C.green:C.ink, transition:"all 0.15s", userSelect:"none" }}>{p.vi}</div>; })}
         </div>
       </div>
     </div>
@@ -310,7 +310,7 @@ export function DicteeSection({ words, onRecord }) {
         <div style={{ fontFamily:"Georgia,serif", fontSize:"1.3rem", color:C.ink, marginBottom:"1.2rem" }}>{w.vi||"?"}</div>
         <input value={input} disabled={checked} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&check()}
           placeholder="Nhập từ tiếng Pháp..."
-          style={{ width:"100%", maxWidth:260, border:`1.5px solid ${checked?(isCorrect?C.green:C.red):C.border}`, borderRadius:8, padding:"0.5rem 0.8rem", fontSize:"1rem", fontFamily:"Georgia,serif", textAlign:"center", outline:"none", background:checked?(isCorrect?"#e8f7f1":"#fde8e6"):C.white, color:checked?(isCorrect?C.green:C.red):C.ink, boxSizing:"border-box" }} />
+          style={{ width:"100%", maxWidth:260, border:`1.5px solid ${checked?(isCorrect?C.green:C.red):C.border}`, borderRadius:8, padding:"0.5rem 0.8rem", fontSize:"1rem", fontFamily:"Georgia,serif", textAlign:"center", outline:"none", background:checked?(isCorrect?C.greenL:C.redL):C.white, color:checked?(isCorrect?C.green:C.red):C.ink, boxSizing:"border-box" }} />
         {!checked && (
           <div style={{ marginTop:"0.8rem", display:"flex", gap:"0.5rem", justifyContent:"center" }}>
             <button onClick={()=>setRevealed(r=>!r)} style={{ padding:"0.3rem 0.8rem", border:`1px solid ${C.border}`, borderRadius:6, background:C.white, color:C.gray, fontSize:"0.72rem", cursor:"pointer" }}>{revealed?"Ẩn":"💡 Gợi ý"}</button>
@@ -523,8 +523,8 @@ export function FlashcardSection({ words, onRecord }) {
       <div style={{ display:"flex", gap:"0.5rem" }}>
         {[
           { label:"Lại",  sub:"Xem lại",  bg:"#EF4444", fg:"#fff",    border:"#EF4444", action: markLearning },
-          { label:"Khó",  sub:"Ôn thêm",  bg:"#FEF3C7", fg:"#D97706", border:"#F59E0B", action: markLearning },
-          { label:"Tốt",  sub:"Đã thuộc", bg:"#D1FAE5", fg:"#059669", border:"#10B981", action: markLearned  },
+          { label:"Khó",  sub:"Ôn thêm",  bg:"#FEF3C7", fg:C.gold, border:"#F59E0B", action: markLearning },
+          { label:"Tốt",  sub:"Đã thuộc", bg:"#D1FAE5", fg:C.green, border:"#10B981", action: markLearned  },
           { label:"Dễ",   sub:"Thuộc tốt",bg:"#DBEAFE", fg:"#2563EB", border:"#3B82F6", action: markLearned  },
         ].map(r => (
           <button key={r.label} onClick={r.action}

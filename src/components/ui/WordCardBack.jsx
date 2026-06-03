@@ -86,8 +86,8 @@ export default function WordCardBack({ word }) {
 
       {/* Example */}
       {details?.ex_fr && (
-        <div style={{ background:"#FFFBEB", borderRadius:12, padding:"0.55rem 0.8rem", border:"1px solid #FDE68A", marginTop:"0.1rem" }}>
-          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:1.5, color:"#D97706", fontWeight:700, marginBottom:"0.3rem" }}>✦ Ví dụ</div>
+        <div style={{ background:C.goldL, borderRadius:12, padding:"0.55rem 0.8rem", border:`1px solid ${C.gold}55`, marginTop:"0.1rem" }}>
+          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:1.5, color:C.gold, fontWeight:700, marginBottom:"0.3rem" }}>✦ Ví dụ</div>
           <div style={{ fontSize:"0.78rem", color:C.ink, fontStyle:"italic", lineHeight:1.55 }}>{details.ex_fr}</div>
           <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.2rem" }}>↳ {details.ex_vi}</div>
         </div>
