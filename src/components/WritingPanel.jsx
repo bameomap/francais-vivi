@@ -65,13 +65,13 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
 
       {/* ── Corrected ── */}
       {result.is_perfect ? (
-        <div style={{ background:"#F0FDF4", border:"1.5px solid #6EE7B7", borderRadius:14, padding:"0.85rem", textAlign:"center" }}>
+        <div style={{ background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, padding:"0.85rem", textAlign:"center" }}>
           <div style={{ fontSize:"1.3rem", marginBottom:"0.25rem" }}>🎉</div>
-          <div style={{ fontFamily:"Georgia,serif", color:"#059669", fontWeight:600 }}>Hoàn hảo! Không có lỗi nào.</div>
+          <div style={{ fontFamily:"Georgia,serif", color:C.green, fontWeight:600 }}>Hoàn hảo! Không có lỗi nào.</div>
         </div>
       ) : result.corrected && (
-        <div style={{ background:C.white, border:"1.5px solid #6EE7B7", borderRadius:14, padding:"0.85rem 1rem" }}>
-          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.12em", color:"#059669", fontWeight:700, marginBottom:6 }}>✓ Bản sửa</div>
+        <div style={{ background:C.white, border:`1.5px solid ${C.green}`, borderRadius:14, padding:"0.85rem 1rem" }}>
+          <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:"0.12em", color:C.green, fontWeight:700, marginBottom:6 }}>✓ Bản sửa</div>
           <div style={{ fontFamily:"Georgia,serif", fontSize:"0.92rem", color:C.ink, lineHeight:1.65, display:"flex", alignItems:"flex-start", gap:"0.5rem", flexWrap:"wrap" }}>
             {result.corrected}
             <SpeakBtn text={result.corrected} />
@@ -306,12 +306,12 @@ vocab: 5-7 key words/phrases relevant to the task.`);
               {!result && (
                 <div style={{ display:"flex", gap:"0.5rem" }}>
                   <button onClick={loadHint} disabled={hintLoading}
-                    style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"0.35rem", padding:"0.55rem 0.5rem", background: hint ? C.goldL : C.white, border:`1.5px solid ${hint ? C.gold : C.border}`, borderRadius:10, color: hint ? "#B45309" : C.gray, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit", fontWeight:600, transition:"all 0.15s" }}>
+                    style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"0.35rem", padding:"0.55rem 0.5rem", background: hint ? C.goldL : C.white, border:`1.5px solid ${hint ? C.gold : C.border}`, borderRadius:10, color: hint ? C.gold : C.gray, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit", fontWeight:600, transition:"all 0.15s" }}>
                     {hintLoading ? "⏳" : "💡"}
                     {hintLoading ? "Đang tạo…" : hint ? "Ẩn gợi ý" : "Gợi ý cách viết"}
                   </button>
                   <button onClick={loadSample} disabled={sampleLoading}
-                    style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"0.35rem", padding:"0.55rem 0.5rem", background: sample ? "#F0FDF4" : C.white, border:`1.5px solid ${sample ? "#059669" : C.border}`, borderRadius:10, color: sample ? "#059669" : C.gray, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit", fontWeight:600, transition:"all 0.15s" }}>
+                    style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"0.35rem", padding:"0.55rem 0.5rem", background: sample ? C.greenL : C.white, border:`1.5px solid ${sample ? C.green : C.border}`, borderRadius:10, color: sample ? C.green : C.gray, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit", fontWeight:600, transition:"all 0.15s" }}>
                     {sampleLoading ? "⏳" : "📝"}
                     {sampleLoading ? "Đang tạo…" : sample ? "Ẩn bài mẫu" : "Xem bài mẫu"}
                   </button>
@@ -321,13 +321,13 @@ vocab: 5-7 key words/phrases relevant to the task.`);
               {/* ── Hint box ── */}
               {hint && !hint.error && (
                 <div style={{ background:C.goldL, border:`1.5px solid ${C.gold}55`, borderRadius:14, padding:"0.85rem 1rem", animation:"fadeUp 0.25s ease" }}>
-                  <div style={{ fontSize:"0.6rem", fontWeight:700, color:"#B45309", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.6rem" }}>💡 Gợi ý cách viết</div>
+                  <div style={{ fontSize:"0.6rem", fontWeight:700, color:C.gold, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.6rem" }}>💡 Gợi ý cách viết</div>
 
                   {/* Opening */}
                   {hint.opening && (
                     <div style={{ marginBottom:"0.65rem" }}>
-                      <div style={{ fontSize:"0.65rem", fontWeight:700, color:"#92400E", marginBottom:"0.25rem" }}>✍️ Câu mở đầu gợi ý</div>
-                      <div style={{ fontFamily:"Georgia,serif", fontSize:"0.85rem", color:C.ink, background:"rgba(255,255,255,0.6)", borderRadius:8, padding:"0.4rem 0.65rem", fontStyle:"italic" }}>
+                      <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.gold, marginBottom:"0.25rem" }}>✍️ Câu mở đầu gợi ý</div>
+                      <div style={{ fontFamily:"Georgia,serif", fontSize:"0.85rem", color:C.ink, background:C.white, border:`1px solid ${C.border}`, borderRadius:8, padding:"0.4rem 0.65rem", fontStyle:"italic" }}>
                         {hint.opening}
                       </div>
                     </div>
@@ -336,7 +336,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                   {/* Structure */}
                   {hint.structure?.length > 0 && (
                     <div style={{ marginBottom:"0.65rem" }}>
-                      <div style={{ fontSize:"0.65rem", fontWeight:700, color:"#92400E", marginBottom:"0.25rem" }}>📌 Cấu trúc bài</div>
+                      <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.gold, marginBottom:"0.25rem" }}>📌 Cấu trúc bài</div>
                       {hint.structure.map((s, i) => (
                         <div key={i} style={{ display:"flex", gap:"0.45rem", alignItems:"flex-start", marginBottom:"0.2rem" }}>
                           <span style={{ background:C.gold, color:"#fff", borderRadius:"50%", width:18, height:18, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.6rem", fontWeight:700, flexShrink:0, marginTop:1 }}>{i+1}</span>
@@ -349,10 +349,10 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                   {/* Vocab */}
                   {hint.vocab?.length > 0 && (
                     <div style={{ marginBottom:"0.65rem" }}>
-                      <div style={{ fontSize:"0.65rem", fontWeight:700, color:"#92400E", marginBottom:"0.3rem" }}>🔤 Từ vựng hữu ích</div>
+                      <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.gold, marginBottom:"0.3rem" }}>🔤 Từ vựng hữu ích</div>
                       <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem" }}>
                         {hint.vocab.map((w, i) => (
-                          <span key={i} style={{ background:"rgba(255,255,255,0.7)", border:`1px solid ${C.gold}44`, borderRadius:20, padding:"0.15rem 0.6rem", fontSize:"0.72rem", color:C.ink }}>
+                          <span key={i} style={{ background:C.white, border:`1px solid ${C.gold}44`, borderRadius:20, padding:"0.15rem 0.6rem", fontSize:"0.72rem", color:C.ink }}>
                             <span style={{ fontFamily:"Georgia,serif", fontWeight:600 }}>{w.fr}</span>
                             <span style={{ color:C.gray }}> — {w.vi}</span>
                           </span>
@@ -363,7 +363,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
 
                   {/* Grammar tip */}
                   {hint.grammar_tip && (
-                    <div style={{ background:"rgba(255,255,255,0.55)", borderRadius:8, padding:"0.4rem 0.65rem", fontSize:"0.75rem", color:"#78350F", lineHeight:1.55, borderLeft:`3px solid ${C.gold}` }}>
+                    <div style={{ background:C.white, borderRadius:8, padding:"0.4rem 0.65rem", fontSize:"0.75rem", color:C.ink, lineHeight:1.55, borderLeft:`3px solid ${C.gold}` }}>
                       ⚙️ {hint.grammar_tip}
                     </div>
                   )}
@@ -376,11 +376,11 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                 const fr = parts[0]?.trim();
                 const vi = parts[1]?.trim();
                 return (
-                  <div style={{ background:"#F0FDF4", border:`1.5px solid #059669`, borderRadius:14, padding:"0.85rem 1rem", animation:"fadeUp 0.25s ease" }}>
-                    <div style={{ fontSize:"0.6rem", fontWeight:700, color:"#059669", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.65rem" }}>📝 Bài văn mẫu A1</div>
+                  <div style={{ background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, padding:"0.85rem 1rem", animation:"fadeUp 0.25s ease" }}>
+                    <div style={{ fontSize:"0.6rem", fontWeight:700, color:C.green, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.65rem" }}>📝 Bài văn mẫu A1</div>
                     <div style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.ink, lineHeight:1.75, whiteSpace:"pre-wrap", marginBottom:"0.6rem" }}>{fr}</div>
                     {vi && (
-                      <div style={{ paddingTop:"0.55rem", borderTop:`1px dashed #059669`, fontSize:"0.75rem", color:"#065F46", lineHeight:1.65, whiteSpace:"pre-wrap" }}>→ {vi}</div>
+                      <div style={{ paddingTop:"0.55rem", borderTop:`1px dashed ${C.green}`, fontSize:"0.75rem", color:C.gray, lineHeight:1.65, whiteSpace:"pre-wrap" }}>→ {vi}</div>
                     )}
                   </div>
                 );

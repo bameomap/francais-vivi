@@ -194,7 +194,7 @@ function GroupStudyView({ group, unit, onBack }) {
       </div>
 
       {/* Word list */}
-      {subView === "list" && <WordList words={group.words} color={unit.color} bg={unit.bg} />}
+      {subView === "list" && <WordList words={group.words} color={unit.color} bg={`${unit.color}1a`} />}
 
       {/* Mode picker */}
       {subView === "pick" && (
@@ -203,7 +203,7 @@ function GroupStudyView({ group, unit, onBack }) {
           {MODES.map(m => (
             <button key={m.id} onClick={() => setSubView(m.id)}
               style={{ display:"flex", alignItems:"center", gap:"0.85rem", background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.75rem 1rem", cursor:"pointer", textAlign:"left", fontFamily:"inherit", transition:"all 0.15s" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = unit.color; e.currentTarget.style.background = unit.bg; }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = unit.color; e.currentTarget.style.background = `${unit.color}1a`; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = C.white; }}>
               <span style={{ fontSize:"1.4rem", lineHeight:1 }}>{m.label.split(" ")[0]}</span>
               <div>
@@ -250,7 +250,7 @@ function UnitDetailView({ unit, onBack }) {
         {unit.groups.map((g, i) => (
           <button key={g.id} onClick={() => setActiveGroup(g.id)}
             style={{ display:"flex", alignItems:"center", gap:"0.85rem", background:C.white, border:`1.5px solid ${unit.color}33`, borderRadius:16, padding:"0.9rem 1rem", cursor:"pointer", textAlign:"left", fontFamily:"inherit", animation:`fadeUp 0.2s ease ${i*0.05}s both`, transition:"all 0.15s", boxShadow:`0 2px 8px ${unit.color}10` }}
-            onMouseEnter={e => { e.currentTarget.style.background = unit.bg; e.currentTarget.style.borderColor = unit.color; }}
+            onMouseEnter={e => { e.currentTarget.style.background = `${unit.color}1a`; e.currentTarget.style.borderColor = unit.color; }}
             onMouseLeave={e => { e.currentTarget.style.background = C.white; e.currentTarget.style.borderColor = `${unit.color}33`; }}>
             <span style={{ fontSize:"1.6rem", lineHeight:1 }}>{g.icon}</span>
             <div style={{ flex:1 }}>
@@ -342,7 +342,7 @@ export default function EditoVocabPanel({ onBackToParcours }) {
           return (
             <button key={unit.id} onClick={() => setActiveUnit(unit.id)}
               style={{ display:"flex", alignItems:"center", gap:"0.85rem", background:C.white, border:`1.5px solid ${unit.color}33`, borderRadius:16, padding:"0.85rem 1rem", cursor:"pointer", textAlign:"left", fontFamily:"inherit", animation:`fadeUp 0.2s ease ${i*0.03}s both`, transition:"all 0.15s", boxShadow:`0 2px 8px ${unit.color}10` }}
-              onMouseEnter={e => { e.currentTarget.style.background = unit.bg; e.currentTarget.style.borderColor = unit.color; }}
+              onMouseEnter={e => { e.currentTarget.style.background = `${unit.color}1a`; e.currentTarget.style.borderColor = unit.color; }}
               onMouseLeave={e => { e.currentTarget.style.background = C.white; e.currentTarget.style.borderColor = `${unit.color}33`; }}>
               <div style={{ background:unit.color, color:"#fff", borderRadius:999, minWidth:32, height:32, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.8rem", fontWeight:700, flexShrink:0 }}>
                 {unit.num}
