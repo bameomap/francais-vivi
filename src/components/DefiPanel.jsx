@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
 import { markStudiedToday, loadSets } from "../utils/storage.js";
-import { getAllCards } from "../utils/srs.js";
+import { getWeakWords } from "../utils/srs.js";
 import Spinner from "./ui/Spinner.jsx";
 import { Confetti } from "./ui/Minou.jsx";
 import { logMistake } from "../utils/storage.js";
@@ -10,13 +10,6 @@ import { logMistake } from "../utils/storage.js";
 const DEFI_KEY = "defi_history";
 
 // ── Data helpers ────────────────────────────────────────────
-function getWeakWords() {
-  return getAllCards()
-    .filter(c => c.easeFactor < 2.2 || c.repetitions < 2)
-    .sort((a, b) => a.easeFactor - b.easeFactor)
-    .slice(0, 40);
-}
-
 function getSavedWords() {
   const sets = loadSets();
   if (!sets.length) return [];

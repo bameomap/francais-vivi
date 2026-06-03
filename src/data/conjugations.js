@@ -1,4 +1,4 @@
-// Pre-baked conjugation tables for the most common A1 verbs (présent).
+// Pre-baked conjugation tables for the most common A1 verbs.
 // Used by ConjugaisonPanel to answer instantly & offline; falls back to AI
 // for other verbs/tenses. Order: je, tu, il/elle, nous, vous, ils/elles.
 
@@ -20,15 +20,60 @@ const PRESENT = {
   dormir:  { group:"3 (-ir)", meaning:"ngủ", conjugations:["dors","dors","dort","dormons","dormez","dorment"], tip:"Bỏ -mir rồi thêm -s,-s,-t ở số ít.", example:"Je dors huit heures. — Tôi ngủ 8 tiếng." },
 };
 
-const TENSE_TABLES = { present: PRESENT };
+// Past participles + which auxiliary each verb takes (for passé composé).
+const PARTICIPLE = {
+  être:"été", avoir:"eu", aller:"allé", faire:"fait", pouvoir:"pu", vouloir:"voulu",
+  savoir:"su", venir:"venu", voir:"vu", prendre:"pris", parler:"parlé", manger:"mangé",
+  finir:"fini", aimer:"aimé", dormir:"dormi",
+};
+const ETRE_VERBS = new Set(["aller", "venir"]); // of this core set, these use être
+
+const AVOIR_PRES = ["ai", "as", "a", "avons", "avez", "ont"];
+const ETRE_PRES  = ["suis", "es", "est", "sommes", "êtes", "sont"];
+const ALLER_PRES = ["vais", "vas", "va", "allons", "allez", "vont"];
+
+function buildPasse(verb) {
+  const pp = PARTICIPLE[verb];
+  if (!pp) return null;
+  const usesEtre = ETRE_VERBS.has(verb);
+  const aux = usesEtre ? ETRE_PRES : AVOIR_PRES;
+  // For être-verbs the participle agrees: allé(e)(s). Show a simple A1-friendly form.
+  const conj = usesEtre
+    ? [`${aux[0]} ${pp}(e)`, `${aux[1]} ${pp}(e)`, `${aux[2]} ${pp}(e)`, `${aux[3]} ${pp}(e)s`, `${aux[4]} ${pp}(e)(s)`, `${aux[5]} ${pp}(e)s`]
+    : aux.map(a => `${a} ${pp}`);
+  return {
+    group: PRESENT[verb]?.group || "",
+    meaning: PRESENT[verb]?.meaning || "",
+    conjugations: conj,
+    tip: usesEtre
+      ? "Đi với ÊTRE → phân từ hợp giống/số: allé(e)(s)."
+      : "Passé composé = avoir (hiện tại) + phân từ quá khứ.",
+    example: usesEtre
+      ? `Je suis ${pp}(e) hier. — Hôm qua tôi đã ${PRESENT[verb]?.meaning || ""}.`
+      : `J'${aux[0]==="ai"?"ai":aux[0]} ${pp}. — Tôi đã ${PRESENT[verb]?.meaning || ""}.`,
+  };
+}
+
+function buildFuturProche(verb) {
+  if (!PRESENT[verb]) return null;
+  return {
+    group: PRESENT[verb].group,
+    meaning: PRESENT[verb].meaning,
+    conjugations: ALLER_PRES.map(a => `${a} ${verb}`),
+    tip: "Futur proche = ALLER (hiện tại) + động từ nguyên thể.",
+    example: `Je vais ${verb} demain. — Mai tôi sẽ ${PRESENT[verb].meaning}.`,
+  };
+}
 
 const norm = (s = "") => s.toLowerCase().trim().replace(/^(se |s'|s’)/, "");
 
 // Returns a result object matching the AI shape, or null if not baked.
 export function getBakedConjugation(verb, tenseId, tenseLabel) {
-  const table = TENSE_TABLES[tenseId];
-  if (!table) return null;
-  const entry = table[norm(verb)];
+  const v = norm(verb);
+  let entry = null;
+  if (tenseId === "present")        entry = PRESENT[v];
+  else if (tenseId === "passe")     entry = buildPasse(v);
+  else if (tenseId === "futur_pro") entry = buildFuturProche(v);
   if (!entry) return null;
-  return { verb: norm(verb), tense: tenseLabel || tenseId, baked: true, ...entry };
+  return { verb: v, tense: tenseLabel || tenseId, baked: true, ...entry };
 }

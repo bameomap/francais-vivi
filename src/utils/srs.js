@@ -10,6 +10,8 @@
  *  - lastReviewed : timestamp of last review
  */
 
+import { getMistakes } from "./storage.js";
+
 const SRS_KEY = "srs_data";
 
 export function getSRSData() {
@@ -152,6 +154,26 @@ export function getMasteredSet() {
     }
   }
   return mastered;
+}
+
+/**
+ * Single source of truth for "weak words" across the app.
+ * Merges (1) logged mistakes (Défi/Dictée/Quiz) and (2) struggling or
+ * not-yet-learned SRS cards — deduped, mistakes first. Returns {fr, vi}.
+ */
+export function getWeakWords(limit = 40) {
+  const seen = new Set();
+  const out = [];
+  for (const m of getMistakes().slice().reverse()) {
+    if (m.fr && !seen.has(m.fr)) { seen.add(m.fr); out.push({ fr: m.fr, vi: m.vi || "" }); }
+  }
+  const cards = Object.values(getSRSData())
+    .filter(c => c.easeFactor < 2.2 || c.repetitions < 2)
+    .sort((a, b) => a.easeFactor - b.easeFactor);
+  for (const c of cards) {
+    if (!seen.has(c.fr)) { seen.add(c.fr); out.push({ fr: c.fr, vi: c.vi || "" }); }
+  }
+  return out.slice(0, limit);
 }
 
 // ── SM-2 core ───────────────────────────────────────────────
