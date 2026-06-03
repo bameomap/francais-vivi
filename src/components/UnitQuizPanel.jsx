@@ -9,11 +9,12 @@ import { Confetti } from "./ui/Minou.jsx";
 import Spinner from "./ui/Spinner.jsx";
 
 // ── Skill config ──────────────────────────────────────────────
+// bg is derived as a translucent tint of `color` at render → theme-safe.
 const SKILLS = {
-  vocab:          { label:"Vocabulaire", color:"#4A90D9", bg:"#EBF4FF", icon:"V" },
-  grammaire:      { label:"Grammaire",   color:"#7B6CF6", bg:"#F0EEFF", icon:"G" },
-  comprehension:  { label:"Compréhension", color:C.green, bg:C.greenL, icon:"C" },
-  ecriture:       { label:"Écriture",    color:"#E67E22", bg:"#FEF3E2", icon:"É" },
+  vocab:          { label:"Vocabulaire",   color:"#4A90D9", icon:"V" },
+  grammaire:      { label:"Grammaire",     color:"#7B6CF6", icon:"G" },
+  comprehension:  { label:"Compréhension", color:"#10B981", icon:"C" },
+  ecriture:       { label:"Écriture",      color:"#E67E22", icon:"É" },
 };
 
 const CACHE_KEY = (uid) => `unit_quiz_${uid}`;
@@ -86,7 +87,7 @@ function QuestionCard({ q, idx, passage, onAnswer, answered }) {
 
       {/* Skill badge */}
       <div style={{ display:"flex", alignItems:"center", gap:6, marginBottom:"0.5rem" }}>
-        <span style={{ background: sk.bg, color: sk.color, fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", fontWeight:700, letterSpacing:"0.08em", borderRadius:6, padding:"2px 7px", border:`1px solid ${sk.color}33` }}>
+        <span style={{ background: `${sk.color}1a`, color: sk.color, fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", fontWeight:700, letterSpacing:"0.08em", borderRadius:6, padding:"2px 7px", border:`1px solid ${sk.color}33` }}>
           {sk.icon} {sk.label}
         </span>
         <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", color:C.gray }}>{idx + 1}/15</span>
@@ -188,7 +189,7 @@ function ResultScreen({ score, total, unitId, onRetry, onBack }) {
 
       {/* Section breakdown */}
       {Object.entries(SKILLS).map(([key, sk]) => (
-        <div key={key} style={{ display:"flex", alignItems:"center", gap:8, marginBottom:"0.4rem", background:sk.bg, borderRadius:10, padding:"0.4rem 0.75rem", border:`1px solid ${sk.color}22` }}>
+        <div key={key} style={{ display:"flex", alignItems:"center", gap:8, marginBottom:"0.4rem", background:`${sk.color}1a`, borderRadius:10, padding:"0.4rem 0.75rem", border:`1px solid ${sk.color}22` }}>
           <span style={{ fontSize:"0.68rem", fontWeight:700, color:sk.color, minWidth:18 }}>{sk.icon}</span>
           <span style={{ fontSize:"0.78rem", color:C.ink, flex:1, textAlign:"left" }}>{sk.label}</span>
         </div>
@@ -294,7 +295,7 @@ export default function UnitQuizPanel({ onBackToParcours }) {
       {/* Skill chips */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.5rem", marginBottom:"1.25rem" }}>
         {Object.entries(SKILLS).map(([key, sk]) => (
-          <div key={key} style={{ background:sk.bg, borderRadius:12, padding:"0.6rem 0.75rem", border:`1px solid ${sk.color}33`, display:"flex", alignItems:"center", gap:8 }}>
+          <div key={key} style={{ background:`${sk.color}1a`, borderRadius:12, padding:"0.6rem 0.75rem", border:`1px solid ${sk.color}33`, display:"flex", alignItems:"center", gap:8 }}>
             <span style={{ fontSize:"1rem", fontWeight:900, color:sk.color, fontFamily:"'JetBrains Mono',monospace" }}>{sk.icon}</span>
             <div>
               <div style={{ fontSize:"0.72rem", fontWeight:700, color:sk.color }}>{sk.label}</div>
