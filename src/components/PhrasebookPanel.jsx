@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { C } from "../constants.js";
+import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 
 const CATEGORIES = [
@@ -138,8 +139,29 @@ const CATEGORIES = [
   },
 ];
 
+// ── "Pour communiquer" formulas from the Édito book, merged here so the
+//    Phrasebook is the single place to browse all communication phrases.
+//    (These are French-only formulas; deduped by heading.) ──
+const EDITO_PHRASE_CATS = (() => {
+  const byHeading = new Map();
+  for (const groups of Object.values(EDITO_POUR_NOTES)) {
+    for (const g of groups) {
+      if (!byHeading.has(g.heading)) byHeading.set(g.heading, new Set());
+      const set = byHeading.get(g.heading);
+      for (const p of g.phrases) set.add(p);
+    }
+  }
+  return [...byHeading.entries()].map(([heading, set], i) => ({
+    id: `edito-${i}`, icon: "📘", label: heading, edito: true,
+    phrases: [...set].map(fr => ({ fr, vi: "" })),
+  }));
+})();
+
+const ALL_CATEGORIES = [...CATEGORIES, ...EDITO_PHRASE_CATS];
+
 function PhraseRow({ phrase }) {
   const [show, setShow] = useState(false);
+  const hasVi = !!phrase.vi;
   return (
     <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", padding:"0.55rem 0", borderBottom:`1px solid ${C.border}` }}>
       <div style={{ flex:1 }}>
@@ -147,14 +169,16 @@ function PhraseRow({ phrase }) {
           <span style={{ fontSize:"0.88rem", color:C.ink, fontFamily:"Georgia,serif", fontStyle:"italic" }}>{phrase.fr}</span>
           <SpeakBtn text={phrase.fr} size="sm" />
         </div>
-        {show && (
+        {show && hasVi && (
           <div style={{ fontSize:"0.75rem", color:C.gray, marginTop:"0.2rem", animation:"fadeUp 0.2s ease" }}>{phrase.vi}</div>
         )}
       </div>
-      <button onClick={() => setShow(v => !v)}
-        style={{ padding:"0.2rem 0.55rem", border:`1px solid ${C.border}`, borderRadius:20, background:"transparent", color:C.gray, fontSize:"0.65rem", cursor:"pointer", flexShrink:0, whiteSpace:"nowrap" }}>
-        {show ? "Ẩn" : "Nghĩa"}
-      </button>
+      {hasVi && (
+        <button onClick={() => setShow(v => !v)}
+          style={{ padding:"0.2rem 0.55rem", border:`1px solid ${C.border}`, borderRadius:20, background:"transparent", color:C.gray, fontSize:"0.65rem", cursor:"pointer", flexShrink:0, whiteSpace:"nowrap" }}>
+          {show ? "Ẩn" : "Nghĩa"}
+        </button>
+      )}
     </div>
   );
 }
@@ -165,13 +189,13 @@ export default function PhrasebookPanel() {
 
   const q = search.toLowerCase().trim();
   const filtered = q
-    ? CATEGORIES.map(cat => ({
+    ? ALL_CATEGORIES.map(cat => ({
         ...cat,
         phrases: cat.phrases.filter(p =>
           p.fr.toLowerCase().includes(q) || p.vi.toLowerCase().includes(q)
         ),
       })).filter(cat => cat.phrases.length > 0)
-    : CATEGORIES;
+    : ALL_CATEGORIES;
 
   return (
     <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
@@ -188,10 +212,19 @@ export default function PhrasebookPanel() {
 
       {/* Category accordion */}
       <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem" }}>
-        {filtered.map(cat => {
+        {filtered.map((cat, ci) => {
           const isOpen = open === cat.id || !!q;
+          const firstEdito = cat.edito && (ci === 0 || !filtered[ci - 1].edito);
           return (
-            <div key={cat.id} style={{ background:C.white, borderRadius:16, border:`1.5px solid ${C.border}`, overflow:"hidden" }}>
+            <div key={cat.id}>
+            {firstEdito && (
+              <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", margin:"0.6rem 0 0.55rem" }}>
+                <div style={{ flex:1, height:1, background:C.border }}/>
+                <span style={{ fontSize:"0.62rem", fontWeight:700, color:C.gray, letterSpacing:"0.08em", textTransform:"uppercase" }}>📘 Theo bài Édito</span>
+                <div style={{ flex:1, height:1, background:C.border }}/>
+              </div>
+            )}
+            <div style={{ background:C.white, borderRadius:16, border:`1.5px solid ${C.border}`, overflow:"hidden" }}>
               {/* Header */}
               <button
                 onClick={() => !q && setOpen(isOpen && !q ? null : cat.id)}
@@ -210,6 +243,7 @@ export default function PhrasebookPanel() {
                   {cat.phrases.map((p, i) => <PhraseRow key={i} phrase={p} />)}
                 </div>
               )}
+            </div>
             </div>
           );
         })}

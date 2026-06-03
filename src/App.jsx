@@ -575,6 +575,17 @@ function AppInner() {
                 </button>
               ))}
             </div>
+
+            {/* ── Défi du jour CTA ── */}
+            <button className="card-hover" onClick={()=>goSection("defi","defi")}
+              style={{ width:"100%", marginTop:10, display:"flex", alignItems:"center", gap:12, background:`linear-gradient(135deg, #8E44AD, #6D28D9)`, border:"none", borderRadius:16, padding:"13px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", boxShadow:"0 4px 16px rgba(109,40,217,0.3)", animation:"fadeUp 0.3s ease 0.32s both" }}>
+              <span style={{ fontSize:26, lineHeight:1, flexShrink:0 }}>🎲</span>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:"#fff", lineHeight:1.1 }}>Le Défi du jour</div>
+                <div style={{ fontSize:11, color:"rgba(255,255,255,0.8)", marginTop:2 }}>Thử thách nhanh · tích streak 🔥</div>
+              </div>
+              <span style={{ color:"#fff", fontSize:18, flexShrink:0 }}>→</span>
+            </button>
           </div>
 
           <div style={{ height:"1.5rem" }} />

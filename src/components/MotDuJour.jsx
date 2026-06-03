@@ -3,7 +3,7 @@ import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
-import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
+import { EDITO_VOCAB_UNITS, getBakedWord } from "../data/editoVocab.js";
 
 // A1 seed words used when user has no vocab yet
 const SEED_WORDS = [
@@ -100,7 +100,11 @@ export default function MotDuJour({ words = [] }) {
   const word  = pool[getDayIndex() % pool.length];
   const cacheKey = getTodayKey() + "_" + word.fr;
 
+  // Pre-baked example (offline) if available on the word or in the vocab index.
+  const baked = (word.ipa || word.ex_fr) ? word : getBakedWord(word.fr);
+
   const [example, setExample] = useState(() => {
+    if (baked?.ex_fr) return { fr: baked.ex_fr, vi: baked.ex_vi || "" };
     try { return JSON.parse(localStorage.getItem(cacheKey)) || null; } catch { return null; }
   });
   const [loading, setLoading] = useState(false);
@@ -168,7 +172,7 @@ export default function MotDuJour({ words = [] }) {
                 </div>
               )}
               {example && (
-                <div style={{ background:"#F5F8FF", borderRadius:12, padding:"0.5rem 0.75rem", border:`1px solid ${C.border}` }}>
+                <div style={{ background:C.cream, borderRadius:12, padding:"0.5rem 0.75rem", border:`1px solid ${C.border}` }}>
                   <div style={{ display:"flex", alignItems:"flex-start", gap:"0.5rem" }}>
                     <div style={{ flex:1 }}>
                       <div style={{ fontSize:"0.82rem", color:C.ink, fontStyle:"italic", lineHeight:1.5 }}>{example.fr}</div>
@@ -189,7 +193,9 @@ export default function MotDuJour({ words = [] }) {
 
 // ── Inline details panel ───────────────────────────────────────
 function WordDetails({ word }) {
+  const baked = (word.ipa) ? word : getBakedWord(word.fr);
   const [details, setDetails] = useState(() => {
+    if (baked?.ipa) return { pron: baked.ipa, tip: "", gram: baked.pos || "" };
     const k = `wotd_det_${word.fr}`;
     try { return JSON.parse(localStorage.getItem(k)) || null; } catch { return null; }
   });
@@ -225,7 +231,7 @@ function WordDetails({ word }) {
       {details.pron && (
         <div style={{ display:"flex", alignItems:"center", gap:"0.5rem" }}>
           <span style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1, color:C.gray, fontWeight:600, minWidth:36 }}>IPA</span>
-          <span style={{ fontFamily:"'Courier New',monospace", fontSize:"0.82rem", color:"#6D28D9", background:"#F5F0FF", borderRadius:8, padding:"0.2rem 0.55rem" }}>/{details.pron}/</span>
+          <span style={{ fontFamily:"'Courier New',monospace", fontSize:"0.82rem", color:C.blue, background:C.blueL, borderRadius:8, padding:"0.2rem 0.55rem" }}>/{details.pron}/</span>
         </div>
       )}
       {details.gram && (

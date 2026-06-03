@@ -208,10 +208,13 @@ const SALUTATIONS = [
 
 function Section({ icon, title, subtitle, color, bg, defaultOpen=false, children }) {
   const [open, setOpen] = useState(defaultOpen);
+  // Theme-safe tint derived from the section accent (the hardcoded `bg` prop
+  // was a light colour that broke in dark mode).
+  const tint = `${color}14`;
   return (
     <div style={{ borderRadius:16, overflow:"hidden", border:`1.5px solid ${color}33`, marginBottom:"0.6rem", boxShadow:`0 2px 10px ${color}10` }}>
       <button onClick={()=>setOpen(o=>!o)}
-        style={{ width:"100%", display:"flex", alignItems:"center", gap:"0.75rem", padding:"0.9rem 1rem", background:open?bg:C.white, border:"none", cursor:"pointer", fontFamily:"inherit", transition:"background 0.2s" }}>
+        style={{ width:"100%", display:"flex", alignItems:"center", gap:"0.75rem", padding:"0.9rem 1rem", background:open?tint:C.white, border:"none", cursor:"pointer", fontFamily:"inherit", transition:"background 0.2s" }}>
         <span style={{ fontSize:"1.4rem", flexShrink:0 }}>{icon}</span>
         <div style={{ flex:1, textAlign:"left" }}>
           <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.97rem", color:C.ink, fontWeight:700 }}>{title}</div>
@@ -219,7 +222,7 @@ function Section({ icon, title, subtitle, color, bg, defaultOpen=false, children
         </div>
         <span style={{ color:color, fontSize:"0.85rem", transform:open?"rotate(180deg)":"none", transition:"transform 0.2s", flexShrink:0 }}>▾</span>
       </button>
-      {open && <div style={{ background:bg, borderTop:`1px solid ${color}22` }}>{children}</div>}
+      {open && <div style={{ background:tint, borderTop:`1px solid ${color}22` }}>{children}</div>}
     </div>
   );
 }
@@ -268,7 +271,7 @@ function AlphabetSection() {
       </button>
 
       {rulesOpen && (
-        <div style={{ background:"#F9F8FF", border:`1.5px solid ${COLOR}22`, borderRadius:12, overflow:"hidden", animation:"fadeUp 0.2s ease" }}>
+        <div style={{ background:C.cream, border:`1.5px solid ${COLOR}22`, borderRadius:12, overflow:"hidden", animation:"fadeUp 0.2s ease" }}>
           {/* Category tabs */}
           <div style={{ display:"flex", gap:"0.3rem", padding:"0.6rem 0.7rem", overflowX:"auto", borderBottom:`1px solid ${COLOR}15` }}>
             {[...ruleCats, "🔗 Nối âm", "🤫 Chữ câm"].map(cat => (
@@ -292,7 +295,7 @@ function AlphabetSection() {
                 </div>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem", marginBottom:"0.3rem" }}>
                   {r.examples.map((ex,j) => (
-                    <span key={j} style={{ display:"flex", alignItems:"center", gap:2, background:"#F0EEFF", borderRadius:20, padding:"0.1rem 0.45rem 0.1rem 0.55rem", fontSize:"0.75rem", fontFamily:"Georgia,serif", color:COLOR }}>
+                    <span key={j} style={{ display:"flex", alignItems:"center", gap:2, background:C.cream, borderRadius:20, padding:"0.1rem 0.45rem 0.1rem 0.55rem", fontSize:"0.75rem", fontFamily:"Georgia,serif", color:COLOR }}>
                       {ex}<SpeakBtn text={ex} size="0.6rem"/>
                     </span>
                   ))}
@@ -321,7 +324,7 @@ function AlphabetSection() {
                 <div style={{ fontSize:"0.8rem", color:COLOR, fontWeight:700, marginBottom:"0.3rem" }}>{sl.pattern}</div>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem", marginBottom:"0.25rem" }}>
                   {sl.examples.map((ex,j) => (
-                    <span key={j} style={{ display:"flex", alignItems:"center", gap:2, background:"#F0EEFF", borderRadius:20, padding:"0.1rem 0.45rem 0.1rem 0.55rem", fontSize:"0.75rem", fontFamily:"Georgia,serif", color:COLOR }}>
+                    <span key={j} style={{ display:"flex", alignItems:"center", gap:2, background:C.cream, borderRadius:20, padding:"0.1rem 0.45rem 0.1rem 0.55rem", fontSize:"0.75rem", fontFamily:"Georgia,serif", color:COLOR }}>
                       {ex}<SpeakBtn text={ex} size="0.6rem"/>
                     </span>
                   ))}
@@ -419,7 +422,7 @@ function DateSection() {
         </div>
       ))}
 
-      <div style={{ marginTop:"0.65rem", background:"#FEF3E2", border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.6rem 0.75rem" }}>
+      <div style={{ marginTop:"0.65rem", background:C.cream, border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.6rem 0.75rem" }}>
         <div style={{ fontSize:"0.68rem", color:COLOR, fontWeight:700, marginBottom:"0.2rem" }}>💡 Thứ và tháng không viết hoa trong tiếng Pháp (trừ đầu câu)</div>
         <div style={{ fontSize:"0.68rem", color:C.gray }}>lundi, mardi … / janvier, février …</div>
       </div>
@@ -443,7 +446,7 @@ function HeureSection() {
           </div>
         </div>
       ))}
-      <div style={{ marginTop:"0.65rem", background:"#F0FDFA", border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.6rem 0.75rem" }}>
+      <div style={{ marginTop:"0.65rem", background:C.cream, border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.6rem 0.75rem" }}>
         <div style={{ fontSize:"0.62rem", color:COLOR, fontWeight:700, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.35rem" }}>💡 Mẹo nhớ</div>
         {HEURE_TIPS.map((t,i) => <div key={i} style={{ fontSize:"0.73rem", color:C.ink, lineHeight:1.6, marginBottom:"0.12rem" }}>• {t}</div>)}
       </div>
@@ -474,7 +477,7 @@ function CouleurSection() {
           );
         })}
       </div>
-      <div style={{ background:"#FDF2F8", border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.6rem 0.75rem" }}>
+      <div style={{ background:C.cream, border:`1px solid ${COLOR}22`, borderRadius:10, padding:"0.6rem 0.75rem" }}>
         <div style={{ fontSize:"0.62rem", color:COLOR, fontWeight:700, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.35rem" }}>💡 Lưu ý</div>
         {COULEUR_TIPS.map((t,i) => <div key={i} style={{ fontSize:"0.73rem", color:C.ink, lineHeight:1.6, marginBottom:"0.12rem" }}>• {t}</div>)}
       </div>

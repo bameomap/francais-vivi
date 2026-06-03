@@ -17,18 +17,18 @@ function scoreToGrade(s) {
   return              { letter:"D",  color:C.red };
 }
 
-const ERROR_TYPE_STYLE = {
-  "Ngữ pháp":  { color:C.red, bg:C.redL, border:C.red },
-  "Từ vựng":   { color:C.gold, bg:C.goldL, border:C.gold },
-  "Chính tả":  { color:"#2563EB", bg:C.blueL, border:"#93C5FD" },
-  "Giới từ":   { color:C.blue,    bg:C.blueL,   border:`${C.blue}55` },
-  "Mạo từ":    { color:C.green, bg:C.greenL,  border:C.green },
-};
-const DEFAULT_ERR_STYLE = { color:C.red, bg:C.redL, border:C.red };
-
 // ── Shared result block ─────────────────────────────────────────
 function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
   const grade = scoreToGrade(result.score);
+  // Built each render so colours follow the current (light/dark) theme.
+  const ERROR_TYPE_STYLE = {
+    "Ngữ pháp":  { color:C.red,   bg:C.redL,   border:C.red   },
+    "Từ vựng":   { color:C.gold,  bg:C.goldL,  border:C.gold  },
+    "Chính tả":  { color:C.blue,  bg:C.blueL,  border:`${C.blue}55` },
+    "Giới từ":   { color:C.blue,  bg:C.blueL,  border:`${C.blue}55` },
+    "Mạo từ":    { color:C.green, bg:C.greenL, border:C.green },
+  };
+  const DEFAULT_ERR_STYLE = { color:C.red, bg:C.redL, border:C.red };
 
   const grammarErrors = result.errors?.filter(e => ["Ngữ pháp","Giới từ","Mạo từ"].includes(e.type)) || [];
   const vocabErrors   = result.errors?.filter(e => ["Từ vựng","Chính tả"].includes(e.type))           || [];

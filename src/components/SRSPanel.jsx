@@ -32,14 +32,14 @@ function intervalLabel(days) {
 }
 
 // ── Rating bar ───────────────────────────────────────────────────
-const RATINGS = [
-  { id:0, label:"Lại",  emoji:"😵", bg:C.redL, border:C.red, fg:C.red },
-  { id:1, label:"Khó",  emoji:"😓", bg:C.goldL, border:C.gold, fg:C.gold },
-  { id:2, label:"Tốt",  emoji:"😊", bg:C.greenL, border:C.green, fg:C.green },
-  { id:3, label:"Dễ",   emoji:"😎", bg:C.blueL, border:"#93C5FD", fg:"#2563EB" },
-];
-
 function RatingBar({ card, onRate }) {
+  // Built each render so colours follow the current (light/dark) theme.
+  const RATINGS = [
+    { id:0, label:"Lại",  emoji:"😵", bg:C.redL,   border:C.red,   fg:C.red   },
+    { id:1, label:"Khó",  emoji:"😓", bg:C.goldL,  border:C.gold,  fg:C.gold  },
+    { id:2, label:"Tốt",  emoji:"😊", bg:C.greenL, border:C.green, fg:C.green },
+    { id:3, label:"Dễ",   emoji:"😎", bg:C.blueL,  border:C.blue,  fg:C.blue  },
+  ];
   return (
     <div style={{ display:"flex", gap:"0.45rem" }}>
       {RATINGS.map(r => {
