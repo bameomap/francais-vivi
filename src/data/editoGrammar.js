@@ -1048,8 +1048,20 @@ Dùng futur proche khi:
 PHỦ ĐỊNH: Ne + ALLER + pas + INFINITIF
 "Je ne vais pas sortir ce soir." (Tôi sẽ không ra ngoài tối nay)
 
-ĐẠI TỪ: se place avant l'infinitif:
-"Il va se lever tard." (không phải "Il va lever se tard")
+VỊ TRÍ ĐẠI TỪ (me, te, se, le, la, les, lui, y, en…):
+Trong futur proche có 2 động từ: ALLER (đã chia) + động từ nguyên mẫu.
+→ Đại từ KHÔNG đứng trước aller, mà đứng SÁT TRƯỚC động từ nguyên mẫu.
+
+Công thức:  Sujet + ALLER + [đại từ] + infinitif
+
+• Je vais ME lever.      → Tôi sắp thức dậy.   (KHÔNG nói "Je me vais lever")
+• Tu vas TE doucher.     → Bạn sắp đi tắm.
+• Il va SE coucher.      → Anh ấy sắp đi ngủ.   (KHÔNG nói "Il va coucher se")
+• Je vais LE faire.      → Tôi sắp làm việc đó. (le = nó/việc đó)
+• On va Y aller.         → Mình sắp đi (đến đó).
+
+⚠️ Nhớ: đại từ luôn "dính" vào động từ nguyên mẫu — nằm ngay trước nó.
+Phủ định bọc quanh aller: "Je ne vais pas me lever." (ne … pas ôm lấy aller).
 
 💡 Mẹo phân biệt:
 Futur proche: action très bientôt, intime conviction
