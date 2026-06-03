@@ -1216,3 +1216,18 @@ export const EDITO_VOCAB_UNITS = [
     ]
   },
 ];
+
+// Index of words shipped with pre-baked details (ipa/example) for instant,
+// offline word cards. Falls back to AI for words not in this index.
+const _BAKED_WORD_INDEX = (() => {
+  const m = {};
+  for (const u of EDITO_VOCAB_UNITS)
+    for (const g of u.groups)
+      for (const w of g.words)
+        if (w.ipa || w.ex_fr) m[w.fr] = w;
+  return m;
+})();
+
+export function getBakedWord(fr) {
+  return _BAKED_WORD_INDEX[fr] || null;
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
 import { markStudiedToday, loadSets } from "../utils/storage.js";
@@ -282,8 +282,8 @@ export function DefiQuiz({ defi, onFinish }) {
   const questions   = defi.questions || [];
   const allAnswered = questions.length > 0 && questions.every((_, i) => revealed[i]);
 
-  // Auto-finish 1s after last answer
-  useState(() => {
+  // Auto-finish 1s after the last question is answered.
+  useEffect(() => {
     if (!allAnswered) return;
     const ok = questions.filter((_, i) => {
       if (grading[i] !== undefined) return grading[i];
@@ -292,7 +292,7 @@ export function DefiQuiz({ defi, onFinish }) {
     }).length;
     const t = setTimeout(() => onFinish(ok, questions.length), 1000);
     return () => clearTimeout(t);
-  });
+  }, [allAnswered]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const submitInput = (i, q) => {
     const val = (inputVals[i] || "").trim();

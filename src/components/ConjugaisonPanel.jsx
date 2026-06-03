@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
+import { getBakedConjugation } from "../data/conjugations.js";
 import { awardXP, increment, checkBadges, BADGE_DEFS } from "../utils/xp.js";
 import { getSRSStats } from "../utils/srs.js";
 import { getStreak } from "../utils/storage.js";
@@ -122,9 +123,13 @@ export default function ConjugaisonPanel() {
   const generate = async (v, t) => {
     const target = (v || verb).trim();
     if (!target) return;
+    const tId = t || tense;
     setLoading(true); setErr(""); setResult(null); setMode("table");
     try {
-      const data = await callAI(buildPrompt(target, t || tense));
+      // Instant & offline for common verbs; AI only for the rest.
+      const tLabel = TENSES.find(x => x.id === tId)?.label || tId;
+      const baked = getBakedConjugation(target, tId, tLabel);
+      const data = baked || await callAI(buildPrompt(target, tId));
       setResult(data);
       awardXP(5);
       const conjCount = increment("conjugaison_count");
