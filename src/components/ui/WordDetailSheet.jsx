@@ -12,7 +12,14 @@ import Spinner from "./Spinner.jsx";
 export default function WordDetailSheet({ word, onClose }) {
   const cacheKey = `wds_${word.fr}`;
 
+  // Pre-baked details shipped with the word (offline, instant, consistent).
+  const baked = (word.ipa || word.ex_fr)
+    ? { pos: word.pos || "", ipa: word.ipa || "", def_fr: word.def_fr || "",
+        def_vi: word.def_vi || word.vi || "", ex_fr: word.ex_fr || "", ex_vi: word.ex_vi || "" }
+    : null;
+
   const [details, setDetails] = useState(() => {
+    if (baked) return baked;
     try { return JSON.parse(localStorage.getItem(cacheKey)) || null; } catch { return null; }
   });
   const [loading, setLoading] = useState(false);
@@ -29,11 +36,10 @@ export default function WordDetailSheet({ word, onClose }) {
         `IPA: <phiên âm IPA chính xác>\n` +
         `DEF_FR: <định nghĩa 1 câu bằng tiếng Pháp đơn giản A1-A2>\n` +
         `DEF_VI: <định nghĩa 1 câu bằng tiếng Việt>\n` +
-        `DEF_JA: <日本語で1文の簡単な意味 (N4-N5レベル)>\n` +
         `EX_FR: <1 câu ví dụ ngắn tiếng Pháp (6-10 từ) dùng từ này>\n` +
         `EX_VI: <dịch tiếng Việt của câu ví dụ>`
       }],
-      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 7 dòng format yêu cầu."
+      "Giáo viên tiếng Pháp. Chỉ trả lời đúng 6 dòng format yêu cầu."
     ).then(text => {
       const get = tag => text.match(new RegExp(`^${tag}:\\s*(.+)`, "m"))?.[1]?.trim() || "";
       const result = {
@@ -41,7 +47,6 @@ export default function WordDetailSheet({ word, onClose }) {
         ipa:    get("IPA"),
         def_fr: get("DEF_FR"),
         def_vi: get("DEF_VI"),
-        def_ja: get("DEF_JA"),
         ex_fr:  get("EX_FR"),
         ex_vi:  get("EX_VI"),
       };
@@ -119,8 +124,8 @@ export default function WordDetailSheet({ word, onClose }) {
           {/* ── Divider ── */}
           <div style={{ borderTop:`1px dashed ${C.border}`, marginBottom:"0.9rem" }}/>
 
-          {/* ── Định nghĩa ── */}
-          {(details?.def_fr || details?.def_vi) && (
+          {/* ── Định nghĩa (chỉ hiện khi có định nghĩa tiếng Pháp, tránh lặp Bản dịch) ── */}
+          {details?.def_fr && (
             <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:14, padding:"0.9rem 1rem", marginBottom:"0.75rem" }}>
               <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1.5, color:C.gray, fontWeight:700, marginBottom:"0.55rem" }}>
                 Định nghĩa
@@ -145,16 +150,10 @@ export default function WordDetailSheet({ word, onClose }) {
             <div style={{ fontSize:"0.6rem", textTransform:"uppercase", letterSpacing:1.5, color:C.blue, fontWeight:700, marginBottom:"0.4rem" }}>
               Bản dịch
             </div>
-            <div style={{ display:"flex", gap:"0.5rem", alignItems:"center", marginBottom: details?.def_ja ? "0.35rem" : 0 }}>
+            <div style={{ display:"flex", gap:"0.5rem", alignItems:"center" }}>
               <span style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, minWidth:20 }}>VI</span>
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.05rem", color:C.blue, fontWeight:700 }}>{word.vi || "—"}</span>
             </div>
-            {details?.def_ja && (
-              <div style={{ display:"flex", gap:"0.5rem", alignItems:"flex-start" }}>
-                <span style={{ fontSize:"0.65rem", fontWeight:700, color:"#C0392B", minWidth:20, marginTop:"0.1rem" }}>JA</span>
-                <span style={{ fontSize:"0.85rem", color:"#C0392B", lineHeight:1.5 }}>{details.def_ja}</span>
-              </div>
-            )}
           </div>
 
           {/* ── Ví dụ ── */}

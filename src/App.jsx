@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
-import { loadSets, saveSets, getStreak, getProgress, markModuleUsed } from "./utils/storage.js";
+import { loadSets, saveSets, getStreak, getProgress, markModuleUsed, getStorageHealth, exportBackup } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
 import { C, applyTheme } from "./constants.js";
 
@@ -156,6 +156,7 @@ function AppInner() {
   };
   const [editOpen, setEditOpen]             = useState(false);
   const [navStack, setNavStack]             = useState([]); // breadcrumb of {section,view} for "← Về"
+  const [storageWarn, setStorageWarn]       = useState(false);
   const [xpData, setXpData]                 = useState(getXPData);
   const [badgeToast, setBadgeToast]         = useState("");
 
@@ -172,6 +173,13 @@ function AppInner() {
   );
 
   useEffect(() => { setSets(loadSets()); }, []);
+
+  // Warn before localStorage fills up and learning data is silently lost.
+  useEffect(() => {
+    if (getStorageHealth().near && !sessionStorage.getItem("storage_warn_dismissed")) {
+      setStorageWarn(true);
+    }
+  }, []);
 
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(""), 2400); };
 
@@ -376,6 +384,21 @@ function AppInner() {
       {(toast || badgeToast) && (
         <div style={{ position:"fixed", top:20, left:"50%", transform:"translateX(-50%)", background:badgeToast?"#7C3AED":C.ink, color:C.white, padding:"0.55rem 1.2rem", borderRadius:24, fontSize:"0.8rem", zIndex:400, whiteSpace:"nowrap", boxShadow:"0 4px 20px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
           {badgeToast || toast}
+        </div>
+      )}
+
+      {/* ── Storage near-full warning ── */}
+      {storageWarn && (
+        <div style={{ position:"fixed", top:0, left:0, right:0, zIndex:420, background:C.gold, color:"#3a2c00", padding:"0.55rem 0.9rem", display:"flex", alignItems:"center", gap:8, fontSize:"0.76rem", boxShadow:"0 2px 12px rgba(0,0,0,0.15)" }}>
+          <span style={{ flex:1, lineHeight:1.4 }}>⚠️ Bộ nhớ trình duyệt gần đầy. Hãy sao lưu để tránh mất tiến độ học.</span>
+          <button onClick={()=>{ if (exportBackup()) showToast("✓ Đã tải file sao lưu!"); }}
+            style={{ background:"#3a2c00", color:C.gold, border:"none", borderRadius:8, padding:"0.3rem 0.7rem", fontSize:"0.72rem", fontWeight:700, cursor:"pointer", whiteSpace:"nowrap" }}>
+            ⬇ Sao lưu
+          </button>
+          <button onClick={()=>{ sessionStorage.setItem("storage_warn_dismissed","1"); setStorageWarn(false); }}
+            style={{ background:"transparent", border:"none", color:"#3a2c00", fontSize:"1rem", cursor:"pointer", lineHeight:1, padding:"0 0.2rem" }}>
+            ×
+          </button>
         </div>
       )}
 

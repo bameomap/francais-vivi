@@ -2,6 +2,46 @@ const SETS_KEY = "vocab_sets";
 const STREAK_KEY = "streak_data";
 const PROGRESS_KEY = "module_progress";
 
+// ── Storage health ────────────────────────────────────────────
+// Most browsers cap localStorage at ~5MB. We warn before silent data loss.
+const STORAGE_LIMIT = 5 * 1024 * 1024;
+
+export function estimateStorageBytes() {
+  try {
+    let total = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const val = localStorage.getItem(key) || "";
+      total += (key.length + val.length) * 2; // UTF-16 ~2 bytes/char
+    }
+    return total;
+  } catch { return 0; }
+}
+
+// Returns { bytes, pct, near } — near = true when over 80% of the limit.
+export function getStorageHealth() {
+  const bytes = estimateStorageBytes();
+  const pct = Math.round((bytes / STORAGE_LIMIT) * 100);
+  return { bytes, pct, near: pct >= 80 };
+}
+
+// Full backup of everything in localStorage → downloadable JSON.
+export function exportBackup() {
+  try {
+    const dump = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      dump[k] = localStorage.getItem(k);
+    }
+    const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `vivi-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    return true;
+  } catch { return false; }
+}
+
 export function loadSets() {
   try {
     const r = localStorage.getItem(SETS_KEY);
