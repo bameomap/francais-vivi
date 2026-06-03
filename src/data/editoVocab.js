@@ -640,6 +640,37 @@ export const EDITO_VOCAB_UNITS = [
         ]
       },
       {
+        id: "u6gjms", label: "Les jours, mois et saisons", icon: "📅",
+        words: [
+          { fr:"lundi",      vi:"thứ Hai" },
+          { fr:"mardi",      vi:"thứ Ba" },
+          { fr:"mercredi",   vi:"thứ Tư" },
+          { fr:"jeudi",      vi:"thứ Năm" },
+          { fr:"vendredi",   vi:"thứ Sáu" },
+          { fr:"samedi",     vi:"thứ Bảy" },
+          { fr:"dimanche",   vi:"Chủ nhật" },
+          { fr:"janvier",    vi:"tháng Một" },
+          { fr:"février",    vi:"tháng Hai" },
+          { fr:"mars",       vi:"tháng Ba" },
+          { fr:"avril",      vi:"tháng Tư" },
+          { fr:"mai",        vi:"tháng Năm" },
+          { fr:"juin",       vi:"tháng Sáu" },
+          { fr:"juillet",    vi:"tháng Bảy" },
+          { fr:"août",       vi:"tháng Tám" },
+          { fr:"septembre",  vi:"tháng Chín" },
+          { fr:"octobre",    vi:"tháng Mười" },
+          { fr:"novembre",   vi:"tháng Mười Một" },
+          { fr:"décembre",   vi:"tháng Mười Hai" },
+          { fr:"le printemps", vi:"mùa xuân" },
+          { fr:"l'été (m.)",   vi:"mùa hè" },
+          { fr:"l'automne (m.)", vi:"mùa thu" },
+          { fr:"l'hiver (m.)",   vi:"mùa đông" },
+          { fr:"aujourd'hui",  vi:"hôm nay" },
+          { fr:"demain",       vi:"ngày mai" },
+          { fr:"hier",         vi:"hôm qua" },
+        ]
+      },
+      {
         id: "u6g2", label: "Les activités quotidiennes", icon: "🌅",
         words: [
           { fr:"se brosser les dents",        vi:"đánh răng" },

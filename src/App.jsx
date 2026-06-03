@@ -1,5 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
-import { Home, BookOpen, Award, PenTool, Layers, Target, TrendingUp, Brain } from "lucide-react";
+import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
@@ -9,24 +8,25 @@ import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
 import { SecLabel, QCard, SaveModal, ImportModal } from "./components/ui/SharedUI.jsx";
 import { MCSection, FillSection, MatchSection, DicteeSection, FlashcardSection, AnagrammeSection } from "./components/QuizSections.jsx";
-import ConversationPanel from "./components/ConversationPanel.jsx";
-import WritingPanel from "./components/WritingPanel.jsx";
-import GrammarPanel from "./components/GrammarPanel.jsx";
 import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./components/VocabGenerator.jsx";
-import DefiPanel from "./components/DefiPanel.jsx";
-import SRSPanel from "./components/SRSPanel.jsx";
-import ReferenceHub from "./components/ReferenceHub.jsx";
-import ParcoursPanel from "./components/ParcoursPanel.jsx";
 import MotDuJour from "./components/MotDuJour.jsx";
-import LecturePanel from "./components/LecturePanel.jsx";
-import StatsPanel from "./components/StatsPanel.jsx";
-import RevisionPanel from "./components/RevisionPanel.jsx";
-import BuiltinSetsPanel from "./components/BuiltinSetsPanel.jsx";
-import EditoVocabPanel from "./components/EditoVocabPanel.jsx";
-import EcouterPanel from "./components/EcouterPanel.jsx";
-import UnitQuizPanel from "./components/UnitQuizPanel.jsx";
-import SentenceBuilder from "./components/SentenceBuilder.jsx";
-import ProfilPanel from "./components/ProfilPanel.jsx";
+
+// Heavy panels are code-split: loaded on demand to shrink the initial bundle.
+const ConversationPanel = lazy(() => import("./components/ConversationPanel.jsx"));
+const WritingPanel      = lazy(() => import("./components/WritingPanel.jsx"));
+const GrammarPanel      = lazy(() => import("./components/GrammarPanel.jsx"));
+const DefiPanel         = lazy(() => import("./components/DefiPanel.jsx"));
+const SRSPanel          = lazy(() => import("./components/SRSPanel.jsx"));
+const ReferenceHub      = lazy(() => import("./components/ReferenceHub.jsx"));
+const ParcoursPanel     = lazy(() => import("./components/ParcoursPanel.jsx"));
+const LecturePanel      = lazy(() => import("./components/LecturePanel.jsx"));
+const StatsPanel        = lazy(() => import("./components/StatsPanel.jsx"));
+const RevisionPanel     = lazy(() => import("./components/RevisionPanel.jsx"));
+const EditoVocabPanel   = lazy(() => import("./components/EditoVocabPanel.jsx"));
+const EcouterPanel      = lazy(() => import("./components/EcouterPanel.jsx"));
+const UnitQuizPanel     = lazy(() => import("./components/UnitQuizPanel.jsx"));
+const SentenceBuilder   = lazy(() => import("./components/SentenceBuilder.jsx"));
+const ProfilPanel       = lazy(() => import("./components/ProfilPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
@@ -51,13 +51,6 @@ const MODULES = [
   { id:"revision",      group:"luyen",  label:"Ôn sai",     fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"      },
   // Công cụ
   { id:"stats",         group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"         },
-];
-
-const GROUP_DEFS = [
-  { id:"vocab",    icon:"📖", LucideIcon:BookOpen,    label:"Từ vựng",   color:"#4A90D9", bg:"#EBF4FF", desc:"Học & ôn từ mới",         moduleIds:["vocab","parcours","srs"] },
-  { id:"grammar",  icon:"⚜️", LucideIcon:Award,       label:"Ngữ pháp",  color:"#7B6CF6", bg:"#F0EEFF", desc:"Ngữ pháp & tra cứu",     moduleIds:["grammar","reference_hub","sentence"] },
-  { id:"practice", icon:"🥐", LucideIcon:Target,      label:"Luyện tập", color:"#E67E22", bg:"#FEF3E2", desc:"Nghe · Nói · Viết · Đọc", moduleIds:["conversation","writing","defi","lecture","dictee","listening"] },
-  { id:"progress", icon:"📈", LucideIcon:TrendingUp,  label:"Theo dõi",  color:"#0D9488", bg:"#F0FDFA", desc:"Thống kê & ôn sai",       moduleIds:["stats","revision"] },
 ];
 
 const TABS = [
@@ -162,8 +155,7 @@ function AppInner() {
     setDark(next);
   };
   const [editOpen, setEditOpen]             = useState(false);
-  const [activeGroup, setActiveGroup]       = useState(null);
-  const [fromGroup,   setFromGroup]         = useState(null);
+  const [navStack, setNavStack]             = useState([]); // breadcrumb of {section,view} for "← Về"
   const [xpData, setXpData]                 = useState(getXPData);
   const [badgeToast, setBadgeToast]         = useState("");
 
@@ -173,16 +165,28 @@ function AppInner() {
   const TYPE_NAMES = { multiple_choice:"Trắc nghiệm", fill_blank:"Điền từ", matching:"Nối từ", dictee:"Dictée", flashcard:"Flashcard", anagramme:"Anagramme", mixed:"Hỗn hợp" };
   const hasFill = quiz && (quiz.type==="fill_blank"||(quiz.type==="mixed"&&quiz.sections?.some(s=>s.sectionType==="fill_blank")));
 
+  const panelFallback = (
+    <div style={{ display:"flex", alignItems:"center", justifyContent:"center", minHeight:240, color:C.gray }}>
+      <Spinner/>
+    </div>
+  );
+
   useEffect(() => { setSets(loadSets()); }, []);
 
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(""), 2400); };
 
   const goSection = (s, v) => {
-    setSection(s); setView(v || s);
+    const nextView = v || s;
+    // Remember where we are now so the header "← Về" can return there.
+    setNavStack(prev => {
+      const here = { section, view };
+      if (here.section === s && here.view === nextView) return prev;          // no-op nav
+      const top = prev[prev.length - 1];
+      if (top && top.section === here.section && top.view === here.view) return prev; // dedup
+      return [...prev, here];
+    });
+    setSection(s); setView(nextView);
     setEditOpen(false);
-    // Remember which group launched this module so "← Về" can return to it
-    setFromGroup(activeGroup);
-    setActiveGroup(null);
     markModuleUsed(s);
     setStreakData(getStreak());
     setProgress(getProgress());
@@ -195,6 +199,24 @@ function AppInner() {
       const badge = BADGE_DEFS.find(b => b.id === earned[0]);
       if (badge) { setBadgeToast(`🏅 ${badge.icon} ${badge.label}!`); setTimeout(()=>setBadgeToast(""), 3000); }
     }
+  };
+
+  // Return to wherever the user came from (falls back to home).
+  const goBack = () => {
+    if (!navStack.length) { setSection("home"); setView("home"); setEditOpen(false); return; }
+    const target = navStack[navStack.length - 1];
+    setSection(target.section);
+    setView(target.view);
+    setEditOpen(false);
+    setNavStack(prev => prev.slice(0, -1));
+  };
+
+  // "Về Parcours" buttons inside panels: pop back to the unit the user came
+  // from (restores the unit detail) when that's the origin, else go fresh.
+  const backToParcours = () => {
+    const top = navStack[navStack.length - 1];
+    if (top && top.section === "parcours") goBack();
+    else goSection("parcours", "parcours");
   };
 
   const recordAnswer = useCallback((word, isOk) => {
@@ -219,7 +241,7 @@ function AppInner() {
     let best = null, bestTime = 0;
     for (const m of MODULES) {
       const p = progress[m.id];
-      if (p?.last && p.last > bestTime) { best = m; bestTime = p.last; }
+      if (p?.lastTs && p.lastTs > bestTime) { best = m; bestTime = p.lastTs; }
     }
     return best;
   })();
@@ -340,6 +362,14 @@ function AppInner() {
         @keyframes confettiFall {
           to { transform:translateY(110vh) rotate(540deg); opacity:0; }
         }
+        @keyframes pulse {
+          0%,100% { opacity:0.35; transform:scale(0.85); }
+          50%     { opacity:1;    transform:scale(1);    }
+        }
+        @keyframes micPulse {
+          0%,100% { box-shadow:0 0 0 0 ${C.accent}66; }
+          50%     { box-shadow:0 0 0 6px ${C.accent}00; }
+        }
       `}</style>
 
       {/* ── Toast ── */}
@@ -454,7 +484,7 @@ function AppInner() {
             const isCurrent = statuses[focusUnit.id]?.status === "current";
             return (
               <div style={{ margin:"0.75rem 1.25rem 0", animation:"fadeUp 0.4s ease 0.05s both", position:"relative" }}>
-                <div style={{ background:`linear-gradient(135deg, ${C.ink} 0%, #2d4f8a 100%)`, borderRadius:18, padding:"1.15rem 1.35rem", color:"#fff", position:"relative", overflow:"hidden" }}>
+                <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, borderRadius:18, padding:"1.15rem 1.35rem", color:"#fff", position:"relative", overflow:"hidden" }}>
                   <div style={{ position:"absolute", right:-18, top:-18, width:90, height:90, borderRadius:"50%", background:"radial-gradient(circle, #E8574A18 0%, transparent 70%)" }}/>
                   <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>
                     {isCurrent ? `UNIT ${focusUnit.num} · ĐANG HỌC` : `UNIT ${focusUnit.num} · TIẾP THEO`}
@@ -537,7 +567,7 @@ function AppInner() {
           <div style={{ background:C.white, padding:"0.6rem 1rem", display:"flex", flexDirection:"column", gap:"0.4rem", borderBottom:`1.5px solid ${C.border}`, position:"sticky", top:0, zIndex:100, boxShadow:"0 1px 12px rgba(74,144,217,0.08)" }}>
             {/* Row 1: back + title + dark toggle */}
             <div style={{ display:"flex", alignItems:"center", gap:"0.6rem" }}>
-              <button onClick={()=>{ setSection("home"); if (fromGroup) { setActiveGroup(fromGroup); setFromGroup(null); } }}
+              <button onClick={goBack}
                 style={{ background:C.blueL, border:`1.5px solid ${C.blue}33`, color:C.blue, cursor:"pointer", fontSize:"0.82rem", padding:"0.3rem 0.65rem", borderRadius:10, fontWeight:600, transition:"all 0.15s", flexShrink:0 }}>
                 ← Về
               </button>
@@ -555,8 +585,7 @@ function AppInner() {
                 <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:11 }}>
                   {[
                     { label:"Bộ của tôi", view:"input"   },
-                    { label:"Themes A1",  view:"topics"  },
-                    { label:"Phrasebook", view:"history" },
+                    { label:"Bộ đã lưu",  view:"history" },
                     { label:"Edito",      view:"edito"   },
                   ].map(t => {
                     const isActive = t.view === view || (t.view==="input" && !["topics","history","edito","vocab-table","examples","quiz"].includes(view));
@@ -583,9 +612,10 @@ function AppInner() {
 
           {/* ── Content ── */}
           <div style={{ minHeight:"calc(100vh - 130px)", paddingBottom:80 }}>
+           <Suspense fallback={panelFallback}>
 
             {/* EDITO VOCAB */}
-            {view==="edito" && <EditoVocabPanel onBackToParcours={() => goSection("parcours","parcours")} />}
+            {view==="edito" && <EditoVocabPanel onBackToParcours={backToParcours} />}
 
             {/* INPUT */}
             {view==="input" && (
@@ -808,71 +838,6 @@ function AppInner() {
               </div>
             )}
 
-            {/* STATS */}
-            {view==="stats" && (() => {
-              const entries = Object.entries(stats)
-                .map(([word,s])=>({word,...s,total:s.ok+s.wrong,rate:s.ok+s.wrong>0?Math.round(s.ok/(s.ok+s.wrong)*100):0}))
-                .sort((a,b)=>a.rate-b.rate);
-              const weak = entries.filter(e=>e.rate<80);
-              const mastered = entries.filter(e=>e.rate>=80);
-              const weakWords = weak.map(e=>{const w=words.find(x=>x.fr===e.word);return w?`${w.fr}${w.vi?" — "+w.vi:""}`:e.word;});
-              const WordPill = ({e,isWeak}) => {
-                const vi=words.find(w=>w.fr===e.word)?.vi||"";
-                return (
-                  <div style={{background:C.white,border:`1px solid ${isWeak?C.red+"44":C.border}`,borderRadius:10,padding:"0.45rem 0.6rem",marginBottom:"0.35rem"}}>
-                    <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"0.85rem"}}>{e.word}</div>
-                    {vi&&<div style={{fontSize:"0.67rem",color:C.gray}}>{vi}</div>}
-                    <div style={{display:"flex",gap:"0.4rem",alignItems:"center",marginTop:"0.28rem"}}>
-                      <div style={{flex:1,height:4,background:C.border,borderRadius:999}}>
-                        <div style={{height:"100%",width:`${e.rate}%`,background:isWeak?(e.rate>=50?C.gold:C.red):C.green,borderRadius:999}}/>
-                      </div>
-                      <span style={{fontSize:"0.65rem",color:isWeak?C.red:C.green,fontWeight:700,minWidth:28}}>{e.rate}%</span>
-                    </div>
-                  </div>
-                );
-              };
-              return (
-                <div style={{padding:"1rem",animation:"fadeUp 0.3s ease"}}>
-                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"0.85rem"}}>
-                    <div style={{fontSize:"0.78rem",fontWeight:700,color:C.blue}}>📊 Thống kê</div>
-                    <div style={{display:"flex",gap:"0.4rem"}}>
-                      {weakWords.length>0&&<button onClick={()=>{setTextPersist(weakWords.join("\n"));setQuiz(null);setView("input");showToast("✓ Đã load từ yếu!");}} style={{padding:"0.25rem 0.65rem",background:C.blue,color:C.white,border:"none",borderRadius:20,fontSize:"0.65rem",cursor:"pointer",fontWeight:600}}>🎯 Ôn từ yếu ({weak.length})</button>}
-                      {entries.length>0&&<button onClick={()=>{setStats({});showToast("✓ Đã xóa");}} style={{padding:"0.25rem 0.55rem",background:"transparent",color:C.gray,border:`1.5px solid ${C.border}`,borderRadius:20,fontSize:"0.65rem",cursor:"pointer"}}>🗑</button>}
-                    </div>
-                  </div>
-                  {entries.length===0
-                    ?<div style={{textAlign:"center",padding:"1.5rem 1rem"}}>
-                      <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"0.95rem",color:C.ink,marginBottom:"0.3rem"}}>Chưa có dữ liệu</div>
-                      <div style={{fontSize:"0.75rem",color:C.gray,lineHeight:1.6,marginBottom:"0.9rem"}}>Làm bài tập để bắt đầu theo dõi tiến độ.</div>
-                      <button onClick={()=>setView("input")} style={{padding:"0.5rem 1.2rem",background:`linear-gradient(135deg,${C.blue},${C.blueDark})`,color:C.white,border:"none",borderRadius:12,fontSize:"0.82rem",cursor:"pointer",fontWeight:600}}>
-                        🎯 Luyện tập ngay
-                      </button>
-                    </div>
-                    :<>
-                      <div style={{display:"flex",gap:"0.5rem",marginBottom:"0.85rem"}}>
-                        {[{label:"Tổng từ",val:entries.length,color:C.blue},{label:"Từ yếu",val:weak.length,color:C.red},{label:"Thành thạo",val:mastered.length,color:C.green}].map((item,i)=>(
-                          <div key={i} style={{flex:1,background:C.white,border:`1.5px solid ${C.border}`,borderRadius:12,padding:"0.6rem 0.3rem",textAlign:"center",boxShadow:"0 1px 8px rgba(74,144,217,0.06)"}}>
-                            <div style={{fontFamily:"'Playfair Display',Georgia,serif",fontSize:"1.3rem",color:item.color,fontWeight:700}}>{item.val}</div>
-                            <div style={{fontSize:"0.65rem",color:C.gray,marginTop:"0.1rem"}}>{item.label}</div>
-                          </div>
-                        ))}
-                      </div>
-                      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0.75rem"}}>
-                        <div>
-                          <div style={{fontSize:"0.65rem",textTransform:"uppercase",letterSpacing:1,color:C.red,marginBottom:"0.4rem",fontWeight:700}}>✗ Từ yếu ({weak.length})</div>
-                          {weak.length===0?<div style={{fontSize:"0.78rem",color:C.gray,fontStyle:"italic"}}>Không có 🎉</div>:weak.map((e,i)=><WordPill key={i} e={e} isWeak={true}/>)}
-                        </div>
-                        <div>
-                          <div style={{fontSize:"0.65rem",textTransform:"uppercase",letterSpacing:1,color:C.green,marginBottom:"0.4rem",fontWeight:700}}>✓ Thành thạo ({mastered.length})</div>
-                          {mastered.length===0?<div style={{fontSize:"0.78rem",color:C.gray,fontStyle:"italic"}}>Chưa có</div>:mastered.map((e,i)=><WordPill key={i} e={e} isWeak={false}/>)}
-                        </div>
-                      </div>
-                    </>
-                  }
-                </div>
-              );
-            })()}
-
             {/* QUIZ */}
             {view==="quiz" && (
               <div style={{padding:"1rem",animation:"fadeUp 0.3s ease"}}>
@@ -924,19 +889,19 @@ function AppInner() {
 
             {/* Panels */}
             {view==="parcours"      && <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} />}
-            {view==="grammar"       && <GrammarPanel onBackToParcours={() => goSection("parcours","parcours")} />}
+            {view==="grammar"       && <GrammarPanel onBackToParcours={backToParcours} />}
             {view==="defi"          && <DefiPanel/>}
-            {view==="writing"       && <WritingPanel onBackToParcours={() => goSection("parcours","parcours")} />}
-            {view==="conversation"  && <ConversationPanel onBackToParcours={() => goSection("parcours","parcours")} />}
+            {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
+            {view==="conversation"  && <ConversationPanel onBackToParcours={backToParcours} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="reference_hub" && <ReferenceHub />}
             {view==="lecture"       && <LecturePanel words={words} />}
-            {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={() => goSection("parcours","parcours")} />}
-            {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={() => goSection("parcours","parcours")} />}
+            {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
+            {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
             {view==="revision"      && <RevisionPanel />}
             {view==="stats"         && <StatsPanel />}
-            {view==="topics"        && <BuiltinSetsPanel onAdd={() => setSrsStats(getSRSStats())} />}
             {view==="sentence"      && <SentenceBuilder />}
+           </Suspense>
           </div>
         </>
       )}
@@ -955,12 +920,14 @@ function AppInner() {
             </button>
           </div>
           <div style={{ flex:1, overflowY:"auto" }}>
-            <ProfilPanel
-              userName={userName}
-              dark={dark}
-              toggleDark={toggleDark}
-              onNavigate={(s, v) => goSection(s, v || s)}
-            />
+            <Suspense fallback={panelFallback}>
+              <ProfilPanel
+                userName={userName}
+                dark={dark}
+                toggleDark={toggleDark}
+                onNavigate={(s, v) => goSection(s, v || s)}
+              />
+            </Suspense>
           </div>
         </div>
       )}
@@ -976,7 +943,7 @@ function AppInner() {
             return (
               <button key={tab.id} className="tab-btn"
                 onClick={()=>{
-                  if (tab.id==="home") { setSection("home"); setActiveGroup(null); setFromGroup(null); return; }
+                  if (tab.id==="home") { setSection("home"); setNavStack([]); return; }
                   if (tab.id==="profil") { setSection("profil"); setView("profil"); return; }
                   goSection(tab.section, tab.view);
                 }}

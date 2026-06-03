@@ -258,6 +258,37 @@ Hai cách dùng:
         ]
       },
       {
+        topic:"Đặt câu hỏi — 3 cách hỏi Có/Không (Poser des questions)",
+        rule:`Tiếng Pháp có 3 cách hỏi câu Có/Không (cùng 1 nghĩa, khác mức trang trọng):
+
+1️⃣ NGỮ ĐIỆU (thân mật, nói hằng ngày) — giữ nguyên câu, lên giọng cuối:
+• Tu parles français ? → Bạn nói tiếng Pháp à?
+• Vous êtes étudiant ? → Bạn là sinh viên ạ?
+
+2️⃣ EST-CE QUE (trung tính, hay dùng nhất) — thêm "Est-ce que" vào đầu:
+• Est-ce que tu parles français ?
+• Est-ce qu'il est là ? (que → qu' trước nguyên âm)
+
+3️⃣ ĐẢO NGỮ (trang trọng, viết) — đảo động từ ↔ đại từ, nối bằng gạch ngang:
+• Parlez-vous français ?
+• Êtes-vous étudiant ?
+
+❓ HỎI THÔNG TIN — đặt từ để hỏi ở đầu:
+• Où… ? (ở đâu)  • Quand… ? (khi nào)  • Comment… ? (thế nào)
+• Combien… ? (bao nhiêu)  • Pourquoi… ? (tại sao)  • Qui… ? (ai)
+→ Où est-ce que tu habites ? / Tu habites où ?
+
+💡 Trả lời: Oui (có) · Non (không) · Si (có — khi phản bác câu phủ định).`,
+        examples:[
+          "Tu aimes le café ? — Bạn thích cà phê à? (ngữ điệu)",
+          "Est-ce que vous parlez anglais ? — Bạn có nói tiếng Anh không?",
+          "Parlez-vous français ? — Ngài có nói tiếng Pháp không? (đảo ngữ)",
+          "Où est-ce que tu habites ? — Bạn sống ở đâu?",
+          "Comment tu t'appelles ? — Bạn tên là gì?",
+          "— Tu n'aimes pas ça ? — Si ! — Bạn không thích à? — Có chứ!",
+        ]
+      },
+      {
         topic:"Les nombres 32–100 — Số đếm từ 32 đến 100",
         rule:`SỐ 32–69 → Quy tắc bình thường:
 32=trente-deux, 40=quarante, 41=quarante et un,
@@ -364,6 +395,36 @@ Il a des amis. → Il n'a PAS D'amis.
           "Il y a des parcs sympas ici. — Ở đây có những công viên dễ thương.",
           "Je n'ai pas d'amis ici. — Tôi không có bạn bè ở đây.",
           "Je cherche une collocataire. LE logement est grand. — Tôi tìm người ở cùng. Chỗ ở khá rộng.",
+        ]
+      },
+      {
+        topic:"IL Y A — \"Có\" (diễn tả sự tồn tại)",
+        rule:`IL Y A = "có / tồn tại" — dùng để nói có cái gì ở một nơi. KHÔNG đổi theo số ít/số nhiều!
+
+• Il y a + danh từ số ít:   Il y a un parc. — Có một công viên.
+• Il y a + danh từ số nhiều: Il y a des magasins. — Có những cửa hàng.
+
+PHỦ ĐỊNH → Il n'y a pas de / d' :
+• Il n'y a pas de métro ici. — Ở đây không có tàu điện ngầm.
+• Il n'y a pas d'école. — Không có trường học.
+
+CÂU HỎI:
+• Est-ce qu'il y a une pharmacie ? — Có hiệu thuốc nào không?
+• Qu'est-ce qu'il y a ? — Có chuyện gì vậy? / Có gì vậy?
+
+⚠️ Phân biệt:
+• IL Y A → có (sự tồn tại): Il y a un chat. (Có một con mèo.)
+• C'EST  → đây là (giới thiệu): C'est un chat. (Đây là một con mèo.)
+• IL EST → anh ấy/nó thì: Il est noir. (Nó màu đen.)
+
+💡 "Il y a" còn chỉ thời gian đã qua: Il y a deux ans. — Cách đây 2 năm.`,
+        examples:[
+          "Dans ma ville, il y a un marché. — Ở thành phố tôi có một cái chợ.",
+          "Il y a beaucoup de touristes ici. — Ở đây có rất nhiều khách du lịch.",
+          "Il n'y a pas de banque dans ce quartier. — Khu này không có ngân hàng.",
+          "Est-ce qu'il y a un parking ? — Có chỗ đậu xe không?",
+          "Qu'est-ce qu'il y a dans le frigo ? — Trong tủ lạnh có gì?",
+          "Il y a trois chambres dans l'appartement. — Căn hộ có ba phòng ngủ.",
         ]
       },
       {

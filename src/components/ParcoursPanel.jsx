@@ -101,7 +101,7 @@ function UnitList({ onSelect }) {
                 onClick={() => { localStorage.setItem("parcours_last_unit", u.id); onSelect(u.id); }}
                 style={{
                   flex: 1, minWidth: 0, textAlign: "left",
-                  background: isCurrent ? "#FFF0EF" : C.white,
+                  background: isCurrent ? C.accentL : C.white,
                   border: `1px solid ${isCurrent ? C.accent + "55" : C.border}`,
                   borderRadius: 11, padding: "9px 12px",
                   cursor: "pointer",
@@ -153,8 +153,8 @@ function StepCard({ step, done, onClick }) {
         display: "flex", flexDirection: "column", alignItems: "flex-start",
         gap: "0.3rem",
         padding: "0.75rem 0.8rem",
-        background: done ? "#F0FDF4" : C.white,
-        border: `1.5px solid ${done ? "#86EFAC" : C.border}`,
+        background: done ? C.greenL : C.white,
+        border: `1.5px solid ${done ? C.green + "66" : C.border}`,
         borderRadius: 12, cursor: "pointer",
         textAlign: "left", fontFamily: "inherit",
         transition: "all 0.15s", position: "relative",
@@ -164,7 +164,7 @@ function StepCard({ step, done, onClick }) {
       {done && (
         <span style={{
           position: "absolute", top: 6, right: 8,
-          fontSize: "0.65rem", color: "#16A34A",
+          fontSize: "0.65rem", color: C.green,
           fontWeight: 700,
         }}>✓</span>
       )}
@@ -182,7 +182,7 @@ function StepCard({ step, done, onClick }) {
 
       {/* text */}
       <div>
-        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: done ? "#15803D" : C.ink, lineHeight: 1.2 }}>
+        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: done ? C.green : C.ink, lineHeight: 1.2 }}>
           {step.kind}
         </div>
         <div style={{ fontSize: "0.65rem", color: C.gray, marginTop: 1, lineHeight: 1.3 }}>
@@ -252,7 +252,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
       {/* ── Sticky header ── */}
       <div style={{
         position: "sticky", top: 0, zIndex: 10,
-        background: `linear-gradient(135deg, ${C.ink} 0%, #2d4f8a 100%)`,
+        background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`,
         padding: "12px 16px 10px",
       }}>
         <button
@@ -350,7 +350,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
             onClick={() => handleStep(nextStep)}
             style={{
               width: "100%", padding: "13px 16px",
-              background: C.ink, color: "#fff",
+              background: C.heroFrom, color: "#fff",
               border: "none", borderRadius: 14,
               fontFamily: "inherit", fontSize: 14, fontWeight: 700,
               cursor: "pointer",

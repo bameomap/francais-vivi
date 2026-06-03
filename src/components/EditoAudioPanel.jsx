@@ -365,6 +365,9 @@ Trả về JSON thuần (không markdown):
                     {track.questions.map((qGroup, gIdx) => {
                       const subQs = parseSubQ(qGroup.text);
                       const qs    = Q_STYLE[qGroup.label] || Q_STYLE["1ère écoute"];
+                      // "Entrée en matière" = câu khởi động (thường tham chiếu ảnh sách,
+                      // hỏi mở) → hiển thị để suy nghĩ/nói trước khi nghe, KHÔNG chấm AI.
+                      const isWarmup = qGroup.label === "Entrée en matière";
                       return (
                         <div key={gIdx} style={{ borderRadius: 10, overflow: "hidden", border: `1px solid ${qs.border}25` }}>
                           {/* Group header */}
@@ -385,12 +388,19 @@ Trả về JSON thuần (không markdown):
                                   borderTop: qIdx > 0 ? `1px solid ${qs.border}15` : "none",
                                 }}>
                                   {/* Question text */}
-                                  <div style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.55, marginBottom: "0.42rem", fontStyle: "italic" }}>
+                                  <div style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.55, marginBottom: isWarmup ? 0 : "0.42rem", fontStyle: "italic" }}>
                                     {q}
                                   </div>
 
+                                  {/* Warm-up prompt — no grading */}
+                                  {isWarmup && (
+                                    <div style={{ fontSize: "0.64rem", color: qs.chip, marginTop: "0.3rem", display: "flex", alignItems: "center", gap: "0.3rem" }}>
+                                      💭 Suy nghĩ / nói thử trước khi nghe — không cần chấm
+                                    </div>
+                                  )}
+
                                   {/* Input row — show if not yet graded */}
-                                  {!graded && (
+                                  {!isWarmup && !graded && (
                                     <div style={{ display: "flex", gap: "0.35rem", alignItems: "flex-end" }}>
                                       <textarea
                                         value={ans}
@@ -432,7 +442,7 @@ Trả về JSON thuần (không markdown):
                                   )}
 
                                   {/* Grade result */}
-                                  {graded && (
+                                  {!isWarmup && graded && (
                                     <div style={{
                                       background: grade.correct ? "#F0FDF4" : "#FFF1F2",
                                       border: `1px solid ${grade.correct ? "#86EFAC" : "#FCA5A5"}`,

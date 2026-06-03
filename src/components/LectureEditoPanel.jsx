@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
+import { callAIText } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { Confetti } from "./ui/Minou.jsx";
 
@@ -200,12 +201,48 @@ function RevealQ({ q, revealed, onReveal }) {
   );
 }
 
+// ── Open / discussion (no fixed answer) ──────────────────────
+function OpenQ({ q }) {
+  return (
+    <div style={{ marginBottom: "1rem" }}>
+      <div style={{ fontSize: "0.84rem", color: C.ink, fontWeight: 600, marginBottom: "0.4rem", lineHeight: 1.45 }}>
+        {q.prompt}
+      </div>
+      <div style={{ fontSize: "0.72rem", color: C.gray, fontStyle: "italic", display: "flex", alignItems: "center", gap: "0.3rem" }}>
+        💬 Câu thảo luận — tự diễn đạt ý của bạn, không có đáp án cố định.
+      </div>
+    </div>
+  );
+}
+
 // ── Activity view ─────────────────────────────────────────────
 function ActivityView({ activity, onBack }) {
   const [answers,      setAnswers]      = useState({});
   const [revealed,     setRevealed]     = useState({});
   const [confetti,     setConfetti]     = useState(false);
   const [showText,     setShowText]     = useState(true);
+
+  // On-demand Vietnamese translation of the passage (cached per activity).
+  const viCacheKey = `read_vi_${activity.id}`;
+  const [viText,    setViText]    = useState(() => { try { return localStorage.getItem(viCacheKey) || ""; } catch { return ""; } });
+  const [showVi,    setShowVi]    = useState(false);
+  const [viLoading, setViLoading] = useState(false);
+
+  const toggleTranslate = async () => {
+    if (viText) { setShowVi(v => !v); return; }
+    setViLoading(true); setShowVi(true);
+    try {
+      const out = await callAIText(
+        [{ role: "user", content: `Dịch đoạn văn tiếng Pháp sau sang tiếng Việt tự nhiên, giữ nguyên xuống dòng. Chỉ trả về bản dịch:\n\n${activity.text}` }],
+        "Bạn là dịch giả Pháp–Việt. Dịch sát nghĩa, tự nhiên, không thêm chú thích."
+      );
+      setViText(out);
+      try { localStorage.setItem(viCacheKey, out); } catch {}
+    } catch {
+      setViText(""); setShowVi(false);
+    }
+    setViLoading(false);
+  };
 
   const SCOREABLE = ["true_false", "multiple_choice", "multi_select"];
   const scoreable = activity.questions.filter(q => SCOREABLE.includes(q.type));
@@ -264,7 +301,13 @@ function ActivityView({ activity, onBack }) {
             <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1rem", color: C.ink, fontWeight: 700, lineHeight: 1.3 }}>
               {activity.title}
             </div>
-            <SpeakBtn text={activity.text} />
+            <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", flexShrink: 0 }}>
+              <button onClick={toggleTranslate} disabled={viLoading}
+                style={{ padding: "0.2rem 0.55rem", background: showVi ? C.blueL : "transparent", border: `1.5px solid ${C.blue}44`, borderRadius: 20, color: C.blue, fontSize: "0.66rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit", whiteSpace: "nowrap" }}>
+                {viLoading ? "Đang dịch…" : showVi ? "Ẩn dịch" : "🇻🇳 Dịch"}
+              </button>
+              <SpeakBtn text={activity.text} />
+            </div>
           </div>
           <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap", marginBottom: "0.6rem" }}>
             <span style={{ background: C.cream, border: `1px solid ${C.border}`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.63rem", color: C.gray }}>
@@ -282,6 +325,12 @@ function ActivityView({ activity, onBack }) {
           <div style={{ fontSize: "0.88rem", color: C.ink, lineHeight: 2, fontFamily: "Georgia,serif", whiteSpace: "pre-line", background: C.cream, borderRadius: 12, padding: "0.85rem 1rem", border: `1px solid ${C.border}` }}>
             {activity.text}
           </div>
+          {showVi && viText && (
+            <div style={{ marginTop: "0.6rem", fontSize: "0.82rem", color: C.gray, lineHeight: 1.8, whiteSpace: "pre-line", background: C.blueL, borderRadius: 12, padding: "0.75rem 1rem", border: `1px solid ${C.blue}33`, animation: "fadeUp 0.2s ease" }}>
+              <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1, color: C.blue, fontWeight: 700, marginBottom: "0.35rem" }}>🇻🇳 Bản dịch</div>
+              {viText}
+            </div>
+          )}
         </div>
       )}
 
@@ -301,7 +350,8 @@ function ActivityView({ activity, onBack }) {
               {q.type === "multiple_choice" && <MultipleChoiceQ q={q} ans={ans} onAnswer={handleAnswer} />}
               {q.type === "multi_select"    && <MultiSelectQ    q={q} ans={ans} onAnswer={handleAnswer} />}
               {q.type === "short_answer"    && <ShortAnswerQ    q={q} revealed={rev} onReveal={() => setRevealed(r => ({ ...r, [q.id]: true }))} />}
-              {(q.type === "open" || q.type === "matching") && <RevealQ q={q} revealed={rev} onReveal={() => setRevealed(r => ({ ...r, [q.id]: true }))} />}
+              {q.type === "open"            && <OpenQ q={q} />}
+              {q.type === "matching"        && <RevealQ q={q} revealed={rev} onReveal={() => setRevealed(r => ({ ...r, [q.id]: true }))} />}
               {!isLast && <div style={{ height: 1, background: C.border, margin: "0.2rem 0 0.8rem" }} />}
             </div>
           );

@@ -96,6 +96,7 @@ export function markModuleUsed(moduleId) {
     if (!p[moduleId]) p[moduleId] = { count: 0 };
     p[moduleId].count = (p[moduleId].count || 0) + 1;
     p[moduleId].last = new Date().toDateString();
+    p[moduleId].lastTs = Date.now();
     localStorage.setItem(PROGRESS_KEY, JSON.stringify(p));
     markStudiedToday();
   } catch {}

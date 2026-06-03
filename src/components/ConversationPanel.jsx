@@ -86,6 +86,34 @@ export default function ConversationPanel({ onBackToParcours }) {
 
   const [fromParcours, setFromParcours] = useState(false);
 
+  // ── Speech-to-text (luyện NÓI thật) ─────────────────────────
+  const recRef = useRef(null);
+  const [listening, setListening] = useState(false);
+  const micSupported = typeof window !== "undefined" &&
+    !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+
+  const toggleMic = () => {
+    if (!micSupported) return;
+    if (listening) { recRef.current?.stop(); return; }
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const rec = new SR();
+    rec.lang = "fr-FR";
+    rec.interimResults = true;
+    rec.continuous = false;
+    rec.onresult = (e) => {
+      let txt = "";
+      for (const r of e.results) txt += r[0].transcript;
+      setInput(txt);
+    };
+    rec.onerror = () => setListening(false);
+    rec.onend = () => setListening(false);
+    recRef.current = rec;
+    setListening(true);
+    rec.start();
+  };
+
+  useEffect(() => () => { try { recRef.current?.abort(); } catch {} }, []);
+
   useEffect(() => {
     const back = localStorage.getItem("parcours_back");
     if (back) { localStorage.removeItem("parcours_back"); setFromParcours(true); }
@@ -387,12 +415,18 @@ export default function ConversationPanel({ onBackToParcours }) {
 
       {/* Input bar */}
       <div style={{ padding:"0.5rem 0.75rem 0.6rem", background:C.white, borderTop:`1px solid ${C.border}`, display:"flex", gap:"0.4rem", alignItems:"center" }}>
+        {micSupported && (
+          <button onClick={toggleMic} title={listening ? "Đang nghe… bấm để dừng" : "Nói bằng tiếng Pháp"}
+            style={{ flexShrink:0, width:38, height:38, borderRadius:"50%", border:`1.5px solid ${listening ? C.accent : C.border}`, background: listening ? C.accent : C.white, color: listening ? "#fff" : C.gray, fontSize:"1rem", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", animation: listening ? "micPulse 1.1s ease infinite" : "none", transition:"all 0.15s" }}>
+            🎤
+          </button>
+        )}
         <input value={input} onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === "Enter" && send()}
-          placeholder="Écrivez en français…"
-          style={{ flex:1, border:`1.5px solid ${C.border}`, borderRadius:22, padding:"0.5rem 0.85rem", fontSize:"0.88rem", fontFamily:"Georgia,serif", outline:"none", color:C.ink, minWidth:0, transition:"border-color 0.15s" }}
-          onFocus={e => e.target.style.borderColor = C.blue}
-          onBlur={e => e.target.style.borderColor = C.border}
+          placeholder={listening ? "Đang nghe… hãy nói tiếng Pháp" : "Écrivez ou parlez en français…"}
+          style={{ flex:1, border:`1.5px solid ${listening ? C.accent : C.border}`, borderRadius:22, padding:"0.5rem 0.85rem", fontSize:"0.88rem", fontFamily:"Georgia,serif", outline:"none", color:C.ink, minWidth:0, transition:"border-color 0.15s" }}
+          onFocus={e => { if (!listening) e.target.style.borderColor = C.blue; }}
+          onBlur={e => { if (!listening) e.target.style.borderColor = C.border; }}
         />
         <button onClick={() => send()} disabled={loading || !input.trim()}
           style={{ padding:"0.5rem 1rem", background: input.trim() ? `linear-gradient(135deg, ${C.accent}, #c0392b)` : C.border, color:"#fff", border:"none", borderRadius:22, fontSize:"0.82rem", cursor: input.trim() ? "pointer" : "default", fontFamily:"Georgia,serif", fontWeight:700, flexShrink:0, transition:"background 0.15s" }}>

@@ -19,6 +19,22 @@ const MODES = [
 
 const CLIENT_TYPES = ["flashcard", "anagramme"];
 
+// Câu/cụm dài (vd "Qu'est-ce que ça veut dire ?") không hợp cho flashcard,
+// xếp chữ, điền từ. Lọc giữ lại "từ đơn" cho phần luyện tập.
+function isQuizzable(w) {
+  const fr = (w.fr || "").trim();
+  if (/[?!…]$/.test(fr)) return false;            // là câu hỏi/cảm thán
+  if (fr.includes("...") || fr.includes("…")) return false;
+  if (fr.split(/\s+/).length > 3) return false;   // quá dài
+  return fr.length > 0 && fr.length <= 28;
+}
+
+// Lọc cho luyện tập; nếu còn quá ít thì dùng nguyên list để không kẹt.
+function quizableWords(words) {
+  const filtered = words.filter(isQuizzable);
+  return filtered.length >= 3 ? filtered : words;
+}
+
 // ── Word list view for a group ─────────────────────────────
 function WordList({ words, color = C.blue, bg = C.blueL }) {
   const [selected, setSelected] = useState(null);
@@ -149,7 +165,7 @@ function GroupStudyView({ group, unit, onBack }) {
   const [subView, setSubView] = useState("list"); // "list" | "pick" | mode-id
 
   if (subView !== "list" && subView !== "pick") {
-    return <QuizRunner words={group.words} mode={subView} onBack={() => setSubView("pick")} />;
+    return <QuizRunner words={quizableWords(group.words)} mode={subView} onBack={() => setSubView("pick")} />;
   }
 
   return (
