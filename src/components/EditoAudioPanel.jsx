@@ -325,7 +325,7 @@ Trả về JSON thuần (không markdown):
                 </div>
 
                 {/* ── Audio player ── */}
-                <div style={{ padding: "0.55rem 0.9rem 0.45rem", background: track.colorLight }}>
+                <div style={{ padding: "0.55rem 0.9rem 0.45rem", background: `${track.color}0d` }}>
                   <audio controls src={track.audioSrc} preload="none"
                     style={{ width: "100%", height: 34, accentColor: track.color }} />
                 </div>
@@ -344,7 +344,7 @@ Trả về JSON thuần (không markdown):
                         <button key={btn.id} onClick={btn.action}
                           style={{
                             flex: 1, padding: "0.45rem 0.2rem",
-                            background: mode === btn.id ? track.colorLight : "transparent",
+                            background: mode === btn.id ? `${track.color}1a` : "transparent",
                             border: "none",
                             borderRight: bi < btns.length - 1 ? `1px solid ${C.border}` : "none",
                             color: mode === btn.id ? track.color : C.gray,
@@ -459,7 +459,7 @@ Trả về JSON thuần (không markdown):
                                         </button>
                                       </div>
                                       {grade.feedback && (
-                                        <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.5 }}>
+                                        <div style={{ fontSize: "0.71rem", color: C.ink, lineHeight: 1.5 }}>
                                           {grade.feedback}
                                         </div>
                                       )}
@@ -525,7 +525,7 @@ Trả về JSON thuần (không markdown):
                             </button>
                           </div>
                           {/* Phrases */}
-                          <div style={{ background: track.colorLight, padding: "0.45rem 0.75rem 0.5rem" }}>
+                          <div style={{ background: `${track.color}14`, padding: "0.45rem 0.75rem 0.5rem" }}>
                             <ul style={{ margin: 0, paddingLeft: "1.1rem" }}>
                               {note.phrases.map((p, pi) => (
                                 <li key={pi} style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.75, fontStyle: "italic" }}>{p}</li>
@@ -534,15 +534,15 @@ Trả về JSON thuần (không markdown):
                           </div>
                           {/* AI expansion */}
                           {exp && !exp.loading && exp.content && (
-                            <div style={{ background: "#FAFAFA", padding: "0.5rem 0.75rem", borderTop: `1px dashed ${track.color}30` }}>
+                            <div style={{ background: C.cream, padding: "0.5rem 0.75rem", borderTop: `1px dashed ${track.color}30` }}>
                               {exp.content.vi && (
-                                <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.25rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
+                                <div style={{ fontSize: "0.71rem", color: C.ink, lineHeight: 1.55, marginBottom: "0.25rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
                                   <span style={{ background: C.blueL, color: "#2563EB", fontSize: "0.56rem", fontWeight: 700, padding: "0.1rem 0.35rem", borderRadius: 5, flexShrink: 0, marginTop: "0.15rem" }}>VI</span>
                                   <em>{exp.content.vi}</em>
                                 </div>
                               )}
                               {exp.content.ja && (
-                                <div style={{ fontSize: "0.71rem", color: "#374151", lineHeight: 1.55, marginBottom: "0.3rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
+                                <div style={{ fontSize: "0.71rem", color: C.ink, lineHeight: 1.55, marginBottom: "0.3rem", display: "flex", gap: "0.4rem", alignItems: "flex-start" }}>
                                   <span style={{ background: "#FFF0F0", color: "#C0392B", fontSize: "0.56rem", fontWeight: 700, padding: "0.1rem 0.35rem", borderRadius: 5, flexShrink: 0, marginTop: "0.15rem" }}>日本語</span>
                                   <em>{exp.content.ja}</em>
                                 </div>
@@ -570,7 +570,7 @@ Trả về JSON thuần (không markdown):
                                 </div>
                               )}
                               {exp.content.tip && exp.content.tip !== "null" && (
-                                <div style={{ fontSize: "0.67rem", color: "#6D28D9", background: "#F5F3FF", borderRadius: 6, padding: "0.28rem 0.5rem", marginTop: "0.25rem" }}>
+                                <div style={{ fontSize: "0.67rem", color: track.color, background: `${track.color}14`, borderRadius: 6, padding: "0.28rem 0.5rem", marginTop: "0.25rem" }}>
                                   📌 {exp.content.tip}
                                 </div>
                               )}
@@ -646,7 +646,7 @@ Trả về JSON thuần (không markdown):
                               <div style={{ fontSize: "0.68rem", color: C.gray, marginBottom: "0.4rem", display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
                                 <span>Chép lại câu {idx + 1}:</span>
                                 {speaker && (
-                                  <span style={{ background: track.colorLight, color: track.color, borderRadius: 10, padding: "0.05rem 0.5rem", fontWeight: 700, fontSize: "0.65rem" }}>
+                                  <span style={{ background: `${track.color}1a`, color: track.color, borderRadius: 10, padding: "0.05rem 0.5rem", fontWeight: 700, fontSize: "0.65rem" }}>
                                     💬 {speaker}
                                   </span>
                                 )}
