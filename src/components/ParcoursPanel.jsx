@@ -228,6 +228,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
       localStorage.setItem("parcours_back", "1");
       onNavigate("lecture", "lecture");
     } else if (step.id === "ecouter") {
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("dictee", "ecouter");
     } else if (step.id === "ecrire") {
       onNavigate("writing", "writing");

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import DicteePanel from "./DicteePanel.jsx";
@@ -30,11 +30,13 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
   const [mainTab,       setMainTab]       = useState("edito");
   const [subTab,        setSubTab]        = useState(section === "listening" ? "chon" : "chep");
   const [selectedUnit,  setSelectedUnit]  = useState(null);
-  const [fromParcours] = useState(() => {
-    const back = localStorage.getItem("parcours_back");
-    if (back) { localStorage.removeItem("parcours_back"); return true; }
-    return false;
-  });
+  const [fromParcours, setFromParcours] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("parcours_back")) {
+      setFromParcours(true);
+      localStorage.removeItem("parcours_back");
+    }
+  }, []);
 
   const unitData    = selectedUnit ? EDITO_VOCAB_UNITS.find(u => u.id === selectedUnit) : null;
   const unitWords   = unitData ? unitData.groups.flatMap(g => g.words) : null;

@@ -3,7 +3,7 @@
  * Nghe theo sách Édito A1 — câu hỏi tương tác, AI chấm, chép chính tả, script.
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { EDITO_AUDIO } from "../data/editoAudio.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
@@ -123,6 +123,18 @@ hoặc:
 // ═══════════════════════════════════════════════════════════════════
 export default function EditoAudioPanel() {
   const [selectedUnit, setSelectedUnit] = useState(null);
+
+  // Deep-link from Parcours "Nghe" step: open the current unit directly.
+  // Read in an effect (not a useState initializer) so the localStorage
+  // read+remove stays StrictMode-safe.
+  useEffect(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      const u = EDITO_UNITS[Number(idx)];
+      if (u) setSelectedUnit(u.id);
+      localStorage.removeItem("parcours_unit_idx");
+    }
+  }, []);
   // mode per track: null | "questions" | "script" | "dictee"
   const [panelMode, setPanelMode]       = useState({});
   // Q answers: { "tid|gi|qi": string }
@@ -527,8 +539,14 @@ Trả về JSON thuần (không markdown):
                           {/* Phrases */}
                           <div style={{ background: `${track.color}14`, padding: "0.5rem 0.75rem 0.55rem" }}>
                             {note.structure && (
-                              <div style={{ fontSize: "0.66rem", color: track.color, background: `${track.color}1f`, borderRadius: 7, padding: "0.32rem 0.55rem", marginBottom: "0.5rem", lineHeight: 1.55 }}>
-                                🔑 <strong>Cấu trúc:</strong> {note.structure}
+                              <div style={{ fontSize: "0.66rem", color: track.color, background: `${track.color}1f`, borderRadius: 7, padding: "0.4rem 0.6rem", marginBottom: "0.5rem", lineHeight: 1.6 }}>
+                                <div style={{ fontWeight: 700, marginBottom: "0.25rem" }}>🔑 Cấu trúc</div>
+                                {note.structure.split(/(?<=\.)\s+(?=\S)/).map(s => s.replace(/\.$/, "").trim()).filter(Boolean).map((line, li) => (
+                                  <div key={li} style={{ display: "flex", gap: "0.35rem", marginBottom: "0.15rem" }}>
+                                    <span style={{ flexShrink: 0, opacity: 0.65 }}>•</span>
+                                    <span>{line}</span>
+                                  </div>
+                                ))}
                               </div>
                             )}
                             <ul style={{ margin: 0, paddingLeft: "1.1rem" }}>
