@@ -1035,9 +1035,8 @@ Khi ghép 2 từ màu hoặc màu + bổ nghĩa → không bao giờ thêm -e / 
 Cấu trúc: ALLER (présent) + INFINITIF
 
 Chia ALLER ở présent:
-• Je vais     • Nous allons
-• Tu vas      • Vous allez
-• Il/Elle va  • Ils/Elles vont
+Je vais · Tu vas · Il/Elle va
+Nous allons · Vous allez · Ils/Elles vont
 
 Dùng futur proche khi:
 ✅ Hành động sắp xảy ra trong tương lai gần: "Je vais partir dans 5 minutes."
@@ -1121,7 +1120,18 @@ Thêm -CI (gần) hoặc -LÀ (xa) sau danh từ để phân biệt:
 "ce pull-CI" (cái áo len này, gần) vs "ce pull-LÀ" (cái áo len kia, xa)
 
 💡 Cet vs Ce: chỉ khác nhau trước nguyên âm để dễ phát âm hơn
-"Ce ami" → khó đọc → "Cet ami" [sɛtami]`,
+"Ce ami" → khó đọc → "Cet ami" [sɛtami]
+
+💡 TIẾNG PHÁP KHÔNG TÁCH "này" vs "kia" như tiếng Việt:
+Một từ ce/cet/cette/ces dùng cho CẢ "này" (gần) LẪN "kia/đó" (xa) — ngữ cảnh tự hiểu.
+Chỉ khi cần nhấn mạnh đối lập mới thêm -ci (này) / -là (kia):
+"Je prends ce pull." = Tôi lấy cái áo này/đó (không cần nói rõ xa gần).
+"Ce pull-ci ou ce pull-là?" = Cái này hay cái kia? (đang so sánh hai cái)
+
+⚠️ Đây là TÍNH TỪ chỉ định → LUÔN đi kèm danh từ, không đứng một mình:
+"Je veux ce." ❌  →  "Je veux ce pull." ✅
+(Muốn nói trống "cái này" thì dùng ĐẠI TỪ celui-ci/celle-ci — học ở trình độ sau.)`,
+
         examples:[
           "Ce pull est très chaud. — Cái áo len này rất ấm.",
           "Cet imperméable est pratique. — Chiếc áo mưa đó thực tế.",
@@ -1136,22 +1146,19 @@ Thêm -CI (gần) hoặc -LÀ (xa) sau danh từ để phân biệt:
         rule:`Ba động từ quan trọng trong Unité 5:
 
 VENDRE (bán) — nhóm -RE quy tắc:
-• Je vends    • Nous vendons
-• Tu vends    • Vous vendez
-• Il vend (không có -s!) • Ils vendent
+Je vends · Tu vends · Il/Elle vend (không có -s!)
+Nous vendons · Vous vendez · Ils/Elles vendent
 Tương tự: répondre, attendre, entendre, perdre
 
 METTRE (đặt / mặc / bật):
-• Je mets     • Nous mettons
-• Tu mets     • Vous mettez
-• Il met      • Ils mettent
+Je mets · Tu mets · Il/Elle met
+Nous mettons · Vous mettez · Ils/Elles mettent
 💡 Dùng: mettre une veste (mặc áo), mettre la table (dọn bàn ăn), mettre de la musique (bật nhạc)
 Tương tự: promettre (hứa), permettre (cho phép)
 
 VENIR (đến) — Bất quy tắc:
-• Je viens    • Nous venons
-• Tu viens    • Vous venez
-• Il vient    • Ils viennent
+Je viens · Tu viens · Il/Elle vient
+Nous venons · Vous venez · Ils/Elles viennent
 ⚠️ Venir DE + infinitif = passé récent: "Je viens de manger." (Unité 6)
 ⚠️ Venir DE + lieu = xuất xứ: "Je viens du Japon." (Unité 9)
 Tương tự: devenir (trở thành), revenir (quay lại), tenir (giữ)`,
@@ -1259,11 +1266,20 @@ Bảng chia SE LEVER (thức dậy):
 • Ils/Elles se lèvent
 
 Các loại động từ phản thân:
-1. Thực sự phản thân (tự làm cho mình): se laver, se coiffer, se maquiller, se raser
-2. Nghĩa đặc biệt khác động từ gốc: s'appeler (tên là) ≠ appeler (gọi)
-   se trouver (nằm ở) ≠ trouver (tìm thấy)
-3. Luôn luôn phản thân (không có dạng không phản thân):
-   se souvenir (nhớ), se taire (im lặng), se méfier (cảnh giác)
+1. PHẢN THÂN THẬT SỰ — chủ ngữ tự làm cho CHÍNH MÌNH (se = "chính mình"):
+   se laver (tự tắm), se coiffer (tự chải đầu), se maquiller (tự trang điểm), se raser (tự cạo râu)
+   💡 So sánh để thấy rõ vai trò của "se":
+   "Je lave la voiture." (tôi rửa xe — tác động lên vật khác)
+   "Je ME lave." (tôi tắm — tác động lên chính tôi)
+2. TƯƠNG HỖ — nhiều người làm cho NHAU (se = "lẫn nhau"; chỉ đi với chủ ngữ số nhiều):
+   se regarder (nhìn nhau), s'aimer (yêu nhau), se téléphoner (gọi cho nhau),
+   se disputer (cãi nhau), se rencontrer (gặp nhau), se parler (nói chuyện với nhau)
+   ⚠️ "Ils se regardent." = Họ nhìn NHAU — KHÔNG phải mỗi người tự nhìn mình!
+3. NGHĨA ĐẶC BIỆT khác hẳn động từ gốc (phải nhớ như từ vựng riêng):
+   s'appeler (tên là) ≠ appeler (gọi)   ·   se trouver (nằm ở) ≠ trouver (tìm thấy)
+   s'entendre (hợp tính nhau) ≠ entendre (nghe thấy)   ·   se rendre (đi đến) ≠ rendre (trả lại)
+4. LUÔN LUÔN phản thân — không tồn tại dạng không có "se":
+   se souvenir (nhớ), se taire (im lặng), se méfier (cảnh giác), s'évanouir (ngất xỉu)
 
 PHỦ ĐỊNH: Ne + me/te/se + verbe + pas
 "Je ne me lève pas tôt." (Tôi không dậy sớm)
@@ -1277,6 +1293,7 @@ PHỦ ĐỊNH: Ne + me/te/se + verbe + pas
           "Elle s'habille vite. — Cô ấy mặc đồ nhanh.",
           "Comment tu t'appelles? — Bạn tên là gì?",
           "Je ne me maquille pas tous les jours. — Tôi không trang điểm mỗi ngày.",
+          "Marie et Paul s'aiment et se téléphonent tous les soirs. — Marie và Paul yêu nhau và gọi cho nhau mỗi tối. (tương hỗ)",
         ]
       },
       {
@@ -1314,9 +1331,8 @@ BIỂU THỨC THỜI GIAN (đứng đầu hoặc cuối câu):
         rule:`VENIR DE + INFINITIF = "vừa mới làm gì đó" (hành động vừa kết thúc)
 
 Chia VENIR au présent:
-• Je viens de     • Nous venons de
-• Tu viens de     • Vous venez de
-• Il/Elle vient de • Ils/Elles viennent de
+Je viens de · Tu viens de · Il/Elle vient de
+Nous venons de · Vous venez de · Ils/Elles viennent de
 
 Dùng khi:
 ✅ Hành động xảy ra NGAY TRƯỚC lúc nói: "Je viens de manger." (Tôi vừa mới ăn xong)
@@ -1344,16 +1360,16 @@ PHỦ ĐỊNH: Je ne viens pas de + infinitif
 Đặc điểm: số ít mất phụ âm cuối cùng của phần gốc
 
 PARTIR (khởi hành / rời đi):
-• Je pars    Tu pars    Il part
-• Nous partons  Vous partez  Ils partent
+Je pars · Tu pars · Il/Elle part
+Nous partons · Vous partez · Ils/Elles partent
 
 SORTIR (ra ngoài):
-• Je sors    Tu sors    Il sort
-• Nous sortons  Vous sortez  Ils sortent
+Je sors · Tu sors · Il/Elle sort
+Nous sortons · Vous sortez · Ils/Elles sortent
 
 DORMIR (ngủ):
-• Je dors    Tu dors    Il dort
-• Nous dormons  Vous dormez  Ils dorment
+Je dors · Tu dors · Il/Elle dort
+Nous dormons · Vous dormez · Ils/Elles dorment
 
 Tương tự: servir (phục vụ), mentir (nói dối), sentir (cảm nhận/ngửi)
 
@@ -1379,15 +1395,13 @@ PARTIR vs QUITTER vs LAISSER:
         rule:`Hai động từ bất quy tắc rất hay dùng trong Unité 6:
 
 POUVOIR (có thể / được phép):
-• Je peux     • Nous pouvons
-• Tu peux     • Vous pouvez
-• Il peut     • Ils peuvent
+Je peux · Tu peux · Il/Elle peut
+Nous pouvons · Vous pouvez · Ils/Elles peuvent
 ⚠️ Hỏi lịch sự: "Puis-je...?" (đảo ngữ trang trọng)
 
 VOULOIR (muốn):
-• Je veux     • Nous voulons
-• Tu veux     • Vous voulez
-• Il veut     • Ils veulent
+Je veux · Tu veux · Il/Elle veut
+Nous voulons · Vous voulez · Ils/Elles veulent
 💡 Dạng lịch sự: "Je voudrais..." (conditionnel) — lịch sự hơn "Je veux"
 "Je voudrais un café, s'il vous plaît."
 
@@ -1447,7 +1461,7 @@ SA ROUTINE QUOTIDIENNE (production orale simple):
 • D'habitude, je [prends le bus / travaille de 9h à 18h].
 • Le matin, je [prends un café / lis les news].
 • Le week-end, je [sors avec des amis / reste à la maison / fais du sport].
-• Le lundi, j'ai [cours / réunion]. Tous les vendredis, je [finisse tôt].`,
+• Le lundi, j'ai [cours / réunion]. Tous les vendredis, je [finis tôt].`,
         examples:[
           "Tu es libre samedi soir? On va au cinéma? — Oui, bonne idée! À quelle heure?",
           "Il y a un concert de jazz au Bataclan. Ça te dit? — Pourquoi pas! À quelle heure ça commence?",
@@ -1509,6 +1523,24 @@ il y a + temps: "Il y a deux jours" = hai ngày trước`,
 • AU-DESSUS DE = phía trên (không tiếp xúc): au-dessus du lit
 • EN DESSOUS DE = phía dưới (không tiếp xúc)
 • AU FOND DE = ở cuối/trong: au fond du couloir
+
+💡 PHÂN BIỆT CÁC CẶP DỄ NHẦM:
+• SUR (chạm bề mặt) ≠ AU-DESSUS DE (lơ lửng phía trên, KHÔNG chạm):
+  "La lampe est sur la table." (đèn đặt trên mặt bàn)
+  "La lampe est au-dessus de la table." (đèn treo phía trên bàn)
+• SOUS (ngay bên dưới) ≠ EN DESSOUS DE (ở tầng/mức thấp hơn):
+  "Le chat est sous la chaise." ≠ "Les voisins en dessous sont bruyants."
+• À CÔTÉ DE (sát bên cạnh) ≠ EN FACE DE (đối diện, nhìn sang nhau):
+  hai vật đứng cạnh nhau  ≠  hai vật nhìn về phía nhau.
+
+⚠️ ĐỪNG NHẦM KHÔNG GIAN với THỜI GIAN (lỗi rất hay gặp):
+• DEVANT / DERRIÈRE = trước/sau trong KHÔNG GIAN (vị trí): "devant la maison" (trước nhà).
+• AVANT / APRÈS = trước/sau về THỜI GIAN: "avant midi" (trước trưa), "après le travail" (sau giờ làm).
+→ KHÔNG nói "avant la maison" để chỉ vị trí!
+
+💡 HỎI & TRẢ LỜI VỊ TRÍ:
+"Où est… ? / Où sont… ?" → "Il est / Elle est / C'est + giới từ + nơi chốn."
+"Où est la télécommande? — Elle est sous le canapé."
 
 ⚠️ Chú ý: DE + LE = DU, DE + LES = DES
 "à côté du canapé" (pas de le canapé)
@@ -1590,9 +1622,8 @@ PASSÉ COMPOSÉ: pronom avant l'auxiliaire
         rule:`CONNAÎTRE = "biết / quen biết" — phân biệt với SAVOIR!
 
 Chia CONNAÎTRE au présent:
-• Je connais     • Nous connaissons
-• Tu connais     • Vous connaissez
-• Il connaît ⚠️ (accent circonflexe: î)  • Ils connaissent
+Je connais · Tu connais · Il/Elle connaît (dấu mũ: î)
+Nous connaissons · Vous connaissez · Ils/Elles connaissent
 
 CONNAÎTRE vs SAVOIR:
 
@@ -1688,7 +1719,7 @@ EN -ERT:
 couvrir→couvert, offrir→offert, ouvrir→ouvert, souffrir→souffert
 
 EN -É (réguliers mais fréquents):
-aller→allé (avec être!), naître→né, téléphoner→téléphone
+aller→allé (avec être!), naître→né, téléphoner→téléphoné, arriver→arrivé
 
 COMPLÈTEMENT IRRÉGULIERS:
 être→été, naître→né, mourir→mort
@@ -1741,9 +1772,8 @@ FORMES:
         rule:`DEVOIR + INFINITIF = "phải làm gì" (obligation personnelle)
 
 Chia DEVOIR au présent:
-• Je dois      • Nous devons
-• Tu dois      • Vous devez
-• Il/Elle doit  • Ils/Elles doivent
+Je dois · Tu dois · Il/Elle doit
+Nous devons · Vous devez · Ils/Elles doivent
 
 Khác với IL FAUT (obligation générale, impersonnelle):
 "Il faut manger des légumes." = Nói chung, người ta nên ăn rau.
@@ -1803,9 +1833,8 @@ Phủ định → cấm:
         rule:`BOIRE (uống) — Động từ bất quy tắc:
 
 Chia BOIRE au présent:
-• Je bois     • Nous buvons
-• Tu bois     • Vous buvez
-• Il boit     • Ils boivent
+Je bois · Tu bois · Il/Elle boit
+Nous buvons · Vous buvez · Ils/Elles boivent
 
 Participe passé: BU (bất quy tắc!)
 "J'ai bu beaucoup d'eau aujourd'hui."
@@ -1970,7 +1999,7 @@ TRỞ THÀNH (devenir) · ĐI QUA (passer)
           "Ils sont partis tôt ce matin. — Họ đã khởi hành sớm sáng nay.",
           "Nous sommes restés une semaine. — Chúng tôi đã ở lại một tuần.",
           "Elle est née à Lyon. — Cô ấy sinh ở Lyon.",
-          "Il est tombé en vacances et il est allé à l'hôpital. — Anh ấy bị ngã trong kỳ nghỉ và đã đến bệnh viện.",
+          "Il est tombé pendant les vacances et il est allé à l'hôpital. — Anh ấy bị ngã trong kỳ nghỉ và đã đến bệnh viện.",
         ]
       },
       {

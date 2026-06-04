@@ -525,11 +525,25 @@ Trả về JSON thuần (không markdown):
                             </button>
                           </div>
                           {/* Phrases */}
-                          <div style={{ background: `${track.color}14`, padding: "0.45rem 0.75rem 0.5rem" }}>
+                          <div style={{ background: `${track.color}14`, padding: "0.5rem 0.75rem 0.55rem" }}>
+                            {note.structure && (
+                              <div style={{ fontSize: "0.66rem", color: track.color, background: `${track.color}1f`, borderRadius: 7, padding: "0.32rem 0.55rem", marginBottom: "0.5rem", lineHeight: 1.55 }}>
+                                🔑 <strong>Cấu trúc:</strong> {note.structure}
+                              </div>
+                            )}
                             <ul style={{ margin: 0, paddingLeft: "1.1rem" }}>
-                              {note.phrases.map((p, pi) => (
-                                <li key={pi} style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.75, fontStyle: "italic" }}>{p}</li>
-                              ))}
+                              {note.phrases.map((p, pi) => {
+                                const fr = typeof p === "string" ? p : p.fr;
+                                const vi = typeof p === "object" ? p.vi : null;
+                                return (
+                                  <li key={pi} style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.5, marginBottom: vi ? "0.38rem" : "0.12rem" }}>
+                                    <span style={{ fontStyle: "italic" }}>{fr}</span>
+                                    {vi && (
+                                      <span style={{ display: "block", fontStyle: "normal", color: C.gray, fontSize: "0.68rem", lineHeight: 1.45, marginTop: "0.05rem" }}>↳ {vi}</span>
+                                    )}
+                                  </li>
+                                );
+                              })}
                             </ul>
                           </div>
                           {/* AI expansion */}
