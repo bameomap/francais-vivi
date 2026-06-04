@@ -954,7 +954,7 @@ function AppInner() {
               <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
 
                 {/* ── Từ đã lưu (reading + dict) ── */}
-                <SavedWordListView onReview={() => goSection("srs","srs")} />
+                <SavedWordListView onReview={() => goSection("srs","srs-saved")} />
 
                 {/* ── Divider ── */}
                 <div style={{ display:"flex", alignItems:"center", gap:8, margin:"0.5rem 0 1rem" }}>
@@ -1047,6 +1047,7 @@ function AppInner() {
             {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
             {view==="conversation"  && <ConversationPanel onBackToParcours={backToParcours} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
+            {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
             {view==="reference_hub" && <ReferenceHub onBackToParcours={backToParcours} />}
             {view==="lecture"       && <LecturePanel words={words} onBackToParcours={backToParcours} />}
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}

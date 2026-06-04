@@ -145,7 +145,7 @@ function FlipCard({ card, flipped, onFlip }) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-export default function SRSPanel({ currentWords = [] }) {
+export default function SRSPanel({ currentWords = [], autoStartSaved = false }) {
   const WORDLIST_KEY = "reading_wordlist_v1";
   const [mode,      setMode]      = useState("home");
   const [queue,     setQueue]     = useState([]);
@@ -168,6 +168,13 @@ export default function SRSPanel({ currentWords = [] }) {
   const swipeX = useRef(null);
 
   const refreshStats = () => { setStats(getSRSStats()); setAllCards(getAllCards()); };
+
+  // Auto-start saved words review when navigated from SavedWordListView
+  useEffect(() => {
+    if (autoStartSaved && savedWords.length > 0) {
+      setSavedIdx(0); setSavedFlipped(false); setSavedKnown([]); setMode("saved");
+    }
+  }, [autoStartSaved]);
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(""), 2200); };
 
   const startReview = () => {
@@ -567,51 +574,42 @@ export default function SRSPanel({ currentWords = [] }) {
         <div style={{ height:3, background:C.border, borderRadius:99, marginBottom:"1rem", overflow:"hidden" }}>
           <div style={{ height:"100%", width:`${((savedIdx)/savedWords.length)*100}%`, background:C.green, borderRadius:99, transition:"width 0.3s" }}/>
         </div>
-        {/* Card */}
-        <div style={{ perspective:"1200px", userSelect:"none", minHeight:220, marginBottom:"1rem", cursor:"pointer" }}
-          onClick={() => { if (!savedFlipped) { setSavedFlipped(true); setTimeout(() => speak(sw.fr), 280); } }}
+        {/* Card — reuse FlipCard with saved word data */}
+        <div style={{ padding:"0 0 0.75rem" }}
           onTouchStart={e => { swipeX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             if (swipeX.current === null) return;
             const dx = swipeX.current - e.changedTouches[0].clientX;
             swipeX.current = null;
             if (Math.abs(dx) < 55) return;
-            if (!savedFlipped) { setSavedFlipped(true); setTimeout(() => speak(sw.fr), 280); return; }
-            savedAnswer(dx < 0); // swipe right = nhớ, swipe left = quên
+            if (!savedFlipped) { setSavedFlipped(true); return; }
+            savedAnswer(dx < 0);
           }}
         >
-          <div style={{ position:"relative", width:"100%", minHeight:220, transformStyle:"preserve-3d", transform: savedFlipped ? "rotateY(180deg)" : "rotateY(0deg)", transition:"transform 0.42s cubic-bezier(0.4,0,0.2,1)" }}>
-            {/* Front */}
-            <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", background:`linear-gradient(135deg, ${C.green}, #059669)`, borderRadius:22, padding:"1.5rem", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0.5rem", boxShadow:`0 8px 32px ${C.green}44` }}>
-              <div style={{ fontSize:"0.6rem", color:"rgba(255,255,255,0.7)", textTransform:"uppercase", letterSpacing:2 }}>🇫🇷 Tiếng Pháp</div>
-              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2.4rem", color:"#fff", fontWeight:700, textAlign:"center", lineHeight:1.2 }}>{sw.fr}</div>
-              {sw.type && <span style={{ background:"rgba(255,255,255,0.2)", color:"#fff", borderRadius:20, padding:"0.1rem 0.55rem", fontSize:"0.7rem", fontWeight:700 }}>{sw.type}</span>}
-              <button onClick={e => { e.stopPropagation(); speak(sw.fr); }} style={{ background:"rgba(255,255,255,0.22)", border:"1.5px solid rgba(255,255,255,0.4)", color:"#fff", borderRadius:20, padding:"0.28rem 0.85rem", fontSize:"0.78rem", cursor:"pointer" }}>🔊 Nghe</button>
-              <div style={{ position:"absolute", bottom:14, fontSize:"0.62rem", color:"rgba(255,255,255,0.55)" }}>Nhấn để xem nghĩa ↕</div>
-            </div>
-            {/* Back */}
-            <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", transform:"rotateY(180deg)", background:C.white, borderRadius:22, boxShadow:"0 6px 28px rgba(0,0,0,0.09)", border:`1.5px solid ${C.border}`, padding:"1.5rem", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0.5rem" }}>
-              <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:2 }}>🇻🇳 Tiếng Việt</div>
-              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, textAlign:"center" }}>{sw.vi}</div>
-              {sw.note && <div style={{ fontSize:"0.76rem", color:C.gold, textAlign:"center", lineHeight:1.5 }}>💡 {sw.note}</div>}
-              <div style={{ fontSize:"0.68rem", color:C.gray2 }}>📌 {sw.source}</div>
-              <div style={{ position:"absolute", bottom:10, left:0, right:0, display:"flex", justifyContent:"space-between", padding:"0 14px", pointerEvents:"none" }}>
-                <span style={{ fontSize:"0.58rem", color:C.gray2 }}>← Quên</span>
-                <span style={{ fontSize:"0.58rem", color:C.gray2 }}>Nhớ →</span>
-              </div>
-            </div>
-          </div>
+          <FlipCard
+            card={{ ...sw, repetitions: 0, interval: 0 }}
+            flipped={savedFlipped}
+            onFlip={() => setSavedFlipped(f => !f)}
+            key={sw.fr}
+          />
         </div>
         {/* Buttons */}
-        {savedFlipped && (
-          <div style={{ display:"flex", gap:"0.75rem" }}>
-            <button onClick={() => savedAnswer(false)} style={{ flex:1, padding:"0.7rem", background:C.redL, border:`1.5px solid ${C.red}`, borderRadius:14, color:C.red, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>← Ôn lại</button>
-            <button onClick={() => savedAnswer(true)} style={{ flex:1, padding:"0.7rem", background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, color:C.green, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>Nhớ rồi ✓</button>
-          </div>
-        )}
-        {!savedFlipped && (
-          <button onClick={() => { setSavedFlipped(true); setTimeout(() => speak(sw.fr), 280); }} style={{ width:"100%", padding:"0.7rem", background:C.green, color:"#fff", border:"none", borderRadius:14, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>Xem nghĩa →</button>
-        )}
+        <div style={{ padding:"0 1rem" }}>
+          {!savedFlipped && (
+            <div style={{ textAlign:"center" }}>
+              <button onClick={() => setSavedFlipped(true)}
+                style={{ padding:"0.55rem 1.5rem", background:PURPLE, color:"#fff", border:"none", borderRadius:20, fontSize:"0.82rem", cursor:"pointer", fontWeight:700, boxShadow:`0 4px 14px ${PURPLE}44` }}>
+                Xem nghĩa →
+              </button>
+            </div>
+          )}
+          {savedFlipped && (
+            <div style={{ display:"flex", gap:"0.75rem" }}>
+              <button onClick={() => savedAnswer(false)} style={{ flex:1, padding:"0.7rem", background:C.redL, border:`1.5px solid ${C.red}`, borderRadius:14, color:C.red, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>← Ôn lại</button>
+              <button onClick={() => savedAnswer(true)} style={{ flex:1, padding:"0.7rem", background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, color:C.green, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>Nhớ rồi ✓</button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
