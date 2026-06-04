@@ -70,7 +70,7 @@ export function ImportModal({ onImport, onClose }) {
 
   return (
     <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:100 }} onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div style={{ background:C.white,borderRadius:"16px 16px 0 0",padding:"1.25rem",width:"100%",maxWidth:480,maxHeight:"80vh",display:"flex",flexDirection:"column",gap:"0.8rem" }}>
+      <div style={{ background:C.white,borderRadius:"16px 16px 0 0",padding:"1.25rem",paddingBottom:"calc(1.25rem + 70px)",width:"100%",maxWidth:480,maxHeight:"85vh",overflowY:"auto",display:"flex",flexDirection:"column",gap:"0.8rem" }}>
         <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
           <div style={{ fontFamily:"Georgia,serif",fontSize:"1rem",color:C.purple }}>📁 Import từ vựng</div>
           <button onClick={onClose} style={{ background:"transparent",border:"none",fontSize:"1.2rem",cursor:"pointer",color:C.gray }}>×</button>
