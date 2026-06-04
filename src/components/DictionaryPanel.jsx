@@ -77,8 +77,7 @@ export default function DictionaryPanel() {
     setLoading(true);
     setResult(null);
     try {
-      const raw = await callAI(buildPrompt(w));
-      const data = JSON.parse(raw.replace(/```json|```/g, "").trim());
+      const data = await callAI(buildPrompt(w));
       setResult(data);
       try {
         localStorage.setItem(CACHE_PREFIX + w, JSON.stringify(data));

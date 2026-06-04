@@ -29,28 +29,57 @@ const TypePill = ({ type }) => {
   );
 };
 
+// ── Helpers for smart phrase detection ───────────────────────
+const SE_WORDS    = new Set(["se", "s'"]);
+const NE_WORDS    = new Set(["ne", "n'"]);
+// Compound prepositions where word[i] + word[i+1] form a phrase
+const COMP_PREP_NEXT = { "à": ["côté"], "en": ["face", "dehors", "dessous", "dessus"], "près": ["de"], "loin": ["de"], "à": ["partir", "côté", "cause", "gauche", "droite"] };
+
+function getPhrase(tokens, idx) {
+  const cur  = tokens[idx]?.norm || "";
+  const prev = idx > 0 ? tokens[idx - 1]?.norm : "";
+  const next = idx < tokens.length - 1 ? tokens[idx + 1]?.norm : "";
+
+  // se / s' + verb → "se coucher"
+  if (SE_WORDS.has(prev)) return `se ${cur}`;
+  // ne + verb + pas → just look up the verb (ne is grammatical)
+  // à côté, en face, près de, loin de...
+  if (next && COMP_PREP_NEXT[cur]?.includes(next)) return `${cur} ${next}`;
+  return cur;
+}
+
 // ── Clickable word text ───────────────────────────────────────
 function InteractiveText({ text, activeWord, onWordClick }) {
-  const parts = [];
+  // Build token array first so we can inspect neighbours
+  const tokens = [];
   const regex = /([A-Za-zÀ-ÿœŒæÆÀ-ɏ'-]+)|([^A-Za-zÀ-ÿœŒæÆÀ-ɏ'-]+)/g;
-  let match, key = 0;
+  let match;
   while ((match = regex.exec(text)) !== null) {
     if (match[1]) {
       const word = match[1];
       const norm = word.toLowerCase().replace(/^[-']+|[-']+$/g, "");
-      const isActive = activeWord === norm;
-      parts.push(
-        <span key={key++}
-          onClick={(e) => { e.stopPropagation(); if (norm.length > 1) onWordClick(norm, e); }}
-          style={{ background: isActive ? C.blueL : "transparent", color: isActive ? C.blue : "inherit", borderRadius: 3, cursor: norm.length > 1 ? "pointer" : "default", transition: "background 0.1s", padding: "0 1px" }}>
-          {word}
-        </span>
-      );
+      tokens.push({ text: word, isWord: true, norm });
     } else {
-      parts.push(<span key={key++}>{match[2]}</span>);
+      tokens.push({ text: match[2], isWord: false, norm: "" });
     }
   }
-  return <>{parts}</>;
+
+  return (
+    <>
+      {tokens.map((tok, i) => {
+        if (!tok.isWord) return <span key={i}>{tok.text}</span>;
+        const phrase  = getPhrase(tokens, i);
+        const isActive = activeWord === phrase;
+        return (
+          <span key={i}
+            onClick={(e) => { e.stopPropagation(); if (tok.norm.length > 1) onWordClick(phrase); }}
+            style={{ background: isActive ? C.blueL : "transparent", color: isActive ? C.blue : "inherit", borderRadius: 3, cursor: tok.norm.length > 1 ? "pointer" : "default", transition: "background 0.1s", padding: "0 1px" }}>
+            {tok.text}
+          </span>
+        );
+      })}
+    </>
+  );
 }
 
 // ── Word popup (bottom sheet) ─────────────────────────────────
@@ -400,8 +429,7 @@ function ActivityView({ activity, onBack }) {
     }
     setWordLoading(true);
     try {
-      const raw = await callAI(`Tra từ tiếng Pháp "${word}". JSON không markdown: {"type":"n.m/n.f/v/adj/adv/prép/expr","vi":"nghĩa tiếng Việt ngắn","gender":"đực/cái/không áp dụng","note":"ghi chú ngắn hoặc để trống","example":"ví dụ tiếng Pháp ngắn — bản dịch tiếng Việt"}`);
-      const data = JSON.parse(raw.replace(/```json|```/g, "").trim());
+      const data = await callAI(`Tra từ tiếng Pháp "${word}": {"type":"n.m/n.f/v/adj/adv/prép/expr","vi":"nghĩa tiếng Việt ngắn","gender":"đực/cái/không áp dụng","note":"ghi chú ngắn hoặc để trống","example":"ví dụ tiếng Pháp ngắn — bản dịch tiếng Việt"}`);
       setWordData(data);
       try { localStorage.setItem(DICT_CACHE + word, JSON.stringify(data)); } catch {}
     } catch {
