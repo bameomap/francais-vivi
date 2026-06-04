@@ -140,6 +140,79 @@ NÓI NGÀY THÁNG: le + số + tháng
           "On est le combien aujourd'hui? — Hôm nay là ngày mấy?",
         ]
       },
+      {
+        topic:"Phủ định cơ bản — Ne … pas",
+        rule:`PHỦ ĐỊNH = cách nói "không" trong tiếng Pháp.
+Cấu trúc: NE + động từ + PAS
+
+Hai phần kẹp xung quanh động từ:
+"Je suis étudiant." → "Je NE suis PAS étudiant."
+"Il parle français." → "Il NE parle PAS français."
+
+⚠️ Trước nguyên âm: NE → N'
+"J'aime le café." → "Je N'aime PAS le café."
+"Il est là." → "Il N'est PAS là."
+
+💡 Trong khẩu ngữ (nói chuyện), NE bị bỏ thường xuyên:
+"Je suis pas étudiant." (thân mật, không nên viết)
+→ Ở trình độ A1: luôn dùng đủ NE … PAS!
+
+BIẾN ĐỔI MẠO TỪ SAU PHỦ ĐỊNH:
+UN/UNE/DES → DE (d' trước nguyên âm):
+"J'ai un chien." → "Je n'ai PAS DE chien."
+"Il y a des parcs." → "Il n'y a PAS DE parcs."
+⚠️ LE/LA/LES giữ nguyên: "Je n'aime PAS LE sport."`,
+        examples:[
+          "Je ne suis pas français. Je suis vietnamien. — Tôi không phải người Pháp. Tôi là người Việt.",
+          "Il n'est pas là. — Anh ấy không có ở đây.",
+          "Je n'aime pas le sport. — Tôi không thích thể thao.",
+          "Elle n'a pas de voiture. — Cô ấy không có xe.",
+          "Tu n'es pas étudiant? — Bạn không phải sinh viên à?",
+          "Il n'y a pas de métro ici. — Ở đây không có tàu điện ngầm.",
+        ]
+      },
+      {
+        topic:"Production orale — Se saluer & faire connaissance",
+        rule:`CHÀO HỎI VÀ LÀM QUEN — Script đầy đủ từ A đến Z:
+
+CHÀO KHI GẶP:
+• Bonjour ! (cả ngày) · Bonsoir ! (buổi tối)
+• Salut ! (thân mật, với bạn bè) · Coucou ! (rất thân mật)
+• Comment allez-vous ? (lịch sự, với VOUS)
+• Comment tu vas ? / Ça va ? (thân mật, với TU)
+→ Très bien, merci ! / Bien, merci. Et vous/toi ?
+→ Ça va. / Pas mal. / Comme ci, comme ça. (trung bình)
+
+GIỚI THIỆU BẢN THÂN:
+• Je m'appelle [prénom]. / Mon prénom, c'est [prénom].
+• Je suis [nationalité]. J'ai [X] ans.
+• J'habite à [ville], en/au [pays].
+• Je suis [profession / étudiant(e)].
+
+HỎI THÔNG TIN CƠ BẢN:
+• Comment vous vous appelez ? / Tu t'appelles comment ?
+• Vous avez quel âge ? / Tu as quel âge ?
+• Vous êtes d'où ? / Tu viens d'où ?
+• Qu'est-ce que vous faites dans la vie ? (làm nghề gì?)
+
+TẠM BIỆT:
+• Au revoir ! (chính thức) · À bientôt ! (hẹn gặp lại sớm)
+• À tout à l'heure ! (gặp lại lúc nữa) · À demain ! (gặp mai)
+• Bonne journée ! / Bonne soirée ! / Bonne nuit !
+• Salut ! (thân mật — dùng cả khi gặp lẫn khi chia tay)
+
+💡 VOUS vs TU — quy tắc chọn:
+TU → bạn bè, gia đình, người cùng tuổi, trẻ em
+VOUS → người lạ, người lớn tuổi hơn, cấp trên, bối cảnh trang trọng`,
+        examples:[
+          "Bonjour! Je m'appelle Linh. Je suis vietnamienne et j'étudie le français.",
+          "Comment tu t'appelles? — Je m'appelle Thomas. Et toi?",
+          "Ça va? — Très bien, merci! Et toi?",
+          "Vous êtes d'où? — Je suis de Hanoï, au Vietnam.",
+          "Ravi(e) de vous rencontrer! — Moi aussi, enchanté(e)!",
+          "Au revoir! Bonne journée! — Merci, à bientôt!",
+        ]
+      },
     ]
   },
   {

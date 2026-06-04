@@ -6,6 +6,29 @@
 export const EDITO_POUR_NOTES = {
 
   // ─── Unité 1 ──────────────────────────────────────────────────────
+  "u1-e": [
+    {
+      heading: "Pour donner ses coordonnées personnelles",
+      structure: "Điền form online: « Prénom » (tên), « Nom » (họ), « Date de naissance » (ngày sinh), « E-mail » (email), « Mot de passe » (mật khẩu). Nói ngày sinh: « Je suis né(e) le + ngày + mois + année ». Email đọc: @ = arobase, . = point.",
+      phrases: [
+        { fr: "Prénom : [Marie] / Nom : [Dupont]", vi: "Tên: [Marie] / Họ: [Dupont]" },
+        { fr: "Date de naissance : le [26 janvier 1999].", vi: "Ngày sinh: [26 tháng 1 năm 1999]." },
+        { fr: "E-mail : [marie.dupont@gmail.com].", vi: "Email: [marie.dupont@gmail.com]." },
+        { fr: "Mot de passe : [marie260199].", vi: "Mật khẩu: [marie260199]." },
+        { fr: "Je suis né(e) le [26 janvier 1999].", vi: "Tôi sinh ngày [26 tháng 1 năm 1999]." },
+      ],
+    },
+    {
+      heading: "Pour parler de covoiturage / transport",
+      structure: "Covoiturage = xe đi chung (carpooling). Chỉ điểm đến: « Paris-Angoulême » (từ Paris đến Angoulême). Ngày đi: « le + ngày ». Số người: « pour + số + passager(s) ».",
+      phrases: [
+        { fr: "C'est un site de covoiturage.", vi: "Đây là trang web đi chung xe." },
+        { fr: "[Paris]-[Angoulême], le [24 janvier], pour [un] passager.", vi: "[Paris]-[Angoulême], ngày [24/1], cho [một] hành khách." },
+        { fr: "C'est parti !", vi: "Xuất phát thôi! / Đi thôi!" },
+      ],
+    },
+  ],
+
   "u1-b": [
     {
       heading: "Pour se présenter",
@@ -48,6 +71,29 @@ export const EDITO_POUR_NOTES = {
   ],
 
   // ─── Unité 2 ──────────────────────────────────────────────────────
+  "u2-e": [
+    {
+      heading: "Pour présenter quelqu'un à sa famille",
+      structure: "Giới thiệu người khác: « Voici [prénom], [lien de parenté/relation] ». Lịch sự khi gặp lần đầu: « C'est un plaisir (de vous rencontrer) ! ». Hỏi nghề nghiệp: « Vous êtes/Tu es + profession ? » hoặc « Qu'est-ce que vous faites (comme travail) ? ».",
+      phrases: [
+        { fr: "[Prénom], voici [mes parents / mon ami(e) / ma famille].", vi: "[Tên], đây là [bố mẹ tôi / bạn tôi / gia đình tôi]." },
+        { fr: "C'est un plaisir (de vous rencontrer) !", vi: "Rất vui được gặp bạn/anh/chị!" },
+        { fr: "Bienvenue !", vi: "Chào mừng!" },
+        { fr: "Tu es étudiant(e) ? / Vous travaillez ?", vi: "Bạn là sinh viên à? / Bạn đang đi làm à?" },
+      ],
+    },
+    {
+      heading: "Pour parler des professions et de la famille",
+      structure: "Nghề nghiệp: « Je suis + profession » (KHÔNG có mạo từ sau être!). Gia đình: « Mon/ma + lien ». Hỏi: « Ils étudient ou ils travaillent ? » = câu hỏi hai lựa chọn dùng OU (hoặc).",
+      phrases: [
+        { fr: "Je suis [infirmière / professeure / informaticien / fleuriste].", vi: "Tôi là [y tá / giáo viên / kỹ sư IT / người bán hoa]." },
+        { fr: "Je travaille à [l'hôpital / l'université / la banque].", vi: "Tôi làm việc ở [bệnh viện / trường đại học / ngân hàng]." },
+        { fr: "Mon frère est [coiffeur]. Ma sœur est [actrice].", vi: "Anh tôi là [thợ cắt tóc]. Chị tôi là [diễn viên]." },
+        { fr: "Ils étudient ou ils travaillent ?", vi: "Họ đang học hay đi làm?" },
+      ],
+    },
+  ],
+
   "u2-b": [
     {
       heading: "Pour exprimer ses goûts",

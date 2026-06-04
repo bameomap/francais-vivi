@@ -32,7 +32,7 @@ export function GrammarMC({ exercises, onWrong }) {
   return <div>{exercises.map((q,i) => {
     const a = ans[i], ok = a === q.answer;
     return (
-      <div key={i} style={{ background:a?(ok?"#f0faf6":"#fdf5f4"):C.white, border:`1.5px solid ${a?(ok?C.green:C.red):C.border}`, borderRadius:12, padding:"0.85rem 1rem", marginBottom:"0.6rem" }}>
+      <div key={i} style={{ background:a?(ok?C.greenL:C.redL):C.white, border:`1.5px solid ${a?(ok?C.green:C.red):C.border}`, borderRadius:12, padding:"0.85rem 1rem", marginBottom:"0.6rem" }}>
         <div style={{ fontSize:"0.63rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:4 }}>Câu {i+1}</div>
         <div style={{ fontFamily:"Georgia,serif", fontSize:"0.93rem", marginBottom:"0.6rem", lineHeight:1.5 }}>{q.question}</div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.3rem" }}>
@@ -52,7 +52,7 @@ export function GrammarMC({ exercises, onWrong }) {
               marginTop:"0.35rem", padding:"0.35rem 0.6rem",
               background: ok ? C.greenL : C.goldL,
               border: `1px solid ${ok ? C.green+"44" : C.gold+"66"}`,
-              borderRadius:8, color: ok ? "#166534" : "#92400e",
+              borderRadius:8, color: ok ? C.green : C.gold,
               fontSize:"0.71rem", lineHeight:1.55,
             }}>💡 {q.explanation}</div>
           )}
@@ -68,7 +68,7 @@ export function GrammarFill({ exercises }) {
   return <div>{exercises.map((q,i) => {
     const v=inp[i]||"", done=chk[i], ok=done&&v.trim().toLowerCase()===(q.answer||"").toLowerCase();
     return (
-      <div key={i} style={{ background:done?(ok?"#f0faf6":"#fdf5f4"):C.white, border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:12, padding:"0.85rem 1rem", marginBottom:"0.6rem" }}>
+      <div key={i} style={{ background:done?(ok?C.greenL:C.redL):C.white, border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`, borderRadius:12, padding:"0.85rem 1rem", marginBottom:"0.6rem" }}>
         <div style={{ fontSize:"0.63rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:4 }}>
           Câu {i+1}{q.hint?<span style={{color:C.gold,marginLeft:6,textTransform:"none"}}>· {q.hint}</span>:null}
         </div>
@@ -86,7 +86,7 @@ export function GrammarFill({ exercises }) {
             marginTop:"0.35rem", padding:"0.35rem 0.6rem",
             background: ok ? C.greenL : C.goldL,
             border: `1px solid ${ok ? C.green+"44" : C.gold+"66"}`,
-            borderRadius:8, color: ok ? "#166534" : "#92400e",
+            borderRadius:8, color: ok ? C.green : C.gold,
             fontSize:"0.71rem", lineHeight:1.55,
           }}>💡 {q.explanation}</div>
         )}
@@ -116,7 +116,7 @@ export function GrammarOrder({ exercises }) {
     const answer = s.chosen.map(x=>x.w).join(" ");
     const ok = s.checked && norm(answer) === norm(q.answer);
     return (
-      <div key={i} style={{ background:s.checked?(ok?"#f0faf6":"#fdf5f4"):C.white, border:`1.5px solid ${s.checked?(ok?C.green:C.red):C.border}`, borderRadius:12, padding:"0.85rem 1rem", marginBottom:"0.6rem" }}>
+      <div key={i} style={{ background:s.checked?(ok?C.greenL:C.redL):C.white, border:`1.5px solid ${s.checked?(ok?C.green:C.red):C.border}`, borderRadius:12, padding:"0.85rem 1rem", marginBottom:"0.6rem" }}>
         <div style={{ fontSize:"0.63rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:8 }}>Câu {i+1} — Sắp xếp thành câu đúng</div>
         {/* Chosen area */}
         <div style={{ minHeight:40, display:"flex", flexWrap:"wrap", gap:"0.28rem", padding:"0.45rem 0.5rem", background:C.purpleL, borderRadius:8, marginBottom:"0.5rem" }}>
@@ -141,7 +141,7 @@ export function GrammarOrder({ exercises }) {
               marginTop:"0.35rem", padding:"0.35rem 0.6rem",
               background: ok ? C.greenL : C.goldL,
               border: `1px solid ${ok ? C.green+"44" : C.gold+"66"}`,
-              borderRadius:8, color: ok ? "#166534" : "#92400e",
+              borderRadius:8, color: ok ? C.green : C.gold,
               fontSize:"0.71rem", lineHeight:1.55,
             }}>💡 {q.explanation}</div>
           )}
@@ -166,7 +166,7 @@ function RuleRenderer({ text }) {
           <div key={i} style={{ background:C.blueL, borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#1D4ED8", lineHeight:1.55 }}>{t}</div>
         );
         if (t.startsWith("✅")) return (
-          <div key={i} style={{ fontSize:"0.73rem", color:"#166534", lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
+          <div key={i} style={{ fontSize:"0.73rem", color:C.green, lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
         );
         if (t.startsWith("❌")) return (
           <div key={i} style={{ fontSize:"0.73rem", color:C.red, lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
