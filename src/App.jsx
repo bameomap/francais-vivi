@@ -120,7 +120,7 @@ function ExamplesView({ words }) {
 // ── Saved word list tab ───────────────────────────────────────
 const WORDLIST_KEY = "reading_wordlist_v1";
 function SavedWordListView({ onReview }) {
-  const [wlist, setWlist] = React.useState(() => {
+  const [wlist, setWlist] = useState(() => {
     try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
   });
   const remove = (fr) => {
