@@ -244,6 +244,52 @@ function ActivityView({ activity, onBack }) {
     setViLoading(false);
   };
 
+  // On-demand vocabulary extraction (cached)
+  const vocabCacheKey = `read_vocab_${activity.id}`;
+  const [vocabData,    setVocabData]    = useState(() => { try { const s = localStorage.getItem(vocabCacheKey); return s ? JSON.parse(s) : null; } catch { return null; } });
+  const [showVocab,    setShowVocab]    = useState(false);
+  const [vocabLoading, setVocabLoading] = useState(false);
+
+  const toggleVocab = async () => {
+    if (vocabData) { setShowVocab(v => !v); return; }
+    setVocabLoading(true); setShowVocab(true);
+    try {
+      const out = await callAIText(
+        [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 8 từ vựng quan trọng cho người học A1. Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
+        "Bạn là giáo viên tiếng Pháp A1. Chỉ trả về JSON array hợp lệ, không thêm markdown hay giải thích."
+      );
+      const data = JSON.parse(out.replace(/```json|```/g, "").trim());
+      setVocabData(data);
+      try { localStorage.setItem(vocabCacheKey, JSON.stringify(data)); } catch {}
+    } catch {
+      setVocabData([]); setShowVocab(false);
+    }
+    setVocabLoading(false);
+  };
+
+  // On-demand grammar structure extraction (cached)
+  const grammarCacheKey = `read_grammar_${activity.id}`;
+  const [grammarData,    setGrammarData]    = useState(() => { try { const s = localStorage.getItem(grammarCacheKey); return s ? JSON.parse(s) : null; } catch { return null; } });
+  const [showGrammar,    setShowGrammar]    = useState(false);
+  const [grammarLoading, setGrammarLoading] = useState(false);
+
+  const toggleGrammar = async () => {
+    if (grammarData) { setShowGrammar(v => !v); return; }
+    setGrammarLoading(true); setShowGrammar(true);
+    try {
+      const out = await callAIText(
+        [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 4 cấu trúc ngữ pháp quan trọng trong bài. Trả về JSON array, mỗi item: {"structure":"tên cấu trúc ngắn","example":"câu ví dụ từ bài","vi":"giải thích tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
+        "Bạn là giáo viên tiếng Pháp A1. Chỉ trả về JSON array hợp lệ, không thêm markdown hay giải thích."
+      );
+      const data = JSON.parse(out.replace(/```json|```/g, "").trim());
+      setGrammarData(data);
+      try { localStorage.setItem(grammarCacheKey, JSON.stringify(data)); } catch {}
+    } catch {
+      setGrammarData([]); setShowGrammar(false);
+    }
+    setGrammarLoading(false);
+  };
+
   const SCOREABLE = ["true_false", "multiple_choice", "multi_select"];
   const scoreable = activity.questions.filter(q => SCOREABLE.includes(q.type));
 
@@ -329,6 +375,52 @@ function ActivityView({ activity, onBack }) {
             <div style={{ marginTop: "0.6rem", fontSize: "0.82rem", color: C.gray, lineHeight: 1.8, whiteSpace: "pre-line", background: C.blueL, borderRadius: 12, padding: "0.75rem 1rem", border: `1px solid ${C.blue}33`, animation: "fadeUp 0.2s ease" }}>
               <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1, color: C.blue, fontWeight: 700, marginBottom: "0.35rem" }}>🇻🇳 Bản dịch</div>
               {viText}
+            </div>
+          )}
+
+          {/* Vocab & Grammar — unit 4+ only */}
+          {activity.unit >= 4 && (
+            <div style={{ display: "flex", gap: "0.4rem", marginTop: "0.6rem", flexWrap: "wrap" }}>
+              <button onClick={toggleVocab} disabled={vocabLoading}
+                style={{ padding: "0.22rem 0.6rem", background: showVocab && vocabData ? "#FEF3C7" : "transparent", border: "1.5px solid #D97706", borderRadius: 20, color: "#D97706", fontSize: "0.66rem", cursor: vocabLoading ? "default" : "pointer", fontWeight: 600, fontFamily: "inherit", whiteSpace: "nowrap" }}>
+                {vocabLoading ? "Đang phân tích…" : showVocab && vocabData ? "Ẩn từ mới" : "📚 Từ mới"}
+              </button>
+              <button onClick={toggleGrammar} disabled={grammarLoading}
+                style={{ padding: "0.22rem 0.6rem", background: showGrammar && grammarData ? "#EDE9FE" : "transparent", border: "1.5px solid #7B6CF6", borderRadius: 20, color: "#7B6CF6", fontSize: "0.66rem", cursor: grammarLoading ? "default" : "pointer", fontWeight: 600, fontFamily: "inherit", whiteSpace: "nowrap" }}>
+                {grammarLoading ? "Đang phân tích…" : showGrammar && grammarData ? "Ẩn cấu trúc" : "⚜️ Cấu trúc ngữ pháp"}
+              </button>
+            </div>
+          )}
+
+          {/* Vocab panel */}
+          {showVocab && vocabData && vocabData.length > 0 && (
+            <div style={{ marginTop: "0.5rem", background: "#FFFBEB", border: "1.5px solid #D97706", borderRadius: 12, padding: "0.75rem 1rem", animation: "fadeUp 0.2s ease" }}>
+              <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1, color: "#D97706", fontWeight: 700, marginBottom: "0.5rem" }}>📚 Từ mới trong bài</div>
+              {vocabData.map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.3rem 0", borderBottom: i < vocabData.length - 1 ? "1px solid #FDE68A" : "none" }}>
+                  <span style={{ fontFamily: "Georgia,serif", fontSize: "0.88rem", color: C.ink, fontWeight: 600, flexShrink: 0 }}>{item.fr}</span>
+                  <SpeakBtn text={item.fr} size="0.65rem" />
+                  <span style={{ fontSize: "0.65rem", color: "#92400E", background: "#FDE68A", borderRadius: 10, padding: "0.05rem 0.4rem", fontWeight: 700, flexShrink: 0 }}>{item.type}</span>
+                  <span style={{ fontSize: "0.78rem", color: C.gray, flex: 1, textAlign: "right" }}>→ {item.vi}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Grammar panel */}
+          {showGrammar && grammarData && grammarData.length > 0 && (
+            <div style={{ marginTop: "0.5rem", background: "#F5F3FF", border: "1.5px solid #7B6CF6", borderRadius: 12, padding: "0.75rem 1rem", animation: "fadeUp 0.2s ease" }}>
+              <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1, color: "#7B6CF6", fontWeight: 700, marginBottom: "0.5rem" }}>⚜️ Cấu trúc ngữ pháp trong bài</div>
+              {grammarData.map((item, i) => (
+                <div key={i} style={{ padding: "0.5rem 0", borderBottom: i < grammarData.length - 1 ? "1px solid #C4B5FD" : "none" }}>
+                  <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "#5B21B6", marginBottom: "0.2rem" }}>{item.structure}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.3rem", marginBottom: "0.15rem" }}>
+                    <span style={{ fontFamily: "Georgia,serif", fontSize: "0.84rem", color: C.blue }}>{item.example}</span>
+                    <SpeakBtn text={item.example} size="0.65rem" />
+                  </div>
+                  <div style={{ fontSize: "0.72rem", color: C.gray }}>→ {item.vi}</div>
+                </div>
+              ))}
             </div>
           )}
         </div>
