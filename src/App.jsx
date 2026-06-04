@@ -117,6 +117,60 @@ function ExamplesView({ words }) {
 }
 
 // ── Main App ────────────────────────────────────────────────
+// ── Saved word list tab ───────────────────────────────────────
+const WORDLIST_KEY = "reading_wordlist_v1";
+function SavedWordListView({ onReview }) {
+  const [wlist, setWlist] = React.useState(() => {
+    try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
+  });
+  const remove = (fr) => {
+    const u = wlist.filter(w => w.fr !== fr);
+    setWlist(u);
+    try { localStorage.setItem(WORDLIST_KEY, JSON.stringify(u)); } catch {}
+  };
+  return (
+    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"0.85rem" }}>
+        <div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", fontWeight:700, color:C.ink }}>📝 Từ đã lưu</div>
+          <div style={{ fontSize:"0.7rem", color:C.gray }}>{wlist.length} từ · từ bài đọc &amp; tra từ điển</div>
+        </div>
+        {wlist.length > 0 && (
+          <button onClick={onReview}
+            style={{ padding:"0.35rem 0.85rem", background:C.green, color:"#fff", border:"none", borderRadius:20, fontSize:"0.76rem", fontWeight:700, cursor:"pointer" }}>
+            Ôn lại →
+          </button>
+        )}
+      </div>
+      {wlist.length === 0 ? (
+        <div style={{ textAlign:"center", padding:"3rem 1rem", color:C.gray }}>
+          <div style={{ fontSize:"2rem", marginBottom:"0.5rem" }}>📭</div>
+          <div style={{ fontSize:"0.85rem" }}>Chưa có từ nào được lưu.</div>
+          <div style={{ fontSize:"0.75rem", marginTop:"0.4rem" }}>Bấm vào từ trong bài đọc hoặc tra từ điển để lưu!</div>
+        </div>
+      ) : (
+        <div style={{ background:C.white, borderRadius:12, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+          {wlist.map((w, i) => (
+            <div key={w.fr + i} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", borderBottom:i < wlist.length-1 ? `1px solid ${C.borderSoft||C.border}` : "none" }}>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ display:"flex", alignItems:"center", gap:6, flexWrap:"wrap" }}>
+                  <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:14.5, color:C.ink }}>{w.fr}</span>
+                  {w.type && <span style={{ fontSize:"0.6rem", background:"#EBF4FF", color:"#1B3A6B", borderRadius:20, padding:"0.05rem 0.4rem", fontWeight:700 }}>{w.type}</span>}
+                </div>
+                <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>→ {w.vi}</div>
+                {w.note && <div style={{ fontSize:10.5, color:C.gold, marginTop:1 }}>💡 {w.note}</div>}
+                <div style={{ fontSize:10, color:C.gray2, marginTop:1 }}>📌 {w.source || "Tra từ điển"}</div>
+              </div>
+              <SpeakBtn text={w.fr} size="sm" />
+              <button onClick={() => remove(w.fr)} style={{ background:"none", border:"none", color:C.gray2, cursor:"pointer", fontSize:"1rem", padding:"0.1rem" }}>✕</button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function App() { return <AppInner />; }
 
 function AppInner() {
@@ -702,52 +756,7 @@ function AppInner() {
             {view==="edito" && <EditoVocabPanel onBackToParcours={backToParcours} />}
 
             {/* TỪ ĐÃ LƯU — from reading + dictionary */}
-            {view==="wordlist" && (() => {
-              const WKEY = "reading_wordlist_v1";
-              const [wlist, setWlist] = React.useState(() => { try { return JSON.parse(localStorage.getItem(WKEY)||"[]"); } catch { return []; } });
-              const remove = (fr) => { const u = wlist.filter(w=>w.fr!==fr); setWlist(u); try { localStorage.setItem(WKEY,JSON.stringify(u)); } catch {} };
-              return (
-                <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
-                  <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"0.85rem" }}>
-                    <div>
-                      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", fontWeight:700, color:C.ink }}>📝 Từ đã lưu</div>
-                      <div style={{ fontSize:"0.7rem", color:C.gray }}>{wlist.length} từ · từ bài đọc &amp; tra từ điển</div>
-                    </div>
-                    {wlist.length > 0 && (
-                      <button onClick={()=>goSection("srs","srs")}
-                        style={{ padding:"0.35rem 0.85rem", background:C.green, color:"#fff", border:"none", borderRadius:20, fontSize:"0.76rem", fontWeight:700, cursor:"pointer" }}>
-                        Ôn lại →
-                      </button>
-                    )}
-                  </div>
-                  {wlist.length === 0 ? (
-                    <div style={{ textAlign:"center", padding:"3rem 1rem", color:C.gray }}>
-                      <div style={{ fontSize:"2rem", marginBottom:"0.5rem" }}>📭</div>
-                      <div style={{ fontSize:"0.85rem" }}>Chưa có từ nào được lưu.</div>
-                      <div style={{ fontSize:"0.75rem", marginTop:"0.4rem" }}>Bấm vào từ trong bài đọc hoặc tra từ điển để lưu!</div>
-                    </div>
-                  ) : (
-                    <div style={{ background:C.white, borderRadius:12, border:`1px solid ${C.border}`, overflow:"hidden" }}>
-                      {wlist.map((w, i) => (
-                        <div key={w.fr+i} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", borderBottom:i<wlist.length-1?`1px solid ${C.borderSoft||C.border}`:"none" }}>
-                          <div style={{ flex:1, minWidth:0 }}>
-                            <div style={{ display:"flex", alignItems:"center", gap:6 }}>
-                              <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:14.5, color:C.ink }}>{w.fr}</span>
-                              {w.type && <span style={{ fontSize:"0.6rem", background:"#EBF4FF", color:"#1B3A6B", borderRadius:20, padding:"0.05rem 0.4rem", fontWeight:700 }}>{w.type}</span>}
-                            </div>
-                            <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>→ {w.vi}</div>
-                            {w.note && <div style={{ fontSize:10.5, color:C.gold, marginTop:1 }}>💡 {w.note}</div>}
-                            <div style={{ fontSize:10, color:C.gray2, marginTop:1 }}>📌 {w.source||"Tra từ điển"}</div>
-                          </div>
-                          <SpeakBtn text={w.fr} size="sm" />
-                          <button onClick={()=>remove(w.fr)} style={{ background:"none", border:"none", color:C.gray2, cursor:"pointer", fontSize:"1rem", padding:"0.1rem" }}>✕</button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })()}
+            {view==="wordlist" && <SavedWordListView onReview={() => goSection("srs","srs")} />}
 
             {/* INPUT */}
             {view==="input" && (
