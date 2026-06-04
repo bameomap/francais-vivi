@@ -313,7 +313,7 @@ export function GrammarExplanation({ rules, text }) {
 }
 
 // ── Edito unit list (primary grammar view) ────────────────
-function EditoGrammarView({ defaultUnitIndex }) {
+function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) {
   const [selectedUnit, setSelectedUnit] = useState(null);
 
   useEffect(() => {
@@ -401,10 +401,12 @@ function EditoGrammarView({ defaultUnitIndex }) {
     return (
       <div style={{ padding:"1rem" }}>
         <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"1rem" }}>
-          <button onClick={() => { setSelectedUnit(null); setOpenPoints(new Set()); }}
-            style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, padding:"0.2rem 0.65rem", borderRadius:20, fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
-            ← Quay lại
-          </button>
+          {!fromParcours && (
+            <button onClick={() => { setSelectedUnit(null); setOpenPoints(new Set()); }}
+              style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, padding:"0.2rem 0.65rem", borderRadius:20, fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
+              ← Quay lại
+            </button>
+          )}
           <div style={{ background:C.purple, color:"#fff", borderRadius:999, minWidth:28, height:28, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.78rem", fontWeight:700, flexShrink:0 }}>
             {selectedUnit.num}
           </div>
@@ -684,7 +686,7 @@ export default function GrammarPanel({ onBackToParcours }) {
         </div>
       </div>
       {tabBar}
-      {panelTab === "edito"  && <EditoGrammarView defaultUnitIndex={initUnit} />}
+      {panelTab === "edito"  && <EditoGrammarView defaultUnitIndex={initUnit} fromParcours={fromParcours} onBackToParcours={onBackToParcours} />}
       {panelTab === "custom" && <CustomExerciseView />}
     </div>
   );

@@ -422,7 +422,7 @@ function ListeningQuiz({ quiz, sounds }) {
 }
 
 /* ── UNIT DETAIL ──────────────────────────────────────────── */
-function UnitDetail({ unit, onBack }) {
+function UnitDetail({ unit, onBack, fromParcours = false }) {
   return (
     <div style={{ animation: "fadeUp 0.25s ease" }}>
       {/* Sticky gradient header */}
@@ -431,12 +431,14 @@ function UnitDetail({ unit, onBack }) {
         padding: "0.85rem 1rem 0.9rem",
         position: "sticky", top: 0, zIndex: 10,
       }}>
-        <button onClick={onBack} style={{
-          background: "rgba(255,255,255,0.15)", border: "none",
-          color: "#fff", fontSize: "0.72rem", fontWeight: 600,
-          cursor: "pointer", padding: "0.2rem 0.65rem",
-          borderRadius: 20, marginBottom: "0.6rem", fontFamily: "inherit",
-        }}>← Quay lại</button>
+        {!fromParcours && (
+          <button onClick={onBack} style={{
+            background: "rgba(255,255,255,0.15)", border: "none",
+            color: "#fff", fontSize: "0.72rem", fontWeight: 600,
+            cursor: "pointer", padding: "0.2rem 0.65rem",
+            borderRadius: 20, marginBottom: "0.6rem", fontFamily: "inherit",
+          }}>← Quay lại</button>
+        )}
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <div style={{
@@ -476,7 +478,7 @@ function UnitDetail({ unit, onBack }) {
 }
 
 /* ── MAIN COMPONENT ───────────────────────────────────────── */
-export default function EditoPhonoPanel() {
+export default function EditoPhonoPanel({ fromParcours = false }) {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -491,7 +493,7 @@ export default function EditoPhonoPanel() {
   return (
     <div>
       {selected ? (
-        <UnitDetail unit={selected} onBack={() => setSelected(null)} />
+        <UnitDetail unit={selected} onBack={() => setSelected(null)} fromParcours={fromParcours} />
       ) : (
         <UnitList onSelect={setSelected} />
       )}

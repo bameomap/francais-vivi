@@ -69,8 +69,8 @@ export default function ReferenceHub({ onBackToParcours }) {
 
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
-      {active === "phono"   && <EditoPhonoPanel />}
-      {active === "verbes"  && <EditoVerbsPanel />}
+      {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} />}
+      {active === "verbes"  && <EditoVerbsPanel fromParcours={fromParcours} />}
       {active === "conjug"  && <ConjugaisonPanel />}
       {active === "phrases" && <PhrasebookPanel />}
     </div>

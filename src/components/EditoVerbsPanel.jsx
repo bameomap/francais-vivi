@@ -381,7 +381,7 @@ function MatchQuiz({ unit, onNext }) {
 }
 
 // ── Unit exercise view ────────────────────────────────────────
-function UnitExerciseView({ unit, onBack }) {
+function UnitExerciseView({ unit, onBack, fromParcours = false }) {
   const [exType,   setExType]   = useState("table");
   const [verbIdx,  setVerbIdx]  = useState(0);
   const [tenseIdx, setTenseIdx] = useState(0);
@@ -436,13 +436,15 @@ function UnitExerciseView({ unit, onBack }) {
         padding: "0.85rem 1rem 1rem",
         position: "sticky", top: 0, zIndex: 10,
       }}>
-        <button onClick={onBack} style={{
-          background:"rgba(255,255,255,0.2)", border:"none",
-          color:"#fff", fontSize:"0.72rem", fontWeight:600,
-          cursor:"pointer", padding:"0.2rem 0.65rem",
-          borderRadius:20, marginBottom:"0.6rem",
-          fontFamily:"inherit", display:"inline-flex", alignItems:"center", gap:4,
-        }}>← Quay lại</button>
+        {!fromParcours && (
+          <button onClick={onBack} style={{
+            background:"rgba(255,255,255,0.2)", border:"none",
+            color:"#fff", fontSize:"0.72rem", fontWeight:600,
+            cursor:"pointer", padding:"0.2rem 0.65rem",
+            borderRadius:20, marginBottom:"0.6rem",
+            fontFamily:"inherit", display:"inline-flex", alignItems:"center", gap:4,
+          }}>← Quay lại</button>
+        )}
 
         <div style={{ display:"flex", alignItems:"center", gap:"0.75rem" }}>
           <div style={{
@@ -710,7 +712,7 @@ function UnitExerciseView({ unit, onBack }) {
 }
 
 // ── Unit list (main view) ─────────────────────────────────────
-export default function EditoVerbsPanel() {
+export default function EditoVerbsPanel({ fromParcours = false }) {
   const [activeUnit, setActiveUnit] = useState(null);
 
   useEffect(() => {
@@ -724,7 +726,7 @@ export default function EditoVerbsPanel() {
 
   if (activeUnit) {
     const unit = EDITO_A1_VERB_UNITS.find(u => u.unitId === activeUnit);
-    return <UnitExerciseView unit={unit} onBack={() => setActiveUnit(null)} />;
+    return <UnitExerciseView unit={unit} onBack={() => setActiveUnit(null)} fromParcours={fromParcours} />;
   }
 
   return (

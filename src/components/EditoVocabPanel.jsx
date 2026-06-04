@@ -220,7 +220,7 @@ function GroupStudyView({ group, unit, onBack }) {
 }
 
 // ── Unit detail view — shows groups ───────────────────────
-function UnitDetailView({ unit, onBack }) {
+function UnitDetailView({ unit, onBack, backLabel = "← Quay lại" }) {
   const [activeGroup, setActiveGroup] = useState(null);
 
   if (activeGroup) {
@@ -234,7 +234,7 @@ function UnitDetailView({ unit, onBack }) {
       <div style={{ display:"flex", alignItems:"center", gap:"0.6rem", marginBottom:"1rem" }}>
         <button onClick={onBack}
           style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, padding:"0.2rem 0.65rem", borderRadius:20, fontSize:"0.7rem", cursor:"pointer", fontWeight:600 }}>
-          ← Quay lại
+          {backLabel}
         </button>
         <div style={{ background:unit.color, color:"#fff", borderRadius:999, minWidth:28, height:28, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.78rem", fontWeight:700, flexShrink:0 }}>
           {unit.num}
@@ -318,7 +318,7 @@ export default function EditoVocabPanel({ onBackToParcours }) {
     const handleBack = fromParcours && onBackToParcours
       ? () => onBackToParcours()
       : () => { setActiveUnit(null); setFromParcours(false); };
-    return <UnitDetailView unit={unit} onBack={handleBack} />;
+    return <UnitDetailView unit={unit} onBack={handleBack} backLabel={fromParcours ? "← Parcours" : "← Quay lại"} />;
   }
 
   // Unit list
