@@ -1,9 +1,101 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
-import { callAIText } from "../utils/api.js";
+import { callAI, callAIText } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { Confetti } from "./ui/Minou.jsx";
+import Spinner from "./ui/Spinner.jsx";
+
+// ── Shared constants ──────────────────────────────────────────
+const DICT_CACHE   = "dict_v1_";
+const WORDLIST_KEY = "reading_wordlist_v1";
+
+const TYPE_META = {
+  "n.m":  { bg:"#EBF4FF", color:"#1B3A6B" },
+  "n.f":  { bg:"#FDF2F8", color:"#9D174D" },
+  "n.m/f":{ bg:"#F5F3FF", color:"#5B21B6" },
+  "v":    { bg:"#ECFDF5", color:"#065F46" },
+  "adj":  { bg:"#FFF7ED", color:"#92400E" },
+  "adv":  { bg:"#FEF9C3", color:"#713F12" },
+  "prép": { bg:"#EFF6FF", color:"#1E40AF" },
+  "expr": { bg:"#FFF0EF", color:"#9B1C1C" },
+};
+const TypePill = ({ type }) => {
+  const m = TYPE_META[type] || { bg: C.cream, color: C.gray };
+  return (
+    <span style={{ background:m.bg, color:m.color, border:`1px solid ${m.color}44`, borderRadius:20, padding:"0.08rem 0.45rem", fontSize:"0.68rem", fontWeight:700, whiteSpace:"nowrap" }}>
+      {type}
+    </span>
+  );
+};
+
+// ── Clickable word text ───────────────────────────────────────
+function InteractiveText({ text, activeWord, onWordClick }) {
+  const parts = [];
+  const regex = /([A-Za-zÀ-ÿœŒæÆÀ-ɏ'-]+)|([^A-Za-zÀ-ÿœŒæÆÀ-ɏ'-]+)/g;
+  let match, key = 0;
+  while ((match = regex.exec(text)) !== null) {
+    if (match[1]) {
+      const word = match[1];
+      const norm = word.toLowerCase().replace(/^[-']+|[-']+$/g, "");
+      const isActive = activeWord === norm;
+      parts.push(
+        <span key={key++}
+          onClick={(e) => { e.stopPropagation(); if (norm.length > 1) onWordClick(norm, e); }}
+          style={{ background: isActive ? C.blueL : "transparent", color: isActive ? C.blue : "inherit", borderRadius: 3, cursor: norm.length > 1 ? "pointer" : "default", transition: "background 0.1s", padding: "0 1px" }}>
+          {word}
+        </span>
+      );
+    } else {
+      parts.push(<span key={key++}>{match[2]}</span>);
+    }
+  }
+  return <>{parts}</>;
+}
+
+// ── Word popup (bottom sheet) ─────────────────────────────────
+function WordPopup({ word, data, loading, onClose, onSave, isSaved }) {
+  return (
+    <>
+      <div onClick={onClose} style={{ position:"fixed", inset:0, zIndex:98, background:"rgba(0,0,0,0.25)" }} />
+      <div style={{ position:"fixed", bottom:70, left:"50%", transform:"translateX(-50%)", width:"min(340px, calc(100vw - 1.5rem))", background:C.white, border:`2px solid ${C.blue}`, borderRadius:18, padding:"1rem 1.1rem", zIndex:99, boxShadow:"0 8px 40px rgba(26,39,68,0.22)", animation:"slideUp 0.18s ease" }}>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"0.55rem" }}>
+          <div style={{ display:"flex", alignItems:"center", gap:"0.4rem" }}>
+            <span style={{ fontFamily:"Georgia,serif", fontSize:"1.25rem", fontWeight:700, color:C.ink }}>{word}</span>
+            <SpeakBtn text={word} size="0.8rem" />
+          </div>
+          <button onClick={onClose} style={{ background:C.cream, border:"none", color:C.gray, borderRadius:"50%", width:26, height:26, cursor:"pointer", fontSize:"0.8rem", display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
+        </div>
+        {loading && (
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"0.75rem", gap:"0.5rem", color:C.gray, fontSize:"0.8rem" }}>
+            <Spinner size={14} /> Đang tra từ…
+          </div>
+        )}
+        {!loading && data && (
+          <div>
+            <div style={{ display:"flex", gap:"0.3rem", alignItems:"center", marginBottom:"0.4rem", flexWrap:"wrap" }}>
+              <TypePill type={data.type} />
+              {data.gender && data.gender !== "không áp dụng" && (
+                <span style={{ fontSize:"0.7rem", color:C.gray, background:C.cream, borderRadius:8, padding:"0.05rem 0.4rem" }}>{data.gender}</span>
+              )}
+            </div>
+            <div style={{ fontSize:"1rem", fontWeight:700, color:C.ink, marginBottom:"0.2rem" }}>{data.vi}</div>
+            {data.note && <div style={{ fontSize:"0.74rem", color:C.gold, marginBottom:"0.35rem", lineHeight:1.45 }}>💡 {data.note}</div>}
+            {data.example && (
+              <div style={{ fontSize:"0.76rem", color:C.gray, background:C.cream, borderRadius:8, padding:"0.3rem 0.55rem", marginBottom:"0.5rem", lineHeight:1.5 }}>
+                {data.example}
+              </div>
+            )}
+            <button onClick={onSave} disabled={isSaved}
+              style={{ width:"100%", padding:"0.45rem", background:isSaved ? C.greenL : C.blue, border:isSaved ? `1.5px solid ${C.green}` : "none", borderRadius:10, color:isSaved ? C.green : "#fff", fontSize:"0.8rem", fontWeight:700, cursor:isSaved ? "default" : "pointer", fontFamily:"inherit", transition:"all 0.15s" }}>
+              {isSaved ? "✅ Đã lưu vào danh sách" : "💾 Lưu vào danh sách"}
+            </button>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
 
 const UNITS_LIST = (() => {
   const seen = new Set();
@@ -255,7 +347,7 @@ function ActivityView({ activity, onBack }) {
     setVocabLoading(true); setShowVocab(true);
     try {
       const out = await callAIText(
-        [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 8 từ vựng quan trọng cho người học A1. Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
+        [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 25 từ vựng quan trọng cho người học A1 (ưu tiên từ khó, từ mới, từ hay gặp trong chủ đề này). Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
         "Bạn là giáo viên tiếng Pháp A1. Chỉ trả về JSON array hợp lệ, không thêm markdown hay giải thích."
       );
       const data = JSON.parse(out.replace(/```json|```/g, "").trim());
@@ -289,6 +381,50 @@ function ActivityView({ activity, onBack }) {
     }
     setGrammarLoading(false);
   };
+
+  // ── Word tap lookup ────────────────────────────────────────
+  const [activeWord,   setActiveWord]   = useState(null);
+  const [wordData,     setWordData]     = useState(null);
+  const [wordLoading,  setWordLoading]  = useState(false);
+  const [savedWords,   setSavedWords]   = useState(() => {
+    try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
+  });
+  const [showWordList, setShowWordList] = useState(false);
+
+  const lookupWord = async (word) => {
+    setActiveWord(word);
+    setWordData(null);
+    const cached = localStorage.getItem(DICT_CACHE + word);
+    if (cached) {
+      try { setWordData(JSON.parse(cached)); return; } catch {}
+    }
+    setWordLoading(true);
+    try {
+      const raw = await callAI(`Tra từ tiếng Pháp "${word}". JSON không markdown: {"type":"n.m/n.f/v/adj/adv/prép/expr","vi":"nghĩa tiếng Việt ngắn","gender":"đực/cái/không áp dụng","note":"ghi chú ngắn hoặc để trống","example":"ví dụ tiếng Pháp ngắn — bản dịch tiếng Việt"}`);
+      const data = JSON.parse(raw.replace(/```json|```/g, "").trim());
+      setWordData(data);
+      try { localStorage.setItem(DICT_CACHE + word, JSON.stringify(data)); } catch {}
+    } catch {
+      setWordData({ type: "?", vi: "Không tra được", note: "", example: "" });
+    }
+    setWordLoading(false);
+  };
+
+  const saveWord = () => {
+    if (!activeWord || !wordData) return;
+    if (savedWords.some(w => w.fr === activeWord)) return;
+    const updated = [{ fr: activeWord, vi: wordData.vi, type: wordData.type, note: wordData.note || "", source: activity.title, unit: activity.unit, savedAt: Date.now() }, ...savedWords];
+    setSavedWords(updated);
+    try { localStorage.setItem(WORDLIST_KEY, JSON.stringify(updated)); } catch {}
+  };
+
+  const removeWord = (fr) => {
+    const updated = savedWords.filter(w => w.fr !== fr);
+    setSavedWords(updated);
+    try { localStorage.setItem(WORDLIST_KEY, JSON.stringify(updated)); } catch {}
+  };
+
+  const isSaved = activeWord ? savedWords.some(w => w.fr === activeWord) : false;
 
   const SCOREABLE = ["true_false", "multiple_choice", "multi_select"];
   const scoreable = activity.questions.filter(q => SCOREABLE.includes(q.type));
@@ -368,8 +504,11 @@ function ActivityView({ activity, onBack }) {
           <div style={{ fontSize: "0.76rem", color: C.gray, fontStyle: "italic", marginBottom: "0.7rem", lineHeight: 1.5 }}>
             {activity.instruction}
           </div>
-          <div style={{ fontSize: "0.88rem", color: C.ink, lineHeight: 2, fontFamily: "Georgia,serif", whiteSpace: "pre-line", background: C.cream, borderRadius: 12, padding: "0.85rem 1rem", border: `1px solid ${C.border}` }}>
-            {activity.text}
+          <div style={{ fontSize: "0.76rem", color: C.gray2, marginBottom: "0.4rem", fontStyle: "italic" }}>
+            👆 Bấm vào từ bất kỳ để tra nghĩa
+          </div>
+          <div style={{ fontSize: "0.88rem", color: C.ink, lineHeight: 2, fontFamily: "Georgia,serif", whiteSpace: "pre-line", background: C.cream, borderRadius: 12, padding: "0.85rem 1rem", border: `1px solid ${C.border}`, userSelect: "none" }}>
+            <InteractiveText text={activity.text} activeWord={activeWord} onWordClick={lookupWord} />
           </div>
           {showVi && viText && (
             <div style={{ marginTop: "0.6rem", fontSize: "0.82rem", color: C.gray, lineHeight: 1.8, whiteSpace: "pre-line", background: C.blueL, borderRadius: 12, padding: "0.75rem 1rem", border: `1px solid ${C.blue}33`, animation: "fadeUp 0.2s ease" }}>
@@ -424,6 +563,38 @@ function ActivityView({ activity, onBack }) {
             </div>
           )}
         </div>
+      )}
+
+      {/* Saved word list */}
+      {savedWords.length > 0 && (
+        <div style={{ background: C.white, borderRadius: 16, border: `1.5px solid ${C.border}`, marginBottom: "0.75rem", overflow: "hidden" }}>
+          <button onClick={() => setShowWordList(v => !v)}
+            style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.75rem 1.1rem", background: "transparent", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: C.green }}>📝 Từ đã lưu ({savedWords.length})</span>
+            <span style={{ fontSize: "0.75rem", color: C.gray }}>{showWordList ? "▲" : "▼"}</span>
+          </button>
+          {showWordList && (
+            <div style={{ padding: "0 1.1rem 0.75rem", animation: "fadeUp 0.2s ease" }}>
+              {savedWords.map((w, i) => (
+                <div key={w.fr + i} style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.35rem 0", borderTop: `1px solid ${C.border}` }}>
+                  <span style={{ fontFamily: "Georgia,serif", fontSize: "0.88rem", fontWeight: 600, color: C.ink, flex: "0 0 auto" }}>{w.fr}</span>
+                  <SpeakBtn text={w.fr} size="0.62rem" />
+                  <TypePill type={w.type} />
+                  <span style={{ fontSize: "0.76rem", color: C.gray, flex: 1 }}>→ {w.vi}</span>
+                  <button onClick={() => removeWord(w.fr)} style={{ background: "none", border: "none", color: C.gray2, cursor: "pointer", fontSize: "0.75rem", flexShrink: 0, padding: "0.1rem 0.2rem" }}>✕</button>
+                </div>
+              ))}
+              <div style={{ marginTop: "0.5rem", fontSize: "0.65rem", color: C.gray2, textAlign: "center" }}>
+                Danh sách lưu lại khi bạn bấm 💾 vào từ
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Word popup */}
+      {activeWord && (
+        <WordPopup word={activeWord} data={wordData} loading={wordLoading} isSaved={isSaved} onClose={() => setActiveWord(null)} onSave={saveWord} />
       )}
 
       {/* Questions card */}
