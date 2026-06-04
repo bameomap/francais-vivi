@@ -1,4 +1,4 @@
-const CACHE = "vivi-v2";
+const CACHE = "vivi-v3";
 const OFFLINE = ["/", "/logo.svg"];
 
 self.addEventListener("install", e =>
@@ -6,7 +6,17 @@ self.addEventListener("install", e =>
 );
 
 self.addEventListener("activate", e =>
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()))
+  e.waitUntil(
+    caches.keys()
+      .then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+      .then(() => {
+        // Notify all open tabs that a new version is ready
+        self.clients.matchAll({ type: "window" }).then(clients =>
+          clients.forEach(c => c.postMessage({ type: "SW_UPDATED" }))
+        );
+      })
+  )
 );
 
 self.addEventListener("fetch", e => {

@@ -158,6 +158,7 @@ function AppInner() {
   const [editOpen, setEditOpen]             = useState(false);
   const [navStack, setNavStack]             = useState([]); // breadcrumb of {section,view} for "← Về"
   const [storageWarn, setStorageWarn]       = useState(false);
+  const [swUpdated,   setSwUpdated]         = useState(false);
   const [xpData, setXpData]                 = useState(getXPData);
   const [badgeToast, setBadgeToast]         = useState("");
 
@@ -174,6 +175,16 @@ function AppInner() {
   );
 
   useEffect(() => { setSets(loadSets()); }, []);
+
+  // Listen for service worker update notification
+  useEffect(() => {
+    if (!("serviceWorker" in navigator)) return;
+    const onMessage = (e) => {
+      if (e.data?.type === "SW_UPDATED") setSwUpdated(true);
+    };
+    navigator.serviceWorker.addEventListener("message", onMessage);
+    return () => navigator.serviceWorker.removeEventListener("message", onMessage);
+  }, []);
 
   // Warn before localStorage fills up and learning data is silently lost.
   useEffect(() => {
@@ -407,6 +418,21 @@ function AppInner() {
       {syncPullMsg && (
         <div style={{ position:"fixed", bottom:72, left:"50%", transform:"translateX(-50%)", background:"#1e3a5f", color:"#fff", padding:"0.45rem 1rem", borderRadius:20, fontSize:"0.75rem", zIndex:399, whiteSpace:"nowrap", boxShadow:"0 2px 12px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
           {syncPullMsg}
+        </div>
+      )}
+
+      {/* ── New version available banner ── */}
+      {swUpdated && (
+        <div style={{ position:"fixed", top:0, left:0, right:0, zIndex:430, background:"#1B3A6B", color:"#fff", padding:"0.55rem 0.9rem", display:"flex", alignItems:"center", gap:8, fontSize:"0.76rem", boxShadow:"0 2px 12px rgba(0,0,0,0.2)" }}>
+          <span style={{ flex:1, lineHeight:1.4 }}>✨ Có phiên bản mới — tải lại để cập nhật!</span>
+          <button onClick={() => window.location.reload()}
+            style={{ background:"#fff", color:"#1B3A6B", border:"none", borderRadius:8, padding:"0.3rem 0.8rem", fontSize:"0.72rem", fontWeight:700, cursor:"pointer", whiteSpace:"nowrap" }}>
+            Tải lại
+          </button>
+          <button onClick={() => setSwUpdated(false)}
+            style={{ background:"transparent", border:"none", color:"rgba(255,255,255,0.7)", fontSize:"1rem", cursor:"pointer", lineHeight:1, padding:"0 0.2rem" }}>
+            ×
+          </button>
         </div>
       )}
 
