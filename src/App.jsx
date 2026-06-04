@@ -721,10 +721,9 @@ function AppInner() {
               <div style={{ padding:"0 0 10px" }}>
                 <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:11 }}>
                   {[
-                    { label:"Bộ của tôi", view:"input"     },
-                    { label:"Bộ đã lưu",  view:"history"   },
-                    { label:"Từ đã lưu",  view:"wordlist"  },
-                    { label:"Edito",      view:"edito"     },
+                    { label:"Bộ của tôi", view:"input"   },
+                    { label:"Đã lưu",     view:"history" },
+                    { label:"Edito",      view:"edito"   },
                   ].map(t => {
                     const isActive = t.view === view || (t.view==="input" && !["topics","history","edito","vocab-table","examples","quiz","wordlist"].includes(view));
                     return (
@@ -755,8 +754,6 @@ function AppInner() {
             {/* EDITO VOCAB */}
             {view==="edito" && <EditoVocabPanel onBackToParcours={backToParcours} />}
 
-            {/* TỪ ĐÃ LƯU — from reading + dictionary */}
-            {view==="wordlist" && <SavedWordListView onReview={() => goSection("srs","srs")} />}
 
             {/* INPUT */}
             {view==="input" && (
@@ -955,20 +952,30 @@ function AppInner() {
             {/* HISTORY */}
             {view==="history" && (
               <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
-                <div style={{ fontSize:"0.78rem", fontWeight:700, color:C.blue, marginBottom:"0.8rem" }}>📂 Bộ từ đã lưu</div>
+
+                {/* ── Từ đã lưu (reading + dict) ── */}
+                <SavedWordListView onReview={() => goSection("srs","srs")} />
+
+                {/* ── Divider ── */}
+                <div style={{ display:"flex", alignItems:"center", gap:8, margin:"0.5rem 0 1rem" }}>
+                  <div style={{ flex:1, height:1, background:C.border }}/>
+                  <span style={{ fontSize:10, fontWeight:700, color:C.gray, letterSpacing:"0.1em", textTransform:"uppercase" }}>Bộ từ tự nhập</span>
+                  <div style={{ flex:1, height:1, background:C.border }}/>
+                </div>
+
+                {/* ── Saved sets ── */}
                 {sets.length===0
-                  ? <div style={{ textAlign:"center", padding:"1.5rem 1rem" }}>
-                      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, marginBottom:"0.3rem" }}>Lưu bộ từ đầu tiên nhé!</div>
-                      <div style={{ fontSize:"0.75rem", color:C.gray, lineHeight:1.6, marginBottom:"0.9rem" }}>Nhập từ vựng và nhấn <b>💾 Lưu</b> để giữ lại.</div>
-                      <button onClick={()=>setView("input")} style={{ padding:"0.5rem 1.2rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:12, fontSize:"0.82rem", cursor:"pointer", fontWeight:600 }}>
-                        📚 Đến trang từ vựng
+                  ? <div style={{ textAlign:"center", padding:"1rem" }}>
+                      <div style={{ fontSize:"0.8rem", color:C.gray, lineHeight:1.6, marginBottom:"0.75rem" }}>Nhập từ vựng ở tab <b>Bộ của tôi</b> và nhấn 💾 Lưu để giữ lại.</div>
+                      <button onClick={()=>setView("input")} style={{ padding:"0.45rem 1rem", background:C.blue, color:C.white, border:"none", borderRadius:12, fontSize:"0.78rem", cursor:"pointer", fontWeight:600 }}>
+                        Đến Bộ của tôi →
                       </button>
                     </div>
                   : sets.map(s=>(
-                    <div key={s.id} style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.85rem 1rem", marginBottom:"0.55rem", boxShadow:"0 1px 8px rgba(74,144,217,0.06)" }}>
+                    <div key={s.id} style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:14, padding:"0.85rem 1rem", marginBottom:"0.55rem" }}>
                       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
                         <div>
-                          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.98rem", color:C.ink, marginBottom:"0.2rem" }}>{s.name}</div>
+                          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:C.ink, marginBottom:"0.2rem" }}>{s.name}</div>
                           <div style={{ fontSize:"0.72rem", color:C.gray }}>{s.count} từ · {s.date}</div>
                         </div>
                         <div style={{ display:"flex", gap:"0.35rem" }}>
