@@ -51,6 +51,167 @@ const Phrase = ({ fr, vi }) => (
   </div>
 );
 
+// ── Quiz data ─────────────────────────────────────────────────
+const QUIZZES = {
+  pronoms: [
+    { q: "Đại từ nhấn mạnh của 'je' (dùng sau giới từ) là gì?", opts: ["moi", "me", "mon", "on"], ans: 0 },
+    { q: "Tân ngữ trực tiếp (COD) của 'il/elle' là gì?", opts: ["le / la", "lui / elle", "y", "en"], ans: 0 },
+    { q: "Điền: 'Avec ___ !' (với tôi)", opts: ["moi", "je", "me", "mon"], ans: 0 },
+  ],
+  articles: [
+    { q: "Chọn mạo từ đúng: '___ café' (một tách, bất kỳ)", opts: ["un", "une", "du", "le"], ans: 0 },
+    { q: "'Je bois ___ eau' — mạo từ bộ phận trước nguyên âm?", opts: ["de l'", "une", "la", "de la"], ans: 0 },
+    { q: "Sau phủ định 'pas', 'un livre' đổi thành?", opts: ["pas de livre", "pas le livre", "pas un livre", "pas du livre"], ans: 0 },
+  ],
+  det_compare: [
+    { q: "'___ livre' — cuốn sách NÀY (chỉ định)", opts: ["Ce", "Le", "Un", "Des"], ans: 0 },
+    { q: "'___ ami' — người bạn này (trước nguyên âm, giống đực)", opts: ["Cet", "Ce", "Cette", "Ces"], ans: 0 },
+    { q: "Lần đầu nhắc đến 'một con mèo': Je vois ___", opts: ["un chat", "le chat", "ce chat", "des chats"], ans: 0 },
+  ],
+  possessifs: [
+    { q: "'___ amie' (bạn gái của tôi — trước nguyên âm)", opts: ["mon", "ma", "mes", "son"], ans: 0 },
+    { q: "Tính từ sở hữu hòa hợp với ai?", opts: ["Danh từ được sở hữu", "Người sở hữu", "Cả hai", "Không hòa hợp"], ans: 0 },
+    { q: "'Les enfants de Pierre' → sở hữu là?", opts: ["ses enfants", "son enfants", "leurs enfants", "leur enfants"], ans: 0 },
+  ],
+  demonstratifs: [
+    { q: "'___ homme' (người đàn ông này — trước h câm)", opts: ["Cet", "Ce", "Cette", "Ces"], ans: 0 },
+    { q: "'___ robe' (cái váy này)", opts: ["Cette", "Ce", "Cet", "Ces"], ans: 0 },
+    { q: "Số nhiều của 'ce / cette' là gì?", opts: ["ces", "cets", "cettes", "cets / cettes"], ans: 0 },
+  ],
+  etre_avoir: [
+    { q: "'J'___ 20 ans.' — điền gì?", opts: ["ai", "suis", "est", "ont"], ans: 0 },
+    { q: "'Nous ___ étudiants.' — điền gì?", opts: ["sommes", "avons", "sont", "êtes"], ans: 0 },
+    { q: "Cảm giác 'đói' dùng être hay avoir?", opts: ["avoir (avoir faim)", "être (être faim)", "Cả hai đều đúng", "Không dùng được"], ans: 0 },
+  ],
+  verbes_er: [
+    { q: "'vous parler' → chia hiện tại:", opts: ["parlez", "parle", "parlons", "parlent"], ans: 0 },
+    { q: "'nous manger' → chia hiện tại:", opts: ["mangeons", "mangons", "mangent", "mangez"], ans: 0 },
+    { q: "Đuôi '-ent' dùng cho ngôi nào?", opts: ["ils / elles", "nous", "vous", "je"], ans: 0 },
+  ],
+  verbes_irreg: [
+    { q: "'faire' ngôi 'je': Je ___", opts: ["fais", "fait", "font", "faites"], ans: 0 },
+    { q: "'aller' ngôi 'tu': Tu ___", opts: ["vas", "vais", "va", "allez"], ans: 0 },
+    { q: "'pouvoir' ngôi 'tu': Tu ___", opts: ["peux", "peut", "pouvez", "veux"], ans: 0 },
+  ],
+  pronominaux: [
+    { q: "'Je ___ lève à 7h.' — đại từ phản thân?", opts: ["me", "se", "te", "nous"], ans: 0 },
+    { q: "Phủ định: 'Je me lève tôt' →", opts: ["Je ne me lève pas tôt", "Je me ne lève pas tôt", "Je ne lève me pas tôt", "Me je ne lève pas"], ans: 0 },
+    { q: "'Ils ___ réveillent.' — điền gì?", opts: ["se", "me", "te", "nous"], ans: 0 },
+  ],
+  imperatif: [
+    { q: "Mệnh lệnh ngôi 'tu' của 'parler':", opts: ["Parle !", "Parles !", "Parlons !", "Parlez !"], ans: 0 },
+    { q: "Mệnh lệnh ngôi 'vous' của 'aller':", opts: ["Allez !", "Allons !", "Va !", "Aller !"], ans: 0 },
+    { q: "Phủ định mệnh lệnh ngôi 'tu' của 'fumer':", opts: ["Ne fume pas !", "Fume pas !", "Ne fumez pas !", "Pas fume !"], ans: 0 },
+  ],
+  adjectifs: [
+    { q: "'Une voiture ___' — tính từ 'rouge' đứng ở đâu?", opts: ["Sau danh từ: voiture rouge", "Trước: rouge voiture", "Cả hai đều đúng", "Tùy giống"], ans: 0 },
+    { q: "'un ___ appartement' — 'grand' đứng ở đâu? (BAGS)", opts: ["Trước: grand appartement", "Sau: appartement grand", "Cả hai", "Chỉ sau nguyên âm"], ans: 0 },
+    { q: "Feminine của 'heureux' là gì?", opts: ["heureuse", "heureuze", "heureux", "heureuxe"], ans: 0 },
+  ],
+  negation: [
+    { q: "Phủ định cơ bản: 'Je ___ parle ___ français.'", opts: ["ne / pas", "pas / ne", "n' / jamais", "non / pas"], ans: 0 },
+    { q: "Sau phủ định 'pas', mạo từ 'un/une/du/de la' → ?", opts: ["de / d'", "le / la", "un / une", "des"], ans: 0 },
+    { q: "'Je ___ fume ___.' (không bao giờ)", opts: ["ne / jamais", "pas / jamais", "ne / plus", "ne / rien"], ans: 0 },
+  ],
+  questions: [
+    { q: "Cách đặt câu hỏi thông dụng nhất trong tiếng Pháp:", opts: ["Est-ce que…", "Inversion (đảo ngữ)", "Ngữ điệu ↑", "Quel / Quelle"], ans: 0 },
+    { q: "'___ tu habites ?' (ở đâu)", opts: ["Où", "Quand", "Comment", "Qui"], ans: 0 },
+    { q: "'___ âge tu as ?' — điền gì? (âge = giống đực)", opts: ["Quel", "Quelle", "Quels", "Quelles"], ans: 0 },
+  ],
+  prepositions: [
+    { q: "'Je vais ___ Japon.' (quốc gia giống đực)", opts: ["au", "en", "à", "aux"], ans: 0 },
+    { q: "'Je vais ___ France.' (quốc gia giống cái)", opts: ["en", "au", "à", "aux"], ans: 0 },
+    { q: "'à + le' rút gọn thành gì?", opts: ["au", "du", "de la", "à le"], ans: 0 },
+  ],
+  futur: [
+    { q: "'Elle ___ dormir.' (futur proche)", opts: ["va", "vais", "vont", "allez"], ans: 0 },
+    { q: "Cấu trúc futur proche là gì?", opts: ["aller + infinitif", "être + infinitif", "avoir + participe passé", "infinitif + -ai"], ans: 0 },
+    { q: "Phủ định: 'Je ___ vais ___ sortir.'", opts: ["ne / pas", "pas / ne", "ne / jamais", "non / pas"], ans: 0 },
+  ],
+  passe_recent: [
+    { q: "Cấu trúc passé récent là gì?", opts: ["venir de + infinitif", "aller + infinitif", "avoir + participe passé", "être + infinitif"], ans: 0 },
+    { q: "'Nous venons ___ arriver.' — điền gì?", opts: ["d'", "de", "du", "à"], ans: 0 },
+    { q: "'Elle ___ finir.' (vừa mới xong)", opts: ["vient de", "viens de", "venons de", "va"], ans: 0 },
+  ],
+  passe: [
+    { q: "Passé composé của 'parler' ngôi 'je':", opts: ["j'ai parlé", "j'ai parlée", "je suis parlé", "j'avais parlé"], ans: 0 },
+    { q: "'Elle est ___' (aller, passé composé — giống cái)", opts: ["allée", "allé", "allés", "allant"], ans: 0 },
+    { q: "Phủ định passé composé: 'Je ___ ai ___ mangé.'", opts: ["n' / pas", "ne / pas", "n' / jamais", "pas / de"], ans: 0 },
+  ],
+  imparfait: [
+    { q: "Imparfait của 'être' ngôi 'je':", opts: ["j'étais", "j'était", "je suis", "j'ai été"], ans: 0 },
+    { q: "Dùng thì nào để MÔ TẢ bối cảnh trong quá khứ?", opts: ["Imparfait", "Passé composé", "Futur proche", "Présent"], ans: 0 },
+    { q: "Gốc chia imparfait lấy từ dạng 'nous' ở thì nào?", opts: ["Présent", "Passé composé", "Futur simple", "Infinitif"], ans: 0 },
+  ],
+  comparaison: [
+    { q: "'Paris est ___ grand ___ Lyon.' (lớn hơn)", opts: ["plus / que", "moins / que", "aussi / que", "très / que"], ans: 0 },
+    { q: "So sánh hơn của 'bon(ne)' là gì? (bất quy tắc)", opts: ["meilleur(e)", "plus bon(ne)", "mieux", "très bon"], ans: 0 },
+    { q: "Cấu trúc so sánh bằng nhau:", opts: ["aussi + adj + que", "plus + adj + que", "moins + adj + que", "très + adj"], ans: 0 },
+  ],
+  pronoms_rel: [
+    { q: "'C'est l'homme ___ parle.' — điền gì? (chủ ngữ)", opts: ["qui", "que", "qu'", "dont"], ans: 0 },
+    { q: "'Le film ___ j'aime…' — điền gì? (tân ngữ)", opts: ["que", "qui", "dont", "où"], ans: 0 },
+    { q: "'que' trước nguyên âm trở thành gì?", opts: ["qu'", "qui", "quoi", "que (giữ nguyên)"], ans: 0 },
+  ],
+};
+
+// ── Mini quiz component ───────────────────────────────────────
+function MiniQuiz({ id }) {
+  const qs = QUIZZES[id];
+  if (!qs || qs.length === 0) return null;
+  const [picked, setPicked] = useState({});
+  const done = Object.keys(picked).length === qs.length;
+  const score = done ? qs.filter((q, i) => picked[i] === q.ans).length : 0;
+  return (
+    <div style={{ marginTop: "1.5rem", borderTop: `2px dashed ${C.border}`, paddingTop: "1rem" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
+        <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 2, color: C.gray, fontWeight: 700 }}>✏️ Luyện tập nhanh</div>
+        {done && (
+          <button onClick={() => setPicked({})} style={{ fontSize: "0.68rem", padding: "0.2rem 0.6rem", border: `1px solid ${C.border}`, borderRadius: 20, background: C.white, color: C.gray, cursor: "pointer", fontFamily: "inherit" }}>
+            🔄 Thử lại
+          </button>
+        )}
+      </div>
+      {qs.map((q, qi) => {
+        const answer = picked[qi];
+        const answered = answer !== undefined;
+        return (
+          <div key={qi} style={{ marginBottom: "1rem" }}>
+            <div style={{ fontSize: "0.8rem", fontWeight: 600, color: C.ink, marginBottom: "0.4rem", lineHeight: 1.4 }}>
+              {qi + 1}. {q.q}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.3rem" }}>
+              {q.opts.map((opt, oi) => {
+                const isCorrect = oi === q.ans;
+                const isPicked = answer === oi;
+                let bg = C.white, border = C.border, color = C.ink;
+                if (answered) {
+                  if (isCorrect)      { bg = "#D1FAE5"; border = C.green; color = C.green; }
+                  else if (isPicked)  { bg = "#FEE2E2"; border = C.red;   color = C.red;   }
+                  else                { color = C.gray; }
+                }
+                return (
+                  <button key={oi} disabled={answered} onClick={() => setPicked(p => ({ ...p, [qi]: oi }))}
+                    style={{ padding: "0.4rem 0.5rem", background: bg, border: `1.5px solid ${border}`, borderRadius: 8, fontSize: "0.76rem", color, cursor: answered ? "default" : "pointer", fontFamily: "Georgia,serif", textAlign: "left", lineHeight: 1.3, transition: "all 0.15s" }}>
+                    {answered && isCorrect ? "✅ " : answered && isPicked ? "❌ " : ""}{opt}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+      {done && (
+        <div style={{ textAlign: "center", padding: "0.6rem", borderRadius: 10, fontSize: "0.85rem", fontWeight: 700,
+          background: score === qs.length ? "#D1FAE5" : score >= Math.ceil(qs.length / 2) ? "#FEF9C3" : "#FEE2E2",
+          color:      score === qs.length ? C.green   : score >= Math.ceil(qs.length / 2) ? "#92400E"  : C.red }}>
+          {score === qs.length ? "🎉 Hoàn hảo!" : score >= Math.ceil(qs.length / 2) ? "👍 Khá tốt!" : "💪 Cố lên!"} — {score}/{qs.length} câu đúng
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Topics ────────────────────────────────────────────────────
 const TOPICS = [
   { id: "pronoms",       label: "Đại từ",           icon: "👤", color: T.blue   },
@@ -1089,6 +1250,7 @@ export default function GrammarCheatsheet({ allowedTopics = null, defaultTopic =
       {/* Content */}
       <div style={{ padding: "0 1rem 5rem", animation: "fadeUp 0.2s ease" }} key={active}>
         <TopicContent id={active} />
+        <MiniQuiz id={active} />
       </div>
     </div>
   );
