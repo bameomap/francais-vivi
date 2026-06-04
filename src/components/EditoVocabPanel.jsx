@@ -25,8 +25,8 @@ function isQuizzable(w) {
   const fr = (w.fr || "").trim();
   if (/[?!…]$/.test(fr)) return false;            // là câu hỏi/cảm thán
   if (fr.includes("...") || fr.includes("…")) return false;
-  if (fr.split(/\s+/).length > 3) return false;   // quá dài
-  return fr.length > 0 && fr.length <= 28;
+  if (fr.split(/\s+/).length > 7) return false;   // quá dài (tăng từ 3→7 để giữ cụm từ)
+  return fr.length > 0 && fr.length <= 40;
 }
 
 // Lọc cho luyện tập; nếu còn quá ít thì dùng nguyên list để không kẹt.
