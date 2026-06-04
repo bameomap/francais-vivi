@@ -222,7 +222,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("vocab", "edito");
     } else if (step.id === "grammar") {
-      localStorage.setItem("parcours_back", "1");
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("grammar", "grammar");
     } else if (step.id === "lecture") {
       localStorage.setItem("parcours_back", "1");
