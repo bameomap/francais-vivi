@@ -55,6 +55,7 @@ const Phrase = ({ fr, vi }) => (
 const TOPICS = [
   { id: "pronoms",       label: "Đại từ",           icon: "👤", color: T.blue   },
   { id: "articles",      label: "Mạo từ",           icon: "🔤", color: T.purple },
+  { id: "det_compare",   label: "So sánh le/un/ce", icon: "🆚", color: T.pink   },
   { id: "possessifs",    label: "Sở hữu",           icon: "👜", color: T.orange },
   { id: "demonstratifs", label: "Chỉ định từ",      icon: "👉", color: T.orange },
   { id: "etre_avoir",    label: "Être / Avoir",     icon: "⚜️", color: T.purple },
@@ -175,6 +176,54 @@ function TopicContent({ id }) {
             ["Partitif",  "du / de l'", "de la / de l'", "des"],
           ]}
         />
+      </div>
+    );
+
+    case "det_compare": return (
+      <div>
+        <SectionTitle text="So sánh nhanh: le / un / ce" />
+        <Note text="3 nhóm hay nhầm nhất — cùng một danh từ, khác cách dùng. Cột nào hợp giống đó." color={T.pink} />
+        <Table
+          headers={["", "Đực (le chat)", "Cái (la table)", "Đực + nguyên âm", "Số nhiều"]}
+          rows={[
+            ["The — xác định",   "le chat",  "la table",  "l'ami",  "les chats / les tables"],
+            ["A/an — chung",     "un chat",  "une table", "un ami", "des chats / des tables"],
+            ["This/that — chỉ định","ce chat","cette table","cet ami","ces chats / ces tables"],
+          ]}
+        />
+
+        <SectionTitle text="Dùng nhóm nào khi nào?" />
+        <Table
+          headers={["Nhóm", "Nghĩa", "Dùng khi"]}
+          rows={[
+            ["le / la / l' / les",  "cái (the)",       "Vật ĐÃ BIẾT, cụ thể: le livre de Marie"],
+            ["un / une / des",      "một (a/an)",      "Vật CHƯA BIẾT, lần đầu nhắc: Je vois un chat"],
+            ["ce / cet / cette / ces","này/kia (this)","CHỈ VÀO vật: cette voiture (chiếc xe này)"],
+          ]}
+        />
+
+        <SectionTitle text="Quy tắc theo giống & số" />
+        <Table
+          headers={["", "→ Đực 🔵", "→ Cái 🔴", "→ Nguyên âm", "→ Số nhiều"]}
+          rows={[
+            ["Xác định",  "le",  "la",   "l'",   "les"],
+            ["Không xác định","un","une", "un/une","des"],
+            ["Chỉ định",  "ce",  "cette","cet (đực)","ces"],
+          ]}
+        />
+        <Note text="Trước NGUYÊN ÂM (a,e,i,o,u) hoặc h câm: dùng l' (xác định) và cet (chỉ định, giống đực) cho dễ đọc." color={T.blue} />
+
+        <SectionTitle text="Cùng một câu — 3 cách nói" />
+        {[
+          ["Je veux le livre.",   "Tôi muốn cuốn sách (đã biết)."],
+          ["Je veux un livre.",   "Tôi muốn một cuốn sách (bất kỳ)."],
+          ["Je veux ce livre.",   "Tôi muốn cuốn sách này (chỉ vào)."],
+          ["J'aime la musique.",  "Tôi thích âm nhạc (nói chung)."],
+          ["J'écoute une chanson.","Tôi nghe một bài hát."],
+          ["J'adore cette chanson !","Tôi mê bài hát này!"],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <Note text="💡 Mẹo: le/un/ce → luôn đi với giống ĐỰC. la/une/cette → luôn đi với giống CÁI. Học từ mới NHỚ KÈM mạo từ: học 'une table' chứ đừng học mỗi 'table'." color={T.gold} />
       </div>
     );
 
