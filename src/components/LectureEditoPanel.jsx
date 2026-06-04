@@ -112,11 +112,6 @@ function WordPopup({ word, data, loading, onClose, onSave, isSaved, nextWordInTe
           </div>
           <button onClick={onClose} style={{ background:C.cream, border:"none", color:C.gray, borderRadius:"50%", width:26, height:26, cursor:"pointer", fontSize:"0.8rem", display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
         </div>
-        {loading && (
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"0.75rem", gap:"0.5rem", color:C.gray, fontSize:"0.8rem" }}>
-            <Spinner size={14} /> Đang tra từ…
-          </div>
-        )}
         {/* Extend phrase button — always show when there's a next word */}
         {nextWordInText && (
           <button onClick={() => onExtend(`${word} ${nextWordInText}`)}
