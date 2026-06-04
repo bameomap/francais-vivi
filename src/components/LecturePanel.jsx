@@ -116,8 +116,12 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
     }
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
+      const n = Number(idx);
       setMode("edito");
-      setInitUnitNum(Number(idx));
+      setInitUnitNum(n);
+      // Also pre-select the unit in AI mode so switching tabs keeps context
+      const u = EDITO_UNITS[n];
+      if (u) setSelectedUnit(u.id);
       localStorage.removeItem("parcours_unit_idx");
     }
   }, []);

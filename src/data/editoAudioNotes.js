@@ -9,18 +9,20 @@ export const EDITO_POUR_NOTES = {
   "u1-b": [
     {
       heading: "Pour se présenter",
+      structure: "Tự giới thiệu: ÊTRE + quốc tịch/nghề nghiệp (không cần mạo từ!). Tuổi: AVOIR + số + ans. Tên: « Je m'APPELLE » (động từ phản thân s'appeler).",
       phrases: [
-        "Je m'appelle [prénom].",
-        "J'ai [X] ans.",
-        "Je suis [nationalité].",
+        { fr: "Je m'appelle [prénom].", vi: "Tôi tên là [tên]." },
+        { fr: "J'ai [X] ans.", vi: "Tôi [X] tuổi." },
+        { fr: "Je suis [nationalité].", vi: "Tôi là người [quốc tịch]." },
       ],
     },
     {
       heading: "Pour demander des informations sur quelqu'un",
+      structure: "Hỏi thông tin: « Comment + VOUS/TU + động từ ? ». Dùng VOUS (lịch sự) với người lạ/bề trên, TU (thân mật) với bạn bè. « Vous avez quel âge ? » = lịch sự ↔ « Tu as quel âge ? » = thân mật.",
       phrases: [
-        "Comment vous vous appelez ? / Comment tu t'appelles ?",
-        "Vous avez quel âge ? / Tu as quel âge ?",
-        "Vous êtes / Tu es [nationalité] ?",
+        { fr: "Comment vous vous appelez ? / Comment tu t'appelles ?", vi: "Bạn/Ngài tên là gì?" },
+        { fr: "Vous avez quel âge ? / Tu as quel âge ?", vi: "Ngài/Bạn bao nhiêu tuổi?" },
+        { fr: "Vous êtes / Tu es [nationalité] ?", vi: "Ngài/Bạn là người [quốc tịch] à?" },
       ],
     },
   ],
@@ -28,17 +30,19 @@ export const EDITO_POUR_NOTES = {
   "u1-f": [
     {
       heading: "Pour parler de ses goûts",
+      structure: "Thang cảm xúc tăng dần: AIMER (thích) < ADORER (rất thích/mê). Hỏi: « Tu aimes + danh từ/động từ nguyên mẫu ? ». Đặc biệt: J'AIME + LE/LA/LES (nói chung), J'AIME + UN/UNE (cụ thể).",
       phrases: [
-        "J'aime / J'adore [nom / infinitif].",
-        "Tu aimes [nom] ?",
+        { fr: "J'aime / J'adore [nom / infinitif].", vi: "Tôi thích / Tôi mê [danh từ / động từ]." },
+        { fr: "Tu aimes [nom] ?", vi: "Bạn có thích [danh từ] không?" },
       ],
     },
     {
       heading: "Pour échanger des coordonnées",
+      structure: "Trao đổi liên hệ: « Tu as + mạng xã hội ? » (hỏi đơn giản). Số điện thoại: « Quel est TON numéro ? » (ton vì thân mật). Đọc số theo từng cặp: 06 = zéro six.",
       phrases: [
-        "Tu as Facebook / Instagram ?",
-        "Quel est ton numéro [de téléphone] ?",
-        "C'est le [06 XX XX XX XX].",
+        { fr: "Tu as Facebook / Instagram ?", vi: "Bạn có Facebook / Instagram không?" },
+        { fr: "Quel est ton numéro [de téléphone] ?", vi: "Số [điện thoại] của bạn là gì?" },
+        { fr: "C'est le [06 XX XX XX XX].", vi: "Số là [06 XX XX XX XX]." },
       ],
     },
   ],
@@ -47,11 +51,12 @@ export const EDITO_POUR_NOTES = {
   "u2-b": [
     {
       heading: "Pour exprimer ses goûts",
+      structure: "Thang cảm xúc đầy đủ: ADORER > AIMER > (neutre) > NE PAS AIMER > DÉTESTER. Phủ định: NE + AIMER + PAS (kẹp động từ). Đồng ý/Không đồng ý: « MOI AUSSI » (tôi cũng vậy — câu khẳng định) ↔ « MOI NON PLUS » (tôi cũng không — câu phủ định).",
       phrases: [
-        "J'aime / J'adore [nom / infinitif].",
-        "Je n'aime pas [nom / infinitif].",
-        "Je déteste [nom / infinitif].",
-        "Moi aussi ! / Moi non plus !",
+        { fr: "J'aime / J'adore [nom / infinitif].", vi: "Tôi thích / Tôi mê [danh từ / động từ]." },
+        { fr: "Je n'aime pas [nom / infinitif].", vi: "Tôi không thích [danh từ / động từ]." },
+        { fr: "Je déteste [nom / infinitif].", vi: "Tôi ghét [danh từ / động từ]." },
+        { fr: "Moi aussi ! / Moi non plus !", vi: "Tôi cũng vậy! (câu ĐỀU ĐÚNG) / Tôi cũng không! (câu ĐỀU PHỦ ĐỊNH)" },
       ],
     },
   ],
@@ -60,17 +65,19 @@ export const EDITO_POUR_NOTES = {
   "u3-b": [
     {
       heading: "Pour acheter dans un magasin",
+      structure: "Hỏi giá: « Ça COÛTE combien ? » = « Combien ça COÛTE ? » (2 cách đều đúng). Trả lời: chủ ngữ + COÛTE + giá. « Ce sera tout ? » = người bán hỏi (Bạn cần thêm gì không?).",
       phrases: [
-        "Ça coûte combien ? / Combien ça coûte ?",
-        "[Le produit] coûte [X] euros.",
-        "Ce sera tout ?",
+        { fr: "Ça coûte combien ? / Combien ça coûte ?", vi: "Cái này giá bao nhiêu?" },
+        { fr: "[Le produit] coûte [X] euros.", vi: "[Sản phẩm] giá [X] euro." },
+        { fr: "Ce sera tout ?", vi: "Bạn cần thêm gì không? (câu người bán hỏi)" },
       ],
     },
     {
       heading: "Pour payer",
+      structure: "Người bán hỏi: « Vous payez COMMENT ? » (Có con chữ COMMENT = thế nào?). Khách trả lời: PAR + thẻ (carte) hoặc EN + tiền mặt (espèces). ⚠️ Luôn dùng VOUS (trang trọng) trong cửa hàng.",
       phrases: [
-        "Vous payez comment ?",
-        "Par carte / En espèces, s'il vous plaît.",
+        { fr: "Vous payez comment ?", vi: "Bạn thanh toán thế nào?" },
+        { fr: "Par carte / En espèces, s'il vous plaît.", vi: "Bằng thẻ / Bằng tiền mặt, xin cảm ơn." },
       ],
     },
   ],
@@ -78,18 +85,20 @@ export const EDITO_POUR_NOTES = {
   "u3-f": [
     {
       heading: "Pour parler des aliments disponibles",
+      structure: "Có gì: « Il y a / On a + DU/DE LA/DES + thực phẩm ». Không có: « Il n'y a PAS / On n'a PAS DE + thực phẩm » (sau phủ định: mạo từ phân lượng → DE). « Un peu de » = một ít (không dùng mạo từ sau).",
       phrases: [
-        "Il y a / On a [de la / du / des] + aliment.",
-        "Il n'y a pas / On n'a pas de + aliment.",
-        "On a un peu de [huile d'olive].",
+        { fr: "Il y a / On a [de la / du / des] + aliment.", vi: "Có [mạo từ phân lượng + thực phẩm]." },
+        { fr: "Il n'y a pas / On n'a pas de + aliment.", vi: "Không có [thực phẩm]. (de thay mạo từ sau phủ định)" },
+        { fr: "On a un peu de [huile d'olive].", vi: "Có một ít [dầu ô-liu]." },
       ],
     },
     {
       heading: "Pour faire une suggestion culinaire",
+      structure: "Đề xuất: « ON + động từ ? » — ON là chủ ngữ tập thể thân mật (chúng mình), chia như IL/ELLE. « Qu'est-ce qu'on mange ? » = Chúng mình ăn gì? « Tu PRÉFÈRES » (bạn thích hơn — thể hiện ưu tiên cá nhân).",
       phrases: [
-        "On fait [des pâtes] ? / On mange [une quiche] ?",
-        "Qu'est-ce qu'on mange ?",
-        "Qu'est-ce que tu préfères ?",
+        { fr: "On fait [des pâtes] ? / On mange [une quiche] ?", vi: "Mình nấu [mì ống] nhé? / Mình ăn [bánh quiche] nhé?" },
+        { fr: "Qu'est-ce qu'on mange ?", vi: "Chúng mình ăn gì đây?" },
+        { fr: "Qu'est-ce que tu préfères ?", vi: "Bạn thích ăn gì hơn?" },
       ],
     },
   ],
@@ -98,18 +107,20 @@ export const EDITO_POUR_NOTES = {
   "u4-b": [
     {
       heading: "Pour décrire un quartier / une ville",
+      structure: "Tả chung: « C'EST UN quartier + tính từ ». Liệt kê: « IL Y A + mạo từ + địa điểm ». Khoảng cách: « C'EST LOIN/PRÈS DE + địa điểm » — nhớ co rút de+le → DU, de+les → DES (près du centre, pas près de le centre).",
       phrases: [
-        "C'est un quartier [agréable / dynamique / calme].",
-        "Il y a [des cafés / une église / une mairie].",
-        "C'est loin / près [du centre / de chez moi].",
+        { fr: "C'est un quartier [agréable / dynamique / calme].", vi: "Đây là một khu phố [dễ chịu / sôi động / yên tĩnh]." },
+        { fr: "Il y a [des cafés / une église / une mairie].", vi: "Có [quán cà phê / nhà thờ / tòa thị chính]." },
+        { fr: "C'est loin / près [du centre / de chez moi].", vi: "Xa / gần [trung tâm / nhà tôi]." },
       ],
     },
     {
       heading: "Pour situer un lieu",
+      structure: "Chỉ địa điểm trực tiếp: « LÀ/ICI, C'EST + tên địa điểm » (dùng khi đang đứng tại chỗ hoặc chỉ vào bản đồ). « SUR + địa điểm, IL Y A… » (trên/ở… có…). Địa chỉ đường phố: số nhà + RUE + tên đường (không có mạo từ).",
       phrases: [
-        "Là, c'est [la place du Capitole].",
-        "Sur la place, il y a…",
-        "Ici, c'est [la mairie]. / Moi, j'habite là, [rue des Jacobins].",
+        { fr: "Là, c'est [la place du Capitole].", vi: "Đằng kia là [quảng trường Capitole]." },
+        { fr: "Sur la place, il y a…", vi: "Trên quảng trường có…" },
+        { fr: "Ici, c'est [la mairie]. / Moi, j'habite là, [rue des Jacobins].", vi: "Đây là [tòa thị chính]. / Tôi sống ở đây, [phố Jacobins]." },
       ],
     },
   ],
@@ -117,10 +128,11 @@ export const EDITO_POUR_NOTES = {
   "u4-c": [
     {
       heading: "Pour parler de la fréquence",
+      structure: "Thang tần suất: TOUJOURS (100%) > SOUVENT > PARFOIS > RAREMENT > JAMAIS (0%). Vị trí: sau động từ chính. Phủ định JAMAIS: NE + động từ + JAMAIS. ⚠️ NE PAS + JAMAIS = sai! Chỉ dùng một trong hai.",
       phrases: [
-        "Je vais souvent / toujours / parfois [au musée / dans les parcs].",
-        "Je vais rarement [au théâtre].",
-        "Je ne vais jamais [rue de la République].",
+        { fr: "Je vais souvent / toujours / parfois [au musée / dans les parcs].", vi: "Tôi thường xuyên / luôn / đôi khi đến [bảo tàng / trong các công viên]." },
+        { fr: "Je vais rarement [au théâtre].", vi: "Tôi hiếm khi đến [rạp hát]." },
+        { fr: "Je ne vais jamais [rue de la République].", vi: "Tôi không bao giờ đến [phố République]." },
       ],
     },
   ],
@@ -128,20 +140,22 @@ export const EDITO_POUR_NOTES = {
   "u4-f": [
     {
       heading: "Pour demander son chemin",
+      structure: "Mở đầu lịch sự: « EXCUSEZ-MOI » (từ VOUS/lịch sự). « On cherche + địa điểm » (chúng tôi đang tìm…). « Où EST + địa điểm ? » — dùng EST (être) không phải trouver. « C'est quelle ligne ? » = đi tuyến nào?",
       phrases: [
-        "Excusez-moi, on cherche [les Arènes].",
-        "Où est [l'arrêt de bus], s'il vous plaît ?",
-        "C'est quelle ligne ?",
+        { fr: "Excusez-moi, on cherche [les Arènes].", vi: "Xin lỗi, chúng tôi đang tìm [đấu trường La Mã]." },
+        { fr: "Où est [l'arrêt de bus], s'il vous plaît ?", vi: "[Trạm xe buýt] ở đâu ạ?" },
+        { fr: "C'est quelle ligne ?", vi: "Đó là tuyến nào?" },
       ],
     },
     {
       heading: "Pour indiquer un chemin",
+      structure: "Dùng IMPÉRATIF (mệnh lệnh): TOURNEZ (quẹo) / CONTINUEZ (tiếp tục) / PRENEZ (lấy/đi) / DESCENDEZ (xuống). « tout droit » = thẳng. « la première/deuxième rue à droite » = con đường đầu tiên/thứ hai bên phải.",
       phrases: [
-        "Tournez à droite / à gauche.",
-        "Continuez tout droit sur [100] mètres.",
-        "Prenez la première rue à droite.",
-        "Prenez le bus direction [« Lices »].",
-        "Descendez à l'arrêt [« Lices »].",
+        { fr: "Tournez à droite / à gauche.", vi: "Quẹo phải / trái." },
+        { fr: "Continuez tout droit sur [100] mètres.", vi: "Đi thẳng [100] mét." },
+        { fr: "Prenez la première rue à droite.", vi: "Rẽ vào con đường đầu tiên bên phải." },
+        { fr: "Prenez le bus direction [« Lices »].", vi: "Đi xe buýt hướng [« Lices »]." },
+        { fr: "Descendez à l'arrêt [« Lices »].", vi: "Xuống ở trạm [« Lices »]." },
       ],
     },
   ],

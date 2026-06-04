@@ -433,12 +433,8 @@ CÂU HỎI:
 Bỏ -er, thêm: -e / -es / -e / -ons / -ez / -ent
 
 Ví dụ AIMER (yêu thích):
-• J'aime     (j' vì nguyên âm!)
-• Tu aimes
-• Il/Elle aime
-• Nous aimons
-• Vous aimez
-• Ils/Elles aiment
+J'aime (j' vì nguyên âm!) · Tu aimes · Il/Elle aime
+Nous aimons · Vous aimez · Ils/Elles aiment
 
 Một số động từ đặc biệt trong nhóm:
 • ACHETER: j'achète (thêm accent grave ở tu, il)
@@ -665,14 +661,12 @@ un peu de, beaucoup de, assez de, trop de, un kilo de, une bouteille de...
 Nhận biết: thêm -ISS- vào phần nous/vous/ils!
 
 Chia CHOISIR (chọn):
-• Je choisis     • Nous choisissons
-• Tu choisis     • Vous choisissez
-• Il/Elle choisit  • Ils/Elles choisissent
+Je choisis · Tu choisis · Il/Elle choisit
+Nous choisissons · Vous choisissez · Ils/Elles choisissent
 
 Chia FINIR (kết thúc / ăn hết):
-• Je finis       • Nous finissons
-• Tu finis       • Vous finissez
-• Il/Elle finit    • Ils/Elles finissent
+Je finis · Tu finis · Il/Elle finit
+Nous finissons · Vous finissez · Ils/Elles finissent
 
 Các động từ tương tự: réussir (thành công), grossir (tăng cân), maigrir (giảm cân), rougir (đỏ mặt), vieillir (già đi), grandir (lớn lên)
 
@@ -691,26 +685,22 @@ Các động từ tương tự: réussir (thành công), grossir (tăng cân), m
         rule:`Bốn động từ quan trọng trong Unité 3 — cần học thuộc:
 
 ACHETER (mua) — biến đổi accent:
-• J'achète     • Nous achetons
-• Tu achètes   • Vous achetez
-• Il achète    • Ils achètent
+J'achète · Tu achètes · Il/Elle achète
+Nous achetons · Vous achetez · Ils/Elles achètent
 ⚠️ Accent grave xuất hiện ở je/tu/il/ils (trước -e câm)
 
 PAYER (trả tiền) — hai cách chia đều đúng:
-• Je paie / paye    • Nous payons
-• Tu paies / payes  • Vous payez
-• Il paie / paye    • Ils paient / payent
+Je paie/paye · Tu paies/payes · Il/Elle paie/paye
+Nous payons · Vous payez · Ils/Elles paient/payent
 
 ALLER (đi) — Bất quy tắc hoàn toàn:
-• Je vais    • Nous allons
-• Tu vas     • Vous allez
-• Il va      • Ils vont
+Je vais · Tu vas · Il/Elle va
+Nous allons · Vous allez · Ils/Elles vont
 💡 ALLER sert à former le futur proche: Je vais partir.
 
 FAIRE (làm / tạo):
-• Je fais    • Nous faisons
-• Tu fais    • Vous faites ⚠️ (không phải "faisez"!)
-• Il fait    • Ils font`,
+Je fais · Tu fais · Il/Elle fait
+Nous faisons · Vous faites ⚠️ (không phải "faisez"!) · Ils/Elles font`,
         examples:[
           "J'achète du pain à la boulangerie chaque matin. — Tôi mua bánh mì ở tiệm bánh mỗi sáng.",
           "Tu paies comment? Par carte ou en espèces? — Bạn thanh toán thế nào? Thẻ hay tiền mặt?",

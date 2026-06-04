@@ -328,21 +328,33 @@ function TopicContent({ id }) {
 
         <SectionTitle text="Vouloir — muốn" />
         <Table headers={["Ngôi","Dạng chia"]} rows={[["je","veux"],["tu","veux"],["il/elle","veut"],["nous","voulons"],["vous","voulez"],["ils/elles","veulent"]]} />
+        <Note text="Lịch sự hơn: je VOUDRAIS (điều kiện) thay je veux: Je voudrais un café." color={T.orange} />
+        {[["Tu veux du café ?","Bạn muốn cà phê không?"],["Je voudrais réserver une table.","Tôi muốn đặt bàn."],["Ils veulent apprendre le français.","Họ muốn học tiếng Pháp."]].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
 
-        <SectionTitle text="Pouvoir — có thể" />
+        <SectionTitle text="Pouvoir — có thể, được phép" />
         <Table headers={["Ngôi","Dạng chia"]} rows={[["je","peux"],["tu","peux"],["il/elle","peut"],["nous","pouvons"],["vous","pouvez"],["ils/elles","peuvent"]]} />
+        <Note text="Hỏi lịch sự: Puis-je… ? (đảo ngữ trang trọng)" color={T.teal} />
+        {[["Tu peux m'aider ?","Bạn có thể giúp tôi không?"],["Je ne peux pas venir ce soir.","Tôi không thể đến tối nay."],["Vous pouvez répéter, s'il vous plaît ?","Bạn có thể nhắc lại được không?"]].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
 
-        <SectionTitle text="Devoir — phải" />
+        <SectionTitle text="Devoir — phải, cần" />
         <Table headers={["Ngôi","Dạng chia"]} rows={[["je","dois"],["tu","dois"],["il/elle","doit"],["nous","devons"],["vous","devez"],["ils/elles","doivent"]]} />
+        <Note text="Phủ định → CẤM: Tu ne dois pas fumer. (bạn không được hút thuốc)" color={T.red} />
+        {[["Je dois partir à 8h.","Tôi phải đi lúc 8 giờ."],["Vous devez vous reposer.","Bạn cần nghỉ ngơi."],["Il ne doit pas oublier son passeport.","Anh ấy không được quên hộ chiếu."]].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
 
-        <SectionTitle text="Savoir — biết (kiến thức)" />
+        <SectionTitle text="Savoir — biết (kỹ năng/thông tin)" />
         <Table headers={["Ngôi","Dạng chia"]} rows={[["je","sais"],["tu","sais"],["il/elle","sait"],["nous","savons"],["vous","savez"],["ils/elles","savent"]]} />
+        <Note text="SAVOIR + inf. = biết cách làm gì. CONNAÎTRE + nom = quen biết người/nơi chốn." color={T.blue} />
+        {[["Tu sais nager ?","Bạn biết bơi không?"],["Je sais que c'est difficile.","Tôi biết điều đó khó."],["Elle sait parler trois langues.","Cô ấy biết nói ba ngôn ngữ."]].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
 
-        <SectionTitle text="Prendre — lấy, đi (phương tiện)" />
+        <SectionTitle text="Prendre — lấy, đi (phương tiện), ăn/uống" />
         <Table headers={["Ngôi","Dạng chia"]} rows={[["je","prends"],["tu","prends"],["il/elle","prend"],["nous","prenons"],["vous","prenez"],["ils/elles","prennent"]]} />
+        <Note text="Tương tự: apprendre (học), comprendre (hiểu), surprendre (làm ngạc nhiên)" color={T.teal} />
+        {[["Je prends le métro tous les jours.","Tôi đi tàu điện ngầm mỗi ngày."],["Tu prends quelque chose ?","Bạn uống/ăn gì không?"],["Nous prenons un café ensemble.","Chúng ta uống cà phê cùng nhau nhé."]].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
 
-        <SectionTitle text="Venir — đến" />
+        <SectionTitle text="Venir — đến, xuất phát từ" />
         <Table headers={["Ngôi","Dạng chia"]} rows={[["je","viens"],["tu","viens"],["il/elle","vient"],["nous","venons"],["vous","venez"],["ils/elles","viennent"]]} />
+        <Note text="VENIR DE + lieu = đến từ. VENIR DE + inf. = passé récent (vừa mới...)" color={T.orange} />
+        {[["Tu viens d'où ?","Bạn đến từ đâu?"],["Il vient de Tokyo.","Anh ấy đến từ Tokyo."],["Elle vient de finir son travail.","Cô ấy vừa mới xong việc."]].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
       </div>
     );
 
