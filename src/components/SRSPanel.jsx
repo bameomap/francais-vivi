@@ -277,15 +277,23 @@ export default function SRSPanel({ currentWords = [] }) {
 
       {/* Saved words section */}
       {savedWords.length > 0 && (
-        <div style={{ background:C.white, border:`1.5px solid ${C.green}44`, borderRadius:16, padding:"0.9rem 1rem", marginBottom:"0.75rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-          <div>
-            <div style={{ fontSize:"0.85rem", fontWeight:700, color:C.ink }}>📝 Từ đã lưu khi đọc</div>
-            <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.15rem" }}>{savedWords.length} từ đang chờ ôn</div>
+        <div style={{ background:C.white, border:`1.5px solid ${C.green}44`, borderRadius:16, padding:"0.9rem 1rem", marginBottom:"0.75rem" }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.6rem" }}>
+            <div>
+              <div style={{ fontSize:"0.85rem", fontWeight:700, color:C.ink }}>📝 Danh sách từ đã lưu</div>
+              <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.1rem" }}>{savedWords.length} từ · từ bài đọc & tra từ điển</div>
+            </div>
           </div>
-          <button onClick={startSaved}
-            style={{ padding:"0.45rem 1rem", background:C.green, color:"#fff", border:"none", borderRadius:20, fontSize:"0.78rem", cursor:"pointer", fontWeight:600 }}>
-            Ôn lại →
-          </button>
+          <div style={{ display:"flex", gap:"0.5rem" }}>
+            <button onClick={() => setMode("wordlist")}
+              style={{ flex:1, padding:"0.42rem 0", background:C.cream, border:`1.5px solid ${C.border}`, borderRadius:20, fontSize:"0.78rem", cursor:"pointer", fontWeight:600, color:C.ink }}>
+              📋 Xem danh sách
+            </button>
+            <button onClick={startSaved}
+              style={{ flex:1, padding:"0.42rem 0", background:C.green, color:"#fff", border:"none", borderRadius:20, fontSize:"0.78rem", cursor:"pointer", fontWeight:600 }}>
+              Ôn lại →
+            </button>
+          </div>
         </div>
       )}
 
@@ -485,6 +493,60 @@ export default function SRSPanel({ currentWords = [] }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+
+  // ════════════════════════════════════════════════════════════════
+  // WORD LIST VIEW
+  // ════════════════════════════════════════════════════════════════
+  if (mode === "wordlist") return (
+    <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"0.85rem" }}>
+        <div>
+          <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", fontWeight:700, color:C.ink }}>📝 Danh sách từ đã lưu</div>
+          <div style={{ fontSize:"0.7rem", color:C.gray }}>{savedWords.length} từ</div>
+        </div>
+        <div style={{ display:"flex", gap:"0.4rem" }}>
+          <button onClick={startSaved}
+            style={{ padding:"0.3rem 0.75rem", background:C.green, color:"#fff", border:"none", borderRadius:20, fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
+            Ôn lại →
+          </button>
+          <button onClick={() => setMode("home")}
+            style={{ padding:"0.3rem 0.75rem", background:"transparent", border:`1px solid ${C.border}`, borderRadius:20, fontSize:"0.72rem", cursor:"pointer", color:C.gray }}>
+            ← Về
+          </button>
+        </div>
+      </div>
+
+      {savedWords.length === 0 ? (
+        <div style={{ textAlign:"center", padding:"2rem", color:C.gray, fontSize:"0.85rem" }}>
+          Chưa có từ nào được lưu.<br/>Bấm vào từ trong bài đọc hoặc tra từ điển để lưu!
+        </div>
+      ) : (
+        <div>
+          {savedWords.map((w, i) => (
+            <div key={w.fr + i} style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.7rem 0.85rem", marginBottom:"0.45rem", display:"flex", alignItems:"center", gap:"0.5rem" }}>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ display:"flex", alignItems:"center", gap:"0.35rem", marginBottom:"0.15rem" }}>
+                  <span style={{ fontFamily:"Georgia,serif", fontSize:"0.95rem", fontWeight:700, color:C.ink }}>{w.fr}</span>
+                  <button onClick={() => speak(w.fr)} style={{ background:"none", border:"none", cursor:"pointer", fontSize:"0.75rem", padding:0, color:C.gray }}>🔊</button>
+                  {w.type && (
+                    <span style={{ fontSize:"0.62rem", background:"#EBF4FF", color:"#1B3A6B", borderRadius:20, padding:"0.05rem 0.4rem", fontWeight:700 }}>{w.type}</span>
+                  )}
+                </div>
+                <div style={{ fontSize:"0.8rem", color:C.gray }}>→ {w.vi}</div>
+                {w.note && <div style={{ fontSize:"0.7rem", color:C.gold, marginTop:"0.1rem" }}>💡 {w.note}</div>}
+                <div style={{ fontSize:"0.62rem", color:C.gray2, marginTop:"0.2rem" }}>📌 {w.source || "Tra từ điển"}</div>
+              </div>
+              <button onClick={() => {
+                const updated = savedWords.filter((_, j) => j !== i);
+                setSavedWords(updated);
+                try { localStorage.setItem(WORDLIST_KEY, JSON.stringify(updated)); } catch {}
+              }} style={{ background:"none", border:"none", color:C.gray2, cursor:"pointer", fontSize:"1rem", flexShrink:0, padding:"0.2rem" }}>✕</button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 
