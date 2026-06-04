@@ -65,8 +65,8 @@ function getPhrase(tokens, idx) {
 }
 
 // ── Clickable word text ───────────────────────────────────────
+// onWordClick(phrase, nextWordInText) — passes context so popup can offer "extend"
 function InteractiveText({ text, activeWord, onWordClick }) {
-  // Build token array first so we can inspect neighbours
   const tokens = [];
   const regex = /([A-Za-zÀ-ÿœŒæÆÀ-ɏ'-]+)|([^A-Za-zÀ-ÿœŒæÆÀ-ɏ'-]+)/g;
   let match;
@@ -84,11 +84,12 @@ function InteractiveText({ text, activeWord, onWordClick }) {
     <>
       {tokens.map((tok, i) => {
         if (!tok.isWord) return <span key={i}>{tok.text}</span>;
-        const phrase  = getPhrase(tokens, i);
-        const isActive = activeWord === phrase;
+        const phrase = getPhrase(tokens, i);
+        const nw     = nextWord(tokens, i);   // pass next word for "extend" button
+        const isActive = activeWord === phrase || activeWord?.startsWith(phrase + " ");
         return (
           <span key={i}
-            onClick={(e) => { e.stopPropagation(); if (tok.norm.length > 1) onWordClick(phrase); }}
+            onClick={(e) => { e.stopPropagation(); if (tok.norm.length > 1) onWordClick(phrase, nw); }}
             style={{ background: isActive ? C.blueL : "transparent", color: isActive ? C.blue : "inherit", borderRadius: 3, cursor: tok.norm.length > 1 ? "pointer" : "default", transition: "background 0.1s", padding: "0 1px" }}>
             {tok.text}
           </span>
@@ -99,7 +100,7 @@ function InteractiveText({ text, activeWord, onWordClick }) {
 }
 
 // ── Word popup (bottom sheet) ─────────────────────────────────
-function WordPopup({ word, data, loading, onClose, onSave, isSaved }) {
+function WordPopup({ word, data, loading, onClose, onSave, isSaved, nextWordInText, onExtend }) {
   return (
     <>
       <div onClick={onClose} style={{ position:"fixed", inset:0, zIndex:98, background:"rgba(0,0,0,0.25)" }} />
@@ -111,6 +112,19 @@ function WordPopup({ word, data, loading, onClose, onSave, isSaved }) {
           </div>
           <button onClick={onClose} style={{ background:C.cream, border:"none", color:C.gray, borderRadius:"50%", width:26, height:26, cursor:"pointer", fontSize:"0.8rem", display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
         </div>
+        {loading && (
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"0.75rem", gap:"0.5rem", color:C.gray, fontSize:"0.8rem" }}>
+            <Spinner size={14} /> Đang tra từ…
+          </div>
+        )}
+        {/* Extend phrase button — always show when there's a next word */}
+        {nextWordInText && (
+          <button onClick={() => onExtend(`${word} ${nextWordInText}`)}
+            style={{ display:"flex", alignItems:"center", gap:"0.3rem", width:"100%", marginBottom:"0.5rem", padding:"0.32rem 0.6rem", background:C.cream, border:`1.5px dashed ${C.border}`, borderRadius:8, color:C.gray, fontSize:"0.74rem", cursor:"pointer", fontFamily:"inherit", textAlign:"left" }}>
+            <span style={{ color:C.blue, fontWeight:700 }}>⊕</span>
+            <span>Mở rộng cụm: <strong style={{ fontFamily:"Georgia,serif", color:C.ink }}>{word} {nextWordInText}</strong></span>
+          </button>
+        )}
         {loading && (
           <div style={{ display:"flex", alignItems:"center", justifyContent:"center", padding:"0.75rem", gap:"0.5rem", color:C.gray, fontSize:"0.8rem" }}>
             <Spinner size={14} /> Đang tra từ…
@@ -428,16 +442,18 @@ function ActivityView({ activity, onBack }) {
   };
 
   // ── Word tap lookup ────────────────────────────────────────
-  const [activeWord,   setActiveWord]   = useState(null);
-  const [wordData,     setWordData]     = useState(null);
-  const [wordLoading,  setWordLoading]  = useState(false);
-  const [savedWords,   setSavedWords]   = useState(() => {
+  const [activeWord,      setActiveWord]      = useState(null);
+  const [wordNextContext, setWordNextContext]  = useState("");   // next word in text for "extend" button
+  const [wordData,        setWordData]        = useState(null);
+  const [wordLoading,     setWordLoading]     = useState(false);
+  const [savedWords,      setSavedWords]      = useState(() => {
     try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
   });
   const [showWordList, setShowWordList] = useState(false);
 
-  const lookupWord = async (word) => {
+  const lookupWord = async (word, nextCtx = "") => {
     setActiveWord(word);
+    setWordNextContext(nextCtx);
     setWordData(null);
     const cached = localStorage.getItem(DICT_CACHE + word);
     if (cached) {
@@ -445,7 +461,7 @@ function ActivityView({ activity, onBack }) {
     }
     setWordLoading(true);
     try {
-      const data = await callAI(`Tra từ tiếng Pháp "${word}": {"type":"n.m/n.f/v/adj/adv/prép/expr","vi":"nghĩa tiếng Việt ngắn","gender":"đực/cái/không áp dụng","note":"ghi chú ngắn hoặc để trống","example":"ví dụ tiếng Pháp ngắn — bản dịch tiếng Việt"}`);
+      const data = await callAI(`Tra từ/cụm từ tiếng Pháp "${word}": {"type":"n.m/n.f/v/adj/adv/prép/expr/cụm","vi":"nghĩa tiếng Việt ngắn","gender":"đực/cái/không áp dụng","note":"ghi chú ngắn hoặc để trống","example":"ví dụ tiếng Pháp ngắn — bản dịch tiếng Việt"}`);
       setWordData(data);
       try { localStorage.setItem(DICT_CACHE + word, JSON.stringify(data)); } catch {}
     } catch {
@@ -552,7 +568,7 @@ function ActivityView({ activity, onBack }) {
             👆 Bấm vào từ bất kỳ để tra nghĩa
           </div>
           <div style={{ fontSize: "0.88rem", color: C.ink, lineHeight: 2, fontFamily: "Georgia,serif", whiteSpace: "pre-line", background: C.cream, borderRadius: 12, padding: "0.85rem 1rem", border: `1px solid ${C.border}`, userSelect: "none" }}>
-            <InteractiveText text={activity.text} activeWord={activeWord} onWordClick={lookupWord} />
+            <InteractiveText text={activity.text} activeWord={activeWord} onWordClick={(phrase, nw) => lookupWord(phrase, nw)} />
           </div>
           {showVi && viText && (
             <div style={{ marginTop: "0.6rem", fontSize: "0.82rem", color: C.gray, lineHeight: 1.8, whiteSpace: "pre-line", background: C.blueL, borderRadius: 12, padding: "0.75rem 1rem", border: `1px solid ${C.blue}33`, animation: "fadeUp 0.2s ease" }}>
@@ -638,7 +654,16 @@ function ActivityView({ activity, onBack }) {
 
       {/* Word popup */}
       {activeWord && (
-        <WordPopup word={activeWord} data={wordData} loading={wordLoading} isSaved={isSaved} onClose={() => setActiveWord(null)} onSave={saveWord} />
+        <WordPopup
+          word={activeWord}
+          data={wordData}
+          loading={wordLoading}
+          isSaved={isSaved}
+          onClose={() => setActiveWord(null)}
+          onSave={saveWord}
+          nextWordInText={wordNextContext}
+          onExtend={(phrase) => lookupWord(phrase, "")}
+        />
       )}
 
       {/* Questions card */}
