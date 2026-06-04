@@ -929,7 +929,7 @@ function AppInner() {
             {view==="conversation"  && <ConversationPanel onBackToParcours={backToParcours} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="reference_hub" && <ReferenceHub />}
-            {view==="lecture"       && <LecturePanel words={words} />}
+            {view==="lecture"       && <LecturePanel words={words} onBackToParcours={backToParcours} />}
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
             {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
             {view==="revision"      && <RevisionPanel />}

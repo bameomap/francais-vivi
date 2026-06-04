@@ -225,14 +225,16 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("grammar", "grammar");
     } else if (step.id === "lecture") {
-      localStorage.setItem("parcours_back", "1");
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("lecture", "lecture");
     } else if (step.id === "ecouter") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("dictee", "ecouter");
     } else if (step.id === "ecrire") {
+      localStorage.setItem("parcours_writing_idx", String(unitIdx));
       onNavigate("writing", "writing");
     } else if (step.id === "parler") {
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("conversation", "conversation");
     } else if (step.id === "quiz") {
       localStorage.setItem("parcours_quiz_unit", unitId);

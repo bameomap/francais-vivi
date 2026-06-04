@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI, callAIText } from "../utils/api.js";
 import { addWordToSRS } from "../utils/srs.js";
@@ -99,9 +99,28 @@ const DEFAULT_WORDS = [
   {fr:"jour"},{fr:"soir"},{fr:"ville"},{fr:"enfant"},{fr:"travail"},
 ];
 
-export default function LecturePanel({ words: propWords = [] }) {
+export default function LecturePanel({ words: propWords = [], onBackToParcours }) {
   const [mode,         setMode]         = useState("ai");
   const [selectedUnit, setSelectedUnit] = useState(null);
+  const [fromParcours, setFromParcours] = useState(false);
+  const [initUnitNum,  setInitUnitNum]  = useState(null);
+
+  // Deep-link from Parcours "Đọc hiểu" step: open the Édito reading of the
+  // current unit directly. Read in an effect (not a useState initializer) so
+  // the localStorage read+remove stays StrictMode-safe. The unit index is
+  // passed down to LectureEditoPanel rather than consumed here twice.
+  useEffect(() => {
+    if (localStorage.getItem("parcours_back")) {
+      setFromParcours(true);
+      localStorage.removeItem("parcours_back");
+    }
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      setMode("edito");
+      setInitUnitNum(Number(idx));
+      localStorage.removeItem("parcours_unit_idx");
+    }
+  }, []);
   const [level,        setLevel]        = useState("easy");
   const [loading,      setLoading]      = useState(false);
   const [lecture,      setLecture]      = useState(null);
@@ -195,6 +214,11 @@ export default function LecturePanel({ words: propWords = [] }) {
 
       {/* ── Dark hero banner ── */}
       <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem" }}>
+        {fromParcours && onBackToParcours && (
+          <button onClick={onBackToParcours} style={{ background:"rgba(255,255,255,0.15)", border:"none", color:"#fff", fontSize:"0.72rem", fontWeight:600, cursor:"pointer", padding:"0.2rem 0.65rem", borderRadius:20, marginBottom:"0.6rem", fontFamily:"inherit" }}>
+            ← Parcours
+          </button>
+        )}
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>
           📜 La Lecture
         </div>
@@ -219,7 +243,7 @@ export default function LecturePanel({ words: propWords = [] }) {
       </div>
 
       {/* ── Édito mode ── */}
-      {mode === "edito" && <LectureEditoPanel />}
+      {mode === "edito" && <LectureEditoPanel defaultUnitNum={initUnitNum} />}
 
       {/* ── AI mode ── */}
       {mode === "ai" && <>

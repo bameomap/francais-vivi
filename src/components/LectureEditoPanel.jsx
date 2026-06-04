@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
 import { callAIText } from "../utils/api.js";
@@ -379,9 +379,14 @@ function ActivityView({ activity, onBack }) {
 }
 
 // ── Main export ───────────────────────────────────────────────
-export default function LectureEditoPanel() {
+export default function LectureEditoPanel({ defaultUnitNum = null }) {
   const [selectedUnit,     setSelectedUnit]     = useState(null);
   const [selectedActivity, setSelectedActivity] = useState(null);
+
+  // Deep-link from Parcours: pre-select the unit passed down by LecturePanel.
+  useEffect(() => {
+    if (defaultUnitNum != null) setSelectedUnit(defaultUnitNum);
+  }, [defaultUnitNum]);
 
   if (selectedActivity) {
     return <ActivityView activity={selectedActivity} onBack={() => setSelectedActivity(null)} />;
