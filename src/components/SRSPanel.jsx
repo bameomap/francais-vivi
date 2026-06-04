@@ -604,10 +604,10 @@ export default function SRSPanel({ currentWords = [], autoStartSaved = false }) 
             </div>
           )}
           {savedFlipped && (
-            <div style={{ display:"flex", gap:"0.75rem" }}>
-              <button onClick={() => savedAnswer(false)} style={{ flex:1, padding:"0.7rem", background:C.redL, border:`1.5px solid ${C.red}`, borderRadius:14, color:C.red, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>← Ôn lại</button>
-              <button onClick={() => savedAnswer(true)} style={{ flex:1, padding:"0.7rem", background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, color:C.green, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>Nhớ rồi ✓</button>
-            </div>
+            <RatingBar
+              card={null}
+              onRate={rating => savedAnswer(rating >= 2)}
+            />
           )}
         </div>
       </div>
