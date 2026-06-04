@@ -1,15 +1,76 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { C } from "../constants.js";
 import { getStreak, getProgress, getMistakes } from "../utils/storage.js";
 import { getSRSStats } from "../utils/srs.js";
 import { getXPData, getLevel, getNextLevel, LEVELS } from "../utils/xp.js";
 import { computeOverallProgress } from "../utils/parcours.js";
 
+// ── Keys that should be backed up / restored ──────────────────
+const BACKUP_KEYS = [
+  "srs_data", "module_progress", "streak_data", "xp_data", "badges_earned",
+  "vocab_sets", "mistake_log", "weak_spots_log", "study_history",
+  "writing_history", "defi_history", "analyse_history", "parcours_last_unit",
+  "pour_note_expansions_v2", "grammar_last_unit", "user_name", "onboarded",
+];
+// Also back up dynamic lecture cache keys (lecture_cache_*)
+function collectBackup() {
+  const data = {};
+  for (const key of BACKUP_KEYS) {
+    const v = localStorage.getItem(key);
+    if (v !== null) data[key] = v;
+  }
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith("lecture_cache_")) data[k] = localStorage.getItem(k);
+  }
+  return data;
+}
+function applyRestore(data) {
+  for (const [key, value] of Object.entries(data)) {
+    try { localStorage.setItem(key, value); } catch {}
+  }
+}
+
 // ── ProfilPanel · Hub cá nhân ─────────────────────────────────
 export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) {
   const streakData = getStreak();
   const srsStats   = getSRSStats();
   const xpData     = getXPData();
+  const [backupMsg, setBackupMsg] = useState("");
+  const fileInputRef = useRef(null);
+
+  const handleExport = () => {
+    const data = collectBackup();
+    const keyCount = Object.keys(data).length;
+    const json = JSON.stringify({ version: 1, ts: Date.now(), data }, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `vivi-francais-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    setBackupMsg(`✅ Đã tải ${keyCount} mục dữ liệu`);
+    setTimeout(() => setBackupMsg(""), 3000);
+  };
+
+  const handleImport = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        const payload = parsed.version === 1 ? parsed.data : parsed;
+        applyRestore(payload);
+        setBackupMsg(`✅ Đã khôi phục ${Object.keys(payload).length} mục — tải lại trang để thấy thay đổi`);
+        setTimeout(() => window.location.reload(), 1800);
+      } catch {
+        setBackupMsg("❌ File không hợp lệ. Thử lại nhé!");
+        setTimeout(() => setBackupMsg(""), 3000);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
   const overall    = computeOverallProgress();
   const mistakes   = getMistakes();
   const progress   = getProgress();
@@ -295,6 +356,45 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
           </div>
         ))}
       </div>
+
+      {/* ── Backup / Restore ── */}
+      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8, marginTop: 20 }}>
+        Sao lưu dữ liệu
+      </div>
+      <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 14, overflow: "hidden" }}>
+        {/* Export */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "11px 14px", borderBottom: `1px solid ${C.borderSoft || "#EEF2FA"}` }}>
+          <span style={{ fontSize: 14, width: 18, textAlign: "center", flexShrink: 0 }}>💾</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 13, color: C.ink, fontWeight: 600 }}>Xuất dữ liệu</div>
+            <div style={{ fontSize: 11, color: C.gray, marginTop: 2 }}>Tải file .json về máy để sao lưu tiến độ</div>
+          </div>
+          <button onClick={handleExport}
+            style={{ padding: "0.28rem 0.8rem", background: C.blue, color: "#fff", border: "none", borderRadius: 20, fontSize: "0.72rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit", flexShrink: 0 }}>
+            ⬇ Xuất
+          </button>
+        </div>
+        {/* Import */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "11px 14px" }}>
+          <span style={{ fontSize: 14, width: 18, textAlign: "center", flexShrink: 0 }}>📂</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 13, color: C.ink, fontWeight: 600 }}>Khôi phục dữ liệu</div>
+            <div style={{ fontSize: 11, color: C.gray, marginTop: 2 }}>Chọn file .json đã xuất để khôi phục</div>
+          </div>
+          <input ref={fileInputRef} type="file" accept=".json" onChange={handleImport} style={{ display: "none" }} />
+          <button onClick={() => fileInputRef.current?.click()}
+            style={{ padding: "0.28rem 0.8rem", background: "transparent", color: C.blue, border: `1.5px solid ${C.blue}`, borderRadius: 20, fontSize: "0.72rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit", flexShrink: 0 }}>
+            ⬆ Nhập
+          </button>
+        </div>
+      </div>
+
+      {/* Feedback toast */}
+      {backupMsg && (
+        <div style={{ marginTop: 8, padding: "0.5rem 0.75rem", background: backupMsg.startsWith("✅") ? C.greenL : C.redL, border: `1px solid ${backupMsg.startsWith("✅") ? C.green : C.red}44`, borderRadius: 10, fontSize: "0.75rem", color: backupMsg.startsWith("✅") ? C.green : C.red, lineHeight: 1.5 }}>
+          {backupMsg}
+        </div>
+      )}
 
       <div style={{ height: 16 }}/>
     </div>
