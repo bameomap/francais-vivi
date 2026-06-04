@@ -158,11 +158,23 @@ QUY TẮC THÀNH LẬP GIỐNG CÁI:
 
 4. Không đổi (đã có -e): belge, russe, suisse, tchèque, mexicaine...
 
-5. Đặc biệt: espagnol→espagnole
+5. Đặc biệt: espagnol→espagnole, grec→grecque
+
+SỐ NHIỀU: thêm -S (như tính từ thường): français→français (đã có -s), américain→américains
+
+BẢNG QUỐC TỊCH HAY GẶP:
+vietnamien · vietnamienne | japonais · japonaise
+français · française | anglais · anglaise
+américain · américaine | coréen · coréenne
+chinois · chinoise | espagnol · espagnole
+allemand · allemande | italien · italienne
+australien · australienne | canadien · canadienne
+thaïlandais · thaïlandaise | singapourien · singapourienne
 
 💡 Tính từ quốc tịch KHÔNG viết hoa khi dùng như tính từ!
 ✅ Il est français.  ❌ Il est Français.
-✅ C'est un Français. (danh từ → viết hoa)`,
+✅ C'est un Français. (danh từ → viết hoa)
+💡 Tương tự: tên ngôn ngữ KHÔNG viết hoa: "Je parle français / japonais."`,
         examples:[
           "Il est japonais. Elle est japonaise. — Anh ấy / Cô ấy là người Nhật.",
           "Il est brésilien. Elle est brésilienne. — Anh ấy / Cô ấy là người Brazil.",
@@ -188,6 +200,13 @@ Dùng le/la/les để:
 
 ⚠️ Tên nước có mạo từ! la France, le Japon, les Pays-Bas
 ⚠️ Tên thành phố KHÔNG có mạo từ! à Paris (không phải à la Paris)
+
+CO RÚT BẮT BUỘC — học ngay từ đầu!
+À + LE → AU :  Je vais au cinéma. / Il est au marché.
+À + LES → AUX : Elle parle aux enfants.
+DE + LE → DU :  Je viens du bureau. / C'est le livre du professeur.
+DE + LES → DES : Le cours des étudiants.
+⚠️ À + LA và À + L' không co rút: à la boulangerie / à l'école.
 
 💡 Phân biệt:
 "J'aime LE cinéma." = Tôi thích điện ảnh (nói chung)
@@ -278,7 +297,17 @@ Hai cách dùng:
 • Combien… ? (bao nhiêu)  • Pourquoi… ? (tại sao)  • Qui… ? (ai)
 → Où est-ce que tu habites ? / Tu habites où ?
 
-💡 Trả lời: Oui (có) · Non (không) · Si (có — khi phản bác câu phủ định).`,
+💡 Trả lời:
+• OUI = có (khi câu hỏi ở dạng khẳng định)
+• NON = không
+• SI = có (khi phản bác câu hỏi hay câu phủ định!) — rất quan trọng!
+"Tu n'aimes pas le café ?" — "Si, j'aime le café !" (Có chứ, tôi thích!)
+⚠️ Không nói "Oui" để phản bác câu phủ định → dùng "Si"!
+
+4️⃣ N'EST-CE PAS? (đúng không? / phải không?) — xác nhận cuối câu:
+"C'est beau, n'est-ce pas?" = Đẹp đúng không?
+"Tu parles français, n'est-ce pas?" = Bạn nói tiếng Pháp đúng không?
+💡 Tương đương "right?" / "isn't it?" trong tiếng Anh.`,
         examples:[
           "Tu aimes le café ? — Bạn thích cà phê à? (ngữ điệu)",
           "Est-ce que vous parlez anglais ? — Bạn có nói tiếng Anh không?",
@@ -613,7 +642,14 @@ TYPES DE COMMERCES & CE QU'ON Y ACHÈTE:
    madame→mesdames
 
 ⚠️ Mạo từ số nhiều: UN/UNE → DES; LE/LA/L' → LES
-⚠️ Sau phủ định: DES → DE: J'ai des amis → Je n'ai PAS D'amis`,
+⚠️ Sau phủ định: DES → DE: J'ai des amis → Je n'ai PAS D'amis
+
+PHÁT ÂM SỐ NHIỀU — hay bị bỏ qua:
+⚠️ -S cuối KHÔNG ĐỌC: pains [pɛ̃] · livres [livʁ] · tables [tabl]
+💡 LIAISON bắt buộc: LES + danh từ bắt đầu nguyên âm → đọc liền [z]:
+"les amis" = [le‿za‿mi] · "des enfants" = [de‿zɑ̃fɑ̃] · "mes élèves" = [me‿ze‿lɛv]
+💡 Khi có tính từ đứng TRƯỚC: "de beaux enfants" (DES → DE trước tính từ BAGS)
+"des fleurs rouges" → "de belles fleurs" (pas des belles fleurs)`,
         examples:[
           "Je voudrais un croissant. → Mme Martin achète trois croissants. — Ba cái bánh sừng bò.",
           "Il y a un beau gâteau. → Il y a de beaux gâteaux. — Có những cái bánh đẹp.",
@@ -866,28 +902,34 @@ PHẢN THÂN: Pronom APRÈS le verbe (avec trait d'union):
         ]
       },
       {
-        topic:"Liên từ — Pour, Parce que, Mais, Avec, Sans",
-        rule:`Các liên từ và giới từ nối câu:
+        topic:"Liên từ — Pour, Parce que, Mais, Et, Donc, Alors…",
+        rule:`Các liên từ và giới từ nối câu — phân loại theo chức năng:
 
-POUR + INFINITIF → mục đích (để làm gì)
-"Je prends le bus pour aller au travail." (để đi làm)
+➕ THÊM VÀO:
+ET = và → "J'aime le café ET le thé."
+PUIS = rồi thì, sau đó → "Je prends le métro, puis je marche 5 minutes."
+
+🔀 ĐỐI LẬP:
+MAIS = nhưng → "J'aime Paris mais c'est cher."
+CEPENDANT = tuy nhiên (trang trọng hơn mais)
+
+🎯 MỤC ĐÍCH (để làm gì):
+POUR + INFINITIF → "Je prends le bus pour aller au travail."
 ⚠️ Không dùng "pour que" + subjonctif ở trình độ A1
 
-PARCE QUE + PHRASE COMPLÈTE → lý do (vì...)
-"Je prends le bus parce que c'est moins cher."
-⚠️ Parce qu' trước nguyên âm: "parce qu'il fait froid"
-Khác với CAR (vì) — trang trọng hơn, viết văn
+📌 LÝ DO (vì sao):
+PARCE QUE + phrase complète → "Je reste parce qu'il pleut."
+⚠️ parce qu' trước nguyên âm: "parce qu'il fait froid"
+CAR = parce que (trang trọng, viết văn) → "Je reste, car il pleut."
 
-MAIS → đối lập (nhưng)
-"J'aime Paris mais c'est cher."
-"Il est sympa mais un peu timide."
+⚡ HẬU QUẢ / KẾT LUẬN:
+DONC = vậy nên, vì thế → "Il pleut, donc je prends le bus."
+ALORS = vậy thì, thế thì → "Tu es libre? Alors on y va!"
+💡 DONC/ALORS đứng sau dấu phẩy: "Il fait froid, donc je mets un manteau."
 
-AVEC + NOM → có/cùng với
-"Je bois un café avec du lait." "Je viens avec mes amis."
-Sans avoir de verbe: "un café avec du sucre"
-
-SANS + NOM/INFINITIF → không có/không làm
-"Un café sans sucre." "Je pars sans manger."`,
+➕ CÓ / KHÔNG CÓ:
+AVEC + nom → "Un café avec du lait."
+SANS + nom/infinitif → "Un café sans sucre." / "Je pars sans manger."`,
         examples:[
           "Je prends le métro pour aller à l'université. — Tôi đi tàu điện để đến trường.",
           "Je reste à la maison parce qu'il pleut. — Tôi ở nhà vì trời mưa.",
@@ -897,28 +939,30 @@ SANS + NOM/INFINITIF → không có/không làm
         ]
       },
       {
-        topic:"Tần suất (1) — Toujours, Souvent, Jamais",
-        rule:`Ba trạng từ tần suất cơ bản — Unité 4:
+        topic:"Tần suất — Toujours, Souvent, Parfois, Rarement, Jamais",
+        rule:`THANG TẦN SUẤT từ thấp đến cao:
+jamais (0%) — rarement (~10%) — parfois/quelquefois (~30%) — souvent (~70%) — toujours (100%)
 
-• TOUJOURS = luôn luôn (100%)
-  "Je prends toujours le métro."
-
-• SOUVENT = thường xuyên (~70–80%)
-  "Je vais souvent à la boulangerie."
-
+• TOUJOURS = luôn luôn (100%): "Je prends toujours le métro."
+• SOUVENT = thường xuyên (~70%): "Je vais souvent à la boulangerie."
+• PARFOIS / QUELQUEFOIS = đôi khi (~30%): "Je vais parfois au cinéma." (hai từ này thay thế nhau)
+• RAREMENT = hiếm khi (~10%): "Je vais rarement au théâtre."
 • JAMAIS = không bao giờ (0%) → PHẢI dùng với NE!
-  "Je ne vais jamais au cinéma seul(e)."
-  ⚠️ JAMAIS luôn dùng với NE: "Je ne mange jamais de viande."
-  ❌ "Je vais jamais" (argot — tránh dùng ở trình độ này)
 
-VỊ TRÍ: SAU ĐỘNG TỪ (thì hiện tại)
+⚠️ JAMAIS luôn đi với NE:
+"Je ne mange JAMAIS de viande." ✅
+"Je mange jamais de viande." ❌ (argot — tránh dùng)
+
+VỊ TRÍ trong câu — SAU ĐỘNG TỪ CHÍNH:
 "Je vais TOUJOURS au travail à pied."
-"Il mange SOUVENT chez ses parents."
 "Elle ne sort JAMAIS le soir."
+"Il mange SOUVENT chez ses parents."
 
-Thứ tự tần suất đầy đủ:
-jamais (0%) < rarement < parfois < souvent < toujours (100%)
-💡 Xem thêm: parfois, rarement, tous les… → Unité 6`,
+BIỂU THỨC THỜI GIAN (đứng đầu hoặc cuối câu):
+• le lundi = mỗi thứ Hai: "Le lundi, je fais du sport."
+• tous les jours / tous les soirs = mỗi ngày/tối
+• une fois par semaine / par mois = một lần mỗi tuần/tháng
+• de temps en temps = thỉnh thoảng (≈ parfois)`,
         examples:[
           "Je prends toujours le métro pour aller au travail. — Tôi luôn đi tàu điện đến chỗ làm.",
           "Il va souvent au musée le week-end. — Anh ấy thường đi bảo tàng vào cuối tuần.",

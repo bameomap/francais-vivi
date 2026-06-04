@@ -69,6 +69,7 @@ const TOPICS = [
   { id: "futur",         label: "Tương lai gần",    icon: "🔮", color: T.purple },
   { id: "passe_recent",  label: "Passé récent",     icon: "⏪", color: T.green  },
   { id: "passe",         label: "Passé composé",    icon: "📜", color: T.green  },
+  { id: "imparfait",     label: "Imparfait",        icon: "🖼️", color: T.teal   },
   { id: "comparaison",   label: "So sánh",          icon: "⚖️", color: T.gold   },
   { id: "pronoms_rel",   label: "Đại từ quan hệ",   icon: "🔗", color: T.blue   },
 ];
@@ -781,6 +782,53 @@ function TopicContent({ id }) {
             ["Futur proche",  "aller + inf.",            "Sắp xảy ra"],
           ]}
         />
+      </div>
+    );
+
+    case "imparfait": return (
+      <div>
+        <SectionTitle text="L'imparfait — Quá khứ miêu tả / thói quen" />
+        <Note text="Dùng để MÔ TẢ bối cảnh, THÓI QUEN trong quá khứ — khác Passé composé (sự kiện đã xảy ra)." color={T.teal} />
+
+        <SectionTitle text="Cách thành lập" />
+        <Note text="Lấy gốc NOUS ở thì présent + đuôi: -ais · -ais · -ait · -ions · -iez · -aient" color={T.blue} />
+        <Table
+          headers={["Ngôi", "Đuôi", "parler", "finir", "prendre"]}
+          rows={[
+            ["je",        "-ais",  "parlais",  "finissais",  "prenais"],
+            ["tu",        "-ais",  "parlais",  "finissais",  "prenais"],
+            ["il/elle",   "-ait",  "parlait",  "finissait",  "prenait"],
+            ["nous",      "-ions", "parlions", "finissions", "prenions"],
+            ["vous",      "-iez",  "parliez",  "finissiez",  "preniez"],
+            ["ils/elles", "-aient","parlaient","finissaient","prenaient"],
+          ]}
+        />
+        <Note text="⚠️ ÊTRE — ngoại lệ duy nhất: j'étais · tu étais · il était · nous étions · vous étiez · ils étaient" color={T.red} />
+
+        <SectionTitle text="3 cụm hay dùng nhất ở A1" />
+        {[
+          ["C'était [magnifique / calme / difficile].", "Nó thật [tuyệt / yên tĩnh / khó khăn]."],
+          ["Il y avait [beaucoup de monde / du soleil].", "Có [rất nhiều người / nắng]."],
+          ["Il faisait [beau / chaud / froid / mauvais].", "Trời [đẹp / nóng / lạnh / xấu]."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
+
+        <SectionTitle text="Passé composé vs Imparfait — phân biệt" />
+        <Table
+          headers={["Thì", "Dùng khi", "Ví dụ"]}
+          rows={[
+            ["Passé composé", "Sự kiện XẢY RA, hoàn thành", "Je suis allé(e) à la plage."],
+            ["Imparfait", "Miêu tả HOÀN CẢNH, thói quen", "Il faisait beau, il y avait du monde."],
+          ]}
+        />
+        <Note text="Hay dùng cùng nhau: 'Quand je suis arrivé(e) (PC), il faisait (IMP) très chaud.'" color={T.orange} />
+
+        <SectionTitle text="Ví dụ kể chuyện" />
+        {[
+          ["C'était magnifique ! La mer était bleue.", "Thật tuyệt! Biển rất xanh."],
+          ["Il y avait beaucoup de touristes.", "Có rất nhiều khách du lịch."],
+          ["Quand j'étais enfant, j'habitais à Hanoi.", "Hồi nhỏ, tôi sống ở Hà Nội."],
+          ["Avant, elle travaillait dans une banque.", "Trước đây, cô ấy làm việc ở ngân hàng."],
+        ].map(([fr,vi])=><Phrase key={fr} fr={fr} vi={vi}/>)}
       </div>
     );
 

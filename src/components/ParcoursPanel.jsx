@@ -145,7 +145,7 @@ function UnitList({ onSelect }) {
 
 // ── Step Card ──────────────────────────────────────────────────
 
-function StepCard({ step, done, onClick }) {
+function StepCard({ step, done, isNext, onClick }) {
   return (
     <button
       onClick={onClick}
@@ -153,27 +153,38 @@ function StepCard({ step, done, onClick }) {
         display: "flex", flexDirection: "column", alignItems: "flex-start",
         gap: "0.3rem",
         padding: "0.75rem 0.8rem",
-        background: done ? C.greenL : C.white,
-        border: `1.5px solid ${done ? C.green + "66" : C.border}`,
+        background: done ? C.greenL : isNext ? `${step.color}08` : C.white,
+        border: `1.5px solid ${done ? C.green + "88" : isNext ? step.color : C.border}`,
         borderRadius: 12, cursor: "pointer",
         textAlign: "left", fontFamily: "inherit",
         transition: "all 0.15s", position: "relative",
+        boxShadow: isNext ? `0 2px 8px ${step.color}22` : "none",
       }}
     >
-      {/* done badge */}
-      {done && (
+      {/* status badge */}
+      {done ? (
         <span style={{
-          position: "absolute", top: 6, right: 8,
-          fontSize: "0.65rem", color: C.green,
-          fontWeight: 700,
-        }}>✓</span>
-      )}
+          position: "absolute", top: 5, right: 7,
+          fontSize: "0.58rem", color: "#fff",
+          fontWeight: 700, background: C.green,
+          borderRadius: 20, padding: "0.1rem 0.4rem",
+          lineHeight: 1.5,
+        }}>✓ Xong</span>
+      ) : isNext ? (
+        <span style={{
+          position: "absolute", top: 5, right: 7,
+          fontSize: "0.56rem", color: "#fff",
+          fontWeight: 700, background: step.color,
+          borderRadius: 20, padding: "0.1rem 0.4rem",
+          lineHeight: 1.5,
+        }}>Tiếp theo</span>
+      ) : null}
 
       {/* icon */}
       <span style={{
         width: 32, height: 32, borderRadius: 9,
-        background: done ? `${step.color}20` : `${step.color}18`,
-        border: `1.5px solid ${step.color}40`,
+        background: done ? `${C.green}22` : `${step.color}18`,
+        border: `1.5px solid ${done ? C.green + "55" : step.color + "40"}`,
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: "1rem", flexShrink: 0,
       }}>
@@ -182,7 +193,7 @@ function StepCard({ step, done, onClick }) {
 
       {/* text */}
       <div>
-        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: done ? C.green : C.ink, lineHeight: 1.2 }}>
+        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: done ? C.green : isNext ? step.color : C.ink, lineHeight: 1.2 }}>
           {step.kind}
         </div>
         <div style={{ fontSize: "0.65rem", color: C.gray, marginTop: 1, lineHeight: 1.3 }}>
@@ -340,6 +351,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
                   key={step.id}
                   step={step}
                   done={!!progress[step.id]}
+                  isNext={nextStep?.id === step.id}
                   onClick={() => handleStep(step)}
                 />
               ))}

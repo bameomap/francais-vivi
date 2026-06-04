@@ -317,11 +317,23 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
   const [selectedUnit, setSelectedUnit] = useState(null);
 
   useEffect(() => {
+    // Deep-link from Parcours takes priority, otherwise restore last-viewed unit
     if (defaultUnitIndex != null) {
       const unit = EDITO_GRAMMAR[defaultUnitIndex] || EDITO_GRAMMAR[0];
       if (unit) setSelectedUnit(unit);
+    } else {
+      const saved = localStorage.getItem("grammar_last_unit");
+      if (saved) {
+        const unit = EDITO_GRAMMAR.find(u => u.id === saved);
+        if (unit) setSelectedUnit(unit);
+      }
     }
   }, [defaultUnitIndex]);
+
+  // Save last-viewed unit to localStorage whenever it changes
+  useEffect(() => {
+    if (selectedUnit) localStorage.setItem("grammar_last_unit", selectedUnit.id);
+  }, [selectedUnit]);
   const [openPoints, setOpenPoints]     = useState(new Set());
   const [activeExercise, setActiveExercise] = useState(null); // {topic}
   const [loading, setLoading]   = useState(false);
