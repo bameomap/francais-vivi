@@ -6,9 +6,11 @@ import ConjugaisonPanel from "./ConjugaisonPanel.jsx";
 import PhrasebookPanel from "./PhrasebookPanel.jsx";
 import EditoVerbsPanel from "./EditoVerbsPanel.jsx";
 import EditoPhonoPanel from "./EditoPhonoPanel.jsx";
+import DictionaryPanel from "./DictionaryPanel.jsx";
 
 const TABS = [
-  { id: "pronunc",    label: "Phát âm",      icon: "🔊" },
+  { id: "dict",      label: "Tra từ",       icon: "🔍" },
+  { id: "pronunc",   label: "Phát âm",      icon: "🔊" },
   { id: "grammar",   label: "Ngữ pháp",     icon: "⚜️" },
   { id: "phono",     label: "Phono",        icon: "🎵" },
   { id: "verbes",    label: "Động từ",      icon: "🖊️" },
@@ -17,7 +19,7 @@ const TABS = [
 ];
 
 export default function ReferenceHub({ onBackToParcours }) {
-  const [active, setActive]             = useState("pronunc");
+  const [active, setActive]             = useState("dict");
   const [fromParcours, setFromParcours] = useState(false);
 
   useEffect(() => {
@@ -67,6 +69,7 @@ export default function ReferenceHub({ onBackToParcours }) {
         ))}
       </div>
 
+      {active === "dict"    && <DictionaryPanel />}
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
       {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} />}
