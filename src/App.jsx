@@ -31,7 +31,7 @@ import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards } from "./utils/
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
 import { PARCOURS_UNITS } from "./data/parcoursData.js";
-import { schedulePush } from "./utils/cloudSync.js";
+import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
 
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
@@ -181,6 +181,20 @@ function AppInner() {
       setStorageWarn(true);
     }
   }, []);
+
+  // ── Cloud sync: auto-pull on focus, auto-push on close ────────────
+  const [syncPullMsg, setSyncPullMsg] = useState("");
+  useEffect(() => {
+    const cleanup = initAutoSync((applied, ts) => {
+      // Show a subtle toast when data was pulled from cloud
+      const timeStr = new Date(ts).toLocaleTimeString("vi-VN", { hour:"2-digit", minute:"2-digit" });
+      setSyncPullMsg(`☁️ Đã đồng bộ từ cloud (${timeStr})`);
+      setTimeout(() => setSyncPullMsg(""), 3500);
+      // Refresh SRS stats in case cards were updated
+      setSrsStats(getSRSStats());
+    });
+    return cleanup;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(""), 2400); };
 
@@ -386,6 +400,13 @@ function AppInner() {
       {(toast || badgeToast) && (
         <div style={{ position:"fixed", top:20, left:"50%", transform:"translateX(-50%)", background:badgeToast?"#7C3AED":C.ink, color:C.white, padding:"0.55rem 1.2rem", borderRadius:24, fontSize:"0.8rem", zIndex:400, whiteSpace:"nowrap", boxShadow:"0 4px 20px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
           {badgeToast || toast}
+        </div>
+      )}
+
+      {/* ── Cloud sync pull notification ── */}
+      {syncPullMsg && (
+        <div style={{ position:"fixed", bottom:72, left:"50%", transform:"translateX(-50%)", background:"#1e3a5f", color:"#fff", padding:"0.45rem 1rem", borderRadius:20, fontSize:"0.75rem", zIndex:399, whiteSpace:"nowrap", boxShadow:"0 2px 12px rgba(0,0,0,0.2)", animation:"pop 0.3s ease" }}>
+          {syncPullMsg}
         </div>
       )}
 

@@ -88,18 +88,23 @@ export async function pullFromCloud(token = getSyncToken()) {
   return { applied, ts: res.ts };
 }
 
+// ── Last-push timestamp ───────────────────────────────────────────
+const LAST_PUSH_KEY = "sync_last_push_ts";
+export function getLastPushTs() { return Number(localStorage.getItem(LAST_PUSH_KEY) || 0); }
+function setLastPushTs(ts) { localStorage.setItem(LAST_PUSH_KEY, String(ts)); }
+
 // ── Debounced auto-push ───────────────────────────────────────────
 let _pushTimer = null;
 
-/** Schedule a debounced push (call this whenever data changes). */
+/** Schedule a debounced push (call whenever data changes). */
 export function schedulePush(delayMs = 5000) {
   if (!getSyncToken()) return;
   clearTimeout(_pushTimer);
   _pushTimer = setTimeout(async () => {
     try {
-      await pushToCloud();
+      const r = await pushToCloud();
+      setLastPushTs(r.ts);
     } catch (e) {
-      // Silently ignore auto-push errors (offline, etc.)
       if (e.message !== "NO_TOKEN") {
         console.warn("[cloudSync] auto-push failed:", e.message);
       }
@@ -107,7 +112,64 @@ export function schedulePush(delayMs = 5000) {
   }, delayMs);
 }
 
-/** Cancel any pending push (call on app unmount). */
+/** Cancel any pending push. */
 export function cancelPendingPush() {
   clearTimeout(_pushTimer);
+}
+
+// ── Auto-pull on focus / visibility ──────────────────────────────
+/**
+ * Call once on app init. Silently checks cloud on tab focus/page show,
+ * applies newer data automatically, calls onPulled(applied, ts) if updated.
+ * Returns a cleanup function.
+ */
+export function initAutoSync(onPulled) {
+  if (!getSyncToken()) return () => {};
+
+  let _checking = false;
+
+  const checkAndPull = async () => {
+    if (_checking || !getSyncToken()) return;
+    _checking = true;
+    try {
+      const res = await apiCall("GET", getSyncToken());
+      if (!res.data || !res.ts) return;
+      // Only pull if cloud is strictly newer than our last push
+      if (res.ts > getLastPushTs()) {
+        const applied = applyData(res.data);
+        setLastPushTs(res.ts);
+        if (applied > 0 && onPulled) onPulled(applied, res.ts);
+      }
+    } catch {
+      // Silently ignore — offline or token wrong
+    } finally {
+      _checking = false;
+    }
+  };
+
+  const onFocus   = () => checkAndPull();
+  const onVisible = () => { if (!document.hidden) checkAndPull(); };
+
+  window.addEventListener("focus", onFocus);
+  document.addEventListener("visibilitychange", onVisible);
+
+  // Pull once on page load (device switch, fresh open)
+  checkAndPull();
+
+  // Push immediately when page closes (mobile-safe with sendBeacon)
+  const onUnload = () => {
+    if (!getSyncToken()) return;
+    const payload = JSON.stringify({ data: collectData() });
+    const url = `/api/sync?token=${encodeURIComponent(getSyncToken())}`;
+    navigator.sendBeacon?.(url, new Blob([payload], { type: "application/json" }));
+  };
+  window.addEventListener("pagehide",      onUnload);
+  window.addEventListener("beforeunload",  onUnload);
+
+  return () => {
+    window.removeEventListener("focus",           onFocus);
+    document.removeEventListener("visibilitychange", onVisible);
+    window.removeEventListener("pagehide",        onUnload);
+    window.removeEventListener("beforeunload",    onUnload);
+  };
 }

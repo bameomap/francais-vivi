@@ -1,4 +1,5 @@
 import { PARCOURS_UNITS, STEP_DEFS } from "../data/parcoursData.js";
+import { schedulePush } from "./cloudSync.js";
 
 const KEY = "parcours_progress";
 const STEP_IDS = STEP_DEFS.map(s => s.id);
@@ -13,6 +14,7 @@ export function markStepDone(unitId, stepId) {
   if (!p[unitId]) p[unitId] = {};
   p[unitId][stepId] = true;
   localStorage.setItem(KEY, JSON.stringify(p));
+  schedulePush();
 }
 
 export function getUnitStepProgress(unitId) {

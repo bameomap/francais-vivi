@@ -1,6 +1,7 @@
 const SETS_KEY = "vocab_sets";
 const STREAK_KEY = "streak_data";
 const PROGRESS_KEY = "module_progress";
+import { schedulePush } from "./cloudSync.js";
 
 // ── Storage health ────────────────────────────────────────────
 // Most browsers cap localStorage at ~5MB. We warn before silent data loss.
@@ -84,6 +85,7 @@ export function markStudiedToday() {
       hist.push(today);
       localStorage.setItem("study_history", JSON.stringify(hist.slice(-90)));
     }
+    schedulePush();
   } catch {}
 }
 

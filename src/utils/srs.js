@@ -11,6 +11,7 @@
  */
 
 import { getMistakes } from "./storage.js";
+import { schedulePush } from "./cloudSync.js";
 
 const SRS_KEY = "srs_data";
 
@@ -77,6 +78,7 @@ export function updateSRSCardRating(fr, rating) {
   if (!data[fr]) return;
   data[fr] = calculateNextRating(data[fr], rating);
   saveSRSData(data);
+  schedulePush();
 }
 
 /** Label for interval shown under each button */
