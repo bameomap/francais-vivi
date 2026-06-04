@@ -321,6 +321,14 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
                 style={{ padding:"0.75rem 1.8rem", background:`linear-gradient(135deg, ${C.accent}, #c0392b)`, color:C.white, border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700, boxShadow:`0 6px 20px ${C.accent}44` }}>
                 Tạo bài đọc ✦
               </button>
+
+              {/* Show cached article for this unit+level if available */}
+              {selectedUnit && getCached(selectedUnit, level) && (
+                <button onClick={() => setLecture(getCached(selectedUnit, level))}
+                  style={{ marginTop:"0.65rem", width:"100%", padding:"0.5rem", background:"transparent", border:`1.5px solid ${C.border}`, borderRadius:10, color:C.gray, fontSize:"0.73rem", cursor:"pointer", fontFamily:"inherit" }}>
+                  📄 Xem lại bài cũ · {unitData?.title} · {LEVEL_CONFIG[level]?.label}
+                </button>
+              )}
             </div>
           </div>
         )}

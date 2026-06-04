@@ -221,9 +221,25 @@ export default function SRSPanel({ currentWords = [] }) {
         </div>
         <button onClick={startReview} disabled={stats.due === 0}
           style={{ width:"100%", padding:"0.8rem", background: stats.due > 0 ? "#fff" : "rgba(255,255,255,0.3)", color: stats.due > 0 ? PURPLE : "rgba(255,255,255,0.6)", border:"none", borderRadius:12, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor: stats.due > 0 ? "pointer" : "default", fontWeight:700, transition:"all 0.2s" }}>
-          {stats.due > 0 ? `Ôn ${stats.due} từ ngay →` : "✓ Không có từ cần ôn!"}
+          {stats.due > 0 ? `Ôn ${stats.due} từ ngay →` : stats.total === 0 ? "Chưa có thẻ nào" : "✓ Hôm nay xong rồi!"}
         </button>
       </div>
+
+      {/* Empty state — guide to start */}
+      {stats.total === 0 && (
+        <div style={{ background:C.white, border:`1.5px solid ${PURPLE}33`, borderRadius:16, padding:"1.1rem", marginBottom:"0.75rem", textAlign:"center" }}>
+          <div style={{ fontSize:"2rem", marginBottom:"0.4rem" }}>📚</div>
+          <div style={{ fontWeight:700, color:C.ink, fontSize:"0.9rem", marginBottom:"0.35rem" }}>Bộ thẻ SRS của bạn đang trống</div>
+          <div style={{ fontSize:"0.76rem", color:C.gray, lineHeight:1.6, marginBottom:"0.75rem" }}>
+            Hãy học từ vựng trong <b>📖 Từ vựng Édito</b>, làm bài quiz, hoặc nghe bài — từ mới sẽ tự động được thêm vào thẻ ôn tập của bạn!
+          </div>
+          <div style={{ display:"flex", gap:"0.4rem", justifyContent:"center", flexWrap:"wrap" }}>
+            {[["📖 Từ vựng","edito"],["🎧 Nghe","ecouter"],["📜 Đọc hiểu","lecture"]].map(([label]) => (
+              <span key={label} style={{ padding:"0.3rem 0.7rem", background:PURPLE_L, color:PURPLE, borderRadius:20, fontSize:"0.72rem", fontWeight:600 }}>{label}</span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Add current words */}
       {currentWords.length > 0 && (

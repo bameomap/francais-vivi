@@ -245,6 +245,23 @@ function UnitDetailView({ unit, onBack, backLabel = "← Quay lại" }) {
         </div>
       </div>
 
+      {/* Export button */}
+      <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:"0.5rem" }}>
+        <button
+          onClick={() => {
+            const words = unit.groups.flatMap(g => g.words);
+            const csv = "Front,Back\n" + words.map(w => `"${w.fr.replace(/"/g,'""')}","${(w.vi||"").replace(/"/g,'""')}"`).join("\n");
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `vocab_unite${unit.num}_${unit.title.replace(/\s+/g,"_")}.csv`;
+            a.click();
+          }}
+          style={{ display:"flex", alignItems:"center", gap:"0.35rem", padding:"0.28rem 0.7rem", background:"transparent", border:`1.5px solid ${C.border}`, borderRadius:20, fontSize:"0.67rem", color:C.gray, cursor:"pointer", fontFamily:"inherit" }}>
+          ⬇ CSV / Anki
+        </button>
+      </div>
+
       {/* Group cards */}
       <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
         {unit.groups.map((g, i) => (

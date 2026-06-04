@@ -945,7 +945,15 @@ export default function GrammarCheatsheet({ allowedTopics = null, defaultTopic =
   const firstTopic = visibleTopics[0]?.id || "pronoms";
 
   const [active, setActive] = useState(defaultTopic || firstTopic);
+  const [search, setSearch] = useState("");
   const tabRef = useRef(null);
+
+  const filteredTopics = search.trim()
+    ? visibleTopics.filter(t =>
+        t.label.toLowerCase().includes(search.toLowerCase()) ||
+        t.id.toLowerCase().includes(search.toLowerCase())
+      )
+    : visibleTopics;
 
   const scroll = (dir) => {
     if (tabRef.current) tabRef.current.scrollBy({ left: dir * 160, behavior: "smooth" });
@@ -971,15 +979,32 @@ export default function GrammarCheatsheet({ allowedTopics = null, defaultTopic =
         </div>
       )}
 
-      {/* Tab bar — hidden when embedded (parent controls topic selection) */}
+      {/* Search box */}
       {!hideTabBar && (
+        <div style={{ padding: "0.5rem 1rem 0" }}>
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="🔍 Tìm chủ đề... (vd: passé, đại từ, mệnh lệnh)"
+            style={{
+              width: "100%", boxSizing: "border-box",
+              padding: "0.42rem 0.75rem", border: `1.5px solid ${C.border}`,
+              borderRadius: 20, fontSize: "0.76rem", fontFamily: "inherit",
+              background: C.white, color: C.ink, outline: "none",
+            }}
+          />
+        </div>
+      )}
+
+      {/* Tab bar — hidden when embedded (parent controls topic selection) */}
+      {!hideTabBar && !search && (
         <div style={{ display: "flex", alignItems: "center", gap: "0.25rem", padding: "0.5rem 0.75rem" }}>
           <button onClick={() => scroll(-1)}
             style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.border}`, background: C.white, color: C.gray, fontSize: "0.8rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
             ‹
           </button>
           <div ref={tabRef} style={{ overflowX: "auto", display: "flex", gap: "0.35rem", flex: 1, scrollbarWidth: "none", msOverflowStyle: "none" }}>
-            {visibleTopics.map(t => (
+            {filteredTopics.map(t => (
               <button key={t.id} data-id={t.id} onClick={() => pick(t.id)}
                 style={{ flexShrink: 0, padding: "0.35rem 0.7rem", background: active === t.id ? t.color : C.white, border: `1.5px solid ${active === t.id ? t.color : C.border}`, color: active === t.id ? "#fff" : C.gray, borderRadius: 20, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", fontWeight: active === t.id ? 700 : 400, whiteSpace: "nowrap", transition: "all 0.15s" }}>
                 {t.icon} {t.label}
@@ -990,6 +1015,25 @@ export default function GrammarCheatsheet({ allowedTopics = null, defaultTopic =
             style={{ flexShrink: 0, width: 28, height: 28, borderRadius: "50%", border: `1.5px solid ${C.border}`, background: C.white, color: C.gray, fontSize: "0.8rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
             ›
           </button>
+        </div>
+      )}
+
+      {/* Search results grid */}
+      {search && (
+        <div style={{ padding: "0.5rem 1rem 0" }}>
+          {filteredTopics.length === 0 ? (
+            <div style={{ textAlign:"center", color:C.gray, fontSize:"0.8rem", padding:"1rem" }}>Không tìm thấy chủ đề nào 🤷</div>
+          ) : (
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.4rem", marginBottom:"0.5rem" }}>
+              {filteredTopics.map(t => (
+                <button key={t.id} onClick={() => { pick(t.id); setSearch(""); }}
+                  style={{ display:"flex", alignItems:"center", gap:"0.5rem", padding:"0.55rem 0.75rem", background: active===t.id ? t.color+"18" : C.white, border:`1.5px solid ${active===t.id ? t.color : C.border}`, borderRadius:10, cursor:"pointer", textAlign:"left", fontFamily:"inherit", transition:"all 0.15s" }}>
+                  <span style={{ fontSize:"1rem" }}>{t.icon}</span>
+                  <span style={{ fontSize:"0.74rem", fontWeight:600, color: active===t.id ? t.color : C.ink }}>{t.label}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

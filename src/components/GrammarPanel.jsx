@@ -44,9 +44,18 @@ export function GrammarMC({ exercises, onWrong }) {
           })}
         </div>
         {a && <div style={{ marginTop:"0.4rem", fontSize:"0.72rem", lineHeight:1.7 }}>
-          {ok ? <span style={{color:C.green}}>✓ Chính xác!</span>
-              : <><div style={{color:C.red}}>✗ <b>{a}</b></div><div style={{color:C.green}}>✓ <b>{q.answer}</b></div></>}
-          {q.explanation && <div style={{color:C.gray,marginTop:"0.2rem"}}>💡 {q.explanation}</div>}
+          {ok
+            ? <span style={{color:C.green,fontWeight:600}}>✓ Chính xác!</span>
+            : <><div style={{color:C.red}}>✗ Bạn chọn: <b>{a}</b></div><div style={{color:C.green,fontWeight:600}}>✓ Đáp án đúng: <b>{q.answer}</b></div></>}
+          {q.explanation && (
+            <div style={{
+              marginTop:"0.35rem", padding:"0.35rem 0.6rem",
+              background: ok ? C.greenL : C.goldL,
+              border: `1px solid ${ok ? C.green+"44" : C.gold+"66"}`,
+              borderRadius:8, color: ok ? "#166534" : "#92400e",
+              fontSize:"0.71rem", lineHeight:1.55,
+            }}>💡 {q.explanation}</div>
+          )}
         </div>}
       </div>
     );
@@ -72,7 +81,15 @@ export function GrammarFill({ exercises }) {
           {!done&&<button onClick={()=>setChk(x=>({...x,[i]:true}))} style={{padding:"0.3rem 0.65rem",background:C.purple,color:C.white,border:"none",borderRadius:6,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>Kiểm tra</button>}
           {done&&<span style={{fontSize:"0.73rem",color:ok?C.green:C.red,fontWeight:500}}>{ok?"✓ Đúng!":`✗ Đáp án: ${q.answer}`}</span>}
         </div>
-        {done&&q.explanation&&<div style={{marginTop:"0.4rem",fontSize:"0.72rem",color:C.gray}}>💡 {q.explanation}</div>}
+        {done && q.explanation && (
+          <div style={{
+            marginTop:"0.35rem", padding:"0.35rem 0.6rem",
+            background: ok ? C.greenL : C.goldL,
+            border: `1px solid ${ok ? C.green+"44" : C.gold+"66"}`,
+            borderRadius:8, color: ok ? "#166534" : "#92400e",
+            fontSize:"0.71rem", lineHeight:1.55,
+          }}>💡 {q.explanation}</div>
+        )}
       </div>
     );
   })}</div>;
@@ -119,7 +136,15 @@ export function GrammarOrder({ exercises }) {
         {s.checked&&<div style={{marginTop:"0.45rem"}}>
           <div style={{fontSize:"0.78rem",color:ok?C.green:C.red,marginBottom:"0.2rem"}}>{ok?"✓ Chính xác!":<><span>✗ Đáp án: </span><b style={{fontFamily:"Georgia,serif"}}>{q.answer}</b></>}</div>
           {q.translation&&<div style={{fontSize:"0.72rem",color:C.gray}}>→ {q.translation}</div>}
-          {q.explanation&&<div style={{fontSize:"0.72rem",color:C.gray,marginTop:"0.15rem"}}>💡 {q.explanation}</div>}
+          {q.explanation && (
+            <div style={{
+              marginTop:"0.35rem", padding:"0.35rem 0.6rem",
+              background: ok ? C.greenL : C.goldL,
+              border: `1px solid ${ok ? C.green+"44" : C.gold+"66"}`,
+              borderRadius:8, color: ok ? "#166534" : "#92400e",
+              fontSize:"0.71rem", lineHeight:1.55,
+            }}>💡 {q.explanation}</div>
+          )}
         </div>}
       </div>
     );

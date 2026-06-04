@@ -210,8 +210,15 @@ export default function EditoAudioPanel() {
     setDictee(prev => ({ ...prev, [tid]: { current: 0, typed: {}, results: {} } }));
 
   // ── AI expand Pour note ───────────────────────────────────────
+  const NOTE_CACHE_KEY = "pour_note_expansions_v2";
+  const getNoteCache = () => { try { return JSON.parse(localStorage.getItem(NOTE_CACHE_KEY) || "{}"); } catch { return {}; } };
+  const setNoteCache = (key, content) => { try { const c = getNoteCache(); c[key] = content; localStorage.setItem(NOTE_CACHE_KEY, JSON.stringify(c)); } catch {} };
+
   const handleExpandNote = async (tid, ni, heading, phrases) => {
     const key = `${tid}|${ni}`;
+    // Return cached result instantly if available
+    const cached = getNoteCache()[key];
+    if (cached) { setNoteExpansions(prev => ({ ...prev, [key]: { loading: false, content: cached } })); return; }
     setNoteExpansions(prev => ({ ...prev, [key]: { loading: true } }));
     try {
       const res = await fetch("/api/proxy", {
@@ -233,11 +240,22 @@ Trả về JSON thuần (không markdown):
       const raw = data.content?.[0]?.text || "{}";
       const match = raw.match(/\{[\s\S]*\}/);
       const content = JSON.parse(match ? match[0] : "{}");
+      setNoteCache(key, content);
       setNoteExpansions(prev => ({ ...prev, [key]: { loading: false, content } }));
     } catch {
       setNoteExpansions(prev => ({ ...prev, [key]: { loading: false, content: { vi: "Lỗi kết nối AI. Thử lại nhé! 😢" } } }));
     }
   };
+
+  // Load cached expansions on mount
+  useEffect(() => {
+    const cached = getNoteCache();
+    if (Object.keys(cached).length > 0) {
+      setNoteExpansions(Object.fromEntries(
+        Object.entries(cached).map(([k, content]) => [k, { loading: false, content }])
+      ));
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Render ────────────────────────────────────────────────────
   return (
@@ -533,7 +551,7 @@ Trả về JSON thuần (không markdown):
                             <button
                               onClick={() => !exp?.loading && handleExpandNote(track.id, ni, note.heading, note.phrases)}
                               style={{ background: "rgba(255,255,255,0.22)", border: "none", color: "#fff", fontSize: "0.6rem", fontWeight: 700, padding: "0.12rem 0.55rem", borderRadius: 10, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", flexShrink: 0 }}>
-                              {exp?.loading ? "⏳" : exp?.content ? "✓ AI" : "AI ✦"}
+                              {exp?.loading ? "⏳" : exp?.content ? "✓ VI" : "AI ✦"}
                             </button>
                           </div>
                           {/* Phrases */}
