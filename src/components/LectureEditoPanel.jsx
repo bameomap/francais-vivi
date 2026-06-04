@@ -30,20 +30,36 @@ const TypePill = ({ type }) => {
 };
 
 // ── Helpers for smart phrase detection ───────────────────────
-const SE_WORDS    = new Set(["se", "s'"]);
-const NE_WORDS    = new Set(["ne", "n'"]);
-// Compound prepositions where word[i] + word[i+1] form a phrase
-const COMP_PREP_NEXT = { "à": ["côté"], "en": ["face", "dehors", "dessous", "dessus"], "près": ["de"], "loin": ["de"], "à": ["partir", "côté", "cause", "gauche", "droite"] };
+const REFLEXIVE = new Set(["se", "me", "te", "nous", "vous"]);
+const COMP_PREP_NEXT = {
+  "à":    ["côté", "partir", "cause", "gauche", "droite"],
+  "en":   ["face", "dehors", "dessous", "dessus", "train"],
+  "près": ["de"],
+  "loin": ["de"],
+  "tout": ["droit", "droite"],
+};
+
+// Skip non-word tokens to find the actual previous/next word
+function prevWord(tokens, idx) {
+  for (let i = idx - 1; i >= 0; i--) {
+    if (tokens[i].isWord && tokens[i].norm.length > 1) return tokens[i].norm;
+  }
+  return "";
+}
+function nextWord(tokens, idx) {
+  for (let i = idx + 1; i < tokens.length; i++) {
+    if (tokens[i].isWord && tokens[i].norm.length > 1) return tokens[i].norm;
+  }
+  return "";
+}
 
 function getPhrase(tokens, idx) {
   const cur  = tokens[idx]?.norm || "";
-  const prev = idx > 0 ? tokens[idx - 1]?.norm : "";
-  const next = idx < tokens.length - 1 ? tokens[idx + 1]?.norm : "";
-
-  // se / s' + verb → "se coucher"
-  if (SE_WORDS.has(prev)) return `se ${cur}`;
-  // ne + verb + pas → just look up the verb (ne is grammatical)
-  // à côté, en face, près de, loin de...
+  const prev = prevWord(tokens, idx);
+  const next = nextWord(tokens, idx);
+  // se/me/te + verb → "se coucher", "me lever"...
+  if (REFLEXIVE.has(prev)) return `se ${cur}`;
+  // compound preps: "à côté", "en face", "près de"...
   if (next && COMP_PREP_NEXT[cur]?.includes(next)) return `${cur} ${next}`;
   return cur;
 }
