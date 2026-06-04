@@ -1,9 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { getStreak, getProgress, getMistakes } from "../utils/storage.js";
 import { getSRSStats } from "../utils/srs.js";
 import { getXPData, getLevel, getNextLevel, LEVELS } from "../utils/xp.js";
 import { computeOverallProgress } from "../utils/parcours.js";
+import { getSyncToken, setSyncToken, clearSyncToken, pushToCloud, pullFromCloud } from "../utils/cloudSync.js";
 
 // ── Keys that should be backed up / restored ──────────────────
 const BACKUP_KEYS = [
@@ -71,6 +72,44 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
     reader.readAsText(file);
     e.target.value = "";
   };
+  // ── Cloud sync state ────────────────────────────────────────────
+  const [syncToken, setSyncTokenState] = useState(getSyncToken);
+  const [syncMsg,   setSyncMsg]        = useState("");
+  const [syncing,   setSyncing]        = useState(false);
+
+  const showSyncMsg = (msg, ms = 4000) => {
+    setSyncMsg(msg);
+    setTimeout(() => setSyncMsg(""), ms);
+  };
+
+  const handleSyncPush = async () => {
+    setSyncing(true);
+    try {
+      const r = await pushToCloud(syncToken);
+      showSyncMsg(`☁️ Đã lưu ${r.keys} mục lên cloud (${new Date(r.ts).toLocaleTimeString("vi-VN")})`);
+    } catch (e) {
+      showSyncMsg(e.message === "UNAUTHORIZED" ? "❌ Token sai — kiểm tra lại" : "❌ Lỗi kết nối. Thử lại nhé!");
+    } finally { setSyncing(false); }
+  };
+
+  const handleSyncPull = async () => {
+    setSyncing(true);
+    try {
+      const r = await pullFromCloud(syncToken);
+      if (r.empty) { showSyncMsg("☁️ Chưa có dữ liệu trên cloud."); setSyncing(false); return; }
+      showSyncMsg(`✅ Đã khôi phục ${r.applied} mục — tải lại trang…`);
+      setTimeout(() => window.location.reload(), 1800);
+    } catch (e) {
+      showSyncMsg(e.message === "UNAUTHORIZED" ? "❌ Token sai — kiểm tra lại" : "❌ Lỗi kết nối. Thử lại nhé!");
+    } finally { setSyncing(false); }
+  };
+
+  const handleSaveToken = (val) => {
+    setSyncTokenState(val);
+    setSyncToken(val);
+    showSyncMsg(val ? "🔑 Token đã lưu" : "🗑 Token đã xóa", 2000);
+  };
+
   const overall    = computeOverallProgress();
   const mistakes   = getMistakes();
   const progress   = getProgress();
@@ -389,10 +428,65 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
         </div>
       </div>
 
-      {/* Feedback toast */}
+      {/* Feedback toast (local backup) */}
       {backupMsg && (
         <div style={{ marginTop: 8, padding: "0.5rem 0.75rem", background: backupMsg.startsWith("✅") ? C.greenL : C.redL, border: `1px solid ${backupMsg.startsWith("✅") ? C.green : C.red}44`, borderRadius: 10, fontSize: "0.75rem", color: backupMsg.startsWith("✅") ? C.green : C.red, lineHeight: 1.5 }}>
           {backupMsg}
+        </div>
+      )}
+
+      {/* ── Cloud Sync ── */}
+      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8, marginTop: 20 }}>
+        Đồng bộ đám mây ☁️
+      </div>
+      <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 14, padding: "12px 14px", display: "flex", flexDirection: "column", gap: 10 }}>
+        {/* Token input */}
+        <div>
+          <div style={{ fontSize: 12, color: C.gray, marginBottom: 5 }}>🔑 Sync Token (xem trong Settings → Environment Variables)</div>
+          <div style={{ display: "flex", gap: 6 }}>
+            <input
+              type="password"
+              value={syncToken}
+              onChange={e => setSyncTokenState(e.target.value)}
+              placeholder="Nhập token bí mật..."
+              style={{ flex: 1, padding: "0.35rem 0.6rem", border: `1.5px solid ${syncToken ? C.blue : C.border}`, borderRadius: 8, fontSize: "0.75rem", fontFamily: "inherit", background: C.white, color: C.ink, outline: "none" }}
+            />
+            <button onClick={() => handleSaveToken(syncToken)}
+              style={{ padding: "0.3rem 0.7rem", background: C.blue, color: "#fff", border: "none", borderRadius: 8, fontSize: "0.72rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit", flexShrink: 0 }}>
+              Lưu
+            </button>
+            {syncToken && (
+              <button onClick={() => handleSaveToken("")}
+                style={{ padding: "0.3rem 0.6rem", background: "transparent", color: C.gray, border: `1.5px solid ${C.border}`, borderRadius: 8, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 }}>
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+        {/* Sync buttons */}
+        {syncToken && (
+          <div style={{ display: "flex", gap: 8 }}>
+            <button onClick={handleSyncPush} disabled={syncing}
+              style={{ flex: 1, padding: "0.5rem", background: C.blue, color: "#fff", border: "none", borderRadius: 10, fontSize: "0.78rem", cursor: syncing ? "default" : "pointer", fontWeight: 600, fontFamily: "inherit", opacity: syncing ? 0.6 : 1 }}>
+              {syncing ? "⏳ Đang xử lý..." : "⬆ Lưu lên cloud"}
+            </button>
+            <button onClick={handleSyncPull} disabled={syncing}
+              style={{ flex: 1, padding: "0.5rem", background: "transparent", color: C.blue, border: `1.5px solid ${C.blue}`, borderRadius: 10, fontSize: "0.78rem", cursor: syncing ? "default" : "pointer", fontWeight: 600, fontFamily: "inherit", opacity: syncing ? 0.6 : 1 }}>
+              {syncing ? "⏳ Đang xử lý..." : "⬇ Kéo từ cloud"}
+            </button>
+          </div>
+        )}
+        {!syncToken && (
+          <div style={{ fontSize: "0.72rem", color: C.gray, lineHeight: 1.6 }}>
+            Nhập token để đồng bộ dữ liệu tự động giữa các thiết bị. Token nằm trong Vercel Dashboard → Settings → Environment Variables → <b>SYNC_SECRET</b>.
+          </div>
+        )}
+      </div>
+
+      {/* Cloud sync feedback */}
+      {syncMsg && (
+        <div style={{ marginTop: 8, padding: "0.5rem 0.75rem", background: syncMsg.startsWith("❌") ? C.redL : C.greenL, border: `1px solid ${syncMsg.startsWith("❌") ? C.red : C.green}44`, borderRadius: 10, fontSize: "0.75rem", color: syncMsg.startsWith("❌") ? C.red : C.green, lineHeight: 1.5 }}>
+          {syncMsg}
         </div>
       )}
 

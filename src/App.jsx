@@ -31,6 +31,7 @@ import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards } from "./utils/
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
 import { PARCOURS_UNITS } from "./data/parcoursData.js";
+import { schedulePush } from "./utils/cloudSync.js";
 
 // ── Module definitions ──────────────────────────────────────
 const MODULES = [
@@ -237,6 +238,7 @@ function AppInner() {
     if (wordObj) {
       addWordToSRS(wordObj.fr, wordObj.vi);
       setSrsStats(getSRSStats());
+      schedulePush();
     }
   }, [words]);
 
