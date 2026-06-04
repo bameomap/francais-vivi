@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { speak } from "../utils/helpers.js";
 import WordCardBack from "./ui/WordCardBack.jsx";
@@ -69,6 +69,14 @@ function RatingBar({ card, onRate }) {
 
 // ── Flip card ────────────────────────────────────────────────────
 function FlipCard({ card, flipped, onFlip }) {
+  // Auto-play pronunciation when card is revealed
+  useEffect(() => {
+    if (flipped) {
+      const t = setTimeout(() => speak(card.fr), 300);
+      return () => clearTimeout(t);
+    }
+  }, [flipped]);
+
   return (
     <div onClick={onFlip}
       style={{ perspective:"1200px", cursor:"pointer", userSelect:"none", minHeight:230 }}>
@@ -125,6 +133,11 @@ function FlipCard({ card, flipped, onFlip }) {
           overflow:"hidden",
         }}>
           <WordCardBack word={card} />
+          {/* Swipe hint */}
+          <div style={{ position:"absolute", bottom:10, left:0, right:0, display:"flex", justifyContent:"space-between", padding:"0 14px", pointerEvents:"none" }}>
+            <span style={{ fontSize:"0.58rem", color:C.gray2, opacity:0.7 }}>← Quên</span>
+            <span style={{ fontSize:"0.58rem", color:C.gray2, opacity:0.7 }}>Nhớ →</span>
+          </div>
         </div>
       </div>
     </div>
@@ -133,6 +146,7 @@ function FlipCard({ card, flipped, onFlip }) {
 
 // ══════════════════════════════════════════════════════════════════
 export default function SRSPanel({ currentWords = [] }) {
+  const WORDLIST_KEY = "reading_wordlist_v1";
   const [mode,      setMode]      = useState("home");
   const [queue,     setQueue]     = useState([]);
   const [idx,       setIdx]       = useState(0);
@@ -141,6 +155,17 @@ export default function SRSPanel({ currentWords = [] }) {
   const [stats,     setStats]     = useState(getSRSStats());
   const [allCards,  setAllCards]  = useState(getAllCards());
   const [toast,     setToast]     = useState("");
+
+  // Saved words (from reading)
+  const [savedWords, setSavedWords] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
+  });
+  const [savedIdx,     setSavedIdx]     = useState(0);
+  const [savedFlipped, setSavedFlipped] = useState(false);
+  const [savedKnown,   setSavedKnown]   = useState([]);
+
+  // Swipe gesture ref
+  const swipeX = useRef(null);
 
   const refreshStats = () => { setStats(getSRSStats()); setAllCards(getAllCards()); };
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(""), 2200); };
@@ -179,6 +204,31 @@ export default function SRSPanel({ currentWords = [] }) {
       setFlipped(false);
     }
   }, [queue, idx, session]);
+
+  // ── Saved words review ──────────────────────────────────────
+  const startSaved = () => {
+    if (!savedWords.length) { showToast("Chưa có từ nào được lưu!"); return; }
+    setSavedIdx(0); setSavedFlipped(false); setSavedKnown([]); setMode("saved");
+  };
+
+  const savedAnswer = (known) => {
+    const cur = savedWords[savedIdx];
+    if (known) setSavedKnown(k => [...k, cur.fr]);
+    if (savedIdx + 1 >= savedWords.length) {
+      setMode("savedDone");
+    } else {
+      setSavedIdx(i => i + 1);
+      setSavedFlipped(false);
+    }
+  };
+
+  const removeKnown = () => {
+    const updated = savedWords.filter(w => !savedKnown.includes(w.fr));
+    setSavedWords(updated);
+    try { localStorage.setItem(WORDLIST_KEY, JSON.stringify(updated)); } catch {}
+    setMode("home");
+    showToast(`✓ Đã xóa ${savedKnown.length} từ đã nhớ!`);
+  };
 
   const addCurrentWords = () => {
     if (!currentWords.length) { showToast("Chưa có từ vựng nào!"); return; }
@@ -224,6 +274,20 @@ export default function SRSPanel({ currentWords = [] }) {
           {stats.due > 0 ? `Ôn ${stats.due} từ ngay →` : stats.total === 0 ? "Chưa có thẻ nào" : "✓ Hôm nay xong rồi!"}
         </button>
       </div>
+
+      {/* Saved words section */}
+      {savedWords.length > 0 && (
+        <div style={{ background:C.white, border:`1.5px solid ${C.green}44`, borderRadius:16, padding:"0.9rem 1rem", marginBottom:"0.75rem", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+          <div>
+            <div style={{ fontSize:"0.85rem", fontWeight:700, color:C.ink }}>📝 Từ đã lưu khi đọc</div>
+            <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.15rem" }}>{savedWords.length} từ đang chờ ôn</div>
+          </div>
+          <button onClick={startSaved}
+            style={{ padding:"0.45rem 1rem", background:C.green, color:"#fff", border:"none", borderRadius:20, fontSize:"0.78rem", cursor:"pointer", fontWeight:600 }}>
+            Ôn lại →
+          </button>
+        </div>
+      )}
 
       {/* Empty state — guide to start */}
       {stats.total === 0 && (
@@ -303,9 +367,19 @@ export default function SRSPanel({ currentWords = [] }) {
         </div>
       </div>
 
-      {/* Card */}
+      {/* Card — with swipe support */}
       {current && (
-        <div style={{ padding:"0.75rem 1rem 0" }}>
+        <div style={{ padding:"0.75rem 1rem 0" }}
+          onTouchStart={e => { swipeX.current = e.touches[0].clientX; }}
+          onTouchEnd={e => {
+            if (swipeX.current === null) return;
+            const dx = swipeX.current - e.changedTouches[0].clientX;
+            swipeX.current = null;
+            if (Math.abs(dx) < 55) return;
+            if (!flipped) { setFlipped(true); return; }
+            answer(dx > 0 ? 0 : 3);
+          }}
+        >
           <FlipCard card={current} flipped={flipped} onFlip={() => setFlipped(f => !f)} key={`${current.fr}-${idx}`} />
         </div>
       )}
@@ -411,6 +485,93 @@ export default function SRSPanel({ currentWords = [] }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+
+  // ════════════════════════════════════════════════════════════════
+  // SAVED WORDS REVIEW
+  // ════════════════════════════════════════════════════════════════
+  if (mode === "saved") {
+    const sw = savedWords[savedIdx];
+    if (!sw) { setMode("home"); return null; }
+    return (
+      <div style={{ padding:"1rem", animation:"fadeUp 0.3s ease" }}>
+        {/* Header */}
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.75rem" }}>
+          <button onClick={() => setMode("home")} style={{ background:"transparent", border:"none", color:C.gray, cursor:"pointer", fontSize:"0.72rem", fontWeight:600 }}>← Dừng</button>
+          <span style={{ fontSize:"0.72rem", color:C.gray }}>{savedIdx + 1}/{savedWords.length} · ✓ {savedKnown.length} nhớ</span>
+        </div>
+        {/* Progress bar */}
+        <div style={{ height:3, background:C.border, borderRadius:99, marginBottom:"1rem", overflow:"hidden" }}>
+          <div style={{ height:"100%", width:`${((savedIdx)/savedWords.length)*100}%`, background:C.green, borderRadius:99, transition:"width 0.3s" }}/>
+        </div>
+        {/* Card */}
+        <div style={{ perspective:"1200px", userSelect:"none", minHeight:220, marginBottom:"1rem", cursor:"pointer" }}
+          onClick={() => { if (!savedFlipped) { setSavedFlipped(true); setTimeout(() => speak(sw.fr), 280); } }}
+          onTouchStart={e => { swipeX.current = e.touches[0].clientX; }}
+          onTouchEnd={e => {
+            if (swipeX.current === null) return;
+            const dx = swipeX.current - e.changedTouches[0].clientX;
+            swipeX.current = null;
+            if (Math.abs(dx) < 55) return;
+            if (!savedFlipped) { setSavedFlipped(true); setTimeout(() => speak(sw.fr), 280); return; }
+            savedAnswer(dx < 0); // swipe right = nhớ, swipe left = quên
+          }}
+        >
+          <div style={{ position:"relative", width:"100%", minHeight:220, transformStyle:"preserve-3d", transform: savedFlipped ? "rotateY(180deg)" : "rotateY(0deg)", transition:"transform 0.42s cubic-bezier(0.4,0,0.2,1)" }}>
+            {/* Front */}
+            <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", background:`linear-gradient(135deg, ${C.green}, #059669)`, borderRadius:22, padding:"1.5rem", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0.5rem", boxShadow:`0 8px 32px ${C.green}44` }}>
+              <div style={{ fontSize:"0.6rem", color:"rgba(255,255,255,0.7)", textTransform:"uppercase", letterSpacing:2 }}>🇫🇷 Tiếng Pháp</div>
+              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2.4rem", color:"#fff", fontWeight:700, textAlign:"center", lineHeight:1.2 }}>{sw.fr}</div>
+              {sw.type && <span style={{ background:"rgba(255,255,255,0.2)", color:"#fff", borderRadius:20, padding:"0.1rem 0.55rem", fontSize:"0.7rem", fontWeight:700 }}>{sw.type}</span>}
+              <button onClick={e => { e.stopPropagation(); speak(sw.fr); }} style={{ background:"rgba(255,255,255,0.22)", border:"1.5px solid rgba(255,255,255,0.4)", color:"#fff", borderRadius:20, padding:"0.28rem 0.85rem", fontSize:"0.78rem", cursor:"pointer" }}>🔊 Nghe</button>
+              <div style={{ position:"absolute", bottom:14, fontSize:"0.62rem", color:"rgba(255,255,255,0.55)" }}>Nhấn để xem nghĩa ↕</div>
+            </div>
+            {/* Back */}
+            <div style={{ position:"absolute", inset:0, backfaceVisibility:"hidden", WebkitBackfaceVisibility:"hidden", transform:"rotateY(180deg)", background:C.white, borderRadius:22, boxShadow:"0 6px 28px rgba(0,0,0,0.09)", border:`1.5px solid ${C.border}`, padding:"1.5rem", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"0.5rem" }}>
+              <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:2 }}>🇻🇳 Tiếng Việt</div>
+              <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"2rem", color:C.ink, fontWeight:700, textAlign:"center" }}>{sw.vi}</div>
+              {sw.note && <div style={{ fontSize:"0.76rem", color:C.gold, textAlign:"center", lineHeight:1.5 }}>💡 {sw.note}</div>}
+              <div style={{ fontSize:"0.68rem", color:C.gray2 }}>📌 {sw.source}</div>
+              <div style={{ position:"absolute", bottom:10, left:0, right:0, display:"flex", justifyContent:"space-between", padding:"0 14px", pointerEvents:"none" }}>
+                <span style={{ fontSize:"0.58rem", color:C.gray2 }}>← Quên</span>
+                <span style={{ fontSize:"0.58rem", color:C.gray2 }}>Nhớ →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Buttons */}
+        {savedFlipped && (
+          <div style={{ display:"flex", gap:"0.75rem" }}>
+            <button onClick={() => savedAnswer(false)} style={{ flex:1, padding:"0.7rem", background:C.redL, border:`1.5px solid ${C.red}`, borderRadius:14, color:C.red, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>← Ôn lại</button>
+            <button onClick={() => savedAnswer(true)} style={{ flex:1, padding:"0.7rem", background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, color:C.green, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>Nhớ rồi ✓</button>
+          </div>
+        )}
+        {!savedFlipped && (
+          <button onClick={() => { setSavedFlipped(true); setTimeout(() => speak(sw.fr), 280); }} style={{ width:"100%", padding:"0.7rem", background:C.green, color:"#fff", border:"none", borderRadius:14, fontSize:"0.85rem", fontWeight:700, cursor:"pointer" }}>Xem nghĩa →</button>
+        )}
+      </div>
+    );
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  // SAVED WORDS DONE
+  // ════════════════════════════════════════════════════════════════
+  if (mode === "savedDone") return (
+    <div style={{ padding:"1.5rem 1rem", animation:"fadeUp 0.3s ease", textAlign:"center" }}>
+      <div style={{ fontSize:"3rem", marginBottom:"0.5rem" }}>{savedKnown.length === savedWords.length ? "🎉" : "💪"}</div>
+      <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.6rem", color:C.ink, fontWeight:700, marginBottom:"0.25rem" }}>
+        {savedKnown.length}/{savedWords.length}
+      </div>
+      <div style={{ fontSize:"0.82rem", color:C.green, fontWeight:600, marginBottom:"1.5rem" }}>từ đã nhớ!</div>
+      {savedKnown.length > 0 && (
+        <button onClick={removeKnown} style={{ width:"100%", padding:"0.7rem", background:C.green, color:"#fff", border:"none", borderRadius:14, fontSize:"0.85rem", fontWeight:700, cursor:"pointer", marginBottom:"0.6rem" }}>
+          🗑 Xóa {savedKnown.length} từ đã nhớ khỏi danh sách
+        </button>
+      )}
+      <button onClick={() => setMode("home")} style={{ width:"100%", padding:"0.7rem", background:"transparent", border:`1.5px solid ${C.border}`, borderRadius:14, color:C.gray, fontSize:"0.82rem", cursor:"pointer" }}>
+        ← Về trang chủ
+      </button>
     </div>
   );
 }

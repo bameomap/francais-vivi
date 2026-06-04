@@ -52,6 +52,8 @@ function TypeBadge({ type }) {
   );
 }
 
+const WORDLIST_KEY = "reading_wordlist_v1";
+
 export default function DictionaryPanel() {
   const [query,   setQuery]   = useState("");
   const [loading, setLoading] = useState(false);
@@ -60,7 +62,23 @@ export default function DictionaryPanel() {
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem("dict_history") || "[]"); } catch { return []; }
   });
+  const [savedWords, setSavedWords] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
+  });
   const inputRef = useRef(null);
+
+  const isSaved = result && savedWords.some(w => w.fr === result.word);
+
+  const saveWord = () => {
+    if (!result || isSaved) return;
+    const updated = [{
+      fr: result.word, vi: result.vi, type: result.type,
+      note: result.grammar_note || "", source: "Tra từ điển",
+      unit: null, savedAt: Date.now(),
+    }, ...savedWords];
+    setSavedWords(updated);
+    try { localStorage.setItem(WORDLIST_KEY, JSON.stringify(updated)); } catch {}
+  };
 
   const lookup = async (word) => {
     const w = (word || query).trim().toLowerCase();
@@ -245,7 +263,7 @@ export default function DictionaryPanel() {
 
             {/* Related words */}
             {result.related?.length > 0 && (
-              <div>
+              <div style={{ marginBottom: "0.85rem" }}>
                 <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1.5, color: C.gray2, fontWeight: 700, marginBottom: "0.4rem" }}>Từ liên quan</div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
                   {result.related.map(w => (
@@ -257,6 +275,12 @@ export default function DictionaryPanel() {
                 </div>
               </div>
             )}
+
+            {/* Save to word list */}
+            <button onClick={saveWord} disabled={isSaved}
+              style={{ width: "100%", padding: "0.55rem", background: isSaved ? C.greenL : C.green, border: isSaved ? `1.5px solid ${C.green}` : "none", borderRadius: 12, color: isSaved ? C.green : "#fff", fontSize: "0.85rem", fontWeight: 700, cursor: isSaved ? "default" : "pointer", fontFamily: "inherit", transition: "all 0.15s" }}>
+              {isSaved ? "✅ Đã lưu vào danh sách" : "💾 Lưu vào danh sách từ"}
+            </button>
           </div>
         </div>
       )}
