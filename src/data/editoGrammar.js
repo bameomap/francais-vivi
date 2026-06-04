@@ -374,21 +374,30 @@ Prénom → âge → ville → profession/études → famille → goûts → con
         topic:"Mạo từ xác định và bất định — Le/La/Les vs Un/Une/Des",
         rule:`HAI LOẠI MẠO TỪ — phân biệt rất quan trọng!
 
-MẠO TỪ BẤT ĐỊNH (indéfini) → nói về thứ CHƯA XÁC ĐỊNH:
+MẠO TỪ BẤT ĐỊNH (indéfini) → nói về thứ CHƯA XÁC ĐỊNH, MỚI ĐỀ CẬP LẦN ĐẦU:
 • UN  + danh từ nam số ít: un appartement, un ami, un film
 • UNE + danh từ nữ số ít: une maison, une amie, une rue
 • DES + số nhiều (nam và nữ): des amis, des maisons
 
-MẠO TỪ XÁC ĐỊNH (défini) → nói về thứ ĐÃ BIẾT hoặc CỤ THỂ:
-• LE / LA / L' / LES (đã học ở Unité 1)
+MẠO TỪ XÁC ĐỊNH (défini) → nói về thứ ĐÃ BIẾT, CỤ THỂ, HOẶC NÓI CHUNG THEO LOẠI:
+• LE  + danh từ nam số ít: le cinéma, le sport
+• LA  + danh từ nữ số ít: la musique, la France
+• L'  + danh từ bắt đầu bằng nguyên âm/h câm: l'art, l'ami, l'histoire
+• LES + tất cả số nhiều: les langues, les amis
 
-⚠️ Sau phủ định → thay un/une/des bằng DE (d'):
+💡 QUY TẮC "LẦN ĐẦU → BẤT ĐỊNH, LẦN SAU → XÁC ĐỊNH":
+"J'ai UN chat. LE chat s'appelle Mimi."
+(Lần đầu giới thiệu → un; lần sau người nghe đã biết → le)
+
+💡 SỞ THÍCH CHUNG CHUNG → dùng LE/LA/LES (không phải un/une):
+"J'aime LA musique." ✅ (âm nhạc nói chung)
+"J'aime UNE musique." ❌ (không tự nhiên — một thể loại âm nhạc cụ thể nào?)
+
+⚠️ SAU PHỦ ĐỊNH → thay un/une/des bằng DE (d'):
 J'ai un frère. → Je n'ai PAS DE frère.
 Il a des amis. → Il n'a PAS D'amis.
-(Le/la/les giữ nguyên sau phủ định: Je n'aime pas LE sport.)
-
-💡 Nhớ quy tắc "lần đầu gặp → bất định, lần sau → xác định":
-"J'ai UN chat. LE chat s'appelle Mimi."`,
+⚠️ Ngoại lệ: LE/LA/LES GIỮ NGUYÊN sau phủ định (đã xác định):
+"Je n'aime pas LE sport." (không thành "de sport")`,
         examples:[
           "J'habite dans un appartement. — Tôi sống trong một căn hộ.",
           "C'est le quartier du centre-ville. — Đó là khu trung tâm (cụ thể).",
@@ -436,10 +445,25 @@ Ví dụ AIMER (yêu thích):
 J'aime (j' vì nguyên âm!) · Tu aimes · Il/Elle aime
 Nous aimons · Vous aimez · Ils/Elles aiment
 
-Một số động từ đặc biệt trong nhóm:
-• ACHETER: j'achète (thêm accent grave ở tu, il)
-• APPELER: j'appelle (đôi phụ âm: tu appelles, il appelle)
-• PRÉFÉRER: je préfère (accent grave: tu préfères, il préfère)
+ĐỘNG TỪ -ER ĐẶC BIỆT — biến đổi chính tả ở je/tu/il/ils:
+
+ACHETER (mua) — thêm accent grave trước -e câm:
+J'achète · Tu achètes · Il/Elle achète
+Nous achetons · Vous achetez · Ils/Elles achètent
+⚠️ Nguyên tắc: thêm accent grave (dấu huyền à/è) vào je/tu/il/ils để giữ âm [ɛ] đúng.
+Tương tự: lever (j'élève→je lève), se lever, emmener, peser
+
+APPELER (gọi / tên là) — đôi phụ âm L trước -e câm:
+J'appelle · Tu appelles · Il/Elle appelle
+Nous appelons · Vous appelez · Ils/Elles appellent
+⚠️ "L" nhân đôi ở je/tu/il/ils, nhưng nous/vous giữ nguyên 1 chữ L.
+Tương tự: rappeler (gọi lại), épeler (đánh vần)
+
+PRÉFÉRER (thích hơn) — accent grave thay accent aigu trước -e câm:
+Je préfère · Tu préfères · Il/Elle préfère
+Nous préférons · Vous préférez · Ils/Elles préfèrent
+⚠️ É → È (accent aigu → accent grave) ở je/tu/il/ils.
+Tương tự: espérer (hy vọng), répéter (lặp lại), considérer, compléter
 
 PHỦ ĐỊNH: Ne + verbe + pas
 J'aime → Je N'aime PAS
@@ -458,26 +482,30 @@ DẠNG HỎI LỊCH SỰ: Aimez-vous le sport? (đảo ngữ)`,
       },
       {
         topic:"Tính từ sở hữu — Mon/Ma/Mes, Ton/Ta/Tes, Son/Sa/Ses…",
-        rule:`Tính từ sở hữu chỉ ra VẬT THUỘC VỀ AI. Nó đồng ý với ĐỐI TƯỢNG SỞ HỮU (không phải chủ sở hữu)!
+        rule:`Tính từ sở hữu chỉ ra VẬT THUỘC VỀ AI.
+⚠️ NGUYÊN TẮC CỐT LÕI: Hòa hợp với DANH TỪ ĐƯỢC SỞ HỮU, KHÔNG phải người sở hữu!
+→ "ma voiture" (voiture = nữ) dù người nói là nam hay nữ.
 
-       Nam sg  | Nữ sg | Số nhiều
-1 người: mon   |  ma   |  mes   (của tôi)
-         ton   |  ta   |  tes   (của bạn)
-         son   |  sa   |  ses   (của anh/cô ấy)
-Nhiều:  notre  | notre |  nos   (của chúng tôi)
-        votre  | votre |  vos   (của các bạn)
-        leur   | leur  | leurs  (của họ)
+BẢNG CHIA:
+Của tôi   → mon (nam) · ma (nữ) · mes (số nhiều)
+Của bạn   → ton (nam) · ta (nữ) · tes (số nhiều)
+Của anh/cô ấy → son (nam) · sa (nữ) · ses (số nhiều)
+Của chúng tôi → notre · notre · nos
+Của các bạn   → votre · votre · vos
+Của họ        → leur · leur · leurs
 
-⚠️ Quan trọng: SON/SA/SES có thể là "của anh ấy" HOẶC "của cô ấy"!
-Paul et SA sœur = em gái của Paul
-Marie et SA sœur = em gái của Marie
+💡 Cách nhớ nhanh:
+• Je → mon/ma/mes  |  Tu → ton/ta/tes  |  Il/Elle → son/sa/ses
+• "M-T-S" cho ngôi 1-2-3 số ít, rồi notre/votre/leur cho số nhiều.
 
-⚠️ Ngoại lệ phát âm: Mon/Ton/Son + danh từ nữ bắt đầu nguyên âm!
-mon amie (không phải ma amie — khó đọc)
-ton école, son histoire
+⚠️ BẪY 1 — SON/SA/SES = "của anh ấy" VÀ "của cô ấy":
+"Paul aime SA sœur." = anh ấy yêu em gái (của Paul).
+"Marie aime SA sœur." = cô ấy yêu em gái (của Marie).
+→ Tiếng Pháp không phân biệt giới tính người sở hữu — chỉ cần nhìn vào vật được sở hữu.
 
-💡 Mẹo: "mon livre" → quyển sách của tôi (livre=nam → mon)
-"ma voiture" → xe của tôi (voiture=nữ → ma)`,
+⚠️ BẪY 2 — MA/TA/SA + nguyên âm → đổi thành MON/TON/SON:
+mon amie (KHÔNG: ma amie ❌) · ton école · son idée
+→ Quy tắc: tránh 2 nguyên âm liền nhau [a a], dùng [mɔ̃] cho dễ phát âm.`,
         examples:[
           "Mon père est médecin et ma mère est professeure. — Bố tôi là bác sĩ, mẹ tôi là giáo viên.",
           "Tes amis sont sympas. — Bạn bè của bạn thật dễ mến.",
