@@ -928,7 +928,7 @@ function AppInner() {
             {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
             {view==="conversation"  && <ConversationPanel onBackToParcours={backToParcours} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
-            {view==="reference_hub" && <ReferenceHub />}
+            {view==="reference_hub" && <ReferenceHub onBackToParcours={backToParcours} />}
             {view==="lecture"       && <LecturePanel words={words} onBackToParcours={backToParcours} />}
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
             {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}

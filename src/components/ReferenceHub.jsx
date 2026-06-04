@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import ReferencePanel from "./ReferencePanel.jsx";
 import GrammarCheatsheet from "./GrammarCheatsheet.jsx";
@@ -16,15 +16,28 @@ const TABS = [
   { id: "phrases",   label: "Mẫu câu",      icon: "💬" },
 ];
 
-export default function ReferenceHub() {
-  const [active, setActive] = useState(() => {
+export default function ReferenceHub({ onBackToParcours }) {
+  const [active, setActive]             = useState("pronunc");
+  const [fromParcours, setFromParcours] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("parcours_back")) {
+      setFromParcours(true);
+      localStorage.removeItem("parcours_back");
+    }
     const tab = localStorage.getItem("parcours_ref_tab");
-    if (tab) { localStorage.removeItem("parcours_ref_tab"); return tab; }
-    return "pronunc";
-  });
+    if (tab) { setActive(tab); localStorage.removeItem("parcours_ref_tab"); }
+  }, []);
 
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
+      {fromParcours && onBackToParcours && (
+        <div style={{ background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding: "0.6rem 1rem" }}>
+          <button onClick={onBackToParcours} style={{ background: "rgba(255,255,255,0.15)", border: "none", color: "#fff", fontSize: "0.72rem", fontWeight: 600, cursor: "pointer", padding: "0.2rem 0.65rem", borderRadius: 20, fontFamily: "inherit" }}>
+            ← Parcours
+          </button>
+        </div>
+      )}
       <div style={{
         display: "flex", gap: "0.3rem", padding: "0.6rem 1rem",
         overflowX: "auto", borderBottom: `1.5px solid ${C.border}`,

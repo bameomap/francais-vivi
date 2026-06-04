@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
 import { EDITO_A1_VERB_UNITS } from "../data/editoVerbs.js";
@@ -711,14 +711,16 @@ function UnitExerciseView({ unit, onBack }) {
 
 // ── Unit list (main view) ─────────────────────────────────────
 export default function EditoVerbsPanel() {
-  const [activeUnit, setActiveUnit] = useState(() => {
+  const [activeUnit, setActiveUnit] = useState(null);
+
+  useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
+      const unitId = EDITO_A1_VERB_UNITS[Number(idx)]?.unitId ?? null;
+      if (unitId) setActiveUnit(unitId);
       localStorage.removeItem("parcours_unit_idx");
-      return EDITO_A1_VERB_UNITS[Number(idx)]?.unitId ?? null;
     }
-    return null;
-  });
+  }, []);
 
   if (activeUnit) {
     const unit = EDITO_A1_VERB_UNITS.find(u => u.unitId === activeUnit);

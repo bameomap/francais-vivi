@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { EDITO_A1_PHONO } from "../data/editoPhono.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -477,14 +477,16 @@ function UnitDetail({ unit, onBack }) {
 
 /* ── MAIN COMPONENT ───────────────────────────────────────── */
 export default function EditoPhonoPanel() {
-  const [selected, setSelected] = useState(() => {
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
+      const unit = EDITO_A1_PHONO[Number(idx)] ?? null;
+      if (unit) setSelected(unit);
       localStorage.removeItem("parcours_unit_idx");
-      return EDITO_A1_PHONO[Number(idx)] ?? null;
     }
-    return null;
-  });
+  }, []);
 
   return (
     <div>
