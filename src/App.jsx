@@ -26,7 +26,8 @@ const EditoVocabPanel   = lazy(() => import("./components/EditoVocabPanel.jsx"))
 const EcouterPanel      = lazy(() => import("./components/EcouterPanel.jsx"));
 const UnitQuizPanel     = lazy(() => import("./components/UnitQuizPanel.jsx"));
 const SentenceBuilder   = lazy(() => import("./components/SentenceBuilder.jsx"));
-const ProfilPanel       = lazy(() => import("./components/ProfilPanel.jsx"));
+const ProfilPanel          = lazy(() => import("./components/ProfilPanel.jsx"));
+const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
@@ -42,7 +43,8 @@ const MODULES = [
   { id:"reference_hub", group:"hoc",    label:"Tra cứu",    fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference_hub" },
   { id:"sentence",      group:"hoc",    label:"Câu ghép từ",fr:"Les Phrases",      icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"sentence"      },
   // Luyện
-  { id:"conversation",  group:"luyen",  label:"Giao tiếp",  fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation"  },
+  { id:"conversation",  group:"luyen",  label:"Giao tiếp",  fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation"   },
+  { id:"prononciation", group:"luyen",  label:"Phát âm",    fr:"La Prononciation", icon:"🎤", color:"#F59E0B", bg:"#FFFBEB", view:"prononciation"  },
   { id:"writing",       group:"luyen",  label:"Luyện viết", fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"       },
   { id:"defi",          group:"luyen",  label:"Thử thách",  fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"          },
   { id:"lecture",       group:"luyen",  label:"Đọc hiểu",   fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"       },
@@ -69,6 +71,7 @@ const SECTION_TITLE = {
   revision:"La Révision", stats:"Les Statistiques",
   listening:"L'Écoute Active", sentence:"Les Phrases",
   "quiz-unit":"Le Quiz de l'Unité",
+  prononciation:"La Prononciation",
   profil:"Mon Profil",
 };
 
@@ -687,6 +690,17 @@ function AppInner() {
               ))}
             </div>
 
+            {/* ── Prononciation CTA ── */}
+            <button className="card-hover" onClick={()=>goSection("prononciation","prononciation")}
+              style={{ width:"100%", marginTop:8, display:"flex", alignItems:"center", gap:12, background:`linear-gradient(135deg, #F59E0B, #D97706)`, border:"none", borderRadius:16, padding:"11px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", boxShadow:"0 4px 14px rgba(245,158,11,0.25)", animation:"fadeUp 0.3s ease 0.28s both" }}>
+              <span style={{ fontSize:24, lineHeight:1, flexShrink:0 }}>🎤</span>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:14, color:"#fff", lineHeight:1.1 }}>La Prononciation</div>
+                <div style={{ fontSize:11, color:"rgba(255,255,255,0.82)", marginTop:2 }}>Luyện phát âm · chấm điểm tức thì 🎯</div>
+              </div>
+              <span style={{ color:"#fff", fontSize:18, flexShrink:0 }}>→</span>
+            </button>
+
             {/* ── Défi du jour CTA ── */}
             <button className="card-hover" onClick={()=>goSection("defi","defi")}
               style={{ width:"100%", marginTop:10, display:"flex", alignItems:"center", gap:12, background:`linear-gradient(135deg, #8E44AD, #6D28D9)`, border:"none", borderRadius:16, padding:"13px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", boxShadow:"0 4px 16px rgba(109,40,217,0.3)", animation:"fadeUp 0.3s ease 0.32s both" }}>
@@ -1030,7 +1044,8 @@ function AppInner() {
             {view==="grammar"       && <GrammarPanel onBackToParcours={backToParcours} />}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
-            {view==="conversation"  && <ConversationPanel onBackToParcours={backToParcours} />}
+            {view==="conversation"   && <ConversationPanel onBackToParcours={backToParcours} />}
+            {view==="prononciation"  && <PrononciationPanel words={words} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
             {view==="reference_hub" && <ReferenceHub onBackToParcours={backToParcours} />}
