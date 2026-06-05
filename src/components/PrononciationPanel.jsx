@@ -58,7 +58,11 @@ export default function PrononciationPanel({ words = [] }) {
   const [stats,      setStats]      = useState({ total: 0, great: 0, good: 0 });
   const recRef = useRef(null);
 
-  const micOK = typeof window !== "undefined" &&
+  // iOS Safari has webkitSpeechRecognition but it's unreliable in practice
+  // (onresult rarely fires). Detect iOS and use self-assessment mode instead.
+  const isIOS = typeof navigator !== "undefined" &&
+    /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const micOK = !isIOS && typeof window !== "undefined" &&
     !!(window.SpeechRecognition || window.webkitSpeechRecognition);
 
   const word = queue[idx % queue.length];
@@ -111,6 +115,19 @@ export default function PrononciationPanel({ words = [] }) {
     setPhase("idle");
   };
 
+  // Self-assessment for iOS (mic unreliable) — user rates themselves
+  const selfRate = (sc) => {
+    setScore(sc);
+    setTranscript("");
+    setPhase("result");
+    setStats(s => ({
+      total: s.total + 1,
+      great: s.great + (sc >= 85 ? 1 : 0),
+      good:  s.good  + (sc >= 65 && sc < 85 ? 1 : 0),
+    }));
+    if (sc < 50) logMistake({ fr: word.fr, vi: word.vi, context: "phát âm", module: "prononciation" });
+  };
+
   const retry = () => { setPhase("idle"); setTranscript(""); setScore(0); };
   const next  = () => { setIdx(i => i + 1); setPhase("idle"); setTranscript(""); setScore(0); };
 
@@ -155,8 +172,34 @@ export default function PrononciationPanel({ words = [] }) {
       {phase !== "result" ? (
         <div style={{ textAlign: "center" }}>
           {!micOK ? (
-            <div style={{ padding: "1.2rem", color: C.gray, fontSize: "0.82rem", background: C.cream, borderRadius: 14 }}>
-              ⚠️ Trình duyệt không hỗ trợ nhận diện giọng nói.<br />Vui lòng dùng <strong>Chrome</strong> trên máy tính hoặc Android.
+            /* ── iOS / unsupported: self-assessment mode ── */
+            <div>
+              {phase !== "selfrate" ? (
+                <button onClick={() => setPhase("selfrate")}
+                  style={{ width:"100%", padding:"0.9rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, border:"none", borderRadius:16, color:"#fff", fontSize:"0.9rem", fontWeight:700, cursor:"pointer", fontFamily:"inherit", boxShadow:`0 4px 16px ${C.blue}44` }}>
+                  Tôi đã đọc xong →
+                </button>
+              ) : (
+                <div>
+                  <div style={{ fontSize:"0.75rem", color:C.gray, textAlign:"center", marginBottom:"0.7rem" }}>Bạn tự đánh giá:</div>
+                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"0.5rem" }}>
+                    {[
+                      { label:"Chưa đúng", emoji:"😅", sc:30, color:C.red,   bg:C.redL   },
+                      { label:"Tạm ổn",    emoji:"👍", sc:70, color:C.blue,  bg:C.blueL  },
+                      { label:"Đọc đúng",  emoji:"🎉", sc:95, color:C.green, bg:C.greenL },
+                    ].map(r => (
+                      <button key={r.label} onClick={() => selfRate(r.sc)}
+                        style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"0.3rem", padding:"0.75rem 0.4rem", background:r.bg, border:`1.5px solid ${r.color}44`, borderRadius:14, cursor:"pointer", fontFamily:"inherit" }}>
+                        <span style={{ fontSize:"1.5rem" }}>{r.emoji}</span>
+                        <span style={{ fontSize:"0.72rem", fontWeight:700, color:r.color }}>{r.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div style={{ marginTop:"0.75rem", fontSize:"0.68rem", color:C.gray, textAlign:"center" }}>
+                {isIOS ? "iPhone chưa hỗ trợ nhận diện giọng · chế độ tự đánh giá" : "Trình duyệt không hỗ trợ mic · dùng Chrome để chấm điểm tự động"}
+              </div>
             </div>
           ) : (
             <>
