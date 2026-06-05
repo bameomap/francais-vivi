@@ -101,7 +101,6 @@ export default function WordDetailSheet({ word, onClose }) {
                   {details.pos}
                 </span>
               )}
-              {loading && !details && <Spinner size={16} />}
             </div>
             <button onClick={onClose}
               style={{ background:C.border, border:"none", borderRadius:"50%", width:30, height:30, cursor:"pointer", color:C.gray, fontSize:"1rem", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
