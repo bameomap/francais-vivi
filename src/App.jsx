@@ -776,10 +776,6 @@ function AppInner() {
                         Ôn {srsStats.due} →
                       </button>
                     )}
-                    <button onClick={()=>setEditOpen(o=>!o)}
-                      style={{ background:editOpen?C.blueL:"transparent", border:`1.5px solid ${C.blue}44`, color:C.blue, borderRadius:999, padding:"6px 12px", fontSize:11.5, cursor:"pointer", fontWeight:600 }}>
-                      ✏️
-                    </button>
                     <button onClick={()=>{ if(window.confirm("Xóa toàn bộ dữ liệu SRS? Hành động này không thể hoàn tác.")) { resetSRS(); setSrsStats(getSRSStats()); }}}
                       style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:999, padding:"6px 10px", fontSize:11, cursor:"pointer" }}
                       title="Xóa toàn bộ dữ liệu SRS">
@@ -870,82 +866,63 @@ function AppInner() {
                   );
                 })()}
 
-                {/* ── Divider before exercise builder ── */}
-                <div style={{ display:"flex", alignItems:"center", gap:8, marginTop:4 }}>
-                  <div style={{ flex:1, height:1, background:C.border }}/>
-                  <span style={{ fontSize:10, fontWeight:700, color:C.gray, letterSpacing:"0.1em", textTransform:"uppercase" }}>Luyện tập tự do</span>
-                  <div style={{ flex:1, height:1, background:C.border }}/>
-                </div>
+                {/* ── Luyện tập tự do — collapsible ── */}
+                <div style={{ background:C.white, borderRadius:16, border:`1.5px solid ${C.border}`, overflow:"hidden" }}>
+                  <button onClick={()=>setEditOpen(o=>!o)}
+                    style={{ width:"100%", display:"flex", alignItems:"center", justifyContent:"space-between", padding:"0.8rem 1rem", background:"transparent", border:"none", cursor:"pointer", fontFamily:"inherit" }}>
+                    <span style={{ fontSize:"0.82rem", fontWeight:700, color:C.blue }}>✏️ Luyện tập tự do</span>
+                    <span style={{ fontSize:"0.75rem", color:C.gray }}>{editOpen ? "▲ Thu gọn" : "▼ Mở rộng"}</span>
+                  </button>
 
-                {/* ── Collapsible Editor ── */}
-                {editOpen && (
-                  <div style={{ display:"flex", flexDirection:"column", gap:"0.7rem", animation:"fadeUp 0.2s ease" }}>
-                    <VocabGenerator onGenerate={generated=>{
-                      const lines = generated.map(w=>`${w.fr} — ${w.vi}`).join("\n");
-                      setTextPersist(lines); setView("vocab-table"); setGeneratedVocab(generated); setEditOpen(false);
-                    }}/>
-                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-                      <div style={{ fontSize:"0.72rem", fontWeight:600, color:C.gray }}>📝 Nhập từ vựng thủ công</div>
-                      <div style={{ display:"flex", gap:"0.4rem" }}>
-                        <button onClick={()=>setShowImport(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>📁 Import</button>
-                        {words.length>=1 && <button onClick={()=>{
-                          const content = words.map(w=>w.vi?`${w.fr} — ${w.vi}`:w.fr).join("\n");
-                          const a = document.createElement("a");
-                          a.href = URL.createObjectURL(new Blob([content],{type:"text/plain"}));
-                          a.download = `tu-vung-${new Date().toISOString().slice(0,10)}.txt`;
-                          a.click();
-                        }} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>⬇ Export</button>}
-                        {words.length>=3 && <button onClick={()=>setShowSave(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.blue}`, color:C.blue, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>💾 Lưu</button>}
+                  {editOpen && (
+                    <div style={{ padding:"0 1rem 1rem", display:"flex", flexDirection:"column", gap:"0.7rem", animation:"fadeUp 0.2s ease" }}>
+                      <VocabGenerator onGenerate={generated=>{
+                        const lines = generated.map(w=>`${w.fr} — ${w.vi}`).join("\n");
+                        setTextPersist(lines); setView("vocab-table"); setGeneratedVocab(generated); setEditOpen(false);
+                      }}/>
+
+                      {/* Textarea */}
+                      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+                        <div style={{ fontSize:"0.72rem", fontWeight:600, color:C.gray }}>📝 Nhập từ vựng</div>
+                        <div style={{ display:"flex", gap:"0.4rem" }}>
+                          <button onClick={()=>setShowImport(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>📁 Import</button>
+                          {words.length>=1 && <button onClick={()=>{ const content=words.map(w=>w.vi?`${w.fr} — ${w.vi}`:w.fr).join("\n"); const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([content],{type:"text/plain"})); a.download=`tu-vung-${new Date().toISOString().slice(0,10)}.txt`; a.click(); }} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>⬇ Export</button>}
+                          {words.length>=3 && <button onClick={()=>setShowSave(true)} style={{ padding:"0.22rem 0.58rem", background:"transparent", border:`1.5px solid ${C.blue}`, color:C.blue, borderRadius:20, fontSize:"0.67rem", cursor:"pointer" }}>💾 Lưu</button>}
+                        </div>
                       </div>
-                    </div>
-                    <textarea value={text} onChange={e=>setTextPersist(e.target.value)}
-                      placeholder={"la boulangerie — tiệm bánh mì\nle marché — chợ\n..."}
-                      style={{ width:"100%", height:145, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.65rem 0.75rem", fontFamily:"inherit", fontSize:"0.85rem", background:C.white, resize:"vertical", color:C.ink, lineHeight:1.7, boxSizing:"border-box" }}/>
-                    <div style={{ fontSize:"0.7rem", color:C.gray }}>
-                      Mỗi dòng: <code style={{ background:C.blueL, color:C.blue, padding:"1px 6px", borderRadius:4, fontSize:"0.68rem" }}>từ pháp — nghĩa</code>
-                      {words.length>0 && <span style={{ color:C.blue, marginLeft:8, fontWeight:600 }}>{words.length} từ</span>}
-                    </div>
-                  </div>
-                )}
+                      <textarea value={text} onChange={e=>setTextPersist(e.target.value)}
+                        placeholder={"la boulangerie — tiệm bánh mì\nle marché — chợ\n..."}
+                        style={{ width:"100%", height:130, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"0.65rem 0.75rem", fontFamily:"inherit", fontSize:"0.85rem", background:C.white, resize:"vertical", color:C.ink, lineHeight:1.7, boxSizing:"border-box" }}/>
+                      <div style={{ fontSize:"0.7rem", color:C.gray }}>
+                        Mỗi dòng: <code style={{ background:C.blueL, color:C.blue, padding:"1px 6px", borderRadius:4, fontSize:"0.68rem" }}>từ pháp — nghĩa</code>
+                        {words.length>0 && <span style={{ color:C.blue, marginLeft:8, fontWeight:600 }}>{words.length} từ</span>}
+                      </div>
 
-                {/* ── Exercise type selector ── */}
-                <div style={{ background:C.white, borderRadius:16, padding:"0.9rem", border:`1.5px solid ${C.border}` }}>
-                  <div style={{ fontSize:"0.75rem", fontWeight:700, color:C.blue, marginBottom:"0.6rem" }}>🎯 Chế độ học</div>
-                  <div style={{ fontSize:"0.65rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.35rem", fontWeight:600 }}>Chọn đáp án</div>
-                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.35rem", marginBottom:"0.65rem" }}>
-                    {[{id:"multiple_choice",label:"☑ Trắc nghiệm"},{id:"matching",label:"🔗 Nối từ"},{id:"flashcard",label:"🃏 Flashcard"},{id:"mixed",label:"🎲 Hỗn hợp"}].map(t=>(
-                      <button key={t.id} onClick={()=>setType(t.id)}
-                        style={{ padding:"0.5rem 0.3rem", border:`1.5px solid ${type===t.id?C.blue:C.border}`, borderRadius:10, background:type===t.id?C.blue:C.white, color:type===t.id?C.white:C.ink, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s", fontWeight:type===t.id?600:400 }}>
-                        {t.label}
-                      </button>
-                    ))}
-                  </div>
-                  <div style={{ fontSize:"0.65rem", color:C.gray, textTransform:"uppercase", letterSpacing:1, marginBottom:"0.35rem", fontWeight:600 }}>Điền / Viết từ</div>
-                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"0.35rem" }}>
-                    {[{id:"fill_blank",label:"✏️ Điền từ"},{id:"dictee",label:"🎧 Dictée"},{id:"anagramme",label:"🔀 Xếp chữ"}].map(t=>(
-                      <button key={t.id} onClick={()=>setType(t.id)}
-                        style={{ padding:"0.5rem 0.25rem", border:`1.5px solid ${type===t.id?C.blue:C.border}`, borderRadius:10, background:type===t.id?C.blue:C.white, color:type===t.id?C.white:C.ink, fontSize:"0.75rem", cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s", fontWeight:type===t.id?600:400 }}>
-                        {t.label}
-                      </button>
-                    ))}
-                  </div>
+                      {/* Exercise types — only show when words entered */}
+                      {words.length >= 2 && (<>
+                        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.35rem" }}>
+                          {[{id:"multiple_choice",label:"☑ Trắc nghiệm"},{id:"matching",label:"🔗 Nối từ"},{id:"flashcard",label:"🃏 Flashcard"},{id:"mixed",label:"🎲 Hỗn hợp"},{id:"fill_blank",label:"✏️ Điền từ"},{id:"dictee",label:"🎧 Dictée"},{id:"anagramme",label:"🔀 Xếp chữ"}].map(t=>(
+                            <button key={t.id} onClick={()=>setType(t.id)}
+                              style={{ padding:"0.5rem 0.3rem", border:`1.5px solid ${type===t.id?C.blue:C.border}`, borderRadius:10, background:type===t.id?C.blue:C.white, color:type===t.id?C.white:C.ink, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s", fontWeight:type===t.id?600:400 }}>
+                              {t.label}
+                            </button>
+                          ))}
+                        </div>
+                        {!["matching","dictee","flashcard","anagramme"].includes(type) && (
+                          <div>
+                            <div style={{ fontSize:"0.72rem", color:C.gray, marginBottom:"0.3rem" }}>🔢 Số câu: <b>{numQ}</b></div>
+                            <input type="range" min={3} max={30} value={numQ} onChange={e=>setNumQ(Number(e.target.value))} style={{ width:"100%", accentColor:C.blue }}/>
+                          </div>
+                        )}
+                        {error && <div style={{ color:C.red, fontSize:"0.8rem", padding:"0.5rem 0.75rem", background:C.redL, borderRadius:10 }}>⚠ {error}</div>}
+                        <button onClick={generate} disabled={loading}
+                          style={{ width:"100%", padding:"0.85rem", background:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:"pointer", fontWeight:700, boxShadow:`0 6px 20px ${C.blue}44` }}>
+                          {loading ? "Đang tạo..." : "Bắt đầu luyện tập ✦"}
+                        </button>
+                      </>)}
+                    </div>
+                  )}
                 </div>
-
-                {/* ── Number of questions ── */}
-                {!["matching","dictee","flashcard","anagramme"].includes(type) && (
-                  <div style={{ background:C.white, borderRadius:16, padding:"0.9rem", border:`1.5px solid ${C.border}` }}>
-                    <div style={{ fontSize:"0.75rem", fontWeight:700, color:C.blue, marginBottom:"0.55rem" }}>🔢 Số câu: <span style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.1rem", color:C.blue }}>{numQ}</span></div>
-                    <input type="range" min={3} max={30} value={numQ} onChange={e=>setNumQ(Number(e.target.value))}
-                      style={{ width:"100%", accentColor:C.blue }}/>
-                    {numQ>words.length && words.length>0 && <div style={{ fontSize:"0.7rem", color:C.gold, marginTop:"0.35rem" }}>💡 AI sẽ dùng lại từ theo nhiều cách</div>}
-                  </div>
-                )}
-
-                {error && <div style={{ color:C.red, fontSize:"0.8rem", padding:"0.5rem 0.75rem", background:C.redL, borderRadius:10, border:`1px solid ${C.red}33` }}>⚠ {error}</div>}
-                <button onClick={generate} disabled={loading||words.length<2}
-                  style={{ width:"100%", padding:"0.9rem", background:words.length<2?C.border:`linear-gradient(135deg,${C.blue},${C.blueDark})`, color:C.white, border:"none", borderRadius:14, fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", cursor:words.length<2?"not-allowed":"pointer", fontWeight:700, boxShadow:words.length>=2?`0 6px 20px ${C.blue}44`:"none", transition:"all 0.2s" }}>
-                  {loading ? "Đang tạo..." : "Bắt đầu luyện tập ✦"}
-                </button>
               </div>
             )}
 
