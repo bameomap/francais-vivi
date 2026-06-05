@@ -15,6 +15,12 @@ const GTYPES = [
   { id:"mixed", label:"🎲 Hỗn hợp" },
 ];
 
+export function buildDetectivePrompt(topic, level, n) {
+  return `French grammar teacher. Create ${n} short French sentences, each containing EXACTLY ONE deliberate grammatical error related to the topic "${topic}" (level ${level}).
+Return ONLY JSON: {"type":"detective","topic":"${topic}","level":"${level}","exercises":[{"sentence":"Full sentence with one error","words":["word1","word2","word3"],"errorIndex":2,"correction":"correct replacement","explanation":"Giải thích lỗi sai bằng tiếng Việt, tại sao sai và quy tắc đúng","rule":"tên quy tắc ngắn"}]}
+RULES: errorIndex is 0-based index in words[]. Split sentence into tokens by spaces, keep punctuation attached to the nearest word. The error must be clear and unambiguous.`;
+}
+
 export function buildGrammarPrompt(topic, level, gtype, n) {
   const base = `French grammar teacher. Create ${n} exercises on the topic: "${topic}" for level ${level}.`;
   // explanationRules: array of {type, content} where type = "rule"|"warning"|"note"
@@ -663,6 +669,155 @@ function CustomExerciseView() {
   );
 }
 
+// ── Detective exercise ─────────────────────────────────────────
+function GrammarDetective({ exercises }) {
+  const [states, setStates] = useState(() =>
+    exercises.map(() => ({ selected: null, submitted: false }))
+  );
+  const select = (qi, wi) =>
+    setStates(prev => prev.map((s, i) => i === qi && !s.submitted ? { ...s, selected: wi } : s));
+  const submit = (qi) =>
+    setStates(prev => prev.map((s, i) => i === qi ? { ...s, submitted: true } : s));
+
+  return (
+    <div>
+      {exercises.map((q, qi) => {
+        const st = states[qi];
+        const correct = st.submitted && st.selected === q.errorIndex;
+        const wrong   = st.submitted && st.selected !== q.errorIndex;
+        return (
+          <div key={qi} style={{ background:C.white, border:`1.5px solid ${st.submitted ? (correct ? C.green : C.red) + "55" : C.border}`, borderRadius:14, padding:"0.9rem 1rem", marginBottom:"0.65rem" }}>
+            <div style={{ fontSize:"0.62rem", color:C.purple, fontWeight:700, marginBottom:"0.55rem", textTransform:"uppercase", letterSpacing:1 }}>
+              🔍 Tìm lỗi sai · {q.rule}
+            </div>
+            {/* Tappable word chips */}
+            <div style={{ display:"flex", flexWrap:"wrap", gap:"0.3rem", marginBottom:"0.7rem" }}>
+              {q.words.map((w, wi) => {
+                const isErr      = st.submitted && wi === q.errorIndex;
+                const isSel      = st.selected === wi;
+                return (
+                  <button key={wi} onClick={() => select(qi, wi)}
+                    style={{
+                      padding:"0.22rem 0.55rem", borderRadius:8,
+                      border:`1.5px solid ${isErr ? C.red : isSel ? C.purple : C.border}`,
+                      background: isErr ? C.redL : isSel ? C.purpleL : C.white,
+                      color: isErr ? C.red : isSel ? C.purple : C.ink,
+                      fontSize:"0.92rem", fontFamily:"'Playfair Display',Georgia,serif",
+                      fontWeight: (isSel || isErr) ? 700 : 400,
+                      cursor: st.submitted ? "default" : "pointer",
+                      transition:"all 0.15s",
+                    }}>
+                    {w}
+                  </button>
+                );
+              })}
+            </div>
+
+            {!st.submitted ? (
+              <button onClick={() => st.selected !== null && submit(qi)}
+                disabled={st.selected === null}
+                style={{ padding:"0.35rem 1rem", background: st.selected !== null ? C.purple : C.border, border:"none", borderRadius:10, color:"#fff", fontSize:"0.78rem", cursor: st.selected !== null ? "pointer" : "default", fontWeight:600, fontFamily:"inherit" }}>
+                Xác nhận
+              </button>
+            ) : (
+              <div>
+                <div style={{ fontWeight:700, fontSize:"0.82rem", marginBottom:"0.4rem", color: correct ? C.green : C.red }}>
+                  {correct ? "✓ Đúng!" : "✗ Sai."} Từ sai là <em>"{q.words[q.errorIndex]}"</em> → sửa thành <strong>"{q.correction}"</strong>
+                </div>
+                <div style={{ background:C.purpleL, borderRadius:10, padding:"0.55rem 0.8rem", fontSize:"0.74rem", color:C.ink, lineHeight:1.6 }}>
+                  📖 {q.explanation}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Detective tab view ────────────────────────────────────────
+function DetectiveView() {
+  const [topic,   setTopic]   = useState("");
+  const [level,   setLevel]   = useState("A1");
+  const [loading, setLoading] = useState(false);
+  const [result,  setResult]  = useState(null);
+  const [err,     setErr]     = useState("");
+  const quizRef = useRef(null);
+
+  const QUICK = {
+    A1:["Mạo từ le/la/l'","Chia être & avoir","Tính từ giống số","Phủ định ne…pas","Giới từ à & de"],
+    A2:["Passé composé","Accord du participe","Imparfait","Pronoms COD/COI","Futur proche"],
+    B1:["Subjonctif","Conditionnel","Pronoms y & en","Voix passive","Futur simple"],
+  };
+
+  const generate = async (t = topic) => {
+    const topic_ = t.trim(); if (!topic_) return;
+    setLoading(true); setErr(""); setResult(null);
+    try {
+      const data = await callAI(buildDetectivePrompt(topic_, level, 6));
+      setResult(data);
+      setTimeout(() => quizRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 150);
+    } catch(e) { setErr(e.message); }
+    setLoading(false);
+  };
+
+  return (
+    <div style={{ padding:"1rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
+      {/* Intro */}
+      <div style={{ background:"#FFFBEB", border:"1px solid #F59E0B44", borderRadius:12, padding:"0.75rem 0.9rem", fontSize:"0.78rem", color:"#92400E", lineHeight:1.6 }}>
+        🔍 <strong>Thám tử lỗi sai</strong> — Mỗi câu có đúng 1 lỗi ngữ pháp cố ý. Bấm vào từ bạn cho là sai, rồi nhấn "Xác nhận".
+      </div>
+
+      {/* Config */}
+      <div style={{ background:C.cream, borderRadius:12, padding:"0.9rem", display:"flex", flexDirection:"column", gap:"0.6rem" }}>
+        <div style={{ fontSize:"0.65rem", color:C.gray, marginBottom:"0.1rem" }}>Chủ đề ngữ pháp</div>
+        <input value={topic} onChange={e => setTopic(e.target.value)} onKeyDown={e => e.key==="Enter" && generate()}
+          placeholder="vd: mạo từ, chia động từ, passé composé…"
+          style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:8, padding:"0.5rem 0.7rem", fontSize:"0.82rem", fontFamily:"inherit", outline:"none", color:C.ink, boxSizing:"border-box" }} />
+        {/* Quick picks */}
+        <div style={{ display:"flex", flexWrap:"wrap", gap:"0.28rem" }}>
+          {(QUICK[level] || QUICK.A1).map(s => (
+            <button key={s} onClick={() => { setTopic(s); generate(s); }}
+              style={{ padding:"0.18rem 0.55rem", border:`1px solid ${topic===s ? C.purple : C.border}`, borderRadius:20, background: topic===s ? C.purple : C.white, color: topic===s ? C.white : C.gray, fontSize:"0.65rem", cursor:"pointer", fontFamily:"inherit" }}>
+              {s}
+            </button>
+          ))}
+        </div>
+        {/* Level */}
+        <div style={{ display:"flex", gap:"0.28rem" }}>
+          {["A1","A2","B1","B2"].map(l => (
+            <button key={l} onClick={() => { setLevel(l); setTopic(""); }}
+              style={{ flex:1, padding:"0.32rem", border:`1.5px solid ${level===l ? C.purple : C.border}`, borderRadius:7, background: level===l ? C.purple : C.white, color: level===l ? C.white : C.ink, fontSize:"0.72rem", cursor:"pointer", fontFamily:"inherit" }}>
+              {l}
+            </button>
+          ))}
+        </div>
+        <button onClick={() => generate()} disabled={!topic.trim() || loading}
+          style={{ padding:"0.6rem", background: topic.trim() && !loading ? C.purple : C.border, border:"none", borderRadius:10, color:"#fff", fontSize:"0.85rem", fontWeight:700, cursor: topic.trim() && !loading ? "pointer" : "default", fontFamily:"inherit" }}>
+          {loading ? "Đang tạo…" : "🔍 Tạo bài tập"}
+        </button>
+      </div>
+
+      {loading && (
+        <div style={{ display:"flex", justifyContent:"center", padding:"1.5rem", gap:"0.8rem", color:C.gray, alignItems:"center" }}>
+          <Spinner /><span style={{ fontSize:"0.88rem" }}>AI đang tạo câu lỗi sai…</span>
+        </div>
+      )}
+      {err && <div style={{ color:C.red, background:C.redL, borderRadius:10, padding:"0.75rem", fontSize:"0.82rem" }}>⚠ {err}</div>}
+      {result && (
+        <div ref={quizRef}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"0.5rem" }}>
+            <div style={{ fontSize:"0.7rem", color:C.gray }}>{result.exercises?.length} câu · chủ đề: {result.topic}</div>
+            <button onClick={() => generate()} style={{ padding:"0.22rem 0.65rem", border:`1px solid ${C.border}`, borderRadius:20, background:C.white, color:C.ink, fontSize:"0.67rem", cursor:"pointer" }}>🔄 Tạo lại</button>
+          </div>
+          <GrammarDetective exercises={result.exercises || []} />
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function GrammarPanel({ onBackToParcours }) {
   const [panelTab, setPanelTab] = useState("edito");
   const [fromParcours, setFromParcours] = useState(false);
@@ -684,8 +839,9 @@ export default function GrammarPanel({ onBackToParcours }) {
   }, []);
 
   const TABS = [
-    { id:"edito",  label:"📘 Edito A1"  },
-    { id:"custom", label:"🎯 Tùy chỉnh" },
+    { id:"edito",     label:"📘 Edito A1"   },
+    { id:"custom",    label:"🎯 Tùy chỉnh"  },
+    { id:"detective", label:"🔍 Thám tử"    },
   ];
 
   const tabBar = (
@@ -723,8 +879,9 @@ export default function GrammarPanel({ onBackToParcours }) {
         </div>
       </div>
       {tabBar}
-      {panelTab === "edito"  && <EditoGrammarView defaultUnitIndex={initUnit} fromParcours={fromParcours} onBackToParcours={onBackToParcours} />}
-      {panelTab === "custom" && <CustomExerciseView />}
+      {panelTab === "edito"     && <EditoGrammarView defaultUnitIndex={initUnit} fromParcours={fromParcours} onBackToParcours={onBackToParcours} />}
+      {panelTab === "custom"    && <CustomExerciseView />}
+      {panelTab === "detective" && <DetectiveView />}
     </div>
   );
 }

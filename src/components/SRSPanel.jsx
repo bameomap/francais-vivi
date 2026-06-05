@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import { C } from "../constants.js";
 import { speak } from "../utils/helpers.js";
 import WordCardBack from "./ui/WordCardBack.jsx";
@@ -77,6 +77,19 @@ function FlipCard({ card, flipped, onFlip }) {
     }
   }, [flipped]);
 
+  // Context hint: show cached example sentence with the word blanked out on the front.
+  // Silently skipped when there's no cache or the word doesn't appear verbatim.
+  const contextHint = useMemo(() => {
+    try {
+      const d = JSON.parse(localStorage.getItem(`wcb_${card.fr}`));
+      if (!d?.ex_fr) return null;
+      const esc = card.fr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(esc, "gi");
+      if (!regex.test(d.ex_fr)) return null;
+      return d.ex_fr.replace(regex, "___");
+    } catch { return null; }
+  }, [card.fr]);
+
   return (
     <div onClick={onFlip}
       style={{ perspective:"1200px", cursor:"pointer", userSelect:"none", minHeight:230 }}>
@@ -119,6 +132,11 @@ function FlipCard({ card, flipped, onFlip }) {
             style={{ background:"rgba(255,255,255,0.22)", border:"1.5px solid rgba(255,255,255,0.4)", color:"#fff", borderRadius:20, padding:"0.28rem 0.85rem", fontSize:"0.78rem", cursor:"pointer", fontWeight:600 }}>
             🔊 Nghe
           </button>
+          {contextHint && (
+            <div style={{ fontSize:"0.72rem", color:"rgba(255,255,255,0.55)", fontStyle:"italic", textAlign:"center", marginTop:"0.1rem", padding:"0 1.2rem", lineHeight:1.5, maxWidth:280 }}>
+              📄 {contextHint}
+            </div>
+          )}
           <div style={{ position:"absolute", bottom:14, fontSize:"0.62rem", color:"rgba(255,255,255,0.55)" }}>
             Nhấn để xem nghĩa ↕
           </div>

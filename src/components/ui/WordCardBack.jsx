@@ -10,6 +10,20 @@ import { getBakedWord } from "../../data/editoVocab.js";
 import SpeakBtn from "./SpeakBtn.jsx";
 import Spinner from "./Spinner.jsx";
 
+// Bold + colour the target word wherever it appears verbatim in a sentence.
+// Returns an array of strings/spans safe to render as children.
+function highlightWord(sentence, word) {
+  if (!sentence || !word) return [sentence];
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const parts = sentence.split(new RegExp(`(${escaped})`, "gi"));
+  if (parts.length === 1) return [sentence]; // not found verbatim
+  return parts.map((p, i) =>
+    new RegExp(`^${escaped}$`, "i").test(p)
+      ? <strong key={i} style={{ color: C.blue, fontStyle: "normal" }}>{p}</strong>
+      : p
+  );
+}
+
 export default function WordCardBack({ word }) {
   const cacheKey = `wcb_${word.fr}`;
 
@@ -88,7 +102,7 @@ export default function WordCardBack({ word }) {
       {details?.ex_fr && (
         <div style={{ background:C.goldL, borderRadius:12, padding:"0.55rem 0.8rem", border:`1px solid ${C.gold}55`, marginTop:"0.1rem" }}>
           <div style={{ fontSize:"0.58rem", textTransform:"uppercase", letterSpacing:1.5, color:C.gold, fontWeight:700, marginBottom:"0.3rem" }}>✦ Ví dụ</div>
-          <div style={{ fontSize:"0.78rem", color:C.ink, fontStyle:"italic", lineHeight:1.55 }}>{details.ex_fr}</div>
+          <div style={{ fontSize:"0.78rem", color:C.ink, fontStyle:"italic", lineHeight:1.55 }}>{highlightWord(details.ex_fr, word.fr)}</div>
           <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.2rem" }}>↳ {details.ex_vi}</div>
         </div>
       )}
