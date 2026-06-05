@@ -245,6 +245,14 @@ function AppInner() {
     if (getStorageHealth().near && !sessionStorage.getItem("storage_warn_dismissed")) {
       setStorageWarn(true);
     }
+    // Also catch the moment a write actually fails (storage full) — this is
+    // when data is really being lost, so force the warning regardless of dismissal.
+    const onQuota = () => {
+      sessionStorage.removeItem("storage_warn_dismissed");
+      setStorageWarn(true);
+    };
+    window.addEventListener("storage-quota-exceeded", onQuota);
+    return () => window.removeEventListener("storage-quota-exceeded", onQuota);
   }, []);
 
   // ── Cloud sync: auto-pull on focus, auto-push on close ────────────

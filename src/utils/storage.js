@@ -26,6 +26,21 @@ export function getStorageHealth() {
   return { bytes, pct, near: pct >= 80 };
 }
 
+// Safe write that surfaces quota failures instead of losing data silently.
+// On failure it broadcasts a "storage-quota-exceeded" event the UI listens for,
+// then rethrows nothing — callers stay simple but the user gets warned.
+export function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch (e) {
+    try {
+      window.dispatchEvent(new CustomEvent("storage-quota-exceeded", { detail: { key } }));
+    } catch {}
+    return false;
+  }
+}
+
 // Full backup of everything in localStorage → downloadable JSON.
 export function exportBackup() {
   try {
@@ -53,9 +68,7 @@ export function loadSets() {
 }
 
 export function saveSets(sets) {
-  try {
-    localStorage.setItem(SETS_KEY, JSON.stringify(sets));
-  } catch {}
+  return safeSetItem(SETS_KEY, JSON.stringify(sets));
 }
 
 export function getStreak() {

@@ -1,4 +1,4 @@
-export const MODEL = "claude-sonnet-4-20250514";
+export const MODEL = "claude-sonnet-4-6";
 
 export async function callAI(prompt) {
   const res = await fetch("/api/proxy", {

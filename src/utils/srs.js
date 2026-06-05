@@ -10,7 +10,7 @@
  *  - lastReviewed : timestamp of last review
  */
 
-import { getMistakes } from "./storage.js";
+import { getMistakes, safeSetItem } from "./storage.js";
 import { schedulePush } from "./cloudSync.js";
 
 const SRS_KEY = "srs_data";
@@ -21,8 +21,7 @@ export function getSRSData() {
 }
 
 function saveSRSData(data) {
-  try { localStorage.setItem(SRS_KEY, JSON.stringify(data)); }
-  catch {}
+  return safeSetItem(SRS_KEY, JSON.stringify(data));
 }
 
 /** Add a word to the deck (only if not already there) */

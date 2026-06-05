@@ -1,3 +1,5 @@
+import { Redis } from "@upstash/redis";
+
 const ALLOWED_ORIGINS = [
   "https://francais-vivi.vercel.app",
   "http://localhost:5174",
@@ -5,21 +7,31 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000",
 ];
 
-const SAFE_MODEL = "claude-sonnet-4-20250514";
+const SAFE_MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS_CAP = 8000;
 
-// Simple in-memory rate limiter: 20 req/min per IP
-const rateMap = new Map();
+// Rate limit: 20 req/min per IP.
+// Backed by Redis so the count is shared across all serverless instances
+// (an in-memory Map resets per cold start and effectively disables the limit).
 const RATE_LIMIT = 20;
-const RATE_WINDOW = 60_000;
+const RATE_WINDOW_SEC = 60;
 
-function isRateLimited(ip) {
-  const now = Date.now();
-  const e = rateMap.get(ip) || { count: 0, resetAt: now + RATE_WINDOW };
-  if (now > e.resetAt) { e.count = 0; e.resetAt = now + RATE_WINDOW; }
-  e.count++;
-  rateMap.set(ip, e);
-  return e.count > RATE_LIMIT;
+// Reuse one client across warm invocations. Null if Redis isn't configured.
+const redis =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? Redis.fromEnv()
+    : null;
+
+async function isRateLimited(ip) {
+  if (!redis) return false; // No Redis configured (e.g. local dev) → don't block.
+  try {
+    const key = `rl:proxy:${ip}`;
+    const count = await redis.incr(key);
+    if (count === 1) await redis.expire(key, RATE_WINDOW_SEC);
+    return count > RATE_LIMIT;
+  } catch {
+    return false; // Fail open: a Redis hiccup shouldn't take the app down.
+  }
 }
 
 export default async function handler(req, res) {
@@ -31,7 +43,7 @@ export default async function handler(req, res) {
   }
 
   const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "unknown";
-  if (isRateLimited(ip)) {
+  if (await isRateLimited(ip)) {
     return res.status(429).json({ error: { message: "Quá nhiều yêu cầu, vui lòng thử lại sau." } });
   }
 
