@@ -52,7 +52,7 @@ export default function PrononciationPanel({ words = [] }) {
     return shuffleArray(src);
   });
   const [idx,        setIdx]        = useState(0);
-  const [phase,      setPhase]      = useState("idle"); // idle | listening | result
+  const [phase,      setPhase]      = useState("idle"); // idle | listening | processing | result
   const [transcript, setTranscript] = useState("");
   const [score,      setScore]      = useState(0);
   const [stats,      setStats]      = useState({ total: 0, great: 0, good: 0 });
@@ -73,10 +73,10 @@ export default function PrononciationPanel({ words = [] }) {
   useEffect(() => () => { try { recRef.current?.abort(); } catch {} }, []);
 
   const startListening = useCallback(() => {
-    if (!micOK || phase === "listening") return;
+    if (!micOK || phase !== "idle") return;
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     const rec = new SR();
-    rec.lang          = "fr-FR";
+    rec.lang           = "fr-FR";
     rec.interimResults = false;
     rec.continuous     = false;
     let gotResult      = false;
@@ -93,19 +93,24 @@ export default function PrononciationPanel({ words = [] }) {
         great: s.great + (sc >= 85 ? 1 : 0),
         good:  s.good  + (sc >= 65 && sc < 85 ? 1 : 0),
       }));
-      // Log to "Ôn sai" when score is poor so WeakSpots picks it up
       if (sc < 50) logMistake({ fr: word.fr, vi: word.vi, context: "phát âm", module: "prononciation" });
     };
-    rec.onerror = ()   => setPhase("idle");
-    // onend fires after onresult too; only reset if no result came in
-    rec.onend   = ()   => { if (!gotResult) setPhase("idle"); };
+    rec.onerror = (e) => { if (e.error !== "aborted") setPhase("idle"); };
+    // onend fires after onresult; switch to processing while waiting, idle if nothing came
+    rec.onend = () => { if (!gotResult) setPhase("idle"); };
 
     recRef.current = rec;
     setPhase("listening");
     rec.start();
   }, [micOK, phase, word]);
 
-  const stopListening = () => { recRef.current?.stop(); setPhase("idle"); };
+  // On iOS, rec.stop() kills the session before onresult fires → use abort() to cancel cleanly.
+  // Recognition ends naturally on silence and fires onresult by itself — no manual stop needed.
+  const cancelListening = () => {
+    try { recRef.current?.abort(); } catch {}
+    setPhase("idle");
+  };
+
   const retry = () => { setPhase("idle"); setTranscript(""); setScore(0); };
   const next  = () => { setIdx(i => i + 1); setPhase("idle"); setTranscript(""); setScore(0); };
 
@@ -156,22 +161,29 @@ export default function PrononciationPanel({ words = [] }) {
           ) : (
             <>
               <button
-                onClick={phase === "listening" ? stopListening : startListening}
+                onClick={phase === "listening" ? cancelListening : startListening}
+                disabled={phase === "processing"}
                 style={{
                   width: 84, height: 84, borderRadius: "50%",
                   background: phase === "listening"
                     ? `linear-gradient(135deg, ${C.red}, #C0392B)`
+                    : phase === "processing"
+                    ? `linear-gradient(135deg, ${C.gold}, #D97706)`
                     : `linear-gradient(135deg, ${C.blue}, ${C.blueDark})`,
-                  border: "none", cursor: "pointer", fontSize: "2.2rem",
+                  border: "none", cursor: phase === "processing" ? "default" : "pointer",
+                  fontSize: "2.2rem",
                   boxShadow: phase === "listening"
                     ? `0 0 0 10px ${C.red}2a, 0 4px 24px ${C.red}44`
                     : `0 4px 20px ${C.blue}44`,
                   transition: "all 0.25s",
+                  opacity: phase === "processing" ? 0.7 : 1,
                 }}>
-                🎤
+                {phase === "processing" ? "⏳" : "🎤"}
               </button>
               <div style={{ marginTop: "0.75rem", fontSize: "0.78rem", color: C.gray, minHeight: "1.2em" }}>
-                {phase === "listening" ? "Đang nghe… (nhấn để dừng)" : "Nhấn để đọc"}
+                {phase === "listening"   ? "Đang nghe… nói xong thì dừng lại tự nhiên · nhấn để huỷ"
+                : phase === "processing" ? "Đang xử lý…"
+                :                          "Nhấn để đọc"}
               </div>
             </>
           )}
