@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { C } from "../../constants.js";
-import { callAI } from "../../utils/api.js";
+import { callAI, MODEL } from "../../utils/api.js";
 import Spinner from "./Spinner.jsx";
 
 export function SecLabel({ icon, text }) {
@@ -33,9 +33,6 @@ export function ImportModal({ onImport, onClose }) {
   const [state, setState] = useState("idle");
   const [preview, setPreview] = useState("");
   const [err, setErr] = useState("");
-
-  // MODEL is needed for image import - import directly
-  const MODEL = "claude-sonnet-4-6";
 
   const processFile = async file => {
     setState("loading"); setErr("");

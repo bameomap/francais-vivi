@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
-import { callAI } from "../utils/api.js";
+import { callAI, MODEL } from "../utils/api.js";
 import Spinner from "./ui/Spinner.jsx";
 import { MCSection, FillSection } from "./QuizSections.jsx";
 
-const MODEL = "claude-sonnet-4-6";
 const ANALYSE_HISTORY_KEY = "analyse_history";
 
 function loadAnalyseHistory() {

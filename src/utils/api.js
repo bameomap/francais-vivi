@@ -1,15 +1,34 @@
 export const MODEL = "claude-sonnet-4-6";
 
+// AI calls can hang (slow model, dropped connection). Without a timeout the
+// loading spinner would spin forever, so we abort after this many ms.
+const AI_TIMEOUT_MS = 35_000;
+
+// fetch() wrapper that aborts on timeout and surfaces a friendly message.
+async function fetchProxy(body) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
+  try {
+    return await fetch("/api/proxy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+  } catch (e) {
+    if (e.name === "AbortError") throw new Error("AI phản hồi quá lâu. Vui lòng thử lại.");
+    throw new Error("Lỗi kết nối mạng. Vui lòng kiểm tra mạng và thử lại.");
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function callAI(prompt) {
-  const res = await fetch("/api/proxy", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 8000,
-      system: "You are a JSON API. Output valid JSON only. No markdown, no backticks. Start with { end with }.",
-      messages: [{ role: "user", content: prompt }],
-    }),
+  const res = await fetchProxy({
+    model: MODEL,
+    max_tokens: 8000,
+    system: "You are a JSON API. Output valid JSON only. No markdown, no backticks. Start with { end with }.",
+    messages: [{ role: "user", content: prompt }],
   });
   const data = await res.json();
   if (data.error) throw new Error(data.error.message);
@@ -20,11 +39,7 @@ export async function callAI(prompt) {
 }
 
 export async function callAIText(messages, systemPrompt) {
-  const res = await fetch("/api/proxy", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: MODEL, max_tokens: 1024, system: systemPrompt, messages }),
-  });
+  const res = await fetchProxy({ model: MODEL, max_tokens: 1024, system: systemPrompt, messages });
   let data;
   try { data = await res.json(); }
   catch { throw new Error(`Lỗi kết nối máy chủ (${res.status}). Vui lòng thử lại.`); }
