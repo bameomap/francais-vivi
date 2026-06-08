@@ -1390,97 +1390,185 @@ Quels vêtements / accessoires portez-vous aujourd'hui ?
     id:"g6", num:"6", title:"Qu'est-ce qu'on fait aujourd'hui?", points:[
       {
         topic:"Động từ phản thân — Les verbes pronominaux",
-        rule:`Động từ phản thân = hành động TỰ LÀM CHO MÌNH (se + verbe)
+        rule:`Động từ phản thân = hành động TỰ LÀM CHO MÌNH (se + verbe).
+Dấu hiệu nhận biết: trong từ điển luôn ghi "se + động từ" (se lever, s'habiller…).
+
+CẤU TRÚC: pronom réfléchi + verbe
+Đại từ phản thân thay đổi theo chủ ngữ:
+Je → me (m')   Tu → te (t')   Il/Elle/On → se (s')
+Nous → nous    Vous → vous    Ils/Elles → se (s')
+⚠️ me/te/se → m'/t'/s' trước nguyên âm hoặc h câm.
 
 Bảng chia SE LEVER (thức dậy):
-• Je me lève      (me trước nguyên âm → m')
-• Tu te lèves     (te → t' trước nguyên âm)
-• Il/Elle se lève  (se → s' trước nguyên âm)
-• Nous nous levons
-• Vous vous levez
-• Ils/Elles se lèvent
+• Je me lève       • Tu te lèves      • Il/Elle se lève
+• Nous nous levons • Vous vous levez  • Ils/Elles se lèvent
 
-Các loại động từ phản thân:
-1. PHẢN THÂN THẬT SỰ — chủ ngữ tự làm cho CHÍNH MÌNH (se = "chính mình"):
-   se laver (tự tắm), se coiffer (tự chải đầu), se maquiller (tự trang điểm), se raser (tự cạo râu)
-   💡 So sánh để thấy rõ vai trò của "se":
-   "Je lave la voiture." (tôi rửa xe — tác động lên vật khác)
+Bảng chia S'APPELER (tên là):
+• Je m'appelle     • Tu t'appelles    • Il/Elle s'appelle
+• Nous nous appelons • Vous vous appelez • Ils/Elles s'appellent
+
+DANH SÁCH ĐỘNG TỪ THƯỜNG DÙNG (sinh hoạt hằng ngày):
+se réveiller (thức giấc) → se lever (dậy) → se laver (rửa mặt/tắm)
+se doucher (tắm vòi) → se raser (cạo râu) → se maquiller (trang điểm)
+se coiffer (chải đầu) → s'habiller (mặc đồ) → se préparer (chuẩn bị)
+se dépêcher (vội vàng) → partir au travail...
+...về nhà: se reposer (nghỉ ngơi) → se relaxer → se coucher (đi ngủ) → s'endormir (ngủ thiếp đi)
+
+CÁC LOẠI ĐỘNG TỪ PHẢN THÂN:
+
+1. PHẢN THÂN THẬT SỰ — chủ ngữ tự làm cho CHÍNH MÌNH:
+   "Je lave la voiture." (rửa xe — tác động lên vật khác)
    "Je ME lave." (tôi tắm — tác động lên chính tôi)
-2. TƯƠNG HỖ — nhiều người làm cho NHAU (se = "lẫn nhau"; chỉ đi với chủ ngữ số nhiều):
-   se regarder (nhìn nhau), s'aimer (yêu nhau), se téléphoner (gọi cho nhau),
+   → "se" = "chính mình"
+
+2. TƯƠNG HỖ — nhiều người làm cho NHAU (chỉ dùng với chủ ngữ số nhiều):
+   se regarder (nhìn nhau), s'aimer (yêu nhau), se téléphoner (gọi cho nhau)
    se disputer (cãi nhau), se rencontrer (gặp nhau), se parler (nói chuyện với nhau)
-   ⚠️ "Ils se regardent." = Họ nhìn NHAU — KHÔNG phải mỗi người tự nhìn mình!
-3. NGHĨA ĐẶC BIỆT khác hẳn động từ gốc (phải nhớ như từ vựng riêng):
-   s'appeler (tên là) ≠ appeler (gọi)   ·   se trouver (nằm ở) ≠ trouver (tìm thấy)
-   s'entendre (hợp tính nhau) ≠ entendre (nghe thấy)   ·   se rendre (đi đến) ≠ rendre (trả lại)
+   ⚠️ "Ils se regardent." = Họ nhìn NHAU — không phải mỗi người tự nhìn mình!
+
+3. NGHĨA ĐẶC BIỆT khác hẳn động từ gốc (học như từ vựng riêng):
+   s'appeler (tên là) ≠ appeler (gọi ai)
+   se trouver (nằm ở vị trí) ≠ trouver (tìm thấy)
+   s'entendre (hợp tính, hiểu nhau) ≠ entendre (nghe thấy)
+   se passer (xảy ra) ≠ passer (đi qua / dành thời gian)
+
 4. LUÔN LUÔN phản thân — không tồn tại dạng không có "se":
-   se souvenir (nhớ), se taire (im lặng), se méfier (cảnh giác), s'évanouir (ngất xỉu)
+   se souvenir de (nhớ đến), se taire (im lặng), se méfier de (cảnh giác với), s'évanouir (ngất xỉu)
 
-PHỦ ĐỊNH: Ne + me/te/se + verbe + pas
-"Je ne me lève pas tôt." (Tôi không dậy sớm)
+PHỦ ĐỊNH: NE + pronom réfléchi + VERBE + PAS
+"Je NE me lève PAS tôt." — Tôi không dậy sớm.
+"Il NE se rase PAS tous les jours." — Anh ấy không cạo râu mỗi ngày.
+⚠️ "ne" đứng TRƯỚC me/te/se, không phải sau!
 
-⚠️ Ở thì PASSÉ COMPOSÉ: Être (không avoir!) + participe passé
-"Je me suis levé(e) à 7h."`,
+DẠNG MỆNH LỆNH (impératif):
+• Khẳng định: Pronom THEO SAU có gạch ngang, te → toi:
+  "Lève-toi!" (dậy đi!) · "Levons-nous!" · "Levez-vous!"
+• Phủ định: Ne + te/nous/vous + verbe + pas:
+  "Ne te lève pas!" · "Ne vous dépêchez pas!"
+
+PASSÉ COMPOSÉ — dùng ÊTRE (không phải avoir!):
+"Je me suis levé(e) à 7h." — Tôi đã dậy lúc 7h.
+"Elle s'est habillée vite." — Cô ấy mặc đồ nhanh.
+⚠️ Participe passé PHẢI ĐỒI GIỐNG VÀ SỐ với chủ ngữ:
+levé (nam) / levée (nữ) / levés (nam số nhiều) / levées (nữ số nhiều)`,
         examples:[
-          "Je me réveille à 7h et je me lève à 7h15. — Tôi thức lúc 7h và dậy lúc 7h15.",
-          "Il se douche et se rase le matin. — Anh ấy tắm và cạo râu buổi sáng.",
+          "Je me réveille à 6h30, je me lève à 6h45 et je me douche. — Tôi thức lúc 6h30, dậy lúc 6h45 và tắm.",
+          "Il se rase et se coiffe avant de partir au travail. — Anh ấy cạo râu và chải đầu trước khi đi làm.",
           "Nous nous couchons tard le week-end. — Chúng tôi đi ngủ muộn vào cuối tuần.",
-          "Elle s'habille vite. — Cô ấy mặc đồ nhanh.",
-          "Comment tu t'appelles? — Bạn tên là gì?",
-          "Je ne me maquille pas tous les jours. — Tôi không trang điểm mỗi ngày.",
-          "Marie et Paul s'aiment et se téléphonent tous les soirs. — Marie và Paul yêu nhau và gọi cho nhau mỗi tối. (tương hỗ)",
+          "Elle ne se maquille pas tous les jours. — Cô ấy không trang điểm mỗi ngày.",
+          "Dépêche-toi! On est en retard! — Nhanh lên! Chúng mình trễ rồi!",
+          "Marie et Paul s'aiment et se téléphonent tous les soirs. (tương hỗ) — Marie và Paul yêu nhau và gọi cho nhau mỗi tối.",
+          "Je me suis levée à 8h ce matin. (nữ nói) — Sáng nay tôi dậy lúc 8h.",
         ]
       },
       {
         topic:"Trạng từ tần suất (2) — Parfois, Rarement, Tous les…",
-        rule:`Thang tần suất từ thấp đến cao:
-jamais (0%) < rarement < parfois/quelquefois < souvent < toujours (100%)
+        rule:`THANG TẦN SUẤT từ thấp đến cao:
+jamais (0%) < rarement (~10%) < parfois/quelquefois/de temps en temps (~30%) < souvent (~70%) < toujours (100%)
+
+GIẢI THÍCH TỪNG TRẠNG TỪ:
+
+• TOUJOURS = luôn luôn, lúc nào cũng (100%)
+  "Je prends toujours le bus." — Tôi lúc nào cũng đi xe buýt.
+
+• SOUVENT = thường xuyên (~70%)
+  "Il va souvent au sport." — Anh ấy thường đi tập thể thao.
+
+• PARFOIS = đôi khi, thỉnh thoảng (~30%)
+  "Je mange parfois au restaurant." — Thỉnh thoảng tôi ăn nhà hàng.
+
+• QUELQUEFOIS = đôi khi (≈ parfois, thay thế nhau được)
+  "Je lis quelquefois le soir." — Đôi khi tôi đọc sách buổi tối.
+
+• DE TEMPS EN TEMPS = thỉnh thoảng (≈ parfois, nhưng nhấn mạnh hơn ý "không thường xuyên")
+  "On se voit de temps en temps." — Chúng tôi thỉnh thoảng gặp nhau.
+
+• RAREMENT = hiếm khi (~10%)
+  "Il sort rarement le soir." — Anh ấy hiếm khi ra ngoài buổi tối.
+  ⚠️ RAREMENT KHÔNG cần NE — khác với jamais!
+  ✅ "Il sort rarement." (đúng)   ❌ "Il ne sort rarement pas." (sai)
+
+• JAMAIS = không bao giờ (0%) → BẮT BUỘC dùng với NE (ne ... jamais):
+  "Je ne mange jamais de viande." — Tôi không bao giờ ăn thịt.
+  "Elle ne sort jamais seule." — Cô ấy không bao giờ đi một mình.
+  ⚠️ "Je mange jamais de viande." (argot/familier — tránh dùng khi viết!)
+
+PHÂN BIỆT PARFOIS / QUELQUEFOIS / DE TEMPS EN TEMPS:
+→ Ba từ này gần như cùng nghĩa và thay thế nhau được.
+→ Parfois và quelquefois phổ biến hơn trong văn viết.
+→ De temps en temps thường dùng trong khẩu ngữ, nhấn mạnh tính "không đều đặn".
 
 VỊ TRÍ TRONG CÂU:
-• Sau động từ (thì hiện tại, passé composé phần avoir): Je vais SOUVENT au cinéma.
-• Trước participe passé: J'ai SOUVENT regardé ce film.
+
+THÌ HIỆN TẠI → đứng SAU động từ chính:
+"Je vais TOUJOURS au travail à pied."
+"Elle sort RAREMENT le soir."
+"Il mange PARFOIS chez ses parents."
+
+PASSÉ COMPOSÉ → đứng GIỮA avoir/être và participe passé:
+"J'ai SOUVENT regardé ce film." (giữa ai và regardé)
+"Il est TOUJOURS arrivé à l'heure." (giữa est và arrivé)
+"Je n'ai JAMAIS mangé de cuisses de grenouille." (jamais đứng giữa)
+⚠️ Khác với tiếng Việt/Anh — trạng từ KHÔNG đứng sau participe passé!
+❌ "J'ai regardé souvent ce film." (không tự nhiên)
+✅ "J'ai souvent regardé ce film." (đúng)
 
 BIỂU THỨC THỜI GIAN (đứng đầu hoặc cuối câu):
-• le lundi = mỗi thứ Hai: Le lundi, je fais du yoga.
-• tous les lundis = every Monday: Je fais du yoga tous les lundis.
-• tous les jours = chaque jour: Il court tous les jours.
-• tous les matins/soirs = chaque matin/soir
-• le week-end = chaque week-end
-• une fois par semaine/mois = một lần mỗi tuần/tháng
-• de temps en temps = thỉnh thoảng
+• le lundi = mỗi thứ Hai (cố định): "Le lundi, je fais du yoga."
+  ≠ lundi = thứ Hai này (sắp tới): "Lundi, je vais chez le médecin."
+• tous les lundis = every Monday: "Je fais du yoga tous les lundis."
+• tous les jours = chaque jour: "Il court tous les jours."
+• tous les matins / tous les soirs = mỗi sáng / mỗi tối
+• tous les week-ends / le week-end = mỗi cuối tuần
+• une fois par semaine = một lần mỗi tuần
+• deux fois par mois = hai lần mỗi tháng
+• de temps en temps = thỉnh thoảng (≈ parfois)
 
-⚠️ JAMAIS avec ne → jamais sans ne = argot/informal
-"Je ne vais jamais là-bas." (standard)
-"Je vais jamais là-bas." (familier)`,
+💡 TOUS LES + groupe nominal → chỉ tần suất đều đặn:
+"tous les jours" (chaque jour), "tous les deux jours" (cách ngày), "tous les ans" (hàng năm)`,
         examples:[
           "Je vais parfois au théâtre, mais jamais à l'opéra. — Tôi thỉnh thoảng đi xem kịch nhưng không bao giờ đi opera.",
-          "Le lundi, je fais du sport. Tous les lundis! — Thứ Hai tôi tập thể thao. Mỗi thứ Hai!",
-          "Elle travaille toujours tard le soir. — Cô ấy luôn làm việc muộn buổi tối.",
-          "Tu sors souvent le week-end? — Bạn hay ra ngoài vào cuối tuần không?",
-          "Je fais du yoga deux fois par semaine. — Tôi tập yoga hai lần một tuần.",
-          "Il ne va rarement au cinéma. → Sai! Nói: Il va rarement au cinéma.",
+          "J'ai souvent regardé ce film. — Tôi đã xem bộ phim này nhiều lần. (souvent giữa ai và regardé!)",
+          "Elle sort rarement le soir. (KHÔNG có ne!) — Cô ấy hiếm khi ra ngoài buổi tối.",
+          "Je ne sors jamais sans parapluie quand il pleut. — Tôi không bao giờ ra ngoài không mang ô khi trời mưa.",
+          "Le lundi, je fais du sport. Tous les lundis! — Thứ Hai (mỗi tuần) tôi tập thể thao.",
+          "Je fais du yoga deux fois par semaine, le mardi et le jeudi. — Tôi tập yoga hai lần mỗi tuần, thứ Ba và thứ Năm.",
+          "On se voit de temps en temps, parfois le week-end. — Chúng tôi thỉnh thoảng gặp nhau, đôi khi cuối tuần.",
         ]
       },
       {
         topic:"Passé récent — Venir de + infinitif",
-        rule:`VENIR DE + INFINITIF = "vừa mới làm gì đó" (hành động vừa kết thúc)
+        rule:`VENIR DE + INFINITIF = "vừa mới làm gì đó" (hành động vừa kết thúc ngay trước lúc nói)
+
+CẤU TRÚC: VENIR (chia theo chủ ngữ) + DE/D' + infinitif
 
 Chia VENIR au présent:
-Je viens de · Tu viens de · Il/Elle vient de
-Nous venons de · Vous venez de · Ils/Elles viennent de
+• Je viens de   · Tu viens de   · Il/Elle vient de
+• Nous venons de · Vous venez de · Ils/Elles viennent de
+⚠️ DE → D' trước nguyên âm: "Il vient D'appeler." / "Je viens D'arriver."
 
-Dùng khi:
-✅ Hành động xảy ra NGAY TRƯỚC lúc nói: "Je viens de manger." (Tôi vừa mới ăn xong)
-✅ Giải thích tại sao không thể làm gì: "Je ne peux pas manger, je viens de finir."
+KHI NÀO DÙNG:
+✅ Hành động xảy ra NGAY TRƯỚC lúc nói (vài giây/phút trước):
+   "Je viens de manger." — Tôi vừa mới ăn xong.
+   "Il vient de partir." — Anh ấy vừa mới đi.
+✅ Giải thích tại sao không thể/không muốn làm gì ngay:
+   "— Tu veux du café ? — Non merci, je viens d'en prendre un."
+   (— Bạn muốn cà phê không? — Không cảm ơn, tôi vừa uống một ly rồi.)
 
-⚠️ VENIR DE + lieu = "vừa đến từ" → nghĩa khác!
-"Il vient de Paris." = Anh ấy đến từ Paris. (xuất xứ)
-"Il vient DE RENTRER." = Anh ấy vừa mới về. (passé récent)
+⚠️ PHÂN BIỆT: VENIR DE + lieu ≠ VENIR DE + infinitif
+"Il vient de Paris." = Anh ấy đến từ Paris. (xuất xứ — danh từ theo sau)
+"Il vient de rentrer." = Anh ấy vừa mới về. (passé récent — động từ nguyên thể theo sau)
+💡 Mẹo: nhìn xem sau "de" là danh từ hay động từ nguyên thể!
 
-PHỦ ĐỊNH: Je ne viens pas de + infinitif
-"Il ne vient pas de partir." = Anh ấy không vừa đi.
+PHỦ ĐỊNH: trong thực tế, HIẾM KHI phủ định "venir de"
+→ Thay vào đó, người Pháp dùng passé composé hoặc cách nói khác:
+"Il n'est pas encore arrivé." = Anh ấy chưa đến. (thay vì "Il ne vient pas d'arriver." — rất gượng)
+"Je n'ai pas encore mangé." = Tôi chưa ăn. (thay vì "Je ne viens pas de manger.")
 
-💡 Đây là cách diễn đạt tự nhiên trong tiếng Pháp khẩu ngữ, thường dùng hơn passé composé khi nói về "vừa mới"`,
+💡 PASSÉ RÉCENT so với PASSÉ COMPOSÉ:
+"Je viens de manger." → vừa xong, cách đây vài phút (cảm giác còn "tươi")
+"J'ai mangé." → đã ăn, không nói rõ khi nào (có thể sáng nay, hôm qua...)
+→ Khi muốn nhấn mạnh "vừa mới xong", dùng venir de; trong các tình huống khác dùng passé composé.`,
         examples:[
           "Je viens de finir mon cours de français! — Tôi vừa mới kết thúc bài học tiếng Pháp!",
           "Il vient d'appeler. Tu l'as raté! — Anh ấy vừa gọi. Bạn bỏ lỡ rồi!",
