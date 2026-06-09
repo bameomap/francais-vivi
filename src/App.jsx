@@ -801,12 +801,18 @@ function AppInner() {
                 </div>
 
                 {/* ── Search ── */}
-                <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"8px 12px", display:"flex", alignItems:"center", gap:8 }}>
-                  <span style={{ color:C.gray2, fontSize:16 }}>⌕</span>
-                  <input value={vocabSearch} onChange={e=>setVocabSearch(e.target.value)}
-                    placeholder="Tìm từ tiếng Pháp hoặc nghĩa Việt…"
-                    style={{ border:"none", outline:"none", flex:1, fontSize:12.5, fontFamily:"inherit", color:C.ink, background:"transparent" }}/>
-                </div>
+                {srsStats.total > 0 && (
+                  <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:10, padding:"8px 12px", display:"flex", alignItems:"center", gap:8 }}>
+                    <span style={{ color:C.gray2, fontSize:16 }}>⌕</span>
+                    <input value={vocabSearch} onChange={e=>setVocabSearch(e.target.value)}
+                      placeholder="Tìm từ tiếng Pháp hoặc nghĩa Việt…"
+                      style={{ border:"none", outline:"none", flex:1, fontSize:12.5, fontFamily:"inherit", color:C.ink, background:"transparent" }}/>
+                    {vocabSearch && (
+                      <button onClick={()=>setVocabSearch("")}
+                        style={{ background:"none", border:"none", cursor:"pointer", color:C.gray, fontSize:14, padding:"0 2px", lineHeight:1 }}>✕</button>
+                    )}
+                  </div>
+                )}
 
                 {/* ── Filter chips ── */}
                 <div style={{ display:"flex", gap:6, flexWrap:"nowrap", overflowX:"auto" }}>
