@@ -1700,27 +1700,75 @@ SA ROUTINE QUOTIDIENNE (production orale simple):
     id:"g7", num:"7", title:"Chez moi!", points:[
       {
         topic:"Passé composé (1) — Avec l'auxiliaire AVOIR",
-        rule:`PASSÉ COMPOSÉ = thì quá khứ kể chuyện, hành động đã hoàn thành
+        rule:`PASSÉ COMPOSÉ = thì quá khứ quan trọng nhất ở A1!
+Dùng để kể một hành động ĐÃ XẢY RA VÀ ĐÃ XONG trong quá khứ.
 
-Cấu trúc: AVOIR (présent) + PARTICIPE PASSÉ
+"Composé" = GHÉP — vì thì này luôn gồm 2 PHẦN:
+1️⃣ TRỢ ĐỘNG TỪ (auxiliaire) AVOIR chia ở thì hiện tại
+2️⃣ PARTICIPE PASSÉ (quá khứ phân từ) của động từ chính
 
-THÀNH LẬP PARTICIPE PASSÉ:
-• Verbes en -ER → É: parler→parlé, manger→mangé, trouver→trouvé
-• Verbes en -IR (groupe 2) → I: finir→fini, choisir→choisi
-• Irréguliers phải học thuộc:
+  Sujet + AVOIR (présent) + participe passé
+  "J'ai mangé." = ai (avoir) + mangé (participe passé của manger)
+
+BẢNG CHIA HOÀN CHỈNH — ví dụ MANGER (ăn):
+• J'ai mangé          → Tôi đã ăn
+• Tu as mangé         → Bạn đã ăn
+• Il/Elle a mangé     → Anh/Cô ấy đã ăn
+• Nous avons mangé    → Chúng tôi đã ăn
+• Vous avez mangé     → Các bạn đã ăn
+• Ils/Elles ont mangé → Họ đã ăn
+💡 Chỉ AVOIR thay đổi theo ngôi — participe passé GIỮ NGUYÊN!
+
+CÁCH THÀNH LẬP PARTICIPE PASSÉ (3 nhóm):
+• Động từ -ER → -É:  parler→parlé, manger→mangé, trouver→trouvé, acheter→acheté
+  ⚠️ "mangé" và "manger" ĐỌC GIỐNG HỆT NHAU [mɑ̃ʒe] — chỉ khác khi viết!
+• Động từ -IR (nhóm 2) → -I:  finir→fini, choisir→choisi, réussir→réussi
+• Động từ -RE (như vendre) → -U:  vendre→vendu, attendre→attendu,
+  répondre→répondu, entendre→entendu, perdre→perdu
+• Bất quy tắc — phải học thuộc (hay gặp nhất):
   avoir→eu, être→été, faire→fait, voir→vu, pouvoir→pu,
   vouloir→voulu, devoir→dû, savoir→su, boire→bu,
   prendre→pris, mettre→mis, dire→dit, écrire→écrit
+  (Danh sách đầy đủ → xem Passé composé (2) ở Unité 8)
 
-PHỦ ĐỊNH: NE + AVOIR + PAS + PARTICIPE PASSÉ
-"Je n'ai pas mangé." "Il n'a pas vu ce film."
+KHI NÀO DÙNG PASSÉ COMPOSÉ?
+✅ Hành động đã xảy ra 1 lần, đã kết thúc: "Hier, j'ai visité le Louvre."
+✅ Chuỗi hành động nối tiếp nhau khi kể chuyện:
+   "J'ai pris le bus, j'ai acheté du pain, puis j'ai mangé."
+✅ Hành động có kết quả ở hiện tại: "J'ai trouvé un appartement!" (giờ có nhà rồi)
+❌ KHÔNG dùng để MÔ TẢ hoàn cảnh/thói quen quá khứ → đó là imparfait (Unité 9)
 
-⚠️ Avec AVOIR: le participe passé ne s'accorde PAS avec le sujet!
-"Elle a mangé." (pas mangée — l'accord se fait seulement avec le COD avant le verbe)
+PHỦ ĐỊNH — ne…pas ÔM LẤY AVOIR (không ôm participe passé):
+  Sujet + N' + AVOIR + PAS + participe passé
+"Je N'ai PAS mangé."  (KHÔNG nói "Je n'ai mangé pas" ❌)
+"Il N'a PAS vu ce film."
+• jamais: "Je n'ai JAMAIS visité Paris." = chưa bao giờ
+• rien:   "Je n'ai RIEN mangé." = không ăn gì cả
+• pas encore: "Je n'ai PAS ENCORE fini." = chưa xong
 
-INDICATEURS DE TEMPS:
-hier (hôm qua), avant-hier, la semaine dernière, le mois dernier,
-il y a + temps: "Il y a deux jours" = hai ngày trước`,
+CÂU HỎI — 3 cách như thường lệ:
+• Ngữ điệu: "Tu as mangé ?"
+• Est-ce que: "Est-ce que tu as mangé ?"
+• Đảo ngữ: "As-tu mangé ?" / "Avez-vous fini ?"
+
+VỊ TRÍ TRẠNG TỪ — các trạng từ ngắn (déjà, encore, bien, mal,
+beaucoup, trop) đứng GIỮA avoir và participe passé:
+"J'ai DÉJÀ mangé." (tôi ăn rồi) · "Tu as BIEN dormi ?" (ngủ ngon không?)
+"Il a BEAUCOUP travaillé."
+
+⚠️ Với AVOIR: participe passé KHÔNG hòa hợp với chủ ngữ!
+"Elle a mangé." ✅ (KHÔNG viết "mangée" ❌)
+"Ils ont fini." ✅ (KHÔNG viết "finis" ❌)
+(Ngoại lệ nâng cao: hòa hợp với COD đứng trước — "la pizza? Je l'ai mangéE" — xem Pronoms COD)
+
+⚠️ Một số động từ (aller, partir, venir…) dùng ÊTRE thay vì avoir
+→ "Je SUIS allé(e)" — học kỹ ở Unité 9!
+
+TỪ CHỈ THỜI GIAN hay đi với passé composé:
+hier (hôm qua) · avant-hier (hôm kia) · ce matin (sáng nay)
+la semaine dernière / le mois dernier / l'année dernière (tuần/tháng/năm trước)
+il y a + thời gian: "il y a deux jours" = hai ngày trước
+lundi dernier (thứ Hai tuần trước) · déjà (đã/rồi) · pendant deux ans (trong 2 năm — đã xong)`,
         examples:[
           "J'ai trouvé un bel appartement hier! — Tôi đã tìm được một căn hộ đẹp hôm qua!",
           "Tu as fait les courses? — Bạn đã đi mua sắm chưa?",
@@ -1779,27 +1827,33 @@ il y a + temps: "Il y a deux jours" = hai ngày trước`,
       },
       {
         topic:"Obligation et interdiction (1) — Il faut, Ne pas + infinitif",
-        rule:`OBLIGATION ET INTERDICTION — ba cách diễn đạt:
+        rule:`BẮT BUỘC (obligation) và CẤM ĐOÁN (interdiction) — 3 cách diễn đạt:
 
-1. IL FAUT + INFINITIF (obligation impersonnelle, générale)
-"Il faut respecter le règlement." = Cần phải tôn trọng nội quy.
+1️⃣ IL FAUT + ĐỘNG TỪ NGUYÊN MẪU = "cần phải / phải" (quy tắc CHUNG, không nhắm vào ai cụ thể)
+⚠️ "IL" ở đây KHÔNG phải "anh ấy" — đây là chủ ngữ giả (như "il pleut")!
+"Il faut" KHÔNG BAO GIỜ đổi: không có "je faux" hay "tu faux" ❌
+"Il faut respecter le règlement." = (Mọi người) cần phải tôn trọng nội quy.
 "Il faut faire du sport." = Cần phải tập thể thao.
-Phủ định: "Il ne faut pas + inf." = Không được...
+
+Phủ định: IL NE FAUT PAS + infinitif = "KHÔNG ĐƯỢC..." (cấm!)
+⚠️ Chú ý nghĩa: KHÔNG phải "không cần" mà là "không được phép"!
 "Il ne faut pas faire de bruit." = Không được làm ồn.
+(Muốn nói "không cần" → "Ce n'est pas obligatoire" / "Tu n'es pas obligé de…")
 
-2. INFINITIF seul (panneaux, instructions écrites)
-"Ne pas fumer." "Ne pas stationner." "Composer son billet."
-→ Style télégraphique pour affiches, règlements, recettes
+2️⃣ ĐỘNG TỪ NGUYÊN MẪU đứng một mình — văn phong BIỂN BÁO, nội quy, công thức nấu ăn:
+"Ne pas fumer." (Cấm hút thuốc) · "Ne pas stationner." (Cấm đỗ xe)
+"Composer son billet." (Hãy dập vé)
+→ Chỉ dùng khi VIẾT trên bảng/biển — không dùng khi nói chuyện.
 
-3. IMPÉRATIF (ordre direct à une personne)
-"Fermez la porte!" "Ne faites pas de bruit!"
+3️⃣ MỆNH LỆNH THỨC (impératif) — ra lệnh TRỰC TIẾP cho một người cụ thể (xem Unité 4):
+"Fermez la porte!" (Đóng cửa lại!) · "Ne faites pas de bruit!" (Đừng làm ồn!)
 
-Mức độ:
-• Il faut... (obligation générale, impersonnelle)
-• Devoir... (obligation personnelle — voir Unité 8)
-• Pouvoir... (permission)
-• Ne pas devoir... (interdiction personnelle)
-• Il est interdit de... (interdiction formelle)`,
+📊 THANG MỨC ĐỘ — từ gợi ý đến cấm:
+• Pouvoir: "Tu peux entrer." = được phép (permission)
+• Il faut: "Il faut être à l'heure." = quy tắc chung cho mọi người
+• Devoir: "Tu dois être à l'heure." = BẠN (cụ thể) phải — xem Unité 8
+• Ne pas devoir: "Tu ne dois pas fumer ici." = bạn không được (cấm cá nhân)
+• Il est interdit de: "Il est interdit de fumer." = cấm chính thức (biển báo, luật)`,
         examples:[
           "Il faut sortir les poubelles le lundi. — Cần đổ rác vào thứ Hai.",
           "Il ne faut pas faire de bruit après 22h. — Không được làm ồn sau 22 giờ.",
@@ -1810,27 +1864,38 @@ Mức độ:
       },
       {
         topic:"Pronoms COD (1) — Le, La, L', Les",
-        rule:`COD = Complément d'Objet Direct = bổ ngữ trực tiếp
-Pronoms COD thay thế danh từ để tránh lặp lại!
+        rule:`COD = Complément d'Objet Direct = bổ ngữ TRỰC TIẾP
+(danh từ đứng ngay sau động từ, KHÔNG có giới từ à/de ở giữa)
+Đại từ COD thay thế danh từ đó để tránh lặp lại!
 
-• LE = thay thế nam sg: le film → je LE regarde
-• LA = thay thế nữ sg: la série → je LA regarde
-• L' = trước nguyên âm (nam hoặc nữ): l'appartement → je L'ai trouvé
-• LES = số nhiều: les clés → je LES ai
+💡 CÁCH NHẬN BIẾT COD: hỏi "động từ + CÁI GÌ? / AI?"
+"Je regarde le film." → regarde cái gì? → le film = COD ✅
+"Je téléphone À Marie." → có "à" → KHÔNG phải COD (đó là COI) ❌
 
-VỊ TRÍ: TRƯỚC động từ (sauf impératif affirmatif)
-"Je regarde le film." → "Je LE regarde." ✅
-"Je LE regarde." → pronom AVANT le verbe ✅
+BẢNG ĐẠI TỪ COD (ngôi thứ 3):
+• LE  = thay danh từ nam số ít:  le film → je LE regarde
+• LA  = thay danh từ nữ số ít:   la série → je LA regarde
+• L'  = trước nguyên âm (nam hoặc nữ): l'appartement → je L'ai trouvé
+• LES = số nhiều (mọi giống):    les clés → je LES ai
 
-PHỦ ĐỊNH: ne + pronom + verbe + pas
-"Je ne LE regarde pas."
+VỊ TRÍ — đứng TRƯỚC động từ (khác hẳn tiếng Việt!):
+"Je regarde le film." → "Je LE regarde." (KHÔNG nói "Je regarde le" ❌)
+Tiếng Việt: "Tôi xem NÓ" (sau) — Tiếng Pháp: "Je LE regarde" (trước)!
 
-IMPÉRATIF AFFIRMATIF: pronom APRÈS, avec trait d'union
-"Regarde-LE!" "Appelle-LA!" "Mange-LES!"
-⚠️ Le/la → l' avant h aspiré? Non! → "Regarde-le!" toujours
+PHỦ ĐỊNH: ne + đại từ + động từ + pas (ne…pas ôm cả đại từ lẫn động từ)
+"Je ne LE regarde pas." — Tôi không xem nó.
 
-PASSÉ COMPOSÉ: pronom avant l'auxiliaire
-"Je l'ai vu." "Tu les as appelés?"`,
+FUTUR PROCHE: đại từ đứng trước động từ NGUYÊN MẪU:
+"Je vais LE regarder." (KHÔNG nói "Je le vais regarder" ❌)
+
+PASSÉ COMPOSÉ: đại từ đứng trước AVOIR:
+"Je L'ai vu." — Tôi đã xem nó. · "Tu LES as appelés?" — Bạn đã gọi họ chưa?
+⚠️ Lúc này participe passé HÒA HỢP với COD đứng trước:
+"La pizza? Je L'ai mangéE." (la → +e) · "Les clés? Je LES ai trouvéES." (les nữ → +es)
+
+MỆNH LỆNH KHẲNG ĐỊNH — ngoại lệ duy nhất: đại từ đứng SAU, nối bằng gạch ngang:
+"Regarde-LE!" (Xem nó đi!) · "Appelle-LA!" · "Mange-LES!"
+Nhưng mệnh lệnh PHỦ ĐỊNH → đại từ về lại trước: "Ne LE regarde pas!"`,
         examples:[
           "Tu as les clés? Oui, je LES ai. — Bạn có chìa khóa không? Có, tôi có.",
           "Ce film? Je L'ai vu hier. — Bộ phim đó? Tôi đã xem hôm qua.",
@@ -1925,32 +1990,57 @@ le bail = hợp đồng thuê nhà`,
     id:"g8", num:"8", title:"En forme!", points:[
       {
         topic:"Passé composé (2) — Participes passés irréguliers",
-        rule:`Participes passés irréguliers PHẢI HỌC THUỘC! Đây là danh sách hay gặp nhất:
+        rule:`Ôn lại Unité 7: passé composé = AVOIR (présent) + participe passé.
+Động từ -ER → -é, -IR nhóm 2 → -i, -RE → -u. NHƯNG nhiều động từ
+hay dùng nhất lại BẤT QUY TẮC → phải học thuộc, nhóm theo ĐUÔI cho dễ nhớ:
 
-EN -U:
-avoir→eu [y], boire→bu, courir→couru, croire→cru,
-devoir→dû, falloir→fallu, lire→lu, pleuvoir→plu,
-pouvoir→pu, recevoir→reçu, savoir→su, vivre→vécu,
-vouloir→voulu, voir→vu, venir→venu
+🔵 NHÓM ĐUÔI -U (đông nhất):
+• avoir→eu (đọc [y] như "u"!): "J'ai eu de la fièvre."
+• boire→bu: "J'ai bu un café."
+• voir→vu: "Tu as vu ce film?"
+• pouvoir→pu: "Je n'ai pas pu venir."
+• vouloir→voulu: "Il a voulu partir."
+• devoir→dû (có dấu mũ!): "J'ai dû travailler."
+• savoir→su: "Je l'ai su hier."
+• lire→lu: "J'ai lu ce livre."
+• croire→cru: "Je t'ai cru."
+• recevoir→reçu (có ç!): "Elle a reçu un cadeau."
+• courir→couru · vivre→vécu · falloir→fallu (il a fallu)
+• pleuvoir→plu: "Il a plu toute la nuit." (trời đã mưa)
+• venir→venu ⚠️ nhưng venir dùng ÊTRE: "Il est venu." (Unité 9)
 
-EN -IT/-IS:
-dire→dit, écrire→écrit, faire→fait, mettre→mis,
-prendre→pris, apprendre→appris, comprendre→compris,
-permettre→permis, promettre→promis
+🟡 NHÓM ĐUÔI -IS:
+• mettre→mis: "J'ai mis une veste."
+• prendre→pris: "Elle a pris le bus."
+• apprendre→appris · comprendre→compris (họ hàng của prendre)
+• permettre→permis · promettre→promis (họ hàng của mettre)
+💡 Mẹo: biết prendre→pris và mettre→mis là suy ra cả họ!
 
-EN -ERT:
-couvrir→couvert, offrir→offert, ouvrir→ouvert, souffrir→souffert
+🟢 NHÓM ĐUÔI -IT:
+• dire→dit: "Il a dit oui."
+• écrire→écrit: "J'ai écrit un mail."
+• faire→fait: "Tu as fait du sport?"
 
-EN -É (réguliers mais fréquents):
-aller→allé (avec être!), naître→né, téléphoner→téléphoné, arriver→arrivé
+🟠 NHÓM ĐUÔI -ERT (động từ đuôi -VRIR/-FFRIR):
+• ouvrir→ouvert: "J'ai ouvert la fenêtre."
+• offrir→offert: "Il a offert des fleurs."
+• couvrir→couvert · souffrir→souffert
+⚠️ Nhóm này dễ nhầm: KHÔNG phải "ouvri" ❌ → "ouvert" ✅
 
-COMPLÈTEMENT IRRÉGULIERS:
-être→été, naître→né, mourir→mort
+🔴 HOÀN TOÀN BẤT QUY TẮC:
+• être→été: "Ça a été difficile." (đã từng khó khăn)
+• naître→né và mourir→mort ⚠️ hai động từ này dùng ÊTRE:
+  "Elle est née en 1998." / "Il est mort en 2020." (Unité 9)
 
-💡 Truco de memorización: groupez par terminaison!
--u: bu, lu, pu, su, vu, eu, eu!
--it: dit, fait, écrit
--is: mis, pris, appris`,
+PHỦ ĐỊNH & TRẠNG TỪ — như Unité 7, vẫn ôm lấy avoir:
+"Je n'ai pas compris." · "Il n'a jamais bu d'alcool."
+"J'ai trop mangé." · "Tu as déjà pris ton médicament?"
+
+💡 MẸO HỌC THUỘC — đọc to theo vần:
+-u: bu, lu, pu, su, vu, eu, voulu, reçu
+-is: mis, pris, appris, compris
+-it: dit, écrit · -ert: ouvert, offert
+→ Mỗi ngày tự đặt 2–3 câu với động từ trong bảng!`,
         examples:[
           "J'ai eu de la fièvre hier. — Hôm qua tôi bị sốt.",
           "Il a fait du sport ce matin. — Anh ấy đã tập thể thao sáng nay.",
@@ -2227,26 +2317,43 @@ TRỞ THÀNH (devenir) · ĐI QUA (passer)
       },
       {
         topic:"L'imparfait — C'était, Il y avait, Il faisait (description au passé)",
-        rule:`L'IMPARFAIT dùng để MÔ TẢ ở quá khứ (trạng thái, hoàn cảnh, thói quen)
+        rule:`L'IMPARFAIT = thì quá khứ dùng để MÔ TẢ: trạng thái, hoàn cảnh, thời tiết, cảm xúc, thói quen trong quá khứ.
 
-THÀNH LẬP: Radical de NOUS au présent + terminaisons
-Terminaisons: -ais / -ais / -ait / -ions / -iez / -aient
-ÊTRE (seule exception): j'étais, tu étais, il était...
+CÁCH THÀNH LẬP — 3 bước:
+1. Lấy dạng NOUS ở thì hiện tại: nous faisons, nous avons, nous allons
+2. Bỏ đuôi -ons → còn lại gốc: fais-, av-, all-
+3. Thêm đuôi imparfait: -ais / -ais / -ait / -ions / -iez / -aient
 
-Ba cụm từ cực kỳ hay dùng trong Édito A1:
-• C'était + adjectif: "C'était magnifique! / C'était calme."
-• Il y avait + nom: "Il y avait beaucoup de monde."
-• Il faisait + temps: "Il faisait chaud/froid/beau/mauvais."
+Ví dụ FAIRE (nous faisons → fais-):
+Je faisais · Tu faisais · Il/Elle faisait
+Nous faisions · Vous faisiez · Ils/Elles faisaient
+💡 Phát âm: -ais / -ait / -aient đều đọc là [ɛ] — giống hệt nhau!
 
-PHÂN BIỆT PASSÉ COMPOSÉ vs IMPARFAIT:
-• Passé composé: hành động XẢY RA, CỤ THỂ
-  "Je suis allé(e) à la plage." (tôi đã đi)
-• Imparfait: HOÀN CẢNH, MÔ TẢ, THÓI QUEN
-  "Il faisait beau, il y avait des touristes partout..."
+⚠️ NGOẠI LỆ DUY NHẤT — ÊTRE (gốc ét-):
+J'étais · Tu étais · Il/Elle était · Nous étions · Vous étiez · Ils étaient
 
-Thường dùng CÙNG NHAU:
-"Quand je suis arrivé(e) (PC), il faisait (IMP) très chaud."
-(Khi tôi đến nơi, trời đang rất nóng.)`,
+Ở A1, tập trung vào 3 cụm cực kỳ hay dùng khi kể về kỳ nghỉ:
+• C'ÉTAIT + tính từ: "C'était magnifique!" (Thật tuyệt!) / "C'était calme."
+• IL Y AVAIT + danh từ: "Il y avait beaucoup de monde." (Có rất đông người.)
+• IL FAISAIT + thời tiết: "Il faisait chaud/froid/beau/mauvais." (Trời nóng/lạnh/đẹp/xấu.)
+
+PHÂN BIỆT PASSÉ COMPOSÉ vs IMPARFAIT — câu hỏi then chốt:
+"Đây là HÀNH ĐỘNG xảy ra, hay là KHUNG CẢNH/TRẠNG THÁI nền?"
+
+• PASSÉ COMPOSÉ = hành động CỤ THỂ, xảy ra 1 lần, ĐÃ XONG (như chụp ảnh từng khoảnh khắc):
+  "Je suis allé(e) à la plage." (tôi đã đi) · "J'ai visité le musée."
+• IMPARFAIT = phông nền, mô tả KHÔNG CÓ ĐIỂM ĐẦU-CUỐI rõ ràng (như quay phim khung cảnh):
+  "Il faisait beau, la mer était bleue, il y avait des touristes partout…"
+
+💡 Mẹo tiếng Việt: passé composé ≈ "ĐÃ làm gì" · imparfait ≈ "lúc đó ĐANG / trời ĐANG / cảnh là như thế"
+
+Hai thì thường dùng CÙNG NHAU trong một câu chuyện:
+"Quand je suis arrivé(e) (PC — hành động), il faisait (IMP — khung cảnh) très chaud."
+(Khi tôi đến nơi, trời đang rất nóng.)
+"J'ai nagé (PC) parce que l'eau était (IMP) bonne."
+(Tôi đã bơi vì nước lúc đó ấm.)
+
+⚠️ Ở A1 chỉ cần dùng được c'était / il y avait / il faisait + nhận diện sự khác biệt với passé composé — bảng chia đầy đủ sẽ học kỹ ở A2.`,
         examples:[
           "C'était magnifique! La mer était bleue et le sable blanc. — Thật tuyệt! Biển xanh và cát trắng.",
           "Il y avait beaucoup de touristes à la plage. — Có rất nhiều khách du lịch ở bãi biển.",
