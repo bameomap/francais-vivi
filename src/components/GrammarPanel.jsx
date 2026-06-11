@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
+import { signalStepDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { SecLabel } from "./ui/SharedUI.jsx";
@@ -33,7 +34,7 @@ export function buildGrammarPrompt(topic, level, gtype, n) {
   return "";
 }
 
-export function GrammarMC({ exercises, onWrong }) {
+export function GrammarMC({ exercises, onWrong, onFirstAnswer }) {
   const [ans, setAns] = useState({});
   return <div>{exercises.map((q,i) => {
     const a = ans[i], ok = a === q.answer;
@@ -45,7 +46,7 @@ export function GrammarMC({ exercises, onWrong }) {
           {q.options.map((opt,j) => {
             let bg=C.white,bc=C.border,col=C.ink;
             if(a){if(opt===q.answer){bg=C.greenL;bc=C.green;col=C.green;}else if(opt===a){bg=C.redL;bc=C.red;col=C.red;}}
-            return <button key={j} disabled={!!a} onClick={()=>{setAns(x=>({...x,[i]:opt}));if(opt!==q.answer)onWrong?.(q);}}
+            return <button key={j} disabled={!!a} onClick={()=>{if(Object.keys(ans).length===0)onFirstAnswer?.();setAns(x=>({...x,[i]:opt}));if(opt!==q.answer)onWrong?.(q);}}
               style={{padding:"0.42rem 0.55rem",border:`1.5px solid ${bc}`,borderRadius:8,background:bg,color:col,fontSize:"0.78rem",cursor:a?"default":"pointer",textAlign:"left",fontFamily:"inherit"}}>{opt}</button>;
           })}
         </div>
@@ -68,7 +69,7 @@ export function GrammarMC({ exercises, onWrong }) {
   })}</div>;
 }
 
-export function GrammarFill({ exercises }) {
+export function GrammarFill({ exercises, onFirstAnswer }) {
   const [inp, setInp] = useState({});
   const [chk, setChk] = useState({});
   return <div>{exercises.map((q,i) => {
@@ -81,10 +82,10 @@ export function GrammarFill({ exercises }) {
         <div style={{ fontFamily:"Georgia,serif", fontSize:"0.9rem", marginBottom:"0.55rem", lineHeight:1.6 }}>{q.sentence}</div>
         <div style={{ display:"flex", gap:"0.38rem", alignItems:"center", flexWrap:"wrap" }}>
           <input value={v} disabled={done} onChange={e=>setInp(x=>({...x,[i]:e.target.value}))}
-            onKeyDown={e=>e.key==="Enter"&&!done&&setChk(x=>({...x,[i]:true}))}
+            onKeyDown={e=>e.key==="Enter"&&!done&&(Object.keys(chk).length===0&&onFirstAnswer?.(),setChk(x=>({...x,[i]:true})))}
             placeholder="Nhập từ / dạng đúng..."
             style={{border:`1.5px solid ${done?(ok?C.green:C.red):C.border}`,borderRadius:6,padding:"0.3rem 0.55rem",fontSize:"0.83rem",width:180,fontFamily:"inherit",background:done?(ok?C.greenL:C.redL):C.white,color:done?(ok?C.green:C.red):C.ink,outline:"none"}}/>
-          {!done&&<button onClick={()=>setChk(x=>({...x,[i]:true}))} style={{padding:"0.3rem 0.65rem",background:C.purple,color:C.white,border:"none",borderRadius:6,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>Kiểm tra</button>}
+          {!done&&<button onClick={()=>{if(Object.keys(chk).length===0)onFirstAnswer?.();setChk(x=>({...x,[i]:true}));}} style={{padding:"0.3rem 0.65rem",background:C.purple,color:C.white,border:"none",borderRadius:6,fontSize:"0.73rem",cursor:"pointer",fontFamily:"inherit"}}>Kiểm tra</button>}
           {done&&<span style={{fontSize:"0.73rem",color:ok?C.green:C.red,fontWeight:500}}>{ok?"✓ Đúng!":`✗ Đáp án: ${q.answer}`}</span>}
         </div>
         {done && q.explanation && (
@@ -101,7 +102,7 @@ export function GrammarFill({ exercises }) {
   })}</div>;
 }
 
-export function GrammarOrder({ exercises }) {
+export function GrammarOrder({ exercises, onFirstAnswer }) {
   const init = (words) => words.map((w,i)=>({w,id:i})).sort(()=>Math.random()-0.5);
   const [states, setStates] = useState(()=>exercises.map(q=>({ pool:init(q.words), chosen:[], checked:false })));
 
@@ -114,7 +115,7 @@ export function GrammarOrder({ exercises }) {
     setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s, chosen:s.chosen.filter((_,j)=>j!==ti), pool:[...s.pool,s.chosen[ti]]})));
   };
   const norm = s => (s||"").trim().toLowerCase().replace(/[''`]/g,"'").replace(/[.,!?;:«»]/g,"").replace(/\s+/g," ");
-  const check = (qi) => setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s,checked:true})));
+  const check = (qi) => { if(!states.some(s=>s.checked))onFirstAnswer?.(); setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s,checked:true}))); };
   const reset = (qi) => setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s,pool:init(exercises[qi].words),chosen:[],checked:false})));
 
   return <div>{exercises.map((q,i) => {
@@ -386,15 +387,16 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
   const renderExercises = () => {
     if (!result) return null;
     const onW = () => {};
-    if (result.type==="mc") return <GrammarMC exercises={result.exercises} onWrong={onW}/>;
-    if (result.type==="fill") return <GrammarFill exercises={result.exercises}/>;
-    if (result.type==="order") return <GrammarOrder exercises={result.exercises}/>;
+    const onFirst = () => signalStepDone("grammar");
+    if (result.type==="mc") return <GrammarMC exercises={result.exercises} onWrong={onW} onFirstAnswer={onFirst}/>;
+    if (result.type==="fill") return <GrammarFill exercises={result.exercises} onFirstAnswer={onFirst}/>;
+    if (result.type==="order") return <GrammarOrder exercises={result.exercises} onFirstAnswer={onFirst}/>;
     if (result.type==="mixed") return result.sections?.map((sec,i)=>(
       <div key={i} style={{marginBottom:"0.5rem"}}>
         <SecLabel icon={sec.sectionType==="mc"?"☑":sec.sectionType==="fill"?"✏️":"🔀"} text={sec.sectionType==="mc"?"Chọn đáp án":sec.sectionType==="fill"?"Điền vào chỗ trống":"Sắp xếp câu"}/>
-        {sec.sectionType==="mc"&&<GrammarMC exercises={sec.exercises} onWrong={onW}/>}
-        {sec.sectionType==="fill"&&<GrammarFill exercises={sec.exercises}/>}
-        {sec.sectionType==="order"&&<GrammarOrder exercises={sec.exercises}/>}
+        {sec.sectionType==="mc"&&<GrammarMC exercises={sec.exercises} onWrong={onW} onFirstAnswer={onFirst}/>}
+        {sec.sectionType==="fill"&&<GrammarFill exercises={sec.exercises} onFirstAnswer={onFirst}/>}
+        {sec.sectionType==="order"&&<GrammarOrder exercises={sec.exercises} onFirstAnswer={onFirst}/>}
       </div>
     ));
     return null;

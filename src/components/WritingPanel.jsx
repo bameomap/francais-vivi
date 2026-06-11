@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI, callAIText } from "../utils/api.js";
+import { signalStepDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { logError } from "./WeakSpotsPanel.jsx";
@@ -168,6 +169,7 @@ Return ONLY JSON:
       const newHistory = [entry, ...history].slice(0, 30);
       setHistory(newHistory);
       localStorage.setItem("writing_history", JSON.stringify(newHistory));
+      signalStepDone("ecrire"); // completed when AI feedback received
       setResult(r);
       r.errors?.forEach(e => { if (e.type) logError(e.type); });
     } catch(e) { setErr(e.message); }

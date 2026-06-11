@@ -174,7 +174,7 @@ function ResultScreen({ score, total, unitId, onRetry, onBack }) {
   const color = pct >= 80 ? C.green : pct >= 60 ? C.gold : C.accent;
 
   useEffect(() => {
-    if (passed) markStepDone(unitId, "quiz");
+    markStepDone(unitId, "quiz"); // done regardless of score — attempted = completed
   }, []);
 
   return (

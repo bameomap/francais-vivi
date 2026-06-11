@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
+import { signalStepDone } from "../utils/parcours.js";
 import { EDITO_A1_VERB_UNITS } from "../data/editoVerbs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
@@ -418,6 +419,7 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
   const generate = () => doGenerate(exType, verbIdx, tenseIdx);
 
   const handleNext = () => {
+    signalStepDone("verbes"); // completed when first quiz submitted (no-op on repeated calls)
     const nv = Math.floor(Math.random() * unit.verbs.length);
     const nt = Math.floor(Math.random() * unit.tenses.length);
     setVerbIdx(nv); setTenseIdx(nt);

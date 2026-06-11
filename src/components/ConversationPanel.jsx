@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import { awardXP } from "../utils/xp.js";
+import { signalStepDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 
@@ -151,6 +152,7 @@ export default function ConversationPanel({ onBackToParcours }) {
   const send = async (override) => {
     const txt = (override || input).trim();
     if (!txt || loading) return;
+    if (messages.filter(m => m.role === "user").length === 0) signalStepDone("parler"); // first user message
     const userMsg = { role:"user", text: txt };
     const newMsgs = [...messages, userMsg];
     setMessages(newMsgs); setInput(""); setLoading(true);

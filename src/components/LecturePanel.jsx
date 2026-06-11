@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI, callAIText } from "../utils/api.js";
 import { addWordToSRS } from "../utils/srs.js";
+import { signalStepDone } from "../utils/parcours.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -202,6 +203,7 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
   const score = lecture ? lecture.questions.reduce((acc, q, i) => acc + (answers[i] === q.answer ? 1 : 0), 0) : 0;
   const total = lecture?.questions?.length || 0;
   const allAnswered = total > 0 && Object.keys(revealed).length === total;
+  useEffect(() => { if (allAnswered) signalStepDone("lecture"); }, [allAnswered]);
   const pct = total > 0 ? Math.round(score / total * 100) : 0;
   if (allAnswered && pct >= 80 && !confetti && lecture) {
     setTimeout(() => setConfetti(true), 300);

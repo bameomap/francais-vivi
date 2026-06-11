@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { callAI, callAIBatched, buildPrompt } from "../utils/api.js";
 import { addWordToSRS, getSRSStats } from "../utils/srs.js";
+import { signalStepDone } from "../utils/parcours.js";
 import { MCSection, FillSection, MatchSection, FlashcardSection, AnagrammeSection } from "./QuizSections.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
@@ -149,11 +150,12 @@ function QuizRunner({ words, mode, onBack }) {
         </div>
       )}
       {quiz && !loading && (() => {
-        if (quiz.type === "multiple_choice") return <MCSection questions={quiz.questions} words={words} onRecord={recordAnswer} />;
-        if (quiz.type === "fill_blank")      return <FillSection questions={quiz.questions} words={words} onRecord={recordAnswer} />;
-        if (quiz.type === "matching")        return <MatchSection pairs={quiz.pairs} />;
-        if (quiz.type === "flashcard")       return <FlashcardSection words={quiz.words} onRecord={recordAnswer} />;
-        if (quiz.type === "anagramme")       return <AnagrammeSection words={quiz.words} onRecord={recordAnswer} />;
+        const done = () => signalStepDone("vocab");
+        if (quiz.type === "multiple_choice") return <MCSection questions={quiz.questions} words={words} onRecord={recordAnswer} onComplete={done} />;
+        if (quiz.type === "fill_blank")      return <FillSection questions={quiz.questions} words={words} onRecord={recordAnswer} onComplete={done} />;
+        if (quiz.type === "matching")        return <MatchSection pairs={quiz.pairs} onComplete={done} />;
+        if (quiz.type === "flashcard")       return <FlashcardSection words={quiz.words} onRecord={recordAnswer} onComplete={done} />;
+        if (quiz.type === "anagramme")       return <AnagrammeSection words={quiz.words} onRecord={recordAnswer} onComplete={done} />;
         return null;
       })()}
     </div>

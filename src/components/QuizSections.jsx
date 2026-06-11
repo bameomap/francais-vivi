@@ -96,7 +96,7 @@ export function ExerciseFill({ ex, idx }) {
 }
 
 // ── MC Section ──────────────────────────────────────────────
-export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
+export function MCSection({ questions, words = [], sl, onRecord, onWrong, onComplete }) {
   const [ans, setAns] = useState({});
   const qRefs = useRef([]);
   const summaryRef = useRef(null);
@@ -118,7 +118,10 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
   const pct     = allDone ? Math.round(score / questions.length * 100) : 0;
 
   useEffect(() => {
-    if (allDone) setTimeout(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 300);
+    if (allDone) {
+      setTimeout(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 300);
+      onComplete?.();
+    }
   }, [allDone]);
 
   return (
@@ -177,7 +180,7 @@ export function MCSection({ questions, words = [], sl, onRecord, onWrong }) {
 }
 
 // ── Fill Section ────────────────────────────────────────────
-export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
+export function FillSection({ questions, words = [], sl, onRecord, onWrong, onComplete }) {
   const [inp, setInp] = useState({});
   const [chk, setChk] = useState({});
   const qRefs = useRef([]);
@@ -199,7 +202,10 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
   const pct     = allDone ? Math.round(score / questions.length * 100) : 0;
 
   useEffect(() => {
-    if (allDone) setTimeout(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 300);
+    if (allDone) {
+      setTimeout(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 300);
+      onComplete?.();
+    }
   }, [allDone]);
 
   return (
@@ -246,12 +252,13 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong }) {
 }
 
 // ── Match Section ───────────────────────────────────────────
-export function MatchSection({ pairs, sl }) {
+export function MatchSection({ pairs, sl, onComplete }) {
   const [shuffled] = useState(() => [...pairs].sort(() => Math.random()-0.5));
   const [selFr, setSelFr] = useState(null);
   const [matched, setMatched] = useState({});
   const [wrongKey, setWrongKey] = useState(null);
   const done = Object.keys(matched).length;
+  useEffect(() => { if (done === pairs.length && pairs.length > 0) onComplete?.(); }, [done]);
   const clickFr = fr => { if (matched[fr]) return; setSelFr(fr===selFr?null:fr); };
   const clickVi = p => {
     if (!selFr || matched[selFr]) return;
@@ -343,7 +350,7 @@ function makeFp(words) {
   return (h >>> 0).toString(36);
 }
 
-export function FlashcardSection({ words, onRecord }) {
+export function FlashcardSection({ words, onRecord, onComplete }) {
   const fp      = makeFp(words);
   const lsKey   = `fc_batch_${fp}`;
   const batches = [];
@@ -428,6 +435,8 @@ export function FlashcardSection({ words, onRecord }) {
     if (Math.abs(diff) > 48) { diff > 0 ? goNext() : goPrev(); }
     touchX.current = null;
   };
+
+  useEffect(() => { if (batchDone && batchIdx >= totalBatches - 1) onComplete?.(); }, [batchDone, batchIdx]);
 
   // ── Tất cả batch xong ──
   if (batchDone && batchIdx >= totalBatches - 1) return (
@@ -542,12 +551,13 @@ export function FlashcardSection({ words, onRecord }) {
 }
 
 // ── Anagramme Section ───────────────────────────────────────
-export function AnagrammeSection({ words, onRecord }) {
+export function AnagrammeSection({ words, onRecord, onComplete }) {
   const [idx, setIdx] = useState(0);
   const [tiles, setTiles] = useState(()=>[...words[0].fr].sort(()=>Math.random()-0.5));
   const [answer, setAnswer] = useState([]);
   const [checked, setChecked] = useState(false);
   const [score, setScore] = useState({ok:0,total:0});
+  useEffect(() => { if (score.total === words.length && words.length > 0) onComplete?.(); }, [score.total]);
   const w = words[idx];
   const isCorrect = checked && answer.join("")===w.fr;
   const reset = word => { setTiles([...word].sort(()=>Math.random()-0.5)); setAnswer([]); setChecked(false); };

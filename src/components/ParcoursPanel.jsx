@@ -8,6 +8,9 @@ import {
   markStepDone,
 } from "../utils/parcours.js";
 
+// Only phono is marked done on open — grammar and verbes require answering exercises
+const OPEN_MARK_STEPS = new Set(["phono"]);
+
 // ── Helpers ────────────────────────────────────────────────────
 
 function statusColor(status) {
@@ -215,10 +218,13 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
   const pct       = Math.round((doneCount / STEP_DEFS.length) * 100);
 
   const handleStep = useCallback((step) => {
-    // Mark as done & refresh progress display
-    if (!progress[step.id]) {
+    // Reference steps: mark done immediately on open
+    // Activity steps: marked done by the destination panel via signalStepDone(stepId)
+    if (!progress[step.id] && OPEN_MARK_STEPS.has(step.id)) {
       markStepDone(unitId, step.id);
       setProgress(getUnitStepProgress(unitId));
+    } else if (!progress[step.id] && step.id !== "quiz") {
+      localStorage.setItem("parcours_active_step", step.id);
     }
 
     localStorage.setItem("parcours_back", "1");

@@ -47,6 +47,19 @@ export function computeUnitStatuses() {
   return statuses;
 }
 
+// Called by activity panels when meaningful engagement happens.
+// Marks the active parcours step done — only if the panel's step id
+// matches the step the user actually navigated from (prevents a stale
+// "parcours_active_step" from being completed by an unrelated activity).
+export function signalStepDone(stepId) {
+  const unitId = localStorage.getItem("parcours_last_unit");
+  const activeStep = localStorage.getItem("parcours_active_step");
+  if (unitId && activeStep && activeStep === stepId) {
+    localStorage.removeItem("parcours_active_step");
+    markStepDone(unitId, stepId);
+  }
+}
+
 // Overall % across all units
 export function computeOverallProgress() {
   const p = getParcoursProgress();

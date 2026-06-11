@@ -8,6 +8,7 @@ import { EDITO_AUDIO, shuffleArray } from "../data/editoAudio.js";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 import Spinner from "./ui/Spinner.jsx";
 import { Confetti } from "./ui/Minou.jsx";
+import { signalStepDone } from "../utils/parcours.js";
 
 const NUM_SENTENCES     = 5;
 const NUM_AUDIO_SENTS   = 5;
@@ -376,6 +377,7 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
   const next = () => {
     const nextIdx = current + 1;
     if (nextIdx >= sentences.length) {
+      signalStepDone("ecouter");
       setPhase("done");
       const totalWords = results.reduce((a, r) => a + r.grade.length, 0);
       const okWords    = results.reduce((a, r) => a + r.grade.filter(g => g.status==="ok").length, 0);
