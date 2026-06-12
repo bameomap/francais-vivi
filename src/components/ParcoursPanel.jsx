@@ -6,6 +6,8 @@ import {
   computeOverallProgress,
   getUnitStepProgress,
   markStepDone,
+  unmarkStepDone,
+  resetUnit,
 } from "../utils/parcours.js";
 
 // Only phono is marked done on open — grammar and verbes require answering exercises
@@ -148,7 +150,7 @@ function UnitList({ onSelect }) {
 
 // ── Step Card ──────────────────────────────────────────────────
 
-function StepCard({ step, done, isNext, onClick }) {
+function StepCard({ step, done, isNext, onClick, onRedo }) {
   return (
     <button
       onClick={onClick}
@@ -203,6 +205,21 @@ function StepCard({ step, done, isNext, onClick }) {
           {step.sub}
         </div>
       </div>
+
+      {/* redo button (only when done) */}
+      {done && (
+        <span
+          role="button"
+          onClick={(e) => { e.stopPropagation(); onRedo(); }}
+          style={{
+            fontSize: "0.62rem", fontWeight: 700, color: C.green,
+            background: C.white, border: `1px solid ${C.green}66`,
+            borderRadius: 20, padding: "0.15rem 0.55rem",
+            marginTop: 2, lineHeight: 1.5,
+          }}>
+          ↻ Làm lại
+        </span>
+      )}
     </button>
   );
 }
@@ -217,13 +234,19 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
   const doneCount = STEP_DEFS.filter(s => progress[s.id]).length;
   const pct       = Math.round((doneCount / STEP_DEFS.length) * 100);
 
-  const handleStep = useCallback((step) => {
+  const handleStep = useCallback((step, { redo = false } = {}) => {
+    if (redo) {
+      unmarkStepDone(unitId, step.id);
+      setProgress(getUnitStepProgress(unitId));
+    }
+    const isDone = !redo && progress[step.id];
+
     // Reference steps: mark done immediately on open
     // Activity steps: marked done by the destination panel via signalStepDone(stepId)
-    if (!progress[step.id] && OPEN_MARK_STEPS.has(step.id)) {
+    if (!isDone && OPEN_MARK_STEPS.has(step.id)) {
       markStepDone(unitId, step.id);
       setProgress(getUnitStepProgress(unitId));
-    } else if (!progress[step.id] && step.id !== "quiz") {
+    } else if (!isDone && step.id !== "quiz") {
       localStorage.setItem("parcours_active_step", step.id);
     }
 
@@ -359,6 +382,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
                   done={!!progress[step.id]}
                   isNext={nextStep?.id === step.id}
                   onClick={() => handleStep(step)}
+                  onRedo={() => handleStep(step, { redo: true })}
                 />
               ))}
             </div>
@@ -383,11 +407,26 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
           </button>
         )}
         {pct === 100 && (
-          <div style={{
-            textAlign: "center", padding: "16px 0",
-            fontSize: 14, color: C.green, fontWeight: 700,
-          }}>
-            🎉 Unit hoàn thành!
+          <div style={{ textAlign: "center", padding: "16px 0" }}>
+            <div style={{ fontSize: 14, color: C.green, fontWeight: 700 }}>
+              🎉 Unit hoàn thành!
+            </div>
+            <button
+              onClick={() => {
+                if (window.confirm("Xoá tiến độ unit này và học lại từ đầu?")) {
+                  resetUnit(unitId);
+                  setProgress({});
+                }
+              }}
+              style={{
+                marginTop: 10, padding: "8px 18px",
+                background: C.white, color: C.gray,
+                border: `1.5px solid ${C.border}`, borderRadius: 20,
+                fontFamily: "inherit", fontSize: 12.5, fontWeight: 600,
+                cursor: "pointer",
+              }}>
+              ↻ Làm lại cả unit
+            </button>
           </div>
         )}
       </div>

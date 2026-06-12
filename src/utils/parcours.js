@@ -17,6 +17,24 @@ export function markStepDone(unitId, stepId) {
   schedulePush();
 }
 
+export function unmarkStepDone(unitId, stepId) {
+  const p = getParcoursProgress();
+  if (p[unitId]) {
+    delete p[unitId][stepId];
+    localStorage.setItem(KEY, JSON.stringify(p));
+    schedulePush();
+  }
+}
+
+export function resetUnit(unitId) {
+  const p = getParcoursProgress();
+  if (p[unitId]) {
+    delete p[unitId];
+    localStorage.setItem(KEY, JSON.stringify(p));
+    schedulePush();
+  }
+}
+
 export function getUnitStepProgress(unitId) {
   return getParcoursProgress()[unitId] || {};
 }
