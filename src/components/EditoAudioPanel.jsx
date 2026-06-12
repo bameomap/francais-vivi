@@ -475,7 +475,7 @@ Trả về JSON thuần (không markdown):
                                       </button>
                                     </div>
                                   )}
-                                  {!isWarmup && !graded && <AccentBar compact />}
+                                  {!isWarmup && !graded && <div style={{ marginTop: "0.45rem" }}><AccentBar compact /></div>}
 
                                   {/* Grade result */}
                                   {!isWarmup && graded && (
