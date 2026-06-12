@@ -33,7 +33,7 @@ function applyRestore(data) {
 }
 
 // ── ProfilPanel · Hub cá nhân ─────────────────────────────────
-export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) {
+export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, onNavigate }) {
   const streakData = getStreak();
   const srsStats   = getSRSStats();
   const xpData     = getXPData();
@@ -161,9 +161,21 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
             fontFamily: "'Playfair Display',Georgia,serif", fontSize: 18,
-            fontWeight: 700, color: C.ink, lineHeight: 1.1, letterSpacing: "-0.01em"
+            fontWeight: 700, color: C.ink, lineHeight: 1.1, letterSpacing: "-0.01em",
+            display: "flex", alignItems: "center", gap: 6
           }}>
-            {userName || "Bạn"}
+            <span>{userName || "Bạn"}</span>
+            {onChangeName && (
+              <button
+                aria-label="Đổi tên hiển thị"
+                onClick={() => {
+                  const name = window.prompt("Tên của bạn:", userName || "");
+                  if (name !== null) onChangeName(name);
+                }}
+                style={{ background: "transparent", border: "none", cursor: "pointer", color: C.gray, fontSize: 13, padding: 2, lineHeight: 1 }}>
+                ✎
+              </button>
+            )}
           </div>
           <div style={{ fontSize: 11, color: C.gray, marginTop: 2 }}>
             Đang học Français · A1
@@ -249,7 +261,7 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
             ↻
           </div>
           <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontWeight: 700, fontSize: 15, color: C.ink, marginTop: 6, lineHeight: 1.1 }}>
-            Ôn SRS
+            Ôn từ vựng
           </div>
           <div style={{ fontSize: 10.5, color: C.gray, marginTop: 2 }}>
             {srsStats.total} từ · {srsStats.due} đến hạn
@@ -297,7 +309,7 @@ export default function ProfilPanel({ userName, dark, toggleDark, onNavigate }) 
       }}>
         {[
           { v: srsStats.mastered,              l: "từ thuộc",   c: C.green  },
-          { v: `${srsStats.total}`,            l: "tổng SRS",   c: C.blue   },
+          { v: `${srsStats.total}`,            l: "từ đang học", c: C.blue   },
           { v: `${overall.done}/${overall.total}`, l: "units",  c: C.accent },
         ].map((s, i, arr) => (
           <div key={i} style={{ flex: 1, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>

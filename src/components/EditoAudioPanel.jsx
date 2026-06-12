@@ -8,6 +8,7 @@ import { C } from "../constants.js";
 import { EDITO_AUDIO } from "../data/editoAudio.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
+import AccentBar from "./ui/AccentBar.jsx";
 
 const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
@@ -342,7 +343,7 @@ Trả về JSON thuần (không markdown):
                         Section {track.section}
                       </span>
                       <span style={{ background: "rgba(255,255,255,0.2)", color: "#fff", fontSize: "0.6rem", padding: "0.1rem 0.45rem", borderRadius: 10 }}>
-                        Piste {track.trackNum} · p.{track.page}
+                        Piste {track.trackNum} · trang {track.page}
                       </span>
                     </div>
                     <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "0.9rem", color: "#fff", fontWeight: 700, lineHeight: 1.2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -362,16 +363,19 @@ Trả về JSON thuần (không markdown):
 
                 {/* ── Action buttons ── */}
                 {(() => {
+                  const hasNotes = !!EDITO_POUR_NOTES[track.id];
                   const btns = [
                     { id: "questions", icon: "📋", label: "Câu hỏi", action: () => togglePanel(track.id, "questions") },
                     { id: "script",    icon: "📖", label: "Script",  action: () => togglePanel(track.id, "script") },
                     { id: "dictee",    icon: "✏️",  label: "Chép",   action: () => openDictee(track.id) },
-                    ...(EDITO_POUR_NOTES[track.id] ? [{ id: "notes", icon: "📝", label: "Note", action: () => togglePanel(track.id, "notes") }] : []),
+                    // Luôn hiện nút Note để bố cục các card đồng nhất; mờ đi khi bài không có ghi chú
+                    { id: "notes", icon: "📝", label: "Note", disabled: !hasNotes, action: () => hasNotes && togglePanel(track.id, "notes") },
                   ];
                   return (
                     <div style={{ display: "flex", gap: 0, borderTop: `1px solid ${C.border}`, borderBottom: mode ? `1px solid ${C.border}` : "none" }}>
                       {btns.map((btn, bi) => (
-                        <button key={btn.id} onClick={btn.action}
+                        <button key={btn.id} onClick={btn.action} disabled={btn.disabled}
+                          title={btn.disabled ? "Bài này không có ghi chú" : undefined}
                           style={{
                             flex: 1, padding: "0.45rem 0.2rem",
                             background: mode === btn.id ? `${track.color}1a` : "transparent",
@@ -379,7 +383,8 @@ Trả về JSON thuần (không markdown):
                             borderRight: bi < btns.length - 1 ? `1px solid ${C.border}` : "none",
                             color: mode === btn.id ? track.color : C.gray,
                             fontSize: "0.68rem", fontWeight: mode === btn.id ? 700 : 500,
-                            cursor: "pointer", fontFamily: "inherit",
+                            cursor: btn.disabled ? "default" : "pointer", fontFamily: "inherit",
+                            opacity: btn.disabled ? 0.35 : 1,
                             transition: "all 0.13s",
                           }}>
                           {btn.icon} {btn.label}
@@ -470,6 +475,7 @@ Trả về JSON thuần (không markdown):
                                       </button>
                                     </div>
                                   )}
+                                  {!isWarmup && !graded && <AccentBar compact />}
 
                                   {/* Grade result */}
                                   {!isWarmup && graded && (
@@ -721,6 +727,7 @@ Trả về JSON thuần (không markdown):
                                   boxSizing: "border-box", lineHeight: 1.5,
                                 }}
                               />
+                              <AccentBar compact />
                               <div style={{ display: "flex", gap: "0.4rem" }}>
                                 <button
                                   onClick={() => dicteeSubmit(track.id, track.sentences)}

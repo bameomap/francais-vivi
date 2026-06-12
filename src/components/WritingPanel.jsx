@@ -7,6 +7,7 @@ import Spinner from "./ui/Spinner.jsx";
 import { logError } from "./WeakSpotsPanel.jsx";
 import AnalysePanel from "./AnalysePanel.jsx";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
+import AccentBar from "./ui/AccentBar.jsx";
 
 // ── Grade helpers ───────────────────────────────────────────────
 function scoreToGrade(s) {
@@ -397,6 +398,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                     placeholder="Écrivez votre réponse en français…"
                     rows={5}
                     style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.6rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.7, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
+                  <AccentBar />
                   {err && (
                     <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
                       <div style={{ fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>
@@ -456,6 +458,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
               placeholder="Nhập câu tiếng Pháp… vd: Je suis une étudiant."
               rows={4}
               style={{ width:"100%", border:`1.5px solid ${C.border}`, borderRadius:10, padding:"0.6rem 0.75rem", fontFamily:"Georgia,serif", fontSize:"0.92rem", lineHeight:1.7, outline:"none", resize:"vertical", boxSizing:"border-box", color:C.ink }} />
+            <AccentBar />
             {err && (
               <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginTop:"0.4rem" }}>
                 <div style={{ fontSize:"0.72rem", color:C.red }}>⚠ {err}</div>

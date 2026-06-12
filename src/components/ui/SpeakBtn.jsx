@@ -9,7 +9,7 @@ export default function SpeakBtn({ text, size = "0.8rem" }) {
     speak(text, () => setPlaying(false));
   };
   return (
-    <button onClick={go} title="Nghe phát âm"
+    <button onClick={go} title="Nghe phát âm" aria-label={`Nghe phát âm: ${text}`}
       style={{ background:"none", border:"none", cursor:"pointer", fontSize:size, padding:"0 0.2rem", opacity: playing ? 1 : 0.6, transition:"opacity 0.2s" }}>
       {playing ? "🔊" : "🔈"}
     </button>

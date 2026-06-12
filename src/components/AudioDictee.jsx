@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { C } from "../constants.js";
 import { logMistake } from "../utils/storage.js";
+import AccentBar from "./ui/AccentBar.jsx";
 
 function normalize(s = "") {
   return s.toLowerCase()
@@ -226,6 +227,7 @@ export default function AudioDictee() {
             rows={2}
             style={{ width: "100%", border: "none", outline: "none", fontSize: "0.9rem", fontFamily: "Georgia,serif", color: C.ink, resize: "none", background: "transparent", lineHeight: 1.7 }}
           />
+          {!checked && <AccentBar compact />}
           {!checked && (
             <button onClick={check} disabled={!input.trim()}
               style={{ marginTop: "0.4rem", padding: "0.5rem 1.2rem", background: "#0891B2", color: "#fff", border: "none", borderRadius: 10, fontSize: "0.82rem", cursor: "pointer", fontWeight: 600, opacity: input.trim() ? 1 : 0.5 }}>

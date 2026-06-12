@@ -360,6 +360,13 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
         if (unit) setSelectedUnit(unit);
       }
     }
+    // Deep-link from global search: mở sẵn đúng điểm ngữ pháp
+    const openPoint = localStorage.getItem("grammar_open_point");
+    if (openPoint !== null) {
+      localStorage.removeItem("grammar_open_point");
+      const idx = parseInt(openPoint, 10);
+      if (!Number.isNaN(idx)) setOpenPoints(new Set([idx]));
+    }
   }, [defaultUnitIndex]);
 
   // Save last-viewed unit to localStorage whenever it changes
@@ -474,7 +481,16 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
                       style={{ background:C.purple, color:C.white, border:"none", borderRadius:20, padding:"0.22rem 0.65rem", fontSize:"0.63rem", cursor:"pointer", whiteSpace:"nowrap" }}>
                       Làm bài tập →
                     </button>
-                    <span style={{ color:C.purple, fontSize:"0.8rem", transform:isOpen?"rotate(180deg)":"none", transition:"transform 0.2s", display:"inline-block" }}>▾</span>
+                    <span style={{
+                      display:"inline-flex", alignItems:"center", gap:3, whiteSpace:"nowrap",
+                      background:isOpen?C.purple:"transparent", color:isOpen?"#fff":C.purple,
+                      border:`1.5px solid ${C.purple}55`, borderRadius:20,
+                      padding:"0.18rem 0.55rem", fontSize:"0.63rem", fontWeight:600,
+                      transition:"all 0.2s",
+                    }}>
+                      📖 Lý thuyết
+                      <span style={{ transform:isOpen?"rotate(180deg)":"none", transition:"transform 0.2s", display:"inline-block", fontSize:"0.7rem" }}>▾</span>
+                    </span>
                   </div>
                 </div>
                 {isOpen && (

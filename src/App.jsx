@@ -28,10 +28,11 @@ const UnitQuizPanel     = lazy(() => import("./components/UnitQuizPanel.jsx"));
 const SentenceBuilder   = lazy(() => import("./components/SentenceBuilder.jsx"));
 const ProfilPanel          = lazy(() => import("./components/ProfilPanel.jsx"));
 const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.jsx"));
+const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
-import { computeUnitStatuses, computeOverallProgress } from "./utils/parcours.js";
-import { PARCOURS_UNITS } from "./data/parcoursData.js";
+import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from "./utils/parcours.js";
+import { PARCOURS_UNITS, STEP_DEFS } from "./data/parcoursData.js";
 import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
 
 // ── Module definitions ──────────────────────────────────────
@@ -57,7 +58,7 @@ const MODULES = [
 ];
 
 const TABS = [
-  { id:"home",     glyph:"⌂",  label:"Home",      section:"home",          view:"home",          color:null       },
+  { id:"home",     glyph:"⌂",  label:"Accueil",   section:"home",          view:"home",          color:null       },
   { id:"parcours", glyph:"⇢",  label:"Parcours",  section:"parcours",      view:"parcours",      color:"#E8574A"  },
   { id:"vocab",    glyph:"Aa", label:"Vocab",     section:"vocab",         view:"input",         color:"#4A90D9"  },
   { id:"ref",      glyph:"ƒ",  label:"Référence", section:"reference_hub", view:"reference_hub", color:"#F5A623"  },
@@ -165,7 +166,7 @@ function SavedWordListView({ onReview }) {
                 <div style={{ fontSize:10, color:C.gray2, marginTop:1 }}>📌 {w.source || "Tra từ điển"}</div>
               </div>
               <SpeakBtn text={w.fr} size="sm" />
-              <button onClick={() => remove(w.fr)} style={{ background:"none", border:"none", color:C.gray2, cursor:"pointer", fontSize:"1rem", padding:"0.1rem" }}>✕</button>
+              <button onClick={() => remove(w.fr)} aria-label={`Xóa từ ${w.fr}`} style={{ background:"none", border:"none", color:C.gray2, cursor:"pointer", fontSize:"1rem", padding:"0.1rem" }}>✕</button>
             </div>
           ))}
         </div>
@@ -218,6 +219,7 @@ function AppInner() {
   const [swUpdated,   setSwUpdated]         = useState(false);
   const [xpData, setXpData]                 = useState(getXPData);
   const [badgeToast, setBadgeToast]         = useState("");
+  const [searchOpen, setSearchOpen]         = useState(false);
 
   const setTextPersist = (val) => { setText(val); localStorage.setItem("vocab_text", val); };
   const words = parseWords(text);
@@ -519,6 +521,11 @@ function AppInner() {
       {/* ── Modals ── */}
       {showSave   && <SaveModal   text={text} onSave={handleSave}                                    onClose={()=>setShowSave(false)}   />}
       {showImport && <ImportModal onImport={t=>{setTextPersist(t);showToast("✓ Import thành công!");}} onClose={()=>setShowImport(false)} />}
+      {searchOpen && (
+        <Suspense fallback={null}>
+          <GlobalSearch onClose={()=>setSearchOpen(false)} onNavigate={(s,v)=>goSection(s, v||s)} />
+        </Suspense>
+      )}
 
 
       {/* ── ONBOARDING ── */}
@@ -587,7 +594,11 @@ function AppInner() {
                 <span style={{ color:C.gray2, fontWeight:400 }}>·</span>
                 <span style={{ color:C.gold }}>★</span>{xpData.total||0}
               </span>
-              <button onClick={toggleDark}
+              <button onClick={()=>setSearchOpen(true)} aria-label="Tìm kiếm từ vựng và ngữ pháp"
+                style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"3px 8px", fontSize:"0.82rem", cursor:"pointer", lineHeight:1 }}>
+                ⌕
+              </button>
+              <button onClick={toggleDark} aria-label={dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
                 style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"3px 8px", fontSize:"0.82rem", cursor:"pointer", lineHeight:1 }}>
                 {dark ? "☀️" : "🌙"}
               </button>
@@ -635,7 +646,11 @@ function AppInner() {
                   </div>
                   <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
                     <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.65rem", opacity:0.8 }}>
-                      {pct}% · {overall.done}/{overall.total} steps tổng
+                      {(() => {
+                        const up = getUnitStepProgress(focusUnit.id);
+                        const unitDone = STEP_DEFS.filter(s => up[s.id]).length;
+                        return `${unitDone}/${STEP_DEFS.length} hoạt động · Lộ trình ${overall.pct}%`;
+                      })()}
                     </span>
                     <button onClick={()=>goSection("parcours","parcours")}
                       style={{ background:"rgba(255,255,255,0.18)", color:"#fff", border:"1px solid rgba(255,255,255,0.4)", borderRadius:999, padding:"0.3rem 0.85rem", fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
@@ -727,7 +742,7 @@ function AppInner() {
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:600, flex:1 }}>
                 {SECTION_TITLE[section] || section}
               </span>
-              <button onClick={toggleDark}
+              <button onClick={toggleDark} aria-label={dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
                 style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.5rem", fontSize:"0.8rem", cursor:"pointer", lineHeight:1, flexShrink:0 }}>
                 {dark ? "☀️" : "🌙"}
               </button>
@@ -780,10 +795,10 @@ function AppInner() {
                   <div style={{ flex:1 }}>
                     <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:22, fontWeight:700, lineHeight:1 }}>
                       <span style={{ color:C.blue }}>{srsStats.total}</span>
-                      <span style={{ color:C.gray, fontWeight:400, fontSize:13 }}> · </span>
-                      <span style={{ color:C.green, fontSize:18 }}>{srsStats.mastered} thuộc</span>
+                      <span style={{ color:C.gray, fontWeight:400, fontSize:13 }}> từ · </span>
+                      <span style={{ color:C.green, fontSize:18 }}>{srsStats.mastered} đã thuộc</span>
                     </div>
-                    <div style={{ fontSize:11, color:C.gray, marginTop:3 }}>{srsStats.due} cần ôn hôm nay</div>
+                    <div style={{ fontSize:11, color:C.gray, marginTop:3 }}>{srsStats.due} từ cần ôn hôm nay</div>
                   </div>
                   <div style={{ display:"flex", gap:6, flexShrink:0 }}>
                     {srsStats.due > 0 && (
@@ -809,7 +824,7 @@ function AppInner() {
                       style={{ border:"none", outline:"none", flex:1, fontSize:12.5, fontFamily:"inherit", color:C.ink, background:"transparent" }}/>
                     {vocabSearch && (
                       <button onClick={()=>setVocabSearch("")}
-                        style={{ background:"none", border:"none", cursor:"pointer", color:C.gray, fontSize:14, padding:"0 2px", lineHeight:1 }}>✕</button>
+                        aria-label="Xóa tìm kiếm" style={{ background:"none", border:"none", cursor:"pointer", color:C.gray, fontSize:14, padding:"0 2px", lineHeight:1 }}>✕</button>
                     )}
                   </div>
                 )}
@@ -852,11 +867,22 @@ function AppInner() {
                   if (vocabFilter==="mastered") filtered = filtered.filter(c => c.interval >= 21);
                   if (vocabFilter==="new")      filtered = filtered.filter(c => c.repetitions === 0);
                   if (filtered.length === 0) return (
-                    <div style={{ textAlign:"center", padding:"20px 0", color:C.gray, fontSize:12.5 }}>
-                      {allCards.length === 0
-                        ? "Chưa có từ trong SRS. Học Edito để thêm từ!"
-                        : "Không có từ nào phù hợp."}
-                    </div>
+                    allCards.length === 0 ? (
+                      <div style={{ textAlign:"center", padding:"24px 16px", color:C.gray }}>
+                        <div style={{ fontSize:"1.8rem", marginBottom:8 }}>🌱</div>
+                        <div style={{ fontSize:13, lineHeight:1.6, marginBottom:12 }}>
+                          Chưa có từ nào trong bộ ôn tập.<br/>Học từ vựng theo bài để bắt đầu nhé!
+                        </div>
+                        <button onClick={()=>goSection("parcours","parcours")}
+                          style={{ padding:"0.55rem 1.2rem", background:C.blue, color:"#fff", border:"none", borderRadius:999, fontSize:13, fontWeight:700, cursor:"pointer", fontFamily:"inherit", boxShadow:`0 4px 14px ${C.blue}44` }}>
+                          🛤️ Học Unité ngay →
+                        </button>
+                      </div>
+                    ) : (
+                      <div style={{ textAlign:"center", padding:"20px 0", color:C.gray, fontSize:12.5 }}>
+                        Không có từ nào phù hợp.
+                      </div>
+                    )
                   );
                   return (
                     <div style={{ background:C.white, borderRadius:12, border:`1px solid ${C.border}`, overflow:"hidden" }}>
@@ -1068,7 +1094,7 @@ function AppInner() {
           {/* Top bar */}
           <div style={{ padding:"6px 16px 12px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
             <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:17, letterSpacing:"-0.01em", color:C.ink }}>Profil</span>
-            <button onClick={toggleDark}
+            <button onClick={toggleDark} aria-label={dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
               style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"3px 8px", fontSize:"0.82rem", cursor:"pointer", lineHeight:1 }}>
               {dark ? "☀️" : "🌙"}
             </button>
@@ -1077,6 +1103,13 @@ function AppInner() {
             <Suspense fallback={panelFallback}>
               <ProfilPanel
                 userName={userName}
+                onChangeName={(name) => {
+                  const trimmed = (name || "").trim();
+                  if (!trimmed) return;
+                  localStorage.setItem("user_name", trimmed);
+                  setUserName(trimmed);
+                  showToast("✓ Đã đổi tên!");
+                }}
                 dark={dark}
                 toggleDark={toggleDark}
                 onNavigate={(s, v) => goSection(s, v || s)}

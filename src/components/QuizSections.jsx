@@ -5,6 +5,7 @@ import { addWordToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import WordCardBack from "./ui/WordCardBack.jsx";
 import { SecLabel, QCard } from "./ui/SharedUI.jsx";
+import AccentBar from "./ui/AccentBar.jsx";
 
 // ── Confetti burst ──────────────────────────────────────────
 function Confetti() {
@@ -90,6 +91,7 @@ export function ExerciseFill({ ex, idx }) {
         {!done && <button onClick={()=>setDone(true)} style={{padding:"0.3rem 0.65rem",background:C.purple,color:C.white,border:"none",borderRadius:6,fontSize:"0.73rem",cursor:"pointer"}}>Kiểm tra</button>}
         {done && <span style={{fontSize:"0.73rem",color:ok?C.green:C.red,fontWeight:500}}>{ok?"✓ Đúng!":`✗ Đáp án: ${ex.answer}`}</span>}
       </div>
+      {!done && <div style={{ marginTop:"0.3rem" }}><AccentBar compact /></div>}
       {done && ex.explanation && <div style={{ marginTop:"0.3rem", fontSize:"0.73rem", color:C.gray }}>💡 {ex.explanation}</div>}
     </div>
   );
@@ -211,6 +213,7 @@ export function FillSection({ questions, words = [], sl, onRecord, onWrong, onCo
   return (
     <div style={{ marginBottom:"0.5rem" }}>
       {sl && <SecLabel icon="✏️" text="Điền từ" />}
+      {!allDone && <div style={{ position:"sticky", top:58, zIndex:5, background:C.paper, padding:"2px 0", marginBottom:"0.4rem" }}><AccentBar compact /></div>}
       {questions.map((q, i) => {
         const v = inp[i]||"", done = chk[i];
         const ok = done && v.trim().toLowerCase()===(q.answer||"").toLowerCase();
@@ -318,6 +321,7 @@ export function DicteeSection({ words, onRecord }) {
         <input value={input} disabled={checked} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&check()}
           placeholder="Nhập từ tiếng Pháp..."
           style={{ width:"100%", maxWidth:260, border:`1.5px solid ${checked?(isCorrect?C.green:C.red):C.border}`, borderRadius:8, padding:"0.5rem 0.8rem", fontSize:"1rem", fontFamily:"Georgia,serif", textAlign:"center", outline:"none", background:checked?(isCorrect?C.greenL:C.redL):C.white, color:checked?(isCorrect?C.green:C.red):C.ink, boxSizing:"border-box" }} />
+        {!checked && <div style={{ display:"flex", justifyContent:"center", marginTop:"0.5rem" }}><AccentBar compact /></div>}
         {!checked && (
           <div style={{ marginTop:"0.8rem", display:"flex", gap:"0.5rem", justifyContent:"center" }}>
             <button onClick={()=>setRevealed(r=>!r)} style={{ padding:"0.3rem 0.8rem", border:`1px solid ${C.border}`, borderRadius:6, background:C.white, color:C.gray, fontSize:"0.72rem", cursor:"pointer" }}>{revealed?"Ẩn":"💡 Gợi ý"}</button>
