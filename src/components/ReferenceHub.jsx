@@ -34,7 +34,7 @@ export default function ReferenceHub({ onBackToParcours }) {
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
       {fromParcours && onBackToParcours && (
-        <div style={{ background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding: "0.6rem 1rem" }}>
+        <div style={{ background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, padding: "0.6rem 1rem" }}>
           <button onClick={onBackToParcours} style={{ background: "rgba(255,255,255,0.15)", border: "none", color: "#fff", fontSize: "0.72rem", fontWeight: 600, cursor: "pointer", padding: "0.2rem 0.65rem", borderRadius: 20, fontFamily: "inherit" }}>
             ← Parcours
           </button>

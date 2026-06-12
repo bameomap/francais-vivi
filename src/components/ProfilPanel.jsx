@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { C } from "../constants.js";
+import { C, THEMES } from "../constants.js";
 import { getStreak, getProgress, getMistakes } from "../utils/storage.js";
 import { getSRSStats } from "../utils/srs.js";
 import { getXPData, getLevel, getNextLevel, LEVELS } from "../utils/xp.js";
@@ -33,7 +33,7 @@ function applyRestore(data) {
 }
 
 // ── ProfilPanel · Hub cá nhân ─────────────────────────────────
-export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, onNavigate }) {
+export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, themeId, onChangeTheme, onNavigate }) {
   const streakData = getStreak();
   const srsStats   = getSRSStats();
   const xpData     = getXPData();
@@ -388,6 +388,45 @@ export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, 
             }}/>
           </button>
         </div>
+
+        {/* Theme picker — kiểu knitlog: grid swatch màu */}
+        {onChangeTheme && (
+          <div style={{ padding: "11px 14px", borderBottom: `1px solid ${C.borderSoft || "#EEF2FA"}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+              <span style={{ fontSize: 14, width: 18, textAlign: "center", flexShrink: 0 }}>🎨</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 13, color: C.ink }}>Bảng màu</div>
+                <div style={{ fontSize: 11, color: C.gray, marginTop: 1 }}>Chọn màu chủ đạo cho toàn app</div>
+              </div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 8 }}>
+              {THEMES.map(t => {
+                const active = themeId === t.id;
+                return (
+                  <button key={t.id} onClick={() => onChangeTheme(t.id)}
+                    aria-label={`Bảng màu ${t.label}`} title={t.label}
+                    style={{
+                      display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
+                      padding: "8px 2px 6px", borderRadius: 12, cursor: "pointer",
+                      background: active ? C.blueL : "transparent",
+                      border: `1.5px solid ${active ? t.swatch : C.border}`,
+                      boxShadow: active ? `0 4px 12px ${t.swatch}44` : "none",
+                      fontFamily: "inherit", transition: "all 0.15s",
+                    }}>
+                    <span style={{
+                      width: 26, height: 26, borderRadius: "50%", background: t.swatch,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 13, boxShadow: "inset 0 -2px 4px rgba(0,0,0,0.12)",
+                    }}>{t.emoji}</span>
+                    <span style={{ fontSize: 9, color: active ? C.ink : C.gray, fontWeight: active ? 700 : 500, lineHeight: 1.1, textAlign: "center" }}>
+                      {t.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Placeholder rows */}
         {[

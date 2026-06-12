@@ -274,7 +274,7 @@ ${inputText?`<div class="orig">${inputText.slice(0,600)}${inputText.length>600?"
       {state==="done" && result && (
         <>
           {/* Header */}
-          <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", borderRadius:14, padding:"0.9rem 1rem" }}>
+          <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, borderRadius:14, padding:"0.9rem 1rem" }}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
               <div style={{ flex:1 }}>
                 <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.95rem", color:"#fff", fontWeight:700, marginBottom:"0.25rem" }}>

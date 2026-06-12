@@ -21,8 +21,9 @@ function buildItems() {
         unitKey,
         section:    track?.section  || "",
         trackTitle: track?.title    || trackId,
-        color:      track?.color    || "#7C3AED",
-        colorLight: track?.colorLight || "#EDE9FE",
+        // Màu thống nhất theo theme (bỏ màu riêng của track)
+        color:      C.blue,
+        colorLight: C.blueL,
         noteIdx,
         heading: note.heading,
         phrases: note.phrases,
@@ -265,9 +266,9 @@ export default function PourPracticePanel() {
           {/* Track badge */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.7rem", flexWrap: "wrap" }}>
             <span style={{
-              background: `${currentItem.color}18`,
-              color: currentItem.color,
-              border: `1px solid ${currentItem.color}40`,
+              background: `${C.blue}18`,
+              color: C.blue,
+              border: `1px solid ${C.blue}40`,
               fontSize: "0.59rem", fontWeight: 700,
               padding: "0.12rem 0.5rem", borderRadius: 10,
               textTransform: "uppercase",
@@ -281,19 +282,19 @@ export default function PourPracticePanel() {
 
           {/* Situation card */}
           <div style={{
-            background: `linear-gradient(135deg, ${currentItem.colorLight}, #F5F3FF)`,
-            border: `1.5px solid ${currentItem.color}40`,
+            background: `linear-gradient(135deg, ${C.blueLight}, #F5F3FF)`,
+            border: `1.5px solid ${C.blue}40`,
             borderRadius: 14, padding: "0.85rem 1rem",
             marginBottom: "0.65rem", minHeight: 72,
           }}>
-            <div style={{ fontSize: "0.57rem", fontWeight: 700, color: currentItem.color, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.4rem" }}>
+            <div style={{ fontSize: "0.57rem", fontWeight: 700, color: C.blue, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.4rem" }}>
               🎬 Tình huống
             </div>
 
             {sitLoading ? (
               <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-                <Spin color={currentItem.color} />
-                <span style={{ fontSize: "0.74rem", color: currentItem.color }}>Đang tạo tình huống…</span>
+                <Spin color={C.blue} />
+                <span style={{ fontSize: "0.74rem", color: C.blue }}>Đang tạo tình huống…</span>
               </div>
             ) : situation ? (
               <>
@@ -314,8 +315,8 @@ export default function PourPracticePanel() {
           <div style={{ marginBottom: "0.6rem" }}>
             <button onClick={() => setShowHint(h => !h)} style={{
               background: "transparent",
-              border: `1px dashed ${showHint ? currentItem.color : C.border}`,
-              color: showHint ? currentItem.color : C.gray,
+              border: `1px dashed ${showHint ? C.blue : C.border}`,
+              color: showHint ? C.blue : C.gray,
               borderRadius: 8, padding: "0.22rem 0.65rem",
               fontSize: "0.63rem", cursor: "pointer",
               fontFamily: "inherit", fontWeight: showHint ? 700 : 400,
@@ -357,7 +358,7 @@ export default function PourPracticePanel() {
                 disabled={sitLoading || gradeLoading}
                 style={{
                   width: "100%", padding: "0.5rem 0.65rem",
-                  border: `1.5px solid ${currentItem.color}50`,
+                  border: `1.5px solid ${C.blue}50`,
                   borderRadius: 10, fontFamily: "inherit",
                   fontSize: "0.83rem", resize: "none",
                   outline: "none", color: C.ink,

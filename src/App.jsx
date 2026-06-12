@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed, getStorageHealth, exportBackup } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
-import { C, applyTheme } from "./constants.js";
+import { C, applyTheme, THEME_KEY } from "./constants.js";
 
 import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
@@ -202,16 +202,22 @@ function AppInner() {
   const [filterMastered, setFilterMastered] = useState(true);
   const [vocabSearch, setVocabSearch]       = useState("");
   const [vocabFilter, setVocabFilter]       = useState("all");
+  const [themeId, setThemeId] = useState(() => localStorage.getItem(THEME_KEY) || "classic");
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem("dark_mode") === "1";
-    if (saved) applyTheme(true);
+    applyTheme(saved);
     return saved;
   });
   const toggleDark = () => {
     const next = !dark;
-    applyTheme(next);
+    applyTheme(next, themeId);
     localStorage.setItem("dark_mode", next ? "1" : "0");
     setDark(next);
+  };
+  const changeTheme = (id) => {
+    localStorage.setItem(THEME_KEY, id);
+    applyTheme(dark, id);
+    setThemeId(id);
   };
   const [editOpen, setEditOpen]             = useState(false);
   const [navStack, setNavStack]             = useState([]); // breadcrumb of {section,view} for "← Về"
@@ -1112,6 +1118,8 @@ function AppInner() {
                 }}
                 dark={dark}
                 toggleDark={toggleDark}
+                themeId={themeId}
+                onChangeTheme={changeTheme}
                 onNavigate={(s, v) => goSection(s, v || s)}
               />
             </Suspense>

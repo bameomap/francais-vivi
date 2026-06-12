@@ -131,7 +131,7 @@ export default function DefiPanel() {
   if (!mode && !loading) return (
     <div style={{ animation:"fadeUp 0.3s ease" }}>
       {/* ── Dark hero banner ── */}
-      <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem", marginBottom:"0.85rem" }}>
+      <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, padding:"0.9rem 1rem 0.85rem", marginBottom:"0.85rem" }}>
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>🎲 Le Défi</div>
         <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>Mỗi ngày một thử thách — làm xong tích streak 🔥</div>
       </div>

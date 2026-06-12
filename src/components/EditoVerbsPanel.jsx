@@ -434,7 +434,7 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
 
       {/* ── Gradient header ────────────────────────────────── */}
       <div style={{
-        background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`,
         padding: "0.85rem 1rem 1rem",
         position: "sticky", top: 0, zIndex: 10,
       }}>
@@ -735,7 +735,7 @@ export default function EditoVerbsPanel({ fromParcours = false }) {
     <div style={{ animation:"fadeUp 0.3s ease" }}>
       {/* hero banner */}
       <div style={{
-        background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`,
         padding:"1rem 1rem 0.85rem",
       }}>
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>

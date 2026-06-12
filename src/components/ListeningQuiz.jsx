@@ -161,7 +161,7 @@ export default function ListeningQuiz({ words: propWords = [] }) {
 
       {/* Play area */}
       <div style={{ padding:"0.75rem 1rem" }}>
-        <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", borderRadius:20, padding:"1.5rem", textAlign:"center" }}>
+        <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, borderRadius:20, padding:"1.5rem", textAlign:"center" }}>
           <button onClick={playWord} disabled={playing}
             style={{
               width:80, height:80, borderRadius:"50%",

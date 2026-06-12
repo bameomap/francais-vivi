@@ -21,7 +21,7 @@ function UnitList({ onSelect }) {
     <div style={{ animation: "fadeUp 0.3s ease" }}>
       {/* Hero banner */}
       <div style={{
-        background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`,
         padding: "1rem 1rem 0.85rem",
       }}>
         <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1.15rem", color: "#fff", fontWeight: 800 }}>
@@ -427,7 +427,7 @@ function UnitDetail({ unit, onBack, fromParcours = false }) {
     <div style={{ animation: "fadeUp 0.25s ease" }}>
       {/* Sticky gradient header */}
       <div style={{
-        background: "linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)",
+        background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`,
         padding: "0.85rem 1rem 0.9rem",
         position: "sticky", top: 0, zIndex: 10,
       }}>

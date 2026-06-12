@@ -13,11 +13,13 @@ import AccentBar from "./ui/AccentBar.jsx";
 const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
 // ── Question group styles ──────────────────────────────────────────
-const Q_STYLE = {
+// Đọc C động (function thay vì const) để màu đổi theo theme/dark mode.
+// Thống nhất một hue chủ đạo: chỉ phần khởi động (Entrée) dùng gold nhẹ để phân giai đoạn.
+const Q_STYLE_FN = (label) => ({
   "Entrée en matière": { bg: C.goldL, border: C.gold, chip: C.gold, icon: "🔍" },
-  "1ère écoute":       { bg: C.blueL, border: "#2563EB", chip: "#2563EB", icon: "👂" },
-  "2e écoute":         { bg: "#F5F3FF", border: "#7C3AED", chip: "#7C3AED", icon: "👂👂" },
-};
+  "1ère écoute":       { bg: C.blueL, border: C.blue, chip: C.blue, icon: "👂" },
+  "2e écoute":         { bg: C.blueL, border: C.blueDark, chip: C.blueDark, icon: "👂👂" },
+}[label]);
 
 // ── Parse "Q1 / Q2 / Q3" → ["Q1","Q2","Q3"] ──────────────────────
 function parseSubQ(text) {
@@ -317,7 +319,9 @@ Trả về JSON thuần (không markdown):
       {/* ── Track cards ── */}
       {selectedUnit && (
         <div style={{ padding: "0.75rem 0.85rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-          {tracks.map(track => {
+          {tracks.map(rawTrack => {
+            // Thống nhất màu card theo theme — bỏ màu riêng lẻ của từng track
+            const track = { ...rawTrack, color: C.blue, colorLight: C.blueL };
             const mode  = panelMode[track.id] || null;
             const ds    = dictee[track.id];
             const total = track.sentences.length;
@@ -399,7 +403,7 @@ Trả về JSON thuần (không markdown):
                   <div style={{ padding: "0.7rem 0.85rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                     {track.questions.map((qGroup, gIdx) => {
                       const subQs = parseSubQ(qGroup.text);
-                      const qs    = Q_STYLE[qGroup.label] || Q_STYLE["1ère écoute"];
+                      const qs    = Q_STYLE_FN(qGroup.label) || Q_STYLE_FN("1ère écoute");
                       // "Entrée en matière" = câu khởi động (thường tham chiếu ảnh sách,
                       // hỏi mở) → hiển thị để suy nghĩ/nói trước khi nghe, KHÔNG chấm AI.
                       const isWarmup = qGroup.label === "Entrée en matière";

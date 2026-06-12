@@ -190,7 +190,7 @@ export default function ConversationPanel({ onBackToParcours }) {
       <div style={{ animation:"fadeUp 0.3s ease" }}>
 
         {/* Dark hero banner */}
-        <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.9rem 1rem 0.85rem" }}>
+        <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, padding:"0.9rem 1rem 0.85rem" }}>
           {fromParcours && onBackToParcours && (
             <button onClick={onBackToParcours} style={{ background:"rgba(255,255,255,0.15)", border:"none", color:"#fff", fontSize:"0.72rem", fontWeight:600, cursor:"pointer", padding:"0.2rem 0.65rem", borderRadius:20, marginBottom:"0.6rem", fontFamily:"inherit" }}>
               ← Parcours
@@ -298,7 +298,7 @@ export default function ConversationPanel({ onBackToParcours }) {
     <div style={{ display:"flex", flexDirection:"column", height:"calc(100dvh - 120px)" }}>
 
       {/* Chat header */}
-      <div style={{ background:"linear-gradient(135deg, #1B3A6B 0%, #2d4f8a 100%)", padding:"0.65rem 1rem", display:"flex", alignItems:"center", gap:"0.65rem" }}>
+      <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, padding:"0.65rem 1rem", display:"flex", alignItems:"center", gap:"0.65rem" }}>
         <div style={{ width:38, height:38, background:"rgba(255,255,255,0.18)", border:"1.5px solid rgba(255,255,255,0.3)", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.35rem", flexShrink:0 }}>
           {scenario.icon}
         </div>

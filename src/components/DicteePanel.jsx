@@ -262,7 +262,8 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
 
   // Resolve audio tracks for current unit
   const unitKey     = unitId ?? "u5";
-  const audioTracks = EDITO_AUDIO[unitKey] ?? [];
+  // Màu card thống nhất theo theme (bỏ màu riêng lẻ của từng track)
+  const audioTracks = (EDITO_AUDIO[unitKey] ?? []).map(t => ({ ...t, color: C.blue, colorLight: C.blueL }));
   // editoA1Units uses "unite-5" format; vocab uses "u5" — map across
   const unitNum     = unitKey.replace("u", "");
   const unitMeta    = EDITO_A1_UNITS.find(u => u.id === `unite-${unitNum}` || u.unit === Number(unitNum));
