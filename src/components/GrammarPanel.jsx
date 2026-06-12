@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
-import { signalStepDone } from "../utils/parcours.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { SecLabel } from "./ui/SharedUI.jsx";
@@ -374,14 +374,19 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
     if (selectedUnit) localStorage.setItem("grammar_last_unit", selectedUnit.id);
   }, [selectedUnit]);
   const [openPoints, setOpenPoints]     = useState(new Set());
-  const [activeExercise, setActiveExercise] = useState(null); // {topic}
+  const [activeExercise, setActiveExercise] = useState(null); // {topic, subId}
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
+  // Grammar unit id ("g7") → parcours unit id ("u7"). Points are sub-lessons.
+  const gUnitId = selectedUnit ? "u" + selectedUnit.id.replace("g", "") : null;
+  const gDone   = gUnitId ? getSubDone(gUnitId, "grammar") : {};
   const [loading, setLoading]   = useState(false);
   const [result, setResult]     = useState(null);
   const [err, setErr]           = useState("");
   const quizRef = useRef(null);
 
-  const launchExercise = async (topic) => {
-    setActiveExercise({ topic });
+  const launchExercise = async (topic, subId = null) => {
+    setActiveExercise({ topic, subId });
     setResult(null); setErr(""); setLoading(true);
     try {
       const data = await callAI(buildGrammarPrompt(topic, "A1", "mixed", 12));
@@ -394,7 +399,10 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
   const renderExercises = () => {
     if (!result) return null;
     const onW = () => {};
-    const onFirst = () => signalStepDone("grammar");
+    // Mark the specific grammar point done when its exercise is first answered.
+    const onFirst = () => {
+      if (gUnitId && activeExercise?.subId) markSubDone(gUnitId, "grammar", activeExercise.subId);
+    };
     if (result.type==="mc") return <GrammarMC exercises={result.exercises} onWrong={onW} onFirstAnswer={onFirst}/>;
     if (result.type==="fill") return <GrammarFill exercises={result.exercises} onFirstAnswer={onFirst}/>;
     if (result.type==="order") return <GrammarOrder exercises={result.exercises} onFirstAnswer={onFirst}/>;
@@ -471,13 +479,15 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
         <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem" }}>
           {selectedUnit.points.map((p, i) => {
             const isOpen = openPoints.has(i);
+            const subId  = "p" + i;
+            const isDone = !!gDone[subId];
             const toggle = () => setOpenPoints(prev => { const s=new Set(prev); s.has(i)?s.delete(i):s.add(i); return s; });
             return (
-              <div key={i} style={{ background:C.white, border:`1.5px solid ${isOpen?C.purple+"55":C.border}`, borderRadius:12, overflow:"hidden", transition:"border-color 0.2s" }}>
-                <div onClick={toggle} style={{ background:isOpen?C.purpleL:C.white, padding:"0.65rem 0.85rem", display:"flex", justifyContent:"space-between", alignItems:"center", cursor:"pointer", transition:"background 0.2s" }}>
+              <div key={i} style={{ background: isDone ? C.greenL : C.white, border:`1.5px solid ${isDone ? C.green+"66" : isOpen?C.purple+"55":C.border}`, borderRadius:12, overflow:"hidden", transition:"border-color 0.2s" }}>
+                <div onClick={toggle} style={{ background:isOpen?C.purpleL:(isDone?C.greenL:C.white), padding:"0.65rem 0.85rem", display:"flex", justifyContent:"space-between", alignItems:"center", cursor:"pointer", transition:"background 0.2s" }}>
                   <div style={{ fontSize:"0.8rem", fontWeight:600, color:C.purple, lineHeight:1.3, flex:1 }}>{p.topic}</div>
                   <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", flexShrink:0 }}>
-                    <button onClick={e=>{ e.stopPropagation(); launchExercise(p.topic); }}
+                    <button onClick={e=>{ e.stopPropagation(); launchExercise(p.topic, subId); }}
                       style={{ background:C.purple, color:C.white, border:"none", borderRadius:20, padding:"0.22rem 0.65rem", fontSize:"0.63rem", cursor:"pointer", whiteSpace:"nowrap" }}>
                       Làm bài tập →
                     </button>
@@ -492,6 +502,19 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
                       <span style={{ transform:isOpen?"rotate(180deg)":"none", transition:"transform 0.2s", display:"inline-block", fontSize:"0.7rem" }}>▾</span>
                     </span>
                   </div>
+                </div>
+                {/* Sub-lesson done state */}
+                <div style={{ display:"flex", justifyContent:"flex-end", padding:"0 0.85rem", marginTop: isOpen ? 0 : "-0.2rem", marginBottom:"0.4rem" }}>
+                  {isDone ? (
+                    <span style={{ display:"inline-flex", alignItems:"center", gap:"0.35rem" }}>
+                      <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.6rem", fontWeight:700 }}>✓ Đã học</span>
+                      <span role="button" onClick={(e)=>{ e.stopPropagation(); unmarkSubDone(gUnitId,"grammar",subId); refresh(); }}
+                        style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.6rem", fontWeight:700, cursor:"pointer" }}>↻ Làm lại</span>
+                    </span>
+                  ) : (
+                    <span role="button" onClick={(e)=>{ e.stopPropagation(); markSubDone(gUnitId,"grammar",subId); refresh(); }}
+                      style={{ background:"#fff", color:C.gray, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.6rem", fontWeight:600, cursor:"pointer" }}>✓ Đánh dấu đã học</span>
+                  )}
                 </div>
                 {isOpen && (
                   <div style={{ padding:"0.65rem 0.85rem", borderTop:`1px solid ${C.purple}22` }}>

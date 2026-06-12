@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI, callAIText } from "../utils/api.js";
-import { signalStepDone } from "../utils/parcours.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { logError } from "./WeakSpotsPanel.jsx";
@@ -129,7 +129,10 @@ export default function WritingPanel({ onBackToParcours }) {
   });
   const [editoUnit, setEditoUnit] = useState(0);
   const [editoTask, setEditoTask] = useState(null);
+  const [editoTaskIdx, setEditoTaskIdx] = useState(null);
   const [fromParcours, setFromParcours] = useState(false);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
 
   // ── Hint / Sample state ─────────────────────────────────────
   const [hint,          setHint]          = useState(null);   // parsed JSON
@@ -170,14 +173,18 @@ Return ONLY JSON:
       const newHistory = [entry, ...history].slice(0, 30);
       setHistory(newHistory);
       localStorage.setItem("writing_history", JSON.stringify(newHistory));
-      signalStepDone("ecrire"); // completed when AI feedback received
+      // Édito task = a specific writing sub-lesson; freeform "write" tab isn't tracked.
+      if (tab === "edito" && editoTaskIdx != null) {
+        const u = EDITO_A1_UNITS[editoUnit];
+        if (u) markSubDone("u" + u.unit, "ecrire", "w" + editoTaskIdx);
+      }
       setResult(r);
       r.errors?.forEach(e => { if (e.type) logError(e.type); });
     } catch(e) { setErr(e.message); }
     setLoading(false);
   };
 
-  const switchTab = (id) => { setTab(id); setResult(null); setInput(""); setEditoTask(null); setHint(null); setSample(null); };
+  const switchTab = (id) => { setTab(id); setResult(null); setInput(""); setEditoTask(null); setEditoTaskIdx(null); setHint(null); setSample(null); };
 
   const loadHint = async () => {
     if (hint) { setHint(null); return; }
@@ -284,18 +291,31 @@ vocab: 5-7 key words/phrases relevant to the task.`);
               </div>
 
               {/* Task cards */}
-              {unit.writingPractice.map((p, i) => (
-                <button key={i} onClick={() => { setEditoTask(p); setInput(""); setResult(null); }}
-                  style={{ background:C.white, border:`1.5px solid ${C.border}`, borderLeft:`4px solid ${C.blue}`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"box-shadow 0.15s, transform 0.1s", boxShadow:`0 2px 8px rgba(74,144,217,0.06)` }}
+              {(() => { var wDone = getSubDone("u" + unit.unit, "ecrire"); return unit.writingPractice.map((p, i) => {
+                const isDone = !!wDone["w" + i];
+                return (
+                <button key={i} onClick={() => { setEditoTask(p); setEditoTaskIdx(i); setInput(""); setResult(null); }}
+                  style={{ background: isDone ? C.greenL : C.white, border:`1.5px solid ${isDone ? C.green + "88" : C.border}`, borderLeft:`4px solid ${isDone ? C.green : C.blue}`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"box-shadow 0.15s, transform 0.1s", boxShadow:`0 2px 8px rgba(74,144,217,0.06)` }}
                   onPointerDown={e => e.currentTarget.style.transform="scale(0.99)"}
                   onPointerUp={e => e.currentTarget.style.transform="scale(1)"}
                   onPointerLeave={e => e.currentTarget.style.transform="scale(1)"}
                 >
                   <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"0.92rem", color:C.ink, fontWeight:700, marginBottom:"0.3rem" }}>{p.title}</div>
                   <div style={{ fontSize:"0.74rem", color:C.gray, lineHeight:1.6 }}>{p.task}</div>
-                  <div style={{ marginTop:"0.55rem", fontSize:"0.7rem", color:C.blue, fontWeight:600 }}>Bắt đầu viết →</div>
+                  <div style={{ marginTop:"0.55rem", display:"flex", alignItems:"center", gap:"0.4rem", flexWrap:"wrap" }}>
+                    {isDone ? (
+                      <>
+                        <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Xong</span>
+                        <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone("u" + unit.unit, "ecrire", "w" + i); refresh(); }}
+                          style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>↻ Làm lại</span>
+                      </>
+                    ) : (
+                      <span style={{ fontSize:"0.7rem", color:C.blue, fontWeight:600 }}>Bắt đầu viết →</span>
+                    )}
+                  </div>
                 </button>
-              ))}
+                );
+              }); })()}
             </>
           ) : (
             <>
@@ -406,7 +426,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                     </div>
                   )}
                   <div style={{ display:"flex", gap:"0.5rem", marginTop:"0.7rem" }}>
-                    <button onClick={() => { setEditoTask(null); setResult(null); setInput(""); setHint(null); setSample(null); }}
+                    <button onClick={() => { setEditoTask(null); setEditoTaskIdx(null); setResult(null); setInput(""); setHint(null); setSample(null); refresh(); }}
                       style={{ padding:"0.6rem 0.85rem", background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:10, fontSize:"0.78rem", cursor:"pointer", fontFamily:"inherit" }}>
                       ← Đổi đề
                     </button>

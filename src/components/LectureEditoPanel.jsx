@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { callAI, callAIText } from "../utils/api.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { Confetti } from "./ui/Minou.jsx";
@@ -362,7 +363,7 @@ function OpenQ({ q }) {
 }
 
 // ── Activity view ─────────────────────────────────────────────
-function ActivityView({ activity, onBack }) {
+function ActivityView({ activity, onBack, onComplete }) {
   const [answers,      setAnswers]      = useState({});
   const [revealed,     setRevealed]     = useState({});
   const [confetti,     setConfetti]     = useState(false);
@@ -512,6 +513,9 @@ function ActivityView({ activity, onBack }) {
   const score = calcScore(answers);
   const allAnswered = scoreable.length > 0 && scoreable.every(q => answers[q.id] !== undefined);
   const pct = scoreable.length > 0 ? Math.round(score / scoreable.length * 100) : null;
+
+  // Mark this reading done in the Parcours when all auto-graded questions are answered.
+  useEffect(() => { if (allAnswered) onComplete?.(); }, [allAnswered]);
 
   const badge = SECTION_BADGE[activity.section];
 
@@ -709,14 +713,26 @@ function ActivityView({ activity, onBack }) {
 export default function LectureEditoPanel({ defaultUnitNum = null }) {
   const [selectedUnit,     setSelectedUnit]     = useState(null);
   const [selectedActivity, setSelectedActivity] = useState(null);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
 
   // Deep-link from Parcours: pre-select the unit passed down by LecturePanel.
   useEffect(() => {
     if (defaultUnitNum != null) setSelectedUnit(defaultUnitNum);
   }, [defaultUnitNum]);
 
+  // Parcours progress is tracked per reading (sub-lesson) under step "lecture".
+  const unitId = selectedUnit !== null ? "u" + selectedUnit : null;
+  const done   = unitId ? getSubDone(unitId, "lecture") : {};
+
   if (selectedActivity) {
-    return <ActivityView activity={selectedActivity} onBack={() => setSelectedActivity(null)} />;
+    return (
+      <ActivityView
+        activity={selectedActivity}
+        onBack={() => { setSelectedActivity(null); refresh(); }}
+        onComplete={() => { if (unitId) markSubDone(unitId, "lecture", selectedActivity.id); }}
+      />
+    );
   }
 
   const activities = selectedUnit !== null
@@ -766,9 +782,10 @@ export default function LectureEditoPanel({ defaultUnitNum = null }) {
       {activities.map(activity => {
         const badge = SECTION_BADGE[activity.section];
         const autoQ = activity.questions.filter(q => ["true_false","multiple_choice","multi_select"].includes(q.type)).length;
+        const isDone = !!done[activity.id];
         return (
           <div key={activity.id} onClick={() => setSelectedActivity(activity)} className="card-hover"
-            style={{ background: C.white, border: `1.5px solid ${C.border}`, borderRadius: 14, padding: "0.9rem 1rem", marginBottom: "0.55rem", cursor: "pointer" }}>
+            style={{ background: isDone ? C.greenL : C.white, border: `1.5px solid ${isDone ? C.green + "88" : C.border}`, borderRadius: 14, padding: "0.9rem 1rem", marginBottom: "0.55rem", cursor: "pointer" }}>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
               <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "0.95rem", color: C.ink, fontWeight: 700, marginBottom: "0.25rem", lineHeight: 1.3 }}>
@@ -778,13 +795,31 @@ export default function LectureEditoPanel({ defaultUnitNum = null }) {
                   p.{activity.page} · {SOURCE_LABEL[activity.source]} · {activity.questions.length} câu
                   {autoQ > 0 && <span style={{ color: C.green }}> ({autoQ} tự chấm)</span>}
                 </div>
-                {badge && (
-                  <span style={{ background: `${badge.color}18`, border: `1px solid ${badge.color}44`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.63rem", color: badge.color, fontWeight: 600 }}>
-                    {badge.label}
-                  </span>
-                )}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexWrap: "wrap" }}>
+                  {badge && (
+                    <span style={{ background: `${badge.color}18`, border: `1px solid ${badge.color}44`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.63rem", color: badge.color, fontWeight: 600 }}>
+                      {badge.label}
+                    </span>
+                  )}
+                  {isDone ? (
+                    <>
+                      <span style={{ background: C.green, color: "#fff", borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.63rem", fontWeight: 700 }}>✓ Xong</span>
+                      <span role="button"
+                        onClick={(e) => { e.stopPropagation(); if (unitId) { unmarkSubDone(unitId, "lecture", activity.id); refresh(); } }}
+                        style={{ background: C.white, color: C.green, border: `1px solid ${C.green}66`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.63rem", fontWeight: 700 }}>
+                        ↻ Làm lại
+                      </span>
+                    </>
+                  ) : (
+                    <span role="button"
+                      onClick={(e) => { e.stopPropagation(); if (unitId) { markSubDone(unitId, "lecture", activity.id); refresh(); } }}
+                      style={{ background: C.white, color: C.gray, border: `1px solid ${C.border}`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.63rem", fontWeight: 600 }}>
+                      ✓ Đánh dấu đã học
+                    </span>
+                  )}
+                </div>
               </div>
-              <span style={{ fontSize: "1.3rem", color: C.blue, opacity: 0.4, marginTop: 2 }}>›</span>
+              <span style={{ fontSize: "1.3rem", color: isDone ? C.green : C.blue, opacity: 0.5, marginTop: 2 }}>›</span>
             </div>
           </div>
         );

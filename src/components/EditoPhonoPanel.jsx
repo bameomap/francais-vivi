@@ -1,8 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { EDITO_A1_PHONO } from "../data/editoPhono.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { speak } from "../utils/helpers.js";
+
+/* ── Sub-lesson Done / Làm lại pill (shared across discovery panels) ── */
+function DonePill({ done, onMark, onRedo, color = C.green }) {
+  return done ? (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}>
+      <span style={{ background: color, color: "#fff", borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.62rem", fontWeight: 700 }}>✓ Đã học</span>
+      <span role="button" onClick={(e) => { e.stopPropagation(); onRedo(); }}
+        style={{ background: "#fff", color, border: `1px solid ${color}66`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.62rem", fontWeight: 700, cursor: "pointer" }}>↻ Làm lại</span>
+    </span>
+  ) : (
+    <span role="button" onClick={(e) => { e.stopPropagation(); onMark(); }}
+      style={{ background: "#fff", color: C.gray, border: `1px solid ${C.border}`, borderRadius: 20, padding: "0.1rem 0.5rem", fontSize: "0.62rem", fontWeight: 600, cursor: "pointer" }}>✓ Đánh dấu đã học</span>
+  );
+}
 
 /* ── Tag chip ─────────────────────────────────────────────── */
 function Tag({ text }) {
@@ -86,11 +101,11 @@ function UnitList({ onSelect }) {
 }
 
 /* ── SOUND CARD ───────────────────────────────────────────── */
-function SoundCard({ sound, unitColor }) {
+function SoundCard({ sound, unitColor, done, onMark, onRedo }) {
   const [open, setOpen] = useState(true);
   return (
     <div style={{
-      border: `1.5px solid ${open ? C.blue + "40" : C.border}`,
+      border: `1.5px solid ${done ? C.green + "66" : open ? C.blue + "40" : C.border}`,
       borderRadius: 12, overflow: "hidden",
       marginBottom: "0.6rem", transition: "border-color 0.15s",
     }}>
@@ -166,6 +181,10 @@ function SoundCard({ sound, unitColor }) {
               ⚡ {sound.tip}
             </p>
           )}
+
+          <div style={{ marginTop: "0.6rem", display: "flex", justifyContent: "flex-end" }}>
+            <DonePill done={done} onMark={onMark} onRedo={onRedo} />
+          </div>
         </div>
       )}
     </div>
@@ -280,12 +299,14 @@ function PracticeSection({ practice }) {
 }
 
 /* ── LISTENING QUIZ ───────────────────────────────────────── */
-function ListeningQuiz({ quiz, sounds }) {
+function ListeningQuiz({ quiz, sounds, onComplete }) {
   const [idx, setIdx] = useState(0);
   const [answered, setAnswered] = useState(null);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
   const [heard, setHeard] = useState(false);
+
+  useEffect(() => { if (done) onComplete?.(); }, [done]);
 
   if (!quiz || quiz.length === 0) return null;
 
@@ -423,6 +444,9 @@ function ListeningQuiz({ quiz, sounds }) {
 
 /* ── UNIT DETAIL ──────────────────────────────────────────── */
 function UnitDetail({ unit, onBack, fromParcours = false }) {
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
+  const done = getSubDone(unit.unitId, "phono");
   return (
     <div style={{ animation: "fadeUp 0.25s ease" }}>
       {/* Sticky gradient header */}
@@ -466,12 +490,17 @@ function UnitDetail({ unit, onBack, fromParcours = false }) {
           🔤 Âm mục tiêu
         </div>
         {unit.sounds.map(sound => (
-          <SoundCard key={sound.id} sound={sound} unitColor={unit.color} />
+          <SoundCard key={sound.id} sound={sound} unitColor={unit.color}
+            done={!!done[sound.id]}
+            onMark={() => { markSubDone(unit.unitId, "phono", sound.id); refresh(); }}
+            onRedo={() => { unmarkSubDone(unit.unitId, "phono", sound.id); refresh(); }}
+          />
         ))}
 
         <MinimalPairs pairs={unit.pairs} />
         <PracticeSection practice={unit.practice} />
-        <ListeningQuiz quiz={unit.quiz} sounds={unit.sounds} />
+        <ListeningQuiz quiz={unit.quiz} sounds={unit.sounds}
+          onComplete={() => { markSubDone(unit.unitId, "phono", "quiz"); refresh(); }} />
       </div>
     </div>
   );

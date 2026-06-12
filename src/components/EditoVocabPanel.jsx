@@ -3,7 +3,7 @@ import { C } from "../constants.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { callAI, callAIBatched, buildPrompt } from "../utils/api.js";
 import { addWordToSRS, getSRSStats } from "../utils/srs.js";
-import { signalStepDone } from "../utils/parcours.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { MCSection, FillSection, MatchSection, FlashcardSection, AnagrammeSection } from "./QuizSections.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
@@ -91,7 +91,7 @@ function WordList({ words, color = C.blue, bg = C.blueL }) {
 }
 
 // ── Quiz runner ────────────────────────────────────────────
-function QuizRunner({ words, mode, onBack }) {
+function QuizRunner({ words, mode, onBack, onComplete }) {
   const [quiz, setQuiz]       = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
@@ -150,7 +150,7 @@ function QuizRunner({ words, mode, onBack }) {
         </div>
       )}
       {quiz && !loading && (() => {
-        const done = () => signalStepDone("vocab");
+        const done = () => onComplete?.();
         if (quiz.type === "multiple_choice") return <MCSection questions={quiz.questions} words={words} onRecord={recordAnswer} onComplete={done} />;
         if (quiz.type === "fill_blank")      return <FillSection questions={quiz.questions} words={words} onRecord={recordAnswer} onComplete={done} />;
         if (quiz.type === "matching")        return <MatchSection pairs={quiz.pairs} onComplete={done} />;
@@ -167,7 +167,8 @@ function GroupStudyView({ group, unit, onBack }) {
   const [subView, setSubView] = useState("list"); // "list" | "pick" | mode-id
 
   if (subView !== "list" && subView !== "pick") {
-    return <QuizRunner words={quizableWords(group.words)} mode={subView} onBack={() => setSubView("pick")} />;
+    return <QuizRunner words={quizableWords(group.words)} mode={subView} onBack={() => setSubView("pick")}
+      onComplete={() => markSubDone(unit.id, "vocab", group.id)} />;
   }
 
   return (
@@ -224,10 +225,13 @@ function GroupStudyView({ group, unit, onBack }) {
 // ── Unit detail view — shows groups ───────────────────────
 function UnitDetailView({ unit, onBack, backLabel = "← Quay lại" }) {
   const [activeGroup, setActiveGroup] = useState(null);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
+  const done = getSubDone(unit.id, "vocab");
 
   if (activeGroup) {
     const group = unit.groups.find(g => g.id === activeGroup);
-    return <GroupStudyView group={group} unit={unit} onBack={() => setActiveGroup(null)} />;
+    return <GroupStudyView group={group} unit={unit} onBack={() => { setActiveGroup(null); refresh(); }} />;
   }
 
   return (
@@ -266,19 +270,34 @@ function UnitDetailView({ unit, onBack, backLabel = "← Quay lại" }) {
 
       {/* Group cards */}
       <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-        {unit.groups.map((g, i) => (
+        {unit.groups.map((g, i) => {
+          const isDone = !!done[g.id];
+          return (
           <button key={g.id} onClick={() => setActiveGroup(g.id)}
-            style={{ display:"flex", alignItems:"center", gap:"0.85rem", background:C.white, border:`1.5px solid ${unit.color}33`, borderRadius:16, padding:"0.9rem 1rem", cursor:"pointer", textAlign:"left", fontFamily:"inherit", animation:`fadeUp 0.2s ease ${i*0.05}s both`, transition:"all 0.15s", boxShadow:`0 2px 8px ${unit.color}10` }}
-            onMouseEnter={e => { e.currentTarget.style.background = `${unit.color}1a`; e.currentTarget.style.borderColor = unit.color; }}
-            onMouseLeave={e => { e.currentTarget.style.background = C.white; e.currentTarget.style.borderColor = `${unit.color}33`; }}>
+            style={{ display:"flex", alignItems:"center", gap:"0.85rem", background: isDone ? C.greenL : C.white, border:`1.5px solid ${isDone ? C.green + "88" : unit.color + "33"}`, borderRadius:16, padding:"0.9rem 1rem", cursor:"pointer", textAlign:"left", fontFamily:"inherit", animation:`fadeUp 0.2s ease ${i*0.05}s both`, transition:"all 0.15s", boxShadow:`0 2px 8px ${unit.color}10` }}
+            onMouseEnter={e => { e.currentTarget.style.background = isDone ? C.greenL : `${unit.color}1a`; e.currentTarget.style.borderColor = isDone ? C.green : unit.color; }}
+            onMouseLeave={e => { e.currentTarget.style.background = isDone ? C.greenL : C.white; e.currentTarget.style.borderColor = isDone ? C.green + "88" : `${unit.color}33`; }}>
             <span style={{ fontSize:"1.6rem", lineHeight:1 }}>{g.icon}</span>
             <div style={{ flex:1 }}>
               <div style={{ fontWeight:700, color:C.ink, fontSize:"0.88rem" }}>{g.label}</div>
-              <div style={{ fontSize:"0.68rem", color:C.gray, marginTop:"0.1rem" }}>{g.words.length} từ</div>
+              <div style={{ fontSize:"0.68rem", color:C.gray, marginTop:"0.1rem", marginBottom: 4 }}>{g.words.length} từ</div>
+              <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", flexWrap:"wrap" }}>
+                {isDone ? (
+                  <>
+                    <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Xong</span>
+                    <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone(unit.id, "vocab", g.id); refresh(); }}
+                      style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>↻ Làm lại</span>
+                  </>
+                ) : (
+                  <span role="button" onClick={(e) => { e.stopPropagation(); markSubDone(unit.id, "vocab", g.id); refresh(); }}
+                    style={{ background:"#fff", color:C.gray, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:600 }}>✓ Đánh dấu đã học</span>
+                )}
+              </div>
             </div>
-            <span style={{ color:C.gray }}>→</span>
+            <span style={{ color: isDone ? C.green : C.gray }}>→</span>
           </button>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

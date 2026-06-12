@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { callAIText } from "../utils/api.js";
 import { awardXP } from "../utils/xp.js";
-import { signalStepDone } from "../utils/parcours.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 
@@ -83,6 +83,8 @@ export default function ConversationPanel({ onBackToParcours }) {
   const [inlineCorrects, setInlineCorrects] = useState({});
   const [mode,           setMode]           = useState("libre");
   const [selUnit,        setSelUnit]        = useState(0);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
   const bottomRef = useRef(null);
 
   const [fromParcours, setFromParcours] = useState(false);
@@ -152,7 +154,11 @@ export default function ConversationPanel({ onBackToParcours }) {
   const send = async (override) => {
     const txt = (override || input).trim();
     if (!txt || loading) return;
-    if (messages.filter(m => m.role === "user").length === 0) signalStepDone("parler"); // first user message
+    // First user message completes the Édito speaking task (sub-lesson). Free
+    // scenarios aren't part of a unit, so they don't carry unitId/subId.
+    if (messages.filter(m => m.role === "user").length === 0 && scenario?.subId) {
+      markSubDone(scenario.unitId, "parler", scenario.subId);
+    }
     const userMsg = { role:"user", text: txt };
     const newMsgs = [...messages, userMsg];
     setMessages(newMsgs); setInput(""); setLoading(true);
@@ -256,7 +262,9 @@ export default function ConversationPanel({ onBackToParcours }) {
                 <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, textTransform:"uppercase", letterSpacing:"0.1em" }}>
                   Unité {unit.unit} — {unit.title}
                 </div>
-                {unit.speakingPractice.map((p, i) => (
+                {(() => { var pDone = getSubDone("u" + unit.unit, "parler"); return unit.speakingPractice.map((p, i) => {
+                  const isDone = !!pDone["s" + i];
+                  return (
                   <button key={i} onClick={() => {
                     const sc = {
                       id:`edito-${unit.id}-${i}`, label:p.title, icon:"🎙️",
@@ -264,10 +272,11 @@ export default function ConversationPanel({ onBackToParcours }) {
                       color: C.blue, bg: C.blueL,
                       phrases: p.usefulPhrases || [],
                       prompt: buildEditoPrompt(unit, p),
+                      unitId: "u" + unit.unit, subId: "s" + i,
                     };
                     startScenario(sc);
                   }}
-                    style={{ background:C.white, border:`1.5px solid ${C.border}`, borderLeft:`4px solid ${C.blue}`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"box-shadow 0.15s, transform 0.1s", boxShadow:`0 2px 8px rgba(74,144,217,0.06)` }}
+                    style={{ background: isDone ? C.greenL : C.white, border:`1.5px solid ${isDone ? C.green + "88" : C.border}`, borderLeft:`4px solid ${isDone ? C.green : C.blue}`, borderRadius:14, padding:"0.85rem 1rem", textAlign:"left", cursor:"pointer", fontFamily:"inherit", transition:"box-shadow 0.15s, transform 0.1s", boxShadow:`0 2px 8px rgba(74,144,217,0.06)` }}
                     onPointerDown={e => e.currentTarget.style.transform="scale(0.99)"}
                     onPointerUp={e => e.currentTarget.style.transform="scale(1)"}
                     onPointerLeave={e => e.currentTarget.style.transform="scale(1)"}
@@ -281,8 +290,16 @@ export default function ConversationPanel({ onBackToParcours }) {
                         ))}
                       </div>
                     )}
+                    {isDone && (
+                      <div style={{ marginTop:"0.5rem", display:"flex", alignItems:"center", gap:"0.4rem" }}>
+                        <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Đã nói</span>
+                        <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone("u" + unit.unit, "parler", "s" + i); refresh(); }}
+                          style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>↻ Làm lại</span>
+                      </div>
+                    )}
                   </button>
-                ))}
+                  );
+                }); })()}
               </div>
             </>
           )}

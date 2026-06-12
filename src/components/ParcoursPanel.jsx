@@ -4,14 +4,10 @@ import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS } from "../data/parcoursData.js"
 import {
   computeUnitStatuses,
   computeOverallProgress,
-  getUnitStepProgress,
-  markStepDone,
+  getStepStat,
   unmarkStepDone,
   resetUnit,
 } from "../utils/parcours.js";
-
-// Only phono is marked done on open — grammar and verbes require answering exercises
-const OPEN_MARK_STEPS = new Set(["phono"]);
 
 // ── Helpers ────────────────────────────────────────────────────
 
@@ -150,7 +146,12 @@ function UnitList({ onSelect }) {
 
 // ── Step Card ──────────────────────────────────────────────────
 
-function StepCard({ step, done, isNext, onClick, onRedo }) {
+function StepCard({ step, stat, isNext, onClick, onRedo }) {
+  const { done, total, pct, complete } = stat;
+  const partial = done > 0 && !complete;
+  // accent color while in progress, green when fully complete
+  const tint = complete ? C.green : partial ? C.accent : step.color;
+
   return (
     <button
       onClick={onClick}
@@ -158,16 +159,16 @@ function StepCard({ step, done, isNext, onClick, onRedo }) {
         display: "flex", flexDirection: "column", alignItems: "flex-start",
         gap: "0.3rem",
         padding: "0.75rem 0.8rem",
-        background: done ? C.greenL : isNext ? `${step.color}08` : C.white,
-        border: `1.5px solid ${done ? C.green + "88" : isNext ? step.color : C.border}`,
+        background: complete ? C.greenL : partial ? `${C.accent}0C` : isNext ? `${step.color}08` : C.white,
+        border: `1.5px solid ${complete ? C.green + "88" : partial ? C.accent + "66" : isNext ? step.color : C.border}`,
         borderRadius: 12, cursor: "pointer",
         textAlign: "left", fontFamily: "inherit",
         transition: "all 0.15s", position: "relative",
-        boxShadow: isNext ? `0 2px 8px ${step.color}22` : "none",
+        boxShadow: isNext && !partial ? `0 2px 8px ${step.color}22` : "none",
       }}
     >
       {/* status badge */}
-      {done ? (
+      {complete ? (
         <span style={{
           position: "absolute", top: 5, right: 7,
           fontSize: "0.58rem", color: "#fff",
@@ -175,6 +176,14 @@ function StepCard({ step, done, isNext, onClick, onRedo }) {
           borderRadius: 20, padding: "0.1rem 0.4rem",
           lineHeight: 1.5,
         }}>✓ Xong</span>
+      ) : partial ? (
+        <span style={{
+          position: "absolute", top: 5, right: 7,
+          fontSize: "0.58rem", color: "#fff",
+          fontWeight: 700, background: C.accent,
+          borderRadius: 20, padding: "0.1rem 0.4rem",
+          lineHeight: 1.5,
+        }}>{done}/{total}</span>
       ) : isNext ? (
         <span style={{
           position: "absolute", top: 5, right: 7,
@@ -188,8 +197,8 @@ function StepCard({ step, done, isNext, onClick, onRedo }) {
       {/* icon */}
       <span style={{
         width: 32, height: 32, borderRadius: 9,
-        background: done ? `${C.green}22` : `${step.color}18`,
-        border: `1.5px solid ${done ? C.green + "55" : step.color + "40"}`,
+        background: complete ? `${C.green}22` : partial ? `${C.accent}1C` : `${step.color}18`,
+        border: `1.5px solid ${complete ? C.green + "55" : partial ? C.accent + "55" : step.color + "40"}`,
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: "1rem", flexShrink: 0,
       }}>
@@ -198,22 +207,29 @@ function StepCard({ step, done, isNext, onClick, onRedo }) {
 
       {/* text */}
       <div>
-        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: done ? C.green : isNext ? step.color : C.ink, lineHeight: 1.2 }}>
+        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: complete ? C.green : partial ? C.accent : isNext ? step.color : C.ink, lineHeight: 1.2 }}>
           {step.kind}
         </div>
         <div style={{ fontSize: "0.65rem", color: C.gray, marginTop: 1, lineHeight: 1.3 }}>
-          {step.sub}
+          {partial ? `${done}/${total} bài · ${pct}%` : step.sub}
         </div>
       </div>
 
-      {/* redo button (only when done) */}
-      {done && (
+      {/* mini progress bar while in progress */}
+      {partial && (
+        <div style={{ width: "100%", height: 3, background: `${C.accent}22`, borderRadius: 999, overflow: "hidden" }}>
+          <div style={{ height: "100%", width: `${pct}%`, background: C.accent, borderRadius: 999 }}/>
+        </div>
+      )}
+
+      {/* redo button (when any progress) */}
+      {done > 0 && (
         <span
           role="button"
           onClick={(e) => { e.stopPropagation(); onRedo(); }}
           style={{
-            fontSize: "0.62rem", fontWeight: 700, color: C.green,
-            background: C.white, border: `1px solid ${C.green}66`,
+            fontSize: "0.62rem", fontWeight: 700, color: tint,
+            background: C.white, border: `1px solid ${tint}66`,
             borderRadius: 20, padding: "0.15rem 0.55rem",
             marginTop: 2, lineHeight: 1.5,
           }}>
@@ -229,25 +245,23 @@ function StepCard({ step, done, isNext, onClick, onRedo }) {
 function UnitDetail({ unitId, onBack, onNavigate }) {
   const unit     = PARCOURS_UNITS.find(u => u.id === unitId);
   const unitIdx  = PARCOURS_UNITS.findIndex(u => u.id === unitId);
-  const [progress, setProgress] = useState(() => getUnitStepProgress(unitId));
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
 
-  const doneCount = STEP_DEFS.filter(s => progress[s.id]).length;
-  const pct       = Math.round((doneCount / STEP_DEFS.length) * 100);
+  // Per-step fractional progress (recomputed each render)
+  const stats = {};
+  STEP_DEFS.forEach(s => { stats[s.id] = getStepStat(unitId, s.id); });
+
+  const subDone  = STEP_DEFS.reduce((a, s) => a + stats[s.id].done, 0);
+  const subTotal = STEP_DEFS.reduce((a, s) => a + stats[s.id].total, 0);
+  const pct      = subTotal ? Math.round((subDone / subTotal) * 100) : 0;
+  const doneSteps = STEP_DEFS.filter(s => stats[s.id].complete).length;
 
   const handleStep = useCallback((step, { redo = false } = {}) => {
     if (redo) {
       unmarkStepDone(unitId, step.id);
-      setProgress(getUnitStepProgress(unitId));
-    }
-    const isDone = !redo && progress[step.id];
-
-    // Reference steps: mark done immediately on open
-    // Activity steps: marked done by the destination panel via signalStepDone(stepId)
-    if (!isDone && OPEN_MARK_STEPS.has(step.id)) {
-      markStepDone(unitId, step.id);
-      setProgress(getUnitStepProgress(unitId));
-    } else if (!isDone && step.id !== "quiz") {
-      localStorage.setItem("parcours_active_step", step.id);
+      refresh();
+      return;
     }
 
     localStorage.setItem("parcours_back", "1");
@@ -282,10 +296,10 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
     } else {
       onNavigate(step.section, step.view);
     }
-  }, [unitId, unitIdx, progress, onNavigate]);
+  }, [unitId, unitIdx, onNavigate]);
 
-  // First undone step for the CTA
-  const nextStep = STEP_DEFS.find(s => !progress[s.id]);
+  // First not-yet-complete step for the CTA
+  const nextStep = STEP_DEFS.find(s => !stats[s.id].complete);
 
   if (!unit) return null;
 
@@ -325,7 +339,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
               {pct}<span style={{ fontSize: 12, opacity: 0.7 }}>%</span>
             </div>
             <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.6)" }}>
-              {doneCount}/{STEP_DEFS.length} bài
+              {doneSteps}/{STEP_DEFS.length} kỹ năng · {subDone}/{subTotal} bài
             </div>
           </div>
         </div>
@@ -365,7 +379,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
                 {group.label}
               </span>
               <span style={{ fontSize: "0.65rem", color: C.gray2, marginLeft: "auto" }}>
-                {group.steps.filter(s => progress[s.id]).length}/{group.steps.length}
+                {group.steps.filter(s => stats[s.id].complete).length}/{group.steps.length}
               </span>
             </div>
 
@@ -379,7 +393,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
                 <StepCard
                   key={step.id}
                   step={step}
-                  done={!!progress[step.id]}
+                  stat={stats[step.id]}
                   isNext={nextStep?.id === step.id}
                   onClick={() => handleStep(step)}
                   onRedo={() => handleStep(step, { redo: true })}
@@ -415,7 +429,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
               onClick={() => {
                 if (window.confirm("Xoá tiến độ unit này và học lại từ đầu?")) {
                   resetUnit(unitId);
-                  setProgress({});
+                  refresh();
                 }
               }}
               style={{

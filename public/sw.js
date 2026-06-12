@@ -24,6 +24,17 @@ self.addEventListener("fetch", e => {
   // Never touch non-GET or API calls
   if (e.request.method !== "GET" || url.pathname.startsWith("/api/")) return;
 
+  // In dev, never cache Vite's module graph (source files are non-hashed and
+  // change constantly). Let these always hit the network. No effect in prod,
+  // where these paths don't exist and assets are content-hashed.
+  if (
+    url.pathname.startsWith("/src/") ||
+    url.pathname.startsWith("/@") ||
+    url.pathname.startsWith("/node_modules/") ||
+    url.search.includes("import") ||
+    url.search.includes("t=")
+  ) return;
+
   const isHTML =
     e.request.mode === "navigate" ||
     url.pathname === "/" ||

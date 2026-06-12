@@ -4,7 +4,6 @@ import { getAllCards } from "../utils/srs.js";
 import { BUILTIN_SETS } from "../data/builtinSets.js";
 import { speak } from "../utils/helpers.js";
 import { awardXP } from "../utils/xp.js";
-import { signalStepDone } from "../utils/parcours.js";
 
 const ROUND_SIZE = 8;
 
@@ -73,8 +72,6 @@ export default function ListeningQuiz({ words: propWords = [] }) {
       return () => clearTimeout(t);
     }
   }, [qIdx, round]);
-
-  useEffect(() => { if (done) signalStepDone("ecouter"); }, [done]);
 
   const check = () => {
     if (selected === null || checked) return;

@@ -6,9 +6,9 @@ import { logMistake } from "../utils/storage.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import { EDITO_AUDIO, shuffleArray } from "../data/editoAudio.js";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import Spinner from "./ui/Spinner.jsx";
 import { Confetti } from "./ui/Minou.jsx";
-import { signalStepDone } from "../utils/parcours.js";
 
 const NUM_SENTENCES     = 5;
 const NUM_AUDIO_SENTS   = 5;
@@ -225,12 +225,12 @@ function AudioPlayer({ src, trackNum, title }) {
 }
 
 // ── Track card (picker) ──────────────────────────────────────────
-function TrackCard({ track, onSelect }) {
+function TrackCard({ track, done, onSelect, onMark, onRedo }) {
   return (
     <button onClick={() => onSelect(track)}
-      style={{ width:"100%", background:"#fff", border:`2px solid ${track.colorLight}`, borderRadius:16, padding:"0.9rem 1rem", textAlign:"left", cursor:"pointer", display:"flex", alignItems:"center", gap:"0.85rem", transition:"all 0.18s" }}
-      onMouseEnter={e => { e.currentTarget.style.borderColor = track.color; e.currentTarget.style.transform = "translateY(-1px)"; }}
-      onMouseLeave={e => { e.currentTarget.style.borderColor = track.colorLight; e.currentTarget.style.transform = "none"; }}>
+      style={{ width:"100%", background: done ? C.greenL : "#fff", border:`2px solid ${done ? C.green + "88" : track.colorLight}`, borderRadius:16, padding:"0.9rem 1rem", textAlign:"left", cursor:"pointer", display:"flex", alignItems:"center", gap:"0.85rem", transition:"all 0.18s" }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = done ? C.green : track.color; e.currentTarget.style.transform = "translateY(-1px)"; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = done ? C.green + "88" : track.colorLight; e.currentTarget.style.transform = "none"; }}>
 
       {/* Icon + track badge */}
       <div style={{ width:46, height:46, borderRadius:14, background:track.colorLight, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
@@ -245,10 +245,24 @@ function TrackCard({ track, onSelect }) {
           <span style={{ fontSize:"0.58rem", color:C.gray }}>Piste {track.trackNum}</span>
         </div>
         <div style={{ fontWeight:700, fontSize:"0.88rem", color:C.ink, marginBottom:2 }}>{track.title}</div>
-        <div style={{ fontSize:"0.7rem", color:C.gray }}>{track.subtitle}</div>
+        <div style={{ fontSize:"0.7rem", color:C.gray, marginBottom: done ? 4 : 0 }}>{track.subtitle}</div>
+        <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", flexWrap:"wrap" }}>
+          {done ? (
+            <>
+              <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Xong</span>
+              <span role="button"
+                onClick={(e) => { e.stopPropagation(); onRedo(); }}
+                style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>↻ Làm lại</span>
+            </>
+          ) : (
+            <span role="button"
+              onClick={(e) => { e.stopPropagation(); onMark(); }}
+              style={{ background:"#fff", color:C.gray, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:600 }}>✓ Đánh dấu đã học</span>
+          )}
+        </div>
       </div>
 
-      <div style={{ color:C.gray, fontSize:"1rem", flexShrink:0 }}>›</div>
+      <div style={{ color: done ? C.green : C.gray, fontSize:"1rem", flexShrink:0 }}>›</div>
     </button>
   );
 }
@@ -286,6 +300,9 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
 
   // Audio mode state
   const [audioTrack,   setAudioTrack]   = useState(null); // selected track object
+  const [, setTick] = useState(0);
+  const refreshDone = () => setTick(t => t + 1);
+  const doneTracks = getSubDone(unitKey, "ecouter");
 
   const inputRef = useRef(null);
 
@@ -378,7 +395,9 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
   const next = () => {
     const nextIdx = current + 1;
     if (nextIdx >= sentences.length) {
-      signalStepDone("ecouter");
+      // Audio dictée maps to a specific Édito track (sub-lesson). AI/script
+      // modes are freeform and don't correspond to a tracked sub-lesson.
+      if (mode === "audio" && audioTrack) markSubDone(unitKey, "ecouter", audioTrack.id);
       setPhase("done");
       const totalWords = results.reduce((a, r) => a + r.grade.length, 0);
       const okWords    = results.reduce((a, r) => a + r.grade.filter(g => g.status==="ok").length, 0);
@@ -427,7 +446,11 @@ export default function DicteePanel({ words: propWords = [], unitId = null }) {
             Chọn bài nghe — {unitLabel}
           </div>
           {audioTracks.map(track => (
-            <TrackCard key={track.id} track={track} onSelect={t => setAudioTrack(t)} />
+            <TrackCard key={track.id} track={track} done={!!doneTracks[track.id]}
+              onSelect={t => setAudioTrack(t)}
+              onMark={() => { markSubDone(unitKey, "ecouter", track.id); refreshDone(); }}
+              onRedo={() => { unmarkSubDone(unitKey, "ecouter", track.id); refreshDone(); }}
+            />
           ))}
 
           {audioTracks.length === 0 && (

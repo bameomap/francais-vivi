@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
-import { signalStepDone } from "../utils/parcours.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { EDITO_A1_VERB_UNITS } from "../data/editoVerbs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
@@ -390,6 +390,8 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
   const [quizData, setQuizData] = useState(null);
   const [err,      setErr]      = useState("");
   const [quizKey,  setQuizKey]  = useState(0);
+  const [, setTick] = useState(0);
+  const refreshDone = () => setTick(t => t + 1);
 
   const hasMultiTense = unit.tenses.length >= 2;
 
@@ -419,7 +421,9 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
   const generate = () => doGenerate(exType, verbIdx, tenseIdx);
 
   const handleNext = () => {
-    signalStepDone("verbes"); // completed when first quiz submitted (no-op on repeated calls)
+    // Mark the tense just practised done (sub-lesson). No-op if already done.
+    if (unit.tenses[tenseIdx]) markSubDone(unit.unitId, "verbes", unit.tenses[tenseIdx].id);
+    refreshDone();
     const nv = Math.floor(Math.random() * unit.verbs.length);
     const nt = Math.floor(Math.random() * unit.tenses.length);
     setVerbIdx(nv); setTenseIdx(nt);
@@ -428,6 +432,7 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
 
   const visibleTypes = EXERCISE_TYPES.filter(t => t.id !== "transform" || hasMultiTense);
   const activeType   = EXERCISE_TYPES.find(t => t.id === exType);
+  const tenseDone    = getSubDone(unit.unitId, "verbes");
 
   return (
     <div style={{ animation:"fadeUp 0.3s ease", paddingBottom:"2rem" }}>
@@ -593,20 +598,21 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
             <div style={{ display:"flex", flexWrap:"wrap", gap:"0.35rem" }}>
               {unit.tenses.map((t, i) => {
                 const sel = tenseIdx === i;
+                const td  = !!tenseDone[t.id];
                 return (
                   <button key={i} onClick={() => setTenseIdx(i)}
                     style={{
                       padding:"0.4rem 0.85rem",
-                      background: sel ? C.blue : C.white,
-                      border: `2px solid ${sel ? C.blue : C.border}`,
+                      background: sel ? C.blue : td ? C.greenL : C.white,
+                      border: `2px solid ${sel ? C.blue : td ? C.green + "88" : C.border}`,
                       borderRadius:20, cursor:"pointer",
                       fontFamily:"inherit", fontWeight: sel ? 700 : 500,
                       fontSize:"0.78rem",
-                      color: sel ? "#fff" : C.ink,
+                      color: sel ? "#fff" : td ? C.green : C.ink,
                       boxShadow: sel ? `0 3px 10px ${C.blue}30` : "none",
                       transition:"all 0.15s",
                     }}>
-                    {t.label}
+                    {td ? "✓ " : ""}{t.label}
                     {t.note && (
                       <span style={{ fontSize:"0.6rem", opacity:0.75, marginLeft:5 }}>
                         {t.note.length > 24 ? t.note.slice(0,24)+"…" : t.note}
@@ -615,6 +621,19 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
                   </button>
                 );
               })}
+            </div>
+            {/* Manual mark for the selected tense (read-only learners) */}
+            <div style={{ marginTop:"0.5rem" }}>
+              {tenseDone[unit.tenses[tenseIdx]?.id] ? (
+                <span style={{ display:"inline-flex", alignItems:"center", gap:"0.35rem" }}>
+                  <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Đã học thì này</span>
+                  <span role="button" onClick={() => { unmarkSubDone(unit.unitId, "verbes", unit.tenses[tenseIdx].id); refreshDone(); }}
+                    style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700, cursor:"pointer" }}>↻ Làm lại</span>
+                </span>
+              ) : (
+                <span role="button" onClick={() => { markSubDone(unit.unitId, "verbes", unit.tenses[tenseIdx].id); refreshDone(); }}
+                  style={{ background:"#fff", color:C.gray, border:`1px solid ${C.border}`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:600, cursor:"pointer" }}>✓ Đánh dấu đã học thì này</span>
+              )}
             </div>
           </div>
         )}
