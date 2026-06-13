@@ -76,6 +76,8 @@ export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, 
   const [syncToken, setSyncTokenState] = useState(getSyncToken);
   const [syncMsg,   setSyncMsg]        = useState("");
   const [syncing,   setSyncing]        = useState(false);
+  const [editingToken, setEditingToken] = useState(false);
+  const [draftToken,   setDraftToken]   = useState("");
 
   const showSyncMsg = (msg, ms = 4000) => {
     setSyncMsg(msg);
@@ -107,6 +109,8 @@ export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, 
   const handleSaveToken = (val) => {
     setSyncTokenState(val);
     setSyncToken(val);
+    setEditingToken(false);
+    setDraftToken("");
     showSyncMsg(val ? "🔑 Token đã lưu" : "🗑 Token đã xóa", 2000);
   };
 
@@ -491,29 +495,55 @@ export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, 
         Đồng bộ đám mây ☁️
       </div>
       <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 14, padding: "12px 14px", display: "flex", flexDirection: "column", gap: 10 }}>
-        {/* Token input */}
-        <div>
-          <div style={{ fontSize: 12, color: C.gray, marginBottom: 5 }}>🔑 Sync Token (xem trong Settings → Environment Variables)</div>
-          <div style={{ display: "flex", gap: 6 }}>
-            <input
-              type="password"
-              value={syncToken}
-              onChange={e => setSyncTokenState(e.target.value)}
-              placeholder="Nhập token bí mật..."
-              style={{ flex: 1, padding: "0.35rem 0.6rem", border: `1.5px solid ${syncToken ? C.blue : C.border}`, borderRadius: 8, fontSize: "0.75rem", fontFamily: "inherit", background: C.white, color: C.ink, outline: "none" }}
-            />
-            <button onClick={() => handleSaveToken(syncToken)}
-              style={{ padding: "0.3rem 0.7rem", background: C.blue, color: "#fff", border: "none", borderRadius: 8, fontSize: "0.72rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit", flexShrink: 0 }}>
-              Lưu
-            </button>
-            {syncToken && (
-              <button onClick={() => handleSaveToken("")}
-                style={{ padding: "0.3rem 0.6rem", background: "transparent", color: C.gray, border: `1.5px solid ${C.border}`, borderRadius: 8, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 }}>
-                ✕
+        {/* Token: summary card when set & not editing, otherwise input form */}
+        {syncToken && !editingToken ? (
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, background: C.greenL, border: `1px solid ${C.green}44`, borderRadius: 10, padding: "0.5rem 0.7rem" }}>
+              <span style={{ fontSize: "1rem", flexShrink: 0 }}>🔑</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: "0.78rem", fontWeight: 700, color: C.ink }}>
+                  Token đã lưu <span style={{ fontFamily: "'JetBrains Mono',monospace", color: C.gray, letterSpacing: "0.08em" }}>····{syncToken.slice(-4)}</span>
+                </div>
+                <div style={{ fontSize: "0.68rem", color: C.gray }}>Chỉ lưu trên thiết bị này</div>
+              </div>
+              <span style={{ fontSize: "0.72rem", fontWeight: 700, color: C.green, flexShrink: 0 }}>✓ Đang bật</span>
+            </div>
+            <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+              <button onClick={() => { setDraftToken(""); setEditingToken(true); }}
+                style={{ flex: 1, padding: "0.4rem", background: "transparent", color: C.ink, border: `1.5px solid ${C.border}`, borderRadius: 8, fontSize: "0.74rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit" }}>
+                Đổi token
               </button>
-            )}
+              <button onClick={() => handleSaveToken("")}
+                style={{ flex: 1, padding: "0.4rem", background: "transparent", color: C.red, border: `1.5px solid ${C.red}55`, borderRadius: 8, fontSize: "0.74rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit" }}>
+                Xóa
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>
+            <div style={{ fontSize: 12, color: C.gray, marginBottom: 5 }}>🔑 Sync Token (xem trong Settings → Environment Variables)</div>
+            <div style={{ display: "flex", gap: 6 }}>
+              <input
+                type="password"
+                value={draftToken}
+                onChange={e => setDraftToken(e.target.value)}
+                placeholder="Nhập token bí mật..."
+                autoFocus={editingToken}
+                style={{ flex: 1, padding: "0.35rem 0.6rem", border: `1.5px solid ${draftToken ? C.blue : C.border}`, borderRadius: 8, fontSize: "0.75rem", fontFamily: "inherit", background: C.white, color: C.ink, outline: "none" }}
+              />
+              <button onClick={() => draftToken.trim() && handleSaveToken(draftToken.trim())}
+                style={{ padding: "0.3rem 0.7rem", background: C.blue, color: "#fff", border: "none", borderRadius: 8, fontSize: "0.72rem", cursor: "pointer", fontWeight: 600, fontFamily: "inherit", flexShrink: 0 }}>
+                Lưu
+              </button>
+              {editingToken && (
+                <button onClick={() => { setEditingToken(false); setDraftToken(""); }}
+                  style={{ padding: "0.3rem 0.6rem", background: "transparent", color: C.gray, border: `1.5px solid ${C.border}`, borderRadius: 8, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 }}>
+                  ✕
+                </button>
+              )}
+            </div>
+          </div>
+        )}
         {/* Sync buttons */}
         {syncToken && (
           <div style={{ display: "flex", gap: 8 }}>
