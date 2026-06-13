@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { callAI, callAIText } from "../utils/api.js";
+import { getSRSData, addWordToSRS, addWordsToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { Confetti } from "./ui/Minou.jsx";
 import Spinner from "./ui/Spinner.jsx";
@@ -398,8 +399,8 @@ function ActivityView({ activity, onBack, onComplete }) {
   const [vocabLoading, setVocabLoading] = useState(false);
 
   const toggleVocab = async () => {
-    if (vocabData) { setShowVocab(v => !v); return; }
-    setVocabLoading(true); setShowVocab(true);
+    if (vocabData) { setShowVocab(v => { if (!v) setShowGrammar(false); return !v; }); return; }
+    setVocabLoading(true); setShowVocab(true); setShowGrammar(false);
     try {
       const out = await callAIText(
         [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 25 từ vựng quan trọng cho người học A1 (ưu tiên từ khó, từ mới, từ hay gặp trong chủ đề này). Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
@@ -421,8 +422,8 @@ function ActivityView({ activity, onBack, onComplete }) {
   const [grammarLoading, setGrammarLoading] = useState(false);
 
   const toggleGrammar = async () => {
-    if (grammarData) { setShowGrammar(v => !v); return; }
-    setGrammarLoading(true); setShowGrammar(true);
+    if (grammarData) { setShowGrammar(v => { if (!v) setShowVocab(false); return !v; }); return; }
+    setGrammarLoading(true); setShowGrammar(true); setShowVocab(false);
     try {
       const out = await callAIText(
         [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 4 cấu trúc ngữ pháp quan trọng trong bài. Trả về JSON array, mỗi item: {"structure":"tên cấu trúc ngắn","example":"câu ví dụ từ bài","vi":"giải thích tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
@@ -446,6 +447,20 @@ function ActivityView({ activity, onBack, onComplete }) {
     try { return JSON.parse(localStorage.getItem(WORDLIST_KEY) || "[]"); } catch { return []; }
   });
   const [showWordList, setShowWordList] = useState(false);
+
+  // Words already in the SRS deck — used to mark vocab rows as added
+  const [srsSet, setSrsSet] = useState(() => new Set(Object.keys(getSRSData())));
+
+  const addOneToSRS = (item) => {
+    addWordToSRS(item.fr, item.vi);
+    setSrsSet(prev => new Set(prev).add(item.fr));
+  };
+
+  const addAllVocabToSRS = () => {
+    if (!vocabData) return;
+    addWordsToSRS(vocabData.map(v => ({ fr: v.fr, vi: v.vi })));
+    setSrsSet(new Set(Object.keys(getSRSData())));
+  };
 
   const lookupWord = async (word, nextCtx = "") => {
     setActiveWord(word);
@@ -593,15 +608,33 @@ function ActivityView({ activity, onBack, onComplete }) {
           {/* Vocab panel */}
           {showVocab && vocabData && vocabData.length > 0 && (
             <div style={{ marginTop: "0.5rem", background: "#FFFBEB", border: "1.5px solid #D97706", borderRadius: 12, padding: "0.75rem 1rem", animation: "fadeUp 0.2s ease" }}>
-              <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1, color: "#D97706", fontWeight: 700, marginBottom: "0.5rem" }}>📚 Từ mới trong bài</div>
-              {vocabData.map((item, i) => (
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+                <div style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: 1, color: "#D97706", fontWeight: 700 }}>📚 Từ mới trong bài</div>
+                {(() => {
+                  const remaining = vocabData.filter(v => !srsSet.has(v.fr)).length;
+                  return (
+                    <button onClick={addAllVocabToSRS} disabled={remaining === 0}
+                      style={{ padding: "0.2rem 0.6rem", background: remaining === 0 ? "transparent" : "#D97706", border: "1.5px solid #D97706", borderRadius: 20, color: remaining === 0 ? "#92400E" : "#fff", fontSize: "0.64rem", fontWeight: 700, cursor: remaining === 0 ? "default" : "pointer", fontFamily: "inherit", whiteSpace: "nowrap" }}>
+                      {remaining === 0 ? "✓ Đã thêm hết" : `+ Thêm tất cả vào SRS (${remaining})`}
+                    </button>
+                  );
+                })()}
+              </div>
+              {vocabData.map((item, i) => {
+                const inSRS = srsSet.has(item.fr);
+                return (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.3rem 0", borderBottom: i < vocabData.length - 1 ? "1px solid #FDE68A" : "none" }}>
                   <span style={{ fontFamily: "Georgia,serif", fontSize: "0.88rem", color: C.ink, fontWeight: 600, flexShrink: 0 }}>{item.fr}</span>
                   <SpeakBtn text={item.fr} size="0.65rem" />
                   <span style={{ fontSize: "0.65rem", color: "#92400E", background: "#FDE68A", borderRadius: 10, padding: "0.05rem 0.4rem", fontWeight: 700, flexShrink: 0 }}>{item.type}</span>
                   <span style={{ fontSize: "0.78rem", color: C.gray, flex: 1, textAlign: "right" }}>→ {item.vi}</span>
+                  <button onClick={() => addOneToSRS(item)} disabled={inSRS} title={inSRS ? "Đã có trong SRS" : "Thêm vào SRS"}
+                    style={{ flexShrink: 0, width: "1.4rem", height: "1.4rem", display: "flex", alignItems: "center", justifyContent: "center", background: inSRS ? "transparent" : "#FEF3C7", border: `1.5px solid ${inSRS ? "#86C58A" : "#D97706"}`, borderRadius: 8, color: inSRS ? C.green : "#D97706", fontSize: "0.8rem", fontWeight: 700, cursor: inSRS ? "default" : "pointer", fontFamily: "inherit", lineHeight: 1, padding: 0 }}>
+                    {inSRS ? "✓" : "+"}
+                  </button>
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
 

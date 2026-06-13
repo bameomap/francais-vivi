@@ -146,14 +146,17 @@ const EDITO_PHRASE_CATS = (() => {
   const byHeading = new Map();
   for (const groups of Object.values(EDITO_POUR_NOTES)) {
     for (const g of groups) {
-      if (!byHeading.has(g.heading)) byHeading.set(g.heading, new Set());
-      const set = byHeading.get(g.heading);
-      for (const p of g.phrases) set.add(p);
+      if (!byHeading.has(g.heading)) byHeading.set(g.heading, new Map());
+      const map = byHeading.get(g.heading);
+      // Phrases are { fr, vi } objects; dedupe by the French text.
+      for (const p of g.phrases) {
+        if (!map.has(p.fr)) map.set(p.fr, { fr: p.fr, vi: p.vi || "" });
+      }
     }
   }
-  return [...byHeading.entries()].map(([heading, set], i) => ({
+  return [...byHeading.entries()].map(([heading, map], i) => ({
     id: `edito-${i}`, icon: "📘", label: heading, edito: true,
-    phrases: [...set].map(fr => ({ fr, vi: "" })),
+    phrases: [...map.values()],
   }));
 })();
 
