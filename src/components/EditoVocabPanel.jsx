@@ -38,13 +38,13 @@ function quizableWords(words) {
 
 // ── Word list view for a group ─────────────────────────────
 function WordList({ words, color = C.blue, bg = C.blueL }) {
-  const [selected, setSelected] = useState(null);
+  const [selectedIdx, setSelectedIdx] = useState(null);
   return (
     <>
       <div style={{ display:"flex", flexDirection:"column", gap:"0.35rem" }}>
         {words.map((w, i) => (
           <div key={i}
-            onClick={() => setSelected(w)}
+            onClick={() => setSelectedIdx(i)}
             style={{
               display:"flex", alignItems:"stretch", gap:0,
               background:C.white,
@@ -85,7 +85,17 @@ function WordList({ words, color = C.blue, bg = C.blueL }) {
           </div>
         ))}
       </div>
-      {selected && <WordDetailSheet word={selected} onClose={() => setSelected(null)} />}
+      {selectedIdx !== null && (
+        <WordDetailSheet
+          key={words[selectedIdx].fr}
+          word={words[selectedIdx]}
+          index={selectedIdx}
+          total={words.length}
+          onClose={() => setSelectedIdx(null)}
+          onPrev={selectedIdx > 0 ? () => setSelectedIdx(selectedIdx - 1) : null}
+          onNext={selectedIdx < words.length - 1 ? () => setSelectedIdx(selectedIdx + 1) : null}
+        />
+      )}
     </>
   );
 }

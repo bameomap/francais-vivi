@@ -7,9 +7,9 @@ import Spinner from "./Spinner.jsx";
 
 /**
  * WordDetailSheet — bottom sheet showing full word details
- * Props: word { fr, vi }, onClose
+ * Props: word { fr, vi }, onClose, onPrev, onNext (optional — show nav arrows), index/total (optional — show "3/9")
  */
-export default function WordDetailSheet({ word, onClose }) {
+export default function WordDetailSheet({ word, onClose, onPrev, onNext, index, total }) {
   const cacheKey = `wds_${word.fr}`;
 
   // Pre-baked details shipped with the word (offline, instant, consistent).
@@ -59,6 +59,17 @@ export default function WordDetailSheet({ word, onClose }) {
     addWordToSRS(word.fr, word.vi);
     setSrsAdded(true);
   };
+
+  // Keyboard shortcuts: ← previous word, → next word, Esc close
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "ArrowLeft" && onPrev) onPrev();
+      else if (e.key === "ArrowRight" && onNext) onNext();
+      else if (e.key === "Escape") onClose?.();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onPrev, onNext, onClose]);
 
   return (
     <>
@@ -197,6 +208,37 @@ export default function WordDetailSheet({ word, onClose }) {
             }}>
             {srsAdded ? "✓ Đã thêm vào thẻ ôn tập" : "🧠 Thêm vào SRS"}
           </button>
+
+          {/* ── Prev / Next nav ── */}
+          {(onPrev || onNext) && (
+            <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:"0.5rem", marginTop:"0.65rem" }}>
+              <button
+                onClick={onPrev} disabled={!onPrev}
+                style={{
+                  flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"0.35rem",
+                  padding:"0.6rem", background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12,
+                  color: onPrev ? C.ink : C.border, fontSize:"0.82rem", fontWeight:600,
+                  cursor: onPrev ? "pointer" : "default", fontFamily:"inherit",
+                }}>
+                ‹ Trước
+              </button>
+              {Number.isInteger(index) && Number.isInteger(total) && (
+                <span style={{ fontSize:"0.7rem", color:C.gray, whiteSpace:"nowrap", flexShrink:0 }}>
+                  {index + 1}/{total}
+                </span>
+              )}
+              <button
+                onClick={onNext} disabled={!onNext}
+                style={{
+                  flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"0.35rem",
+                  padding:"0.6rem", background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12,
+                  color: onNext ? C.ink : C.border, fontSize:"0.82rem", fontWeight:600,
+                  cursor: onNext ? "pointer" : "default", fontFamily:"inherit",
+                }}>
+                Sau ›
+              </button>
+            </div>
+          )}
         </div>
       </div>
       </div>{/* end outer centering wrapper */}
