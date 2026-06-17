@@ -65,7 +65,39 @@ function buildFuturProche(verb) {
   };
 }
 
-const norm = (s = "") => s.toLowerCase().trim().replace(/^(se |s'|s’)/, "");
+// Futur simple stems (irregular) and endings.
+const FUTUR_STEMS = {
+  être:"ser", avoir:"aur", aller:"ir", faire:"fer", pouvoir:"pourr",
+  vouloir:"voudr", savoir:"saur", venir:"viendr", voir:"verr",
+};
+const FUTUR_ENDINGS = ["ai","as","a","ons","ez","ont"];
+
+function buildFuturSimple(verb) {
+  if (!PRESENT[verb]) return null;
+  // Irregular stem or default: infinitive minus trailing -e (parler→parler, prendre→prendr, finir→finir)
+  const stem = FUTUR_STEMS[verb] || (verb.endsWith("re") ? verb.slice(0,-1) : verb);
+  const conj  = FUTUR_ENDINGS.map(e => `${stem}${e}`);
+  const tips  = {
+    être:"Stem irrégulier : ser-. Je serai, tu seras…",
+    avoir:"Stem irrégulier : aur-. J’aurai, tu auras…",
+    aller:"Stem irrégulier : ir-. J’irai, tu iras…",
+    faire:"Stem irrégulier : fer-. Je ferai, tu feras…",
+    pouvoir:"Stem irrégulier : pourr-. Je pourrai…",
+    vouloir:"Stem irrégulier : voudr-. Je voudrai…",
+    savoir:"Stem irrégulier : saur-. Je saurai…",
+    venir:"Stem irrégulier : viendr-. Je viendrai…",
+    voir:"Stem irrégulier : verr-. Je verrai…",
+  };
+  return {
+    group: PRESENT[verb].group,
+    meaning: PRESENT[verb].meaning,
+    conjugations: conj,
+    tip: tips[verb] || "Futur simple = infinitif (ou radical) + terminaisons -ai,-as,-a,-ons,-ez,-ont.",
+    example: `${/^[aeéiouyhàâêëîïôùûü]/.test(conj[0])?"J’":"Je "}${conj[0]} ${verb==="être"?"médecin demain":"partir demain"}. — ${verb==="être"?"Ngày mai tôi sẽ là bác sĩ.":"Ngày mai tôi sẽ "+PRESENT[verb].meaning+"."}`,
+  };
+}
+
+const norm = (s = "") => s.toLowerCase().trim().replace(/^(se |s’|s’)/, "");
 
 // Returns a result object matching the AI shape, or null if not baked.
 export function getBakedConjugation(verb, tenseId, tenseLabel) {
@@ -74,6 +106,7 @@ export function getBakedConjugation(verb, tenseId, tenseLabel) {
   if (tenseId === "present")        entry = PRESENT[v];
   else if (tenseId === "passe")     entry = buildPasse(v);
   else if (tenseId === "futur_pro") entry = buildFuturProche(v);
+  else if (tenseId === "futur")     entry = buildFuturSimple(v);
   if (!entry) return null;
   return { verb: v, tense: tenseLabel || tenseId, baked: true, ...entry };
 }
