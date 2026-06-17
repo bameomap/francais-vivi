@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
+import { getBakedReading } from "../data/editoA1ReadingBaked.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { callAI, callAIText } from "../utils/api.js";
 import { getSRSData, addWordToSRS, addWordsToSRS } from "../utils/srs.js";
@@ -378,7 +379,10 @@ function ActivityView({ activity, onBack, onComplete }) {
 
   const toggleTranslate = async () => {
     if (viText) { setShowVi(v => !v); return; }
-    setViLoading(true); setShowVi(true);
+    setShowVi(true);
+    const baked = getBakedReading(activity.id);
+    if (baked?.vi_text) { setViText(baked.vi_text); return; }
+    setViLoading(true);
     try {
       const out = await callAIText(
         [{ role: "user", content: `Dịch đoạn văn tiếng Pháp sau sang tiếng Việt tự nhiên, giữ nguyên xuống dòng. Chỉ trả về bản dịch:\n\n${activity.text}` }],
@@ -400,7 +404,10 @@ function ActivityView({ activity, onBack, onComplete }) {
 
   const toggleVocab = async () => {
     if (vocabData) { setShowVocab(v => { if (!v) setShowGrammar(false); return !v; }); return; }
-    setVocabLoading(true); setShowVocab(true); setShowGrammar(false);
+    setShowVocab(true); setShowGrammar(false);
+    const baked = getBakedReading(activity.id);
+    if (baked?.vocab) { setVocabData(baked.vocab); return; }
+    setVocabLoading(true);
     try {
       const out = await callAIText(
         [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 25 từ vựng quan trọng cho người học A1 (ưu tiên từ khó, từ mới, từ hay gặp trong chủ đề này). Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
@@ -423,7 +430,10 @@ function ActivityView({ activity, onBack, onComplete }) {
 
   const toggleGrammar = async () => {
     if (grammarData) { setShowGrammar(v => { if (!v) setShowVocab(false); return !v; }); return; }
-    setGrammarLoading(true); setShowGrammar(true); setShowVocab(false);
+    setShowGrammar(true); setShowVocab(false);
+    const baked = getBakedReading(activity.id);
+    if (baked?.grammar) { setGrammarData(baked.grammar); return; }
+    setGrammarLoading(true);
     try {
       const out = await callAIText(
         [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 4 cấu trúc ngữ pháp quan trọng trong bài. Trả về JSON array, mỗi item: {"structure":"tên cấu trúc ngắn","example":"câu ví dụ từ bài","vi":"giải thích tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
