@@ -3,10 +3,13 @@ import { C } from "../constants.js";
 import { callAI } from "../utils/api.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { EDITO_A1_VERB_UNITS } from "../data/editoVerbs.js";
+import { getVerbNote } from "../data/editoVerbNotes.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 
 const SUBJECTS = ["je", "tu", "il/elle", "nous", "vous", "ils/elles"];
+
+const NOTE_TYPE = { id:"note", icon:"📖", label:"Ghi chú", desc:"Học cấu trúc, bảng chia & mở rộng AI", color:"#4A90D9" };
 
 const EXERCISE_TYPES = [
   { id:"table",     icon:"📋", label:"Bảng chia",   desc:"Điền đủ 6 ngôi chia động từ",          color:"#4A90D9" },
@@ -44,6 +47,142 @@ function promptTransform(verbs, fromLabel, toLabel) {
 Dùng các động từ: ${verbs.join(", ")} (có thể dùng lại). Câu ngắn, đơn giản.
 JSON hợp lệ KHÔNG có markdown:
 {"from":"${fromLabel}","to":"${toLabel}","questions":[{"original":"Je mange une pomme.","original_vi":"Tôi ăn một quả táo.","answer":"J'ai mangé une pomme.","answer_vi":"Tôi đã ăn một quả táo.","verb":"manger"}]}`;
+}
+
+function promptExpand(verb, meaning) {
+  return `Cho động từ tiếng Pháp "${verb}" (nghĩa: ${meaning}), trình độ A1.
+Trả về JSON hợp lệ KHÔNG markdown, mở rộng cách dùng thực tế:
+{"collocations":[{"fr":"cụm từ ghép thường gặp","vi":"nghĩa tiếng Việt ngắn"}],"structures":[{"fr":"cấu trúc đi cùng (vd: ${verb} + qqch)","vi":"giải thích ngắn"}],"particles":[{"fr":"giới từ/trợ từ đi kèm (à, de, avec…)","vi":"khi nào dùng"}],"idioms":[{"fr":"thành ngữ/câu mẫu hay","vi":"nghĩa"}]}
+Mỗi mảng 2-4 phần tử, ngắn gọn, đúng A1. Nếu không có idiom phù hợp thì để mảng rỗng.`;
+}
+
+// ── Cornell-style study note (baked core + AI expansion) ──────
+function CornellNote({ unit, verb }) {
+  const note = getVerbNote(unit.unitId, verb.infinitive);
+  const [expand,  setExpand]  = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [err,     setErr]     = useState("");
+
+  useEffect(() => { setExpand(null); setErr(""); }, [verb.infinitive]);
+
+  if (!note) {
+    return (
+      <div style={{ background:C.goldL, border:`1px solid ${C.gold}44`, borderRadius:12, padding:"0.9rem 1rem", fontSize:"0.78rem", color:C.gold }}>
+        📝 Chưa có ghi chú viết sẵn cho <b>{verb.infinitive}</b>. Bài này đang thí điểm ở Unité 7.
+      </div>
+    );
+  }
+
+  const loadExpand = async () => {
+    setLoading(true); setErr("");
+    try { setExpand(await callAI(promptExpand(verb.infinitive, verb.meaning))); }
+    catch(e) { setErr(e.message); }
+    setLoading(false);
+  };
+
+  const ex = (() => {
+    const s = note.example.indexOf(" — ");
+    return s >= 0 ? { fr:note.example.slice(0,s), vi:note.example.slice(s+3) } : { fr:note.example, vi:null };
+  })();
+
+  const Cue = ({ children }) => (
+    <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:"0.08em", fontWeight:700, marginBottom:"0.25rem" }}>{children}</div>
+  );
+
+  const ExpandGroup = ({ title, items, color }) => (
+    items && items.length ? (
+      <div style={{ marginBottom:"0.6rem" }}>
+        <div style={{ fontSize:"0.66rem", fontWeight:700, color, marginBottom:"0.3rem" }}>{title}</div>
+        <div style={{ display:"flex", flexDirection:"column", gap:"0.25rem" }}>
+          {items.map((it, i) => (
+            <div key={i} style={{ display:"flex", alignItems:"baseline", gap:"0.4rem", fontSize:"0.78rem" }}>
+              <span style={{ fontFamily:"Georgia,serif", fontStyle:"italic", color:C.ink }}>{it.fr}</span>
+              <span style={{ fontSize:"0.68rem", color:C.gray }}>— {it.vi}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : null
+  );
+
+  return (
+    <div style={{ display:"flex", flexDirection:"column", gap:"0.6rem" }}>
+      {/* header */}
+      <div style={{ background:C.blueL, borderRadius:12, padding:"0.65rem 0.9rem", borderLeft:`4px solid ${C.blue}`, display:"flex", alignItems:"center", gap:"0.5rem" }}>
+        <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.3rem", fontWeight:700, color:C.blue, fontStyle:"italic" }}>{verb.infinitive}</span>
+        <SpeakBtn text={verb.infinitive} />
+        <span style={{ fontSize:"0.72rem", color:C.gray }}>{verb.meaning}</span>
+        <span style={{ marginLeft:"auto", fontSize:"0.6rem", color:C.blue, background:"#fff", border:`1px solid ${C.blue}33`, borderRadius:20, padding:"0.1rem 0.5rem", fontWeight:700 }}>{note.group}</span>
+      </div>
+
+      {/* construction (cấu trúc đi kèm) — highlighted */}
+      <div style={{ background:"#fff", border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.green}`, borderRadius:10, padding:"0.55rem 0.8rem" }}>
+        <Cue>Cấu trúc đi kèm</Cue>
+        <div style={{ fontFamily:"Georgia,serif", fontSize:"0.92rem", color:C.green, fontWeight:700 }}>{note.construction.pattern}</div>
+        <div style={{ fontSize:"0.7rem", color:C.gray, marginTop:"0.15rem" }}>{note.construction.gloss}</div>
+      </div>
+
+      {/* présent table */}
+      <div style={{ background:"#fff", border:`1px solid ${C.border}`, borderRadius:10, padding:"0.55rem 0.8rem" }}>
+        <Cue>Présent — chia 6 ngôi</Cue>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.15rem 0.6rem" }}>
+          {SUBJECTS.map((sub, i) => {
+            const same = note.same?.includes(i);
+            return (
+              <div key={i} style={{ display:"flex", alignItems:"baseline", gap:"0.35rem" }}>
+                <span style={{ fontSize:"0.72rem", color:C.gray, fontStyle:"italic", minWidth:46, textAlign:"right" }}>{sub}</span>
+                <span style={{ fontFamily:"Georgia,serif", fontSize:"0.86rem", color:same?C.red:C.ink, fontWeight:same?700:400 }}>{note.conjugations[i]}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ fontSize:"0.68rem", color:C.red, marginTop:"0.4rem", display:"flex", alignItems:"center", gap:"0.3rem" }}>
+          🔊 {note.sound}
+        </div>
+      </div>
+
+      {/* passé composé */}
+      <div style={{ background:C.goldL, borderRadius:10, padding:"0.5rem 0.8rem" }}>
+        <Cue>Passé composé</Cue>
+        <span style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.gold, fontWeight:700 }}>{note.passe}</span>
+      </div>
+
+      {/* example */}
+      <div style={{ background:"#fff", border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.blue}`, borderRadius:10, padding:"0.55rem 0.8rem" }}>
+        <Cue>Ví dụ</Cue>
+        <div style={{ fontFamily:"Georgia,serif", fontSize:"0.86rem", color:"#1E293B", fontStyle:"italic" }}>« {ex.fr} »</div>
+        {ex.vi && <div style={{ fontSize:"0.72rem", color:C.gray, marginTop:"0.15rem" }}>{ex.vi}</div>}
+      </div>
+
+      {/* summary */}
+      <div style={{ background:"#1E293B", borderRadius:10, padding:"0.55rem 0.85rem" }}>
+        <div style={{ fontSize:"0.58rem", color:"rgba(255,255,255,0.6)", textTransform:"uppercase", letterSpacing:"0.1em", fontWeight:700, marginBottom:"0.2rem" }}>Tóm tắt</div>
+        <div style={{ fontSize:"0.78rem", color:"#fff", lineHeight:1.5 }}>{note.summary}</div>
+      </div>
+
+      {/* AI expansion */}
+      {!expand && (
+        <button onClick={loadExpand} disabled={loading}
+          style={{ padding:"0.7rem", background:loading?C.cream:`linear-gradient(135deg, ${C.accent} 0%, #c0392b 100%)`, color:loading?C.gray:"#fff", border:"none", borderRadius:14, fontWeight:800, fontSize:"0.9rem", cursor:loading?"default":"pointer", fontFamily:"inherit", display:"flex", alignItems:"center", justifyContent:"center", gap:"0.5rem" }}>
+          {loading ? <><Spinner /> AI đang soạn mở rộng…</> : <>✨ Mở rộng cách dùng (AI)</>}
+        </button>
+      )}
+      {err && <div style={{ color:C.red, fontSize:"0.76rem", padding:"0.6rem", background:C.redL, borderRadius:10 }}>⚠ {err}</div>}
+      {expand && (
+        <div style={{ background:"#fff", border:`1.5px solid ${C.accent}33`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
+          <div style={{ fontSize:"0.62rem", color:C.accent, textTransform:"uppercase", letterSpacing:"0.1em", fontWeight:700, marginBottom:"0.5rem" }}>✨ Mở rộng (AI tạo)</div>
+          <ExpandGroup title="🧩 Từ ghép / Collocations" items={expand.collocations} color={C.blue} />
+          <ExpandGroup title="🏗️ Cấu trúc đi cùng"        items={expand.structures}   color={C.green} />
+          <ExpandGroup title="🔗 Giới từ / Trợ từ"          items={expand.particles}    color={C.gold} />
+          <ExpandGroup title="💬 Thành ngữ / Câu mẫu"        items={expand.idioms}       color={C.accent} />
+          <button onClick={loadExpand} disabled={loading}
+            style={{ marginTop:"0.3rem", padding:"0.4rem 0.9rem", background:"#fff", border:`1px solid ${C.border}`, borderRadius:20, fontSize:"0.7rem", color:C.gray, cursor:"pointer", fontWeight:600 }}>
+            ↻ Tạo lại
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
 
 // ── Shared result footer ──────────────────────────────────────
@@ -383,7 +522,7 @@ function MatchQuiz({ unit, onNext }) {
 
 // ── Unit exercise view ────────────────────────────────────────
 function UnitExerciseView({ unit, onBack, fromParcours = false }) {
-  const [exType,   setExType]   = useState("table");
+  const [exType,   setExType]   = useState("note");
   const [verbIdx,  setVerbIdx]  = useState(0);
   const [tenseIdx, setTenseIdx] = useState(0);
   const [loading,  setLoading]  = useState(false);
@@ -430,8 +569,8 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
     doGenerate(exType, nv, nt);
   };
 
-  const visibleTypes = EXERCISE_TYPES.filter(t => t.id !== "transform" || hasMultiTense);
-  const activeType   = EXERCISE_TYPES.find(t => t.id === exType);
+  const visibleTypes = [NOTE_TYPE, ...EXERCISE_TYPES.filter(t => t.id !== "transform" || hasMultiTense)];
+  const activeType   = [NOTE_TYPE, ...EXERCISE_TYPES].find(t => t.id === exType);
   const tenseDone    = getSubDone(unit.unitId, "verbes");
 
   return (
@@ -530,8 +669,8 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
           </div>
         </div>
 
-        {/* ── Verb picker (table mode) — card grid ────────── */}
-        {exType === "table" && (
+        {/* ── Verb picker (table / note mode) — card grid ─── */}
+        {(exType === "table" || exType === "note") && (
           <div style={{ marginBottom:"0.9rem" }}>
             <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:"0.12em", fontWeight:700, marginBottom:"0.5rem" }}>
               Chọn động từ
@@ -590,7 +729,7 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
         )}
 
         {/* ── Tense picker ────────────────────────────────── */}
-        {exType !== "match" && exType !== "transform" && (
+        {exType !== "match" && exType !== "transform" && exType !== "note" && (
           <div style={{ marginBottom:"0.9rem" }}>
             <div style={{ fontSize:"0.6rem", color:C.gray, textTransform:"uppercase", letterSpacing:"0.12em", fontWeight:700, marginBottom:"0.45rem" }}>
               Chọn thì
@@ -681,8 +820,13 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
           </div>
         )}
 
+        {/* ── Cornell study note ──────────────────────────── */}
+        {exType === "note" && (
+          <CornellNote unit={unit} verb={unit.verbs[verbIdx]} />
+        )}
+
         {/* ── CTA button ──────────────────────────────────── */}
-        {!quizData && !loading && (
+        {exType !== "note" && !quizData && !loading && (
           <button onClick={generate} disabled={loading}
             style={{
               width:"100%", padding:"0.85rem",
