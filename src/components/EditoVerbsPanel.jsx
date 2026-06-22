@@ -4,6 +4,7 @@ import { callAI } from "../utils/api.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { EDITO_A1_VERB_UNITS } from "../data/editoVerbs.js";
 import { getVerbNote } from "../data/editoVerbNotes.js";
+import { getVerbExpand } from "../data/editoVerbExpand.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 
@@ -59,11 +60,11 @@ Mỗi mảng 2-4 phần tử, ngắn gọn, đúng A1. Nếu không có idiom ph
 // ── Cornell-style study note (baked core + AI expansion) ──────
 function CornellNote({ unit, verb }) {
   const note = getVerbNote(unit.unitId, verb.infinitive);
-  const [expand,  setExpand]  = useState(null);
+  const [expand,  setExpand]  = useState(() => getVerbExpand(unit.unitId, verb.infinitive));
   const [loading, setLoading] = useState(false);
   const [err,     setErr]     = useState("");
 
-  useEffect(() => { setExpand(null); setErr(""); }, [verb.infinitive]);
+  useEffect(() => { setExpand(getVerbExpand(unit.unitId, verb.infinitive)); setErr(""); }, [verb.infinitive]);
 
   if (!note) {
     return (
@@ -170,7 +171,7 @@ function CornellNote({ unit, verb }) {
       {err && <div style={{ color:C.red, fontSize:"0.76rem", padding:"0.6rem", background:C.redL, borderRadius:10 }}>⚠ {err}</div>}
       {expand && (
         <div style={{ background:"#fff", border:`1.5px solid ${C.accent}33`, borderRadius:12, padding:"0.75rem 0.9rem" }}>
-          <div style={{ fontSize:"0.62rem", color:C.accent, textTransform:"uppercase", letterSpacing:"0.1em", fontWeight:700, marginBottom:"0.5rem" }}>✨ Mở rộng (AI tạo)</div>
+          <div style={{ fontSize:"0.62rem", color:C.accent, textTransform:"uppercase", letterSpacing:"0.1em", fontWeight:700, marginBottom:"0.5rem" }}>✨ Mở rộng cách dùng</div>
           <ExpandGroup title="🧩 Từ ghép / Collocations" items={expand.collocations} color={C.blue} />
           <ExpandGroup title="🏗️ Cấu trúc đi cùng"        items={expand.structures}   color={C.green} />
           <ExpandGroup title="🔗 Giới từ / Trợ từ"          items={expand.particles}    color={C.gold} />
