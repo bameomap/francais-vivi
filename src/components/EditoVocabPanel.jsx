@@ -4,21 +4,20 @@ import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { callAI, callAIBatched, buildPrompt } from "../utils/api.js";
 import { addWordToSRS, getSRSStats } from "../utils/srs.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
-import { MCSection, FillSection, MatchSection, FlashcardSection, AnagrammeSection } from "./QuizSections.jsx";
+import { FillSection, FlashcardSection } from "./QuizSections.jsx";
+import TranslateSection from "./TranslateSection.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import WordDetailSheet from "./ui/WordDetailSheet.jsx";
 
 // ── Study mode selector ────────────────────────────────────
 const MODES = [
-  { id:"flashcard",      label:"🃏 Flashcard",    desc:"Lật thẻ nhớ từ" },
-  { id:"multiple_choice",label:"☑ Trắc nghiệm",  desc:"Chọn đáp án đúng" },
-  { id:"matching",       label:"🔗 Nối từ",       desc:"Ghép từ với nghĩa" },
-  { id:"fill_blank",     label:"✏️ Điền từ",      desc:"Gõ từ đúng vào chỗ trống" },
-  { id:"anagramme",      label:"🔀 Xếp chữ",     desc:"Sắp xếp lại các chữ cái" },
+  { id:"flashcard",  label:"🃏 Flashcard", desc:"Lật thẻ nhớ từ" },
+  { id:"fill_blank", label:"✏️ Điền từ",   desc:"Gõ từ đúng vào chỗ trống" },
+  { id:"translate",  label:"🔄 Dịch câu",  desc:"Dịch Pháp↔Việt, AI chấm" },
 ];
 
-const CLIENT_TYPES = ["flashcard", "anagramme"];
+const CLIENT_TYPES = ["flashcard"];
 
 // Câu/cụm dài (vd "Qu'est-ce que ça veut dire ?") không hợp cho flashcard,
 // xếp chữ, điền từ. Lọc giữ lại "từ đơn" cho phần luyện tập.
@@ -161,11 +160,9 @@ function QuizRunner({ words, mode, onBack, onComplete }) {
       )}
       {quiz && !loading && (() => {
         const done = () => onComplete?.();
-        if (quiz.type === "multiple_choice") return <MCSection questions={quiz.questions} words={words} onRecord={recordAnswer} onComplete={done} />;
         if (quiz.type === "fill_blank")      return <FillSection questions={quiz.questions} words={words} onRecord={recordAnswer} onComplete={done} />;
-        if (quiz.type === "matching")        return <MatchSection pairs={quiz.pairs} onComplete={done} />;
         if (quiz.type === "flashcard")       return <FlashcardSection words={quiz.words} onRecord={recordAnswer} onComplete={done} />;
-        if (quiz.type === "anagramme")       return <AnagrammeSection words={quiz.words} onRecord={recordAnswer} onComplete={done} />;
+        if (quiz.type === "translate")       return <TranslateSection exercises={quiz.exercises} onComplete={done} />;
         return null;
       })()}
     </div>

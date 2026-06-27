@@ -95,9 +95,29 @@ export function buildPrompt(type, words, n = 8) {
     return `French teacher. Create exactly ${n} multiple choice questions mixing FR→VI and VI→FR.${reuse}\nVocabulary:\n${list}\nReturn ONLY JSON: {"type":"multiple_choice","questions":[{"question":"...","options":["A","B","C","D"],"answer":"exact option text","explanation":"Vietnamese note about correct answer","wrongExplanations":{"wrong option text":"what it means in Vietnamese"}}]}`;
   if (type === "fill_blank")
     return `French teacher. Create exactly ${n} fill-in-the-blank sentences using ___ for blank.${reuse}\nVocabulary:\n${list}\nReturn ONLY JSON: {"type":"fill_blank","questions":[{"sentence":"French sentence with ___","answer":"missing word","hint":"Vietnamese meaning"}]}`;
+  if (type === "translate")
+    return `French teacher for Vietnamese A1 learners. Create exactly ${n} SHORT translation exercises (4-9 words each, natural A1 sentences) that reuse the vocabulary below.${reuse}\nMix BOTH directions: about half "vi2fr" (Vietnamese → French) and half "fr2vi" (French → Vietnamese).\nVocabulary:\n${list}\nReturn ONLY JSON: {"type":"translate","exercises":[{"direction":"vi2fr","source":"Vietnamese sentence","reference":"correct natural French translation","note":"short Vietnamese hint about a key word or structure"},{"direction":"fr2vi","source":"French sentence","reference":"correct natural Vietnamese translation","note":"short Vietnamese hint"}]}`;
   if (type === "matching")
     return `French teacher. Create matching pairs.\nVocabulary:\n${list}\nReturn ONLY JSON: {"type":"matching","pairs":[{"fr":"French word","vi":"Vietnamese meaning"}]}`;
   if (type === "mixed")
     return `French teacher. Create ${Math.ceil(n / 2)} multiple choice + ${Math.floor(n / 2)} fill-in-blank + matching pairs.${reuse}\nVocabulary:\n${list}\nReturn ONLY JSON: {"type":"mixed","sections":[{"sectionType":"multiple_choice","questions":[{"question":"...","options":["A","B","C","D"],"answer":"exact option","explanation":"tip","wrongExplanations":{"wrong option":"meaning"}}]},{"sectionType":"fill_blank","questions":[{"sentence":"sentence with ___","answer":"word","hint":"Vietnamese"}]},{"sectionType":"matching","pairs":[{"fr":"word","vi":"meaning"}]}]}`;
   return "";
+}
+
+// Grade a free-form translation by an A1 learner. Lenient: judges by meaning,
+// accepts synonyms / word-order / missing accents. Returns
+// { verdict: "correct"|"close"|"wrong", correction, feedback }.
+export async function gradeTranslation({ direction, source, reference, userAnswer }) {
+  const tgt = direction === "vi2fr" ? "French" : "Vietnamese";
+  const prompt = `You grade a translation written by a Vietnamese A1 learner of French.
+Task: translate the source into ${tgt}.
+Source: "${source}"
+Model answer (${tgt}): "${reference}"
+Learner answer (${tgt}): "${userAnswer}"
+Grade by MEANING, not exact wording. Accept synonyms, any valid word order, and missing accents or capitalization. Be encouraging and lenient.
+- "correct": conveys the same meaning with no serious grammar error (small accent/typo is still correct).
+- "close": understandable but has one real mistake (wrong gender/agreement/verb form/word).
+- "wrong": meaning is off, empty, or in the wrong language.
+Return ONLY JSON: {"verdict":"correct"|"close"|"wrong","correction":"the best natural ${tgt} version","feedback":"ONE short Vietnamese sentence — praise if correct, or clearly say what to fix"}`;
+  return callAI(prompt);
 }

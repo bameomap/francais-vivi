@@ -7,13 +7,13 @@ import Spinner from "./ui/Spinner.jsx";
 import { SecLabel } from "./ui/SharedUI.jsx";
 import ConjugaisonPanel from "./ConjugaisonPanel.jsx";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
+import TranslateSection from "./TranslateSection.jsx";
 
 const LEVELS = ["A1","A2","B1","B2","C1","C2"];
 const GTYPES = [
-  { id:"mc",    label:"☑ Chọn đáp án" },
-  { id:"fill",  label:"✏️ Điền vào chỗ trống" },
-  { id:"order", label:"🔀 Sắp xếp câu" },
-  { id:"mixed", label:"🎲 Hỗn hợp" },
+  { id:"fill",      label:"✏️ Điền vào chỗ trống" },
+  { id:"translate", label:"🔄 Dịch câu" },
+  { id:"mixed",     label:"🎲 Hỗn hợp" },
 ];
 
 export function buildDetectivePrompt(topic, level, n) {
@@ -41,8 +41,8 @@ export function buildGrammarPrompt(topic, level, gtype, n) {
   const explSchema = `"explanationRules":[{"type":"rule","content":"Quy tắc 1 — giải thích ngắn gọn tiếng Việt"},{"type":"rule","content":"Quy tắc 2 — ..."},{"type":"warning","content":"⚠️ Lưu ý quan trọng"},{"type":"note","content":"Ngoại lệ hoặc mẹo nhớ"}]`;
   if (gtype === "mc") return `${base}\nReturn ONLY JSON: {"type":"mc","topic":"${topic}","level":"${level}",${explSchema},"exercises":[{"question":"Full sentence with context","options":["option1","option2","option3","option4"],"answer":"correct option","explanation":"why this is correct in Vietnamese"}]}`;
   if (gtype === "fill") return `${base}\nReturn ONLY JSON: {"type":"fill","topic":"${topic}","level":"${level}",${explSchema},"exercises":[{"sentence":"French sentence with ___ for the blank","answer":"correct word/form","hint":"brief Vietnamese hint","explanation":"why this form is correct in Vietnamese"}]}`;
-  if (gtype === "order") return `${base} Create sentences where words are scrambled.\nIMPORTANT: The "words" array must NOT contain punctuation (no periods, commas, question marks). Punctuation goes only in "answer".\nReturn ONLY JSON: {"type":"order","topic":"${topic}","level":"${level}",${explSchema},"exercises":[{"words":["word1","word2","word3","word4","word5"],"answer":"Correct sentence (may include punctuation)","translation":"Vietnamese translation","explanation":"note about word order in Vietnamese"}]}`;
-  if (gtype === "mixed") return `${base} Create a mix: ${Math.ceil(n/3)} multiple choice + ${Math.ceil(n/3)} fill-in-blank + ${Math.floor(n/3)} word order.\nFor word order exercises: "words" array must NOT contain punctuation.\nReturn ONLY JSON: {"type":"mixed","topic":"${topic}","level":"${level}",${explSchema},"sections":[{"sectionType":"mc","exercises":[{"question":"...","options":["a","b","c","d"],"answer":"correct","explanation":"Vietnamese why"}]},{"sectionType":"fill","exercises":[{"sentence":"sentence with ___","answer":"word","hint":"hint","explanation":"Vietnamese why"}]},{"sectionType":"order","exercises":[{"words":["w1","w2","w3"],"answer":"Correct sentence","translation":"Vietnamese","explanation":"note"}]}`;
+  if (gtype === "translate") return `${base} Create ${n} SHORT translation exercises (A1, 4-9 words) that practice this grammar point. Mix BOTH directions: about half "vi2fr" and half "fr2vi".\nReturn ONLY JSON: {"type":"translate","topic":"${topic}","level":"${level}",${explSchema},"exercises":[{"direction":"vi2fr","source":"Vietnamese sentence","reference":"correct natural French translation","note":"short Vietnamese hint about the grammar point"},{"direction":"fr2vi","source":"French sentence","reference":"correct natural Vietnamese translation","note":"short Vietnamese hint"}]}`;
+  if (gtype === "mixed") return `${base} Create a mix: ${Math.ceil(n/2)} fill-in-blank + ${Math.floor(n/2)} translation exercises (mix vi2fr and fr2vi).\nReturn ONLY JSON: {"type":"mixed","topic":"${topic}","level":"${level}",${explSchema},"sections":[{"sectionType":"fill","exercises":[{"sentence":"sentence with ___","answer":"word","hint":"hint","explanation":"Vietnamese why"}]},{"sectionType":"translate","exercises":[{"direction":"vi2fr","source":"Vietnamese","reference":"French","note":"Vietnamese hint"},{"direction":"fr2vi","source":"French","reference":"Vietnamese","note":"Vietnamese hint"}]}]}`;
   return "";
 }
 
@@ -418,12 +418,14 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
     if (result.type==="mc") return <GrammarMC exercises={result.exercises} onWrong={onW} onFirstAnswer={onFirst}/>;
     if (result.type==="fill") return <GrammarFill exercises={result.exercises} onFirstAnswer={onFirst}/>;
     if (result.type==="order") return <GrammarOrder exercises={result.exercises} onFirstAnswer={onFirst}/>;
+    if (result.type==="translate") return <TranslateSection exercises={result.exercises} onComplete={onFirst}/>;
     if (result.type==="mixed") return result.sections?.map((sec,i)=>(
       <div key={i} style={{marginBottom:"0.5rem"}}>
-        <SecLabel icon={sec.sectionType==="mc"?"☑":sec.sectionType==="fill"?"✏️":"🔀"} text={sec.sectionType==="mc"?"Chọn đáp án":sec.sectionType==="fill"?"Điền vào chỗ trống":"Sắp xếp câu"}/>
+        <SecLabel icon={sec.sectionType==="translate"?"🔄":sec.sectionType==="mc"?"☑":sec.sectionType==="fill"?"✏️":"🔀"} text={sec.sectionType==="translate"?"Dịch câu":sec.sectionType==="mc"?"Chọn đáp án":sec.sectionType==="fill"?"Điền vào chỗ trống":"Sắp xếp câu"}/>
         {sec.sectionType==="mc"&&<GrammarMC exercises={sec.exercises} onWrong={onW} onFirstAnswer={onFirst}/>}
         {sec.sectionType==="fill"&&<GrammarFill exercises={sec.exercises} onFirstAnswer={onFirst}/>}
         {sec.sectionType==="order"&&<GrammarOrder exercises={sec.exercises} onFirstAnswer={onFirst}/>}
+        {sec.sectionType==="translate"&&<TranslateSection exercises={sec.exercises} onComplete={onFirst}/>}
       </div>
     ));
     return null;
@@ -630,12 +632,14 @@ function CustomExerciseView() {
     if (result.type==="mc") return <GrammarMC exercises={result.exercises} onWrong={onW}/>;
     if (result.type==="fill") return <GrammarFill exercises={result.exercises}/>;
     if (result.type==="order") return <GrammarOrder exercises={result.exercises}/>;
+    if (result.type==="translate") return <TranslateSection exercises={result.exercises}/>;
     if (result.type==="mixed") return result.sections?.map((sec,i)=>(
       <div key={i} style={{marginBottom:"0.5rem"}}>
-        <SecLabel icon={sec.sectionType==="mc"?"☑":sec.sectionType==="fill"?"✏️":"🔀"} text={sec.sectionType==="mc"?"Chọn đáp án":sec.sectionType==="fill"?"Điền vào chỗ trống":"Sắp xếp câu"}/>
+        <SecLabel icon={sec.sectionType==="translate"?"🔄":sec.sectionType==="mc"?"☑":sec.sectionType==="fill"?"✏️":"🔀"} text={sec.sectionType==="translate"?"Dịch câu":sec.sectionType==="mc"?"Chọn đáp án":sec.sectionType==="fill"?"Điền vào chỗ trống":"Sắp xếp câu"}/>
         {sec.sectionType==="mc"&&<GrammarMC exercises={sec.exercises} onWrong={onW}/>}
         {sec.sectionType==="fill"&&<GrammarFill exercises={sec.exercises}/>}
         {sec.sectionType==="order"&&<GrammarOrder exercises={sec.exercises}/>}
+        {sec.sectionType==="translate"&&<TranslateSection exercises={sec.exercises}/>}
       </div>
     ));
     return null;
@@ -894,7 +898,6 @@ export default function GrammarPanel({ onBackToParcours }) {
   const TABS = [
     { id:"edito",     label:"📘 Edito A1"   },
     { id:"custom",    label:"🎯 Tùy chỉnh"  },
-    { id:"detective", label:"🔍 Thám tử"    },
   ];
 
   const tabBar = (
@@ -934,7 +937,6 @@ export default function GrammarPanel({ onBackToParcours }) {
       {tabBar}
       {panelTab === "edito"     && <EditoGrammarView defaultUnitIndex={initUnit} fromParcours={fromParcours} onBackToParcours={onBackToParcours} />}
       {panelTab === "custom"    && <CustomExerciseView />}
-      {panelTab === "detective" && <DetectiveView />}
     </div>
   );
 }
