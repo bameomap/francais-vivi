@@ -1783,45 +1783,47 @@ Ví dụ: "Ne laissez pas vos affaires ici!"
       },
       {
         topic:"Pronoms COD (1) — Le, La, L', Les",
-        rule:`COD = Complément d'Objet Direct = bổ ngữ TRỰC TIẾP
-(danh từ đứng ngay sau động từ, KHÔNG có giới từ à/de ở giữa)
-Đại từ COD thay thế danh từ đó để tránh lặp lại!
+        rule:`1. COD LÀ GÌ?
+COD (Complément d'Objet Direct) tiếng Việt gọi là TÂN NGỮ TRỰC TIẾP.
+Đơn giản: đó là người hoặc vật chịu tác động trực tiếp của hành động, đứng NGAY SAU động từ mà KHÔNG có giới từ nào (như à, de) ngăn cách.
 
-💡 CÁCH NHẬN BIẾT COD: hỏi "động từ + CÁI GÌ? / AI?"
-"Je regarde le film." → regarde cái gì? → le film = COD ✅
-"Je téléphone À Marie." → có "à" → KHÔNG phải COD (đó là COI) ❌
+👉 MẸO TÌM RA COD: đặt câu hỏi Quoi ? (Cái gì?) hoặc Qui ? (Ai?) ngay sau động từ.
+Ví dụ: Je regarde la télévision. (Tôi đang xem tivi.)
+→ Hỏi: Je regarde quoi ? (Tôi xem cái gì?) → Trả lời: la télévision.
+⇒ Vậy la télévision chính là COD.
 
-PHẦN 1: BẢNG ĐẠI TỪ COD (ngôi thứ 3)
-• LE = thay danh từ NAM số ít: le film → je LE regarde
-• LA = thay danh từ NỮ số ít: la série → je LA regarde
-• L' = trước nguyên âm (nam/nữ): l'appartement → je L'ai trouvé
-• LES = số nhiều (mọi giống): les clés → je LES ai
+2. TẠI SAO CẦN "ĐẠI TỪ COD" (Les pronoms COD)?
+Người Pháp rất ghét việc lặp đi lặp lại một từ.
+Thay vì nói: "Bạn có thích ngôi nhà không? – Có, tôi rất thích ngôi nhà."
+Người ta dùng đại từ COD: "Bạn có thích ngôi nhà không? – Có, tôi rất thích NÓ."
 
-PHẦN 2: VỊ TRÍ — đặt TRƯỚC động từ (ngược tiếng Việt!)
-Tiếng Việt: "Tôi xem NÓ" (sau) → Tiếng Pháp: "Je LE regarde" (trước).
-✅ "Je le regarde." · ❌ "Je regarde le."
+3. CÓ NHỮNG ĐẠI TỪ COD NÀO Ở NGÔI THỨ 3?
+Để thay cho sự vật, sự việc (hay dùng khi nói về nhà cửa, đồ đạc trong Unité 7), dùng 4 đại từ:
+• LE — thay danh từ GIỐNG ĐỰC, số ít (đi với le, un, ce, mon…).
+• LA — thay danh từ GIỐNG CÁI, số ít (đi với la, une, cette, ma…).
+• L' — dùng thay LE hoặc LA khi ĐỘNG TỪ THEO SAU bắt đầu bằng nguyên âm (a, e, i, o, u, y) hoặc 'h' câm.
+• LES — thay danh từ SỐ NHIỀU (đi với les, des, ces, mes…).
 
-1. Phủ định: ne + đại từ + động từ + pas
-Ví dụ: "Je ne LE regarde pas."
+4. ĐẶT ĐẠI TỪ COD Ở ĐÂU TRONG CÂU?
+🚨 QUY TẮC VÀNG: đại từ COD luôn đứng TRƯỚC động từ chính.
+(Cấu trúc: Chủ ngữ + COD + Động từ)
 
-2. Futur proche: đại từ trước động từ NGUYÊN MẪU
-Ví dụ: "Je vais LE regarder." (KHÔNG nói "Je le vais regarder" ❌)
+Ví dụ áp dụng từ vựng Unité 7:
+• LE (giống đực): Tu achètes le canapé ? → Oui, je LE prends. (Bạn mua ghế sofa này chứ? – Có, tôi mua nó.)
+• LA (giống cái): Tu fais la chambre ? → Oui, je LA fais. (Bạn dọn phòng chưa? – Rồi, tôi dọn nó rồi.)
+• L' (trước nguyên âm): Tu aimes cette maison ? → Oui, je L'aime beaucoup ! (Vì "aime" bắt đầu bằng "a" nên "la" biến thành "l'".)
+• LES (số nhiều): Tu jettes les poubelles ? → Oui, je LES jette. (Cậu vứt các túi rác chứ? – Có, tớ vứt chúng.)
 
-3. Passé composé: đại từ trước AVOIR
-Ví dụ: "Je L'ai vu." · "Tu LES as appelés?"
-⚠️ Participe passé HÒA HỢP với COD đứng trước:
-"La pizza? Je L'ai mangéE." (la → +e) · "Les clés? Je LES ai trouvéES." (les nữ → +es)
-
-4. Mệnh lệnh KHẲNG ĐỊNH (ngoại lệ duy nhất): đại từ ra SAU, nối gạch ngang
-Ví dụ: "Regarde-LE!" · "Appelle-LA!" · "Mange-LES!"
-→ Nhưng mệnh lệnh PHỦ ĐỊNH thì đại từ về lại trước: "Ne LE regarde pas!"`,
+💡 MẸO LÀM BÀI TẬP UNITÉ 7 — 2 bước:
+1. Từ cần thay là Giống đực (LE), Giống cái (LA) hay Số nhiều (LES)?
+2. Động từ phía sau bắt đầu bằng nguyên âm hay phụ âm? Nếu là nguyên âm MÀ từ thay thế là số ít → cứ tự tin điền L' nhé!`,
         examples:[
-          "Tu as les clés? Oui, je LES ai. — Bạn có chìa khóa không? Có, tôi có.",
-          "Ce film? Je L'ai vu hier. — Bộ phim đó? Tôi đã xem hôm qua.",
-          "Elle cherche un plombier. Elle LE contacte. — Cô ấy tìm thợ sửa ống nước. Cô ấy liên hệ anh ta.",
-          "Mange ta soupe! Mange-LA! — Ăn súp đi! Ăn đi!",
-          "Ce livre? Je ne LE comprends pas. — Quyển sách đó? Tôi không hiểu.",
-          "Vous avez vu Marie? — Oui, je L'ai vue ce matin. — Bạn có gặp Marie không? — Có, tôi đã gặp sáng nay.",
+          "Tu achètes le canapé ? — Oui, je le prends. — Bạn mua ghế sofa này chứ? Có, tôi mua nó.",
+          "Tu fais la chambre ? — Oui, je la fais. — Bạn dọn phòng chưa? Rồi, tôi dọn nó rồi.",
+          "Tu aimes cette maison ? — Oui, je l'aime beaucoup ! — Bạn thích ngôi nhà này không? Có, tôi thích nó lắm!",
+          "Tu jettes les poubelles ? — Oui, je les jette. — Cậu vứt các túi rác chứ? Có, tớ vứt chúng.",
+          "Je regarde la télévision. → Je la regarde. — Tôi xem tivi. → Tôi xem nó.",
+          "Tu connais l'adresse ? — Oui, je la connais. — Bạn biết địa chỉ chứ? Có, tôi biết nó.",
         ]
       },
       {
@@ -1905,92 +1907,71 @@ le bail = hợp đồng thuê nhà`,
     id:"g8", num:"8", title:"En forme!", points:[
       {
         topic:"Passé composé (2) — Participes passés irréguliers",
-        rule:`Ôn lại Unité 7: passé composé = AVOIR (présent) + participe passé.
-Quy tắc thường: -ER → -é, -IR nhóm 2 → -i, -RE → -u.
-NHƯNG nhiều động từ hay dùng lại BẤT QUY TẮC — học thuộc theo ĐUÔI cho dễ nhớ.
+        rule:`1. CÁC QUÁ KHỨ PHÂN TỪ (Participe passé) BẤT QUY TẮC
 
-PHẦN 1: NHÓM ĐUÔI -U (đông nhất) 🔵
-• avoir→eu (đọc [y] như "u"!): "J'ai eu de la fièvre."
-• boire→bu: "J'ai bu un café."
-• voir→vu: "Tu as vu ce film?"
-• pouvoir→pu: "Je n'ai pas pu venir."
-• vouloir→voulu: "Il a voulu partir."
-• devoir→dû (có dấu mũ!): "J'ai dû travailler."
-• savoir→su: "Je l'ai su hier."
-• lire→lu: "J'ai lu ce livre."
-• croire→cru: "Je t'ai cru."
-• recevoir→reçu (có ç!): "Elle a reçu un cadeau."
-• courir→couru · vivre→vécu · falloir→fallu (il a fallu)
-• pleuvoir→plu: "Il a plu toute la nuit." (trời đã mưa)
-• venir→venu ⚠️ nhưng venir dùng ÊTRE: "Il est venu." (Unité 9)
+Trong chủ đề sức khỏe, thể thao, ăn uống của Unité 8, bạn sẽ gặp rất nhiều động từ KHÔNG còn thêm đuôi -é đơn giản nữa, mà biến đổi thành các đuôi đặc biệt. Hãy nhớ theo TỪNG NHÓM ĐUÔI cho dễ thuộc nhé:
 
-PHẦN 2: NHÓM ĐUÔI -IS 🟡
-• mettre→mis: "J'ai mis une veste."
-• prendre→pris: "Elle a pris le bus."
-• apprendre→appris · comprendre→compris (họ hàng của prendre)
-• permettre→permis · promettre→promis (họ hàng của mettre)
-💡 Mẹo: biết prendre→pris và mettre→mis là suy ra cả họ!
+🟢 ĐUÔI -IT:
+• faire (làm / chơi thể thao) → fait
+  Ví dụ: J'ai fait du sport. (Tôi đã chơi thể thao.)
+• écrire (viết) → écrit
 
-PHẦN 3: NHÓM ĐUÔI -IT 🟢
-• dire→dit: "Il a dit oui."
-• écrire→écrit: "J'ai écrit un mail."
-• faire→fait: "Tu as fait du sport?"
+🟡 ĐUÔI -IS:
+• prendre (uống thuốc / ăn / cầm lấy) → pris
+  Ví dụ: Il a pris un médicament. (Anh ấy đã uống thuốc.)
+• mettre (mặc quần áo / đặt để) → mis
 
-PHẦN 4: NHÓM ĐUÔI -ERT (động từ -VRIR/-FFRIR) 🟠
-• ouvrir→ouvert: "J'ai ouvert la fenêtre."
-• offrir→offert: "Il a offert des fleurs."
-• couvrir→couvert · souffrir→souffert
-⚠️ Nhóm này dễ nhầm: KHÔNG phải "ouvri" ❌ → "ouvert" ✅
-
-PHẦN 5: HOÀN TOÀN BẤT QUY TẮC 🔴
-• être→été: "Ça a été difficile." (đã từng khó khăn)
-• naître→né và mourir→mort ⚠️ hai động từ này dùng ÊTRE:
-  "Elle est née en 1998." / "Il est mort en 2020." (Unité 9)
-
-PHỦ ĐỊNH & TRẠNG TỪ — như Unité 7, vẫn ôm lấy avoir:
-"Je n'ai pas compris." · "Il n'a jamais bu d'alcool."
-"J'ai trop mangé." · "Tu as déjà pris ton médicament?"
-
-💡 MẸO HỌC THUỘC — đọc to theo vần:
--u: bu, lu, pu, su, vu, eu, voulu, reçu
--is: mis, pris, appris, compris
--it: dit, écrit · -ert: ouvert, offert
-→ Mỗi ngày tự đặt 2–3 câu với động từ trong bảng!`,
+🔵 ĐUÔI -U:
+• boire (uống nước) → bu
+  Ví dụ: Tu as bu de l'eau ? (Bạn đã uống nước chưa?)
+• lire (đọc) → lu
+• voir (nhìn / khám bệnh) → vu
+  Ví dụ: J'ai vu le médecin. (Tôi đã đi khám bác sĩ.)`,
         examples:[
-          "J'ai eu de la fièvre hier. — Hôm qua tôi bị sốt.",
-          "Il a fait du sport ce matin. — Anh ấy đã tập thể thao sáng nay.",
-          "Elle a pris rendez-vous chez le médecin. — Cô ấy đã hẹn gặp bác sĩ.",
-          "Nous avons vu un bon film. — Chúng tôi đã xem một bộ phim hay.",
-          "Tu as pu dormir? — Bạn đã ngủ được không?",
-          "Ils n'ont pas voulu venir. — Họ đã không muốn đến.",
+          "J'ai fait du sport. — Tôi đã chơi thể thao.",
+          "Il a pris un médicament. — Anh ấy đã uống thuốc.",
+          "Tu as bu de l'eau ? — Bạn đã uống nước chưa?",
+          "J'ai vu le médecin. — Tôi đã đi khám bác sĩ.",
+          "Elle a écrit un message. — Cô ấy đã viết một tin nhắn.",
+          "J'ai mis un pull. — Tôi đã mặc một chiếc áo len.",
         ]
       },
       {
         topic:"Pronom Y — Remplace un complément de lieu",
-        rule:`ĐẠI TỪ Y = "đó / ở đó / đến đó" — thay thế cụm chỉ NƠI CHỐN (à, en, dans, sur, chez… + nơi chốn) để tránh lặp.
+        rule:`ĐẠI TỪ "Y" (Le pronom Y)
+Cũng giống như đại từ COD, người Pháp rất ghét sự lặp từ. Nếu COD thay cho danh từ chỉ vật/người trực tiếp, thì đại từ "Y" chuyên thay cho NƠI CHỐN (địa điểm).
+Dịch ra tiếng Việt, "Y" mang nghĩa "ở đó", "tới đó", "vào đó"…
 
-CÁCH DÙNG: "Tu vas à la pharmacie?" → "Tu Y vas?" (Y = à la pharmacie)
-"Il est au bureau." → "Il Y est." · "Nous allons en France." → "Nous Y allons."
+1. KHI NÀO DÙNG ĐẠI TỪ "Y"?
+Dùng "Y" để thay cho một cụm chỉ nơi chốn đứng sau các giới từ: à, au, à la, aux, en, dans, sur, sous, chez…
+• Với À (đến / ở): Tu vas à Paris ? → Oui, j'Y vais. (Ừ, tôi sẽ đi đến đó.)
+• Với EN (ở trong / ở một nước): Tu habites en France ? → Oui, j'Y habite. (Ừ, tôi sống ở đó.)
+• Với DANS (ở trong một không gian): Le chat est dans le salon ? → Oui, il Y est. (Ừ, nó đang ở trong đó.)
 
-PHẦN 1: VỊ TRÍ — luôn đặt TRƯỚC động từ (như mọi đại từ)
-1. Présent: J'y vais · Tu y vas · Il y va · Nous y allons…
-2. Futur proche: "Je vais Y aller." (y trước nguyên mẫu)
-3. Passé composé: "J'y suis allé(e)." (y trước trợ động từ)
-4. Mệnh lệnh khẳng định: "Vas-y!" · "Allons-y!" · "Allez-y!"
-   Mệnh lệnh phủ định: "N'y va pas!" · "N'y allons pas!"
+2. VỊ TRÍ CỦA "Y" TRONG CÂU
+🚨 QUY TẮC VÀNG: giống đại từ COD, "Y" luôn đứng NGAY TRƯỚC động từ chính.
+a. Câu khẳng định: Chủ ngữ + Y + Động từ
+   Je vais au cinéma → J'Y vais.
+b. Câu phủ định: Chủ ngữ + n' + Y + Động từ + pas
+   Je ne vais pas au cinéma → Je n'Y vais pas.
+c. Khi có 2 động từ (1 chia + 1 nguyên thể): "Y" đứng GIỮA, ngay trước động từ nguyên thể.
+   Chủ ngữ + Động từ đã chia + Y + Động từ nguyên thể
+   Tu veux aller au supermarché ? → Oui, je veux Y aller.
 
-PHẦN 2: LƯU Ý QUAN TRỌNG
-⚠️ Y thay NƠI CHỐN và ĐỒ VẬT, KHÔNG thay NGƯỜI (người thì dùng lui/elle…):
-✅ "Je vais chez le médecin." → "J'y vais." (nơi chốn)
-✅ "Je pense à ce problème." → "J'y pense." (đồ vật/sự việc)
-❌ "Je pense à ma mère." → KHÔNG nói "J'y pense" → đúng phải là "Je pense à elle." (người)`,
+3. LƯU Ý CỰC KỲ QUAN TRỌNG ⚠️
+"Y" chỉ thay cho VẬT hoặc NƠI CHỐN, tuyệt đối KHÔNG thay cho NGƯỜI.
+✅ Je pense à mon travail. → J'Y pense. (Tôi nghĩ về điều đó.)
+❌ Je pense à Marie. → KHÔNG nói "J'y pense" vì Marie là người. (Trường hợp này học một loại đại từ khác ở trình độ sau.)
+
+💡 TÓM TẮT ĐỂ NHỚ LÂU:
+Thấy câu hỏi nhắc đến một ĐỊA ĐIỂM (nhà hàng, thành phố, đất nước, căn phòng…) và muốn trả lời "Có, tôi đi đến đó / ở đó" → nhớ ngay cụm quốc dân: J'Y vais (Tôi đến đó đây) hoặc J'Y suis (Tôi đang ở đó đây).`,
         examples:[
-          "Tu vas à la pharmacie? Oui, j'y vais maintenant. — Bạn đến nhà thuốc không? Có, tôi đi ngay.",
-          "Il travaille au cabinet médical. Il y travaille depuis 5 ans. — Anh ấy làm ở phòng khám 5 năm rồi.",
-          "On y va? — Chúng ta đi nhé? (đến đó)",
-          "J'y suis allé(e) hier. — Tôi đã đến đó hôm qua.",
-          "Allez-y! — Cứ tiến hành đi! / Cứ nói đi!",
-          "N'y va pas, c'est dangereux. — Đừng đến đó, nguy hiểm.",
+          "Tu vas à Paris ? — Oui, j'y vais. — Bạn sắp đi Paris à? Ừ, tôi sẽ đi đến đó.",
+          "Tu habites en France ? — Oui, j'y habite. — Bạn sống ở Pháp à? Ừ, tôi sống ở đó.",
+          "Le chat est dans le salon ? — Oui, il y est. — Con mèo ở trong phòng khách à? Ừ, nó ở trong đó.",
+          "Je ne vais pas au cinéma. → Je n'y vais pas. — Tôi không đi đến rạp đâu.",
+          "Tu veux aller au supermarché ? — Oui, je veux y aller. — Bạn muốn đi siêu thị không? Có, tôi muốn đi tới đó.",
+          "Je pense à mon travail. → J'y pense. — Tôi nghĩ về công việc. → Tôi nghĩ về điều đó.",
         ]
       },
       {
@@ -2169,41 +2150,28 @@ PHẦN 3: SO SÁNH VỚI DANH TỪ và ĐỘNG TỪ
         ]
       },
       {
-        topic:"Passé composé avec ÊTRE — Verbes de mouvement et d'état",
-        rule:`Đa số động từ dùng AVOIR ở passé composé, nhưng MỘT NHÓM động từ (chuyển động & thay đổi trạng thái) lại dùng ÊTRE.
+        topic:"Passé composé avec ÊTRE — L'accord avec le sujet",
+        rule:`2. SỰ XUẤT HIỆN CỦA TRỢ ĐỘNG TỪ ÊTRE VÀ QUY TẮC HÒA HỢP (L'accord)
 
-CẤU TRÚC: Chủ ngữ + ÊTRE (présent) + participe passé (HÒA HỢP với chủ ngữ)
+Đây là phần "bẫy" nhất của tiếng Pháp! Một số động từ chuyển động đặc biệt (như aller – đi) và các động từ phản thân (như se lever – thức dậy, se coucher – đi ngủ) sẽ KHÔNG đi với avoir nữa, mà bắt buộc phải đi với ÊTRE.
 
-PHẦN 1: ~14 ĐỘNG TỪ DÙNG ÊTRE — học theo cặp đối nghĩa
-• aller ↔ venir: Je suis allé(e). / Il est venu.
-• partir ↔ arriver: Elle est partie. / Ils sont arrivés.
-• entrer ↔ sortir: Tu es entré(e). / Elle est sortie.
-• monter ↔ descendre: Il est monté. / Elle est descendue.
-• naître ↔ mourir: Elle est née. / Il est mort.
-Còn lại 5 từ: rester, tomber, passer, retourner, rentrer.
-💡 Động từ có tiền tố cũng dùng être: devenir → "Elle est devenue médecin." · revenir → "Il est revenu du Japon."
+🚨 QUY TẮC VÀNG CỦA TRỢ ĐỘNG TỪ ÊTRE:
+Khi đã dùng être, quá khứ phân từ BẮT BUỘC phải "hợp giống và số" với chủ ngữ:
+• Chủ ngữ là NỮ (số ít): thêm -e vào cuối phân từ.
+• Chủ ngữ là SỐ NHIỀU (nam / chung): thêm -s vào cuối phân từ.
+• Chủ ngữ là SỐ NHIỀU (toàn nữ): thêm -es vào cuối phân từ.
 
-💡 MẸO NHỚ (chuyển động + sống/chết):
-ĐI · ĐẾN · VÀO · RA · LÊN · XUỐNG · NGÃ · Ở LẠI · SINH · CHẾT · QUAY LẠI · TRỞ THÀNH · ĐI QUA
-
-PHẦN 2: HÒA HỢP PARTICIPE PASSÉ với CHỦ NGỮ (khác avoir!)
-• Nam số ít: Il est allé.
-• Nữ số ít: Elle est allée. (+E)
-• Nam số nhiều: Ils sont allés. (+S)
-• Nữ số nhiều: Elles sont allées. (+ES)
-💡 Động từ phản thân (se lever…) LUÔN dùng être: "Je me suis levé(e)." · "Elle s'est couchée."
-
-PHẦN 3: NGOẠI LỆ — monter/descendre/sortir/rentrer/passer
-→ Khi CÓ tân ngữ trực tiếp (COD) thì lại dùng AVOIR!
-• Không COD → être: "Elle est montée."
-• Có COD → avoir: "Elle a monté les bagages." (không hòa hợp với chủ ngữ)`,
+VÍ DỤ VỚI ĐỘNG TỪ ALLER (đi):
+• Một bạn nam nói: Je suis allé au gymnase. (Tôi đã đến phòng tập.)
+• Một bạn nữ nói: Je suis allée au gymnase. (Phải thêm -e vì chủ ngữ là nữ.)
+• Nhóm các bạn nữ nói: Elles sont allées. (Thêm -es vì là số nhiều giống cái.)`,
         examples:[
-          "Je suis allé(e) à la plage hier. — Tôi đã đến bãi biển hôm qua.",
-          "Elle est arrivée à 8h du matin. — Cô ấy đã đến lúc 8 giờ sáng.",
-          "Ils sont partis tôt ce matin. — Họ đã khởi hành sớm sáng nay.",
-          "Nous sommes restés une semaine. — Chúng tôi đã ở lại một tuần.",
-          "Elle est née à Lyon. — Cô ấy sinh ở Lyon.",
-          "Il est tombé pendant les vacances et il est allé à l'hôpital. — Anh ấy bị ngã trong kỳ nghỉ và đã đến bệnh viện.",
+          "Je suis allé au gymnase. — Tôi (nam) đã đến phòng tập.",
+          "Je suis allée au gymnase. — Tôi (nữ) đã đến phòng tập.",
+          "Elles sont allées. — Các cô ấy đã đi.",
+          "Elle s'est levée tôt ce matin. — Cô ấy đã thức dậy sớm sáng nay.",
+          "Il s'est couché tard hier. — Anh ấy đã đi ngủ muộn hôm qua.",
+          "Nous sommes allés à l'hôpital. — Chúng tôi đã đến bệnh viện.",
         ]
       },
       {
