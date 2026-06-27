@@ -34,6 +34,18 @@ const FRENCH_RULES = `CRITICAL FRENCH RULES — apply exactly, double-check ever
 - A COD pronoun (le/la/l'/les) goes BEFORE the conjugated verb.
 - Verify the answer field and the explanation agree with each other and with these rules before returning.`;
 
+// Biến các ví dụ "fr — vi" đã kiểm chứng của điểm ngữ pháp thành bài dịch
+// hai chiều (xen kẽ), không cần AI sinh.
+export function buildTranslateFromExamples(examples = []) {
+  const pairs = (examples || []).map(ex => {
+    const p = ex.split(" — ");
+    return { fr: (p[0] || "").trim(), vi: (p[1] || "").trim() };
+  }).filter(p => p.fr && p.vi && p.fr.length <= 90);
+  return [...pairs].sort(() => Math.random() - 0.5).slice(0, 6).map((p, i) => i % 2 === 0
+    ? { direction:"vi2fr", source:p.vi, reference:p.fr }
+    : { direction:"fr2vi", source:p.fr, reference:p.vi });
+}
+
 export function buildGrammarPrompt(topic, level, gtype, n) {
   const base = `French grammar teacher. Create ${n} exercises on the topic: "${topic}" for level ${level}.\n${FRENCH_RULES}`;
   // explanationRules: array of {type, content} where type = "rule"|"warning"|"note"
@@ -397,14 +409,25 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
   const [err, setErr]           = useState("");
   const quizRef = useRef(null);
 
-  const launchExercise = async (topic, subId = null) => {
+  const launchExercise = async (topic, subId = null, examples = []) => {
     setActiveExercise({ topic, subId });
     setResult(null); setErr(""); setLoading(true);
+    // Dịch câu lấy từ ví dụ ĐÃ KIỂM CHỨNG của điểm ngữ pháp (không cần AI).
+    const translateEx = buildTranslateFromExamples(examples);
     try {
-      const data = await callAI(buildGrammarPrompt(topic, "A1", "mixed", 12));
-      setResult(data);
+      // AI chỉ lo phần Điền vào chỗ trống; Dịch câu dùng nội dung baked.
+      const fillData = await callAI(buildGrammarPrompt(topic, "A1", "fill", 6));
+      const sections = [
+        { sectionType:"fill", exercises: fillData.exercises || [] },
+        { sectionType:"translate", exercises: translateEx },
+      ].filter(s => s.exercises.length);
+      setResult({ type:"mixed", topic, level:"A1", explanationRules: fillData.explanationRules, sections });
       setTimeout(() => quizRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 150);
-    } catch(e) { setErr(e.message); }
+    } catch(e) {
+      // AI lỗi → vẫn hiện được phần Dịch câu baked.
+      if (translateEx.length) setResult({ type:"translate", topic, level:"A1", exercises: translateEx });
+      else setErr(e.message);
+    }
     setLoading(false);
   };
 
@@ -501,7 +524,7 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
                 <div onClick={toggle} style={{ background:isOpen?C.purpleL:(isDone?C.greenL:C.white), padding:"0.65rem 0.85rem", display:"flex", justifyContent:"space-between", alignItems:"center", cursor:"pointer", transition:"background 0.2s" }}>
                   <div style={{ fontSize:"0.8rem", fontWeight:600, color:C.purple, lineHeight:1.3, flex:1 }}>{p.topic}</div>
                   <div style={{ display:"flex", alignItems:"center", gap:"0.4rem", flexShrink:0 }}>
-                    <button onClick={e=>{ e.stopPropagation(); launchExercise(p.topic, subId); }}
+                    <button onClick={e=>{ e.stopPropagation(); launchExercise(p.topic, subId, p.examples); }}
                       style={{ background:C.purple, color:C.white, border:"none", borderRadius:20, padding:"0.22rem 0.65rem", fontSize:"0.63rem", cursor:"pointer", whiteSpace:"nowrap" }}>
                       Làm bài tập →
                     </button>

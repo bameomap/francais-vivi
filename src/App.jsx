@@ -47,12 +47,13 @@ const MODULES = [
   { id:"conversation",  group:"luyen",  label:"Giao tiếp",  fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation"   },
   { id:"prononciation", group:"luyen",  label:"Phát âm",    fr:"La Prononciation", icon:"🎤", color:"#F59E0B", bg:"#FFFBEB", view:"prononciation"  },
   { id:"writing",       group:"luyen",  label:"Luyện viết", fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"       },
-  { id:"defi",          group:"luyen",  label:"Thử thách",  fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"          },
   { id:"lecture",       group:"luyen",  label:"Đọc hiểu",   fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"       },
   { id:"dictee",        group:"luyen",  label:"Nghe chép",  fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"ecouter"       },
-  { id:"srs",           group:"luyen",  label:"Thẻ ôn tập", fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"           },
   { id:"listening",     group:"luyen",  label:"Nghe chọn",  fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"ecouter"       },
-  { id:"revision",      group:"luyen",  label:"Ôn sai",     fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"      },
+  // Ôn tập
+  { id:"srs",           group:"on",     label:"Thẻ ôn tập", fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"           },
+  { id:"revision",      group:"on",     label:"Ôn sai",     fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"      },
+  { id:"defi",          group:"on",     label:"Thử thách",  fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"          },
   // Công cụ
   { id:"stats",         group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"         },
 ];
@@ -672,14 +673,15 @@ function AppInner() {
           {/* ── 3-stat row ── */}
           <div style={{ margin:"0.75rem 16px 0", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:7, animation:"fadeUp 0.4s ease 0.1s both" }}>
             {[
-              { val:srsStats.mastered,    lbl:"Từ thuộc",     color:C.green  },
-              { val:srsStats.due,         lbl:"Cần ôn",       color:C.gold   },
-              { val:wrongAnswers.length,  lbl:"Sai gần đây",  color:C.accent },
-            ].map(({ val, lbl, color }) => (
-              <div key={lbl} style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:12, padding:"10px 8px", textAlign:"center" }}>
+              { val:srsStats.mastered,    lbl:"Từ thuộc",     color:C.green,  go:()=>goSection("stats","stats")      },
+              { val:srsStats.due,         lbl:"Cần ôn →",     color:C.gold,   go:()=>goSection("srs","srs")          },
+              { val:wrongAnswers.length,  lbl:"Sai gần đây →",color:C.accent, go:()=>goSection("revision","revision") },
+            ].map(({ val, lbl, color, go }) => (
+              <button key={lbl} onClick={go} className="card-hover"
+                style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:12, padding:"10px 8px", textAlign:"center", cursor:"pointer", fontFamily:"inherit" }}>
                 <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:22, fontWeight:700, color, lineHeight:1 }}>{val}</div>
                 <div style={{ fontSize:10.5, color:C.gray, marginTop:4 }}>{lbl}</div>
-              </div>
+              </button>
             ))}
           </div>
 

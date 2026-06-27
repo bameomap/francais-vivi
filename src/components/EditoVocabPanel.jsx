@@ -17,7 +17,17 @@ const MODES = [
   { id:"translate",  label:"🔄 Dịch câu",  desc:"Dịch Pháp↔Việt, AI chấm" },
 ];
 
-const CLIENT_TYPES = ["flashcard"];
+const CLIENT_TYPES = ["flashcard", "translate"];
+
+// Dịch câu lấy thẳng từ câu ví dụ ĐÃ KIỂM CHỨNG (ex_fr/ex_vi) của từng từ —
+// không cần AI sinh, đúng 100%, hiện ngay. Xen kẽ hai chiều VI→FR / FR→VI.
+function buildTranslateFromWords(words) {
+  const withEx = words.filter(w => w.ex_fr && w.ex_vi && w.ex_fr.length <= 80);
+  const pool = [...withEx].sort(() => Math.random() - 0.5).slice(0, 8);
+  return pool.map((w, i) => i % 2 === 0
+    ? { direction:"vi2fr", source:w.ex_vi, reference:w.ex_fr, note:`Từ khóa: ${w.fr}` }
+    : { direction:"fr2vi", source:w.ex_fr, reference:w.ex_vi, note:`Từ khóa: ${w.fr}` });
+}
 
 // Câu/cụm dài (vd "Qu'est-ce que ça veut dire ?") không hợp cho flashcard,
 // xếp chữ, điền từ. Lọc giữ lại "từ đơn" cho phần luyện tập.
@@ -108,7 +118,11 @@ function QuizRunner({ words, mode, onBack, onComplete }) {
 
   const start = useCallback(async () => {
     setStarted(true);
-    if (CLIENT_TYPES.includes(mode)) {
+    if (mode === "translate") {
+      const ex = buildTranslateFromWords(words);
+      if (ex.length >= 3) { setQuiz({ type: "translate", exercises: ex }); return; }
+      // quá ít câu ví dụ sẵn → để AI sinh thay thế
+    } else if (CLIENT_TYPES.includes(mode)) {
       setQuiz({ type: mode, words });
       return;
     }

@@ -1,26 +1,57 @@
 import { useState } from "react";
 import { C } from "../constants.js";
 import { gradeTranslation } from "../utils/api.js";
+import { addWordToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 
-// Bài DỊCH CÂU hai chiều (VI→FR / FR→VI), AI chấm theo nghĩa.
+// So khớp khoan dung TẠI CHỖ: bỏ dấu, dấu câu, dấu nháy, gộp khoảng trắng.
+// Trùng khít → chấm đúng ngay, không cần gọi AI (nhanh + miễn phí).
+const normLoc = s => (s || "").toLowerCase().normalize("NFD")
+  .replace(/[̀-ͯ]/g, "")
+  .replace(/['’`]/g, "")
+  .replace(/[.,!?;:«»"]/g, "")
+  .replace(/\s+/g, " ").trim();
+
+// Câu dịch → thẻ SRS (fr/vi) để ôn lại khi làm sai.
+const toCard = ex => ex.direction === "vi2fr"
+  ? { fr: ex.reference, vi: ex.source }
+  : { fr: ex.source, vi: ex.reference };
+
+// Bài DỊCH CÂU hai chiều (VI→FR / FR→VI). Chấm tại chỗ trước, AI dự phòng.
+// Câu sai/gần đúng được đẩy vào SRS để gặp lại (lặp lại ngắt quãng).
 // exercises: [{ direction:"vi2fr"|"fr2vi", source, reference, note }]
 export default function TranslateSection({ exercises = [], onComplete }) {
   const [st, setSt] = useState(() => exercises.map(() => ({ val: "", loading: false, res: null, err: "" })));
   const set = (i, patch) => setSt(prev => prev.map((s, j) => (j === i ? { ...s, ...patch } : s)));
 
+  // Sau khi có kết quả: hoàn thành nếu xong hết; đẩy câu chưa đúng vào SRS.
+  const settle = (i, res) => {
+    set(i, { loading: false, res });
+    if (res.verdict !== "correct") {
+      const c = toCard(exercises[i]);
+      if (c.fr && c.vi) addWordToSRS(c.fr, c.vi);
+    }
+    if (st.every((s, j) => j === i || s.res)) onComplete?.();
+  };
+
   const check = async (i) => {
     const ex = exercises[i];
     const val = (st[i].val || "").trim();
     if (!val || st[i].loading || st[i].res) return;
+
+    // 1) Trùng khít đáp án mẫu → đúng ngay, khỏi gọi AI.
+    if (normLoc(val) === normLoc(ex.reference)) {
+      settle(i, { verdict: "correct", correction: ex.reference, feedback: "Chính xác!" });
+      return;
+    }
+
+    // 2) Khác đáp án mẫu → nhờ AI chấm theo nghĩa.
     set(i, { loading: true, err: "" });
     try {
       const res = await gradeTranslation({
         direction: ex.direction, source: ex.source, reference: ex.reference, userAnswer: val,
       });
-      set(i, { loading: false, res });
-      // mọi câu đã có kết quả → coi như hoàn thành
-      if (st.every((s, j) => j === i || s.res)) onComplete?.();
+      settle(i, res);
     } catch (e) {
       set(i, { loading: false, err: e.message });
     }
