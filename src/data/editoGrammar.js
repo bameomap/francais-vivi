@@ -171,30 +171,30 @@ Ví dụ: "J'ai un chien." → "Je n'ai PAS DE chien." · "Il y a des parcs." �
         rule:`CHÀO HỎI VÀ LÀM QUEN — Script đầy đủ từ A đến Z:
 
 CHÀO KHI GẶP:
-• Bonjour ! (cả ngày) · Bonsoir ! (buổi tối)
-• Salut ! (thân mật, với bạn bè) · Coucou ! (rất thân mật)
-• Comment allez-vous ? (lịch sự, với VOUS)
-• Comment tu vas ? / Ça va ? (thân mật, với TU)
-→ Très bien, merci ! / Bien, merci. Et vous/toi ?
-→ Ça va. / Pas mal. / Comme ci, comme ça. (trung bình)
+• Bonjour ! — Xin chào! (dùng cả ngày) · Bonsoir ! — Chào buổi tối!
+• Salut ! — Chào! (thân mật, với bạn bè) · Coucou ! — Hế lô! (rất thân mật)
+• Comment allez-vous ? — Ngài/Anh chị khỏe không? (lịch sự, với VOUS)
+• Comment tu vas ? / Ça va ? — Bạn khỏe không? / Khỏe chứ? (thân mật, với TU)
+→ Très bien, merci ! / Bien, merci. Et vous/toi ? — Rất khỏe, cảm ơn! / Khỏe, cảm ơn. Còn bạn?
+→ Ça va. / Pas mal. / Comme ci, comme ça. — Bình thường. / Cũng ổn. / Tàm tạm. (trung bình)
 
 GIỚI THIỆU BẢN THÂN:
-• Je m'appelle [prénom]. / Mon prénom, c'est [prénom].
-• Je suis [nationalité]. J'ai [X] ans.
-• J'habite à [ville], en/au [pays].
-• Je suis [profession / étudiant(e)].
+• Je m'appelle [prénom]. / Mon prénom, c'est [prénom]. — Tôi tên là [tên]. / Tên tôi là [tên].
+• Je suis [nationalité]. J'ai [X] ans. — Tôi là người [quốc tịch]. Tôi [X] tuổi.
+• J'habite à [ville], en/au [pays]. — Tôi sống ở [thành phố], tại [quốc gia].
+• Je suis [profession / étudiant(e)]. — Tôi là [nghề nghiệp / sinh viên].
 
 HỎI THÔNG TIN CƠ BẢN:
-• Comment vous vous appelez ? / Tu t'appelles comment ?
-• Vous avez quel âge ? / Tu as quel âge ?
-• Vous êtes d'où ? / Tu viens d'où ?
-• Qu'est-ce que vous faites dans la vie ? (làm nghề gì?)
+• Comment vous vous appelez ? / Tu t'appelles comment ? — Ngài/Bạn tên là gì?
+• Vous avez quel âge ? / Tu as quel âge ? — Ngài/Bạn bao nhiêu tuổi?
+• Vous êtes d'où ? / Tu viens d'où ? — Ngài/Bạn đến từ đâu?
+• Qu'est-ce que vous faites dans la vie ? — Ngài làm nghề gì? (làm nghề gì trong đời?)
 
 TẠM BIỆT:
-• Au revoir ! (chính thức) · À bientôt ! (hẹn gặp lại sớm)
-• À tout à l'heure ! (gặp lại lúc nữa) · À demain ! (gặp mai)
-• Bonne journée ! / Bonne soirée ! / Bonne nuit !
-• Salut ! (thân mật — dùng cả khi gặp lẫn khi chia tay)
+• Au revoir ! — Tạm biệt! (chính thức) · À bientôt ! — Hẹn gặp lại sớm!
+• À tout à l'heure ! — Lát gặp lại! · À demain ! — Hẹn mai gặp!
+• Bonne journée ! / Bonne soirée ! / Bonne nuit ! — Chúc một ngày tốt lành! / Chúc buổi tối vui! / Chúc ngủ ngon!
+• Salut ! — Chào! (thân mật — dùng cả khi gặp lẫn khi chia tay)
 
 💡 VOUS vs TU — quy tắc chọn:
 TU → bạn bè, gia đình, người cùng tuổi, trẻ em
@@ -406,32 +406,32 @@ PHẦN 4: 90–99 = 80 + 10
         rule:`SCRIPT TỰ GIỚI THIỆU HOÀN CHỈNH:
 
 1. NÀO, TUỔI, NGUỒN GỐC:
-• Je m'appelle [prénom] [nom]. J'ai [X] ans.
-• Je suis [nationalité]. Je viens de [ville/pays].
-• J'habite à [ville], en/au [pays] depuis [X] ans.
+• Je m'appelle [prénom] [nom]. J'ai [X] ans. — Tôi tên là [tên] [họ]. Tôi [X] tuổi.
+• Je suis [nationalité]. Je viens de [ville/pays]. — Tôi là người [quốc tịch]. Tôi đến từ [thành phố/quốc gia].
+• J'habite à [ville], en/au [pays] depuis [X] ans. — Tôi sống ở [thành phố], tại [quốc gia] được [X] năm rồi.
 
 2. NGHỀ NGHIỆP / HỌC VẤN:
-• Je suis [profession]. / Je travaille comme [profession].
-• Je travaille dans [secteur / entreprise / hôpital…].
-• Je suis étudiant(e) en [droit / médecine / langues…].
+• Je suis [profession]. / Je travaille comme [profession]. — Tôi là [nghề]. / Tôi làm [nghề].
+• Je travaille dans [secteur / entreprise / hôpital…]. — Tôi làm trong [lĩnh vực / công ty / bệnh viện…].
+• Je suis étudiant(e) en [droit / médecine / langues…]. — Tôi là sinh viên ngành [luật / y / ngôn ngữ…].
 
 3. NGÔN NGỮ:
-• Je parle [français / vietnamien / anglais / japonais].
-• Je parle un peu de [langue]. / J'apprends le français.
+• Je parle [français / vietnamien / anglais / japonais]. — Tôi nói [tiếng Pháp / tiếng Việt / tiếng Anh / tiếng Nhật].
+• Je parle un peu de [langue]. / J'apprends le français. — Tôi nói chút [ngôn ngữ]. / Tôi đang học tiếng Pháp.
 
-4. GOÛTS & LOISIRS:
-• J'aime / J'adore [la musique / voyager / cuisiner].
-• Je n'aime pas [le sport / se lever tôt].
-• Mon passe-temps préféré, c'est [loisir].
+4. GOÛTS & LOISIRS (sở thích & giải trí):
+• J'aime / J'adore [la musique / voyager / cuisiner]. — Tôi thích / Tôi mê [âm nhạc / đi du lịch / nấu ăn].
+• Je n'aime pas [le sport / se lever tôt]. — Tôi không thích [thể thao / dậy sớm].
+• Mon passe-temps préféré, c'est [loisir]. — Trò tiêu khiển yêu thích của tôi là [sở thích].
 
-5. FAMILLE:
-• Je suis fils/fille unique. / J'ai [X] frère(s) et [X] sœur(s).
-• Mon père est [profession], ma mère est [profession].
-• Je suis célibataire / marié(e) / en couple. / J'ai [X] enfant(s).
+5. FAMILLE (gia đình):
+• Je suis fils/fille unique. / J'ai [X] frère(s) et [X] sœur(s). — Tôi là con một. / Tôi có [X] anh em trai và [X] chị em gái.
+• Mon père est [profession], ma mère est [profession]. — Bố tôi là [nghề], mẹ tôi là [nghề].
+• Je suis célibataire / marié(e) / en couple. / J'ai [X] enfant(s). — Tôi độc thân / đã kết hôn / đang có người yêu. / Tôi có [X] con.
 
-6. COORDONNÉES:
-• Mon numéro, c'est le [06 XX XX XX XX].
-• Mon adresse mail : [adresse]. J'ai Instagram : [@handle].
+6. COORDONNÉES (thông tin liên hệ):
+• Mon numéro, c'est le [06 XX XX XX XX]. — Số của tôi là [06 XX XX XX XX].
+• Mon adresse mail : [adresse]. J'ai Instagram : [@handle]. — Email của tôi: [địa chỉ]. Tôi có Instagram: [@tên].
 
 💡 Ordre naturel de présentation:
 Prénom → âge → ville → profession/études → famille → goûts → contact`,
@@ -602,33 +602,33 @@ PHẦN 2: LƯU Ý
         rule:`MUA SẮM TẠI CỬA HÀNG — Script đầy đủ:
 
 BƯỚC 1 — VÀO CỬA HÀNG:
-• Bonjour ! Je cherche [du pain / une baguette / du fromage].
-• Vous avez [des tomates / du jambon] ?
-• C'est pour [offrir / consommer de suite].
+• Bonjour ! Je cherche [du pain / une baguette / du fromage]. — Xin chào! Tôi tìm [bánh mì / một ổ baguette / phô mai].
+• Vous avez [des tomates / du jambon] ? — Anh/chị có [cà chua / giăm bông] không?
+• C'est pour [offrir / consommer de suite]. — Cái này để [làm quà / ăn liền].
 
 BƯỚC 2 — CHỈ ĐỊNH / HỎI LƯỢNG:
-• Je voudrais [200 grammes / une tranche / un morceau] de [produit].
-• Donnez-moi [un kilo / une bouteille / une boîte / un paquet] de [produit].
-• Il m'en faut combien ? → [X] suffira / Il m'en faut [X].
-• C'est tout ? — Oui, c'est tout. / Ajoutez aussi [produit].
+• Je voudrais [200 grammes / une tranche / un morceau] de [produit]. — Tôi muốn [200 gam / một lát / một miếng] [sản phẩm].
+• Donnez-moi [un kilo / une bouteille / une boîte / un paquet] de [produit]. — Cho tôi [một ký / một chai / một hộp / một gói] [sản phẩm].
+• Il m'en faut combien ? → [X] suffira / Il m'en faut [X]. — Tôi cần bao nhiêu? → [X] là đủ / Tôi cần [X].
+• C'est tout ? — Oui, c'est tout. / Ajoutez aussi [produit]. — Hết chưa ạ? — Vâng, hết rồi. / Thêm cả [sản phẩm] nữa.
 
 BƯỚC 3 — HỎI GIÁ:
-• C'est combien ? / Ça fait combien en tout ?
-• Le [produit], c'est combien le kilo / la pièce / le litre ?
+• C'est combien ? / Ça fait combien en tout ? — Bao nhiêu tiền? / Tất cả hết bao nhiêu?
+• Le [produit], c'est combien le kilo / la pièce / le litre ? — [Sản phẩm] bao nhiêu một ký / một cái / một lít?
 
 BƯỚC 4 — THANH TOÁN:
-• Je paye comment ? / Vous acceptez la carte ?
-• Par carte, s'il vous plaît. / En espèces.
-• Je n'ai pas de monnaie. / Vous avez la monnaie pour [20 euros] ?
-• Gardez la monnaie !
+• Je paye comment ? / Vous acceptez la carte ? — Tôi thanh toán thế nào? / Anh/chị có nhận thẻ không?
+• Par carte, s'il vous plaît. / En espèces. — Trả bằng thẻ nhé. / Tiền mặt.
+• Je n'ai pas de monnaie. / Vous avez la monnaie pour [20 euros] ? — Tôi không có tiền lẻ. / Anh/chị có thối tiền cho [tờ 20 euro] không?
+• Gardez la monnaie ! — Khỏi thối lại! (giữ tiền thừa)
 
-TYPES DE COMMERCES & CE QU'ON Y ACHÈTE:
-• la boulangerie → du pain, des croissants, des gâteaux
-• la boucherie → du bœuf, du poulet, de l'agneau, des saucisses
-• la fromagerie → du camembert, du brie, du gruyère
-• l'épicerie / le marché → des fruits, des légumes, des conserves
-• la pharmacie → des médicaments, de la crème, des vitamines
-• la poissonnerie → du saumon, des crevettes, des huîtres
+TYPES DE COMMERCES & CE QU'ON Y ACHÈTE (các loại cửa hàng & mua gì ở đó):
+• la boulangerie (tiệm bánh mì) → du pain, des croissants, des gâteaux (bánh mì, bánh sừng bò, bánh ngọt)
+• la boucherie (hàng thịt) → du bœuf, du poulet, de l'agneau, des saucisses (thịt bò, gà, cừu, xúc xích)
+• la fromagerie (hàng phô mai) → du camembert, du brie, du gruyère (các loại phô mai)
+• l'épicerie / le marché (tạp hóa / chợ) → des fruits, des légumes, des conserves (trái cây, rau, đồ hộp)
+• la pharmacie (nhà thuốc) → des médicaments, de la crème, des vitamines (thuốc, kem, vitamin)
+• la poissonnerie (hàng hải sản) → du saumon, des crevettes, des huîtres (cá hồi, tôm, hàu)
 
 ⚠️ "Chez" avec les personnes, "à la/au" avec les lieux:
 "Je vais chez le boulanger." = Je vais à la boulangerie.`,
@@ -789,51 +789,51 @@ BẢNG CHIA — 2 động từ mẫu:
         rule:`AU RESTAURANT — Hội thoại từ đầu đến cuối:
 
 📞 ĐẶT BÀN TRƯỚC (réserver):
-• Je voudrais réserver une table pour [X] personnes.
-• C'est pour [ce soir / demain soir / samedi à 20h].
-• À quel nom ? — Au nom de [nom].
-• Vous avez une table en terrasse / non-fumeur ?
+• Je voudrais réserver une table pour [X] personnes. — Tôi muốn đặt một bàn cho [X] người.
+• C'est pour [ce soir / demain soir / samedi à 20h]. — Đặt cho [tối nay / tối mai / thứ Bảy lúc 20h].
+• À quel nom ? — Au nom de [nom]. — Đặt tên ai ạ? — Tên [tên].
+• Vous avez une table en terrasse / non-fumeur ? — Anh/chị có bàn ngoài hiên / khu không hút thuốc không?
 
 🚪 KHI ĐẾN (arriver):
-• Bonjour, j'ai réservé au nom de [nom].
-• Une table pour [X], s'il vous plaît.
-• On peut s'asseoir là-bas ?
+• Bonjour, j'ai réservé au nom de [nom]. — Xin chào, tôi đã đặt bàn tên [tên].
+• Une table pour [X], s'il vous plaît. — Cho một bàn [X] người ạ.
+• On peut s'asseoir là-bas ? — Chúng tôi ngồi đằng kia được không?
 
-📋 COMMANDER (commander):
-Demander:
-• La carte / Le menu, s'il vous plaît !
-• Qu'est-ce que vous recommandez ?
-• C'est quoi exactement, [le plat du jour / la blanquette] ?
-• C'est [végétarien / sans gluten / sans lactose] ?
+📋 COMMANDER (gọi món):
+Demander (hỏi):
+• La carte / Le menu, s'il vous plaît ! — Cho xem thực đơn ạ!
+• Qu'est-ce que vous recommandez ? — Anh/chị gợi ý món nào?
+• C'est quoi exactement, [le plat du jour / la blanquette] ? — [Món trong ngày / món blanquette] chính xác là gì vậy?
+• C'est [végétarien / sans gluten / sans lactose] ? — Món này [chay / không gluten / không lactose] phải không?
 
-Commander:
-• Je voudrais [la soupe à l'oignon], s'il vous plaît.
-• Pour moi, [le steak-frites]. / Comme [entrée / plat / dessert], je prends [plat].
-• Je vais prendre [le menu à 15 euros].
+Commander (gọi món):
+• Je voudrais [la soupe à l'oignon], s'il vous plaît. — Cho tôi [súp hành] ạ.
+• Pour moi, [le steak-frites]. / Comme [entrée / plat / dessert], je prends [plat]. — Tôi lấy [bít tết khoai chiên]. / Phần [khai vị / món chính / tráng miệng], tôi gọi [món].
+• Je vais prendre [le menu à 15 euros]. — Tôi sẽ lấy [phần set 15 euro].
 
-Les boissons:
-• Une carafe d'eau, s'il vous plaît. (gratuit en France!)
-• Un verre de [vin rouge / vin blanc / rosé], s'il vous plaît.
-• Je voudrais [un jus d'orange / une eau pétillante / un café].
+Les boissons (đồ uống):
+• Une carafe d'eau, s'il vous plaît. — Cho một bình nước ạ. (miễn phí ở Pháp!)
+• Un verre de [vin rouge / vin blanc / rosé], s'il vous plaît. — Cho một ly [vang đỏ / vang trắng / vang hồng] ạ.
+• Je voudrais [un jus d'orange / une eau pétillante / un café]. — Tôi muốn [nước cam / nước có ga / một ly cà phê].
 
-🍽️ PENDANT LE REPAS:
-• Excusez-moi, vous avez du [sel / poivre / pain] ?
-• C'est délicieux ! / C'est très bon. / Je me régale !
-• C'est [trop salé / pas assez cuit / un peu froid].
-• Vous pouvez me rapporter du pain ?
+🍽️ PENDANT LE REPAS (trong bữa ăn):
+• Excusez-moi, vous avez du [sel / poivre / pain] ? — Xin lỗi, có [muối / tiêu / bánh mì] không ạ?
+• C'est délicieux ! / C'est très bon. / Je me régale ! — Ngon quá! / Rất ngon. / Tôi ăn thích mê!
+• C'est [trop salé / pas assez cuit / un peu froid]. — Món hơi [mặn / chưa chín tới / nguội].
+• Vous pouvez me rapporter du pain ? — Anh/chị cho thêm bánh mì được không?
 
-💳 PAYER (payer):
-• L'addition, s'il vous plaît ! / On peut avoir l'addition ?
-• C'est combien ? / Le service est compris ?
-• On partage ? / C'est moi qui invite ! / C'est pour moi.
-• Vous acceptez la carte ? / Je paye en espèces.
+💳 PAYER (thanh toán):
+• L'addition, s'il vous plaît ! / On peut avoir l'addition ? — Tính tiền ạ! / Cho xin hóa đơn được không?
+• C'est combien ? / Le service est compris ? — Hết bao nhiêu? / Đã gồm phí phục vụ chưa?
+• On partage ? / C'est moi qui invite ! / C'est pour moi. — Chia đôi nhé? / Để tôi mời! / Tôi trả.
+• Vous acceptez la carte ? / Je paye en espèces. — Anh/chị nhận thẻ không? / Tôi trả tiền mặt.
 
-⚠️ VOCABULAIRE CLÉ:
-• "La carte" = menu (liste des plats)
-• "Le menu" = formule à prix fixe (ex. entrée + plat + dessert = 15€)
-• "Le plat du jour" = aujourd'hui seulement
-• "Service compris" = tip inclus (pas besoin de donner de pourboire extra)
-• "Une carafe d'eau" = eau du robinet, toujours gratuite`,
+⚠️ VOCABULAIRE CLÉ (từ vựng then chốt):
+• "La carte" = menu (danh sách các món)
+• "Le menu" = phần ăn giá cố định (vd: khai vị + món chính + tráng miệng = 15€)
+• "Le plat du jour" = món của riêng hôm nay
+• "Service compris" = đã gồm tip (không cần đưa thêm tiền boa)
+• "Une carafe d'eau" = nước lọc vòi, luôn miễn phí`,
         examples:[
           "Bonjour! J'ai réservé une table pour deux au nom de Nguyen.",
           "La carte, s'il vous plaît! — Voici. Qu'est-ce que vous recommandez? — La blanquette de veau est excellente!",
@@ -975,30 +975,30 @@ PHẦN 3: BIỂU THỨC THỜI GIAN (đầu hoặc cuối câu)
         rule:`DI CHUYỂN TRONG THÀNH PHỐ:
 
 🚇 MUA VÉ:
-• Un ticket / Un carnet de 10, s'il vous plaît.
-• C'est quelle ligne pour aller à [la gare / le centre-ville] ?
-• Je voudrais un aller simple / aller-retour pour [destination].
-• C'est direct ou avec correspondance ?
+• Un ticket / Un carnet de 10, s'il vous plaît. — Cho một vé / một xấp 10 vé ạ.
+• C'est quelle ligne pour aller à [la gare / le centre-ville] ? — Đi [nhà ga / trung tâm] thì tuyến nào ạ?
+• Je voudrais un aller simple / aller-retour pour [destination]. — Tôi muốn vé một chiều / khứ hồi đi [điểm đến].
+• C'est direct ou avec correspondance ? — Đi thẳng hay phải đổi tuyến ạ?
 
 🚌 DANS LE BUS / LE MÉTRO:
-• Ce bus/métro va bien à [la gare / le musée] ?
-• Excusez-moi, je descends à quel arrêt pour [lieu] ?
-• C'est encore loin ? / Combien d'arrêts encore ?
-• Composez votre billet ! (valider le ticket — obligatoire!)
+• Ce bus/métro va bien à [la gare / le musée] ? — Xe buýt/tàu này có đến [nhà ga / bảo tàng] không ạ?
+• Excusez-moi, je descends à quel arrêt pour [lieu] ? — Xin lỗi, đi [địa điểm] thì xuống trạm nào ạ?
+• C'est encore loin ? / Combien d'arrêts encore ? — Còn xa không ạ? / Còn mấy trạm nữa?
+• Composez votre billet ! — Hãy bấm/quẹt vé! (bắt buộc phải dập vé)
 
 🚆 À LA GARE / PRENDRE LE TRAIN:
-• Je voudrais un billet pour [Lyon], s'il vous plaît.
-• En première ou deuxième classe ? → Deuxième classe, s'il vous plaît.
-• À quelle heure part le prochain train pour [ville] ?
-• Le train est à l'heure ? / Il a du retard ?
-• C'est quel quai ? / Voie [numéro].
-• Je voudrais réserver une place [côté fenêtre / côté couloir].
+• Je voudrais un billet pour [Lyon], s'il vous plaît. — Tôi muốn một vé đi [Lyon] ạ.
+• En première ou deuxième classe ? → Deuxième classe, s'il vous plaît. — Hạng nhất hay hạng hai? → Hạng hai ạ.
+• À quelle heure part le prochain train pour [ville] ? — Chuyến tàu tới đi [thành phố] mấy giờ chạy ạ?
+• Le train est à l'heure ? / Il a du retard ? — Tàu đúng giờ chứ? / Có trễ không?
+• C'est quel quai ? / Voie [numéro]. — Sân ga nào ạ? / Đường ray số [số].
+• Je voudrais réserver une place [côté fenêtre / côté couloir]. — Tôi muốn đặt chỗ [cạnh cửa sổ / cạnh lối đi].
 
-🗺️ DEMANDER SON CHEMIN (rappel):
-→ Voir Pour communiquer u4-f dans les notes!
-• Excusez-moi, je cherche [la gare / la mairie / la poste].
-• C'est loin d'ici ? / C'est à combien de minutes à pied ?
-• Il y a [un bus / un métro] pour aller à [lieu] ?
+🗺️ DEMANDER SON CHEMIN (hỏi đường — nhắc lại):
+→ Xem « Pour communiquer » u4-f trong phần ghi chú!
+• Excusez-moi, je cherche [la gare / la mairie / la poste]. — Xin lỗi, tôi tìm [nhà ga / tòa thị chính / bưu điện].
+• C'est loin d'ici ? / C'est à combien de minutes à pied ? — Có xa đây không? / Đi bộ mất mấy phút?
+• Il y a [un bus / un métro] pour aller à [lieu] ? — Có [xe buýt / tàu điện] đi [địa điểm] không ạ?
 
 MODES DE TRANSPORT à connaître:
 • à pied (đi bộ) · à vélo (xe đạp) · en vélo électrique
@@ -1571,41 +1571,41 @@ Ví dụ: "Je veux un café." · "Ils veulent des billets."`,
         topic:"Production orale — Proposer une sortie & parler de sa journée",
         rule:`PROPOSER ET ORGANISER UNE SORTIE:
 
-PROPOSER:
-• Tu es libre [ce soir / samedi / ce week-end] ?
-• On va [au cinéma / au musée / au restaurant / en boîte] ?
-• Tu veux [voir un film / manger ensemble / faire une promenade] ?
-• Ça te dit [une expo sur Brancusi / un concert de jazz] ?
-• Je t'invite ! / C'est moi qui invite.
+PROPOSER (rủ rê / đề nghị):
+• Tu es libre [ce soir / samedi / ce week-end] ? — Bạn rảnh [tối nay / thứ Bảy / cuối tuần] không?
+• On va [au cinéma / au musée / au restaurant / en boîte] ? — Mình đi [xem phim / bảo tàng / nhà hàng / quán bar] nhé?
+• Tu veux [voir un film / manger ensemble / faire une promenade] ? — Bạn muốn [xem phim / ăn cùng nhau / đi dạo] không?
+• Ça te dit [une expo sur Brancusi / un concert de jazz] ? — Bạn thấy [một triển lãm Brancusi / một buổi hòa nhạc jazz] thế nào?
+• Je t'invite ! / C'est moi qui invite. — Tớ mời cậu! / Để tớ mời.
 
-ACCEPTER:
-• Oui, bonne idée ! / Pourquoi pas ! / Avec plaisir !
-• Super ! / Génial ! / Je suis partant(e) !
-• À quelle heure / Où on se retrouve ?
+ACCEPTER (đồng ý):
+• Oui, bonne idée ! / Pourquoi pas ! / Avec plaisir ! — Ừ, ý hay đấy! / Sao lại không! / Rất sẵn lòng!
+• Super ! / Génial ! / Je suis partant(e) ! — Tuyệt! / Đỉnh! / Tớ tham gia liền!
+• À quelle heure / Où on se retrouve ? — Mấy giờ / Gặp ở đâu?
 
-REFUSER POLIMENT:
-• Désolé(e), je ne peux pas. / Je suis occupé(e).
-• Je dois [travailler / garder les enfants / rester à la maison].
-• J'ai déjà [un rendez-vous / un cours / un dîner].
-• Une prochaine fois peut-être ?
+REFUSER POLIMENT (từ chối lịch sự):
+• Désolé(e), je ne peux pas. / Je suis occupé(e). — Xin lỗi, tớ không đi được. / Tớ đang bận.
+• Je dois [travailler / garder les enfants / rester à la maison]. — Tớ phải [làm việc / trông con / ở nhà].
+• J'ai déjà [un rendez-vous / un cours / un dîner]. — Tớ đã có [một cuộc hẹn / một buổi học / một bữa tối] rồi.
+• Une prochaine fois peut-être ? — Để lần sau nhé?
 
-SE DONNER RENDEZ-VOUS:
-• On se retrouve [devant le cinéma / à la station de métro] ?
-• À [19h30] ça te va ? / On se retrouve à quelle heure ?
-• Je te retrouve là-bas ! / À tout à l'heure !
+SE DONNER RENDEZ-VOUS (hẹn gặp):
+• On se retrouve [devant le cinéma / à la station de métro] ? — Mình gặp nhau [trước rạp phim / ở ga tàu điện] nhé?
+• À [19h30] ça te va ? / On se retrouve à quelle heure ? — [19h30] được không? / Mình gặp lúc mấy giờ?
+• Je te retrouve là-bas ! / À tout à l'heure ! — Tớ gặp cậu ở đó nhé! / Lát gặp!
 
-PARLER D'UN SPECTACLE / FILM:
-• Tu as vu [ce film / cette série / cette expo] ?
-• C'est bien ? Tu me recommandes ?
-• C'est quel genre ? / L'histoire parle de quoi ?
-• C'était [super / nul / émouvant / drôle / long].
-• Je l'ai adoré ! / J'ai bien aimé mais la fin est décevante.
+PARLER D'UN SPECTACLE / FILM (bàn về buổi diễn / phim):
+• Tu as vu [ce film / cette série / cette expo] ? — Bạn xem [phim này / phim bộ này / triển lãm này] chưa?
+• C'est bien ? Tu me recommandes ? — Có hay không? Bạn có giới thiệu không?
+• C'est quel genre ? / L'histoire parle de quoi ? — Thể loại gì vậy? / Nội dung nói về gì?
+• C'était [super / nul / émouvant / drôle / long]. — Nó [tuyệt / dở tệ / cảm động / vui / dài lê thê].
+• Je l'ai adoré ! / J'ai bien aimé mais la fin est décevante. — Tớ mê lắm! / Tớ thích nhưng đoạn kết hơi hụt hẫng.
 
-SA ROUTINE QUOTIDIENNE (production orale simple):
-• D'habitude, je [prends le bus / travaille de 9h à 18h].
-• Le matin, je [prends un café / lis les news].
-• Le week-end, je [sors avec des amis / reste à la maison / fais du sport].
-• Le lundi, j'ai [cours / réunion]. Tous les vendredis, je [finis tôt].`,
+SA ROUTINE QUOTIDIENNE (thói quen hằng ngày — nói đơn giản):
+• D'habitude, je [prends le bus / travaille de 9h à 18h]. — Thường thì tôi [đi xe buýt / làm từ 9h đến 18h].
+• Le matin, je [prends un café / lis les news]. — Buổi sáng, tôi [uống cà phê / đọc tin tức].
+• Le week-end, je [sors avec des amis / reste à la maison / fais du sport]. — Cuối tuần, tôi [đi chơi với bạn / ở nhà / tập thể thao].
+• Le lundi, j'ai [cours / réunion]. Tous les vendredis, je [finis tôt]. — Thứ Hai tôi có [buổi học / cuộc họp]. Thứ Sáu nào tôi cũng [tan sớm].`,
         examples:[
           "Tu es libre samedi soir? On va au cinéma? — Oui, bonne idée! À quelle heure?",
           "Il y a un concert de jazz au Bataclan. Ça te dit? — Pourquoi pas! À quelle heure ça commence?",
@@ -1864,24 +1864,24 @@ un studio (1 pièce tout-en-un) · un T1 (1 pièce + cuisine séparée)
 un T2 (2 pièces) · un T3 (3 pièces) · un appartement · une maison
 une résidence étudiante · une chambre chez l'habitant (colocation)
 
-DÉCRIRE SON LOGEMENT:
-• J'habite dans un [appartement / studio] de [X] m².
-• Il y a [X] pièces : [salon / chambre / cuisine / salle de bains / WC].
-• C'est [meublé / non meublé]. / C'est [grand / petit / lumineux / sombre].
-• Il y a [un balcon / un jardin / une terrasse / un parking / une cave].
-• C'est au [rez-de-chaussée / 1er / 2e] étage.
-• L'immeuble a [un ascenseur / un gardien / un digicode / un interphone].
-• C'est près [du métro / des commerces / d'une école].
+DÉCRIRE SON LOGEMENT (mô tả chỗ ở):
+• J'habite dans un [appartement / studio] de [X] m². — Tôi sống trong [căn hộ / phòng studio] rộng [X] m².
+• Il y a [X] pièces : [salon / chambre / cuisine / salle de bains / WC]. — Có [X] phòng: [phòng khách / phòng ngủ / bếp / phòng tắm / nhà vệ sinh].
+• C'est [meublé / non meublé]. / C'est [grand / petit / lumineux / sombre]. — Nhà [có sẵn đồ / trống]. / Nhà [rộng / nhỏ / sáng / tối].
+• Il y a [un balcon / un jardin / une terrasse / un parking / une cave]. — Có [ban công / vườn / sân thượng / chỗ đậu xe / tầng hầm].
+• C'est au [rez-de-chaussée / 1er / 2e] étage. — Nhà ở [tầng trệt / tầng 1 / tầng 2].
+• L'immeuble a [un ascenseur / un gardien / un digicode / un interphone]. — Tòa nhà có [thang máy / bảo vệ / khóa mã số / chuông liên lạc].
+• C'est près [du métro / des commerces / d'une école]. — Gần [ga tàu điện / khu mua sắm / trường học].
 
-CHERCHER UN LOGEMENT — conversation:
-• Je cherche un appartement [2 pièces / T2] dans [le 5e arrondissement / le centre].
-• Mon budget est de [X] euros par mois, charges comprises.
-• Je cherche quelque chose de [meublé / calme / proche des transports].
-• Quand est-ce que c'est disponible ? / Je peux le visiter quand ?
-• Le loyer est de combien ? Les charges sont comprises ?
-• Il y a une caution ? C'est combien ? (= tiền đặt cọc, thường 1 tháng tiền thuê)
-• Les animaux sont acceptés ? / Le parking est inclus ?
-• C'est bien isolé ? Il y a du bruit ?
+CHERCHER UN LOGEMENT — conversation (đi tìm nhà):
+• Je cherche un appartement [2 pièces / T2] dans [le 5e arrondissement / le centre]. — Tôi tìm một căn hộ [2 phòng / T2] ở [quận 5 / trung tâm].
+• Mon budget est de [X] euros par mois, charges comprises. — Ngân sách của tôi là [X] euro/tháng, đã gồm phí chung.
+• Je cherche quelque chose de [meublé / calme / proche des transports]. — Tôi tìm nơi [có sẵn đồ / yên tĩnh / gần phương tiện công cộng].
+• Quand est-ce que c'est disponible ? / Je peux le visiter quand ? — Khi nào trống ạ? / Tôi xem nhà được khi nào?
+• Le loyer est de combien ? Les charges sont comprises ? — Tiền thuê bao nhiêu? Đã gồm phí chung chưa?
+• Il y a une caution ? C'est combien ? — Có tiền đặt cọc không? Bao nhiêu? (= tiền đặt cọc, thường 1 tháng tiền thuê)
+• Les animaux sont acceptés ? / Le parking est inclus ? — Có cho nuôi thú cưng không? / Có kèm chỗ đậu xe không?
+• C'est bien isolé ? Il y a du bruit ? — Cách âm tốt chứ? / Có ồn không?
 
 VOCABULAIRE ESSENTIEL DU LOGEMENT:
 le loyer = tiền thuê nhà (mensuel = mỗi tháng)
@@ -2083,38 +2083,38 @@ PHẦN 2: LỜI KHUYÊN Y TẾ THƯỜNG GẶP
         topic:"Production orale — Chez le médecin",
         rule:`KHÁM BỆNH — Hội thoại hoàn chỉnh:
 
-📞 PRENDRE RENDEZ-VOUS:
-• Je voudrais prendre rendez-vous avec le docteur [nom], s'il vous plaît.
-• C'est urgent ou c'est pour un contrôle ?
-• J'ai mal à [la gorge] depuis [hier / deux jours]. C'est urgent.
-• Vous avez une place aujourd'hui / cette semaine ?
-• Je suis disponible [le matin / l'après-midi / n'importe quand].
+📞 PRENDRE RENDEZ-VOUS (đặt lịch hẹn):
+• Je voudrais prendre rendez-vous avec le docteur [nom], s'il vous plaît. — Tôi muốn đặt lịch hẹn với bác sĩ [tên] ạ.
+• C'est urgent ou c'est pour un contrôle ? — Có gấp không hay là khám định kỳ ạ?
+• J'ai mal à [la gorge] depuis [hier / deux jours]. C'est urgent. — Tôi đau [họng] từ [hôm qua / hai ngày nay]. Hơi gấp ạ.
+• Vous avez une place aujourd'hui / cette semaine ? — Hôm nay / tuần này còn lịch trống không ạ?
+• Je suis disponible [le matin / l'après-midi / n'importe quand]. — Tôi rảnh [buổi sáng / buổi chiều / lúc nào cũng được].
 
-🩺 AVEC LE MÉDECIN — Décrire ses symptômes:
-(Rappel expressions AVOIR — voir Unité 0!)
-• Docteur, j'ai mal à [la tête / la gorge / l'estomac / le dos / le genou].
-• J'ai [un rhume / une angine / une toux / de la fièvre / 38,5].
-• Ça a commencé [hier / avant-hier / il y a deux jours].
-• Je tousse beaucoup. / Je me sens très fatigué(e).
-• J'ai du mal à [dormir / avaler / marcher].
+🩺 AVEC LE MÉDECIN — Décrire ses symptômes (tả triệu chứng):
+(Ôn lại các cụm với AVOIR — xem Unité 0!)
+• Docteur, j'ai mal à [la tête / la gorge / l'estomac / le dos / le genou]. — Thưa bác sĩ, tôi đau [đầu / họng / dạ dày / lưng / đầu gối].
+• J'ai [un rhume / une angine / une toux / de la fièvre / 38,5]. — Tôi bị [cảm / viêm họng / ho / sốt / 38,5 độ].
+• Ça a commencé [hier / avant-hier / il y a deux jours]. — Bắt đầu từ [hôm qua / hôm kia / hai ngày trước].
+• Je tousse beaucoup. / Je me sens très fatigué(e). — Tôi ho nhiều. / Tôi thấy rất mệt.
+• J'ai du mal à [dormir / avaler / marcher]. — Tôi khó [ngủ / nuốt / đi lại].
 
-Répondre aux questions:
-• Vous avez des allergies ? — Non, aucune. / Oui, je suis allergique à [pénicilline].
-• Vous prenez des médicaments ? — Non. / Oui, je prends [médicament].
-• Vous fumez ? — Non. / Oui, j'ai arrêté.
-• Vous avez été vacciné(e) contre [la grippe] ?
+Répondre aux questions (trả lời câu hỏi):
+• Vous avez des allergies ? — Non, aucune. / Oui, je suis allergique à [pénicilline]. — Anh/chị có dị ứng gì không? — Không, không có. / Có, tôi dị ứng [penicillin].
+• Vous prenez des médicaments ? — Non. / Oui, je prends [médicament]. — Anh/chị đang uống thuốc gì không? — Không. / Có, tôi đang uống [thuốc].
+• Vous fumez ? — Non. / Oui, j'ai arrêté. — Anh/chị có hút thuốc không? — Không. / Có, nhưng tôi đã bỏ.
+• Vous avez été vacciné(e) contre [la grippe] ? — Anh/chị đã tiêm phòng [cúm] chưa?
 
-Après l'examen:
-• C'est grave, docteur ? / Je dois m'arrêter de travailler ?
-• Vous me prescrivez quelque chose ?
-• Je reviens vous voir dans [X] jours si ça ne va pas mieux ?
+Après l'examen (sau khi khám):
+• C'est grave, docteur ? / Je dois m'arrêter de travailler ? — Có nặng không thưa bác sĩ? / Tôi có cần nghỉ làm không?
+• Vous me prescrivez quelque chose ? — Bác sĩ kê đơn gì cho tôi chứ?
+• Je reviens vous voir dans [X] jours si ça ne va pas mieux ? — Nếu không đỡ thì [X] ngày nữa tôi quay lại nhé?
 
-💊 À LA PHARMACIE:
-• J'ai une ordonnance du Dr [nom].
-• Je voudrais quelque chose pour [la toux / les maux de tête / le mal de gorge].
-• Vous avez [du paracétamol / du sirop / des pastilles] ?
-• Il faut prendre [combien de comprimés] par jour ?
-• C'est remboursé par la Sécurité sociale ?
+💊 À LA PHARMACIE (ở nhà thuốc):
+• J'ai une ordonnance du Dr [nom]. — Tôi có đơn thuốc của bác sĩ [tên].
+• Je voudrais quelque chose pour [la toux / les maux de tête / le mal de gorge]. — Tôi muốn thuốc trị [ho / nhức đầu / đau họng].
+• Vous avez [du paracétamol / du sirop / des pastilles] ? — Có [paracétamol / siro / viên ngậm] không ạ?
+• Il faut prendre [combien de comprimés] par jour ? — Mỗi ngày uống [mấy viên] ạ?
+• C'est remboursé par la Sécurité sociale ? — Cái này bảo hiểm xã hội có hoàn tiền không ạ?
 
 PARTIES DU CORPS — à connaître:
 la tête · le front · les yeux · le nez · la bouche · la gorge
@@ -2283,41 +2283,41 @@ PHẦN 3: ĐỐI CHIẾU "ĐẾN ĐÂU" (Unité 1) vs "TỪ ĐÂU" (Unité 9)
         topic:"Production orale — Planifier des vacances & À l'hôtel",
         rule:`CHUẨN BỊ VÀ KỂ VỀ KỲ NGHỈ:
 
-PLANIFIER:
-• On part où cette année ? Tu as des idées pour les vacances ?
-• Je voudrais aller [à la mer / à la montagne / à l'étranger / en ville].
-• On peut partir du [X] au [X] ? / On a [X] jours de congés.
-• On voyage comment ? → En avion / en train / en voiture / en bateau.
-• On loge où ? → À l'hôtel / en camping / dans un Airbnb / chez des amis.
+PLANIFIER (lên kế hoạch):
+• On part où cette année ? Tu as des idées pour les vacances ? — Năm nay mình đi đâu? Bạn có ý tưởng gì cho kỳ nghỉ không?
+• Je voudrais aller [à la mer / à la montagne / à l'étranger / en ville]. — Tôi muốn đi [biển / núi / nước ngoài / thành phố].
+• On peut partir du [X] au [X] ? / On a [X] jours de congés. — Mình đi từ [ngày X] đến [ngày X] được không? / Mình có [X] ngày nghỉ phép.
+• On voyage comment ? → En avion / en train / en voiture / en bateau. — Mình đi bằng gì? → Máy bay / tàu hỏa / ô tô / tàu thủy.
+• On loge où ? → À l'hôtel / en camping / dans un Airbnb / chez des amis. — Mình ở đâu? → Khách sạn / cắm trại / Airbnb / nhà bạn bè.
 
-🏨 À L'HÔTEL — Réserver (voir aussi Pour communiquer u9-b):
-• Je voudrais réserver une chambre [simple / double / familiale / twin].
-• Du [18] au [23 août], soit [5] nuits.
-• Avec ou sans petit-déjeuner ? → Avec, s'il vous plaît.
-• C'est combien la nuit ? / Le petit-déjeuner est compris ?
-• Les animaux sont acceptés ? / Il y a un parking ?
-• À quel nom ? — Au nom de [nom].
+🏨 À L'HÔTEL — Réserver (xem thêm « Pour communiquer » u9-b):
+• Je voudrais réserver une chambre [simple / double / familiale / twin]. — Tôi muốn đặt phòng [đơn / đôi / gia đình / hai giường].
+• Du [18] au [23 août], soit [5] nuits. — Từ [18] đến [23 tháng 8], tức [5] đêm.
+• Avec ou sans petit-déjeuner ? → Avec, s'il vous plaît. — Có kèm bữa sáng không ạ? → Có nhé.
+• C'est combien la nuit ? / Le petit-déjeuner est compris ? — Bao nhiêu một đêm? / Đã gồm bữa sáng chưa?
+• Les animaux sont acceptés ? / Il y a un parking ? — Có cho mang thú cưng không? / Có chỗ đậu xe không?
+• À quel nom ? — Au nom de [nom]. — Đặt tên ai ạ? — Tên [tên].
 
-✅ CHECK-IN:
-• Bonjour, j'ai une réservation au nom de [nom].
-• Voici ma carte d'identité / mon passeport.
-• À quelle heure est le check-out ? — À 11h.
-• Le Wi-Fi est gratuit ? / Quel est le code Wi-Fi ?
-• Vous avez un coffre-fort dans la chambre ?
+✅ CHECK-IN (nhận phòng):
+• Bonjour, j'ai une réservation au nom de [nom]. — Xin chào, tôi có đặt phòng tên [tên].
+• Voici ma carte d'identité / mon passeport. — Đây là chứng minh thư / hộ chiếu của tôi.
+• À quelle heure est le check-out ? — À 11h. — Mấy giờ trả phòng ạ? — Lúc 11h.
+• Le Wi-Fi est gratuit ? / Quel est le code Wi-Fi ? — Wi-Fi miễn phí chứ? / Mật khẩu Wi-Fi là gì ạ?
+• Vous avez un coffre-fort dans la chambre ? — Trong phòng có két sắt không ạ?
 
-🔧 PROBLÈME À L'HÔTEL:
-• La climatisation / le chauffage ne marche pas.
-• Il n'y a pas de serviettes / de savon / de papier toilette.
-• Il y a beaucoup de bruit. Vous pouvez changer ma chambre ?
-• L'ascenseur est en panne.
+🔧 PROBLÈME À L'HÔTEL (sự cố ở khách sạn):
+• La climatisation / le chauffage ne marche pas. — Máy lạnh / lò sưởi không chạy.
+• Il n'y a pas de serviettes / de savon / de papier toilette. — Không có khăn tắm / xà phòng / giấy vệ sinh.
+• Il y a beaucoup de bruit. Vous pouvez changer ma chambre ? — Ồn quá. Anh/chị đổi phòng giúp tôi được không?
+• L'ascenseur est en panne. — Thang máy bị hỏng.
 
-📸 RACONTER SES VACANCES (passé):
-• Cette année, je suis allé(e) [en Martinique / au Portugal / à Tokyo].
-• C'était [magnifique / décevant / inoubliable / reposant].
-• J'ai [fait de la plongée / visité des musées / goûté la cuisine locale].
-• Il faisait [très chaud / beau / variable].
-• Je recommande vraiment [cet endroit / cet hôtel / ce restaurant].
-• La prochaine fois, j'aimerais aller [à…].`,
+📸 RACONTER SES VACANCES (kể về kỳ nghỉ — thì quá khứ):
+• Cette année, je suis allé(e) [en Martinique / au Portugal / à Tokyo]. — Năm nay, tôi đã đi [Martinique / Bồ Đào Nha / Tokyo].
+• C'était [magnifique / décevant / inoubliable / reposant]. — Thật [tuyệt vời / đáng thất vọng / khó quên / thư giãn].
+• J'ai [fait de la plongée / visité des musées / goûté la cuisine locale]. — Tôi đã [đi lặn / thăm bảo tàng / nếm thử ẩm thực địa phương].
+• Il faisait [très chaud / beau / variable]. — Thời tiết [rất nóng / đẹp / thất thường].
+• Je recommande vraiment [cet endroit / cet hôtel / ce restaurant]. — Tôi rất khuyên nên đến [nơi này / khách sạn này / nhà hàng này].
+• La prochaine fois, j'aimerais aller [à…]. — Lần tới, tôi muốn đi [đến…].`,
         examples:[
           "On part où cet été? J'aimerais aller à la mer. — Pourquoi pas la Côte d'Azur?",
           "Je voudrais réserver une chambre double pour deux nuits, du 15 au 17 juillet.",
@@ -2460,40 +2460,40 @@ PHẦN 4: TIẾP DIỄN — TOUJOURS / ENCORE / NE…PLUS
         topic:"Production orale — Parler de son travail et de ses études",
         rule:`PARLER DE SON TRAVAIL:
 
-SON POSTE ET SON ENTREPRISE:
-• Je travaille dans [une entreprise / une école / un hôpital / une ONG].
-• Je suis [profession] depuis [X] ans / mois.
-• Mon poste, c'est [responsable marketing / développeur / infirmier…].
-• Je travaille [à plein temps / à mi-temps / en télétravail / en freelance].
-• Mon bureau est [au centre-ville / en banlieue / à domicile].
+SON POSTE ET SON ENTREPRISE (vị trí & công ty):
+• Je travaille dans [une entreprise / une école / un hôpital / une ONG]. — Tôi làm trong [một công ty / một trường học / một bệnh viện / một tổ chức phi chính phủ].
+• Je suis [profession] depuis [X] ans / mois. — Tôi làm [nghề] được [X] năm / tháng rồi.
+• Mon poste, c'est [responsable marketing / développeur / infirmier…]. — Vị trí của tôi là [trưởng phòng marketing / lập trình viên / y tá…].
+• Je travaille [à plein temps / à mi-temps / en télétravail / en freelance]. — Tôi làm [toàn thời gian / bán thời gian / từ xa / tự do].
+• Mon bureau est [au centre-ville / en banlieue / à domicile]. — Văn phòng tôi ở [trung tâm / ngoại ô / tại nhà].
 
-LES CONDITIONS DE TRAVAIL:
-• Je commence à [X]h et je finis à [X]h. Je travaille [X] heures par semaine.
-• Je prends [X] semaines de congés par an.
-• Mon manager / ma responsable est [sympa / exigeant(e) / compétent(e)].
-• Je dois souvent voyager pour le travail.
-• Je gagne [bien / correctement / pas assez] ma vie.
-• L'ambiance au bureau est [bonne / tendue / très agréable].
+LES CONDITIONS DE TRAVAIL (điều kiện làm việc):
+• Je commence à [X]h et je finis à [X]h. Je travaille [X] heures par semaine. — Tôi bắt đầu lúc [X]h và tan lúc [X]h. Tôi làm [X] giờ mỗi tuần.
+• Je prends [X] semaines de congés par an. — Tôi được nghỉ [X] tuần phép mỗi năm.
+• Mon manager / ma responsable est [sympa / exigeant(e) / compétent(e)]. — Sếp của tôi [dễ chịu / khó tính / giỏi].
+• Je dois souvent voyager pour le travail. — Tôi thường phải đi công tác.
+• Je gagne [bien / correctement / pas assez] ma vie. — Tôi kiếm sống [khá / tạm ổn / chưa đủ].
+• L'ambiance au bureau est [bonne / tendue / très agréable]. — Không khí ở văn phòng [tốt / căng thẳng / rất dễ chịu].
 
-CE QUE J'AIME / JE N'AIME PAS:
-• Ce que j'aime dans mon travail, c'est [le contact avec les clients / la créativité].
-• Ce qui est difficile, c'est [les horaires / le stress / les réunions].
-• Je voudrais évoluer vers [un poste de / le management].
+CE QUE J'AIME / JE N'AIME PAS (điều tôi thích / không thích):
+• Ce que j'aime dans mon travail, c'est [le contact avec les clients / la créativité]. — Điều tôi thích ở công việc là [được tiếp xúc khách hàng / sự sáng tạo].
+• Ce qui est difficile, c'est [les horaires / le stress / les réunions]. — Điều khó khăn là [giờ giấc / áp lực / các cuộc họp].
+• Je voudrais évoluer vers [un poste de / le management]. — Tôi muốn thăng tiến lên [vị trí / quản lý].
 
-PARLER DE SES ÉTUDES:
-• Je suis étudiant(e) en [droit / médecine / commerce / langues / informatique].
-• Je suis en [1ère / 2e / 3e] année de [licence / master / BTS].
-• Mon université / mon école est à [Lyon / Paris / Hanoï].
-• Mes cours sont [très intéressants / difficiles / passionnants].
-• J'ai [X] heures de cours par semaine. Je travaille aussi [X] heures à la maison.
-• Je veux devenir [profession] après mes études.
-• Je cherche un stage / alternance dans [le domaine].
+PARLER DE SES ÉTUDES (nói về việc học):
+• Je suis étudiant(e) en [droit / médecine / commerce / langues / informatique]. — Tôi là sinh viên ngành [luật / y / thương mại / ngôn ngữ / tin học].
+• Je suis en [1ère / 2e / 3e] année de [licence / master / BTS]. — Tôi học năm [1 / 2 / 3] hệ [cử nhân / thạc sĩ / cao đẳng nghề].
+• Mon université / mon école est à [Lyon / Paris / Hanoï]. — Trường đại học / trường của tôi ở [Lyon / Paris / Hà Nội].
+• Mes cours sont [très intéressants / difficiles / passionnants]. — Các môn học của tôi [rất thú vị / khó / cuốn hút].
+• J'ai [X] heures de cours par semaine. Je travaille aussi [X] heures à la maison. — Tôi có [X] giờ học mỗi tuần. Tôi cũng học thêm [X] giờ ở nhà.
+• Je veux devenir [profession] après mes études. — Tôi muốn trở thành [nghề] sau khi học xong.
+• Je cherche un stage / alternance dans [le domaine]. — Tôi đang tìm chỗ thực tập / vừa học vừa làm trong [lĩnh vực].
 
-CHERCHER UN EMPLOI:
-• Je cherche un [emploi / stage / poste] dans [le domaine X].
-• J'ai de l'expérience en [marketing / comptabilité / enseignement].
-• Je parle [X] langues. Je maîtrise [outils numériques / Excel / design].
-• Je suis disponible à partir du [date]. / Je suis disponible immédiatement.`,
+CHERCHER UN EMPLOI (tìm việc):
+• Je cherche un [emploi / stage / poste] dans [le domaine X]. — Tôi tìm [việc làm / chỗ thực tập / vị trí] trong [lĩnh vực X].
+• J'ai de l'expérience en [marketing / comptabilité / enseignement]. — Tôi có kinh nghiệm về [marketing / kế toán / giảng dạy].
+• Je parle [X] langues. Je maîtrise [outils numériques / Excel / design]. — Tôi nói [X] thứ tiếng. Tôi thành thạo [công cụ số / Excel / thiết kế].
+• Je suis disponible à partir du [date]. / Je suis disponible immédiatement. — Tôi có thể bắt đầu từ [ngày]. / Tôi có thể đi làm ngay.`,
         examples:[
           "Je travaille dans une entreprise tech depuis 3 ans. Je suis développeur à plein temps.",
           "Je travaille en télétravail 3 jours par semaine. C'est très pratique, je suis moins fatigué.",

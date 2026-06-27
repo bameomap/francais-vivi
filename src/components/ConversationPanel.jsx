@@ -5,6 +5,17 @@ import { awardXP } from "../utils/xp.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
+import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
+
+// Gom tất cả note « Pour communiquer » của một unité (từ các piste nghe).
+function getUnitNotes(unitNum) {
+  const out = [];
+  for (const [key, notes] of Object.entries(EDITO_POUR_NOTES)) {
+    const m = key.match(/^u(\d+)-/);
+    if (m && Number(m[1]) === unitNum) out.push(...notes);
+  }
+  return out;
+}
 
 function buildEditoPrompt(unit, practice) {
   const phrases = practice.usefulPhrases?.length
@@ -83,6 +94,7 @@ export default function ConversationPanel({ onBackToParcours }) {
   const [inlineCorrects, setInlineCorrects] = useState({});
   const [mode,           setMode]           = useState("libre");
   const [selUnit,        setSelUnit]        = useState(0);
+  const [showNotes,      setShowNotes]      = useState(false);
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
   const bottomRef = useRef(null);
@@ -262,6 +274,64 @@ export default function ConversationPanel({ onBackToParcours }) {
                 <div style={{ fontSize:"0.65rem", fontWeight:700, color:C.blue, textTransform:"uppercase", letterSpacing:"0.1em" }}>
                   Unité {unit.unit} — {unit.title}
                 </div>
+
+                {/* ── Pour communiquer (khung câu rút từ bài nghe) ── */}
+                {(() => {
+                  const notes = getUnitNotes(unit.unit);
+                  if (notes.length === 0) return null;
+                  return (
+                    <div style={{ background:C.white, border:`1.5px solid ${C.gold}55`, borderRadius:14, overflow:"hidden" }}>
+                      <button onClick={() => setShowNotes(s => !s)}
+                        style={{ width:"100%", background:C.goldL, border:"none", padding:"0.6rem 0.85rem", display:"flex", alignItems:"center", justifyContent:"space-between", cursor:"pointer", fontFamily:"inherit", textAlign:"left" }}>
+                        <span style={{ display:"flex", flexDirection:"column", gap:2 }}>
+                          <span style={{ fontSize:"0.8rem", fontWeight:700, color:C.ink }}>📝 Pour communiquer</span>
+                          <span style={{ fontSize:"0.64rem", color:C.gray }}>Khung câu rút từ bài nghe — dùng để chuẩn bị nói</span>
+                        </span>
+                        <span style={{ fontSize:"0.75rem", color:C.gold, fontWeight:700, flexShrink:0 }}>{showNotes ? "Ẩn ▲" : `${notes.length} mục ▼`}</span>
+                      </button>
+
+                      {showNotes && (
+                        <div style={{ padding:"0.6rem 0.75rem 0.7rem", display:"flex", flexDirection:"column", gap:"0.55rem" }}>
+                          {notes.map((note, ni) => (
+                            <div key={ni} style={{ borderRadius:10, border:`1.5px solid ${C.gold}33`, overflow:"hidden" }}>
+                              <div style={{ background:C.gold, color:"#fff", padding:"0.32rem 0.7rem", fontSize:"0.69rem", fontWeight:700, lineHeight:1.3 }}>
+                                {note.heading}
+                              </div>
+                              <div style={{ background:`${C.gold}10`, padding:"0.5rem 0.7rem 0.55rem" }}>
+                                {note.structure && (
+                                  <div style={{ fontSize:"0.66rem", color:C.ink, background:`${C.gold}1c`, borderRadius:7, padding:"0.4rem 0.6rem", marginBottom:"0.5rem", lineHeight:1.6 }}>
+                                    <div style={{ fontWeight:700, marginBottom:"0.25rem", color:"#9A7B0A" }}>🔑 Cấu trúc</div>
+                                    {note.structure.split(/(?<=\.)\s+(?=\S)/).map(s => s.replace(/\.$/, "").trim()).filter(Boolean).map((line, li) => (
+                                      <div key={li} style={{ display:"flex", gap:"0.35rem", marginBottom:"0.15rem" }}>
+                                        <span style={{ flexShrink:0, opacity:0.6 }}>•</span><span>{line}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                                <ul style={{ margin:0, paddingLeft:"1.05rem", display:"flex", flexDirection:"column", gap:"0.32rem" }}>
+                                  {note.phrases.map((p, pi) => {
+                                    const fr = typeof p === "string" ? p : p.fr;
+                                    const vi = typeof p === "object" ? p.vi : null;
+                                    return (
+                                      <li key={pi} style={{ fontSize:"0.74rem", color:C.ink, lineHeight:1.5 }}>
+                                        <span style={{ display:"flex", alignItems:"center", gap:"0.35rem", flexWrap:"wrap" }}>
+                                          <span style={{ fontStyle:"italic", fontFamily:"Georgia,serif" }}>{fr}</span>
+                                          <SpeakBtn text={fr} size="0.62rem" />
+                                        </span>
+                                        {vi && <span style={{ display:"block", color:C.gray, fontSize:"0.68rem", lineHeight:1.45, marginTop:"0.05rem" }}>↳ {vi}</span>}
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+
                 {(() => { var pDone = getSubDone("u" + unit.unit, "parler"); return unit.speakingPractice.map((p, i) => {
                   const isDone = !!pDone["s" + i];
                   return (
