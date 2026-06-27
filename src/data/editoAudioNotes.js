@@ -374,6 +374,29 @@ export const EDITO_POUR_NOTES = {
   ],
 
   // ─── Unité 8 ──────────────────────────────────────────────────────
+  "u8-a": [
+    {
+      heading: "Pour exprimer une émotion positive",
+      structure: "Cảm xúc tích cực dùng ÊTRE + tính từ: « Je suis content(e) » (đực/cái khác nhau). « Je me sens bien » = cảm giác tốt (động từ phản thân se sentir). « ça fait du bien » = điều đó giúp dễ chịu / tốt cho người.",
+      phrases: [
+        { fr: "Je me sens bien.", vi: "Tôi cảm thấy ổn / dễ chịu." },
+        { fr: "C'est agréable. / Ça fait du bien.", vi: "Thật dễ chịu. / Điều đó giúp khỏe hơn." },
+        { fr: "Je suis en (pleine) forme.", vi: "Tôi (đang) rất khỏe / sung sức." },
+        { fr: "Je suis content(e) (pour toi). / Je suis heureux, heureuse (pour toi).", vi: "Tôi vui (cho bạn). / Tôi hạnh phúc (vì bạn)." },
+      ],
+    },
+    {
+      heading: "Pour exprimer une émotion négative",
+      structure: "Cảm xúc tiêu cực cũng dùng ÊTRE + tính từ. Chú ý accord giới tính: fatigué/fatiguée, stressé/stressée, malheureux/malheureuse. « inquiet / inquiète » = lo lắng (bất quy tắc: -et → -ète).",
+      phrases: [
+        { fr: "Je suis inquiet, inquiète.", vi: "Tôi lo lắng. (nam: inquiet / nữ: inquiète)" },
+        { fr: "Je suis fatigué(e).", vi: "Tôi mệt mỏi." },
+        { fr: "Je suis stressé(e).", vi: "Tôi bị stress." },
+        { fr: "Je suis malheureux, malheureuse. / Je suis triste.", vi: "Tôi bất hạnh / không vui. / Tôi buồn." },
+      ],
+    },
+  ],
+
   "u8-b": [
     {
       heading: "Pour parler de ses symptômes",
@@ -386,13 +409,25 @@ export const EDITO_POUR_NOTES = {
       ],
     },
     {
-      heading: "Pour consulter un médecin",
-      structure: "Câu bác sĩ hỏi (ngôi VOUS lịch sự). « Qu'est-ce qui vous arrive ? » = bạn bị làm sao? « Vous avez pris… ? » = passé composé (bạn đã… chưa?). « Vous pesez combien ? » = bạn nặng bao nhiêu?",
+      heading: "Pour demander/dire le poids et la taille",
+      structure: "Hỏi cân nặng: « Vous PESEZ combien ? » (động từ peser). Hỏi chiều cao: « Vous MESUREZ combien ? » (động từ mesurer). Đơn vị: kg = kilo, m = mètre. Ví dụ: 1,68 m đọc là « un mètre soixante-huit ».",
       phrases: [
-        { fr: "Qu'est-ce qui vous arrive ?", vi: "Anh/chị bị làm sao vậy?" },
-        { fr: "Vous toussez ? / Vous avez encore de la fièvre ?", vi: "Anh/chị có ho không? / Còn sốt không?" },
-        { fr: "Vous avez pris des médicaments ?", vi: "Anh/chị đã uống thuốc gì chưa?" },
-        { fr: "Vous pesez combien ? / Quelle est votre taille ?", vi: "Anh/chị nặng bao nhiêu? / Cao bao nhiêu?" },
+        { fr: "Quel est votre poids ? / Vous pesez combien ?", vi: "Cân nặng của anh/chị là bao nhiêu?" },
+        { fr: "Je pèse 60 kg (soixante kilos).", vi: "Tôi nặng 60 ký." },
+        { fr: "Quelle est votre taille ? / Vous mesurez combien ?", vi: "Chiều cao của anh/chị là bao nhiêu?" },
+        { fr: "Je mesure 1,68 m (un mètre soixante-huit).", vi: "Tôi cao 1m68." },
+      ],
+    },
+    {
+      heading: "Pour parler de sa santé (médecin / malade)",
+      structure: "Hai vai trong cuộc khám: bác sĩ dùng VOUS lịch sự để hỏi; bệnh nhân dùng « J'ai mal À + bộ phận » (đau ở đâu) hoặc « J'ai + bệnh » (bị gì). Nhiệt độ: « J'ai 39°C » = sốt 39 độ.",
+      phrases: [
+        { fr: "— Qu'est-ce qui vous arrive ?", vi: "— Anh/chị bị làm sao vậy?" },
+        { fr: "— Vous vous sentez comment ?", vi: "— Anh/chị thấy thế nào?" },
+        { fr: "— Vous avez (encore) de la fièvre ?", vi: "— Anh/chị có (còn) sốt không?" },
+        { fr: "— Je suis malade. / J'ai un rhume.", vi: "— Tôi bị ốm. / Tôi bị cảm." },
+        { fr: "— J'ai mal à la gorge / à la tête / aux oreilles.", vi: "— Tôi đau họng / đầu / tai." },
+        { fr: "— J'ai 39°C.", vi: "— Tôi sốt 39 độ." },
       ],
     },
   ],
@@ -429,12 +464,13 @@ export const EDITO_POUR_NOTES = {
       ],
     },
     {
-      heading: "Pour réagir à une information",
-      structure: "Phản ứng với thông tin: « Tu as raison » (bạn đúng) ↔ « Tu as tort » (bạn sai) — đều dùng AVOIR. « Ah bon ? C'est vrai ? » = Vậy à? Thật không?",
+      heading: "Pour exprimer son accord ou son désaccord",
+      structure: "Đồng ý / Không đồng ý. « Tu as raison » (đúng) ↔ « Tu as tort » (sai) — dùng AVOIR. « C'est vrai » ↔ « C'est faux » — dùng ÊTRE. « Je suis d'accord AVEC toi » = tôi đồng ý với bạn; phủ định: « Je ne suis PAS d'accord ».",
       phrases: [
-        { fr: "Tu as raison ! / Tu as tort !", vi: "Bạn nói đúng! / Bạn sai rồi!" },
-        { fr: "C'est incroyable ! / Ah bon ? C'est vrai ?", vi: "Khó tin thật! / Vậy à? Thật không?" },
-        { fr: "Je suis d'accord !", vi: "Tôi đồng ý!" },
+        { fr: "Tu as raison. ≠ Tu as tort.", vi: "Bạn đúng. ≠ Bạn sai." },
+        { fr: "C'est vrai. ≠ C'est faux.", vi: "Đúng vậy. ≠ Sai rồi." },
+        { fr: "Je suis d'accord (avec toi).", vi: "Tôi đồng ý (với bạn)." },
+        { fr: "Je ne suis pas d'accord (avec toi).", vi: "Tôi không đồng ý (với bạn)." },
       ],
     },
   ],
