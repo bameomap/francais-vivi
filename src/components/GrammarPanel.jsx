@@ -18,12 +18,24 @@ const GTYPES = [
 
 export function buildDetectivePrompt(topic, level, n) {
   return `French grammar teacher. Create ${n} short French sentences, each containing EXACTLY ONE deliberate grammatical error related to the topic "${topic}" (level ${level}).
+${FRENCH_RULES}
 Return ONLY JSON: {"type":"detective","topic":"${topic}","level":"${level}","exercises":[{"sentence":"Full sentence with one error","words":["word1","word2","word3"],"errorIndex":2,"correction":"correct replacement","explanation":"Giải thích lỗi sai bằng tiếng Việt, tại sao sai và quy tắc đúng","rule":"tên quy tắc ngắn"}]}
 RULES: errorIndex is 0-based index in words[]. Split sentence into tokens by spaces, keep punctuation attached to the nearest word. The error must be clear and unambiguous.`;
 }
 
+// Critical French rules the model frequently gets wrong. Élision of object/article
+// le/la depends on the FOLLOWING word (verb), not on the noun being replaced.
+const FRENCH_RULES = `CRITICAL FRENCH RULES — apply exactly, double-check every answer and explanation:
+- Élision of le/la → l' happens ONLY when the IMMEDIATELY FOLLOWING word begins with a vowel (a,e,i,o,u,é,è…) or a mute h. It depends on that next word (usually the verb), NOT on the noun being replaced. "les" NEVER elides.
+  • "Elle écoute la musique." → la → "Elle L'écoute." (écoute starts with a vowel → elide)
+  • "Tu connais l'adresse ?" → la → "Tu LA connais ?" (connais starts with a consonant → DO NOT elide)
+  • "Nous regardons le tableau." → le → "Nous LE regardons." (regardons = consonant → no élision)
+  • "Tu appelles l'enfant ?" → l' → "Tu L'appelles ?" (appelles = vowel → elide)
+- A COD pronoun (le/la/l'/les) goes BEFORE the conjugated verb.
+- Verify the answer field and the explanation agree with each other and with these rules before returning.`;
+
 export function buildGrammarPrompt(topic, level, gtype, n) {
-  const base = `French grammar teacher. Create ${n} exercises on the topic: "${topic}" for level ${level}.`;
+  const base = `French grammar teacher. Create ${n} exercises on the topic: "${topic}" for level ${level}.\n${FRENCH_RULES}`;
   // explanationRules: array of {type, content} where type = "rule"|"warning"|"note"
   // This structured format allows the UI to render each rule on its own line with proper styling.
   const explSchema = `"explanationRules":[{"type":"rule","content":"Quy tắc 1 — giải thích ngắn gọn tiếng Việt"},{"type":"rule","content":"Quy tắc 2 — ..."},{"type":"warning","content":"⚠️ Lưu ý quan trọng"},{"type":"note","content":"Ngoại lệ hoặc mẹo nhớ"}]`;
@@ -114,7 +126,7 @@ export function GrammarOrder({ exercises, onFirstAnswer }) {
     if(states[qi].checked) return;
     setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s, chosen:s.chosen.filter((_,j)=>j!==ti), pool:[...s.pool,s.chosen[ti]]})));
   };
-  const norm = s => (s||"").trim().toLowerCase().replace(/[''`]/g,"'").replace(/[.,!?;:«»]/g,"").replace(/\s+/g," ");
+  const norm = s => (s||"").trim().toLowerCase().replace(/[''`]/g,"'").replace(/[.,!?;:«»]/g,"").replace(/\s+/g," ").replace(/'\s+/g,"'");
   const check = (qi) => { if(!states.some(s=>s.checked))onFirstAnswer?.(); setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s,checked:true}))); };
   const reset = (qi) => setStates(prev=>prev.map((s,i)=>i!==qi?s:({...s,pool:init(exercises[qi].words),chosen:[],checked:false})));
 
