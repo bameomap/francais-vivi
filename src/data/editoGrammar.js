@@ -1906,7 +1906,7 @@ le bail = hợp đồng thuê nhà`,
   {
     id:"g8", num:"8", title:"En forme!", points:[
       {
-        topic:"Passé composé (2) — Participes passés irréguliers",
+        topic:"Passé composé (2) — Participes irréguliers & accord avec ÊTRE",
         rule:`1. CÁC QUÁ KHỨ PHÂN TỪ (Participe passé) BẤT QUY TẮC
 
 Trong chủ đề sức khỏe, thể thao, ăn uống của Unité 8, bạn sẽ gặp rất nhiều động từ KHÔNG còn thêm đuôi -é đơn giản nữa, mà biến đổi thành các đuôi đặc biệt. Hãy nhớ theo TỪNG NHÓM ĐUÔI cho dễ thuộc nhé:
@@ -1926,14 +1926,30 @@ Trong chủ đề sức khỏe, thể thao, ăn uống của Unité 8, bạn s�
   Ví dụ: Tu as bu de l'eau ? (Bạn đã uống nước chưa?)
 • lire (đọc) → lu
 • voir (nhìn / khám bệnh) → vu
-  Ví dụ: J'ai vu le médecin. (Tôi đã đi khám bác sĩ.)`,
+  Ví dụ: J'ai vu le médecin. (Tôi đã đi khám bác sĩ.)
+
+2. SỰ XUẤT HIỆN CỦA TRỢ ĐỘNG TỪ ÊTRE VÀ QUY TẮC HÒA HỢP (L'accord)
+
+Đây là phần "bẫy" nhất của tiếng Pháp! Một số động từ chuyển động đặc biệt (như aller – đi) và các động từ phản thân (như se lever – thức dậy, se coucher – đi ngủ) sẽ KHÔNG đi với avoir nữa, mà bắt buộc phải đi với ÊTRE.
+
+🚨 QUY TẮC VÀNG CỦA TRỢ ĐỘNG TỪ ÊTRE:
+Khi đã dùng être, quá khứ phân từ BẮT BUỘC phải "hợp giống và số" với chủ ngữ:
+• Chủ ngữ là NỮ (số ít): thêm -e vào cuối phân từ.
+• Chủ ngữ là SỐ NHIỀU (nam / chung): thêm -s vào cuối phân từ.
+• Chủ ngữ là SỐ NHIỀU (toàn nữ): thêm -es vào cuối phân từ.
+
+VÍ DỤ VỚI ĐỘNG TỪ ALLER (đi):
+• Một bạn nam nói: Je suis allé au gymnase. (Tôi đã đến phòng tập.)
+• Một bạn nữ nói: Je suis allée au gymnase. (Phải thêm -e vì chủ ngữ là nữ.)
+• Nhóm các bạn nữ nói: Elles sont allées. (Thêm -es vì là số nhiều giống cái.)`,
         examples:[
           "J'ai fait du sport. — Tôi đã chơi thể thao.",
           "Il a pris un médicament. — Anh ấy đã uống thuốc.",
           "Tu as bu de l'eau ? — Bạn đã uống nước chưa?",
           "J'ai vu le médecin. — Tôi đã đi khám bác sĩ.",
-          "Elle a écrit un message. — Cô ấy đã viết một tin nhắn.",
-          "J'ai mis un pull. — Tôi đã mặc một chiếc áo len.",
+          "Je suis allé au gymnase. — Tôi (nam) đã đến phòng tập.",
+          "Je suis allée au gymnase. — Tôi (nữ) đã đến phòng tập.",
+          "Elles sont allées. — Các cô ấy đã đi.",
         ]
       },
       {
