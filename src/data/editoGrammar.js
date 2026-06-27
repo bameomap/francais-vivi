@@ -2167,27 +2167,53 @@ PHẦN 3: SO SÁNH VỚI DANH TỪ và ĐỘNG TỪ
       },
       {
         topic:"Passé composé avec ÊTRE — L'accord avec le sujet",
-        rule:`2. SỰ XUẤT HIỆN CỦA TRỢ ĐỘNG TỪ ÊTRE VÀ QUY TẮC HÒA HỢP (L'accord)
+        rule:`1. CẤU TRÚC CÂU (Công thức)
+Vì là "quá khứ kép" nên gồm 2 phần kết hợp:
+Chủ ngữ + Trợ động từ "ÊTRE" (chia ở hiện tại) + Phân từ quá khứ (participe passé)
+⚠️ "Être" phải chia theo ngôi: Je suis · Tu es · Il/Elle est · Nous sommes · Vous êtes · Ils/Elles sont.
 
-Đây là phần "bẫy" nhất của tiếng Pháp! Một số động từ chuyển động đặc biệt (như aller – đi) và các động từ phản thân (như se lever – thức dậy, se coucher – đi ngủ) sẽ KHÔNG đi với avoir nữa, mà bắt buộc phải đi với ÊTRE.
+2. KHI NÀO DÙNG TRỢ ĐỘNG TỪ "ÊTRE"?
+Không cần học thuộc hàng trăm động từ. Ở A1, hãy nhớ NHÓM ĐỘNG TỪ CHỈ SỰ DI CHUYỂN (đi, đến, về, lên, xuống…) và thay đổi trạng thái — như "hành trình của một người":
+• aller (đi) → Je suis allé(e)
+• venir (đến) → Je suis venu(e)
+• arriver (đến nơi) → Je suis arrivé(e)
+• partir (rời đi) → Je suis parti(e)
+• monter (đi lên) → Je suis monté(e)
+• descendre (đi xuống) → Je suis descendu(e)
+• entrer (đi vào) → Je suis entré(e)
+• sortir (đi ra) → Je suis sorti(e)
+• naître (sinh ra) → Je suis né(e)
+• mourir (mất) → Je suis mort(e)
 
-🚨 QUY TẮC VÀNG CỦA TRỢ ĐỘNG TỪ ÊTRE:
-Khi đã dùng être, quá khứ phân từ BẮT BUỘC phải "hợp giống và số" với chủ ngữ:
-• Chủ ngữ là NỮ (số ít): thêm -e vào cuối phân từ.
-• Chủ ngữ là SỐ NHIỀU (nam / chung): thêm -s vào cuối phân từ.
-• Chủ ngữ là SỐ NHIỀU (toàn nữ): thêm -es vào cuối phân từ.
+3. QUY TẮC "HÒA HỢP" (quan trọng nhất)
+Khác với avoir, khi dùng ÊTRE thì phân từ quá khứ phải HÒA HỢP về giống và số với chủ ngữ:
+• Chủ ngữ giống cái (nữ): thêm "e".
+• Chủ ngữ số nhiều: thêm "s".
+• Chủ ngữ giống cái số nhiều: thêm "es".
+Ví dụ thực tế (động từ partir):
+• Paul (nam): Paul est parti en vacances. (không thêm gì)
+• Marie (nữ): Marie est partie en vacances. (thêm "e")
+• Paul et Marie (nam + nữ): Paul et Marie sont partis. (thêm "s")
+• Sophie et Marie (nữ + nữ): Sophie et Marie sont parties. (thêm "es")
 
-VÍ DỤ VỚI ĐỘNG TỪ ALLER (đi):
-• Một bạn nam nói: Je suis allé au gymnase. (Tôi đã đến phòng tập.)
-• Một bạn nữ nói: Je suis allée au gymnase. (Phải thêm -e vì chủ ngữ là nữ.)
-• Nhóm các bạn nữ nói: Elles sont allées. (Thêm -es vì là số nhiều giống cái.)`,
+4. BẢNG TỔNG HỢP — động từ ALLER (đi)
+• Je suis allé(e)
+• Tu es allé(e)
+• Il est allé / Elle est allée
+• Nous sommes allé(e)s
+• Vous êtes allé(e)s
+• Ils sont allés / Elles sont allées
+
+💡 MẸO NHỎ CHO NGƯỜI MỚI:
+• Động từ phản thân (có "se" như se laver, se coucher) cũng đều đi với ÊTRE.
+• Luyện kể một ngày của bạn: "Ce matin je me suis levé(e), je suis allé(e) au travail…" — kể chuyện kiểu này sẽ nhớ rất nhanh!`,
         examples:[
-          "Je suis allé au gymnase. — Tôi (nam) đã đến phòng tập.",
-          "Je suis allée au gymnase. — Tôi (nữ) đã đến phòng tập.",
-          "Elles sont allées. — Các cô ấy đã đi.",
-          "Elle s'est levée tôt ce matin. — Cô ấy đã thức dậy sớm sáng nay.",
-          "Il s'est couché tard hier. — Anh ấy đã đi ngủ muộn hôm qua.",
-          "Nous sommes allés à l'hôpital. — Chúng tôi đã đến bệnh viện.",
+          "Je suis allé(e) au travail ce matin. — Sáng nay tôi đã đi làm.",
+          "Marie est partie en vacances. — Marie đã đi nghỉ.",
+          "Paul et Marie sont partis ensemble. — Paul và Marie đã đi cùng nhau.",
+          "Sophie et Marie sont parties tôt. — Sophie và Marie đã đi sớm.",
+          "Ce matin je me suis levé(e) à 7h. — Sáng nay tôi dậy lúc 7 giờ.",
+          "Elle est née en 1998. — Cô ấy sinh năm 1998.",
         ]
       },
       {
