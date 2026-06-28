@@ -511,13 +511,26 @@ export const EDITO_POUR_NOTES = {
       ],
     },
     {
-      heading: "Pour décrire un lieu visité",
+      heading: "Pour décrire une ville, un pays",
       structure: "Tả nơi chốn ở hiện tại: « C'EST + tính từ » (cảnh/không khí), « Les gens SONT + tính từ » (con người). « Tu DOIS y aller ! » = bạn nhất định phải đến đó! (y = đến đó).",
       phrases: [
         { fr: "C'est [magnifique / très sympa / très animé].", vi: "Nơi đó [tuyệt đẹp / rất dễ chịu / rất nhộn nhịp]." },
         { fr: "Les gens sont [très gentils].", vi: "Người dân ở đó [rất tốt bụng]." },
         { fr: "On mange bien.", vi: "Đồ ăn ngon lắm." },
         { fr: "Tu dois y aller !", vi: "Bạn nhất định phải đến đó!" },
+      ],
+    },
+  ],
+
+  "u9-e": [
+    {
+      heading: "Pour décrire un paysage",
+      structure: "Tả phong cảnh: « Il y a + danh từ » (có…), « On voit + danh từ » (nhìn thấy…), « C'est + tính từ » (thật…). Dùng trong Production écrite — mô tả tranh/ảnh về thiên nhiên.",
+      phrases: [
+        { fr: "Il y a une rivière, des maisons et de l'herbe verte.", vi: "Có một con sông, những ngôi nhà và cỏ xanh." },
+        { fr: "On voit des arbres, des champs et la montagne.", vi: "Ta thấy những cây, những cánh đồng và núi." },
+        { fr: "C'est très joli !", vi: "Thật đẹp quá!" },
+        { fr: "C'est un lac.", vi: "Đây là một cái hồ." },
       ],
     },
   ],
@@ -530,6 +543,19 @@ export const EDITO_POUR_NOTES = {
         { fr: "Je préfère [les vacances à la mer].", vi: "Tôi thích hơn là [đi nghỉ ở biển]." },
         { fr: "J'aime mieux [bronzer et nager].", vi: "Tôi thích [tắm nắng và bơi] hơn." },
         { fr: "J'aime bien [la campagne], mais je préfère [la mer].", vi: "Tôi cũng thích [vùng quê], nhưng tôi thích [biển] hơn." },
+      ],
+    },
+  ],
+
+  "u9-g": [
+    {
+      heading: "Pour écrire une carte postale",
+      structure: "Cấu trúc bưu thiếp: MỞ ĐẦU với lời chào + tên người nhận (Cher = nam, Chère = nữ), KẾT THƯ với lời tạm biệt. Đây là văn phong thân mật — dùng « tu » không dùng « vous ».",
+      phrases: [
+        { fr: "Salut ! / Bonjour !", vi: "Chào! / Xin chào! (mở đầu thân mật)" },
+        { fr: "Cher [Lucas] / Chère [Emma],", vi: "Bạn [Lucas] thân mến, / Bạn [Emma] thân mến, (mở đầu trang trọng hơn)" },
+        { fr: "À bientôt !", vi: "Hẹn gặp lại sớm nhé!" },
+        { fr: "Bisous ! / Je t'embrasse.", vi: "Hôn bạn nhé! / Gửi cho bạn cái ôm." },
       ],
     },
   ],
