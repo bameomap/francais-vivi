@@ -6,6 +6,21 @@
 export const EDITO_POUR_NOTES = {
 
   // ─── Unité 1 ──────────────────────────────────────────────────────
+  "u1-a": [
+    {
+      heading: "Pour demander de se présenter, se présenter",
+      structure: "Chào hỏi và tự giới thiệu: VOUS (trang trọng/xa lạ) ↔ TU (thân mật/bạn bè). Tên: « Je m'appelle ». Quốc tịch: « Je suis + quốc tịch » (không mạo từ). Tuổi: « J'ai + số + ans ».",
+      phrases: [
+        { fr: "Comment vous vous appelez ? / Comment tu t'appelles ?", vi: "Ngài/Bạn tên là gì?" },
+        { fr: "Je m'appelle [Lars / Alice].", vi: "Tôi tên là [Lars / Alice]." },
+        { fr: "Vous êtes hollandais(e) ? / Tu es hollandais(e) ?", vi: "Ngài/Bạn là người Hà Lan à?" },
+        { fr: "Non, je suis [italien(ne) / allemand(e)].", vi: "Không, tôi là người [Ý / Đức]." },
+        { fr: "Vous avez quel âge ? / Tu as quel âge ?", vi: "Ngài/Bạn bao nhiêu tuổi?" },
+        { fr: "J'ai [30] ans.", vi: "Tôi [30] tuổi." },
+      ],
+    },
+  ],
+
   "u1-e": [
     {
       heading: "Pour donner ses coordonnées personnelles",
@@ -52,28 +67,45 @@ export const EDITO_POUR_NOTES = {
 
   "u1-f": [
     {
-      heading: "Pour parler de ses goûts",
-      structure: "Thang cảm xúc tăng dần: AIMER (thích) < ADORER (rất thích/mê). Hỏi: « Tu aimes + danh từ/động từ nguyên mẫu ? ». Đặc biệt: J'AIME + LE/LA/LES (nói chung), J'AIME + UN/UNE (cụ thể).",
+      heading: "Pour demander/donner des informations personnelles",
+      structure: "Hỏi/đưa thông tin liên hệ: « Quel est TON numéro/mail ? » (thân mật → TON). Số điện thoại đọc từng cặp: 06 80 72 86 45. Email: @ = arobase, . = point. Mạng xã hội: « Tu as + Facebook/Instagram ? ».",
       phrases: [
-        { fr: "J'aime / J'adore [nom / infinitif].", vi: "Tôi thích / Tôi mê [danh từ / động từ]." },
-        { fr: "Tu aimes [nom] ?", vi: "Bạn có thích [danh từ] không?" },
-      ],
-    },
-    {
-      heading: "Pour échanger des coordonnées",
-      structure: "Trao đổi liên hệ: « Tu as + mạng xã hội ? » (hỏi đơn giản). Số điện thoại: « Quel est TON numéro ? » (ton vì thân mật). Đọc số theo từng cặp: 06 = zéro six.",
-      phrases: [
-        { fr: "Tu as Facebook / Instagram ?", vi: "Bạn có Facebook / Instagram không?" },
-        { fr: "Quel est ton numéro [de téléphone] ?", vi: "Số [điện thoại] của bạn là gì?" },
-        { fr: "C'est le [06 XX XX XX XX].", vi: "Số là [06 XX XX XX XX]." },
+        { fr: "Quel est ton numéro de téléphone ? – C'est le [06 XX XX XX XX].", vi: "Số điện thoại của bạn là gì? – Số là [06 XX XX XX XX]." },
+        { fr: "Quel est ton mail ? – C'est [prénom.nom@gmail.com].", vi: "Email của bạn là gì? – Là [prénom.nom@gmail.com]." },
+        { fr: "Tu as Facebook ? Tu as Instagram ? – Oui !", vi: "Bạn có Facebook không? Có Instagram không? – Có!" },
       ],
     },
   ],
 
   // ─── Unité 2 ──────────────────────────────────────────────────────
+  "u2-a": [
+    {
+      heading: "Pour demander/dire le lieu d'habitation",
+      structure: "Hỏi nơi ở: « Tu habites OÙ ? » hoặc « Où tu habites ? » (đảo vị trí). Trả lời: « Je suis À + ville » hoặc « J'habite À + ville / DANS + lieu ». Hỏi cụ thể hơn: « Tu habites dans un quartier sympa ? ».",
+      phrases: [
+        { fr: "Tu habites où ? / Où tu habites ?", vi: "Bạn sống ở đâu?" },
+        { fr: "Je suis à [Lyon]. / Moi, j'habite à [Nice].", vi: "Tôi đang ở [Lyon]. / Tôi sống ở [Nice]." },
+        { fr: "Tu habites dans un quartier sympa ?", vi: "Bạn ở một khu phố dễ chịu không?" },
+        { fr: "Oui ! / J'habite [un appartement] / dans [une rue calme].", vi: "Có! / Tôi ở [một căn hộ] / trong [một con phố yên tĩnh]." },
+      ],
+    },
+  ],
+
+  "u2-d": [
+    {
+      heading: "Pour présenter sa famille",
+      structure: "Giới thiệu gia đình: « J'ai un/une + thành viên ». Phủ định: « Je n'ai PAS DE frères et sœurs » → con một: « fils/fille unique ». Số người trong gia đình: « Chez moi, nous sommes + số ».",
+      phrases: [
+        { fr: "J'ai un frère / une sœur.", vi: "Tôi có một anh/em trai / một chị/em gái." },
+        { fr: "Je n'ai pas de frères et sœurs. = Je suis fils / fille unique.", vi: "Tôi không có anh chị em. = Tôi là con một." },
+        { fr: "Chez moi, nous sommes [quatre].", vi: "Gia đình tôi có [bốn] người." },
+      ],
+    },
+  ],
+
   "u2-e": [
     {
-      heading: "Pour présenter quelqu'un à sa famille",
+      heading: "Pour parler de sa famille",
       structure: "Giới thiệu người khác: « Voici [prénom], [lien de parenté/relation] ». Lịch sự khi gặp lần đầu: « C'est un plaisir (de vous rencontrer) ! ». Hỏi nghề nghiệp: « Vous êtes/Tu es + profession ? » hoặc « Qu'est-ce que vous faites (comme travail) ? ».",
       phrases: [
         { fr: "[Prénom], voici [mes parents / mon ami(e) / ma famille].", vi: "[Tên], đây là [bố mẹ tôi / bạn tôi / gia đình tôi]." },
@@ -110,41 +142,62 @@ export const EDITO_POUR_NOTES = {
   // ─── Unité 3 ──────────────────────────────────────────────────────
   "u3-b": [
     {
-      heading: "Pour acheter dans un magasin",
-      structure: "Hỏi giá: « Ça COÛTE combien ? » = « Combien ça COÛTE ? » (2 cách đều đúng). Trả lời: chủ ngữ + COÛTE + giá. « Ce sera tout ? » = người bán hỏi (Bạn cần thêm gì không?).",
+      heading: "Pour faire les courses",
+      structure: "Vai khách hàng: « Je voudrais… s'il vous plaît » (tôi muốn… làm ơn). Vai người bán: « C'est à qui ? » (đến lượt ai?), « Ce sera tout ? » (còn muốn thêm gì không?), « Vous payez comment ? » (thanh toán thế nào?). ⚠️ Luôn dùng VOUS trong cửa hàng.",
       phrases: [
-        { fr: "Ça coûte combien ? / Combien ça coûte ?", vi: "Cái này giá bao nhiêu?" },
-        { fr: "[Le produit] coûte [X] euros.", vi: "[Sản phẩm] giá [X] euro." },
-        { fr: "Ce sera tout ?", vi: "Bạn cần thêm gì không? (câu người bán hỏi)" },
+        { fr: "Je voudrais [un pain / une bouteille d'huile], s'il vous plaît.", vi: "Tôi muốn [một ổ bánh mì / một chai dầu], làm ơn." },
+        { fr: "C'est à qui ? / Ce sera tout ?", vi: "Đến lượt ai? / Bạn cần thêm gì không?" },
+        { fr: "Vous payez comment ? – Par carte. / En espèces.", vi: "Bạn thanh toán thế nào? – Bằng thẻ. / Bằng tiền mặt." },
       ],
     },
     {
-      heading: "Pour payer",
-      structure: "Người bán hỏi: « Vous payez COMMENT ? » (Có con chữ COMMENT = thế nào?). Khách trả lời: PAR + thẻ (carte) hoặc EN + tiền mặt (espèces). ⚠️ Luôn dùng VOUS (trang trọng) trong cửa hàng.",
+      heading: "Pour demander/dire le prix",
+      structure: "Hỏi giá: « Combien COÛTE… ? » hoặc « Ça coûte COMBIEN ? » (2 cách đều đúng — COÛTE chia theo chủ ngữ đứng trước). Trả lời: « Ça coûte [X] euros ».",
       phrases: [
-        { fr: "Vous payez comment ?", vi: "Bạn thanh toán thế nào?" },
-        { fr: "Par carte / En espèces, s'il vous plaît.", vi: "Bằng thẻ / Bằng tiền mặt, xin cảm ơn." },
+        { fr: "Combien coûte [le jus de pomme] ? / Il / Elle coûte [X] euros.", vi: "[Nước táo] giá bao nhiêu? / [Nó] giá [X] euro." },
+        { fr: "Ça coûte combien ? / Combien ça coûte ?", vi: "Cái này giá bao nhiêu?" },
+        { fr: "Ça coûte [2,50 €].", vi: "Giá [2,50 euro]." },
+      ],
+    },
+  ],
+
+  "u3-e": [
+    {
+      heading: "Pour donner une appréciation",
+      phrases: [
+        { fr: "C'est bon. ≠ Ce n'est pas bon.", vi: "Ngon. ≠ Không ngon." },
+        { fr: "C'est délicieux. ≠ C'est mauvais. / Ça n'a pas de goût.", vi: "Ngon tuyệt. ≠ Dở. / Nhạt nhẽo không có vị." },
+        { fr: "C'est pas mal.", vi: "Cũng tạm được." },
       ],
     },
   ],
 
   "u3-f": [
     {
-      heading: "Pour parler des aliments disponibles",
-      structure: "Có gì: « Il y a / On a + DU/DE LA/DES + thực phẩm ». Không có: « Il n'y a PAS / On n'a PAS DE + thực phẩm » (sau phủ định: mạo từ phân lượng → DE). « Un peu de » = một ít (không dùng mạo từ sau).",
+      heading: "Pour poser des questions",
+      structure: "Hỏi hở (câu hỏi mở): « Qu'est-ce qu'on MANGE ? » hoặc « On mange QUOI ? » — hai cách đều đúng, cách 2 thân mật hơn. ON = chúng mình, chia như IL/ELLE.",
       phrases: [
-        { fr: "Il y a / On a [de la / du / des] + aliment.", vi: "Có [mạo từ phân lượng + thực phẩm]." },
-        { fr: "Il n'y a pas / On n'a pas de + aliment.", vi: "Không có [thực phẩm]. (de thay mạo từ sau phủ định)" },
-        { fr: "On a un peu de [huile d'olive].", vi: "Có một ít [dầu ô-liu]." },
+        { fr: "Qu'est-ce qu'on mange ? / On mange quoi ?", vi: "Chúng mình ăn gì?" },
+        { fr: "On mange [du poulet].", vi: "Chúng mình ăn [gà]." },
       ],
     },
     {
-      heading: "Pour faire une suggestion culinaire",
-      structure: "Đề xuất: « ON + động từ ? » — ON là chủ ngữ tập thể thân mật (chúng mình), chia như IL/ELLE. « Qu'est-ce qu'on mange ? » = Chúng mình ăn gì? « Tu PRÉFÈRES » (bạn thích hơn — thể hiện ưu tiên cá nhân).",
+      heading: "Pour poser des questions fermées",
+      structure: "Hỏi đóng (câu hỏi có/không): « Est-ce qu'on a + thực phẩm ? » → Oui. / Non. Cấu trúc: EST-CE QU' + on/il/elle + động từ. Phủ định trong câu trả lời: « Non, on n'a pas DE… ».",
       phrases: [
-        { fr: "On fait [des pâtes] ? / On mange [une quiche] ?", vi: "Mình nấu [mì ống] nhé? / Mình ăn [bánh quiche] nhé?" },
-        { fr: "Qu'est-ce qu'on mange ?", vi: "Chúng mình ăn gì đây?" },
-        { fr: "Qu'est-ce que tu préfères ?", vi: "Bạn thích ăn gì hơn?" },
+        { fr: "Est-ce qu'on a [des tomates] ?", vi: "Chúng mình có [cà chua] không?" },
+        { fr: "Oui. / Non.", vi: "Có. / Không." },
+      ],
+    },
+  ],
+
+  "u3-g": [
+    {
+      heading: "Pour commander au restaurant",
+      phrases: [
+        { fr: "Une carafe d'eau, s'il vous plaît !", vi: "Cho tôi một bình nước, làm ơn!" },
+        { fr: "Je voudrais [de la blanquette de veau].", vi: "Tôi muốn [món thịt bê hầm]." },
+        { fr: "Pour moi, [un croque-monsieur végétarien].", vi: "Cho tôi [một bánh mì nướng chay]." },
       ],
     },
   ],
@@ -383,6 +436,17 @@ export const EDITO_POUR_NOTES = {
   ],
 
   // ─── Unité 7 ──────────────────────────────────────────────────────
+  "u7-a": [
+    {
+      heading: "Pour s'informer sur un logement",
+      phrases: [
+        { fr: "Quelle est la surface ? – La maison fait [100] m² (mètres carrés).", vi: "Diện tích bao nhiêu? – Nhà [100] m²." },
+        { fr: "Il y a combien de pièces ? – Il y a [cinq] pièces.", vi: "Có bao nhiêu phòng? – Có [năm] phòng." },
+        { fr: "Il y a un jardin ? – Oui, il y a un petit jardin.", vi: "Có vườn không? – Có, có một khu vườn nhỏ." },
+      ],
+    },
+  ],
+
   "u7-c": [
     {
       heading: "Pour situer des objets dans une pièce",
@@ -400,21 +464,23 @@ export const EDITO_POUR_NOTES = {
 
   "u7-f": [
     {
-      heading: "Pour exprimer l'obligation et l'interdiction",
-      structure: "Cấm: « C'est interdit » (bị cấm), « Ce n'est pas possible » (không được). Cho phép: « ON PEUT + động từ nguyên mẫu » (có thể, được phép làm).",
+      heading: "Pour s'excuser dans un message",
+      structure: "Xin lỗi trước: « Pardon D'AVANCE pour le… » (xin lỗi trước vì…). Xin lỗi sau: « Désolé(e)/Excusez-moi pour le… » (xin lỗi vì…). D'avance = trước, báo trước sự việc sẽ xảy ra.",
       phrases: [
-        { fr: "C'est interdit. / Ce n'est pas possible.", vi: "Cái đó bị cấm. / Không được đâu." },
-        { fr: "On peut [mettre les objets dans le couloir].", vi: "Mình có thể [để đồ ngoài hành lang]." },
-        { fr: "Ce n'est pas agréable…", vi: "Như thế không dễ chịu chút nào…" },
+        { fr: "Désolé(e) / Excusez-moi pour [le bruit].", vi: "Xin lỗi vì [tiếng ồn]." },
+        { fr: "Pardon (d'avance) pour [le dérangement].", vi: "Xin lỗi (trước) vì [sự làm phiền]." },
       ],
     },
+  ],
+
+  "u7-g": [
     {
-      heading: "Pour faire une suggestion",
-      structure: "Gợi ý: « ON PEUT + động từ » (mình có thể…), « Je VAIS + động từ » = futur proche (tôi sẽ…). « dire à + người + DE + động từ » = bảo ai làm gì.",
+      heading: "Pour expliquer un problème domestique",
+      structure: "Mô tả sự cố: « Il y a + sự cố » (có vấn đề gì đó). Máy móc không hoạt động: « NE + FONCTIONNE/MARCHE + PAS » (không hoạt động). Phân biệt: FONCTIONNER (thiết bị điện tử/máy móc) vs MARCHER (dùng được cho cả hai).",
       phrases: [
-        { fr: "On peut [dire à notre voisin de participer].", vi: "Mình có thể [rủ hàng xóm cùng tham gia]." },
-        { fr: "Je vais [mettre un mot dans l'ascenseur].", vi: "Tôi sẽ [dán một mẩu giấy trong thang máy]." },
-        { fr: "Bonne idée ! On va s'amuser !", vi: "Ý hay! Mình sẽ vui lắm cho xem!" },
+        { fr: "Il y a une fuite d'eau dans [ma cuisine].", vi: "Có chỗ rò nước trong [nhà bếp] của tôi." },
+        { fr: "Mon ordinateur ne fonctionne pas très bien.", vi: "Máy tính của tôi không hoạt động tốt lắm." },
+        { fr: "Le son ne marche pas.", vi: "Âm thanh không hoạt động." },
       ],
     },
   ],
