@@ -563,44 +563,50 @@ export const EDITO_POUR_NOTES = {
   // ─── Unité 10 ─────────────────────────────────────────────────────
   "u10-b": [
     {
-      heading: "Pour parler de ses études",
-      structure: "« être EN + cấp/năm học » (en master, en 4e année). « étudier + LE/LES + ngành ». « J'ai EU ma licence » = passé composé của avoir (đã có/đã lấy được). « hésiter ENTRE X ET Y » = phân vân giữa X và Y.",
+      heading: "Pour parler de ses études et de son université",
+      structure: "« être EN + cấp/năm học » (en master, en 4e année). « étudier + LE/LES + ngành ». « J'ai EU ma licence » = passé composé của avoir (đã có/đã lấy được). Nhận xét trường: « Les cours SONT + tính từ ».",
       phrases: [
-        { fr: "Je suis en [quatrième] année / en master / en licence.", vi: "Tôi đang học năm [thứ tư] / cao học / cử nhân." },
-        { fr: "J'étudie [le droit / les langues / le commerce].", vi: "Tôi học [luật / ngôn ngữ / thương mại]." },
-        { fr: "J'ai eu ma [licence] [l'année dernière].", vi: "Tôi đã lấy bằng [cử nhân] [năm ngoái]." },
-        { fr: "J'hésite entre [les langues] et [le droit].", vi: "Tôi đang phân vân giữa [ngôn ngữ] và [luật]." },
-      ],
-    },
-    {
-      heading: "Pour donner son avis sur les études",
-      structure: "Nhận xét: « Les cours SONT + tính từ » (tính từ hợp số nhiều: excellentS, intéressantS). « C'est important POUR + động từ nguyên mẫu » = quan trọng để…",
-      phrases: [
-        { fr: "Les cours et les profs sont [excellents / intéressants].", vi: "Các môn học và thầy cô [xuất sắc / thú vị]." },
-        { fr: "On apprend de nouvelles choses tous les jours.", vi: "Mỗi ngày đều học được điều mới." },
-        { fr: "C'est important pour avoir de [bonnes notes].", vi: "Điều đó quan trọng để đạt [điểm cao]." },
+        { fr: "J'étudie [le droit / les langues / l'économie].", vi: "Tôi học [luật / ngôn ngữ / kinh tế]." },
+        { fr: "Je suis étudiant(e) en licence / master d'économie.", vi: "Tôi đang học cử nhân / thạc sĩ kinh tế." },
+        { fr: "Je suis en [quatrième] année.", vi: "Tôi đang học năm [thứ tư]." },
+        { fr: "J'ai eu ma licence [l'année dernière].", vi: "Tôi đã lấy bằng cử nhân [năm ngoái]." },
+        { fr: "Les cours sont excellents.", vi: "Các môn học rất xuất sắc." },
+        { fr: "L'université / La bibliothèque est agréable.", vi: "Trường đại học / Thư viện rất dễ chịu." },
+        { fr: "Le resto U n'est pas cher.", vi: "Căng tin trường không đắt." },
       ],
     },
   ],
 
   "u10-c": [
     {
-      heading: "Pour parler de ses projets",
-      structure: "Nói dự định, đều theo cấu trúc động từ + động từ nguyên mẫu: « rêver DE + inf » (mơ ước), « espérer + inf » (hy vọng), « vouloir + inf » (muốn), « devoir + inf » (phải).",
+      heading: "Pour parler de ses compétences",
+      structure: "Kể năng lực/tính cách: « J'AIME + inf » (thích làm gì), « Je SUIS + tính từ » (tôi là người như thế nào). Tính từ phải chia giống: patient (nam) / patiente (nữ).",
       phrases: [
-        { fr: "Je rêve de [travailler pour une organisation internationale].", vi: "Tôi mơ ước [làm việc cho một tổ chức quốc tế]." },
-        { fr: "J'espère [avoir mon diplôme / trouver un travail intéressant].", vi: "Tôi hy vọng [lấy được bằng / tìm được công việc thú vị]." },
-        { fr: "Je veux [être utile].", vi: "Tôi muốn [trở nên có ích]." },
-        { fr: "Je dois finir [mon master].", vi: "Tôi phải hoàn thành [bằng thạc sĩ]." },
+        { fr: "J'aime être avec des enfants.", vi: "Tôi thích được ở cùng trẻ em." },
+        { fr: "Je suis patient(e).", vi: "Tôi là người kiên nhẫn." },
       ],
     },
     {
-      heading: "Pour parler d'une expérience enrichissante",
-      structure: "« J'ai appris » = passé composé của apprendre (đã học được). So sánh hơn: « plus + tính từ » (… hơn). « une pause POUR + inf » = một quãng nghỉ để…",
+      heading: "Pour parler de son projet professionnel",
+      structure: "Nói dự định nghề nghiệp: « rêver DE + inf » (mơ ước), « vouloir + inf » (muốn), « espérer QUE + mệnh đề » (hy vọng rằng…). Futur proche: « je vais + inf ».",
       phrases: [
-        { fr: "J'ai appris beaucoup de choses.", vi: "Tôi đã học được rất nhiều điều." },
-        { fr: "Je suis plus [patient(e)] maintenant.", vi: "Giờ tôi [kiên nhẫn] hơn." },
-        { fr: "C'est une pause pour [faire de nouvelles choses].", vi: "Đó là quãng nghỉ để [thử những điều mới]." },
+        { fr: "Je rêve de travailler pour une organisation internationale.", vi: "Tôi mơ ước được làm việc cho một tổ chức quốc tế." },
+        { fr: "Je veux être utile.", vi: "Tôi muốn trở nên có ích." },
+        { fr: "J'espère que je vais avoir un travail intéressant.", vi: "Tôi hy vọng sẽ có một công việc thú vị." },
+      ],
+    },
+  ],
+
+  "u10-e": [
+    {
+      heading: "Pour parler de son métier",
+      structure: "Giới thiệu nghề: « Je SUIS + nghề » (không dùng article: « je suis artiste », không phải « je suis une artiste »). « travailler COMME + nghề » = làm với tư cách là… « J'ai CRÉÉ » = passé composé của créer (đã tạo ra/thành lập).",
+      phrases: [
+        { fr: "Je suis comédien(ne) / artiste / informaticien(ne).", vi: "Tôi là diễn viên / nghệ sĩ / chuyên gia tin học." },
+        { fr: "C'est un métier difficile.", vi: "Đây là một nghề khó." },
+        { fr: "J'ai un rythme très différent.", vi: "Tôi có nhịp sống rất khác." },
+        { fr: "Je travaille comme chauffeur.", vi: "Tôi làm nghề lái xe." },
+        { fr: "J'ai créé mon entreprise.", vi: "Tôi đã tự lập doanh nghiệp." },
       ],
     },
   ],
