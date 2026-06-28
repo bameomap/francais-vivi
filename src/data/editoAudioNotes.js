@@ -152,9 +152,10 @@ export const EDITO_POUR_NOTES = {
   // ─── Unité 4 ──────────────────────────────────────────────────────
   "u4-b": [
     {
-      heading: "Pour décrire un quartier / une ville",
+      heading: "Pour présenter une ville/un quartier",
       structure: "Tả chung: « C'EST UN quartier + tính từ ». Liệt kê: « IL Y A + mạo từ + địa điểm ». Khoảng cách: « C'EST LOIN/PRÈS DE + địa điểm » — nhớ co rút de+le → DU, de+les → DES (près du centre, pas près de le centre).",
       phrases: [
+        { fr: "Voilà mon quartier.", vi: "Đây là khu phố của tôi." },
         { fr: "C'est un quartier [agréable / dynamique / calme].", vi: "Đây là một khu phố [dễ chịu / sôi động / yên tĩnh]." },
         { fr: "Il y a [des cafés / une église / une mairie].", vi: "Có [quán cà phê / nhà thờ / tòa thị chính]." },
         { fr: "C'est loin / près [du centre / de chez moi].", vi: "Xa / gần [trung tâm / nhà tôi]." },
@@ -206,10 +207,32 @@ export const EDITO_POUR_NOTES = {
     },
   ],
 
+  "u4-e": [
+    {
+      heading: "Pour se déplacer en transports en commun",
+      structure: "Chỉ đường đi bằng TCCC: « Pour aller DE + điểm xuất phát + À/AU + điểm đến ». Mệnh lệnh: PRENEZ (đi/lấy tuyến) + la ligne + số. DESCENDEZ À L'ARRÊT (xuống ở trạm) + tên trạm.",
+      phrases: [
+        { fr: "Pour aller du [centre-ville] au [musée d'Art moderne], prenez le tram.", vi: "Để đi từ [trung tâm] đến [bảo tàng Nghệ thuật hiện đại], đi xe điện." },
+        { fr: "Prenez la ligne [T1].", vi: "Đi tuyến [T1]." },
+        { fr: "Descendez à l'arrêt [« Philharmonie »].", vi: "Xuống ở trạm [« Philharmonie »]." },
+      ],
+    },
+  ],
+
   // ─── Unité 5 ──────────────────────────────────────────────────────
+  "u5-a": [
+    {
+      heading: "Pour commenter un prix",
+      phrases: [
+        { fr: "C'est cher ! ≠ Ce n'est pas cher.", vi: "Đắt quá! ≠ Không đắt." },
+        { fr: "C'est bon marché !", vi: "Giá rẻ đấy!" },
+      ],
+    },
+  ],
+
   "u5-b": [
     {
-      heading: "Pour parler de la taille et de la pointure",
+      heading: "Pour demander/dire la taille et la pointure",
       structure: "Cỡ quần áo: FAIRE DU + cỡ → « Je fais du M / du 38 ». Cỡ giày: CHAUSSER DU + số → « Je chausse du 39 ». Hỏi: « Tu fais quelle taille ? » (cỡ áo) / « Tu chausses du combien ? » (cỡ giày).",
       phrases: [
         { fr: "Je fais du [38]. / Tu fais quelle taille ?", vi: "Tôi mặc cỡ 38. / Bạn mặc cỡ nào?" },
@@ -217,13 +240,13 @@ export const EDITO_POUR_NOTES = {
       ],
     },
     {
-      heading: "Pour donner son avis sur un vêtement",
+      heading: "Pour donner une appréciation",
       structure: "Khen/chê: [đồ vật] + ME PLAÎT (tôi thích) ↔ NE ME PLAÎT PAS. « Il/Elle te va bien » = hợp với bạn. Lưu ý chọn il (đồ giống đực) / elle (đồ giống cái).",
       phrases: [
+        { fr: "C'est à la mode. ≠ Ce n'est pas à la mode.", vi: "Hợp mốt. ≠ Lỗi thời." },
         { fr: "Il / Elle me plaît. / Il / Elle ne me plaît pas.", vi: "Cái này tôi thích. / Cái này tôi không thích." },
+        { fr: "Je trouve ça joli. ≠ Je déteste (la couleur, la forme). / Quelle horreur !", vi: "Tôi thấy cái này đẹp. ≠ Tôi ghét (màu, kiểu dáng). / Gớm quá!" },
         { fr: "Il / Elle te va bien !", vi: "Cái này hợp với bạn đấy!" },
-        { fr: "J'aime / Je n'aime pas [la couleur / le style].", vi: "Tôi thích / không thích [màu / kiểu]." },
-        { fr: "Quelle horreur ! / C'est à la mode !", vi: "Gớm quá! / Cái này hợp mốt đấy!" },
       ],
     },
   ],
@@ -239,20 +262,20 @@ export const EDITO_POUR_NOTES = {
       ],
     },
     {
-      heading: "Pour parler des saisons",
-      structure: "4 mùa: EN été / EN automne / EN hiver, nhưng AU printemps (mùa xuân dùng « au »). « Il VA faire… » = futur proche (sắp sẽ…). « moins 10 degrés » = âm 10 độ.",
+      heading: "Pour situer un moment dans l'année",
+      structure: "4 mùa: EN été / EN automne / EN hiver, nhưng AU printemps (mùa xuân dùng « au »). Tháng: toàn bộ dùng EN. Phần của tháng: Début / mi- / fin + tháng.",
       phrases: [
-        { fr: "En été / en automne / en hiver / au printemps…", vi: "Vào mùa hè / mùa thu / mùa đông / mùa xuân…" },
-        { fr: "Début [septembre], il fait [30 degrés].", vi: "Đầu [tháng 9], trời [30 độ]." },
-        { fr: "L'hiver va être difficile, il va faire moins [10] degrés !", vi: "Mùa đông sẽ khắc nghiệt, trời sẽ xuống âm [10] độ!" },
+        { fr: "En hiver, au printemps, en été, en automne…", vi: "Vào mùa đông, mùa xuân, mùa hè, mùa thu…" },
+        { fr: "En janvier, en avril, en juillet…", vi: "Vào tháng Giêng, tháng Tư, tháng Bảy…" },
+        { fr: "Début septembre, mi-septembre, fin septembre…", vi: "Đầu tháng 9, giữa tháng 9, cuối tháng 9…" },
       ],
     },
   ],
 
   "u5-f": [
     {
-      heading: "Pour décrire un objet / un cadeau",
-      structure: "Giới thiệu vật: « C'EST + un/une… ». Hỏi công dụng: « À quoi ça sert ? » → trả lời « Ça sert à + động từ nguyên mẫu » (dùng để…) hoặc « C'est pour + động từ nguyên mẫu ».",
+      heading: "Pour demander/dire l'utilité d'un produit",
+      structure: "Hỏi công dụng: « À quoi ça sert ? / Ça sert à quoi ? » → trả lời « Ça sert à + động từ nguyên mẫu » (dùng để…) hoặc « C'est pour + động từ nguyên mẫu ».",
       phrases: [
         { fr: "C'est [un scanner portable]. C'est [rapide et pratique].", vi: "Đây là [máy quét cầm tay]. Nó [nhanh và tiện]." },
         { fr: "À quoi ça sert ? / Ça sert à [numériser des documents].", vi: "Cái này dùng để làm gì? / Nó dùng để [số hóa tài liệu]." },
@@ -271,10 +294,21 @@ export const EDITO_POUR_NOTES = {
     },
   ],
 
+  "u5-g": [
+    {
+      heading: "Pour décrire un objet",
+      phrases: [
+        { fr: "Un cadre photo est carré / rond / rectangulaire.", vi: "Một khung ảnh có hình vuông / tròn / chữ nhật." },
+        { fr: "La valise est lourde. ≠ légère.", vi: "Vali nặng. ≠ nhẹ." },
+        { fr: "Le sac est petit. ≠ grand.", vi: "Túi nhỏ. ≠ lớn." },
+      ],
+    },
+  ],
+
   // ─── Unité 6 ──────────────────────────────────────────────────────
   "u6-b": [
     {
-      heading: "Pour dire et demander l'heure",
+      heading: "Pour demander et dire l'heure",
       structure: "Hỏi giờ: « Quelle heure il est ? » → trả lời « IL EST + giờ ». Hỏi giờ của sự kiện: « À quelle heure… ? » → « C'est À + giờ » (à = vào lúc). « moins dix » = kém 10 phút, « et demie » = rưỡi.",
       phrases: [
         { fr: "Quelle heure il est ? / Il est [neuf heures cinq].", vi: "Mấy giờ rồi? / [9 giờ 5 phút]." },
@@ -323,9 +357,21 @@ export const EDITO_POUR_NOTES = {
     },
   ],
 
+  "u6-e": [
+    {
+      heading: "Pour présenter une personne",
+      structure: "Hai cách tương đương: « [Tên] EST + tính từ » = mô tả trực tiếp; « C'EST + un/une + danh từ + tính từ » = giới thiệu kèm mô tả. Có thể ghép: « [Tên] EST un(e) + danh từ + tính từ ».",
+      phrases: [
+        { fr: "Aya est généreuse. = C'est une jeune femme généreuse.", vi: "Aya hào phóng. = Đây là một người phụ nữ trẻ hào phóng." },
+        { fr: "Il / Elle est [sympathique / drôle / sérieux(se)].", vi: "Anh ấy / Cô ấy [thân thiện / buồn cười / nghiêm túc]." },
+        { fr: "C'est [un footballeur français]. Il est né en [1998].", vi: "Đây là [một cầu thủ bóng đá người Pháp]. Anh ấy sinh năm [1998]." },
+      ],
+    },
+  ],
+
   "u6-f": [
     {
-      heading: "Pour décrire l'apparence physique",
+      heading: "Pour décrire une personne",
       structure: "Tả ngoại hình hai cách: ÊTRE + tính từ (Il EST grand) cho dáng vẻ chung; AVOIR + (les cheveux/les yeux) + tính từ (Il A les yeux bleus) cho bộ phận. Tính từ phải hợp giống & số với người được tả.",
       phrases: [
         { fr: "Il / Elle est [grand(e) / mince / brun(e) / chauve].", vi: "Anh ấy / Cô ấy [cao / mảnh khảnh / tóc nâu / hói]." },
