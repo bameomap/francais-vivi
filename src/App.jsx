@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
-import { loadSets, saveSets, getStreak, getProgress, markModuleUsed, getStorageHealth, exportBackup } from "./utils/storage.js";
+import { loadSets, saveSets, getStreak, getProgress, markModuleUsed, getStorageHealth, exportBackup, getMistakes } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
 import { C, applyTheme, THEME_KEY } from "./constants.js";
 
@@ -34,29 +34,6 @@ import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./ut
 import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from "./utils/parcours.js";
 import { PARCOURS_UNITS, STEP_DEFS } from "./data/parcoursData.js";
 import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
-
-// ── Module definitions ──────────────────────────────────────
-const MODULES = [
-  // Học
-  { id:"vocab",         group:"hoc",    label:"Từ vựng",    fr:"Le Vocabulaire",   icon:"📖", color:"#4A90D9", bg:"#EBF4FF", view:"edito"         },
-  { id:"parcours",      group:"hoc",    label:"Lộ trình",   fr:"Le Parcours",      icon:"🛤️", color:"#E8574A", bg:"#FFF0EF", view:"parcours"      },
-  { id:"grammar",       group:"hoc",    label:"Ngữ pháp",   fr:"La Grammaire",     icon:"⚜️", color:"#7B6CF6", bg:"#F0EEFF", view:"grammar"       },
-  { id:"reference_hub", group:"hoc",    label:"Tra cứu",    fr:"La Référence",     icon:"🗺️", color:"#6D28D9", bg:"#F5F0FF", view:"reference_hub" },
-  { id:"sentence",      group:"hoc",    label:"Câu ghép từ",fr:"Les Phrases",      icon:"🧩", color:"#7B6CF6", bg:"#F0EEFF", view:"sentence"      },
-  // Luyện
-  { id:"conversation",  group:"luyen",  label:"Giao tiếp",  fr:"La Conversation",  icon:"🥐", color:"#2980B9", bg:"#E8F4FD", view:"conversation"   },
-  { id:"prononciation", group:"luyen",  label:"Phát âm",    fr:"La Prononciation", icon:"🎤", color:"#F59E0B", bg:"#FFFBEB", view:"prononciation"  },
-  { id:"writing",       group:"luyen",  label:"Luyện viết", fr:"L'Écriture",       icon:"🖋️", color:"#E67E22", bg:"#FEF3E2", view:"writing"       },
-  { id:"lecture",       group:"luyen",  label:"Đọc hiểu",   fr:"La Lecture",       icon:"📜", color:"#059669", bg:"#ECFDF5", view:"lecture"       },
-  { id:"dictee",        group:"luyen",  label:"Nghe chép",  fr:"La Dictée",        icon:"🎵", color:"#0891B2", bg:"#F0F9FF", view:"ecouter"       },
-  { id:"listening",     group:"luyen",  label:"Nghe chọn",  fr:"L'Écoute",         icon:"🎧", color:"#0891B2", bg:"#F0F9FF", view:"ecouter"       },
-  // Ôn tập
-  { id:"srs",           group:"on",     label:"Thẻ ôn tập", fr:"La Répétition",    icon:"🃏", color:"#0D9488", bg:"#F0FDFA", view:"srs"           },
-  { id:"revision",      group:"on",     label:"Ôn sai",     fr:"La Révision",      icon:"🔍", color:"#DC2626", bg:"#FEF2F2", view:"revision"      },
-  { id:"defi",          group:"on",     label:"Thử thách",  fr:"Le Défi du Jour",  icon:"🏆", color:"#8E44AD", bg:"#F5EEFF", view:"defi"          },
-  // Công cụ
-  { id:"stats",         group:"congcu", label:"Thống kê",   fr:"Les Statistiques", icon:"📈", color:"#0891B2", bg:"#F0F9FF", view:"stats"         },
-];
 
 const TABS = [
   { id:"home",     glyph:"⌂",  label:"Accueil",   section:"home",          view:"home",          color:null       },
@@ -345,16 +322,6 @@ function AppInner() {
     setWrongAnswers(prev => prev.find(x => x.question===q.question) ? prev : [...prev, q]);
   }, []);
 
-  // Last used module (for "next lesson" card)
-  const lastModule = (() => {
-    let best = null, bestTime = 0;
-    for (const m of MODULES) {
-      const p = progress[m.id];
-      if (p?.lastTs && p.lastTs > bestTime) { best = m; bestTime = p.lastTs; }
-    }
-    return best;
-  })();
-
   const addMoreQuestions = async () => {
     if (!quiz || CLIENT_TYPES.includes(type)) return;
     setLoading(true);
@@ -433,16 +400,6 @@ function AppInner() {
     ));
     return null;
   }
-
-  const navBtn = (label, target, show=true) => show && (
-    <button onClick={()=>setView(target)}
-      style={{ padding:"0.22rem 0.58rem", background:view===target?C.blue:"transparent", border:`1.5px solid ${view===target?C.blue:C.border}`, color:view===target?C.white:C.gray, borderRadius:20, fontSize:"0.63rem", cursor:"pointer", fontWeight:view===target?600:400, whiteSpace:"nowrap", transition:"all 0.15s" }}>
-      {label}
-    </button>
-  );
-
-  // ── Progress % for next lesson card ──
-  const moduleProgress = lastModule ? Math.min((progress[lastModule.id]?.count||0) * 8, 100) : 0;
 
   return (
     <div className="app-shell" style={{ fontFamily:"'Inter',sans-serif", background:C.paper, minHeight:"100vh", color:C.ink, position:"relative" }}>
@@ -553,11 +510,11 @@ function AppInner() {
               style={{ width:"100%", padding:"0.75rem 1rem", border:`1.5px solid ${C.border}`, borderRadius:12, fontSize:"0.95rem", fontFamily:"inherit", color:C.ink, marginBottom:"0.8rem" }}
             />
             <div style={{ fontSize:"0.78rem", color:C.gray, lineHeight:1.7, marginBottom:"1rem" }}>
-              App có <b>8 module</b> học tiếng Pháp. Gợi ý bắt đầu với:
+              App học tiếng Pháp theo <b>lộ trình A1</b>. Bắt đầu với:
               <div style={{ display:"flex", flexDirection:"column", gap:"0.4rem", marginTop:"0.6rem" }}>
                 {[
-                  {icon:"📖",text:"Từ vựng — nhập từ, luyện flashcard & bài tập"},
-                  {icon:"🖊️",text:"Chia động từ — tra bảng chia ngay khi cần"},
+                  {icon:"🛤️",text:"Lộ trình — học từng Unité theo trình tự Édito A1"},
+                  {icon:"🃏",text:"Ôn tập — thẻ ghi nhớ & câu sai tự động lặp lại"},
                   {icon:"🥐",text:"Giao tiếp — roleplay tình huống thực tế với AI"},
                 ].map((s,i)=>(
                   <div key={i} style={{ display:"flex", gap:"0.6rem", alignItems:"center", background:C.blueL, borderRadius:10, padding:"0.5rem 0.75rem" }}>
@@ -675,7 +632,7 @@ function AppInner() {
             {[
               { val:srsStats.mastered,    lbl:"Từ thuộc",     color:C.green,  go:()=>goSection("stats","stats")      },
               { val:srsStats.due,         lbl:"Cần ôn →",     color:C.gold,   go:()=>goSection("srs","srs")          },
-              { val:wrongAnswers.length,  lbl:"Sai gần đây →",color:C.accent, go:()=>goSection("revision","revision") },
+              { val:getMistakes().length, lbl:"Sai gần đây →",color:C.accent, go:()=>goSection("revision","revision") },
             ].map(({ val, lbl, color, go }) => (
               <button key={lbl} onClick={go} className="card-hover"
                 style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:12, padding:"10px 8px", textAlign:"center", cursor:"pointer", fontFamily:"inherit" }}>
