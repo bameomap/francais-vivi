@@ -49,7 +49,7 @@ export const EDITO_AUDIO = {
       ],
       questions: [
         { label: "Entrée en matière", text: "Regardez l'affiche. Dites la date du speak-dating." },
-        { label: "1ère écoute", text: "Vrai ou faux ? a. Les personnes se présentent. b. Les personnes se disent au revoir. / Associez les prénoms aux photos (Lars, Enzo, Giulia, Alice)." },
+        { label: "1ère écoute", text: "Vrai ou faux ? a. Les personnes se présentent. b. Les personnes se disent au revoir. / Qui parle ? Donnez les quatre prénoms." },
         { label: "2e écoute", text: "Trouvez la nationalité des personnes. / Associez Lars, Enzo, Giulia, Alice avec 23, 52, 28, 44 ans." },
       ],
     },

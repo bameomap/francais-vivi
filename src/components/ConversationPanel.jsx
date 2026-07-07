@@ -166,9 +166,10 @@ export default function ConversationPanel({ onBackToParcours }) {
   const send = async (override) => {
     const txt = (override || input).trim();
     if (!txt || loading) return;
-    // First user message completes the Édito speaking task (sub-lesson). Free
-    // scenarios aren't part of a unit, so they don't carry unitId/subId.
-    if (messages.filter(m => m.role === "user").length === 0 && scenario?.subId) {
+    // The Édito speaking task (sub-lesson) counts as done from the learner's
+    // 3rd message — one greeting isn't a conversation. Free scenarios aren't
+    // part of a unit, so they don't carry unitId/subId.
+    if (messages.filter(m => m.role === "user").length === 2 && scenario?.subId) {
       markSubDone(scenario.unitId, "parler", scenario.subId);
     }
     const userMsg = { role:"user", text: txt };

@@ -2,9 +2,9 @@ export const EDITO_A1_UNITS = [
   {
     id: "unite-0", unit: 0, title: "Bienvenue !",
     speakingPractice: [
-      { title: "Se présenter", task: "Présentez-vous à un(e) camarade.", usefulPhrases: ["Bonjour, je m'appelle…", "Et vous ?", "Moi, je m'appelle…"] },
-      { title: "Saluer", task: "Associez une situation à une salutation et jouez le dialogue.", usefulPhrases: ["Bonjour", "Salut", "Au revoir", "À bientôt"] },
-      { title: "Dans la classe", task: "Mimez une situation de classe ; votre voisin(e) dit la phrase correcte." },
+      { title: "Se présenter", task: "Présentez-vous à votre partenaire : dites bonjour et donnez votre prénom.", usefulPhrases: ["Bonjour, je m'appelle…", "Et vous ?", "Moi, je m'appelle…"] },
+      { title: "Saluer", task: "Saluez votre partenaire selon la situation (le matin, le soir, un ami, un professeur), puis dites au revoir.", usefulPhrases: ["Bonjour", "Salut", "Au revoir", "À bientôt"] },
+      { title: "Dans la classe", task: "Vous êtes en classe de français : demandez de répéter, demandez comment on dit un mot, dites que vous ne comprenez pas.", usefulPhrases: ["Vous pouvez répéter ?", "Comment on dit… ?", "Je ne comprends pas.", "Qu'est-ce que ça veut dire ?"] },
     ],
     writingPractice: [
       { title: "Écrire son prénom", task: "Épelez et écrivez des prénoms." },
@@ -14,9 +14,9 @@ export const EDITO_A1_UNITS = [
   {
     id: "unite-1", unit: 1, title: "Je suis…",
     speakingPractice: [
-      { title: "Speak-dating", task: "Présentez-vous à une autre personne.", usefulPhrases: ["Je m'appelle…", "Et toi ?", "Vous avez quel âge ?", "Je suis vietnamien(ne)."] },
-      { title: "Nationalité d'une personnalité", task: "Dites le nom d'un acteur, chanteur ou sportif ; votre voisin(e) dit sa nationalité." },
-      { title: "Questionnaire d'identité", task: "Posez des questions à un(e) camarade et notez ses informations personnelles." },
+      { title: "Speak-dating", task: "Vous participez à un speak-dating : présentez-vous et posez des questions à votre partenaire.", usefulPhrases: ["Je m'appelle…", "Et toi ?", "Vous avez quel âge ?", "Je suis vietnamien(ne)."] },
+      { title: "Nationalité d'une personnalité", task: "Présentez un acteur, chanteur ou sportif célèbre : son nom, sa nationalité, sa profession. Votre partenaire vous pose des questions.", usefulPhrases: ["Il s'appelle…", "Elle est américaine.", "Il est chanteur."] },
+      { title: "Questionnaire d'identité", task: "Interviewez votre partenaire : posez des questions sur son nom, son âge, sa nationalité, sa ville.", usefulPhrases: ["Comment tu t'appelles ?", "Tu as quel âge ?", "Tu habites où ?"] },
     ],
     writingPractice: [
       { title: "Profil personnel", task: "Complétez ou écrivez une courte fiche avec nom, prénom, âge, nationalité, ville, goûts." },
@@ -28,7 +28,7 @@ export const EDITO_A1_UNITS = [
     speakingPractice: [
       { title: "Parler de son quartier", task: "Présentez votre ville, votre quartier ou votre logement." },
       { title: "Exprimer ses goûts", task: "Dites ce que vous aimez et ce que vous détestez.", usefulPhrases: ["J'aime…", "J'adore…", "Je déteste…", "Je n'aime pas…"] },
-      { title: "Présenter sa famille", task: "Présentez les membres de votre famille à un(e) camarade." },
+      { title: "Présenter sa famille", task: "Présentez les membres de votre famille : qui, âge, profession. Votre partenaire vous pose des questions.", usefulPhrases: ["J'ai un frère.", "Ma mère s'appelle…", "Il a … ans."] },
     ],
     writingPractice: [
       { title: "Portrait collectif", task: "Écrivez un court portrait de votre groupe : prénoms, villes, goûts, professions." },
@@ -57,7 +57,7 @@ export const EDITO_A1_UNITS = [
     ],
     writingPractice: [
       { title: "Blog ville/quartier", task: "Présentez votre ville et votre quartier en 30 à 40 mots." },
-      { title: "Post réseau social", task: "Postez des photos d'un festival et dites pourquoi vous l'aimez." },
+      { title: "Post réseau social", task: "Écrivez un post de réseau social sur un festival : décrivez le festival et dites pourquoi vous l'aimez." },
       { title: "Audioguide", task: "Écrivez un court texte d'audioguide pour un lieu de votre ville." },
     ],
   },
@@ -79,11 +79,11 @@ export const EDITO_A1_UNITS = [
     speakingPractice: [
       { title: "Routine quotidienne", task: "Présentez votre journée habituelle." },
       { title: "Proposer une sortie", task: "Proposez une sortie ; votre ami(e) accepte ou refuse.", usefulPhrases: ["On va au cinéma ?", "Tu veux venir ?", "D'accord !", "Désolé(e), je ne peux pas."] },
-      { title: "Décrire une personne", task: "Décrivez une célébrité ou une personne de la classe." },
+      { title: "Décrire une personne", task: "Décrivez une célébrité sans dire son nom ; votre partenaire devine qui c'est.", usefulPhrases: ["Il est grand.", "Elle a les cheveux longs.", "Il est acteur.", "C'est… ?"] },
     ],
     writingPractice: [
       { title: "Production écrite", task: "Écrivez un message pour proposer, accepter ou refuser une sortie." },
-      { title: "Affiche d'une célébrité", task: "Réalisez une affiche avec description physique, caractère et activités." },
+      { title: "Affiche d'une célébrité", task: "Écrivez le texte d'une affiche sur une célébrité : description physique, caractère et activités." },
       { title: "Agenda", task: "Écrivez votre programme de la journée avec les heures." },
     ],
   },
@@ -122,7 +122,7 @@ export const EDITO_A1_UNITS = [
     ],
     writingPractice: [
       { title: "Carte postale", task: "Écrivez une carte postale de vacances." },
-      { title: "Brochure touristique", task: "Réalisez une brochure touristique avec lieux, activités et conseils." },
+      { title: "Brochure touristique", task: "Écrivez le texte d'une brochure touristique : lieux à visiter, activités et conseils." },
       { title: "Avis de voyage", task: "Écrivez un court avis sur une destination." },
     ],
   },

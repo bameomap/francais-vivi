@@ -21,9 +21,38 @@ const Q_STYLE_FN = (label) => ({
   "2e écoute":         { bg: C.blueL, border: C.blueDark, chip: C.blueDark, icon: "👂👂" },
 }[label]);
 
-// ── Parse "Q1 / Q2 / Q3" → ["Q1","Q2","Q3"] ──────────────────────
+// ── Parse "Q1 / Q2 / Q3" → sub-questions ─────────────────────────
+// Returns [{ text, quick }] where `quick` is a list of tap-to-answer
+// options (or null → free-text). "Vrai ou faux ? a. … b. …" expands to
+// one Vrai/Faux row per statement; "… ? a. X b. Y" becomes option chips —
+// so A1 learners answer by tapping instead of typing free text.
 function parseSubQ(text) {
-  return text.split(" / ").map(s => s.trim()).filter(Boolean);
+  // Split on " / ", but glue back segments like "b. …" that are options
+  // of the previous question (the book uses "/" for both separators).
+  const rawSegs = text.split(" / ").map(s => s.trim()).filter(Boolean);
+  const segs = [];
+  for (const s of rawSegs) {
+    if (/^[a-d]\.\s/.test(s) && segs.length) segs[segs.length - 1] += " / " + s;
+    else segs.push(s);
+  }
+  const out = [];
+  for (const seg of segs) {
+    const parts = seg.split(/\s*\/?\s+(?=[a-d]\.\s)/).map(s => s.trim()).filter(Boolean);
+    const hasStem = parts.length > 0 && !/^[a-d]\.\s/.test(parts[0]);
+    const stem  = hasStem ? parts[0] : "";
+    const items = parts.slice(hasStem ? 1 : 0).map(p => p.replace(/^[a-d]\.\s*/, "").replace(/\s*\/\s*$/, "").trim()).filter(Boolean);
+    const isTF  = /vrai\s+ou\s+faux/i.test(seg);
+    if (isTF && items.length >= 1) {
+      for (const it of items) out.push({ text: `Vrai ou faux ? ${it}`, quick: ["Vrai", "Faux"] });
+    } else if (isTF) {
+      out.push({ text: seg, quick: ["Vrai", "Faux"] });
+    } else if (stem && items.length >= 2) {
+      out.push({ text: stem, quick: items });
+    } else {
+      out.push({ text: seg, quick: null });
+    }
+  }
+  return out;
 }
 
 // ── Strip "Speaker : " prefix from dictée sentences ──────────────
@@ -169,10 +198,11 @@ export default function EditoAudioPanel() {
   };
 
   // ── AI grade ──────────────────────────────────────────────────
-  const handleGrade = async (tid, gi, qi, question, sentences) => {
+  const handleGrade = async (tid, gi, qi, question, sentences, override) => {
     const key = `${tid}|${gi}|${qi}`;
-    const answer = (answers[key] || "").trim();
+    const answer = (override ?? answers[key] ?? "").trim();
     if (!answer) return;
+    if (override != null) setAnswers(prev => ({ ...prev, [key]: answer }));
     setGrades(prev => ({ ...prev, [key]: { loading: true } }));
     try {
       const r = await gradeAnswer(question, answer, sentences);
@@ -428,7 +458,7 @@ Trả về JSON thuần (không markdown):
                                 }}>
                                   {/* Question text */}
                                   <div style={{ fontSize: "0.74rem", color: C.ink, lineHeight: 1.55, marginBottom: isWarmup ? 0 : "0.42rem", fontStyle: "italic" }}>
-                                    {q}
+                                    {q.text}
                                   </div>
 
                                   {/* Warm-up prompt — no grading */}
@@ -438,8 +468,32 @@ Trả về JSON thuần (không markdown):
                                     </div>
                                   )}
 
-                                  {/* Input row — show if not yet graded */}
-                                  {!isWarmup && !graded && (
+                                  {/* Tap-to-answer chips (Vrai/Faux or a/b/c options) */}
+                                  {!isWarmup && !graded && q.quick && (
+                                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", alignItems: "center" }}>
+                                      {q.quick.map(opt => (
+                                        <button key={opt}
+                                          onClick={() => handleGrade(track.id, gIdx, qIdx, q.text, track.sentences, opt)}
+                                          disabled={grade?.loading}
+                                          style={{
+                                            padding: "0.35rem 0.7rem",
+                                            background: grade?.loading && ans === opt ? qs.border : "#fff",
+                                            color: grade?.loading && ans === opt ? "#fff" : C.ink,
+                                            border: `1.5px solid ${qs.border}55`,
+                                            borderRadius: 999, fontSize: "0.71rem", fontWeight: 600,
+                                            cursor: grade?.loading ? "default" : "pointer",
+                                            fontFamily: "inherit", textAlign: "left", lineHeight: 1.4,
+                                            transition: "all 0.15s",
+                                          }}>
+                                          {opt}
+                                        </button>
+                                      ))}
+                                      {grade?.loading && <span style={{ fontSize: "0.66rem", color: C.gray }}>⏳ Đang chấm…</span>}
+                                    </div>
+                                  )}
+
+                                  {/* Free-text input row — show if not yet graded */}
+                                  {!isWarmup && !graded && !q.quick && (
                                     <div style={{ display: "flex", gap: "0.35rem", alignItems: "flex-end" }}>
                                       <textarea
                                         value={ans}
@@ -447,7 +501,7 @@ Trả về JSON thuần (không markdown):
                                         onKeyDown={e => {
                                           if (e.key === "Enter" && !e.shiftKey) {
                                             e.preventDefault();
-                                            handleGrade(track.id, gIdx, qIdx, q, track.sentences);
+                                            handleGrade(track.id, gIdx, qIdx, q.text, track.sentences);
                                           }
                                         }}
                                         placeholder="Câu trả lời của bạn… (Enter để chấm)"
@@ -463,7 +517,7 @@ Trả về JSON thuần (không markdown):
                                         }}
                                       />
                                       <button
-                                        onClick={() => handleGrade(track.id, gIdx, qIdx, q, track.sentences)}
+                                        onClick={() => handleGrade(track.id, gIdx, qIdx, q.text, track.sentences)}
                                         disabled={!ans.trim() || grade?.loading}
                                         style={{
                                           padding: "0.38rem 0.65rem",
@@ -479,7 +533,7 @@ Trả về JSON thuần (không markdown):
                                       </button>
                                     </div>
                                   )}
-                                  {!isWarmup && !graded && <div style={{ marginTop: "0.45rem" }}><AccentBar compact /></div>}
+                                  {!isWarmup && !graded && !q.quick && <div style={{ marginTop: "0.45rem" }}><AccentBar compact /></div>}
 
                                   {/* Grade result */}
                                   {!isWarmup && graded && (

@@ -7,10 +7,9 @@ export const editoA1ReadingComprehension = [
     section: "compréhension écrite",
     page: 3,
     title: "Bonjour, ça va ?",
-    instruction: "Associez les dialogues et les images, puis complétez les dialogues avec les éléments proposés.",
+    instruction: "Lisez les dialogues, puis complétez-les avec les éléments proposés.",
     text: `Dialogues :\n1. – Bonjour Madame ! – Bonjour Yannick, ça va ?\n2. – Bonjour monsieur Bertoni ! – Bonjour madame Hurip ! Vous allez bien ?\n3. – Au revoir les enfants ! – Au revoir Madame !\n4. – Salut, ça va ? – Oui et toi ?\n\nÉléments proposés : À bientôt – Merci – Bonjour – Salut – Au revoir`,
     questions: [
-      { id: "u0-q1", type: "matching", prompt: "Associez les dialogues et les images." },
       { id: "u0-q2a", type: "short_answer", prompt: "– … Stéphanie ! Ça va ? – Oui, ça va bien, et toi ?", answer: "Salut" },
       { id: "u0-q2b", type: "short_answer", prompt: "– …, monsieur Bens. Vous allez bien ? – Très bien, merci !", answer: "Bonjour" },
       { id: "u0-q2c", type: "short_answer", prompt: "– Bonne journée, Mano ! – … maman !", answer: "Merci" },
@@ -461,7 +460,7 @@ export const editoA1ReadingComprehension = [
     instruction: "Lisez le site de l'office du tourisme de Grenoble et répondez aux questions.",
     text: `grenoble-tourisme.com [Office de Tourisme Grenoble-Alpes Métropole]\n\nÀ Grenoble, au mois de juin, il y a le « Street Art Fest Grenoble-Alpes ». C'est un festival avec des artistes nationaux et internationaux, Snek par exemple. C'est un artiste, il est grenoblois.\n\nDans les quartiers de la ville, au centre-ville et en banlieue, les artistes font des fresques sur les bâtiments. Ils travaillent dans les rues, sur les boulevards et les avenues. Ils utilisent des techniques différentes. Les habitants et les touristes regardent les artistes créer. Le festival propose un programme riche pour découvrir des artistes et leurs pratiques. C'est une expérience unique.\n\nL'Office de Tourisme organise des visites guidées. C'est une visite d'1 heure (6 €) ou d'1 heure 30 (9 €).\n\nOffice de Tourisme Grenoble-Alpes Métropole — 14 rue de la République, 38000 Grenoble`,
     questions: [
-      { id: "u4-artistes-q1", type: "open", prompt: "Regardez les photos. Qu'est-ce que vous voyez ?" },
+      { id: "u4-artistes-q1", type: "open", prompt: "À votre avis, qu'est-ce que le « street art » ? Il y a du street art dans votre ville ?" },
       { id: "u4-artistes-q2", type: "short_answer", prompt: "L'Office de tourisme présente quel événement ?", answer: "Le Street Art Fest Grenoble-Alpes." },
       { id: "u4-artistes-q3", type: "short_answer", prompt: "Où et quand se passe l'événement ?", answer: "À Grenoble, au mois de juin." },
       { id: "u4-artistes-q4a", type: "true_false", prompt: "Tous les artistes sont français.", answer: false },
@@ -554,7 +553,7 @@ export const editoA1ReadingComprehension = [
     instruction: "Lisez l'article et répondez aux questions.",
     text: `Personnalisez vos objets !\n\nTout le monde a un porte-monnaie, un porte-clés, un téléphone portable, des cadres photo… Mais ces objets ne sont pas uniques. Alors aujourd'hui, les gens personnalisent leurs objets, c'est à la mode !\n\nCette coque de téléphone avec la photo de votre chat est originale, ce sac à dos avec le prénom de votre enfant aussi cet étui pour tablette. C'est possible de personnaliser des objets petits ou grands, lourds ou légers, carrés, ronds ou rectangulaires… et des objets de marques aussi, par exemple des portefeuilles ou des valises. Personnaliser les objets du quotidien est original et pratique !`,
     questions: [
-      { id: "u5-objets-q1", type: "open", prompt: "Regardez les photos du document. Quels objets vous connaissez ?" },
+      { id: "u5-objets-q1", type: "open", prompt: "Quels objets avez-vous avec vous aujourd'hui (sac, téléphone, clés…) ?" },
       { id: "u5-objets-q2", type: "true_false", prompt: "Un objet personnalisé est un objet unique.", answer: true },
       { id: "u5-objets-q3", type: "short_answer", prompt: "Est-ce que les objets personnalisés ont du succès ?", answer: "Oui, c'est à la mode ! Les gens personnalisent beaucoup leurs objets." },
       { id: "u5-objets-q4", type: "multi_select", prompt: "Les objets présentés dans l'article sont personnalisés avec :", options: ["une photo", "une couleur", "un prénom"], answer: ["une photo", "un prénom"] },
@@ -636,7 +635,7 @@ export const editoA1ReadingComprehension = [
     instruction: "Lisez la conversation et répondez aux questions.",
     text: `[Chat Marco / David]\nMarco : Salut David ! On est au vide-grenier avec Ophélie. On a acheté une cuisinière et un four à micro-ondes !\nDavid : Vous avez trouvé des meubles ?\nMarco : Oui, un bureau et deux fauteuils. Et pas cher. Mais on n'a pas trouvé de lit.\nDavid : Vous cherchez un lit ? Il y a peut-être un autre vide-grenier ?\nMarco : Oui ! Dimanche, près de chez nous ! On cherche aussi une armoire et des objets de décoration !`,
     questions: [
-      { id: "u7-vide-grenier-q1", type: "open", prompt: "Regardez l'affiche du vide-grenier. Qu'est-ce que vous voyez ?" },
+      { id: "u7-vide-grenier-q1", type: "open", prompt: "À votre avis, qu'est-ce qu'on peut acheter dans un vide-grenier ?" },
       { id: "u7-vide-grenier-q2", type: "short_answer", prompt: "Marco est avec qui ?", answer: "Avec Ophélie." },
       { id: "u7-vide-grenier-q3a", type: "true_false", prompt: "Ils n'ont pas acheté d'appareils électroménagers.", answer: false },
       { id: "u7-vide-grenier-q3b", type: "true_false", prompt: "Les meubles sont bon marché.", answer: true },
@@ -656,7 +655,7 @@ export const editoA1ReadingComprehension = [
     questions: [
       { id: "u7-vivre-q1", type: "open", prompt: "Regardez les documents. Qu'est-ce que vous voyez ?" },
       { id: "u7-vivre-q2", type: "short_answer", prompt: "À quoi sert le document b (le règlement) ?", answer: "À respecter les règles de l'immeuble / à expliquer ce qu'il faut faire ou ne pas faire." },
-      { id: "u7-vivre-q3", type: "matching", prompt: "Associez les règles du règlement aux dessins.", answer: "Fermer la porte / Pas de barbecue / Attention au bruit / Pas de fumée / Chiens en laisse / Ne pas marcher sur la pelouse / Pas de vélo dans les couloirs / Trier les déchets" }
+      { id: "u7-vivre-q3", type: "matching", prompt: "Retrouvez les règles du règlement.", answer: "Fermer la porte / Pas de barbecue / Attention au bruit / Pas de fumée / Chiens en laisse / Ne pas marcher sur la pelouse / Pas de vélo dans les couloirs / Trier les déchets" }
     ]
   },
 
