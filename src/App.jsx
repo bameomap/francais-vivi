@@ -22,6 +22,7 @@ const ParcoursPanel     = lazy(() => import("./components/ParcoursPanel.jsx"));
 const LecturePanel      = lazy(() => import("./components/LecturePanel.jsx"));
 const StatsPanel        = lazy(() => import("./components/StatsPanel.jsx"));
 const RevisionPanel     = lazy(() => import("./components/RevisionPanel.jsx"));
+const FichePanel        = lazy(() => import("./components/FichePanel.jsx"));
 const EditoVocabPanel   = lazy(() => import("./components/EditoVocabPanel.jsx"));
 const EcouterPanel      = lazy(() => import("./components/EcouterPanel.jsx"));
 const UnitQuizPanel     = lazy(() => import("./components/UnitQuizPanel.jsx"));
@@ -47,7 +48,7 @@ const SECTION_TITLE = {
   vocab:"Le Vocabulaire", parcours:"Le Parcours", grammar:"La Grammaire", conversation:"La Conversation",
   writing:"L'Écriture", defi:"Le Défi du Jour", reference_hub:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée", ecouter:"L'Écoute",
-  revision:"La Révision", stats:"Les Statistiques",
+  revision:"La Révision", stats:"Les Statistiques", fiche:"Fiche de Révision",
   listening:"L'Écoute Active", sentence:"Les Phrases",
   "quiz-unit":"Le Quiz de l'Unité",
   prononciation:"La Prononciation",
@@ -685,6 +686,17 @@ function AppInner() {
                 <div style={{ fontSize:10, color:"rgba(255,255,255,0.82)" }}>Tích streak 🔥</div>
               </button>
             </div>
+
+            {/* ── Fiche de révision U1–U10 ── */}
+            <button className="card-hover" onClick={()=>goSection("fiche","fiche")}
+              style={{ display:"flex", alignItems:"center", gap:12, width:"100%", marginTop:8, background:`linear-gradient(135deg, ${C.blueDark}, ${C.blue})`, border:"none", borderRadius:16, padding:"14px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", boxShadow:"0 4px 16px rgba(74,144,217,0.28)", animation:"fadeUp 0.3s ease 0.36s both" }}>
+              <span style={{ fontSize:26, lineHeight:1 }}>📋</span>
+              <div style={{ flex:1 }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:"#fff", lineHeight:1.2 }}>Ôn tập theo Unité</div>
+                <div style={{ fontSize:11, color:"rgba(255,255,255,0.85)", marginTop:1 }}>Từ vựng · Ngữ pháp · Giao tiếp (U1–U10)</div>
+              </div>
+              <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
+            </button>
           </div>
 
           <div style={{ height:"1.5rem" }} />
@@ -1044,6 +1056,7 @@ function AppInner() {
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
             {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
             {view==="revision"      && <RevisionPanel />}
+            {view==="fiche"         && <FichePanel onNavigate={(s, v) => goSection(s, v || s)} />}
             {view==="stats"         && <StatsPanel />}
             {view==="sentence"      && <SentenceBuilder />}
            </Suspense>
