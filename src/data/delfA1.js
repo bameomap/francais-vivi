@@ -140,6 +140,117 @@ export const DELF_ORALE = {
   ],
 };
 
+// Pool 24 từ khoá CHÍNH THỨC (Partie 2) — dùng để bốc ngẫu nhiên 6 thẻ
+export const ECHANGE_POOL = [
+  "Prénom", "Travail", "Adresse", "Heure", "Famille", "Bureau",
+  "Voiture", "Téléphone", "Appartement", "Secrétaire", "Nationalité", "Ordinateur",
+  "Train", "École", "Danser", "Bibliothèque", "Parc", "Piscine",
+  "Banque", "Livre", "Sortir", "Stylo", "Restaurant", "Langue",
+];
+
+// ── 7 ĐỀ VIẾT CHÍNH THỨC (trích nguyên văn từ 7 bộ đề FEI) ──────────
+// Bài mẫu (modele) do app soạn theo chuẩn A1, KHÔNG sao chép bài mẫu trong đề.
+export const DELF_ECRITE_SUJETS = [
+  {
+    id: "s1", num: 1, titre: "Fiche d'hôtel + Lettre d'invitation", titreVi: "Phiếu khách sạn + Thư mời",
+    formulaire: {
+      contexte: "Vous êtes en vacances en France. Vous remplissez ce formulaire dans un hôtel.",
+      contexteVi: "Điền phiếu tại khách sạn.",
+      champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Courriel", "Adresse", "Code postal", "Pays", "Téléphone", "Profession", "Date"],
+    },
+    ex2: {
+      consigne: "Vous écrivez une lettre à un(e) ami(e) français(e) pour l'inviter dans votre pays pendant les vacances. Vous lui parlez des activités que vous pouvez faire ensemble. (40 mots minimum)",
+      consigneVi: "Viết thư mời một người bạn Pháp đến thăm nước bạn vào kỳ nghỉ. Nói về các hoạt động làm cùng nhau. (≥40 từ)",
+      obligatoire: ["✉️ Mời đến nước mình", "🗓️ Vào kỳ nghỉ", "🎯 Các hoạt động cùng nhau"],
+      modele: "Salut Julie !\nCet été, je t'invite au Vietnam pendant les vacances ! Mon pays est très beau. Ensemble, nous pouvons visiter Hanoï, manger du phở et nager à la mer de Da Nang. Il fait chaud et le paysage est magnifique. Tu peux venir en juillet ? J'attends ta réponse !\nBises, Lan",
+    },
+  },
+  {
+    id: "s2", num: 2, titre: "Fiche de bibliothèque + E-mail", titreVi: "Phiếu thư viện + Email",
+    formulaire: {
+      contexte: "Vous voulez vous inscrire à la bibliothèque. Remplissez ce formulaire.",
+      contexteVi: "Đăng ký thư viện.",
+      champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Adresse", "Téléphone", "Adresse mail", "Profession", "Langue parlée", "Date"],
+    },
+    ex2: {
+      consigne: "Vous venez de vous installer dans une nouvelle ville pour vos études / votre travail. Vous écrivez un e-mail à un(e) ami(e) pour lui raconter votre nouvelle vie. Vous lui expliquez ce que vous faites et vous lui demandez de ses nouvelles. (40 à 50 mots)",
+      consigneVi: "Bạn vừa chuyển đến thành phố mới để học/làm việc. Viết email kể về cuộc sống mới, việc bạn làm, và hỏi thăm bạn ấy. (40–50 từ)",
+      obligatoire: ["🏙️ Thành phố mới (học/làm)", "📋 Việc bạn đang làm", "❓ Hỏi thăm bạn ấy"],
+      modele: "Objet : Ma nouvelle vie !\nSalut Marc !\nJe viens d'arriver à Lyon pour mon travail. J'habite dans un petit appartement au centre-ville. Le matin, je travaille et le soir, j'apprends le français. La ville est belle et les gens sont gentils. Et toi, comment ça va ? Donne-moi de tes nouvelles !\nÀ bientôt, Lan",
+    },
+  },
+  {
+    id: "s3", num: 3, titre: "Formulaire de passeport + Réponse à une invitation", titreVi: "Phiếu hộ chiếu + Trả lời lời mời",
+    formulaire: {
+      contexte: "Vous faites une demande de passeport. Vous remplissez ce formulaire.",
+      contexteVi: "Làm hộ chiếu.",
+      champs: ["Nom", "Prénom", "Date de naissance", "Lieu de naissance", "Nationalité", "Situation de famille", "Nombre d'enfants", "Profession", "Adresse", "Taille", "Couleur des yeux"],
+    },
+    ex2: {
+      consigne: "Un(e) ami(e) vous invite à une fête. Vous lui répondez : vous acceptez l'invitation, vous annoncez votre arrivée et vous proposez quelque chose (apporter un plat, un dessert…). (40 à 50 mots)",
+      consigneVi: "Một người bạn mời bạn đến bữa tiệc. Bạn trả lời: nhận lời, báo giờ đến, và đề nghị mang theo gì đó. (40–50 từ)",
+      obligatoire: ["✅ Nhận lời mời", "🕐 Báo giờ/ngày bạn đến", "🎁 Đề nghị mang theo gì đó"],
+      modele: "Salut Claude !\nMerci beaucoup pour ton invitation ! J'accepte avec plaisir. Je vais venir samedi vers 18 heures avec ma sœur. Pour la fête, je peux apporter un gâteau et des fruits. C'est une bonne idée ? Dis-moi si tu as besoin d'autre chose. À très bientôt !\nBises, Lan",
+    },
+  },
+  {
+    id: "s4", num: 4, titre: "Fiche de cours de français + Carte postale", titreVi: "Phiếu ghi danh học tiếng Pháp + Bưu thiếp",
+    formulaire: {
+      contexte: "Vous voulez suivre des cours de français pendant l'été. Complétez votre fiche d'inscription.",
+      contexteVi: "Ghi danh khóa học tiếng Pháp mùa hè.",
+      champs: ["Nom", "Prénom", "Nationalité", "Adresse", "Profession (ou études)", "Âge", "Téléphone et/ou courriel", "Langues parlées (2)", "Signature", "Date"],
+    },
+    ex2: {
+      consigne: "Vous êtes en vacances en France. Vous écrivez à une amie française. Vous lui parlez du temps, de la ville, et vous décrivez ce que vous faites. Vous lui annoncez que vous allez lui rendre visite. (40 à 50 mots)",
+      consigneVi: "Bạn đi nghỉ ở Pháp. Viết cho một bạn nữ người Pháp: nói về thời tiết, thành phố, việc bạn làm, và báo sẽ đến thăm bạn ấy. (40–50 từ)",
+      obligatoire: ["🌤️ Thời tiết + thành phố", "🏄 Việc bạn đang làm", "🚆 Báo sẽ đến thăm"],
+      modele: "Chère Julie !\nJe suis en vacances à Nice. Il fait très beau et la ville est magnifique ! Le matin, je nage à la mer et l'après-midi, je visite les musées. La semaine prochaine, je vais venir à Bordeaux pour te rendre visite ! On peut se voir samedi ?\nGrosses bises, Lan",
+    },
+  },
+  {
+    id: "s5", num: 5, titre: "Fiche de demande de logement + Invitation week-end", titreVi: "Phiếu thuê nhà + Mời cuối tuần",
+    formulaire: {
+      contexte: "Vous cherchez un logement. Complétez votre fiche de demande de logement (locataire).",
+      contexteVi: "Đăng ký thuê nhà.",
+      champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Situation de famille", "Nombre d'enfants", "Nombre total de personnes", "Adresse (domicile actuel)", "Téléphone", "Nom de la banque", "Emploi occupé"],
+    },
+    ex2: {
+      consigne: "Vous invitez une amie à venir passer un week-end chez vous. Vous lui proposez plusieurs activités pour le week-end et vous lui proposez des dates. (40 à 50 mots)",
+      consigneVi: "Bạn mời một bạn nữ đến chơi cuối tuần ở nhà bạn. Đề nghị nhiều hoạt động và đề xuất các ngày. (40–50 từ)",
+      obligatoire: ["🏠 Mời đến chơi cuối tuần", "🎯 Nhiều hoạt động", "📅 Đề xuất các ngày"],
+      modele: "Salut Lucie !\nJe t'invite à passer un week-end chez moi ! On peut faire beaucoup de choses : visiter le parc, aller au cinéma et cuisiner ensemble. C'est possible le week-end du 12 ou du 19 juin ? Dis-moi quelle date tu préfères. J'ai hâte de te voir !\nBises, Lan",
+    },
+  },
+  {
+    id: "s6", num: 6, titre: "Fiche d'inscription à l'hôtel + Carte postale", titreVi: "Phiếu nhận phòng khách sạn + Bưu thiếp",
+    formulaire: {
+      contexte: "Complétez votre fiche d'inscription à l'hôtel.",
+      contexteVi: "Điền phiếu nhận phòng khách sạn.",
+      champs: ["Nom", "Prénom", "Nationalité", "Adresse personnelle", "Profession", "Date d'arrivée à l'hôtel", "Date de départ", "Langue parlée", "Avez-vous un animal ?", "Signature"],
+    },
+    ex2: {
+      consigne: "Vous êtes en vacances. Vous envoyez une carte postale à un ami en France. Vous lui parlez du temps, de vos activités et vous lui donnez votre date de retour. (40 à 50 mots)",
+      consigneVi: "Bạn đi nghỉ. Gửi bưu thiếp cho bạn ở Pháp: nói về thời tiết, hoạt động và cho biết ngày về. (40–50 từ)",
+      obligatoire: ["🌤️ Thời tiết", "🏖️ Hoạt động của bạn", "📆 Ngày bạn về"],
+      modele: "Salut Jean !\nJe suis en vacances à la montagne. Il fait froid mais il y a du soleil ! Chaque jour, je fais du ski et le soir, je mange au restaurant avec ma famille. C'est génial ! Je rentre à Paris le 25 juin. On se voit après ?\nÀ bientôt, Lan",
+    },
+  },
+  {
+    id: "s7", num: 7, titre: "Fiche d'hôtel + Lettre d'invitation (nouveau format)", titreVi: "Phiếu khách sạn + Thư mời (định dạng mới)",
+    formulaire: {
+      contexte: "Vous êtes en vacances en France. Vous remplissez ce formulaire dans un hôtel. (Format 2020 — identique au sujet 1.)",
+      contexteVi: "Điền phiếu khách sạn (định dạng mới 2020 — giống bộ 1).",
+      champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Courriel", "Adresse", "Code postal", "Pays", "Téléphone", "Profession", "Date"],
+    },
+    ex2: {
+      consigne: "Vous écrivez une lettre à un(e) ami(e) français(e) pour l'inviter dans votre pays pendant les vacances. Vous lui parlez des activités que vous pouvez faire ensemble. (40 mots minimum)",
+      consigneVi: "Viết thư mời bạn Pháp đến thăm nước bạn vào kỳ nghỉ, nói về các hoạt động cùng nhau. (≥40 từ)",
+      obligatoire: ["✉️ Mời đến nước mình", "🗓️ Vào kỳ nghỉ", "🎯 Các hoạt động cùng nhau"],
+      modele: "Salut Thomas !\nJe t'invite au Vietnam pour les prochaines vacances ! C'est un pays magnifique. Ensemble, nous pouvons visiter la baie d'Ha Long, goûter la cuisine vietnamienne et nous promener à vélo. Il fait beau et chaud. Tu es libre en août ? Réponds-moi vite !\nBises, Lan",
+    },
+  },
+];
+
 // ── ĐỀ LUYỆN TẬP TƯƠNG TỰ (tham khảo đề DELF A1 thật) ──────────────
 export const DELF_PRATIQUE_ECRITE = [
   {

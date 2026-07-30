@@ -48,6 +48,40 @@ export async function callAIText(messages, systemPrompt) {
   return data.content.map((c) => c.text || "").join("").trim();
 }
 
+// Grade a DELF A1 Partie-2 question the learner asks the examiner from a theme
+// word. Lenient: any valid A1 question on the theme is correct.
+// Returns { verdict, correction, feedback }.
+export async function gradeDelfQuestion({ theme, userQuestion }) {
+  const prompt = `A Vietnamese A1 learner of French must ASK the examiner a question using the theme word below (DELF A1, Partie 2 "Échange d'informations").
+Theme word: "${theme}"
+Learner's question (French): "${userQuestion}"
+The learner does NOT have to use the exact word — any correct, natural A1 question clearly related to the theme is fine. It must be a QUESTION (asking the examiner), not a statement.
+- "correct": a valid, understandable A1 question about the theme (small accent/typo/word-order is still correct).
+- "close": understandable and on-theme but with one real grammar mistake, OR it is a statement not a question.
+- "wrong": empty, off-theme, not a question at all, or in the wrong language.
+Return ONLY JSON: {"verdict":"correct"|"close"|"wrong","correction":"one natural correct French question on this theme","feedback":"ONE short Vietnamese sentence — praise if correct, or clearly say what to fix"}`;
+  return callAI(prompt);
+}
+
+// Grade a DELF A1 Production-écrite letter/email/postcard.
+// Checks required elements, word count and A1 grammar. Returns
+// { score, verdict, corrected, tip, wordCount, checklist:[{item,ok}], errors:[{type,wrong,right}] }.
+export async function gradeDelfEssai({ consigne, obligatoire, minWords, userText }) {
+  const req = (obligatoire || []).map((o, i) => `${i + 1}. ${o}`).join("\n");
+  const prompt = `You are a DELF A1 examiner grading a short text by a Vietnamese A1 learner of French.
+Task (consigne): "${consigne}"
+Required elements the text MUST contain:
+${req}
+Minimum length: ${minWords} words.
+Learner's text:
+"""${userText}"""
+Grade like the real DELF A1 (25-point exam, here normalised to /100). Be encouraging but honest. Reward: all required elements present, respect of the situation, correct greetings/closing, simple correct A1 grammar and enough words. Penalise: missing required element, too short, wrong register.
+For each required element decide if it is clearly present (ok true/false).
+List up to 5 concrete language errors with a correction; keep the corrected text natural A1.
+Return ONLY JSON: {"score":0-100,"verdict":"Xuất sắc|Tốt|Khá|Cần cải thiện","wordCount":<int estimate>,"tip":"ONE short Vietnamese sentence of advice","checklist":[{"item":"<the required element, in Vietnamese>","ok":true|false}],"errors":[{"type":"Ngữ pháp|Từ vựng|Chính tả|Giới từ|Mạo từ","wrong":"...","right":"..."}],"corrected":"the improved full French text"}`;
+  return callAI(prompt);
+}
+
 export async function callAIBatched(type, words, n) {
   if (type === "matching" || n <= 15) return callAI(buildPrompt(type, words, n));
   const h1 = Math.ceil(n / 2), h2 = n - h1;
