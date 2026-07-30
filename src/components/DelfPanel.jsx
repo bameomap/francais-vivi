@@ -527,7 +527,7 @@ function Hints({ hints }) {
           )}
           {hints.questions?.length > 0 && (
             <div>
-              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.purple, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>❓ Câu có thể hỏi</div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.purple, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>{hints.qLabel || "❓ Câu có thể hỏi"}</div>
               {hints.questions.map((q, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 5, marginBottom: 3 }}>
                   <SpeakBtn text={q} size={12} />
@@ -543,6 +543,10 @@ function Hints({ hints }) {
 }
 
 function PratiqueCard({ item }) {
+  const [vIdx, setVIdx] = useState(0);
+  const variant = item.variants ? item.variants[vIdx] : null;
+  const dialogue = variant ? variant.dialogue : item.dialogue;
+  const hints = variant ? variant.hints : item.hints;
   return (
     <Card tint={C.green + "55"}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, marginBottom: 4 }}>
@@ -601,9 +605,24 @@ function PratiqueCard({ item }) {
 
       {item.prix && <PrixTable rows={item.prix} />}
 
-      {item.dialogue && <Dialogue2 turns={item.dialogue} />}
+      {item.variants && (
+        <div style={{ display: "flex", gap: 6, marginBottom: 8 }}>
+          {item.variants.map((v, i) => (
+            <button key={i} onClick={() => setVIdx(i)}
+              style={{ flex: 1, padding: "7px 8px", borderRadius: 9, cursor: "pointer",
+                fontFamily: "inherit", fontSize: 12, fontWeight: 700,
+                background: vIdx === i ? C.green : C.white,
+                color: vIdx === i ? "#fff" : C.gray,
+                border: `1.5px solid ${vIdx === i ? C.green : C.border}` }}>
+              {v.label}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {item.hints && <Hints hints={item.hints} />}
+      {dialogue && <Dialogue2 key={vIdx} turns={dialogue} />}
+
+      {hints && <Hints key={`h${vIdx}`} hints={hints} />}
 
       {item.modele && <Modele text={item.modele} />}
     </Card>
