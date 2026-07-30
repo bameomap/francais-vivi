@@ -475,7 +475,7 @@ function Dialogue2Body({ turns }) {
                 borderRadius: 10, padding: "6px 10px" }}>
                 <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: "0.06em",
                   color: isClient ? C.blue : C.gold, marginBottom: 1 }}>
-                  {isClient ? "VOUS (client)" : "EXAMINATEUR"}
+                  {isClient ? "VOUS" : "PARTENAIRE"}
                 </div>
                 <div style={{ fontSize: 12.5, color: C.ink, lineHeight: 1.45 }}>{t.fr}</div>
               </div>
@@ -542,9 +542,28 @@ function Hints({ hints }) {
   );
 }
 
+// Auto-build a "you answer" (staff) variant by flipping who speaks and turning
+// the partner's lines into sample staff phrases. Buyer/seller role-plays get
+// both roles for free; items with hand-written variants keep theirs.
+function buildVariants(item) {
+  if (item.variants) return item.variants;
+  if (!item.dialogue) return null;
+  const flipped = item.dialogue.map(t => ({ who: t.who === "c" ? "e" : "c", fr: t.fr }));
+  const staffLines = item.dialogue.filter(t => t.who === "e").map(t => t.fr);
+  return [
+    { label: "Bạn là KHÁCH (hỏi/mua)", dialogue: item.dialogue, hints: item.hints },
+    {
+      label: "Bạn là NHÂN VIÊN (trả lời)",
+      dialogue: flipped,
+      hints: item.hints && { ...item.hints, qLabel: "💬 Câu nhân viên thường nói", questions: staffLines },
+    },
+  ];
+}
+
 function PratiqueCard({ item }) {
   const [vIdx, setVIdx] = useState(0);
-  const variant = item.variants ? item.variants[vIdx] : null;
+  const variants = buildVariants(item);
+  const variant = variants ? variants[vIdx] : null;
   const dialogue = variant ? variant.dialogue : item.dialogue;
   const hints = variant ? variant.hints : item.hints;
   return (
@@ -605,9 +624,9 @@ function PratiqueCard({ item }) {
 
       {item.prix && <PrixTable rows={item.prix} />}
 
-      {item.variants && (
+      {variants && variants.length > 1 && (
         <div style={{ display: "flex", gap: 6, marginBottom: 8 }}>
-          {item.variants.map((v, i) => (
+          {variants.map((v, i) => (
             <button key={i} onClick={() => setVIdx(i)}
               style={{ flex: 1, padding: "7px 8px", borderRadius: 9, cursor: "pointer",
                 fontFamily: "inherit", fontSize: 12, fontWeight: 700,
