@@ -156,6 +156,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Vous êtes en vacances en France. Vous remplissez ce formulaire dans un hôtel.",
       contexteVi: "Điền phiếu tại khách sạn.",
+      special: "Courriel · Code postal · Pays",
       champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Courriel", "Adresse", "Code postal", "Pays", "Téléphone", "Profession", "Date"],
     },
     ex2: {
@@ -170,6 +171,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Vous voulez vous inscrire à la bibliothèque. Remplissez ce formulaire.",
       contexteVi: "Đăng ký thư viện.",
+      special: "Adresse mail · Langue parlée",
       champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Adresse", "Téléphone", "Adresse mail", "Profession", "Langue parlée", "Date"],
     },
     ex2: {
@@ -184,6 +186,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Vous faites une demande de passeport. Vous remplissez ce formulaire.",
       contexteVi: "Làm hộ chiếu.",
+      special: "Lieu de naissance · Situation de famille · Taille · Couleur des yeux",
       champs: ["Nom", "Prénom", "Date de naissance", "Lieu de naissance", "Nationalité", "Situation de famille", "Nombre d'enfants", "Profession", "Adresse", "Taille", "Couleur des yeux"],
     },
     ex2: {
@@ -198,6 +201,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Vous voulez suivre des cours de français pendant l'été. Complétez votre fiche d'inscription.",
       contexteVi: "Ghi danh khóa học tiếng Pháp mùa hè.",
+      special: "Âge · Langues parlées (2) · Signature",
       champs: ["Nom", "Prénom", "Nationalité", "Adresse", "Profession (ou études)", "Âge", "Téléphone et/ou courriel", "Langues parlées (2)", "Signature", "Date"],
     },
     ex2: {
@@ -212,6 +216,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Vous cherchez un logement. Complétez votre fiche de demande de logement (locataire).",
       contexteVi: "Đăng ký thuê nhà.",
+      special: "Situation de famille · Nombre de personnes · Nom de la banque · Emploi",
       champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Situation de famille", "Nombre d'enfants", "Nombre total de personnes", "Adresse (domicile actuel)", "Téléphone", "Nom de la banque", "Emploi occupé"],
     },
     ex2: {
@@ -226,6 +231,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Complétez votre fiche d'inscription à l'hôtel.",
       contexteVi: "Điền phiếu nhận phòng khách sạn.",
+      special: "Date d'arrivée / départ · Langue parlée · Avez-vous un animal ?",
       champs: ["Nom", "Prénom", "Nationalité", "Adresse personnelle", "Profession", "Date d'arrivée à l'hôtel", "Date de départ", "Langue parlée", "Avez-vous un animal ?", "Signature"],
     },
     ex2: {
@@ -240,6 +246,7 @@ export const DELF_ECRITE_SUJETS = [
     formulaire: {
       contexte: "Vous êtes en vacances en France. Vous remplissez ce formulaire dans un hôtel. (Format 2020 — identique au sujet 1.)",
       contexteVi: "Điền phiếu khách sạn (định dạng mới 2020 — giống bộ 1).",
+      special: "Courriel · Code postal · Pays (giống bộ 1)",
       champs: ["Nom", "Prénom", "Date de naissance", "Nationalité", "Courriel", "Adresse", "Code postal", "Pays", "Téléphone", "Profession", "Date"],
     },
     ex2: {

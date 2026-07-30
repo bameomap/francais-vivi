@@ -512,41 +512,84 @@ function PratiqueCard({ item }) {
   );
 }
 
-// Official 7 écrite subjects — formulaire (collapsible) + Ex2 + AI grader
-function SujetEcritCard({ s }) {
-  const [showForm, setShowForm] = useState(false);
+// Back link used inside the practice detail views
+function BackBtn({ onClick, children }) {
   return (
-    <Card tint={C.green + "55"}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, marginBottom: 4 }}>
-        <div>
-          <div style={{ ...serif, fontWeight: 700, fontSize: 14.5, color: C.ink }}>{s.titre}</div>
-          <div style={{ fontSize: 11.5, color: C.gray }}>{s.titreVi}</div>
-        </div>
-        <span style={{ ...mono, fontSize: 9.5, fontWeight: 700, color: C.green,
-          background: C.greenL, borderRadius: 999, padding: "2px 7px", whiteSpace: "nowrap" }}>Sujet {s.num}</span>
-      </div>
+    <button onClick={onClick}
+      style={{ background: C.white, color: C.gray, border: `1.5px solid ${C.border}`,
+        borderRadius: 20, padding: "5px 12px", fontSize: 12, fontWeight: 600,
+        cursor: "pointer", fontFamily: "inherit", marginBottom: 12 }}>
+      ← {children}
+    </button>
+  );
+}
 
-      {/* Exercice 1 — formulaire (collapsible) */}
-      <button onClick={() => setShowForm(o => !o)}
-        style={{ background: showForm ? C.blue : C.blueL, color: showForm ? "#fff" : C.blueDark,
-          border: `1.5px solid ${C.blue}55`, borderRadius: 20, padding: "5px 12px",
-          fontSize: 11.5, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", marginBottom: 6 }}>
-        {showForm ? "▾ Ẩn Ex.1 (phiếu)" : "▸ Ex.1 · Phiếu điền (10đ)"}
+// A row of selectable "chips" to pick a subject
+function PickerGrid({ items, selected, onPick, color }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, marginBottom: 14 }}>
+      {items.map((it, i) => {
+        const active = selected === i;
+        return (
+          <button key={i} onClick={() => onPick(i)}
+            style={{ textAlign: "left", padding: "9px 11px", borderRadius: 11, cursor: "pointer",
+              fontFamily: "inherit", background: active ? color : C.white,
+              border: `1.5px solid ${active ? color : C.border}`,
+              boxShadow: active ? `0 2px 8px ${color}33` : "none", transition: "all 0.12s" }}>
+            <div style={{ ...mono, fontSize: 9, fontWeight: 700, letterSpacing: "0.08em",
+              color: active ? "rgba(255,255,255,0.8)" : C.gray2 }}>{it.tag}</div>
+            <div style={{ fontSize: 12.5, fontWeight: 700, lineHeight: 1.25, marginTop: 2,
+              color: active ? "#fff" : C.ink }}>{it.label}</div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// Consolidated Ex.1 explainer — most formulaires share the same identity block
+function Ex1Summary() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ background: C.blueL, border: `1.5px solid ${C.blue}44`, borderRadius: 12, padding: "11px 13px", marginBottom: 14 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: C.blueDark, marginBottom: 3 }}>📋 Exercice 1 · Điền phiếu (10đ)</div>
+      <div style={{ fontSize: 12, color: C.ink2, lineHeight: 1.55 }}>
+        Hầu hết các đề chỉ điền <b>thông tin cá nhân</b> giống nhau — học 1 lần là làm được mọi đề:
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 5, margin: "7px 0" }}>
+        {["Nom", "Prénom", "Date de naissance", "Nationalité", "Adresse", "Profession", "Téléphone", "Date"].map(c => (
+          <span key={c} style={{ fontSize: 11, color: C.blueDark, background: C.white,
+            border: `1px solid ${C.blue}33`, borderRadius: 7, padding: "3px 8px" }}>{c}</span>
+        ))}
+      </div>
+      <button onClick={() => setOpen(o => !o)}
+        style={{ background: "transparent", color: C.blue, border: "none", cursor: "pointer",
+          fontFamily: "inherit", fontSize: 11.5, fontWeight: 700, padding: 0 }}>
+        {open ? "▾ Ẩn trường đặc biệt từng đề" : "▸ Trường đặc biệt khác nhau theo đề"}
       </button>
-      {showForm && (
-        <div style={{ background: C.cream, borderRadius: 9, padding: "9px 11px", marginBottom: 8 }}>
-          <div style={{ fontSize: 12, color: C.ink, fontStyle: "italic", marginBottom: 6 }}>« {s.formulaire.contexte} »</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-            {s.formulaire.champs.map((c, i) => (
-              <span key={i} style={{ fontSize: 11, color: C.ink2, background: C.white,
-                border: `1px solid ${C.border}`, borderRadius: 7, padding: "3px 8px" }}>{c}</span>
-            ))}
-          </div>
+      {open && (
+        <div style={{ marginTop: 7, border: `1px solid ${C.blue}33`, borderRadius: 9, overflow: "hidden" }}>
+          {DELF_ECRITE_SUJETS.map((s, i) => (
+            <div key={s.id} style={{ display: "flex", gap: 8, padding: "6px 10px",
+              background: i % 2 ? C.white : "transparent",
+              borderTop: i ? `1px solid ${C.blue}22` : "none" }}>
+              <span style={{ flex: "0 0 30%", fontSize: 11, fontWeight: 700, color: C.blueDark }}>Sujet {s.num}</span>
+              <span style={{ flex: 1, fontSize: 11, color: C.ink2 }}>{s.formulaire.special}</span>
+            </div>
+          ))}
         </div>
       )}
+    </div>
+  );
+}
 
-      {/* Exercice 2 — essai */}
-      <div style={{ ...mono, fontSize: 9.5, fontWeight: 700, color: C.accent, marginBottom: 3 }}>EX.2 · VIẾT (15đ)</div>
+// Detail: one écrite subject (Ex.2 + AI grader)
+function EcritDetail({ s }) {
+  return (
+    <div style={{ animation: "fadeUp 0.25s ease" }}>
+      <div style={{ ...serif, fontWeight: 700, fontSize: 16, color: C.ink }}>{s.titre}</div>
+      <div style={{ fontSize: 12, color: C.gray, marginBottom: 8 }}>{s.titreVi}</div>
+      <div style={{ ...mono, fontSize: 9.5, fontWeight: 700, color: C.accent, marginBottom: 3 }}>EX.2 · VIẾT (15đ · ≥40 từ)</div>
       <div style={{ background: C.cream, borderRadius: 9, padding: "9px 11px", marginBottom: 6 }}>
         <div style={{ fontSize: 12.5, color: C.ink, fontStyle: "italic", lineHeight: 1.5 }}>« {s.ex2.consigne} »</div>
         <div style={{ fontSize: 11.5, color: C.gray, marginTop: 4 }}>{s.ex2.consigneVi}</div>
@@ -554,20 +597,77 @@ function SujetEcritCard({ s }) {
       <ObligChips items={s.ex2.obligatoire} />
       {s.ex2.modele && <Modele text={s.ex2.modele} />}
       <EssaiGrader consigne={s.ex2.consigne} obligatoire={s.ex2.obligatoire} minWords={40} />
-    </Card>
+    </div>
   );
 }
 
 function PratiqueView() {
+  const [skill, setSkill] = useState(null);   // null | "ecrite" | "orale"
+  const [pick, setPick] = useState(null);     // selected index
+
+  // Level 0 — choose skill
+  if (!skill) {
+    return (
+      <div>
+        <p style={{ fontSize: 12, color: C.gray, lineHeight: 1.6, margin: "4px 0 14px" }}>
+          Đề chính thức DELF A1 (France Éducation International). Chọn kỹ năng để luyện:
+        </p>
+        <div style={{ display: "grid", gap: 10 }}>
+          <button onClick={() => { setSkill("ecrite"); setPick(null); }}
+            style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px",
+              background: `linear-gradient(135deg, ${C.green}, #059669)`, border: "none",
+              borderRadius: 16, cursor: "pointer", fontFamily: "inherit", textAlign: "left",
+              boxShadow: `0 4px 16px ${C.green}33` }}>
+            <span style={{ fontSize: 30 }}>✍️</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ ...serif, fontSize: 17, fontWeight: 700, color: "#fff" }}>Viết</div>
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.85)" }}>{DELF_ECRITE_SUJETS.length} đề · ô viết + AI chấm điểm</div>
+            </div>
+            <span style={{ fontSize: 20, color: "rgba(255,255,255,0.8)" }}>→</span>
+          </button>
+          <button onClick={() => { setSkill("orale"); setPick(null); }}
+            style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px",
+              background: `linear-gradient(135deg, ${C.gold}, #D97706)`, border: "none",
+              borderRadius: 16, cursor: "pointer", fontFamily: "inherit", textAlign: "left",
+              boxShadow: `0 4px 16px ${C.gold}33` }}>
+            <span style={{ fontSize: 30 }}>🗣️</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ ...serif, fontSize: 17, fontWeight: 700, color: "#fff" }}>Nói</div>
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.85)" }}>{DELF_PRATIQUE_ORALE.length} tình huống đóng vai · bảng giá + hội thoại mẫu</div>
+            </div>
+            <span style={{ fontSize: 20, color: "rgba(255,255,255,0.8)" }}>→</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Level 1/2 — écrite
+  if (skill === "ecrite") {
+    const items = DELF_ECRITE_SUJETS.map(s => ({ tag: `SUJET ${s.num}`, label: s.titreVi }));
+    return (
+      <div>
+        <BackBtn onClick={() => setSkill(null)}>Chọn kỹ năng</BackBtn>
+        <Ex1Summary />
+        <SectionLabel>✍️ Exercice 2 · Chọn đề để viết</SectionLabel>
+        <PickerGrid items={items} selected={pick} onPick={setPick} color={C.green} />
+        {pick == null
+          ? <div style={{ fontSize: 12, color: C.gray2, textAlign: "center", padding: "10px 0" }}>↑ Chọn một đề để bắt đầu viết</div>
+          : <EcritDetail s={DELF_ECRITE_SUJETS[pick]} />}
+      </div>
+    );
+  }
+
+  // Level 1/2 — orale
+  const items = DELF_PRATIQUE_ORALE.map(o => ({ tag: o.partie?.toUpperCase() || "", label: o.titreVi }));
   return (
     <div>
-      <p style={{ fontSize: 12, color: C.gray, lineHeight: 1.6, margin: "4px 0" }}>
-        Đề chính thức DELF A1 (France Éducation International). Viết bài vào ô và bấm <b>Chấm bài với AI</b> để nhận điểm & sửa lỗi.
-      </p>
-      <SectionLabel>✍️ Viết · {DELF_ECRITE_SUJETS.length} đề chính thức</SectionLabel>
-      {DELF_ECRITE_SUJETS.map(s => <SujetEcritCard key={s.id} s={s} />)}
-      <SectionLabel>🗣️ Nói · {DELF_PRATIQUE_ORALE.length} tình huống chính thức</SectionLabel>
-      {DELF_PRATIQUE_ORALE.map(it => <PratiqueCard key={it.id} item={it} />)}
+      <BackBtn onClick={() => setSkill(null)}>Chọn kỹ năng</BackBtn>
+      <SectionLabel>🗣️ Jeu de rôle · Chọn tình huống</SectionLabel>
+      <PickerGrid items={items} selected={pick} onPick={setPick} color={C.gold} />
+      {pick == null
+        ? <div style={{ fontSize: 12, color: C.gray2, textAlign: "center", padding: "10px 0" }}>↑ Chọn một tình huống để xem đề & hội thoại mẫu</div>
+        : <PratiqueCard item={DELF_PRATIQUE_ORALE[pick]} />}
     </div>
   );
 }
