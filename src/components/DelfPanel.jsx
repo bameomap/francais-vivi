@@ -421,7 +421,7 @@ function OraleView() {
 
           {p.id === "p2" && <EchangeInteractive />}
 
-          {p.dialogue && (
+          {(p.sujet || p.dialogue) && (
             <div style={{ background: C.cream, borderRadius: 9, padding: "9px 11px" }}>
               {p.sujet && <div style={{ fontSize: 12, color: C.ink, fontWeight: 600, marginBottom: 6 }}>🥐 {p.sujet}</div>}
               {p.produits && (
@@ -430,7 +430,8 @@ function OraleView() {
                 </div>
               )}
               {p.prix && <PrixTable rows={p.prix} />}
-              {p.dialogue.map((d, i) => <FrLine key={i} text={d} />)}
+              {p.dialogue && <Dialogue2 turns={p.dialogue} />}
+              {p.hints && <Hints hints={p.hints} />}
             </div>
           )}
 
