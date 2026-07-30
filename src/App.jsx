@@ -23,6 +23,7 @@ const LecturePanel      = lazy(() => import("./components/LecturePanel.jsx"));
 const StatsPanel        = lazy(() => import("./components/StatsPanel.jsx"));
 const RevisionPanel     = lazy(() => import("./components/RevisionPanel.jsx"));
 const FichePanel        = lazy(() => import("./components/FichePanel.jsx"));
+const DelfPanel         = lazy(() => import("./components/DelfPanel.jsx"));
 const EditoVocabPanel   = lazy(() => import("./components/EditoVocabPanel.jsx"));
 const EcouterPanel      = lazy(() => import("./components/EcouterPanel.jsx"));
 const UnitQuizPanel     = lazy(() => import("./components/UnitQuizPanel.jsx"));
@@ -52,6 +53,7 @@ const SECTION_TITLE = {
   listening:"L'Écoute Active", sentence:"Les Phrases",
   "quiz-unit":"Le Quiz de l'Unité",
   prononciation:"La Prononciation",
+  delf:"DELF A1",
   profil:"Mon Profil",
 };
 
@@ -697,6 +699,17 @@ function AppInner() {
               </div>
               <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
             </button>
+
+            {/* ── DELF A1 — Viết & Nói ── */}
+            <button className="card-hover" onClick={()=>goSection("delf","delf")}
+              style={{ display:"flex", alignItems:"center", gap:12, width:"100%", marginTop:8, background:`linear-gradient(135deg, ${C.ink}, ${C.ink2})`, border:"none", borderRadius:16, padding:"14px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", boxShadow:"0 4px 16px rgba(26,39,68,0.28)", animation:"fadeUp 0.3s ease 0.4s both" }}>
+              <span style={{ fontSize:26, lineHeight:1 }}>🎓</span>
+              <div style={{ flex:1 }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:"#fff", lineHeight:1.2 }}>DELF A1 · Viết & Nói</div>
+                <div style={{ fontSize:11, color:"rgba(255,255,255,0.85)", marginTop:1 }}>Phân tích đề + đề luyện tập tương tự</div>
+              </div>
+              <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
+            </button>
           </div>
 
           <div style={{ height:"1.5rem" }} />
@@ -1057,6 +1070,7 @@ function AppInner() {
             {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
             {view==="revision"      && <RevisionPanel />}
             {view==="fiche"         && <FichePanel onNavigate={(s, v) => goSection(s, v || s)} />}
+            {view==="delf"          && <DelfPanel />}
             {view==="stats"         && <StatsPanel />}
             {view==="sentence"      && <SentenceBuilder />}
            </Suspense>
