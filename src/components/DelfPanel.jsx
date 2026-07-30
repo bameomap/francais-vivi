@@ -442,6 +442,105 @@ function OraleView() {
 }
 
 // ── PRATIQUE view (đề tương tự) ──────────────────────────────────
+// Two-sided model dialogue (client ↔ examinateur), hidden until tapped
+function Dialogue2({ turns }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ marginTop: 4 }}>
+      <button onClick={() => setOpen(o => !o)}
+        style={{ background: open ? C.blue : C.blueL, color: open ? "#fff" : C.blueDark,
+          border: `1.5px solid ${C.blue}55`, borderRadius: 20, padding: "5px 13px",
+          fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
+        {open ? "▾ Ẩn hội thoại mẫu" : "💬 Xem hội thoại mẫu (hỏi ↔ đáp)"}
+      </button>
+      {open && <Dialogue2Body turns={turns} />}
+    </div>
+  );
+}
+
+function Dialogue2Body({ turns }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+      {turns.map((t, i) => {
+        const isClient = t.who === "c";
+        return (
+          <div key={i} style={{ display: "flex", justifyContent: isClient ? "flex-start" : "flex-end" }}>
+            <div style={{ maxWidth: "85%", display: "flex", alignItems: "flex-start", gap: 5,
+              flexDirection: isClient ? "row" : "row-reverse" }}>
+              <SpeakBtn text={t.fr} size={13} />
+              <div style={{
+                background: isClient ? C.blueL : C.goldL,
+                border: `1px solid ${isClient ? C.blue + "44" : C.gold + "44"}`,
+                borderRadius: 10, padding: "6px 10px" }}>
+                <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: "0.06em",
+                  color: isClient ? C.blue : C.gold, marginBottom: 1 }}>
+                  {isClient ? "VOUS (client)" : "EXAMINATEUR"}
+                </div>
+                <div style={{ fontSize: 12.5, color: C.ink, lineHeight: 1.45 }}>{t.fr}</div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Hints button + panel (verbes, vocab, questions)
+function Hints({ hints }) {
+  const [open, setOpen] = useState(false);
+  if (!hints) return null;
+  return (
+    <div style={{ marginTop: 8 }}>
+      <button onClick={() => setOpen(o => !o)}
+        style={{ background: open ? C.purple : C.purpleL, color: open ? "#fff" : C.purple,
+          border: `1.5px solid ${C.purple}55`, borderRadius: 20, padding: "5px 13px",
+          fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
+        {open ? "▾ Ẩn gợi ý" : "💡 Gợi ý từ vựng & câu hỏi"}
+      </button>
+      {open && (
+        <div style={{ marginTop: 8, background: C.purpleL, border: `1px solid ${C.purple}33`,
+          borderRadius: 11, padding: "11px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
+          {hints.verbes?.length > 0 && (
+            <div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.purple, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>🖊️ Động từ nên dùng</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                {hints.verbes.map((v, i) => (
+                  <span key={i} style={{ fontSize: 11.5, color: C.ink, background: C.white,
+                    border: `1px solid ${C.border}`, borderRadius: 7, padding: "2px 8px" }}>{v}</span>
+                ))}
+              </div>
+            </div>
+          )}
+          {hints.vocab?.length > 0 && (
+            <div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.purple, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>📖 Từ vựng chủ đề</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px 10px" }}>
+                {hints.vocab.map((w, i) => (
+                  <div key={i} style={{ fontSize: 11.5, color: C.ink, lineHeight: 1.5 }}>
+                    <b>{w.fr}</b> <span style={{ color: C.gray }}>· {w.vi}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {hints.questions?.length > 0 && (
+            <div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.purple, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>❓ Câu có thể hỏi</div>
+              {hints.questions.map((q, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 5, marginBottom: 3 }}>
+                  <SpeakBtn text={q} size={12} />
+                  <span style={{ fontSize: 12, color: C.ink, lineHeight: 1.45 }}>{q}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function PratiqueCard({ item }) {
   return (
     <Card tint={C.green + "55"}>
@@ -501,11 +600,9 @@ function PratiqueCard({ item }) {
 
       {item.prix && <PrixTable rows={item.prix} />}
 
-      {item.dialogue && (
-        <div style={{ background: C.cream, borderRadius: 9, padding: "9px 11px" }}>
-          {item.dialogue.map((d, i) => <FrLine key={i} text={d} />)}
-        </div>
-      )}
+      {item.dialogue && <Dialogue2 turns={item.dialogue} />}
+
+      {item.hints && <Hints hints={item.hints} />}
 
       {item.modele && <Modele text={item.modele} />}
     </Card>
@@ -667,7 +764,7 @@ function PratiqueView() {
       <PickerGrid items={items} selected={pick} onPick={setPick} color={C.gold} />
       {pick == null
         ? <div style={{ fontSize: 12, color: C.gray2, textAlign: "center", padding: "10px 0" }}>↑ Chọn một tình huống để xem đề & hội thoại mẫu</div>
-        : <PratiqueCard item={DELF_PRATIQUE_ORALE[pick]} />}
+        : <PratiqueCard key={DELF_PRATIQUE_ORALE[pick].id} item={DELF_PRATIQUE_ORALE[pick]} />}
     </div>
   );
 }
