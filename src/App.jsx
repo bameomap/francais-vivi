@@ -32,6 +32,7 @@ const ProfilPanel          = lazy(() => import("./components/ProfilPanel.jsx"));
 const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.jsx"));
 const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
 const ParcoursPanelA2      = lazy(() => import("./components/ParcoursPanelA2.jsx"));
+const LevelSelectPanel     = lazy(() => import("./components/LevelSelectPanel.jsx"));
 const ReferenceHubA2       = lazy(() => import("./components/ReferenceHubA2.jsx"));
 const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
@@ -40,6 +41,7 @@ import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from
 import { PARCOURS_UNITS, STEP_DEFS } from "./data/parcoursData.js";
 import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
 import { PARCOURS_UNITS_A2 } from "./data/parcoursDataA2.js";
+import { getLevel as getLevelInfo, DEFAULT_LEVEL } from "./data/levels.js";
 import { EDITO_VOCAB_A2_UNITS } from "./data/editoVocabA2.js";
 import { EDITO_GRAMMAR_A2, GRAMMAR_A2_EMOJIS } from "./data/editoGrammarA2.js";
 
@@ -61,6 +63,7 @@ const SECTION_TITLE = {
   prononciation:"La Prononciation",
   delf:"DELF A1",
   profil:"Mon Profil",
+  level:"Trình độ",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -189,8 +192,18 @@ function AppInner() {
   const [filterMastered, setFilterMastered] = useState(true);
   const [vocabSearch, setVocabSearch]       = useState("");
   const [vocabFilter, setVocabFilter]       = useState("all");
-  const [level, setLevel]               = useState(() => localStorage.getItem(LEVEL_KEY) || "a1");
-  const changeLevel = (id) => { localStorage.setItem(LEVEL_KEY, id); setLevel(id); };
+  const [level, setLevel]               = useState(() => localStorage.getItem(LEVEL_KEY) || DEFAULT_LEVEL);
+  const levelInfo = getLevelInfo(level);
+  // Switching level resets the in-panel navigation so we never land on a view
+  // that belongs to the level we just left (e.g. A1's Fiche while on A2).
+  const changeLevel = (id) => {
+    localStorage.setItem(LEVEL_KEY, id);
+    setLevel(id);
+    setNavStack([]);
+    setSection("home");
+    setView("home");
+    showToast(`✓ Đang học ${getLevelInfo(id).code} · ${getLevelInfo(id).vi}`);
+  };
   const [themeId, setThemeId] = useState(() => localStorage.getItem(THEME_KEY) || "classic");
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem("dark_mode") === "1";
@@ -563,16 +576,16 @@ function AppInner() {
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:16, letterSpacing:"-0.01em", color:C.ink, whiteSpace:"nowrap" }}>Français</span>
             </div>
             <div style={{ display:"flex", gap:6, alignItems:"center", flexShrink:0 }}>
-              {/* Trình độ toggle */}
-              <div style={{ display:"flex", gap:2, background:C.cream, borderRadius:20, padding:2, border:`1px solid ${C.border}` }}>
-                {["a1","a2"].map(id => (
-                  <button key={id} onClick={()=>changeLevel(id)} aria-label={`Chuyển sang trình độ ${id.toUpperCase()}`}
-                    style={{ padding:"3px 9px", borderRadius:18, border:"none", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"inherit", lineHeight:1.4,
-                      background: level===id ? C.blue : "transparent", color: level===id ? "#fff" : C.gray }}>
-                    {id.toUpperCase()}
-                  </button>
-                ))}
-              </div>
+              {/* Level badge — opens the full level picker */}
+              <button onClick={()=>goSection("level","level")}
+                aria-label={`Trình độ hiện tại ${levelInfo.code} — đổi trình độ`}
+                style={{ display:"inline-flex", alignItems:"center", gap:4, background:`${levelInfo.color}1A`,
+                  border:`1px solid ${levelInfo.color}55`, color:levelInfo.color, borderRadius:20,
+                  padding:"3px 9px", fontSize:11.5, fontWeight:800, cursor:"pointer",
+                  fontFamily:"inherit", lineHeight:1.4, whiteSpace:"nowrap" }}>
+                {levelInfo.emoji} {levelInfo.code}
+                <span style={{ fontSize:8, opacity:0.75 }}>▾</span>
+              </button>
               {/* Combined streak + XP chip */}
               <span style={{ background:C.cream, padding:"4px 10px", borderRadius:999, fontWeight:700, display:"inline-flex", alignItems:"center", gap:5, color:C.ink, fontSize:11.5, border:`1px solid ${C.border}` }}>
                 <span style={{ color:C.accent }}>🔥</span>{streakData.streak}
@@ -1137,6 +1150,8 @@ function AppInner() {
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
             {view==="reference_hub" && (level==="a1" ? <ReferenceHub onBackToParcours={backToParcours} /> : <ReferenceHubA2 />)}
+            {/* No onClose: the shell header already provides "← Về" */}
+            {view==="level"         && <LevelSelectPanel currentLevel={level} onSelect={changeLevel} />}
             {view==="lecture"       && <LecturePanel words={words} onBackToParcours={backToParcours} />}
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
             {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
@@ -1178,6 +1193,7 @@ function AppInner() {
                 toggleDark={toggleDark}
                 themeId={themeId}
                 onChangeTheme={changeTheme}
+                levelInfo={levelInfo}
                 onNavigate={(s, v) => goSection(s, v || s)}
               />
             </Suspense>

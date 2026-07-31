@@ -33,7 +33,7 @@ function applyRestore(data) {
 }
 
 // ── ProfilPanel · Hub cá nhân ─────────────────────────────────
-export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, themeId, onChangeTheme, onNavigate }) {
+export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, themeId, onChangeTheme, onNavigate, levelInfo }) {
   const streakData = getStreak();
   const srsStats   = getSRSStats();
   const xpData     = getXPData();
@@ -367,6 +367,32 @@ export default function ProfilPanel({ userName, onChangeName, dark, toggleDark, 
         background: C.white, border: `1px solid ${C.border}`,
         borderRadius: 14, overflow: "hidden"
       }}>
+        {/* Level row — opens the full CEFR level picker */}
+        {levelInfo && (
+          <button onClick={() => onNavigate("level", "level")}
+            aria-label={`Trình độ đang học ${levelInfo.code} — đổi trình độ`}
+            style={{
+              display: "flex", alignItems: "center", gap: 12, width: "100%",
+              padding: "11px 14px", background: "transparent", border: "none",
+              borderBottom: `1px solid ${C.borderSoft || "#EEF2FA"}`,
+              cursor: "pointer", fontFamily: "inherit", textAlign: "left"
+            }}>
+            <span style={{ fontSize: 14, width: 18, textAlign: "center", flexShrink: 0 }}>{levelInfo.emoji}</span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 13, color: C.ink }}>Trình độ đang học</div>
+              <div style={{ fontSize: 11, color: C.gray, marginTop: 1 }}>{levelInfo.book}</div>
+            </div>
+            <span style={{
+              background: `${levelInfo.color}1A`, color: levelInfo.color,
+              border: `1px solid ${levelInfo.color}55`, borderRadius: 20,
+              padding: "2px 9px", fontSize: 11, fontWeight: 800, flexShrink: 0
+            }}>
+              {levelInfo.code}
+            </span>
+            <span style={{ color: C.gray2, fontSize: 15, flexShrink: 0 }}>›</span>
+          </button>
+        )}
+
         {/* Dark mode row — functional */}
         <div style={{
           display: "flex", alignItems: "center", gap: 12,
