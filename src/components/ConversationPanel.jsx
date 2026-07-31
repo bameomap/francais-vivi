@@ -8,23 +8,21 @@ import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
 
 // Gom tất cả note « Pour communiquer » của một unité (từ các piste nghe).
-// Keys look like "u1-b" (A1) or "b1-c" (A2); `prefix` says which to match.
-function getUnitNotes(unitNum, pourNotes, prefix) {
+function getUnitNotes(unitNum) {
   const out = [];
-  const re = new RegExp(`^${prefix}(\\d+)-`);
-  for (const [key, notes] of Object.entries(pourNotes)) {
-    const m = key.match(re);
+  for (const [key, notes] of Object.entries(EDITO_POUR_NOTES)) {
+    const m = key.match(/^u(\d+)-/);
     if (m && Number(m[1]) === unitNum) out.push(...notes);
   }
   return out;
 }
 
-function buildEditoPrompt(unit, practice, cefr) {
+function buildEditoPrompt(unit, practice) {
   const phrases = practice.usefulPhrases?.length
     ? `\nUseful phrases the learner can use: ${practice.usefulPhrases.join(", ")}.` : "";
-  return `You are a French conversation partner helping an ${cefr} Vietnamese learner practice speaking.
+  return `You are a French conversation partner helping an A1 Vietnamese learner practice speaking.
 Unit ${unit.unit}: "${unit.title}". Task: ${practice.task}${phrases}
-Keep ALL your sentences very short and simple (${cefr} level, max ${cefr === "A1" ? 10 : 14} words).
+Keep ALL your sentences very short and simple (A1 level, max 10 words).
 After each learner reply, if there are any mistakes add a correction note prefixed EXACTLY with '💡' on its own line, in Vietnamese.
 Start by briefly setting up the roleplay situation in French, then invite the learner to begin.`;
 }
@@ -86,14 +84,7 @@ function parseAIMsg(text) {
 const HINT_INSTR = "\nAt the end of EVERY response (including your first), on its own line, add a suggestion prefixed EXACTLY with '🌟' (no space before it): in Vietnamese, suggest how the learner can respond next, then show ONE short French example sentence in quotes. Example format: '🌟 Gợi ý: Bạn có thể trả lời \"Je m'appelle...\"'";
 
 // ════════════════════════════════════════════════════════════════
-export default function ConversationPanel({
-  onBackToParcours,
-  units       = EDITO_A1_UNITS,
-  pourNotes   = EDITO_POUR_NOTES,
-  unitPrefix  = "u",                 // parcours unit-id prefix for this level
-  levelLabel  = "Édito A1",
-  cefr        = "A1",
-}) {
+export default function ConversationPanel({ onBackToParcours }) {
   const [scenario,       setScenario]       = useState(null);
   const [messages,       setMessages]       = useState([]);
   const [input,          setInput]          = useState("");
@@ -213,7 +204,7 @@ export default function ConversationPanel({
   // SCENARIO PICKER
   // ════════════════════════════════════════════════════════════════
   if (!scenario) {
-    const unit = units[Math.min(selUnit, units.length - 1)];
+    const unit = EDITO_A1_UNITS[selUnit];
     return (
       <div style={{ animation:"fadeUp 0.3s ease" }}>
 
@@ -236,7 +227,7 @@ export default function ConversationPanel({
 
           {/* Mode toggle */}
           <div style={{ display:"flex", gap:4, background:C.cream, padding:4, borderRadius:12 }}>
-            {[{ id:"libre", label:"💬 Tự do" }, { id:"edito", label:`📘 ${levelLabel}` }].map(m => (
+            {[{ id:"libre", label:"💬 Tự do" }, { id:"edito", label:"📘 Édito A1" }].map(m => (
               <button key={m.id} onClick={() => setMode(m.id)}
                 style={{ flex:1, padding:"7px 4px", background: mode===m.id ? C.white : "transparent", border:"none", borderRadius:8, cursor:"pointer", fontWeight: mode===m.id ? 700 : 500, color: mode===m.id ? C.ink : C.gray, fontFamily:"inherit", fontSize:12, boxShadow: mode===m.id ? "0 1px 3px rgba(0,0,0,0.06)" : "none", transition:"all 0.15s" }}>
                 {m.label}
@@ -269,7 +260,7 @@ export default function ConversationPanel({
           {mode === "edito" && (
             <>
               <div style={{ overflowX:"auto", display:"flex", gap:6, paddingBottom:2, scrollbarWidth:"none" }}>
-                {units.map((u, i) => {
+                {EDITO_A1_UNITS.map((u, i) => {
                   const active = selUnit === i;
                   return (
                     <button key={u.id} onClick={() => setSelUnit(i)}
@@ -287,7 +278,7 @@ export default function ConversationPanel({
 
                 {/* ── Pour communiquer (khung câu rút từ bài nghe) ── */}
                 {(() => {
-                  const notes = getUnitNotes(unit.unit, pourNotes, unitPrefix);
+                  const notes = getUnitNotes(unit.unit);
                   if (notes.length === 0) return null;
                   return (
                     <div style={{ background:C.white, border:`1.5px solid ${C.gold}55`, borderRadius:14, overflow:"hidden" }}>
@@ -342,7 +333,7 @@ export default function ConversationPanel({
                   );
                 })()}
 
-                {(() => { var pDone = getSubDone(unitPrefix + unit.unit, "parler"); return unit.speakingPractice.map((p, i) => {
+                {(() => { var pDone = getSubDone("u" + unit.unit, "parler"); return unit.speakingPractice.map((p, i) => {
                   const isDone = !!pDone["s" + i];
                   return (
                   <button key={i} onClick={() => {
@@ -351,8 +342,8 @@ export default function ConversationPanel({
                       desc: p.task.length > 55 ? p.task.slice(0,55)+"…" : p.task,
                       color: C.blue, bg: C.blueL,
                       phrases: p.usefulPhrases || [],
-                      prompt: buildEditoPrompt(unit, p, cefr),
-                      unitId: unitPrefix + unit.unit, subId: "s" + i,
+                      prompt: buildEditoPrompt(unit, p),
+                      unitId: "u" + unit.unit, subId: "s" + i,
                     };
                     startScenario(sc);
                   }}
@@ -373,7 +364,7 @@ export default function ConversationPanel({
                     {isDone && (
                       <div style={{ marginTop:"0.5rem", display:"flex", alignItems:"center", gap:"0.4rem" }}>
                         <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Đã nói</span>
-                        <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone(unitPrefix + unit.unit, "parler", "s" + i); refresh(); }}
+                        <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone("u" + unit.unit, "parler", "s" + i); refresh(); }}
                           style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>↻ Làm lại</span>
                       </div>
                     )}

@@ -1,6 +1,12 @@
 // Édito A2 — speaking & writing tasks per unit.
-// Same shape as editoA1Units.js (EDITO_A1_UNITS) so WritingPanel and
-// ConversationPanel can consume either list through their `units` prop.
+//
+// `notes` on a speaking task lists keys into EDITO_POUR_NOTES_A2
+// (editoPourNotesA2.js): the « Pour communiquer » boxes the learner needs for
+// that topic — structures, sample sentences, Vietnamese glosses. The A2
+// speaking step is a preparation sheet built from these, not an AI roleplay.
+//
+// Otherwise the same shape as editoA1Units.js (EDITO_A1_UNITS), so WritingPanel
+// consumes either list through its `units` prop.
 //
 // `unit` is the book's unit number; ids match the "b"-prefixed parcours ids
 // used everywhere else in A2 (see parcoursDataA2.js).
@@ -11,6 +17,7 @@ export const EDITO_A2_UNITS = [
     speakingPractice: [
       {
         title: "Racontez votre parcours",
+        notes: ["b1-a"],
         task: "Racontez votre parcours à votre partenaire : où vous êtes né(e), où vous avez grandi, vos études, ce que vous êtes devenu(e). Utilisez le passé composé.",
         usefulPhrases: [
           "Je suis né(e) à/en/au(x)…",
@@ -22,6 +29,7 @@ export const EDITO_A2_UNITS = [
       },
       {
         title: "Pourquoi le français ?",
+        notes: ["b1-c"],
         task: "Expliquez pourquoi vous avez décidé d'apprendre le français et ce que vous comptez faire avec cette langue.",
         usefulPhrases: [
           "J'ai décidé d'apprendre le français parce que…",
@@ -33,6 +41,7 @@ export const EDITO_A2_UNITS = [
       },
       {
         title: "Vos loisirs préférés",
+        notes: ["b1-d"],
         task: "Quels sont vos loisirs préférés ? Quelles activités ne vous intéressent pas du tout ? Discutez avec votre partenaire.",
         usefulPhrases: [
           "Ma passion, c'est…",
@@ -44,6 +53,7 @@ export const EDITO_A2_UNITS = [
       },
       {
         title: "Proposer une sortie (DELF)",
+        notes: ["b1-i"],
         task: "Proposez une sortie à votre partenaire. Discutez pour trouver une activité qui plaît aux deux et fixez un rendez-vous (jour, heure, lieu).",
         usefulPhrases: [
           "Ça te dit ?",
@@ -55,6 +65,7 @@ export const EDITO_A2_UNITS = [
       },
       {
         title: "Organiser une sortie pour la classe",
+        notes: ["b1-atelier"],
         task: "Atelier médiation : présentez une sortie à faire ensemble. Décrivez l'activité, dites pourquoi elle est intéressante, puis donnez les informations pratiques (date, lieu de rendez-vous, transport, tarif, inscription).",
         usefulPhrases: [
           "Nous vous proposons…",

@@ -32,6 +32,7 @@ const ProfilPanel          = lazy(() => import("./components/ProfilPanel.jsx"));
 const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.jsx"));
 const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
 const LevelSelectPanel     = lazy(() => import("./components/LevelSelectPanel.jsx"));
+const ProductionOralePanel = lazy(() => import("./components/ProductionOralePanel.jsx"));
 const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
@@ -76,6 +77,11 @@ const SECTION_TITLE = {
   delf:"DELF A1",
   profil:"Mon Profil",
   level:"Trình độ",
+};
+
+// Per-level overrides — A2 swaps the AI roleplay for a speaking-prep sheet.
+const SECTION_TITLE_A2 = {
+  conversation: "La Production orale",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -823,7 +829,7 @@ function AppInner() {
                 ← Về
               </button>
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:600, flex:1 }}>
-                {SECTION_TITLE[section] || section}
+                {(level !== "a1" && SECTION_TITLE_A2[section]) || SECTION_TITLE[section] || section}
               </span>
               <button onClick={toggleDark} aria-label={dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
                 style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.5rem", fontSize:"0.8rem", cursor:"pointer", lineHeight:1, flexShrink:0 }}>
@@ -1170,15 +1176,15 @@ function AppInner() {
             {view==="writing"       && (level==="a1"
               ? <WritingPanel onBackToParcours={backToParcours} />
               : <WritingPanel onBackToParcours={backToParcours} units={EDITO_A2_UNITS} unitPrefix="b" cefr="A2" />)}
+            {/* A2 replaces the AI roleplay with a speaking-prep sheet */}
             {view==="conversation"   && (level==="a1"
               ? <ConversationPanel onBackToParcours={backToParcours} />
-              : <ConversationPanel
+              : <ProductionOralePanel
                   onBackToParcours={backToParcours}
                   units={EDITO_A2_UNITS}
                   pourNotes={EDITO_POUR_NOTES_A2}
                   unitPrefix="b"
                   levelLabel="Édito A2"
-                  cefr="A2"
                 />)}
             {view==="prononciation"  && <PrononciationPanel words={words} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}

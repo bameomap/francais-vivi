@@ -29,7 +29,7 @@ export const STEP_GROUPS_A2 = [
       { id:"lecture", icon:"📜", kind:"Đọc hiểu",  color:"#059669", sub:"Bài đọc thật & câu hỏi",    section:"lecture",       view:"lecture" },
       { id:"ecouter", icon:"🎧", kind:"Nghe",       color:"#0891B2", sub:"4 bài nghe của sách",       section:"dictee",        view:"ecouter" },
       { id:"ecrire",  icon:"🖋️", kind:"Viết",     color:"#E67E22", sub:"Luyện viết theo đề bài",    section:"writing",       view:"writing" },
-      { id:"parler",  icon:"🥐", kind:"Giao tiếp", color:"#D97706", sub:"Roleplay hội thoại với AI", section:"conversation",  view:"conversation" },
+      { id:"parler",  icon:"🗣️", kind:"Nói",      color:"#D97706", sub:"Chủ điểm nói & câu mẫu",    section:"conversation",  view:"conversation" },
     ],
   },
   {
