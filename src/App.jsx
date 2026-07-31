@@ -43,7 +43,6 @@ import { EDITO_A2_UNITS } from "./data/editoA2Units.js";
 import { EDITO_A2_PHONO } from "./data/editoPhonoA2.js";
 import { EDITO_POUR_NOTES_A2 } from "./data/editoPourNotesA2.js";
 import editoA2ReadingComprehension from "./data/editoA2Reading.js";
-import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
 
 // Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
 // phrasebook are A1-only content, so they're left out until A2 versions exist.
@@ -1206,20 +1205,7 @@ function AppInner() {
                   levelLabel="Édito A2"
                   cefr="A2"
                 />)}
-            {(view==="ecouter" || view==="dictee" || view==="listening") && (level==="a1"
-              ? <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />
-              : <EcouterPanel
-                  key={section}
-                  words={words}
-                  section={section}
-                  onBackToParcours={backToParcours}
-                  vocabUnits={EDITO_VOCAB_A2_UNITS}
-                  audio={EDITO_AUDIO_A2}
-                  pourNotes={EDITO_POUR_NOTES_A2}
-                  taskUnits={EDITO_A2_UNITS}
-                  levelLabel="Édito A2"
-                  cefr="A2"
-                />)}
+            {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
             {view==="quiz-unit"     && (level==="a1"
               ? <UnitQuizPanel onBackToParcours={backToParcours} />
               : <UnitQuizPanel

@@ -14,6 +14,17 @@ app nằm ở `src/data/*.js`, được soạn dựa trên tài liệu trong th�
   - `EDITO A2/` — sách, cahier, guide pédagogique + audio (không commit — có file >100MB)
 - `misc/` — file chưa rõ mục đích, chưa xếp loại (vd. `french.png`)
 
+## ⚠ Audio A2 KHÔNG khớp với sách A2
+
+`materials/A2/EDITO A2/Edito_A2_audios_manuel/` và `Edito_A2_audios_cahier/` là bản
+rip CD của **Édito A2 édition 1 (2016)** — tag ID3 ghi `date=2016`, file đề ngày
+2017, và mục lục bản 2016 là *Unité 1 « C'est la vie ! »*.
+
+Nội dung app soạn theo **2e édition (2022)**, có *Unité 1 « Nouvelles vies »*.
+Hai bản có bài nghe hoàn toàn khác nhau — không có số piste nào ghép được.
+**Đừng thử map lại số piste**; phải lấy audio bản 2022 (qua didierfle.app,
+quét trang sách) thì bước Nghe của A2 mới làm được.
+
 **Ngoại lệ:** `Nouvel_Edito_A1_audios_manuel/` (audio gốc A1) vẫn nằm ở **root**
 của project, không trong `materials/`, vì `public/audio` là symlink trỏ tới nó —
 app thực sự đọc audio từ đây lúc chạy nên không phải tài liệu tham khảo thuần túy.

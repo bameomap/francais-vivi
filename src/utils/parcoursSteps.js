@@ -21,14 +21,13 @@ import { EDITO_A2_PHONO }       from "../data/editoPhonoA2.js";
 import { EDITO_GRAMMAR_A2 }     from "../data/editoGrammarA2.js";
 import { EDITO_A2_UNITS }       from "../data/editoA2Units.js";
 import editoA2ReadingComprehension from "../data/editoA2Reading.js";
-import { EDITO_AUDIO_A2 }   from "../data/editoAudioA2.js";
 
 // unitId is the parcours form "u0".."u10" (A1) or "b1".."b12" (A2).
 const numOf = (unitId) => Number(String(unitId).replace(/^[ub]/, ""));
 export const isA2Unit = (unitId) => String(unitId).startsWith("b");
 
-// A2 keeps its own data sources; unlike A1 it has no `verbes` step yet, so
-// that returns [] and never appears in an A2 unit's totals.
+// A2 keeps its own data sources; unlike A1 it has no `ecouter` or `verbes`
+// step yet, so those return [] and never appear in an A2 unit's totals.
 function getStepSubIdsA2(unitId, stepId) {
   const num = numOf(unitId);
   switch (stepId) {
@@ -49,8 +48,6 @@ function getStepSubIdsA2(unitId, stepId) {
     }
     case "lecture":
       return editoA2ReadingComprehension.filter(a => a.unit === num).map(a => a.id);
-    case "ecouter":
-      return (EDITO_AUDIO_A2[unitId] || []).map(t => t.id);
     case "ecrire": {
       const u = EDITO_A2_UNITS.find(x => x.unit === num);
       return (u?.writingPractice || []).map((_, i) => "w" + i);
