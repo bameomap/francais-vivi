@@ -14,16 +14,26 @@ app nằm ở `src/data/*.js`, được soạn dựa trên tài liệu trong th�
   - `EDITO A2/` — sách, cahier, guide pédagogique + audio (không commit — có file >100MB)
 - `misc/` — file chưa rõ mục đích, chưa xếp loại (vd. `french.png`)
 
-## ⚠ Audio A2 KHÔNG khớp với sách A2
+## Audio A2 — dùng đúng bộ 2022
 
-`materials/A2/EDITO A2/Edito_A2_audios_manuel/` và `Edito_A2_audios_cahier/` là bản
-rip CD của **Édito A2 édition 1 (2016)** — tag ID3 ghi `date=2016`, file đề ngày
-2017, và mục lục bản 2016 là *Unité 1 « C'est la vie ! »*.
+Dùng `Edito_A2_Audios_Livre/` (121 file, tag ID3 `date=2022`) — đây là bản
+**2e édition**, khớp với nội dung app. Kiểm tra nhanh bằng:
 
-Nội dung app soạn theo **2e édition (2022)**, có *Unité 1 « Nouvelles vies »*.
-Hai bản có bài nghe hoàn toàn khác nhau — không có số piste nào ghép được.
-**Đừng thử map lại số piste**; phải lấy audio bản 2022 (qua didierfle.app,
-quét trang sách) thì bước Nghe của A2 mới làm được.
+```bash
+ffprobe -v error -show_entries format_tags=date -of default=noprint_wrappers=1 FILE.mp3
+```
+
+**Cách đánh số:** sách 2e édition không in số piste (dùng hệ thống quét trang
+qua didierfle.app). Bộ Livre có 121 file so với 120 mục trong
+`Edito A2 by Unite md/transcriptions_audios_*.md`, cùng thứ tự, lệch 1:
+
+> **file N+1 ↔ mục transcription thứ N** (file 001 là générique 24 giây)
+
+Đã đối chiếu thời lượng từng mục qua cả 12 unité.
+
+⚠ **Từng có bộ audio sai:** một bản rip CD **édition 1 (2016)** (tag `date=2016`,
+mục lục *Unité 1 « C'est la vie ! »* thay vì *« Nouvelles vies »*). Nếu gặp lại
+bộ đó thì bỏ — bài nghe khác hoàn toàn, không số piste nào ghép được.
 
 **Ngoại lệ:** `Nouvel_Edito_A1_audios_manuel/` (audio gốc A1) vẫn nằm ở **root**
 của project, không trong `materials/`, vì `public/audio` là symlink trỏ tới nó —
