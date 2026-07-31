@@ -2,6 +2,7 @@ import { useState } from "react";
 import { C } from "../constants.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import { callAIText } from "../utils/api.js";
+import GrammarBlocks from "./GrammarBlocks.jsx";
 
 const EMOJIS = { g0:"👋", g1:"🪪", g2:"🏘️", g3:"🥐", g4:"🗺️", g5:"👗", g6:"📅", g7:"🏠", g8:"💪", g9:"🌴", g10:"💼" };
 
@@ -39,7 +40,7 @@ function GrammarCard({ point, isOpen, onToggle }) {
       <button
         onClick={onToggle}
         style={{
-          width:"100%", display:"flex", alignItems:"center", gap:10,
+          width:"100%", display:"flex", alignItems:"flex-start", gap:10,
           padding:"0.7rem 0.9rem", cursor:"pointer",
           background: isOpen ? C.blueL : C.white,
           border:"none", textAlign:"left", fontFamily:"inherit",
@@ -63,6 +64,12 @@ function GrammarCard({ point, isOpen, onToggle }) {
               </div>
             );
           })()}
+          {/* One-line plain-Vietnamese gist, so the list is scannable while collapsed */}
+          {point.summary && !isOpen && (
+            <div style={{ fontSize:"0.72rem", color:C.gray, lineHeight:1.55, marginTop:4 }}>
+              {point.summary}
+            </div>
+          )}
         </div>
         <div style={{
           width:28, height:28, borderRadius:"50%", flexShrink:0,
@@ -78,6 +85,13 @@ function GrammarCard({ point, isOpen, onToggle }) {
 
       {isOpen && (
         <div style={{ borderTop:`1px solid ${C.border}`, animation:"fadeUp 0.2s ease" }}>
+          {/* Structured blocks (Édito A2). Falls back to the legacy plain-text
+              renderer below for points that still ship a single `rule` string. */}
+          {point.blocks ? (
+            <div style={{ padding:"0.9rem 1rem 0.6rem" }}>
+              <GrammarBlocks blocks={point.blocks} />
+            </div>
+          ) : (
           <div style={{ padding:"0.8rem 1rem 0.5rem" }}>
             {point.rule.split("\n").map((line, i) => {
               const trimmed   = line.trim();
@@ -111,6 +125,7 @@ function GrammarCard({ point, isOpen, onToggle }) {
               );
             })}
           </div>
+          )}
 
           {point.examples?.length > 0 && (
             <div style={{ padding:"0.4rem 1rem 0.6rem", borderTop:`1px dashed ${C.border}` }}>
