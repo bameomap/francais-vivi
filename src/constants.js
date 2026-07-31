@@ -112,6 +112,7 @@ export const THEMES = [
 ];
 
 export const THEME_KEY = "app_theme";
+export const LEVEL_KEY = "app_level";
 
 export function applyTheme(dark, themeId) {
   const id = themeId ?? localStorage.getItem(THEME_KEY) ?? "classic";

@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { callAI, callAIBatched, buildPrompt } from "./utils/api.js";
 import { loadSets, saveSets, getStreak, getProgress, markModuleUsed, getStorageHealth, exportBackup, getMistakes } from "./utils/storage.js";
 import { parseWords } from "./utils/helpers.js";
-import { C, applyTheme, THEME_KEY } from "./constants.js";
+import { C, applyTheme, THEME_KEY, LEVEL_KEY } from "./constants.js";
 
 import SpeakBtn from "./components/ui/SpeakBtn.jsx";
 import Spinner from "./components/ui/Spinner.jsx";
@@ -31,6 +31,8 @@ const SentenceBuilder   = lazy(() => import("./components/SentenceBuilder.jsx"))
 const ProfilPanel          = lazy(() => import("./components/ProfilPanel.jsx"));
 const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.jsx"));
 const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
+const ParcoursPanelA2      = lazy(() => import("./components/ParcoursPanelA2.jsx"));
+const ReferenceHubA2       = lazy(() => import("./components/ReferenceHubA2.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from "./utils/parcours.js";
@@ -183,6 +185,8 @@ function AppInner() {
   const [filterMastered, setFilterMastered] = useState(true);
   const [vocabSearch, setVocabSearch]       = useState("");
   const [vocabFilter, setVocabFilter]       = useState("all");
+  const [level, setLevel]               = useState(() => localStorage.getItem(LEVEL_KEY) || "a1");
+  const changeLevel = (id) => { localStorage.setItem(LEVEL_KEY, id); setLevel(id); };
   const [themeId, setThemeId] = useState(() => localStorage.getItem(THEME_KEY) || "classic");
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem("dark_mode") === "1";
@@ -555,6 +559,16 @@ function AppInner() {
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:16, letterSpacing:"-0.01em", color:C.ink, whiteSpace:"nowrap" }}>Français</span>
             </div>
             <div style={{ display:"flex", gap:6, alignItems:"center", flexShrink:0 }}>
+              {/* Trình độ toggle */}
+              <div style={{ display:"flex", gap:2, background:C.cream, borderRadius:20, padding:2, border:`1px solid ${C.border}` }}>
+                {["a1","a2"].map(id => (
+                  <button key={id} onClick={()=>changeLevel(id)} aria-label={`Chuyển sang trình độ ${id.toUpperCase()}`}
+                    style={{ padding:"3px 9px", borderRadius:18, border:"none", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"inherit", lineHeight:1.4,
+                      background: level===id ? C.blue : "transparent", color: level===id ? "#fff" : C.gray }}>
+                    {id.toUpperCase()}
+                  </button>
+                ))}
+              </div>
               {/* Combined streak + XP chip */}
               <span style={{ background:C.cream, padding:"4px 10px", borderRadius:999, fontWeight:700, display:"inline-flex", alignItems:"center", gap:5, color:C.ink, fontSize:11.5, border:`1px solid ${C.border}` }}>
                 <span style={{ color:C.accent }}>🔥</span>{streakData.streak}
@@ -581,7 +595,7 @@ function AppInner() {
           </div>
 
           {/* ── Focus card (Parcours-driven) ── */}
-          {(() => {
+          {level==="a1" && (() => {
             const statuses = computeUnitStatuses();
             const lastUnitId = localStorage.getItem("parcours_last_unit");
             const focusUnit = (lastUnitId && PARCOURS_UNITS.find(u => u.id === lastUnitId))
@@ -646,9 +660,10 @@ function AppInner() {
           </div>
 
           {/* ── Mot du Jour ── */}
-          <MotDuJour words={words} />
+          {level==="a1" && <MotDuJour words={words} />}
 
           {/* ── 4 skill cards ── */}
+          {level==="a1" && (
           <div style={{ padding:"0 16px", marginTop:14 }}>
             <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10.5, fontWeight:600, color:C.gray, letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:8 }}>
               Luyện theo kỹ năng
@@ -711,6 +726,42 @@ function AppInner() {
               <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
             </button>
           </div>
+          )}
+
+          {/* ── A2 home body ── */}
+          {level==="a2" && (
+            <div style={{ padding:"0 16px", marginTop:14, animation:"fadeUp 0.4s ease 0.1s both" }}>
+              <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, borderRadius:18, padding:"1.15rem 1.35rem", color:"#fff", position:"relative", overflow:"hidden" }}>
+                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>ÉDITO A2 · MỚI BẮT ĐẦU</div>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", fontWeight:700, lineHeight:1.1, marginBottom:4 }}>🚧 Đang xây dựng Parcours A2</div>
+                <div style={{ fontSize:"0.78rem", opacity:0.75, marginBottom:12 }}>Nội dung sẽ được thêm dần, theo cùng format với A1.</div>
+                <button onClick={()=>goSection("parcours","parcours")}
+                  style={{ background:"rgba(255,255,255,0.18)", color:"#fff", border:"1px solid rgba(255,255,255,0.4)", borderRadius:999, padding:"0.3rem 0.85rem", fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
+                  Xem Parcours A2 →
+                </button>
+              </div>
+
+              <button className="card-hover" onClick={()=>goSection("vocab","input")}
+                style={{ display:"flex", alignItems:"center", gap:12, width:"100%", marginTop:10, background:C.white, border:`1px solid ${C.border}`, borderRadius:16, padding:"14px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left" }}>
+                <span style={{ fontSize:26, lineHeight:1 }}>✏️</span>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:C.ink, lineHeight:1.2 }}>Luyện từ vựng tự do</div>
+                  <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>Nhập từ vựng A2 và tạo bài luyện tập ngay</div>
+                </div>
+                <span style={{ fontSize:18, color:C.gray2 }}>→</span>
+              </button>
+
+              <button className="card-hover" onClick={()=>goSection("reference_hub","reference_hub")}
+                style={{ display:"flex", alignItems:"center", gap:12, width:"100%", marginTop:8, background:C.white, border:`1px solid ${C.border}`, borderRadius:16, padding:"14px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left" }}>
+                <span style={{ fontSize:26, lineHeight:1 }}>📚</span>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:C.ink, lineHeight:1.2 }}>Référence A2</div>
+                  <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>Ngữ pháp, động từ, mẫu câu — sắp có</div>
+                </div>
+                <span style={{ fontSize:18, color:C.gray2 }}>→</span>
+              </button>
+            </div>
+          )}
 
           <div style={{ height:"1.5rem" }} />
         </div>
@@ -744,7 +795,7 @@ function AppInner() {
                   {[
                     { label:"Bộ của tôi", view:"input"   },
                     { label:"Đã lưu",     view:"history" },
-                    { label:"Edito",      view:"edito"   },
+                    ...(level==="a1" ? [{ label:"Edito", view:"edito" }] : []),
                   ].map(t => {
                     const isActive = t.view === view || (t.view==="input" && !["topics","history","edito","vocab-table","examples","quiz","wordlist"].includes(view));
                     return (
@@ -773,7 +824,7 @@ function AppInner() {
            <Suspense fallback={panelFallback}>
 
             {/* EDITO VOCAB */}
-            {view==="edito" && <EditoVocabPanel onBackToParcours={backToParcours} />}
+            {view==="edito" && level==="a1" && <EditoVocabPanel onBackToParcours={backToParcours} />}
 
 
             {/* INPUT */}
@@ -1056,7 +1107,7 @@ function AppInner() {
             {view==="examples" && <ExamplesView words={words}/>}
 
             {/* Panels */}
-            {view==="parcours"      && <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} />}
+            {view==="parcours"      && (level==="a1" ? <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} /> : <ParcoursPanelA2 onNavigate={(s, v) => goSection(s, v || s)} />)}
             {view==="grammar"       && <GrammarPanel onBackToParcours={backToParcours} />}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
@@ -1064,7 +1115,7 @@ function AppInner() {
             {view==="prononciation"  && <PrononciationPanel words={words} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
-            {view==="reference_hub" && <ReferenceHub onBackToParcours={backToParcours} />}
+            {view==="reference_hub" && (level==="a1" ? <ReferenceHub onBackToParcours={backToParcours} /> : <ReferenceHubA2 />)}
             {view==="lecture"       && <LecturePanel words={words} onBackToParcours={backToParcours} />}
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
             {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
