@@ -1636,7 +1636,7 @@ BẢNG CHIA MẪU — MANGER (ăn):
 • Ils/Elles ont mangé → Họ đã ăn
 💡 Chỉ AVOIR đổi theo ngôi — participe passé GIỮ NGUYÊN.
 
-PHẦN 1: CÁCH LẬP PARTICIPE PASSÉ (quá khứ phân từ)
+PHẦN 1: CÁCH LẬP PARTICIPE PASSÉ (phân từ quá khứ)
 1. Động từ -ER → -É: parler→parlé, manger→mangé, trouver→trouvé
    ⚠️ "mangé" và "manger" đọc GIỐNG HỆT [mɑ̃ʒe] — chỉ khác khi viết.
 2. Động từ -IR (nhóm 2) → -I: finir→fini, choisir→choisi
@@ -1933,7 +1933,7 @@ Trong chủ đề sức khỏe, thể thao, ăn uống của Unité 8, bạn s�
 Đây là phần "bẫy" nhất của tiếng Pháp! Một số động từ chuyển động đặc biệt (như aller – đi) và các động từ phản thân (như se lever – thức dậy, se coucher – đi ngủ) sẽ KHÔNG đi với avoir nữa, mà bắt buộc phải đi với ÊTRE.
 
 🚨 QUY TẮC VÀNG CỦA TRỢ ĐỘNG TỪ ÊTRE:
-Khi đã dùng être, quá khứ phân từ BẮT BUỘC phải "hợp giống và số" với chủ ngữ:
+Khi đã dùng être, phân từ quá khứ BẮT BUỘC phải "hợp giống và số" với chủ ngữ:
 • Chủ ngữ là NỮ (số ít): thêm -e vào cuối phân từ.
 • Chủ ngữ là SỐ NHIỀU (nam / chung): thêm -s vào cuối phân từ.
 • Chủ ngữ là SỐ NHIỀU (toàn nữ): thêm -es vào cuối phân từ.
