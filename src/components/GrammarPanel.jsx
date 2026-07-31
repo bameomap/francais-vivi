@@ -8,6 +8,8 @@ import { SecLabel } from "./ui/SharedUI.jsx";
 import ConjugaisonPanel from "./ConjugaisonPanel.jsx";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import TranslateSection from "./TranslateSection.jsx";
+import GrammarBlocks from "./GrammarBlocks.jsx";
+import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
 
 const LEVELS = ["A1","A2","B1","B2","C1","C2"];
 const GTYPES = [
@@ -183,35 +185,13 @@ export function GrammarOrder({ exercises, onFirstAnswer }) {
 }
 
 
-function RuleRenderer({ text }) {
-  if (!text) return null;
-  return (
-    <div style={{ display:"flex", flexDirection:"column", gap:"0.18rem" }}>
-      {text.split("\n").map((line, i) => {
-        const t = line.trim();
-        if (!t) return <div key={i} style={{ height:"0.35rem" }}/>;
-        if (t.startsWith("⚠️")) return (
-          <div key={i} style={{ background:C.goldL, border:"1px solid #F59E0B44", borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:C.gold, lineHeight:1.55 }}>{t}</div>
-        );
-        if (t.startsWith("💡")) return (
-          <div key={i} style={{ background:C.blueL, borderRadius:6, padding:"0.28rem 0.55rem", fontSize:"0.73rem", color:"#1D4ED8", lineHeight:1.55 }}>{t}</div>
-        );
-        if (t.startsWith("✅")) return (
-          <div key={i} style={{ fontSize:"0.73rem", color:C.green, lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
-        );
-        if (t.startsWith("❌")) return (
-          <div key={i} style={{ fontSize:"0.73rem", color:C.red, lineHeight:1.55, paddingLeft:"0.25rem" }}>{t}</div>
-        );
-        if (t.startsWith("•")) return (
-          <div key={i} style={{ fontFamily:"Georgia,serif", fontSize:"0.78rem", color:C.ink, lineHeight:1.65, paddingLeft:"0.4rem" }}>{t}</div>
-        );
-        if (/^[A-ZÀÂÁÉÈÊËÎÏÔÙÛÜ\s()]+:/.test(t) || (t.endsWith(":") && t.length < 50)) return (
-          <div key={i} style={{ fontSize:"0.68rem", color:C.purple, fontWeight:700, textTransform:"uppercase", letterSpacing:0.6, marginTop:"0.3rem", lineHeight:1.4 }}>{t}</div>
-        );
-        return <div key={i} style={{ fontSize:"0.76rem", color:C.ink, lineHeight:1.65 }}>{t}</div>;
-      })}
-    </div>
-  );
+// Renders a grammar point's rule text as structured blocks (tables, callouts,
+// lists...) instead of a flat column of lines — parsed on the fly from the
+// plain-text `rule` string via parseRuleToBlocks, or from `p.blocks` if a
+// point ships hand-authored blocks (see editoGrammarA2.js).
+function RuleRenderer({ point }) {
+  const blocks = point.blocks || parseRuleToBlocks(point.rule);
+  return <GrammarBlocks blocks={blocks} />;
 }
 
 export function GrammarPresets({ onLoad }) {
@@ -281,7 +261,7 @@ export function GrammarPresets({ onLoad }) {
                   {isOpen && (
                     <div style={{ padding:"0.65rem 0.85rem", borderTop:`1px solid ${C.purple}22` }}>
                       <div style={{ background:C.cream, borderRadius:8, padding:"0.55rem 0.7rem", borderLeft:`3px solid ${C.purple}`, marginBottom:"0.65rem" }}>
-                        <RuleRenderer text={p.rule}/>
+                        <RuleRenderer point={p}/>
                       </div>
                       <div style={{ fontSize:"0.63rem", textTransform:"uppercase", letterSpacing:0.8, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>Ví dụ</div>
                       <div style={{ display:"flex", flexDirection:"column", gap:"0.45rem" }}>
@@ -556,7 +536,7 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
                 {isOpen && (
                   <div style={{ padding:"0.65rem 0.85rem", borderTop:`1px solid ${C.purple}22` }}>
                     <div style={{ background:C.cream, borderRadius:8, padding:"0.55rem 0.7rem", borderLeft:`3px solid ${C.purple}`, marginBottom:"0.65rem" }}>
-                      <RuleRenderer text={p.rule}/>
+                      <RuleRenderer point={p}/>
                     </div>
                     <div style={{ fontSize:"0.63rem", textTransform:"uppercase", letterSpacing:0.8, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>Ví dụ</div>
                     <div style={{ display:"flex", flexDirection:"column", gap:"0.4rem" }}>

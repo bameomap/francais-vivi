@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import { callAIText } from "../utils/api.js";
 import GrammarBlocks from "./GrammarBlocks.jsx";
+import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
 
 const EMOJIS = { g0:"👋", g1:"🪪", g2:"🏘️", g3:"🥐", g4:"🗺️", g5:"👗", g6:"📅", g7:"🏠", g8:"💪", g9:"🌴", g10:"💼" };
 
@@ -85,11 +86,11 @@ function GrammarCard({ point, isOpen, onToggle }) {
 
       {isOpen && (
         <div style={{ borderTop:`1px solid ${C.border}`, animation:"fadeUp 0.2s ease" }}>
-          {/* Structured blocks (Édito A2). Falls back to the legacy plain-text
-              renderer below for points that still ship a single `rule` string. */}
-          {point.blocks ? (
+          {/* Hand-authored blocks (Édito A2) win; a plain `rule` string (Édito A1)
+              is auto-converted at render time. */}
+          {(point.blocks || point.rule) ? (
             <div style={{ padding:"0.9rem 1rem 0.6rem" }}>
-              <GrammarBlocks blocks={point.blocks} />
+              <GrammarBlocks blocks={point.blocks || parseRuleToBlocks(point.rule)} />
             </div>
           ) : (
           <div style={{ padding:"0.8rem 1rem 0.5rem" }}>

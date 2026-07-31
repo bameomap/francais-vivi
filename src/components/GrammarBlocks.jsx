@@ -2,8 +2,10 @@ import { C } from "../constants.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 
 // Renders the structured `blocks` array of an A2 grammar point.
-// Block types: lead · heading · text · formula · cards · table · pairs · compare · callout · timeline
-// Data lives in src/data/editoGrammarA2.js.
+// Block types: lead · heading · text · formula · cards · table · pairs · list · compare · callout · timeline
+// Hand-authored data lives in src/data/editoGrammarA2.js; A1's editoGrammar.js
+// still ships plain `rule` strings, auto-converted at render time by
+// src/utils/parseGrammarRule.js.
 
 // Minimal inline markup so prose can emphasise a word without extra block types:
 // **bold** and *italic*. Anything else is rendered as-is.
@@ -39,6 +41,8 @@ const calloutStyle = (variant) => ({
   warn: { bg:C.goldL,  border:C.gold,  fg:C.gold,     icon:"⚠️" },
   tip:  { bg:C.greenL, border:C.green, fg:C.green,    icon:"💡" },
   note: { bg:C.blueL,  border:C.blue,  fg:C.blueDark, icon:"📌" },
+  ok:   { bg:C.greenL, border:C.green, fg:C.green,    icon:"✅" },
+  bad:  { bg:C.redL,   border:C.red,   fg:C.red,      icon:"❌" },
 }[variant] || { bg:C.blueL, border:C.blue, fg:C.blueDark, icon:"📌" });
 
 function Block({ block }) {
@@ -171,6 +175,36 @@ function Block({ block }) {
               </div>
             ))}
           </div>
+        </div>
+      );
+
+    // Bullet / numbered lines from the auto-converted legacy `rule` text.
+    // An item containing " → " renders as a two-column row (term → meaning),
+    // which is how most A1 conjugation/vocab bullets are written.
+    case "list":
+      return (
+        <div style={{ background:C.white, border:`1.5px solid ${C.border}`, borderRadius:12, padding:"2px 13px" }}>
+          {b.items.map((item, i) => {
+            const arrowIdx = item.indexOf(" → ");
+            const border = i < b.items.length - 1 ? `1px solid ${C.borderSoft}` : "none";
+            if (arrowIdx > -1) {
+              const left  = item.slice(0, arrowIdx);
+              const right = item.slice(arrowIdx + 3);
+              return (
+                <div key={i} style={{ display:"flex", alignItems:"baseline", gap:8, padding:"6px 0", borderBottom:border }}>
+                  <span style={{ fontFamily:"Georgia,serif", fontSize:13, color:C.blue, flex:"0 0 auto" }}>{left}</span>
+                  <span style={{ color:C.gray2, fontSize:11, flexShrink:0 }}>→</span>
+                  <span style={{ fontSize:12.5, color:C.ink2, lineHeight:1.6 }}>{right}</span>
+                </div>
+              );
+            }
+            return (
+              <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:7, padding:"6px 0", borderBottom:border }}>
+                <span style={{ color:C.blue, fontSize:12, flexShrink:0, lineHeight:1.6 }}>•</span>
+                <RichText text={item} style={{ fontSize:12.5, color:C.ink2, lineHeight:1.65 }} />
+              </div>
+            );
+          })}
         </div>
       );
 
