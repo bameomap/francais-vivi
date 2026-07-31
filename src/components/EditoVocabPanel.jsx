@@ -356,7 +356,7 @@ function ExtraVocabView({ onBack }) {
 }
 
 // ── Main panel ─────────────────────────────────────────────
-export default function EditoVocabPanel({ onBackToParcours }) {
+export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_UNITS, levelLabel = "Edito A1" }) {
   const [activeUnit,   setActiveUnit]   = useState(null);
   const [showExtra,    setShowExtra]    = useState(false);
   const [fromParcours, setFromParcours] = useState(false);
@@ -364,16 +364,16 @@ export default function EditoVocabPanel({ onBackToParcours }) {
   useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
-      const unit = EDITO_VOCAB_UNITS[Number(idx)];
+      const unit = units[Number(idx)];
       if (unit) { setActiveUnit(unit.id); setFromParcours(true); }
       localStorage.removeItem("parcours_unit_idx");
     }
-  }, []);
+  }, [units]);
 
   if (showExtra) return <ExtraVocabView onBack={() => setShowExtra(false)} />;
 
   if (activeUnit) {
-    const unit = EDITO_VOCAB_UNITS.find(u => u.id === activeUnit);
+    const unit = units.find(u => u.id === activeUnit);
     const handleBack = fromParcours && onBackToParcours
       ? () => onBackToParcours()
       : () => { setActiveUnit(null); setFromParcours(false); };
@@ -387,7 +387,7 @@ export default function EditoVocabPanel({ onBackToParcours }) {
       {/* Header */}
       <div style={{ marginBottom:"1rem" }}>
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.1rem", color:C.ink, fontWeight:700, marginBottom:"0.2rem" }}>
-          📖 Từ vựng Edito A1
+          📖 Từ vựng {levelLabel}
         </div>
         <div style={{ fontSize:"0.75rem", color:C.gray }}>
           Chọn Unite để học theo chương trình sách giáo khoa
@@ -396,7 +396,7 @@ export default function EditoVocabPanel({ onBackToParcours }) {
 
       {/* Unit cards */}
       <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem", marginBottom:"0.75rem" }}>
-        {EDITO_VOCAB_UNITS.map((unit, i) => {
+        {units.map((unit, i) => {
           const totalWords = unit.groups.reduce((s, g) => s + g.words.length, 0);
           return (
             <button key={unit.id} onClick={() => setActiveUnit(unit.id)}

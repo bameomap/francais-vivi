@@ -166,11 +166,11 @@ function GrammarCard({ point, isOpen, onToggle }) {
 }
 
 // ── Main component ────────────────────────────────────────────
-export default function EditoGrammarPanel() {
+export default function EditoGrammarPanel({ data = EDITO_GRAMMAR, emojis = EMOJIS, levelLabel = "Édito A1" }) {
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [openCard,     setOpenCard]     = useState(null);
 
-  const unitData = selectedUnit ? EDITO_GRAMMAR.find(u => u.id === selectedUnit) : null;
+  const unitData = selectedUnit ? data.find(u => u.id === selectedUnit) : null;
 
   const selectUnit = (id) => { setSelectedUnit(id); setOpenCard(null); };
   const goBack     = ()   => { setSelectedUnit(null); setOpenCard(null); };
@@ -186,16 +186,16 @@ export default function EditoGrammarPanel() {
         padding:"1rem 1rem 0.85rem",
       }}>
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>
-          ⚜️ Ngữ pháp Édito A1
+          ⚜️ Ngữ pháp {levelLabel}
         </div>
         <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>
-          {EDITO_GRAMMAR.length} bài · Điểm ngữ pháp theo từng đơn vị · Ví dụ minh họa
+          {data.length} bài · Điểm ngữ pháp theo từng đơn vị · Ví dụ minh họa
         </div>
       </div>
 
       <div style={{ padding:"0.85rem 1rem" }}>
         <div style={{ display:"flex", flexDirection:"column", gap:"0.5rem" }}>
-          {EDITO_GRAMMAR.map((u, i) => (
+          {data.map((u, i) => (
             <button key={u.id} onClick={() => selectUnit(u.id)}
               style={{
                 background:C.white, border:`1.5px solid ${C.border}`,
@@ -225,7 +225,7 @@ export default function EditoGrammarPanel() {
 
               <div style={{ flex:1, minWidth:0, padding:"0.65rem 0.4rem 0.65rem 0" }}>
                 <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:14.5, color:C.ink, lineHeight:1.2 }}>
-                  {EMOJIS[u.id]} {u.title}
+                  {emojis[u.id]} {u.title}
                 </div>
                 <div style={{ fontSize:10.5, color:C.blue, marginTop:3, fontWeight:600 }}>
                   {u.points.length} điểm ngữ pháp
@@ -271,7 +271,7 @@ export default function EditoGrammarPanel() {
           </div>
           <div style={{ flex:1, minWidth:0 }}>
             <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:16, color:"#fff", lineHeight:1.15 }}>
-              {EMOJIS[unitData.id]} {unitData.title}
+              {emojis[unitData.id]} {unitData.title}
             </div>
             <div style={{ fontSize:11, color:"rgba(255,255,255,0.65)", marginTop:2, fontWeight:500 }}>
               {unitData.points.length} điểm ngữ pháp

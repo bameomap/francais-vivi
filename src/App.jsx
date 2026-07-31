@@ -33,11 +33,15 @@ const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.
 const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
 const ParcoursPanelA2      = lazy(() => import("./components/ParcoursPanelA2.jsx"));
 const ReferenceHubA2       = lazy(() => import("./components/ReferenceHubA2.jsx"));
+const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from "./utils/parcours.js";
 import { PARCOURS_UNITS, STEP_DEFS } from "./data/parcoursData.js";
 import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
+import { PARCOURS_UNITS_A2 } from "./data/parcoursDataA2.js";
+import { EDITO_VOCAB_A2_UNITS } from "./data/editoVocabA2.js";
+import { EDITO_GRAMMAR_A2, GRAMMAR_A2_EMOJIS } from "./data/editoGrammarA2.js";
 
 const TABS = [
   { id:"home",     glyph:"⌂",  label:"Accueil",   section:"home",          view:"home",          color:null       },
@@ -732,13 +736,26 @@ function AppInner() {
           {level==="a2" && (
             <div style={{ padding:"0 16px", marginTop:14, animation:"fadeUp 0.4s ease 0.1s both" }}>
               <div style={{ background:`linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, borderRadius:18, padding:"1.15rem 1.35rem", color:"#fff", position:"relative", overflow:"hidden" }}>
-                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>ÉDITO A2 · MỚI BẮT ĐẦU</div>
-                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", fontWeight:700, lineHeight:1.1, marginBottom:4 }}>🚧 Đang xây dựng Parcours A2</div>
-                <div style={{ fontSize:"0.78rem", opacity:0.75, marginBottom:12 }}>Nội dung sẽ được thêm dần, theo cùng format với A1.</div>
-                <button onClick={()=>goSection("parcours","parcours")}
-                  style={{ background:"rgba(255,255,255,0.18)", color:"#fff", border:"1px solid rgba(255,255,255,0.4)", borderRadius:999, padding:"0.3rem 0.85rem", fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
-                  Xem Parcours A2 →
-                </button>
+                {PARCOURS_UNITS_A2.length > 0 ? (() => {
+                  const u = PARCOURS_UNITS_A2[0];
+                  return (<>
+                    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>UNIT {u.num} · ÉDITO A2</div>
+                    <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", fontWeight:700, lineHeight:1.1, marginBottom:4 }}>{u.emoji} {u.fr}</div>
+                    <div style={{ fontSize:"0.78rem", opacity:0.75, marginBottom:12 }}>{u.vi} · {u.grammar}</div>
+                    <button onClick={()=>goSection("parcours","parcours")}
+                      style={{ background:"rgba(255,255,255,0.18)", color:"#fff", border:"1px solid rgba(255,255,255,0.4)", borderRadius:999, padding:"0.3rem 0.85rem", fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
+                      Bắt đầu →
+                    </button>
+                  </>);
+                })() : (<>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.58rem", letterSpacing:"0.18em", opacity:0.6, marginBottom:5, textTransform:"uppercase" }}>ÉDITO A2 · MỚI BẮT ĐẦU</div>
+                  <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.25rem", fontWeight:700, lineHeight:1.1, marginBottom:4 }}>🚧 Đang xây dựng Parcours A2</div>
+                  <div style={{ fontSize:"0.78rem", opacity:0.75, marginBottom:12 }}>Nội dung sẽ được thêm dần, theo cùng format với A1.</div>
+                  <button onClick={()=>goSection("parcours","parcours")}
+                    style={{ background:"rgba(255,255,255,0.18)", color:"#fff", border:"1px solid rgba(255,255,255,0.4)", borderRadius:999, padding:"0.3rem 0.85rem", fontSize:"0.72rem", cursor:"pointer", fontWeight:700 }}>
+                    Xem Parcours A2 →
+                  </button>
+                </>)}
               </div>
 
               <button className="card-hover" onClick={()=>goSection("vocab","input")}
@@ -795,7 +812,7 @@ function AppInner() {
                   {[
                     { label:"Bộ của tôi", view:"input"   },
                     { label:"Đã lưu",     view:"history" },
-                    ...(level==="a1" ? [{ label:"Edito", view:"edito" }] : []),
+                    { label: level==="a1" ? "Edito" : "Edito A2", view:"edito" },
                   ].map(t => {
                     const isActive = t.view === view || (t.view==="input" && !["topics","history","edito","vocab-table","examples","quiz","wordlist"].includes(view));
                     return (
@@ -824,7 +841,9 @@ function AppInner() {
            <Suspense fallback={panelFallback}>
 
             {/* EDITO VOCAB */}
-            {view==="edito" && level==="a1" && <EditoVocabPanel onBackToParcours={backToParcours} />}
+            {view==="edito" && (level==="a1"
+              ? <EditoVocabPanel onBackToParcours={backToParcours} />
+              : <EditoVocabPanel onBackToParcours={backToParcours} units={EDITO_VOCAB_A2_UNITS} levelLabel="Edito A2" />)}
 
 
             {/* INPUT */}
@@ -1108,7 +1127,9 @@ function AppInner() {
 
             {/* Panels */}
             {view==="parcours"      && (level==="a1" ? <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} /> : <ParcoursPanelA2 onNavigate={(s, v) => goSection(s, v || s)} />)}
-            {view==="grammar"       && <GrammarPanel onBackToParcours={backToParcours} />}
+            {view==="grammar"       && (level==="a1"
+              ? <GrammarPanel onBackToParcours={backToParcours} />
+              : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" />)}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
             {view==="conversation"   && <ConversationPanel onBackToParcours={backToParcours} />}
