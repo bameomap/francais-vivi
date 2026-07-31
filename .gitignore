@@ -10,3 +10,8 @@ Nouvel_Edito_A1_audios_manuel/
 public/audio
 .env*.local
 french.png
+
+# materials/ — reference PDFs & audio, kept local only (some files >100MB,
+# over GitHub's push limit; see materials/README.md)
+EDITO A2/
+Sujet DELF A1/
