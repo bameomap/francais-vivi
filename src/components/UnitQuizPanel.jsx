@@ -20,20 +20,20 @@ const SKILLS = {
 const CACHE_KEY = (uid) => `unit_quiz_${uid}`;
 
 // ── Prompt builder ─────────────────────────────────────────────
-function buildPrompt(unit, vocabWords, grammarPoints) {
+function buildPrompt(unit, vocabWords, grammarPoints, cefr) {
   const vocabList  = vocabWords.slice(0, 30).map(w => `${w.fr} — ${w.vi}`).join(", ");
   const gramList   = grammarPoints.slice(0, 4).map(p => p.topic).join("; ");
 
-  return `Tu es un professeur de français créant un test complet pour des apprenants A1 vietnamiens.
+  return `Tu es un professeur de français créant un test complet pour des apprenants ${cefr} vietnamiens.
 
 Unité: "${unit.fr}" (${unit.vi})
 Vocabulaire clé: ${vocabList}
-Points de grammaire: ${gramList || "grammaire A1 générale"}
+Points de grammaire: ${gramList || `grammaire ${cefr} générale`}
 
 Crée exactement 15 questions couvrant les 4 compétences. Réponds UNIQUEMENT en JSON valide sans markdown:
 {
   "title": "Quiz · Unité ${unit.num} · ${unit.fr}",
-  "passage": "Un court paragraphe de 45-55 mots en français A1 sur le thème de l'unité, utilisant le vocabulaire clé. Ce passage servira aux questions de compréhension.",
+  "passage": "Un court paragraphe de 45-55 mots en français ${cefr} sur le thème de l'unité, utilisant le vocabulaire clé. Ce passage servira aux questions de compréhension.",
   "questions": [
     {
       "skill": "vocab|grammaire|comprehension|ecriture",
@@ -57,7 +57,7 @@ Règles:
 - Pour "fill": pas d'"options", "q" contient ___ , "answer" = le mot manquant
 - Pour "translate": pas d'"options", "q" = phrase vietnamienne, "answer" = traduction française
 - "explain" toujours en vietnamien, court (max 12 mots)
-- Niveau A1 strict, vocabulaire simple`;
+- Niveau ${cefr} strict, vocabulaire adapté`;
 }
 
 // ── Question renderer ─────────────────────────────────────────
@@ -208,7 +208,13 @@ function ResultScreen({ score, total, unitId, onRetry, onBack }) {
 }
 
 // ── Main component ────────────────────────────────────────────
-export default function UnitQuizPanel({ onBackToParcours }) {
+export default function UnitQuizPanel({
+  onBackToParcours,
+  units        = PARCOURS_UNITS,
+  vocabUnits   = EDITO_VOCAB_UNITS,
+  grammarUnits = EDITO_GRAMMAR,
+  cefr         = "A1",
+}) {
   const [unitId] = useState(() => localStorage.getItem("parcours_quiz_unit") || null);
   const [quiz,    setQuiz]    = useState(() => {
     if (!unitId) return null;
@@ -224,10 +230,12 @@ export default function UnitQuizPanel({ onBackToParcours }) {
     localStorage.removeItem("parcours_back");
   }, []);
 
-  const unit       = PARCOURS_UNITS.find(u => u.id === unitId);
-  const vocabUnit  = unitId ? EDITO_VOCAB_UNITS.find(u => u.id === unitId) : null;
-  const grammarId  = unitId ? "g" + unitId.replace("u","") : null;
-  const grammarUnit= grammarId ? EDITO_GRAMMAR.find(u => u.id === grammarId) : null;
+  const unit       = units.find(u => u.id === unitId);
+  const vocabUnit  = unitId ? vocabUnits.find(u => u.id === unitId) : null;
+  // A1 grammar units are keyed "g0".."g10" against vocab "u0".."u10";
+  // A2 reuses the same id on both sides.
+  const grammarId  = unitId ? (unitId.startsWith("u") ? "g" + unitId.slice(1) : unitId) : null;
+  const grammarUnit= grammarId ? grammarUnits.find(u => u.id === grammarId) : null;
   const vocabWords = vocabUnit ? vocabUnit.groups.flatMap(g => g.words) : [];
   const gramPoints = grammarUnit ? grammarUnit.points : [];
 
@@ -235,7 +243,7 @@ export default function UnitQuizPanel({ onBackToParcours }) {
     if (!unit) return;
     setLoading(true); setErr(""); setQuiz(null); setAnswers({}); setDone(false); setConfetti(false);
     try {
-      const data = await callAI(buildPrompt(unit, vocabWords, gramPoints));
+      const data = await callAI(buildPrompt(unit, vocabWords, gramPoints, cefr));
       setQuiz(data);
       localStorage.setItem(CACHE_KEY(unitId), JSON.stringify(data));
     } catch(e) { setErr(e.message); }

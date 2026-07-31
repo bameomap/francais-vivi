@@ -118,7 +118,12 @@ function ResultBlock({ result, onRedo, redoLabel = "✏️ Viết lại" }) {
 }
 
 // ════════════════════════════════════════════════════════════════
-export default function WritingPanel({ onBackToParcours }) {
+export default function WritingPanel({
+  onBackToParcours,
+  units      = EDITO_A1_UNITS,
+  unitPrefix = "u",              // parcours unit-id prefix for this level
+  cefr       = "A1",
+}) {
   const [tab,       setTab]       = useState("write");
   const [input,     setInput]     = useState("");
   const [result,    setResult]    = useState(null);
@@ -156,7 +161,7 @@ export default function WritingPanel({ onBackToParcours }) {
     setLoading(true); setErr(""); setResult(null);
     const taskContext = contextTask ? `The learner is responding to this writing task: "${contextTask}"\n` : "";
     try {
-      const r = await callAI(`You are a French teacher for A1 students. ${taskContext}Evaluate this French text written by a Vietnamese learner.
+      const r = await callAI(`You are a French teacher for ${cefr} students. ${taskContext}Evaluate this French text written by a Vietnamese learner.
 Text: "${input.trim()}"
 
 Return ONLY JSON:
@@ -175,8 +180,8 @@ Return ONLY JSON:
       localStorage.setItem("writing_history", JSON.stringify(newHistory));
       // Édito task = a specific writing sub-lesson; freeform "write" tab isn't tracked.
       if (tab === "edito" && editoTaskIdx != null) {
-        const u = EDITO_A1_UNITS[editoUnit];
-        if (u) markSubDone("u" + u.unit, "ecrire", "w" + editoTaskIdx);
+        const u = units[editoUnit];
+        if (u) markSubDone(unitPrefix + u.unit, "ecrire", "w" + editoTaskIdx);
       }
       setResult(r);
       r.errors?.forEach(e => { if (e.type) logError(e.type); });
@@ -190,7 +195,7 @@ Return ONLY JSON:
     if (hint) { setHint(null); return; }
     setHintLoading(true);
     try {
-      const r = await callAI(`You are a French teacher for A1 Vietnamese learners.
+      const r = await callAI(`You are a French teacher for ${cefr} Vietnamese learners.
 Writing task: "${editoTask?.task}"
 
 Return ONLY valid JSON (no markdown):
@@ -211,8 +216,8 @@ vocab: 5-7 key words/phrases relevant to the task.`);
     setSampleLoading(true);
     try {
       const r = await callAIText(
-        [{ role:"user", content:`Viết một bài mẫu A1 (4-6 câu) cho đề bài: "${editoTask?.task}"\n\nFormat CHÍNH XÁC:\n[tiếng Pháp]\n---\n[bản dịch tiếng Việt]` }],
-        "Bạn là giáo viên tiếng Pháp. Viết bài mẫu đơn giản, đúng trình độ A1. Không thêm gì ngoài format yêu cầu."
+        [{ role:"user", content:`Viết một bài mẫu ${cefr} (${cefr === "A1" ? "4-6" : "6-9"} câu) cho đề bài: "${editoTask?.task}"\n\nFormat CHÍNH XÁC:\n[tiếng Pháp]\n---\n[bản dịch tiếng Việt]` }],
+        `Bạn là giáo viên tiếng Pháp. Viết bài mẫu đơn giản, đúng trình độ ${cefr}. Không thêm gì ngoài format yêu cầu.`
       );
       setSample(r.trim());
     } catch { setSample("⚠ Không thể tạo bài mẫu lúc này."); }
@@ -263,7 +268,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
 
   // ── Edito tab ───────────────────────────────────────────────
   if (tab === "edito") {
-    const unit = EDITO_A1_UNITS[editoUnit];
+    const unit = units[Math.min(editoUnit, units.length - 1)];
     return (
       <div style={{ animation:"fadeUp 0.3s ease" }}>
         {heroBanner}
@@ -274,7 +279,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
             <>
               {/* Unit chips */}
               <div style={{ overflowX:"auto", display:"flex", gap:6, paddingBottom:4, scrollbarWidth:"none" }}>
-                {EDITO_A1_UNITS.map((u, i) => {
+                {units.map((u, i) => {
                   const active = editoUnit === i;
                   return (
                     <button key={u.id} onClick={() => { setEditoUnit(i); setResult(null); }}
@@ -291,7 +296,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
               </div>
 
               {/* Task cards */}
-              {(() => { var wDone = getSubDone("u" + unit.unit, "ecrire"); return unit.writingPractice.map((p, i) => {
+              {(() => { var wDone = getSubDone(unitPrefix + unit.unit, "ecrire"); return unit.writingPractice.map((p, i) => {
                 const isDone = !!wDone["w" + i];
                 return (
                 <button key={i} onClick={() => { setEditoTask(p); setEditoTaskIdx(i); setInput(""); setResult(null); }}
@@ -306,7 +311,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                     {isDone ? (
                       <>
                         <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>✓ Xong</span>
-                        <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone("u" + unit.unit, "ecrire", "w" + i); refresh(); }}
+                        <span role="button" onClick={(e) => { e.stopPropagation(); unmarkSubDone(unitPrefix + unit.unit, "ecrire", "w" + i); refresh(); }}
                           style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.1rem 0.5rem", fontSize:"0.62rem", fontWeight:700 }}>↻ Làm lại</span>
                       </>
                     ) : (
@@ -400,7 +405,7 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                 const vi = parts[1]?.trim();
                 return (
                   <div style={{ background:C.greenL, border:`1.5px solid ${C.green}`, borderRadius:14, padding:"0.85rem 1rem", animation:"fadeUp 0.25s ease" }}>
-                    <div style={{ fontSize:"0.6rem", fontWeight:700, color:C.green, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.65rem" }}>📝 Bài văn mẫu A1</div>
+                    <div style={{ fontSize:"0.6rem", fontWeight:700, color:C.green, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.65rem" }}>📝 Bài văn mẫu {cefr}</div>
                     <div style={{ fontFamily:"Georgia,serif", fontSize:"0.88rem", color:C.ink, lineHeight:1.75, whiteSpace:"pre-wrap", marginBottom:"0.6rem" }}>{fr}</div>
                     {vi && (
                       <div style={{ paddingTop:"0.55rem", borderTop:`1px dashed ${C.green}`, fontSize:"0.75rem", color:C.gray, lineHeight:1.65, whiteSpace:"pre-wrap" }}>→ {vi}</div>

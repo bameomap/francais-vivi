@@ -17,12 +17,12 @@ function statusColor(status) {
 
 // ── Unit List ──────────────────────────────────────────────────
 
-function UnitList({ onSelect }) {
-  const statuses = computeUnitStatuses();
-  const overall  = computeOverallProgress();
+function UnitList({ onSelect, units, levelTitle, book, lastUnitKey }) {
+  const statuses = computeUnitStatuses(units);
+  const overall  = computeOverallProgress(units);
 
-  const doneCount    = PARCOURS_UNITS.filter(u => statuses[u.id]?.status === "done").length;
-  const currentCount = PARCOURS_UNITS.filter(u => statuses[u.id]?.status === "current").length;
+  const doneCount    = units.filter(u => statuses[u.id]?.status === "done").length;
+  const currentCount = units.filter(u => statuses[u.id]?.status === "current").length;
 
   return (
     <div style={{ padding: "1rem", animation: "fadeUp 0.3s ease" }}>
@@ -38,16 +38,16 @@ function UnitList({ onSelect }) {
               NIVEAU CEFR
             </div>
             <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: 22, fontWeight: 700, color: C.ink, lineHeight: 1.1, marginTop: 3 }}>
-              A1 · Débutant
+              {levelTitle}
             </div>
-            <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>Édito A1 · Didier FLE</div>
+            <div style={{ fontSize: 12, color: C.gray, marginTop: 4 }}>{book}</div>
           </div>
           <div style={{ textAlign: "right", flexShrink: 0 }}>
             <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: 28, fontWeight: 700, color: C.blue, lineHeight: 1 }}>
               {overall.pct}<span style={{ fontSize: 14, color: C.gray, fontWeight: 400 }}>%</span>
             </div>
             <div style={{ fontSize: 11, color: C.gray, marginTop: 3 }}>
-              {doneCount} / {PARCOURS_UNITS.length} units
+              {doneCount} / {units.length} units
             </div>
           </div>
         </div>
@@ -63,20 +63,20 @@ function UnitList({ onSelect }) {
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12, fontSize: 11.5 }}>
           <span><b style={{ color: C.green }}>{doneCount}</b> <span style={{ color: C.gray }}>xong</span></span>
           <span><b style={{ color: C.accent }}>{currentCount}</b> <span style={{ color: C.gray }}>đang học</span></span>
-          <span><b style={{ color: C.gray2 }}>{PARCOURS_UNITS.length - doneCount - currentCount}</b> <span style={{ color: C.gray }}>chưa học</span></span>
+          <span><b style={{ color: C.gray2 }}>{units.length - doneCount - currentCount}</b> <span style={{ color: C.gray }}>chưa học</span></span>
         </div>
       </div>
 
       {/* ── Units timeline ── */}
       <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10 }}>
-        Units · {PARCOURS_UNITS.length} bài
+        Units · {units.length} bài
       </div>
 
       <div style={{ position: "relative" }}>
         {/* vertical timeline line */}
         <div style={{ position: "absolute", left: 16, top: 8, bottom: 8, width: 1.5, background: C.border, zIndex: 0 }}/>
 
-        {PARCOURS_UNITS.map((u) => {
+        {units.map((u) => {
           const { status, pct } = statuses[u.id] || { status: "next", pct: 0 };
           const isDone    = status === "done";
           const isCurrent = status === "current";
@@ -99,7 +99,7 @@ function UnitList({ onSelect }) {
 
               {/* card */}
               <button
-                onClick={() => { localStorage.setItem("parcours_last_unit", u.id); onSelect(u.id); }}
+                onClick={() => { localStorage.setItem(lastUnitKey, u.id); onSelect(u.id); }}
                 style={{
                   flex: 1, minWidth: 0, textAlign: "left",
                   background: isCurrent ? C.accentL : C.white,
@@ -242,20 +242,20 @@ function StepCard({ step, stat, isNext, onClick, onRedo }) {
 
 // ── Unit Detail ────────────────────────────────────────────────
 
-function UnitDetail({ unitId, onBack, onNavigate }) {
-  const unit     = PARCOURS_UNITS.find(u => u.id === unitId);
-  const unitIdx  = PARCOURS_UNITS.findIndex(u => u.id === unitId);
+function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, levelLabel }) {
+  const unit     = units.find(u => u.id === unitId);
+  const unitIdx  = units.findIndex(u => u.id === unitId);
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
 
   // Per-step fractional progress (recomputed each render)
   const stats = {};
-  STEP_DEFS.forEach(s => { stats[s.id] = getStepStat(unitId, s.id); });
+  stepDefs.forEach(s => { stats[s.id] = getStepStat(unitId, s.id); });
 
-  const subDone  = STEP_DEFS.reduce((a, s) => a + stats[s.id].done, 0);
-  const subTotal = STEP_DEFS.reduce((a, s) => a + stats[s.id].total, 0);
+  const subDone  = stepDefs.reduce((a, s) => a + stats[s.id].done, 0);
+  const subTotal = stepDefs.reduce((a, s) => a + stats[s.id].total, 0);
   const pct      = subTotal ? Math.round((subDone / subTotal) * 100) : 0;
-  const doneSteps = STEP_DEFS.filter(s => stats[s.id].complete).length;
+  const doneSteps = stepDefs.filter(s => stats[s.id].complete).length;
 
   const handleStep = useCallback((step, { redo = false } = {}) => {
     if (redo) {
@@ -299,7 +299,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
   }, [unitId, unitIdx, onNavigate]);
 
   // First not-yet-complete step for the CTA
-  const nextStep = STEP_DEFS.find(s => !stats[s.id].complete);
+  const nextStep = stepDefs.find(s => !stats[s.id].complete);
 
   if (!unit) return null;
 
@@ -327,7 +327,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div>
             <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9.5, letterSpacing: "0.15em", opacity: 0.55, color: "#fff" }}>
-              UNIT {unit.num} · A1 ÉDITO
+              UNIT {unit.num} · {levelLabel}
             </div>
             <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: 22, fontWeight: 700, color: "#fff", lineHeight: 1.1, marginTop: 3 }}>
               {unit.emoji} {unit.fr}
@@ -339,7 +339,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
               {pct}<span style={{ fontSize: 12, opacity: 0.7 }}>%</span>
             </div>
             <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.6)" }}>
-              {doneSteps}/{STEP_DEFS.length} kỹ năng · {subDone}/{subTotal} bài
+              {doneSteps}/{stepDefs.length} kỹ năng · {subDone}/{subTotal} bài
             </div>
           </div>
         </div>
@@ -361,7 +361,7 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
 
       {/* ── Step groups ── */}
       <div style={{ padding: "1rem" }}>
-        {STEP_GROUPS.map(group => (
+        {stepGroups.map(group => (
           <div key={group.id} style={{ marginBottom: "1.2rem" }}>
 
             {/* group header */}
@@ -450,19 +450,45 @@ function UnitDetail({ unitId, onBack, onNavigate }) {
 
 // ── Main export ────────────────────────────────────────────────
 
-export default function ParcoursPanel({ onNavigate }) {
-  const [selectedUnit, setSelectedUnit] = useState(() =>
-    localStorage.getItem("parcours_last_unit") || null
-  );
+// Everything level-specific arrives as a prop, so Édito A2 reuses this panel
+// as-is (see App.jsx). Defaults keep the A1 call sites unchanged.
+export default function ParcoursPanel({
+  onNavigate,
+  units       = PARCOURS_UNITS,
+  stepGroups  = STEP_GROUPS,
+  stepDefs    = STEP_DEFS,
+  levelLabel  = "A1 ÉDITO",
+  levelTitle  = "A1 · Débutant",
+  book        = "Édito A1 · Didier FLE",
+  // Per-level key: otherwise opening A2 would try to restore an A1 unit id
+  // that isn't in `units`, and UnitDetail would render nothing.
+  lastUnitKey = "parcours_last_unit",
+}) {
+  const [selectedUnit, setSelectedUnit] = useState(() => {
+    const saved = localStorage.getItem(lastUnitKey);
+    return units.some(u => u.id === saved) ? saved : null;
+  });
 
   if (selectedUnit) {
     return (
       <UnitDetail
         unitId={selectedUnit}
-        onBack={() => { setSelectedUnit(null); localStorage.removeItem("parcours_last_unit"); }}
+        onBack={() => { setSelectedUnit(null); localStorage.removeItem(lastUnitKey); }}
         onNavigate={onNavigate}
+        units={units}
+        stepGroups={stepGroups}
+        stepDefs={stepDefs}
+        levelLabel={levelLabel}
       />
     );
   }
-  return <UnitList onSelect={setSelectedUnit} />;
+  return (
+    <UnitList
+      onSelect={setSelectedUnit}
+      units={units}
+      levelTitle={levelTitle}
+      book={book}
+      lastUnitKey={lastUnitKey}
+    />
+  );
 }

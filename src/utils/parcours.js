@@ -1,9 +1,15 @@
 import { PARCOURS_UNITS, STEP_DEFS } from "../data/parcoursData.js";
-import { getStepSubIds } from "./parcoursSteps.js";
+import { STEP_DEFS_A2 } from "../data/parcoursDataA2.js";
+import { getStepSubIds, isA2Unit } from "./parcoursSteps.js";
 import { schedulePush } from "./cloudSync.js";
 
 const KEY = "parcours_progress";
-const STEP_IDS = STEP_DEFS.map(s => s.id);
+const STEP_IDS    = STEP_DEFS.map(s => s.id);
+const STEP_IDS_A2 = STEP_DEFS_A2.map(s => s.id);
+
+// A2 has a smaller step list than A1; tallying a "b" unit against A1's steps
+// would add phantom slots (écoute, verbes) that can never be completed.
+const stepIdsFor = (unitId) => (isA2Unit(unitId) ? STEP_IDS_A2 : STEP_IDS);
 
 // Steps without enumerable content (e.g. U0 has no audio tracks) still get
 // one implicit slot so they can be marked done manually and counted in totals.
@@ -107,7 +113,7 @@ export function getUnitStepProgress(unitId) {
 // Sum done / total sub-lessons across every step of a unit.
 function unitTally(unitId) {
   let done = 0, total = 0;
-  for (const s of STEP_IDS) {
+  for (const s of stepIdsFor(unitId)) {
     const st = getStepStat(unitId, s);
     done  += st.done;
     total += st.total;
@@ -115,10 +121,10 @@ function unitTally(unitId) {
   return { done, total };
 }
 
-// Returns { unitId: { status, pct } } for all units
-export function computeUnitStatuses() {
+// Returns { unitId: { status, pct } } for all units of the given level
+export function computeUnitStatuses(units = PARCOURS_UNITS) {
   const statuses = {};
-  for (const u of PARCOURS_UNITS) {
+  for (const u of units) {
     const { done, total } = unitTally(u.id);
     const pct = total ? Math.round((done / total) * 100) : 0;
     if (total > 0 && done === total)      statuses[u.id] = { status: "done",    pct: 100 };
@@ -128,10 +134,10 @@ export function computeUnitStatuses() {
   return statuses;
 }
 
-// Overall % across all units (by sub-lesson granularity)
-export function computeOverallProgress() {
+// Overall % across all units of the given level (by sub-lesson granularity)
+export function computeOverallProgress(units = PARCOURS_UNITS) {
   let done = 0, total = 0;
-  for (const u of PARCOURS_UNITS) {
+  for (const u of units) {
     const t = unitTally(u.id);
     done  += t.done;
     total += t.total;

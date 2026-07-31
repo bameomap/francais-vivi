@@ -8,6 +8,8 @@ import EditoVerbsPanel from "./EditoVerbsPanel.jsx";
 import EditoPhonoPanel from "./EditoPhonoPanel.jsx";
 import DictionaryPanel from "./DictionaryPanel.jsx";
 
+import { EDITO_A1_PHONO } from "../data/editoPhono.js";
+
 const TABS = [
   { id: "dict",      label: "Tra từ",       icon: "🔍" },
   { id: "pronunc",   label: "Phát âm",      icon: "🔊" },
@@ -18,8 +20,15 @@ const TABS = [
   { id: "phrases",   label: "Mẫu câu",      icon: "💬" },
 ];
 
-export default function ReferenceHub({ onBackToParcours }) {
-  const [active, setActive]             = useState("dict");
+// `tabs` lets a level hide sections it has no content for yet (A2 has no
+// cheatsheet / verb tables / phrasebook), and `phonoData` swaps the Phono set.
+export default function ReferenceHub({
+  onBackToParcours,
+  tabs = TABS,
+  phonoData = EDITO_A1_PHONO,
+  levelLabel = "Édito A1",
+}) {
+  const [active, setActive]             = useState(tabs[0].id);
   const [fromParcours, setFromParcours] = useState(false);
 
   useEffect(() => {
@@ -28,7 +37,11 @@ export default function ReferenceHub({ onBackToParcours }) {
       localStorage.removeItem("parcours_back");
     }
     const tab = localStorage.getItem("parcours_ref_tab");
-    if (tab) { setActive(tab); localStorage.removeItem("parcours_ref_tab"); }
+    if (tab) {
+      // Ignore a deep-link to a tab this level doesn't offer.
+      if (tabs.some(t => t.id === tab)) setActive(tab);
+      localStorage.removeItem("parcours_ref_tab");
+    }
   }, []);
 
   return (
@@ -45,7 +58,7 @@ export default function ReferenceHub({ onBackToParcours }) {
         overflowX: "auto", borderBottom: `1.5px solid ${C.border}`,
         background: C.white,
       }}>
-        {TABS.map(t => (
+        {tabs.map(t => (
           <button
             key={t.id}
             onClick={() => setActive(t.id)}
@@ -72,7 +85,7 @@ export default function ReferenceHub({ onBackToParcours }) {
       {active === "dict"    && <DictionaryPanel />}
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
-      {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} />}
+      {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} data={phonoData} levelLabel={levelLabel} />}
       {active === "verbes"  && <EditoVerbsPanel fromParcours={fromParcours} />}
       {active === "conjug"  && <ConjugaisonPanel />}
       {active === "phrases" && <PhrasebookPanel />}

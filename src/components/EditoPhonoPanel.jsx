@@ -31,7 +31,7 @@ function Tag({ text }) {
 }
 
 /* ── UNIT LIST ────────────────────────────────────────────── */
-function UnitList({ onSelect }) {
+function UnitList({ onSelect, data, levelLabel }) {
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
       {/* Hero banner */}
@@ -40,16 +40,16 @@ function UnitList({ onSelect }) {
         padding: "1rem 1rem 0.85rem",
       }}>
         <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1.15rem", color: "#fff", fontWeight: 800 }}>
-          🎵 Phono-graphie Édito A1
+          🎵 Phono-graphie {levelLabel}
         </div>
         <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.65)", marginTop: 4 }}>
-          11 bài · Âm vị · Cặp từ tối thiểu · Luyện nghe phân biệt
+          {data.length} bài · Âm vị · Cặp từ tối thiểu · Luyện nghe phân biệt
         </div>
       </div>
 
       <div style={{ padding: "0.85rem 1rem" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-          {EDITO_A1_PHONO.map((unit, i) => (
+          {data.map((unit, i) => (
             <button
               key={unit.unitId}
               onClick={() => onSelect(unit)}
@@ -507,13 +507,17 @@ function UnitDetail({ unit, onBack, fromParcours = false }) {
 }
 
 /* ── MAIN COMPONENT ───────────────────────────────────────── */
-export default function EditoPhonoPanel({ fromParcours = false }) {
+export default function EditoPhonoPanel({
+  fromParcours = false,
+  data = EDITO_A1_PHONO,
+  levelLabel = "Édito A1",
+}) {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
-      const unit = EDITO_A1_PHONO[Number(idx)] ?? null;
+      const unit = data[Number(idx)] ?? null;
       if (unit) setSelected(unit);
       localStorage.removeItem("parcours_unit_idx");
     }
@@ -524,7 +528,7 @@ export default function EditoPhonoPanel({ fromParcours = false }) {
       {selected ? (
         <UnitDetail unit={selected} onBack={() => setSelected(null)} fromParcours={fromParcours} />
       ) : (
-        <UnitList onSelect={setSelected} />
+        <UnitList onSelect={setSelected} data={data} levelLabel={levelLabel} />
       )}
     </div>
   );

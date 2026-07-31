@@ -154,17 +154,18 @@ function WordPopup({ word, data, loading, onClose, onSave, isSaved, nextWordInTe
   );
 }
 
-const UNITS_LIST = (() => {
+// Derived from whichever reading list is passed in, so A2 needs no changes here.
+function unitsOf(readings) {
   const seen = new Set();
   const units = [];
-  for (const a of editoA1ReadingComprehension) {
+  for (const a of readings) {
     if (!seen.has(a.unit)) {
       seen.add(a.unit);
       units.push({ num: a.unit, title: a.unitTitle });
     }
   }
   return units.sort((a, b) => a.num - b.num);
-})();
+}
 
 const SOURCE_LABEL = { livre: "Livre", cahier: "Cahier" };
 
@@ -172,6 +173,7 @@ const SECTION_BADGE = {
   "compréhension écrite":              { label: "Comp. écrite",  color: "#4A90D9" },
   "production écrite avec support":    { label: "Prod. écrite",  color: "#7B6CF6" },
   "DELF compréhension écrite":         { label: "DELF",          color: "#E8574A" },
+  "culture(s)":                        { label: "Culture(s)",    color: "#D97706" },
 };
 
 // ── True/False ───────────────────────────────────────────────
@@ -365,7 +367,7 @@ function OpenQ({ q }) {
 }
 
 // ── Activity view ─────────────────────────────────────────────
-function ActivityView({ activity, onBack, onComplete }) {
+function ActivityView({ activity, onBack, onComplete, cefr = "A1" }) {
   const [answers,      setAnswers]      = useState({});
   const [revealed,     setRevealed]     = useState({});
   const [confetti,     setConfetti]     = useState(false);
@@ -410,7 +412,7 @@ function ActivityView({ activity, onBack, onComplete }) {
     setVocabLoading(true);
     try {
       const out = await callAIText(
-        [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 25 từ vựng quan trọng cho người học A1 (ưu tiên từ khó, từ mới, từ hay gặp trong chủ đề này). Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
+        [{ role: "user", content: `Bài đọc tiếng Pháp ${cefr}:\n\n${activity.text}\n\nLiệt kê 25 từ vựng quan trọng cho người học ${cefr} (ưu tiên từ khó, từ mới, từ hay gặp trong chủ đề này). Trả về JSON array, mỗi item: {"fr":"từ (+ mạo từ nếu là danh từ)","type":"n.m/n.f/v/adj/adv/expr","vi":"nghĩa tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
         "Bạn là giáo viên tiếng Pháp A1. Chỉ trả về JSON array hợp lệ, không thêm markdown hay giải thích."
       );
       const data = JSON.parse(out.replace(/```json|```/g, "").trim());
@@ -436,7 +438,7 @@ function ActivityView({ activity, onBack, onComplete }) {
     setGrammarLoading(true);
     try {
       const out = await callAIText(
-        [{ role: "user", content: `Bài đọc tiếng Pháp A1:\n\n${activity.text}\n\nLiệt kê 4 cấu trúc ngữ pháp quan trọng trong bài. Trả về JSON array, mỗi item: {"structure":"tên cấu trúc ngắn","example":"câu ví dụ từ bài","vi":"giải thích tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
+        [{ role: "user", content: `Bài đọc tiếng Pháp ${cefr}:\n\n${activity.text}\n\nLiệt kê 4 cấu trúc ngữ pháp quan trọng trong bài. Trả về JSON array, mỗi item: {"structure":"tên cấu trúc ngắn","example":"câu ví dụ từ bài","vi":"giải thích tiếng Việt ngắn"}. Chỉ trả về JSON array.` }],
         "Bạn là giáo viên tiếng Pháp A1. Chỉ trả về JSON array hợp lệ, không thêm markdown hay giải thích."
       );
       const data = JSON.parse(out.replace(/```json|```/g, "").trim());
@@ -753,7 +755,13 @@ function ActivityView({ activity, onBack, onComplete }) {
 }
 
 // ── Main export ───────────────────────────────────────────────
-export default function LectureEditoPanel({ defaultUnitNum = null }) {
+export default function LectureEditoPanel({
+  defaultUnitNum = null,
+  readings   = editoA1ReadingComprehension,
+  unitPrefix = "u",                // parcours unit-id prefix for this level
+  cefr       = "A1",
+}) {
+  const UNITS_LIST = unitsOf(readings);
   const [selectedUnit,     setSelectedUnit]     = useState(null);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [, setTick] = useState(0);
@@ -765,7 +773,7 @@ export default function LectureEditoPanel({ defaultUnitNum = null }) {
   }, [defaultUnitNum]);
 
   // Parcours progress is tracked per reading (sub-lesson) under step "lecture".
-  const unitId = selectedUnit !== null ? "u" + selectedUnit : null;
+  const unitId = selectedUnit !== null ? unitPrefix + selectedUnit : null;
   const done   = unitId ? getSubDone(unitId, "lecture") : {};
 
   if (selectedActivity) {
@@ -774,12 +782,13 @@ export default function LectureEditoPanel({ defaultUnitNum = null }) {
         activity={selectedActivity}
         onBack={() => { setSelectedActivity(null); refresh(); }}
         onComplete={() => { if (unitId) markSubDone(unitId, "lecture", selectedActivity.id); }}
+        cefr={cefr}
       />
     );
   }
 
   const activities = selectedUnit !== null
-    ? editoA1ReadingComprehension.filter(a => a.unit === selectedUnit)
+    ? readings.filter(a => a.unit === selectedUnit)
     : [];
 
   return (
@@ -793,7 +802,7 @@ export default function LectureEditoPanel({ defaultUnitNum = null }) {
         <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap" }}>
           {UNITS_LIST.map(u => {
             const active = selectedUnit === u.num;
-            const count  = editoA1ReadingComprehension.filter(a => a.unit === u.num).length;
+            const count  = readings.filter(a => a.unit === u.num).length;
             return (
               <button key={u.num} onClick={() => setSelectedUnit(active ? null : u.num)}
                 style={{ padding: "0.28rem 0.75rem", borderRadius: 20, fontSize: "0.72rem", cursor: "pointer", fontFamily: "inherit", background: active ? C.blue : C.white, border: `1.5px solid ${active ? C.blue : C.border}`, color: active ? "#fff" : C.ink, fontWeight: active ? 700 : 400, transition: "all 0.15s", whiteSpace: "nowrap" }}>
@@ -816,7 +825,7 @@ export default function LectureEditoPanel({ defaultUnitNum = null }) {
           <div style={{ fontSize: "2.2rem", marginBottom: "0.5rem" }}>📚</div>
           <div style={{ fontSize: "0.85rem" }}>Chọn một unit để xem bài đọc từ sách Édito</div>
           <div style={{ fontSize: "0.72rem", marginTop: "0.4rem", color: C.gray2 }}>
-            {editoA1ReadingComprehension.length} bài · U0 → U10
+            {readings.length} bài · U{UNITS_LIST[0]?.num} → U{UNITS_LIST[UNITS_LIST.length - 1]?.num}
           </div>
         </div>
       )}

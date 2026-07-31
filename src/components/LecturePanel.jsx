@@ -4,15 +4,19 @@ import { callAI, callAIText } from "../utils/api.js";
 import { addWordToSRS } from "../utils/srs.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
+import { PARCOURS_UNITS } from "../data/parcoursData.js";
+import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { Confetti } from "./ui/Minou.jsx";
 import LectureEditoPanel from "./LectureEditoPanel.jsx";
 
-function getGrammarPoints(vocabUnitId) {
+// A1 keys its grammar units "g0".."g10" against vocab units "u0".."u10";
+// A2 uses the same id ("b1") on both sides.
+function getGrammarPoints(vocabUnitId, grammarUnits) {
   if (!vocabUnitId) return [];
-  const grammarId = "g" + vocabUnitId.replace("u", "");
-  const unit = EDITO_GRAMMAR.find(u => u.id === grammarId);
+  const grammarId = vocabUnitId.startsWith("u") ? "g" + vocabUnitId.slice(1) : vocabUnitId;
+  const unit = grammarUnits.find(u => u.id === grammarId);
   return unit ? unit.points : [];
 }
 
@@ -22,7 +26,7 @@ const LEVEL_CONFIG = {
   hard:   { label:"Khó (A2)",  words: 110, q: 5 },
 };
 
-const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, fr: u.title }));
+
 
 const cacheKey  = (uid, lvl) => `lecture_cache_${uid}_${lvl}`;
 const getCached = (uid, lvl) => { try { return JSON.parse(localStorage.getItem(cacheKey(uid, lvl))); } catch { return null; } };
@@ -99,7 +103,18 @@ const DEFAULT_WORDS = [
   {fr:"jour"},{fr:"soir"},{fr:"ville"},{fr:"enfant"},{fr:"travail"},
 ];
 
-export default function LecturePanel({ words: propWords = [], onBackToParcours }) {
+export default function LecturePanel({
+  words: propWords = [],
+  onBackToParcours,
+  vocabUnits    = EDITO_VOCAB_UNITS,
+  grammarUnits  = EDITO_GRAMMAR,
+  parcoursUnits = PARCOURS_UNITS,
+  readings      = editoA1ReadingComprehension,
+  unitPrefix    = "u",
+  levelLabel    = "Édito A1",
+  cefr          = "A1",
+}) {
+  const EDITO_UNITS = vocabUnits.map(u => ({ id: u.id, num: u.num, fr: u.title }));
   const [mode,         setMode]         = useState("ai");
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [fromParcours, setFromParcours] = useState(false);
@@ -118,8 +133,11 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
     if (idx !== null) {
       const n = Number(idx);
       setMode("edito");
-      setInitUnitNum(n);
       // Also pre-select the unit in AI mode so switching tabs keeps context
+      // parcours_unit_idx is an INDEX; LectureEditoPanel wants the unit NUMBER
+      // (they differ for A2, whose first unit is 1 at index 0).
+      const pu = parcoursUnits[n];
+      setInitUnitNum(pu ? Number(pu.num) : n);
       const u = EDITO_UNITS[n];
       if (u) setSelectedUnit(u.id);
       localStorage.removeItem("parcours_unit_idx");
@@ -138,7 +156,7 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 2500); };
 
-  const unitData    = selectedUnit ? EDITO_VOCAB_UNITS.find(u => u.id === selectedUnit) : null;
+  const unitData    = selectedUnit ? vocabUnits.find(u => u.id === selectedUnit) : null;
   const unitWords   = unitData ? unitData.groups.flatMap(g => g.words) : null;
   const activeWords = unitWords || (propWords.length >= 4 ? propWords : DEFAULT_WORDS);
 
@@ -164,7 +182,7 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
   const generate = async () => {
     setLoading(true); setErr(""); setLecture(null); setAnswers({}); setRevealed({}); setConfetti(false); setWordPopup(null);
     try {
-      const grammarPoints = getGrammarPoints(selectedUnit);
+      const grammarPoints = getGrammarPoints(selectedUnit, grammarUnits);
       const data = await callAI(buildPrompt(activeWords, level, unitData?.title, grammarPoints));
       setLecture(data);
       if (selectedUnit) setCached(selectedUnit, level, data);
@@ -227,7 +245,7 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
           📜 La Lecture
         </div>
         <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4 }}>
-          Đọc hiểu · AI tạo bài · Sách Édito A1
+          Đọc hiểu · AI tạo bài · Sách {levelLabel}
         </div>
       </div>
 
@@ -236,7 +254,7 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
         <div style={{ display:"flex", gap:3, background:C.cream, padding:4, borderRadius:12 }}>
           {[
             { id:"ai",    label:"✦ AI tạo bài" },
-            { id:"edito", label:"📚 Édito A1"   },
+            { id:"edito", label:`📚 ${levelLabel}` },
           ].map(m => (
             <button key={m.id} onClick={() => setMode(m.id)}
               style={{ flex:1, padding:"0.42rem 0.5rem", background:mode===m.id?C.white:"transparent", border:"none", borderRadius:9, cursor:"pointer", fontWeight:mode===m.id?700:500, color:mode===m.id?C.ink:C.gray, fontFamily:"inherit", fontSize:"0.78rem", boxShadow:mode===m.id?"0 1px 4px rgba(0,0,0,0.07)":"none", transition:"all 0.15s", whiteSpace:"nowrap" }}>
@@ -247,7 +265,14 @@ export default function LecturePanel({ words: propWords = [], onBackToParcours }
       </div>
 
       {/* ── Édito mode ── */}
-      {mode === "edito" && <LectureEditoPanel defaultUnitNum={initUnitNum} />}
+      {mode === "edito" && (
+        <LectureEditoPanel
+          defaultUnitNum={initUnitNum}
+          readings={readings}
+          unitPrefix={unitPrefix}
+          cefr={cefr}
+        />
+      )}
 
       {/* ── AI mode ── */}
       {mode === "ai" && <>

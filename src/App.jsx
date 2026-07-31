@@ -31,16 +31,27 @@ const SentenceBuilder   = lazy(() => import("./components/SentenceBuilder.jsx"))
 const ProfilPanel          = lazy(() => import("./components/ProfilPanel.jsx"));
 const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.jsx"));
 const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
-const ParcoursPanelA2      = lazy(() => import("./components/ParcoursPanelA2.jsx"));
 const LevelSelectPanel     = lazy(() => import("./components/LevelSelectPanel.jsx"));
-const ReferenceHubA2       = lazy(() => import("./components/ReferenceHubA2.jsx"));
 const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
 import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from "./utils/parcours.js";
 import { PARCOURS_UNITS, STEP_DEFS } from "./data/parcoursData.js";
 import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
-import { PARCOURS_UNITS_A2 } from "./data/parcoursDataA2.js";
+import { PARCOURS_UNITS_A2, STEP_GROUPS_A2, STEP_DEFS_A2 } from "./data/parcoursDataA2.js";
+import { EDITO_A2_UNITS } from "./data/editoA2Units.js";
+import { EDITO_A2_PHONO } from "./data/editoPhonoA2.js";
+import { EDITO_POUR_NOTES_A2 } from "./data/editoPourNotesA2.js";
+import editoA2ReadingComprehension from "./data/editoA2Reading.js";
+
+// Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
+// phrasebook are A1-only content, so they're left out until A2 versions exist.
+const REFERENCE_TABS_A2 = [
+  { id: "dict",    label: "Tra từ",     icon: "🔍" },
+  { id: "pronunc", label: "Phát âm",    icon: "🔊" },
+  { id: "phono",   label: "Phono",      icon: "🎵" },
+  { id: "conjug",  label: "Chia tự do", icon: "✏️" },
+];
 import { getLevel as getLevelInfo, DEFAULT_LEVEL } from "./data/levels.js";
 import { EDITO_VOCAB_A2_UNITS } from "./data/editoVocabA2.js";
 import { EDITO_GRAMMAR_A2, GRAMMAR_A2_EMOJIS } from "./data/editoGrammarA2.js";
@@ -786,7 +797,7 @@ function AppInner() {
                 <span style={{ fontSize:26, lineHeight:1 }}>📚</span>
                 <div style={{ flex:1 }}>
                   <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:C.ink, lineHeight:1.2 }}>Référence A2</div>
-                  <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>Ngữ pháp, động từ, mẫu câu — sắp có</div>
+                  <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>Tra từ · Phát âm · Phono [y]/[u] · Chia động từ</div>
                 </div>
                 <span style={{ fontSize:18, color:C.gray2 }}>→</span>
               </button>
@@ -1139,22 +1150,71 @@ function AppInner() {
             {view==="examples" && <ExamplesView words={words}/>}
 
             {/* Panels */}
-            {view==="parcours"      && (level==="a1" ? <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} /> : <ParcoursPanelA2 onNavigate={(s, v) => goSection(s, v || s)} />)}
+            {view==="parcours"      && (level==="a1"
+              ? <ParcoursPanel onNavigate={(s, v) => goSection(s, v || s)} />
+              : <ParcoursPanel
+                  onNavigate={(s, v) => goSection(s, v || s)}
+                  units={PARCOURS_UNITS_A2}
+                  stepGroups={STEP_GROUPS_A2}
+                  stepDefs={STEP_DEFS_A2}
+                  levelLabel="A2 ÉDITO"
+                  levelTitle="A2 · Élémentaire"
+                  book="Édito A2 · Didier FLE"
+                  lastUnitKey="parcours_last_unit_a2"
+                />)}
             {view==="grammar"       && (level==="a1"
               ? <GrammarPanel onBackToParcours={backToParcours} />
               : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" />)}
             {view==="defi"          && <DefiPanel/>}
-            {view==="writing"       && <WritingPanel onBackToParcours={backToParcours} />}
-            {view==="conversation"   && <ConversationPanel onBackToParcours={backToParcours} />}
+            {view==="writing"       && (level==="a1"
+              ? <WritingPanel onBackToParcours={backToParcours} />
+              : <WritingPanel onBackToParcours={backToParcours} units={EDITO_A2_UNITS} unitPrefix="b" cefr="A2" />)}
+            {view==="conversation"   && (level==="a1"
+              ? <ConversationPanel onBackToParcours={backToParcours} />
+              : <ConversationPanel
+                  onBackToParcours={backToParcours}
+                  units={EDITO_A2_UNITS}
+                  pourNotes={EDITO_POUR_NOTES_A2}
+                  unitPrefix="b"
+                  levelLabel="Édito A2"
+                  cefr="A2"
+                />)}
             {view==="prononciation"  && <PrononciationPanel words={words} />}
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
-            {view==="reference_hub" && (level==="a1" ? <ReferenceHub onBackToParcours={backToParcours} /> : <ReferenceHubA2 />)}
+            {view==="reference_hub" && (level==="a1"
+              ? <ReferenceHub onBackToParcours={backToParcours} />
+              : <ReferenceHub
+                  onBackToParcours={backToParcours}
+                  tabs={REFERENCE_TABS_A2}
+                  phonoData={EDITO_A2_PHONO}
+                  levelLabel="Édito A2"
+                />)}
             {/* No onClose: the shell header already provides "← Về" */}
             {view==="level"         && <LevelSelectPanel currentLevel={level} onSelect={changeLevel} />}
-            {view==="lecture"       && <LecturePanel words={words} onBackToParcours={backToParcours} />}
+            {view==="lecture"       && (level==="a1"
+              ? <LecturePanel words={words} onBackToParcours={backToParcours} />
+              : <LecturePanel
+                  words={words}
+                  onBackToParcours={backToParcours}
+                  vocabUnits={EDITO_VOCAB_A2_UNITS}
+                  grammarUnits={EDITO_GRAMMAR_A2}
+                  parcoursUnits={PARCOURS_UNITS_A2}
+                  readings={editoA2ReadingComprehension}
+                  unitPrefix="b"
+                  levelLabel="Édito A2"
+                  cefr="A2"
+                />)}
             {(view==="ecouter" || view==="dictee" || view==="listening") && <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />}
-            {view==="quiz-unit"     && <UnitQuizPanel onBackToParcours={backToParcours} />}
+            {view==="quiz-unit"     && (level==="a1"
+              ? <UnitQuizPanel onBackToParcours={backToParcours} />
+              : <UnitQuizPanel
+                  onBackToParcours={backToParcours}
+                  units={PARCOURS_UNITS_A2}
+                  vocabUnits={EDITO_VOCAB_A2_UNITS}
+                  grammarUnits={EDITO_GRAMMAR_A2}
+                  cefr="A2"
+                />)}
             {view==="revision"      && <RevisionPanel />}
             {view==="fiche"         && <FichePanel onNavigate={(s, v) => goSection(s, v || s)} />}
             {view==="delf"          && <DelfPanel />}
