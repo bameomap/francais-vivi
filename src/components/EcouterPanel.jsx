@@ -21,12 +21,25 @@ const SUB_TABS = [
   { id: "audio", label: "📂 File audio" },
 ];
 
-const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, fr: u.title }));
+import { EDITO_AUDIO } from "../data/editoAudio.js";
+import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
+import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 
 const cacheKey  = (uid) => `ecouter_unit_${uid}`;
 const hasCached = (uid) => !!localStorage.getItem(cacheKey(uid));
 
-export default function EcouterPanel({ words: propWords = [], section, onBackToParcours }) {
+export default function EcouterPanel({
+  words: propWords = [],
+  section,
+  onBackToParcours,
+  vocabUnits   = EDITO_VOCAB_UNITS,
+  audio        = EDITO_AUDIO,
+  pourNotes    = EDITO_POUR_NOTES,
+  taskUnits    = EDITO_A1_UNITS,
+  levelLabel   = "Édito A1",
+  cefr         = "A1",
+}) {
+  const EDITO_UNITS = vocabUnits.map(u => ({ id: u.id, num: u.num, fr: u.title }));
   const [mainTab,       setMainTab]       = useState("edito");
   const [subTab,        setSubTab]        = useState(section === "listening" ? "chon" : "chep");
   const [selectedUnit,  setSelectedUnit]  = useState(null);
@@ -38,7 +51,7 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
     }
   }, []);
 
-  const unitData    = selectedUnit ? EDITO_VOCAB_UNITS.find(u => u.id === selectedUnit) : null;
+  const unitData    = selectedUnit ? vocabUnits.find(u => u.id === selectedUnit) : null;
   const unitWords   = unitData ? unitData.groups.flatMap(g => g.words) : null;
   const activeWords = unitWords || propWords;
 
@@ -46,7 +59,7 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
 
   // Hero subtitle
   const heroSub =
-    mainTab === "edito"    ? "Nghe & học theo sách Édito A1"       :
+    mainTab === "edito"    ? `Nghe & học theo sách ${levelLabel}`  :
     mainTab === "practice" ? "AI tạo tình huống · Bạn viết · AI chấm" :
     subTab  === "chon"     ? "Nghe & chọn đáp án"                  :
     subTab  === "chep"     ? "Nghe & chép chính tả"                : "File audio của bạn";
@@ -88,7 +101,9 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
       </div>
 
       {/* ══ TAB: Édito ══════════════════════════════════════════════ */}
-      {mainTab === "edito" && <EditoAudioPanel />}
+      {mainTab === "edito" && (
+        <EditoAudioPanel audio={audio} vocabUnits={vocabUnits} pourNotes={pourNotes} cefr={cefr} />
+      )}
 
       {/* ══ TAB: Luyện tập ══════════════════════════════════════════ */}
       {mainTab === "practice" && <PourPracticePanel />}
@@ -167,7 +182,7 @@ export default function EcouterPanel({ words: propWords = [], section, onBackToP
           )}
 
           {subTab === "chon" && selectedUnit && <ListeningQuiz words={activeWords} />}
-          {subTab === "chep" && selectedUnit && <DicteePanel   words={activeWords} unitId={selectedUnit} />}
+          {subTab === "chep" && selectedUnit && <DicteePanel words={activeWords} unitId={selectedUnit} audio={audio} units={taskUnits} />}
         </>
       )}
 

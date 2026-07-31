@@ -268,19 +268,24 @@ function TrackCard({ track, done, onSelect, onMark, onRedo }) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-export default function DicteePanel({ words: propWords = [], unitId = null }) {
+export default function DicteePanel({
+  words: propWords = [],
+  unitId = null,
+  audio  = EDITO_AUDIO,
+  units  = EDITO_A1_UNITS,
+}) {
   const words = propWords.length >= 4 ? propWords : [
     {fr:"famille"},{fr:"maison"},{fr:"école"},{fr:"ami"},{fr:"livre"},
     {fr:"manger"},{fr:"aller"},{fr:"beau"},{fr:"jour"},{fr:"ville"},
   ];
 
   // Resolve audio tracks for current unit
-  const unitKey     = unitId ?? "u5";
+  const unitKey     = unitId ?? (units === EDITO_A1_UNITS ? "u5" : "b1");
   // Màu card thống nhất theo theme (bỏ màu riêng lẻ của từng track)
-  const audioTracks = (EDITO_AUDIO[unitKey] ?? []).map(t => ({ ...t, color: C.blue, colorLight: C.blueL }));
+  const audioTracks = (audio[unitKey] ?? []).map(t => ({ ...t, color: C.blue, colorLight: C.blueL }));
   // editoA1Units uses "unite-5" format; vocab uses "u5" — map across
-  const unitNum     = unitKey.replace("u", "");
-  const unitMeta    = EDITO_A1_UNITS.find(u => u.id === `unite-${unitNum}` || u.unit === Number(unitNum));
+  const unitNum     = unitKey.replace(/^[ub]/, "");
+  const unitMeta    = units.find(u => u.id === `unite-${unitNum}` || u.unit === Number(unitNum));
   const unitLabel   = unitMeta ? `Unité ${unitMeta.unit} — ${unitMeta.title}` : unitKey.toUpperCase();
 
   const [phase,        setPhase]        = useState("idle");

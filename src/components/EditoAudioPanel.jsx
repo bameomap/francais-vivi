@@ -10,7 +10,7 @@ import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
 import AccentBar from "./ui/AccentBar.jsx";
 
-const EDITO_UNITS = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
+const EDITO_UNITS_A1 = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
 // ── Question group styles ──────────────────────────────────────────
 // Đọc C động (function thay vì const) để màu đổi theo theme/dark mode.
@@ -125,7 +125,7 @@ async function gradeAnswer(question, userAnswer, sentences) {
       messages: [{
         role: "user",
         content:
-`Bạn là giáo viên tiếng Pháp chấm bài nghe hiểu A1 cho học sinh Việt Nam học tiếng Pháp.
+`Bạn là giáo viên tiếng Pháp chấm bài nghe hiểu ${cefr} cho học sinh Việt Nam học tiếng Pháp.
 
 Script bài nghe: "${script}"
 
@@ -153,7 +153,15 @@ hoặc:
 }
 
 // ═══════════════════════════════════════════════════════════════════
-export default function EditoAudioPanel() {
+export default function EditoAudioPanel({
+  audio      = EDITO_AUDIO,
+  vocabUnits = EDITO_VOCAB_UNITS,
+  pourNotes  = EDITO_POUR_NOTES,
+  cefr       = "A1",
+}) {
+  const EDITO_UNITS = vocabUnits === EDITO_VOCAB_UNITS
+    ? EDITO_UNITS_A1
+    : vocabUnits.map(u => ({ id: u.id, num: u.num, title: u.title }));
   const [selectedUnit, setSelectedUnit] = useState(null);
 
   // Deep-link from Parcours "Nghe" step: open the current unit directly.
@@ -178,7 +186,7 @@ export default function EditoAudioPanel() {
   // Note expansions: { [tid|ni]: { loading, content } }
   const [noteExpansions, setNoteExpansions] = useState({});
 
-  const tracks   = selectedUnit ? (EDITO_AUDIO[selectedUnit] || []) : [];
+  const tracks   = selectedUnit ? (audio[selectedUnit] || []) : [];
   const unitData = EDITO_UNITS.find(u => u.id === selectedUnit);
 
   // ── Unit toggle ────────────────────────────────────────────────
@@ -260,7 +268,7 @@ export default function EditoAudioPanel() {
         body: JSON.stringify({
           max_tokens: 400,
           messages: [{ role: "user", content:
-`Bạn là giáo viên tiếng Pháp A1, dạy cho học sinh Việt Nam.
+`Bạn là giáo viên tiếng Pháp ${cefr}, dạy cho học sinh Việt Nam.
 Giải thích công thức giao tiếp: "${heading}"
 Công thức trong bài: ${phrases.join(" / ")}
 
@@ -397,7 +405,7 @@ Trả về JSON thuần (không markdown):
 
                 {/* ── Action buttons ── */}
                 {(() => {
-                  const hasNotes = !!EDITO_POUR_NOTES[track.id];
+                  const hasNotes = !!pourNotes[track.id];
                   const btns = [
                     { id: "questions", icon: "📋", label: "Câu hỏi", action: () => togglePanel(track.id, "questions") },
                     { id: "script",    icon: "📖", label: "Script",  action: () => togglePanel(track.id, "script") },
@@ -599,12 +607,12 @@ Trả về JSON thuần (không markdown):
                 )}
 
                 {/* ══ PANEL: Notes (Pour communiquer) ══════════════ */}
-                {mode === "notes" && EDITO_POUR_NOTES[track.id] && (
+                {mode === "notes" && pourNotes[track.id] && (
                   <div style={{ padding: "0.7rem 0.85rem", display: "flex", flexDirection: "column", gap: "0.65rem" }}>
                     <div style={{ fontSize: "0.6rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.1em" }}>
                       📝 Pour communiquer — Piste {track.trackNum}
                     </div>
-                    {EDITO_POUR_NOTES[track.id].map((note, ni) => {
+                    {pourNotes[track.id].map((note, ni) => {
                       const expKey = `${track.id}|${ni}`;
                       const exp = noteExpansions[expKey];
                       return (

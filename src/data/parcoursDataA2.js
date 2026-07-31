@@ -8,10 +8,8 @@ export const PARCOURS_UNITS_A2 = [
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
-// Mirrors STEP_GROUPS in parcoursData.js. Two A1 steps are deliberately
-// absent until their A2 content exists:
-//   • écoute  — the Édito A2 mp3s aren't hosted yet (A1's live on GitHub Pages)
-//   • verbes  — no per-unit A2 conjugation tables authored yet
+// Mirrors STEP_GROUPS in parcoursData.js. One A1 step is deliberately absent:
+//   • verbes — no per-unit A2 conjugation tables authored yet
 export const STEP_GROUPS_A2 = [
   {
     id: "decouverte",
@@ -29,6 +27,7 @@ export const STEP_GROUPS_A2 = [
     emoji: "🏋️",
     steps: [
       { id:"lecture", icon:"📜", kind:"Đọc hiểu",  color:"#059669", sub:"Bài đọc thật & câu hỏi",    section:"lecture",       view:"lecture" },
+      { id:"ecouter", icon:"🎧", kind:"Nghe",       color:"#0891B2", sub:"3 bài nghe của sách",       section:"dictee",        view:"ecouter" },
       { id:"ecrire",  icon:"🖋️", kind:"Viết",     color:"#E67E22", sub:"Luyện viết theo đề bài",    section:"writing",       view:"writing" },
       { id:"parler",  icon:"🥐", kind:"Giao tiếp", color:"#D97706", sub:"Roleplay hội thoại với AI", section:"conversation",  view:"conversation" },
     ],
