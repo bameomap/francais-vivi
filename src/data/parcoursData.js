@@ -36,7 +36,7 @@ export const STEP_GROUPS = [
       { id:"lecture",  icon:"📜", kind:"Đọc hiểu",   color:"#059669", sub:"Bài đọc & câu hỏi",           section:"lecture",       view:"lecture"       },
       { id:"ecouter",  icon:"🎧", kind:"Nghe",        color:"#0891B2", sub:"Nghe & chép chính tả",        section:"dictee",        view:"dictee"        },
       { id:"ecrire",   icon:"🖋️", kind:"Viết",       color:"#E67E22", sub:"Luyện viết tự do",            section:"writing",       view:"writing"       },
-      { id:"parler",   icon:"🥐", kind:"Giao tiếp",  color:"#D97706", sub:"Roleplay hội thoại với AI",   section:"conversation",  view:"conversation"  },
+      { id:"parler",   icon:"🗣️", kind:"Nói",       color:"#D97706", sub:"Chủ điểm nói & câu mẫu",     section:"conversation",  view:"conversation"  },
     ],
   },
   {

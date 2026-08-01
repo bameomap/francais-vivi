@@ -1,7 +1,7 @@
 /**
  * editoPourNotesA2.js — « Pour communiquer » boxes for Édito A2.
- * Same shape as EDITO_POUR_NOTES (editoAudioNotes.js); ConversationPanel picks
- * them up through its `pourNotes` prop.
+ * Same shape as EDITO_POUR_NOTES (editoAudioNotes.js); EditoAudioPanel and
+ * ProductionOralePanel pick them up through their `pourNotes` prop.
  *
  * Keys are "<unitId>-<document letter>" so the unit can be recovered from the
  * key prefix, exactly like the A1 file ("u1-b" → unit 1).

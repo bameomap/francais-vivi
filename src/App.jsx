@@ -12,7 +12,6 @@ import VocabGenerator, { ExampleCard, EditoPresets, exportFillPDF } from "./comp
 import MotDuJour from "./components/MotDuJour.jsx";
 
 // Heavy panels are code-split: loaded on demand to shrink the initial bundle.
-const ConversationPanel = lazy(() => import("./components/ConversationPanel.jsx"));
 const WritingPanel      = lazy(() => import("./components/WritingPanel.jsx"));
 const GrammarPanel      = lazy(() => import("./components/GrammarPanel.jsx"));
 const DefiPanel         = lazy(() => import("./components/DefiPanel.jsx"));
@@ -43,6 +42,8 @@ import { PARCOURS_UNITS_A2, STEP_GROUPS_A2, STEP_DEFS_A2 } from "./data/parcours
 import { EDITO_A2_UNITS } from "./data/editoA2Units.js";
 import { EDITO_A2_PHONO } from "./data/editoPhonoA2.js";
 import { EDITO_POUR_NOTES_A2 } from "./data/editoPourNotesA2.js";
+import { EDITO_A1_UNITS } from "./data/editoA1Units.js";
+import { EDITO_POUR_NOTES } from "./data/editoAudioNotes.js";
 import editoA2ReadingComprehension from "./data/editoA2Reading.js";
 import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
 
@@ -67,7 +68,7 @@ const TABS = [
 ];
 
 const SECTION_TITLE = {
-  vocab:"Le Vocabulaire", parcours:"Le Parcours", grammar:"La Grammaire", conversation:"La Conversation",
+  vocab:"Le Vocabulaire", parcours:"Le Parcours", grammar:"La Grammaire", conversation:"La Production orale",
   writing:"L'Écriture", defi:"Le Défi du Jour", reference_hub:"La Référence",
   lecture:"La Lecture", dictee:"La Dictée", ecouter:"L'Écoute",
   revision:"La Révision", stats:"Les Statistiques", fiche:"Fiche de Révision",
@@ -77,11 +78,6 @@ const SECTION_TITLE = {
   delf:"DELF A1",
   profil:"Mon Profil",
   level:"Trình độ",
-};
-
-// Per-level overrides — A2 swaps the AI roleplay for a speaking-prep sheet.
-const SECTION_TITLE_A2 = {
-  conversation: "La Production orale",
 };
 
 // ── Examples view with bulk select ──────────────────────────
@@ -707,7 +703,7 @@ function AppInner() {
               {[
                 { fr:"Lire",    vi:"Đọc",  glyph:"Aa", sub:"Đọc hiểu",   color:"#4A90D9", fn:()=>goSection("lecture","lecture")          },
                 { fr:"Écouter", vi:"Nghe", glyph:"))", sub:"Nghe chép",  color:"#7B6CF6", fn:()=>goSection("ecouter","ecouter")          },
-                { fr:"Parler",  vi:"Nói",  glyph:"••", sub:"Roleplay AI", color:"#E67E22", fn:()=>goSection("conversation","conversation") },
+                { fr:"Parler",  vi:"Nói",  glyph:"••", sub:"Chủ điểm nói", color:"#E67E22", fn:()=>goSection("conversation","conversation") },
                 { fr:"Écrire",  vi:"Viết", glyph:"/",  sub:"Luyện viết", color:"#10B981", fn:()=>goSection("writing","writing")          },
               ].map((s, i) => (
                 <button key={s.fr} className="card-hover" onClick={s.fn}
@@ -829,7 +825,7 @@ function AppInner() {
                 ← Về
               </button>
               <span style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1rem", color:C.ink, fontWeight:600, flex:1 }}>
-                {(level !== "a1" && SECTION_TITLE_A2[section]) || SECTION_TITLE[section] || section}
+                {SECTION_TITLE[section] || section}
               </span>
               <button onClick={toggleDark} aria-label={dark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
                 style={{ background:"transparent", border:`1.5px solid ${C.border}`, color:C.gray, borderRadius:20, padding:"0.2rem 0.5rem", fontSize:"0.8rem", cursor:"pointer", lineHeight:1, flexShrink:0 }}>
@@ -1176,9 +1172,14 @@ function AppInner() {
             {view==="writing"       && (level==="a1"
               ? <WritingPanel onBackToParcours={backToParcours} />
               : <WritingPanel onBackToParcours={backToParcours} units={EDITO_A2_UNITS} unitPrefix="b" cefr="A2" />)}
-            {/* A2 replaces the AI roleplay with a speaking-prep sheet */}
             {view==="conversation"   && (level==="a1"
-              ? <ConversationPanel onBackToParcours={backToParcours} />
+              ? <ProductionOralePanel
+                  onBackToParcours={backToParcours}
+                  units={EDITO_A1_UNITS}
+                  pourNotes={EDITO_POUR_NOTES}
+                  unitPrefix="u"
+                  levelLabel="Édito A1"
+                />
               : <ProductionOralePanel
                   onBackToParcours={backToParcours}
                   units={EDITO_A2_UNITS}
