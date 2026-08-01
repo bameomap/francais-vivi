@@ -147,96 +147,102 @@ function UnitList({ onSelect, units, levelTitle, book, lastUnitKey }) {
 
 // ── Step Card ──────────────────────────────────────────────────
 
-function StepCard({ step, stat, isNext, onClick, onRedo }) {
+function StepRow({ step, stat, isNext, onClick, onRedo }) {
   const { done, total, pct, complete } = stat;
   const partial = done > 0 && !complete;
-  // accent color while in progress, green when fully complete
   const tint = complete ? C.green : partial ? C.accent : step.color;
 
   return (
     <button
       onClick={onClick}
       style={{
-        display: "flex", flexDirection: "column", alignItems: "flex-start",
-        gap: "0.3rem",
-        padding: "0.75rem 0.8rem",
-        background: complete ? C.greenL : partial ? `${C.accent}0C` : isNext ? `${step.color}08` : C.white,
-        border: `1.5px solid ${complete ? C.green + "88" : partial ? C.accent + "66" : isNext ? step.color : C.border}`,
-        borderRadius: 12, cursor: "pointer",
-        textAlign: "left", fontFamily: "inherit",
-        transition: "all 0.15s", position: "relative",
-        boxShadow: isNext && !partial ? `0 2px 8px ${step.color}22` : "none",
+        display: "flex", alignItems: "center", gap: "0.6rem",
+        width: "100%", padding: "0.5rem 0.6rem",
+        background: complete ? C.greenL : partial ? `${C.accent}0C` : isNext ? `${step.color}0A` : C.white,
+        borderTop: `1px solid ${complete ? C.green + "55" : partial ? C.accent + "55" : isNext ? step.color + "88" : C.border}`,
+        borderRight: `1px solid ${complete ? C.green + "55" : partial ? C.accent + "55" : isNext ? step.color + "88" : C.border}`,
+        borderBottom: `1px solid ${complete ? C.green + "55" : partial ? C.accent + "55" : isNext ? step.color + "88" : C.border}`,
+        borderLeft: `3px solid ${tint}`,
+        borderRadius: 9, cursor: "pointer",
+        textAlign: "left", fontFamily: "inherit", transition: "all 0.15s",
       }}
     >
-      {/* status badge */}
-      {complete ? (
-        <span style={{
-          position: "absolute", top: 5, right: 7,
-          fontSize: "0.58rem", color: "#fff",
-          fontWeight: 700, background: C.green,
-          borderRadius: 20, padding: "0.1rem 0.4rem",
-          lineHeight: 1.5,
-        }}>✓ Xong</span>
-      ) : partial ? (
-        <span style={{
-          position: "absolute", top: 5, right: 7,
-          fontSize: "0.58rem", color: "#fff",
-          fontWeight: 700, background: C.accent,
-          borderRadius: 20, padding: "0.1rem 0.4rem",
-          lineHeight: 1.5,
-        }}>{done}/{total}</span>
-      ) : isNext ? (
-        <span style={{
-          position: "absolute", top: 5, right: 7,
-          fontSize: "0.56rem", color: "#fff",
-          fontWeight: 700, background: step.color,
-          borderRadius: 20, padding: "0.1rem 0.4rem",
-          lineHeight: 1.5,
-        }}>Tiếp theo</span>
-      ) : null}
+      <span style={{ fontSize: "0.92rem", flexShrink: 0, width: 20, textAlign: "center" }}>{step.icon}</span>
 
-      {/* icon */}
-      <span style={{
-        width: 32, height: 32, borderRadius: 9,
-        background: complete ? `${C.green}22` : partial ? `${C.accent}1C` : `${step.color}18`,
-        border: `1.5px solid ${complete ? C.green + "55" : partial ? C.accent + "55" : step.color + "40"}`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: "1rem", flexShrink: 0,
-      }}>
-        {step.icon}
+      <span style={{ flex: 1, minWidth: 0 }}>
+        <span style={{
+          display: "block", fontWeight: 700, fontSize: "0.76rem", lineHeight: 1.25,
+          color: complete ? C.green : partial ? C.accent : isNext ? step.color : C.ink,
+        }}>
+          {step.kind}
+        </span>
+        <span style={{
+          display: "block", fontSize: "0.63rem", color: C.gray, lineHeight: 1.3, marginTop: 1,
+          whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+        }}>
+          {partial ? `${done}/${total} bài · ${pct}%` : step.sub}
+        </span>
       </span>
 
-      {/* text */}
-      <div>
-        <div style={{ fontWeight: 700, fontSize: "0.79rem", color: complete ? C.green : partial ? C.accent : isNext ? step.color : C.ink, lineHeight: 1.2 }}>
-          {step.kind}
-        </div>
-        <div style={{ fontSize: "0.65rem", color: C.gray, marginTop: 1, lineHeight: 1.3 }}>
-          {partial ? `${done}/${total} bài · ${pct}%` : step.sub}
-        </div>
-      </div>
-
-      {/* mini progress bar while in progress */}
-      {partial && (
-        <div style={{ width: "100%", height: 3, background: `${C.accent}22`, borderRadius: 999, overflow: "hidden" }}>
-          <div style={{ height: "100%", width: `${pct}%`, background: C.accent, borderRadius: 999 }}/>
-        </div>
-      )}
-
-      {/* redo button (when any progress) */}
+      {/* Redo sits next to the status so the row keeps one line */}
       {done > 0 && (
         <span
           role="button"
           onClick={(e) => { e.stopPropagation(); onRedo(); }}
           style={{
-            fontSize: "0.62rem", fontWeight: 700, color: tint,
+            flexShrink: 0, fontSize: "0.58rem", fontWeight: 700, color: tint,
             background: C.white, border: `1px solid ${tint}66`,
-            borderRadius: 20, padding: "0.15rem 0.55rem",
-            marginTop: 2, lineHeight: 1.5,
+            borderRadius: 20, padding: "0.1rem 0.4rem", lineHeight: 1.5,
           }}>
-          ↻ Làm lại
+          ↻
         </span>
       )}
+
+      <span style={{ flexShrink: 0 }}>
+        {complete ? (
+          <span style={{ fontSize: "0.58rem", color: "#fff", fontWeight: 700, background: C.green, borderRadius: 20, padding: "0.1rem 0.4rem", lineHeight: 1.5 }}>✓</span>
+        ) : partial ? (
+          <span style={{ fontSize: "0.58rem", color: "#fff", fontWeight: 700, background: C.accent, borderRadius: 20, padding: "0.1rem 0.4rem", lineHeight: 1.5 }}>{done}/{total}</span>
+        ) : isNext ? (
+          <span style={{ fontSize: "0.56rem", color: "#fff", fontWeight: 700, background: step.color, borderRadius: 20, padding: "0.1rem 0.45rem", lineHeight: 1.5 }}>Tiếp</span>
+        ) : (
+          <span style={{ fontSize: "0.7rem", color: C.gray2 }}>›</span>
+        )}
+      </span>
+    </button>
+  );
+}
+
+// Collapsible group header. Collapsed groups still show their count and a thin
+// progress bar, so the shape of the whole unit stays readable at a glance.
+function GroupHeader({ group, doneCount, totalCount, isOpen, onToggle }) {
+  const pct = totalCount ? Math.round((doneCount / totalCount) * 100) : 0;
+  return (
+    <button
+      onClick={onToggle}
+      style={{
+        width: "100%", background: "transparent", border: "none",
+        padding: "0.3rem 0.1rem 0.4rem", cursor: "pointer",
+        fontFamily: "inherit", textAlign: "left",
+      }}>
+      <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+        <span style={{ fontSize: "0.85rem" }}>{group.emoji}</span>
+        <span style={{
+          flex: 1, minWidth: 0,
+          fontFamily: "'JetBrains Mono',monospace", fontSize: "0.64rem", fontWeight: 700,
+          color: pct === 100 ? C.green : C.gray, letterSpacing: "0.08em", textTransform: "uppercase",
+          whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+        }}>
+          {group.label}
+        </span>
+        <span style={{ fontSize: "0.62rem", color: pct === 100 ? C.green : C.gray2, fontWeight: 600, flexShrink: 0 }}>
+          {doneCount}/{totalCount}
+        </span>
+        <span style={{ fontSize: "0.6rem", color: C.gray2, flexShrink: 0 }}>{isOpen ? "▲" : "▼"}</span>
+      </span>
+      <span style={{ display: "block", height: 2.5, background: C.cream, borderRadius: 999, overflow: "hidden", marginTop: 4 }}>
+        <span style={{ display: "block", height: "100%", width: `${pct}%`, background: pct === 100 ? C.green : C.accent, borderRadius: 999, transition: "width 0.3s ease" }}/>
+      </span>
     </button>
   );
 }
@@ -308,6 +314,15 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
   // First not-yet-complete step for the CTA
   const nextStep = stepDefs.find(s => !stats[s.id].complete);
 
+  // Only one group is expanded at a time — 22 A2 cards at once made the screen
+  // unreadable. `openGroup` stays undefined until the learner picks a group,
+  // so until then the open one follows their progress; "" collapses all.
+  const [openGroup, setOpenGroup] = useState(undefined);
+  const autoGroup   = stepGroups.find(g => g.steps.some(s => !stats[s.id].complete))?.id
+                      || stepGroups[stepGroups.length - 1]?.id;
+  const activeGroup = openGroup === undefined ? autoGroup : openGroup;
+  const toggleGroup = (id) => setOpenGroup(activeGroup === id ? "" : id);
+
   if (!unit) return null;
 
   return (
@@ -367,48 +382,36 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
       </div>
 
       {/* ── Step groups ── */}
-      <div style={{ padding: "1rem" }}>
-        {stepGroups.map(group => (
-          <div key={group.id} style={{ marginBottom: "1.2rem" }}>
-
-            {/* group header */}
-            <div style={{
-              display: "flex", alignItems: "center", gap: "0.4rem",
-              marginBottom: "0.55rem",
-            }}>
-              <span style={{ fontSize: "0.95rem" }}>{group.emoji}</span>
-              <span style={{
-                fontFamily: "'JetBrains Mono',monospace",
-                fontSize: "0.68rem", fontWeight: 700,
-                color: C.gray, letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}>
-                {group.label}
-              </span>
-              <span style={{ fontSize: "0.65rem", color: C.gray2, marginLeft: "auto" }}>
-                {group.steps.filter(s => stats[s.id].complete).length}/{group.steps.length}
-              </span>
+      <div style={{ padding: "0.85rem 1rem 1rem" }}>
+        {stepGroups.map(group => {
+          const groupDone = group.steps.filter(st => stats[st.id].complete).length;
+          const isOpen    = activeGroup === group.id;
+          return (
+            <div key={group.id} style={{ marginBottom: "0.7rem" }}>
+              <GroupHeader
+                group={group}
+                doneCount={groupDone}
+                totalCount={group.steps.length}
+                isOpen={isOpen}
+                onToggle={() => toggleGroup(group.id)}
+              />
+              {isOpen && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", marginTop: "0.15rem" }}>
+                  {group.steps.map(step => (
+                    <StepRow
+                      key={step.id}
+                      step={step}
+                      stat={stats[step.id]}
+                      isNext={nextStep?.id === step.id}
+                      onClick={() => handleStep(step)}
+                      onRedo={() => handleStep(step, { redo: true })}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-
-            {/* step cards grid */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: group.steps.length === 1 ? "1fr" : "repeat(2, 1fr)",
-              gap: "0.5rem",
-            }}>
-              {group.steps.map(step => (
-                <StepCard
-                  key={step.id}
-                  step={step}
-                  stat={stats[step.id]}
-                  isNext={nextStep?.id === step.id}
-                  onClick={() => handleStep(step)}
-                  onRedo={() => handleStep(step, { redo: true })}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
+          );
+        })}
 
         {/* ── CTA ── */}
         {pct < 100 && nextStep && (
