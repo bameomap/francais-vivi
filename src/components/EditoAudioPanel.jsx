@@ -12,6 +12,7 @@ import AccentBar from "./ui/AccentBar.jsx";
 import FocusBar from "./ui/FocusBar.jsx";
 import { takeParcoursFocus } from "../utils/parcoursFocus.js";
 import { stripSpeaker } from "../utils/dictee.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 
 const EDITO_UNITS_A1 = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
@@ -187,6 +188,19 @@ export default function EditoAudioPanel({
   // Note expansions: { [tid|ni]: { loading, content } }
   const [noteExpansions, setNoteExpansions] = useState({});
 
+  // ── Parcours progress ──────────────────────────────────────────
+  // Each track is one sub-lesson of the unit's "Nghe" step; without this the
+  // step can never reach 100%.
+  const [, setTick] = useState(0);
+  const refreshDone = () => setTick(t => t + 1);
+  const doneTracks  = selectedUnit ? getSubDone(selectedUnit, "ecouter") : {};
+
+  const setTrackDone = (tid, done) => {
+    if (!selectedUnit) return;
+    (done ? markSubDone : unmarkSubDone)(selectedUnit, "ecouter", tid);
+    refreshDone();
+  };
+
   // ── Playing one sentence of the recording ──────────────────────
   // Dictée used to leave the learner scrubbing the track bar to find the
   // sentence they were being asked to write. With timestamps we drive the
@@ -208,7 +222,15 @@ export default function EditoAudioPanel({
     el.playbackRate = slow ? 0.65 : 1;
     ourSeek.current[tid] = true;
     try { el.currentTime = clip[0]; } catch { return; }
-    el.play().then(() => setNowPlaying(`${tid}|${i}`)).catch(() => setNowPlaying(null));
+
+    // Only metadata is preloaded, so the seek has to fetch its bytes first.
+    // Calling play() straight away races that: the element fires
+    // waiting → pause and just sits there. Wait for the seek to land.
+    const go = () => el.play()
+      .then(() => setNowPlaying(`${tid}|${i}`))
+      .catch(() => setNowPlaying(null));
+    if (el.seeking || el.readyState < 3) el.addEventListener("seeked", go, { once: true });
+    else go();
   };
 
   const watchClock = (tid) => () => {
@@ -461,8 +483,11 @@ Trả về JSON thuần (không markdown):
 
                 {/* ── Audio player ── */}
                 <div style={{ padding: "0.55rem 0.9rem 0.45rem", background: `${track.color}0d` }}>
+                  {/* "metadata", never "auto": seeking to a clip works from a
+                      range request, whereas preloading every card pulled ~4MB
+                      per track the moment a unit opened — on mobile data. */}
                   <audio controls src={track.audioSrc}
-                    preload={timings?.[track.id] ? "auto" : "none"}
+                    preload={timings?.[track.id] ? "metadata" : "none"}
                     ref={el => { playerRefs.current[track.id] = el; }}
                     onTimeUpdate={watchClock(track.id)}
                     onSeeking={releaseClock(track.id)}
@@ -502,6 +527,21 @@ Trả về JSON thuần (không markdown):
                     </div>
                   );
                 })()}
+
+                {/* ══ Đánh dấu đã học ═══════════════════════════════ */}
+                <div style={{ padding: "0.4rem 0.85rem", display: "flex", justifyContent: "flex-end", borderTop: mode ? `1px solid ${C.border}` : "none" }}>
+                  <button onClick={() => setTrackDone(track.id, !doneTracks[track.id])}
+                    style={{
+                      background: doneTracks[track.id] ? C.greenL : "transparent",
+                      color: doneTracks[track.id] ? C.green : C.gray,
+                      border: `1px solid ${doneTracks[track.id] ? C.green : C.border}`,
+                      borderRadius: 20, padding: "0.15rem 0.6rem",
+                      fontSize: "0.63rem", fontWeight: doneTracks[track.id] ? 700 : 500,
+                      cursor: "pointer", fontFamily: "inherit",
+                    }}>
+                    {doneTracks[track.id] ? "✓ Đã học xong · bấm để bỏ" : "Đánh dấu đã học xong"}
+                  </button>
+                </div>
 
                 {/* ══ PANEL: Questions ══════════════════════════════ */}
                 {mode === "questions" && (
