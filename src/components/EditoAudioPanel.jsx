@@ -3,7 +3,7 @@
  * Nghe theo sách Édito A1 — câu hỏi tương tác, AI chấm, chép chính tả, script.
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../constants.js";
 import { EDITO_AUDIO } from "../data/editoAudio.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
@@ -157,6 +157,7 @@ hoặc:
 // ═══════════════════════════════════════════════════════════════════
 export default function EditoAudioPanel({
   audio      = EDITO_AUDIO,
+  timings    = null,   // sentence-level mp3 timestamps, per track id
   vocabUnits = EDITO_VOCAB_UNITS,
   pourNotes  = EDITO_POUR_NOTES,
   cefr       = "A1",
@@ -191,6 +192,43 @@ export default function EditoAudioPanel({
   const [dictee, setDictee]             = useState({});
   // Note expansions: { [tid|ni]: { loading, content } }
   const [noteExpansions, setNoteExpansions] = useState({});
+
+  // ── Playing one sentence of the recording ──────────────────────
+  // Dictée used to leave the learner scrubbing the track bar to find the
+  // sentence they were being asked to write. With timestamps we drive the
+  // card's own <audio> — visible progress bar and all — instead of adding a
+  // second hidden player. Nothing stops an <audio> at a timestamp for us, so
+  // the clock is watched on timeupdate.
+  const playerRefs = useRef({});
+  const stopAtRefs = useRef({});
+  const ourSeek    = useRef({});
+  const [nowPlaying, setNowPlaying] = useState(null);   // `${tid}|${i}`
+
+  const clipOf = (tid, i) => timings?.[tid]?.[i] || null;
+
+  const playSentence = (tid, i, slow = false) => {
+    const el = playerRefs.current[tid], clip = clipOf(tid, i);
+    if (!el || !clip) return;
+    if (nowPlaying === `${tid}|${i}` && !el.paused) { el.pause(); return; }
+    stopAtRefs.current[tid] = clip[1];
+    el.playbackRate = slow ? 0.65 : 1;
+    ourSeek.current[tid] = true;
+    try { el.currentTime = clip[0]; } catch { return; }
+    el.play().then(() => setNowPlaying(`${tid}|${i}`)).catch(() => setNowPlaying(null));
+  };
+
+  const watchClock = (tid) => () => {
+    const el = playerRefs.current[tid], stop = stopAtRefs.current[tid];
+    if (!el || el.paused || !stop) return;
+    if (el.currentTime >= stop) { el.pause(); stopAtRefs.current[tid] = 0; }
+  };
+
+  // Scrubbing by hand should hand control back rather than snap to a clip end.
+  // Our own seek fires `seeking` too, so it announces itself first.
+  const releaseClock = (tid) => () => {
+    if (ourSeek.current[tid]) { ourSeek.current[tid] = false; return; }
+    stopAtRefs.current[tid] = 0;
+  };
 
   const allTracks = selectedUnit ? (audio[selectedUnit] || []) : [];
   const focused   = focusIds ? allTracks.filter(t => focusIds.includes(t.id)) : null;
@@ -416,7 +454,12 @@ Trả về JSON thuần (không markdown):
 
                 {/* ── Audio player ── */}
                 <div style={{ padding: "0.55rem 0.9rem 0.45rem", background: `${track.color}0d` }}>
-                  <audio controls src={track.audioSrc} preload="none"
+                  <audio controls src={track.audioSrc}
+                    preload={timings?.[track.id] ? "auto" : "none"}
+                    ref={el => { playerRefs.current[track.id] = el; }}
+                    onTimeUpdate={watchClock(track.id)}
+                    onSeeking={releaseClock(track.id)}
+                    onPause={() => setNowPlaying(null)}
                     style={{ width: "100%", height: 34, accentColor: track.color }} />
                 </div>
 
@@ -784,6 +827,33 @@ Trả về JSON thuần (không markdown):
                               </div>
                             );
                           })()}
+
+                          {/* ── Play just this sentence ── */}
+                          {clipOf(track.id, idx) && (
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", marginBottom: "0.5rem", flexWrap: "wrap" }}>
+                              <button onClick={() => playSentence(track.id, idx)}
+                                style={{
+                                  display: "flex", alignItems: "center", gap: 5,
+                                  background: track.color, color: "#fff", border: "none",
+                                  borderRadius: 20, padding: "0.3rem 0.8rem",
+                                  fontSize: "0.72rem", fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
+                                }}>
+                                {nowPlaying === `${track.id}|${idx}` ? "⏸ Dừng" : "▶ Nghe câu này"}
+                              </button>
+                              <button onClick={() => playSentence(track.id, idx, true)}
+                                style={{
+                                  background: "transparent", color: track.color,
+                                  border: `1.5px solid ${track.color}55`, borderRadius: 20,
+                                  padding: "0.28rem 0.7rem", fontSize: "0.7rem",
+                                  fontWeight: 600, cursor: "pointer", fontFamily: "inherit",
+                                }}>
+                                🐢 Chậm
+                              </button>
+                              <span style={{ fontSize: "0.62rem", color: "#9CA3AF" }}>
+                                Nghe lại bao nhiêu lần cũng được
+                              </span>
+                            </div>
+                          )}
 
                           {/* ── Input (not yet submitted) ── */}
                           {!result && (

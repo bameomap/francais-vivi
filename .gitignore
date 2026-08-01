@@ -15,3 +15,8 @@ french.png
 # over GitHub's push limit; see materials/README.md)
 EDITO A2/
 Sujet DELF A1/
+
+# Alignment scratch: downloaded mp3s, exported transcripts, the venv.
+# Only the generated src/data/editoTimingsA2.js is committed.
+scripts/align-audio/work/
+scripts/align-audio/.venv

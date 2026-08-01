@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check:a2": "node scripts/check-parcours-a2.mjs"
+    "check:a2": "node scripts/check-parcours-a2.mjs",
+    "align:refs": "node scripts/align-audio/export-refs.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

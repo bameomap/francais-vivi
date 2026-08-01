@@ -34,6 +34,7 @@ export default function EcouterPanel({
   onBackToParcours,
   vocabUnits   = EDITO_VOCAB_UNITS,
   audio        = EDITO_AUDIO,
+  timings      = null,   // sentence-level mp3 timestamps; null ⇒ dictée falls back to TTS
   pourNotes    = EDITO_POUR_NOTES,
   taskUnits    = EDITO_A1_UNITS,
   levelLabel   = "Édito A1",
@@ -102,7 +103,7 @@ export default function EcouterPanel({
 
       {/* ══ TAB: Édito ══════════════════════════════════════════════ */}
       {mainTab === "edito" && (
-        <EditoAudioPanel audio={audio} vocabUnits={vocabUnits} pourNotes={pourNotes} cefr={cefr} />
+        <EditoAudioPanel audio={audio} timings={timings} vocabUnits={vocabUnits} pourNotes={pourNotes} cefr={cefr} />
       )}
 
       {/* ══ TAB: Luyện tập ══════════════════════════════════════════ */}
@@ -182,7 +183,7 @@ export default function EcouterPanel({
           )}
 
           {subTab === "chon" && selectedUnit && <ListeningQuiz words={activeWords} />}
-          {subTab === "chep" && selectedUnit && <DicteePanel words={activeWords} unitId={selectedUnit} audio={audio} units={taskUnits} />}
+          {subTab === "chep" && selectedUnit && <DicteePanel words={activeWords} unitId={selectedUnit} audio={audio} timings={timings} units={taskUnits} />}
         </>
       )}
 

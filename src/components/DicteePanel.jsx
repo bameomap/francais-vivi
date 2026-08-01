@@ -4,7 +4,8 @@ import { callAIText } from "../utils/api.js";
 import { speak } from "../utils/helpers.js";
 import { logMistake } from "../utils/storage.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
-import { EDITO_AUDIO, shuffleArray } from "../data/editoAudio.js";
+import { EDITO_AUDIO } from "../data/editoAudio.js";
+import { pickDicteeIndices, stripSpeaker } from "../utils/dictee.js";
 import { EDITO_A1_UNITS } from "../data/editoA1Units.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import Spinner from "./ui/Spinner.jsx";
@@ -270,9 +271,10 @@ function TrackCard({ track, done, onSelect, onMark, onRedo }) {
 // ══════════════════════════════════════════════════════════════════
 export default function DicteePanel({
   words: propWords = [],
-  unitId = null,
-  audio  = EDITO_AUDIO,
-  units  = EDITO_A1_UNITS,
+  unitId  = null,
+  audio   = EDITO_AUDIO,
+  timings = null,
+  units   = EDITO_A1_UNITS,
 }) {
   const words = propWords.length >= 4 ? propWords : [
     {fr:"famille"},{fr:"maison"},{fr:"école"},{fr:"ami"},{fr:"livre"},
@@ -292,6 +294,7 @@ export default function DicteePanel({
   const [mode,         setMode]         = useState("auto");
   const [scriptText,   setScriptText]   = useState("");
   const [sentences,    setSentences]    = useState([]);
+  const [clips,        setClips]        = useState([]);   // [start,end] per sentence, or null
   const [current,      setCurrent]      = useState(0);
   const [input,        setInput]        = useState("");
   const [results,      setResults]      = useState([]);
@@ -310,6 +313,11 @@ export default function DicteePanel({
   const doneTracks = getSubDone(unitKey, "ecouter");
 
   const inputRef = useRef(null);
+  const clipRef  = useRef(null);   // <audio> for the book recording
+  const stopAtRef = useRef(0);
+
+  const trackClips = audioTrack ? timings?.[audioTrack.id] : null;
+  const clip = clips[current] || null;
 
   // Auto-play on new sentence
   useEffect(() => {
@@ -319,8 +327,37 @@ export default function DicteePanel({
     return () => clearTimeout(t);
   }, [current, phase]);
 
+  // Leaving mid-sentence should not leave the recording talking.
+  useEffect(() => () => { try { clipRef.current?.pause(); } catch {} }, []);
+
+  // Play the real seconds of the real mp3 — liaisons, speed, several voices.
+  // Nothing cuts an <audio> off at a timestamp for us, so we watch the clock.
+  const playClip = (slow) => {
+    const el = clipRef.current;
+    if (!el || !clip) return false;
+    stopAtRef.current = clip[1];
+    el.playbackRate = slow ? 0.65 : 1;
+    try { el.currentTime = clip[0]; } catch { return false; }
+    el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    return true;
+  };
+
+  const onClipTime = () => {
+    const el = clipRef.current;
+    if (!el || el.paused) return;
+    if (el.currentTime >= stopAtRef.current) { el.pause(); setPlaying(false); }
+  };
+
   const playNow = (slow) => {
     if (playing) return;
+    if (clip) {
+      setPlaying(true);
+      if (!playClip(slow)) {                 // seek refused → fall back to TTS
+        (slow ? speakSlow : speak)(sentences[current], () => setPlaying(false));
+      }
+      setPlays(p => p + 1);
+      return;
+    }
     setPlaying(true);
     const fn = slow ? speakSlow : speak;
     fn(sentences[current], () => setPlaying(false));
@@ -332,11 +369,22 @@ export default function DicteePanel({
     playNow(slowMode);
   };
 
-  const startQuiz = (s, hints = []) => {
-    setSentences(s); setResults([]); setCurrent(0);
+  const startQuiz = (s, hints = [], cl = []) => {
+    setSentences(s); setClips(cl); setResults([]); setCurrent(0);
     setInput(""); setChecked(false); setConfetti(false);
     setGrammarHints(hints);
     setPhase("quiz");
+  };
+
+  // "La journaliste :" is printed in the book but never spoken, so it must not
+  // be part of what the learner is asked to write down.
+  const audioQuiz = () => {
+    const idx = pickDicteeIndices(audioTrack.sentences, NUM_AUDIO_SENTS);
+    startQuiz(
+      idx.map(i => stripSpeaker(audioTrack.sentences[i])),
+      [],
+      idx.map(i => trackClips?.[i] || null),
+    );
   };
 
   const start = async () => {
@@ -348,8 +396,7 @@ export default function DicteePanel({
     }
     if (mode === "audio") {
       if (!audioTrack) { setErr("Chọn một bài nghe nhé!"); return; }
-      const picked = shuffleArray(audioTrack.sentences).slice(0, NUM_AUDIO_SENTS);
-      startQuiz(picked, []);
+      audioQuiz();
       return;
     }
     // Auto AI mode
@@ -366,10 +413,7 @@ export default function DicteePanel({
 
   const restart = () => {
     if (mode === "script")       startQuiz(parseScript(scriptText), []);
-    else if (mode === "audio" && audioTrack) {
-      const picked = shuffleArray(audioTrack.sentences).slice(0, NUM_AUDIO_SENTS);
-      startQuiz(picked, []);
-    }
+    else if (mode === "audio" && audioTrack) audioQuiz();
     else start();
   };
 
@@ -508,6 +552,11 @@ export default function DicteePanel({
             <div style={{ marginTop:"0.35rem", color:C.gray, fontSize:"0.68rem" }}>
               {NUM_AUDIO_SENTS} câu ngẫu nhiên từ {audioTrack.sentences.length} câu trong bài
             </div>
+            {trackClips && (
+              <div style={{ marginTop:"0.3rem", color:C.green, fontSize:"0.68rem", fontWeight:600 }}>
+                🎙 Nghe đúng giọng trong băng, không phải giọng máy — có liaison, nói nhanh, nhiều người.
+              </div>
+            )}
           </div>
 
           {/* Start button */}
@@ -652,11 +701,21 @@ export default function DicteePanel({
 
       {/* ── Source badge (audio mode) ──────────────────────── */}
       {mode === "audio" && audioTrack && (
-        <div style={{ padding:"0.6rem 1rem 0", display:"flex", alignItems:"center", gap:"0.4rem" }}>
+        <div style={{ padding:"0.6rem 1rem 0", display:"flex", alignItems:"center", gap:"0.4rem", flexWrap:"wrap" }}>
           <div style={{ background:audioTrack.colorLight, color:audioTrack.color, borderRadius:20, padding:"0.2rem 0.65rem", fontSize:"0.62rem", fontWeight:700 }}>
             {audioTrack.theme} {audioTrack.section} · Piste {audioTrack.trackNum}
           </div>
+          <div style={{ background: clip ? C.greenL : C.cream, color: clip ? C.green : C.gray, borderRadius:20, padding:"0.2rem 0.65rem", fontSize:"0.62rem", fontWeight:700 }}>
+            {clip ? "🎙 Giọng thật trong băng" : "🤖 Giọng máy đọc lại"}
+          </div>
         </div>
+      )}
+
+      {/* The book recording, seeked per sentence. Kept mounted so the browser
+          holds one buffered stream instead of refetching every sentence. */}
+      {mode === "audio" && audioTrack && (
+        <audio ref={clipRef} src={audioTrack.audioSrc} preload="auto"
+          onTimeUpdate={onClipTime} onPause={() => setPlaying(false)} />
       )}
 
       {/* ── Progress ────────────────────────────────────────── */}
@@ -712,7 +771,7 @@ export default function DicteePanel({
               </button>
               <button onClick={() => setSlowMode(s => !s)}
                 style={{ padding:"0.25rem 0.75rem", background: slowMode ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.2)", border:"1px solid rgba(255,255,255,0.35)", borderRadius:20, color: slowMode ? C.blue : "#fff", fontSize:"0.68rem", cursor:"pointer", fontWeight:600, transition:"all 0.2s" }}>
-                ½× Chậm {slowMode ? "✓" : ""}
+                {clip ? "🐢 Chậm" : "½× Chậm"} {slowMode ? "✓" : ""}
               </button>
             </div>
           )}

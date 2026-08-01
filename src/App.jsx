@@ -47,6 +47,7 @@ import { EDITO_A1_UNITS } from "./data/editoA1Units.js";
 import { EDITO_POUR_NOTES } from "./data/editoAudioNotes.js";
 import editoA2ReadingComprehension from "./data/editoA2Reading.js";
 import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
+import { EDITO_TIMINGS_A2 } from "./data/editoTimingsA2.js";
 import { CAHIER_A2 } from "./data/editoCahierA2.js";
 
 // Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
@@ -1227,6 +1228,7 @@ function AppInner() {
                   onBackToParcours={backToParcours}
                   vocabUnits={EDITO_VOCAB_A2_UNITS}
                   audio={EDITO_AUDIO_A2}
+                  timings={EDITO_TIMINGS_A2}
                   pourNotes={EDITO_POUR_NOTES_A2}
                   taskUnits={EDITO_A2_UNITS}
                   levelLabel="Édito A2"
