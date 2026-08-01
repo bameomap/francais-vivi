@@ -6,6 +6,7 @@ import { addWordToSRS, getSRSStats } from "../utils/srs.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { takeParcoursFocus } from "../utils/parcoursFocus.js";
 import FocusBar from "./ui/FocusBar.jsx";
+import CahierExercises from "./CahierExercises.jsx";
 import { FillSection, FlashcardSection } from "./QuizSections.jsx";
 import TranslateSection from "./TranslateSection.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -246,7 +247,7 @@ function GroupStudyView({ group, unit, onBack }) {
 }
 
 // ── Unit detail view — shows groups ───────────────────────
-function UnitDetailView({ unit, onBack, backLabel = "← Quay lại", focusIds, onClearFocus }) {
+function UnitDetailView({ unit, onBack, backLabel = "← Quay lại", focusIds, onClearFocus, cahierEx }) {
   const [activeGroup, setActiveGroup] = useState(null);
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
@@ -302,8 +303,10 @@ function UnitDetailView({ unit, onBack, backLabel = "← Quay lại", focusIds, 
         />
       )}
 
+      {cahierEx?.length > 0 && <CahierExercises exercises={cahierEx} color={unit.color || C.blue} />}
+
       {/* Group cards */}
-      <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
+      <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem", marginTop:"0.6rem" }}>
         {groups.map((g, i) => {
           const isDone = !!done[g.id];
           return (
@@ -369,11 +372,20 @@ function ExtraVocabView({ onBack }) {
 }
 
 // ── Main panel ─────────────────────────────────────────────
-export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_UNITS, levelLabel = "Edito A1" }) {
+export default function EditoVocabPanel({
+  onBackToParcours,
+  units = EDITO_VOCAB_UNITS,
+  levelLabel = "Edito A1",
+  // Cahier exercises keyed by unit then parcours step id ("c1_vocab"…). The
+  // step id arrives with the focus, since one unit's vocabulary is split
+  // across cycles and each cycle has its own cahier page.
+  cahier = null,
+}) {
   const [activeUnit,   setActiveUnit]   = useState(null);
   const [showExtra,    setShowExtra]    = useState(false);
   const [fromParcours, setFromParcours] = useState(false);
   const [focusIds,     setFocusIds]     = useState(null);
+  const [cahierStep,   setCahierStep]   = useState(null);
 
   useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
@@ -384,7 +396,7 @@ export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_
     }
     // Narrow to the vocabulary groups this parcours step owns.
     const focus = takeParcoursFocus();
-    if (focus) setFocusIds(focus);
+    if (focus) { setFocusIds(focus.ids); setCahierStep(focus.step); }
   }, [units]);
 
   if (showExtra) return <ExtraVocabView onBack={() => setShowExtra(false)} />;
@@ -395,7 +407,8 @@ export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_
       ? () => onBackToParcours()
       : () => { setActiveUnit(null); setFromParcours(false); };
     return <UnitDetailView unit={unit} onBack={handleBack} backLabel={fromParcours ? "← Parcours" : "← Quay lại"}
-             focusIds={focusIds} onClearFocus={() => setFocusIds(null)} />;
+             focusIds={focusIds} onClearFocus={() => setFocusIds(null)}
+             cahierEx={cahierStep ? cahier?.[unit.id]?.vocab?.[cahierStep] : null} />;
   }
 
   // Unit list

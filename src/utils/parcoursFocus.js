@@ -11,20 +11,27 @@
 
 const KEY = "parcours_sub_ids";
 
-export function setParcoursFocus(subIds) {
-  if (subIds?.length) localStorage.setItem(KEY, JSON.stringify(subIds));
+export function setParcoursFocus(subIds, stepId = null) {
+  if (subIds?.length) localStorage.setItem(KEY, JSON.stringify({ ids: subIds, step: stepId }));
   else localStorage.removeItem(KEY);
 }
 
-// Read once and clear. Returns string[] or null.
+// Read once and clear. Returns { ids: string[], step: string|null } or null.
 // Cleared on read so that going back to the panel later, or reaching it from
 // anywhere other than the parcours, shows the full list again.
+//
+// `step` is the card's own id ("c1_vocab"), which panels need when the same
+// skill is opened by several cards and each has its own material — the vocab
+// panel uses it to pick the right cahier page.
 export function takeParcoursFocus() {
   try {
     const raw = localStorage.getItem(KEY);
     localStorage.removeItem(KEY);
-    const ids = raw ? JSON.parse(raw) : null;
-    return Array.isArray(ids) && ids.length ? ids : null;
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    const ids = Array.isArray(parsed) ? parsed : parsed?.ids;   // tolerate the older array form
+    if (!Array.isArray(ids) || !ids.length) return null;
+    return { ids, step: Array.isArray(parsed) ? null : (parsed.step || null) };
   } catch {
     localStorage.removeItem(KEY);
     return null;

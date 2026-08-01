@@ -777,7 +777,7 @@ export default function LectureEditoPanel({
   }, [defaultUnitNum]);
 
   useEffect(() => { const focus = takeParcoursFocus();
-    if (focus) setFocusIds(focus); }, []);
+    if (focus) setFocusIds(focus.ids); }, []);
 
   // Parcours progress is tracked per reading (sub-lesson) under step "lecture".
   const unitId = selectedUnit !== null ? unitPrefix + selectedUnit : null;

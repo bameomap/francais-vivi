@@ -179,7 +179,7 @@ export default function EditoAudioPanel({
     }
     // …and narrow to the tracks that step owns (A2 splits them across cycles).
     const focus = takeParcoursFocus();
-    if (focus) setFocusIds(focus);
+    if (focus) setFocusIds(focus.ids);
   }, []);
   // mode per track: null | "questions" | "script" | "dictee"
   const [panelMode, setPanelMode]       = useState({});

@@ -46,6 +46,7 @@ import { EDITO_A1_UNITS } from "./data/editoA1Units.js";
 import { EDITO_POUR_NOTES } from "./data/editoAudioNotes.js";
 import editoA2ReadingComprehension from "./data/editoA2Reading.js";
 import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
+import { CAHIER_A2 } from "./data/editoCahierA2.js";
 
 // Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
 // phrasebook are A1-only content, so they're left out until A2 versions exist.
@@ -870,7 +871,7 @@ function AppInner() {
             {/* EDITO VOCAB */}
             {view==="edito" && (level==="a1"
               ? <EditoVocabPanel onBackToParcours={backToParcours} />
-              : <EditoVocabPanel onBackToParcours={backToParcours} units={EDITO_VOCAB_A2_UNITS} levelLabel="Edito A2" />)}
+              : <EditoVocabPanel onBackToParcours={backToParcours} units={EDITO_VOCAB_A2_UNITS} levelLabel="Edito A2" cahier={CAHIER_A2} />)}
 
 
             {/* INPUT */}
@@ -1167,7 +1168,7 @@ function AppInner() {
                 />)}
             {view==="grammar"       && (level==="a1"
               ? <GrammarPanel onBackToParcours={backToParcours} />
-              : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" />)}
+              : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" cahier={CAHIER_A2} />)}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && (level==="a1"
               ? <WritingPanel onBackToParcours={backToParcours} />

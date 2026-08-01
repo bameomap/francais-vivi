@@ -237,7 +237,7 @@ export default function ProductionOralePanel({
     // Narrow to the topics this step owns — A2 spreads them across cycles,
     // and the Atelier is its own step.
     const focus = takeParcoursFocus();
-    if (focus) setFocusIds(focus);
+    if (focus) setFocusIds(focus.ids);
   }, []);
 
   const unit   = units[Math.min(selUnit, units.length - 1)];

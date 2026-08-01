@@ -159,7 +159,7 @@ export default function WritingPanel({
     }
     // Narrow to the writing tasks this parcours step owns.
     const focus = takeParcoursFocus();
-    if (focus) setFocusIds(focus);
+    if (focus) setFocusIds(focus.ids);
   }, []);
 
   const check = async (contextTask) => {

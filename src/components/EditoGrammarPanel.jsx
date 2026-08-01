@@ -7,11 +7,12 @@ import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { takeParcoursFocus } from "../utils/parcoursFocus.js";
 import FocusBar from "./ui/FocusBar.jsx";
+import CahierExercises from "./CahierExercises.jsx";
 
 const EMOJIS = { g0:"👋", g1:"🪪", g2:"🏘️", g3:"🥐", g4:"🗺️", g5:"👗", g6:"📅", g7:"🏠", g8:"💪", g9:"🌴", g10:"💼" };
 
 // ── Grammar accordion card ────────────────────────────────────
-function GrammarCard({ point, isOpen, onToggle, isDone, onMark, onRedo }) {
+function GrammarCard({ point, isOpen, onToggle, isDone, onMark, onRedo, exercises }) {
   const [jp, setJp] = useState(null); // null | { loading } | { text }
 
   const handleJP = async (e) => {
@@ -168,6 +169,11 @@ function GrammarCard({ point, isOpen, onToggle, isDone, onMark, onRedo }) {
               })}
             </div>
           )}
+          {exercises?.length > 0 && (
+            <div style={{ padding:"0 1rem 0.3rem" }}>
+              <CahierExercises exercises={exercises} color={C.blue} />
+            </div>
+          )}
           {onMark && (
             <div style={{ padding:"0.5rem 1rem 0.75rem", borderTop:`1px dashed ${C.border}`, display:"flex", alignItems:"center", gap:"0.4rem" }}>
               {isDone ? (
@@ -207,6 +213,8 @@ export default function EditoGrammarPanel({
   data = EDITO_GRAMMAR,
   emojis = EMOJIS,
   levelLabel = "Édito A1",
+  // Cahier d'activités exercises, keyed by unit then point id ("p0", "p1"…)
+  cahier = null,
   // A2's grammar unit ids match the parcours ids ("b1"), so progress is keyed
   // directly by them. A level whose ids differ would pass a mapper here.
   unitIdFor = (u) => u.id,
@@ -228,7 +236,7 @@ export default function EditoGrammarPanel({
       localStorage.removeItem("parcours_unit_idx");
     }
     const focus = takeParcoursFocus();
-    if (focus) setFocusIds(focus);
+    if (focus) setFocusIds(focus.ids);
   }, [data]);
 
   const unitData = selectedUnit ? data.find(u => u.id === selectedUnit) : null;
@@ -368,6 +376,7 @@ export default function EditoGrammarPanel({
               point={pt}
               isOpen={openCard === key}
               onToggle={() => toggleCard(key)}
+              exercises={cahier?.[progressUnitId]?.grammar?.["p" + i]}
               isDone={!!done["p" + i]}
               onMark={() => { markSubDone(progressUnitId, "grammar", "p" + i); refresh(); }}
               onRedo={() => { unmarkSubDone(progressUnitId, "grammar", "p" + i); refresh(); }}
