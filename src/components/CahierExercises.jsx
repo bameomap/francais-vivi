@@ -77,12 +77,31 @@ function Exercise({ ex, color }) {
           {ex.num}
         </span>
         <span style={{ fontSize: "0.75rem", fontWeight: 700, color: C.ink, lineHeight: 1.35 }}>
-          {ex.instruction}
+          {ex.audioSrc ? "🎧 " : ""}{ex.instruction}
         </span>
       </div>
       {ex.vi && (
         <div style={{ fontSize: "0.68rem", color: C.gray, lineHeight: 1.5, marginBottom: "0.5rem" }}>
           {ex.vi}
+        </div>
+      )}
+
+      {/* Audio exercises: the recording IS the question, so the player sits
+          above the items. preload="none" keeps a page of exercises from
+          fetching every track at once. */}
+      {ex.audioSrc && (
+        <div style={{ marginBottom: "0.55rem" }}>
+          <audio controls preload="none" src={ex.audioSrc} style={{ width: "100%", height: 32 }} />
+          {ex.transcript && (
+            <details style={{ marginTop: "0.3rem" }}>
+              <summary style={{ fontSize: "0.64rem", color, fontWeight: 700, cursor: "pointer" }}>
+                📄 Lời thoại (mở sau khi đã nghe)
+              </summary>
+              <div style={{ marginTop: "0.3rem", background: C.cream, borderRadius: 8, padding: "0.45rem 0.6rem", fontSize: "0.72rem", color: C.ink, lineHeight: 1.7, fontFamily: "Georgia,serif" }}>
+                {ex.transcript}
+              </div>
+            </details>
+          )}
         </div>
       )}
 

@@ -6,8 +6,11 @@
  * self-learner can trust them. This is what the grammar step was missing:
  * theory with no way to check yourself.
  *
- * Only exercises that work WITHOUT audio or images are included here. The
- * audio ones (pistes 1-11) stay in the .md until the cahier audio is hosted.
+ * Audio exercises carry `audioSrc`; the cahier tracks are hosted next to the
+ * livre ones and their printed piste number matches the filename directly.
+ * A handful of cahier exercises depend on photographs rather than sound
+ * (p.4 act.4, p.6 act.1, p.11 act.4) — those stay in the .md only. Where the
+ * DELF listening uses pictures as answer options, the option is written out.
  *
  * Exercise types:
  *   fill      — type the missing word;  `bank` = words to pick from
@@ -21,6 +24,9 @@
  * shown filled in and not scored.
  */
 
+const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
+const piste = (n) => `${AUDIO_BASE}/${String(n).padStart(3, "0")}_Edito_A2_Cahier.mp3`;
+
 export const CAHIER_A2 = {
   b1: {
 
@@ -29,6 +35,20 @@ export const CAHIER_A2 = {
 
       // p0 — Le passé composé (cahier p. 3)
       p0: [
+        {
+          num: 1, page: 3, audioSrc: piste(1),
+          instruction: "Écoutez et dites si vous entendez le passé composé.",
+          vi: "Nghe từng câu và cho biết câu đó có dùng passé composé không.",
+          type: "truefalse",
+          items: [
+            { q: "a. Tu as préparé toutes tes affaires.", answer: false },
+            { q: "b. Hier vous avez vu un film.", answer: true },
+            { q: "c. Dans un bar, debout, j'ai bu un cocktail de fruits.", answer: true },
+            { q: "d. Il a lu à son fils l'histoire du loup.", answer: true },
+            { q: "e. Sa moto à trois roues est dans la rue.", answer: true },
+            { q: "f. Elle a su gérer son stress.", answer: false },
+          ],
+        },
         {
           num: 2, page: 3,
           instruction: "Complétez les phrases avec l'auxiliaire être ou avoir.",
@@ -133,6 +153,20 @@ export const CAHIER_A2 = {
             { q: "Nous n'avons rien à faire.", answer: "Nous n'avons rien eu à faire." },
           ],
         },
+        {
+          num: 4, page: 5, audioSrc: piste(3),
+          instruction: "Écoutez et répondez aux questions avec la négation proposée.",
+          vi: "Nghe câu hỏi rồi trả lời bằng từ phủ định cho sẵn trong ngoặc.",
+          type: "transform",
+          items: [
+            { q: "(jamais)", answer: "Non, je ne fais jamais de jardinage.", example: true },
+            { q: "(personne)", answer: "Je ne vais au concert avec personne." },
+            { q: "(rien)", answer: "Je n'ai rien dit." },
+            { q: "(plus)", answer: "Non, je n'ai plus d'argent." },
+            { q: "(personne)", answer: "Non, personne ne parle italien ici." },
+            { q: "(jamais)", answer: "Non, je n'ai jamais vu ce spectacle." },
+          ],
+        },
       ],
 
       // p2 — Les indicateurs de temps (cahier p. 7)
@@ -182,8 +216,54 @@ export const CAHIER_A2 = {
             { q: "La série La Flamme est sortie ___ deux ans.", answer: "il y a" },
           ],
         },
+        {
+          num: 4, page: 7, audioSrc: piste(5),
+          instruction: "Écoutez et complétez les phrases avec pendant, depuis et il y a.",
+          vi: "Nghe rồi điền pendant / depuis / il y a.",
+          type: "fill",
+          bank: ["pendant", "depuis", "il y a"],
+          items: [
+            { q: "J'ai joué au foot ___ deux heures.", answer: "pendant", example: true },
+            { q: "Nous sommes allées au Festival de Vercors ___ deux ans.", answer: "il y a" },
+            { q: "Je ne fais plus de compétition ___ un an.", answer: "depuis" },
+            { q: "Annabelle est restée à Berlin ___ cinq mois.", answer: "pendant" },
+            { q: "Je travaille ici ___ dix jours.", answer: "depuis" },
+            { q: "J'ai rencontré mon meilleur ami ___ 22 ans.", answer: "il y a" },
+          ],
+        },
       ],
     },
+
+    // ── Phonie-graphie (cahier p. 8) — wired into the Phono step ─────
+    phono: [
+      {
+        num: 1, page: 8, audioSrc: piste(6),
+        instruction: "Discrimination — écoutez et dites dans quel ordre vous entendez les sons [y] et [u].",
+        vi: "Nghe và cho biết thứ tự hai âm: [y] (như « tu ») trước hay [u] (như « coucou ») trước?",
+        type: "choice",
+        items: [
+          { q: "a. Tu as préparé toutes tes affaires.", options: ["[y] avant [u]", "[u] avant [y]"], answer: "[y] avant [u]", example: true },
+          { q: "b. Hier vous avez vu un film.", options: ["[y] avant [u]", "[u] avant [y]"], answer: "[u] avant [y]" },
+          { q: "c. Dans un bar, debout, j'ai bu un cocktail.", options: ["[y] avant [u]", "[u] avant [y]"], answer: "[u] avant [y]" },
+          { q: "d. Il a lu à son fils l'histoire du loup.", options: ["[y] avant [u]", "[u] avant [y]"], answer: "[y] avant [u]" },
+          { q: "e. Sa moto à trois roues est dans la rue.", options: ["[y] avant [u]", "[u] avant [y]"], answer: "[u] avant [y]" },
+          { q: "f. Elle a su gérer son stress et ne pas être sous pression.", options: ["[y] avant [u]", "[u] avant [y]"], answer: "[y] avant [u]" },
+        ],
+      },
+      {
+        num: 3, page: 8, audioSrc: piste(8),
+        instruction: "Dictée — écoutez le texte et complétez les mots.",
+        vi: "Nghe và điền các từ còn thiếu. Toàn bộ đều là âm [y] hoặc [u].",
+        type: "fill",
+        items: [
+          { q: "Sal___ Jules,", answer: "ut", example: true },
+          { q: "au mois d'a___t,", answer: "oû" },
+          { q: "n___s avons d___ annuler nos vacances. (2 từ, cách nhau bởi dấu cách)", answer: "ou û" },
+          { q: "N___s avons ___ un gros problème. (2 từ)", answer: "ou eu" },
+          { q: "Et toi, tu pars ___ p___r les vacances ? (2 từ)", answer: "où ou" },
+        ],
+      },
+    ],
 
     // ── Vocabulaire, keyed by the cycle's vocab step ──────────────────
     vocab: {
@@ -368,7 +448,28 @@ export const CAHIER_A2 = {
         ],
       },
       {
-        num: 7, page: 14,
+        num: 7, page: 9, audioSrc: piste(10),
+        instruction: "Compréhension orale — Rencontre avec Abd Al Malik.",
+        vi: "Nghe bài phỏng vấn rapper Abd Al Malik rồi trả lời.",
+        type: "truefalse",
+        items: [
+          { q: "« Le modèle noir » est le nom d'un tableau.", answer: false },
+          { q: "Le rappeur Abd Al Malik présente son spectacle au musée d'Orsay.", answer: true },
+        ],
+      },
+      {
+        num: 8, page: 9, audioSrc: piste(10),
+        instruction: "Compréhension orale — cochez les bonnes réponses.",
+        vi: "Vẫn bài nghe trên — chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Abd Al Malik raconte :", options: ["la rencontre d'un jeune homme avec un Français", "le parcours d'un jeune homme"], answer: "le parcours d'un jeune homme" },
+          { q: "Le jeune homme se pose des questions sur :", options: ["son travail", "lui et son identité"], answer: "lui et son identité" },
+          { q: "Où est né le jeune homme ?", options: ["En France.", "Au Congo."], answer: "En France." },
+        ],
+      },
+      {
+        num: 9, page: 14,
         instruction: "Jeux — Barrez l'intrus.",
         vi: "Tìm từ lạc loài trong mỗi nhóm.",
         type: "choice",
@@ -385,6 +486,24 @@ export const CAHIER_A2 = {
 
     // ── DELF A2 blanc (cahier p. 12-14) ────────────────────────────
     delf: {
+      // Compréhension de l'oral — the cahier's own exam. Three of the six
+      // questions use photographs as options in the book; they are written out.
+      co: [
+        {
+          num: 1, page: 12, audioSrc: piste(11),
+          instruction: "Compréhension de l'oral — vous écoutez des annonces publiques. (6 points)",
+          vi: "Nghe 6 thông báo nơi công cộng rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Quel événement est organisé au cinéma ?", options: ["Une signature de livre.", "Une projection de film.", "Une présentation de CD."], answer: "Une présentation de CD." },
+            { q: "2. Où est-ce qu'il faut aller pour retrouver le sac ?", options: ["La salle de cinéma.", "Le kiosque d'accueil.", "Le restaurant."], answer: "Le kiosque d'accueil." },
+            { q: "3. Quelle sortie propose le club cette année ?", options: ["Le canoë-kayak.", "L'escalade.", "L'accrobranche."], answer: "Le canoë-kayak." },
+            { q: "4. À quel concours est-ce que vous pouvez vous inscrire ?", options: ["La photographie.", "La peinture.", "La sculpture."], answer: "La photographie." },
+            { q: "5. Dans le parc du château de Versailles, vous pouvez…", options: ["écouter un concert.", "rencontrer le jardinier.", "faire une visite guidée."], answer: "faire une visite guidée." },
+            { q: "6. Qu'est-ce qui est interdit ?", options: ["Venir à côté des sportifs.", "Discuter avec les sportifs.", "Photographier les sportifs."], answer: "Venir à côté des sportifs." },
+          ],
+        },
+      ],
       // Compréhension des écrits — 6 documents, 8 candidates, 6 to place.
       ce: [
         {

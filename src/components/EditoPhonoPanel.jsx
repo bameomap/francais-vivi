@@ -4,6 +4,7 @@ import { EDITO_A1_PHONO } from "../data/editoPhono.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import { speak } from "../utils/helpers.js";
+import CahierExercises from "./CahierExercises.jsx";
 
 /* ── Sub-lesson Done / Làm lại pill (shared across discovery panels) ── */
 function DonePill({ done, onMark, onRedo, color = C.green }) {
@@ -443,7 +444,7 @@ function ListeningQuiz({ quiz, sounds, onComplete }) {
 }
 
 /* ── UNIT DETAIL ──────────────────────────────────────────── */
-function UnitDetail({ unit, onBack, fromParcours = false }) {
+function UnitDetail({ unit, onBack, fromParcours = false, cahierEx }) {
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
   const done = getSubDone(unit.unitId, "phono");
@@ -499,6 +500,7 @@ function UnitDetail({ unit, onBack, fromParcours = false }) {
 
         <MinimalPairs pairs={unit.pairs} />
         <PracticeSection practice={unit.practice} />
+        {cahierEx?.length > 0 && <CahierExercises exercises={cahierEx} color={unit.color || C.blue} />}
         <ListeningQuiz quiz={unit.quiz} sounds={unit.sounds}
           onComplete={() => { markSubDone(unit.unitId, "phono", "quiz"); refresh(); }} />
       </div>
@@ -511,6 +513,8 @@ export default function EditoPhonoPanel({
   fromParcours = false,
   data = EDITO_A1_PHONO,
   levelLabel = "Édito A1",
+  // Cahier phonie-graphie exercises for the selected unit (A2 only).
+  cahier = null,
 }) {
   const [selected, setSelected] = useState(null);
 
@@ -526,7 +530,8 @@ export default function EditoPhonoPanel({
   return (
     <div>
       {selected ? (
-        <UnitDetail unit={selected} onBack={() => setSelected(null)} fromParcours={fromParcours} />
+        <UnitDetail unit={selected} onBack={() => setSelected(null)} fromParcours={fromParcours}
+          cahierEx={cahier?.[selected.unitId]?.phono} />
       ) : (
         <UnitList onSelect={setSelected} data={data} levelLabel={levelLabel} />
       )}

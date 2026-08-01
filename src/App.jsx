@@ -1200,6 +1200,7 @@ function AppInner() {
                   tabs={REFERENCE_TABS_A2}
                   phonoData={EDITO_A2_PHONO}
                   levelLabel="Édito A2"
+                  cahier={CAHIER_A2}
                 />)}
             {/* No onClose: the shell header already provides "← Về" */}
             {view==="level"         && <LevelSelectPanel currentLevel={level} onSelect={changeLevel} />}

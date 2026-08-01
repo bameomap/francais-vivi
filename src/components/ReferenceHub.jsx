@@ -27,6 +27,7 @@ export default function ReferenceHub({
   tabs = TABS,
   phonoData = EDITO_A1_PHONO,
   levelLabel = "Édito A1",
+  cahier = null,
 }) {
   const [active, setActive]             = useState(tabs[0].id);
   const [fromParcours, setFromParcours] = useState(false);
@@ -85,7 +86,7 @@ export default function ReferenceHub({
       {active === "dict"    && <DictionaryPanel />}
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
-      {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} data={phonoData} levelLabel={levelLabel} />}
+      {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} data={phonoData} levelLabel={levelLabel} cahier={cahier} />}
       {active === "verbes"  && <EditoVerbsPanel fromParcours={fromParcours} />}
       {active === "conjug"  && <ConjugaisonPanel />}
       {active === "phrases" && <PhrasebookPanel />}

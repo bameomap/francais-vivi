@@ -170,6 +170,14 @@ export default function DelfA2Panel({
           </section>
         )}
 
+        {/* 1b — the cahier's own listening exam */}
+        {delf?.co?.length > 0 && (
+          <section style={{ marginBottom: "1.2rem" }}>
+            <SkillHeader tag="CO" title="Compréhension de l'oral — Cahier" points="6 points" color={SKILL_COLORS.CO} />
+            <CahierExercises exercises={delf.co} color={SKILL_COLORS.CO} defaultOpen />
+          </section>
+        )}
+
         {/* 2 — Compréhension des écrits */}
         {delf?.ce?.length > 0 && (
           <section style={{ marginBottom: "1.2rem" }}>
