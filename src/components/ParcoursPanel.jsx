@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { C } from "../constants.js";
 import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS } from "../data/parcoursData.js";
+import { setParcoursFocus } from "../utils/parcoursFocus.js";
 import {
   computeUnitStatuses,
   computeOverallProgress,
@@ -268,6 +269,9 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
     }
 
     localStorage.setItem("parcours_back", "1");
+    // Narrow the target panel to this step's share of the skill (A2 only —
+    // A1 steps carry no subIds and so clear any stale focus).
+    setParcoursFocus(step.subIds);
 
     if (step.refTab) {
       // Deep-link: open ReferenceHub at specific tab & pre-select unit

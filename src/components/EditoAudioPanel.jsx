@@ -9,6 +9,8 @@ import { EDITO_AUDIO } from "../data/editoAudio.js";
 import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
 import AccentBar from "./ui/AccentBar.jsx";
+import FocusBar from "./ui/FocusBar.jsx";
+import { takeParcoursFocus } from "../utils/parcoursFocus.js";
 
 const EDITO_UNITS_A1 = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
@@ -163,6 +165,7 @@ export default function EditoAudioPanel({
     ? EDITO_UNITS_A1
     : vocabUnits.map(u => ({ id: u.id, num: u.num, title: u.title }));
   const [selectedUnit, setSelectedUnit] = useState(null);
+  const [focusIds,     setFocusIds]     = useState(null);
 
   // Deep-link from Parcours "Nghe" step: open the current unit directly.
   // Read in an effect (not a useState initializer) so the localStorage
@@ -174,6 +177,9 @@ export default function EditoAudioPanel({
       if (u) setSelectedUnit(u.id);
       localStorage.removeItem("parcours_unit_idx");
     }
+    // …and narrow to the tracks that step owns (A2 splits them across cycles).
+    const focus = takeParcoursFocus();
+    if (focus) setFocusIds(focus);
   }, []);
   // mode per track: null | "questions" | "script" | "dictee"
   const [panelMode, setPanelMode]       = useState({});
@@ -186,8 +192,11 @@ export default function EditoAudioPanel({
   // Note expansions: { [tid|ni]: { loading, content } }
   const [noteExpansions, setNoteExpansions] = useState({});
 
-  const tracks   = selectedUnit ? (audio[selectedUnit] || []) : [];
-  const unitData = EDITO_UNITS.find(u => u.id === selectedUnit);
+  const allTracks = selectedUnit ? (audio[selectedUnit] || []) : [];
+  const focused   = focusIds ? allTracks.filter(t => focusIds.includes(t.id)) : null;
+  // Ignore a focus that matches nothing here rather than showing an empty list.
+  const tracks    = focused?.length ? focused : allTracks;
+  const unitData  = EDITO_UNITS.find(u => u.id === selectedUnit);
 
   // ── Unit toggle ────────────────────────────────────────────────
   const toggleUnit = uid => {
@@ -357,6 +366,14 @@ Trả về JSON thuần (không markdown):
       {/* ── Track cards ── */}
       {selectedUnit && (
         <div style={{ padding: "0.75rem 0.85rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+          {focused?.length > 0 && (
+            <FocusBar
+              label={`${focused.length} bài nghe của bước này`}
+              total={allTracks.length}
+              onClear={() => setFocusIds(null)}
+            />
+          )}
+
           {tracks.map(rawTrack => {
             // Thống nhất màu card theo theme — bỏ màu riêng lẻ của từng track
             const track = { ...rawTrack, color: C.blue, colorLight: C.blueL };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
+import { takeParcoursFocus } from "../utils/parcoursFocus.js";
+import FocusBar from "./ui/FocusBar.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import GrammarBlocks from "./GrammarBlocks.jsx";
 import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
@@ -217,6 +219,7 @@ export default function ProductionOralePanel({
   levelLabel = "Édito A2",
 }) {
   const [selUnit,      setSelUnit]      = useState(0);
+  const [focusIds,     setFocusIds]     = useState(null);
   const [fromParcours, setFromParcours] = useState(false);
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
@@ -231,10 +234,20 @@ export default function ProductionOralePanel({
       setSelUnit(Number(idx));
       localStorage.removeItem("parcours_unit_idx");
     }
+    // Narrow to the topics this step owns — A2 spreads them across cycles,
+    // and the Atelier is its own step.
+    const focus = takeParcoursFocus();
+    if (focus) setFocusIds(focus);
   }, []);
 
   const unit   = units[Math.min(selUnit, units.length - 1)];
   const unitId = unitPrefix + unit.unit;
+
+  // Topic i is sub-lesson "s{i}"; keep the original index so progress ids and
+  // the numbering on each card stay correct when the list is filtered.
+  const allTopics = unit.speakingPractice.map((topic, i) => ({ topic, i }));
+  const focused   = focusIds ? allTopics.filter(t => focusIds.includes("s" + t.i)) : null;
+  const topics    = focused?.length ? focused : allTopics;
 
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
@@ -273,14 +286,22 @@ export default function ProductionOralePanel({
         )}
 
         <div style={{ fontSize: "0.65rem", fontWeight: 700, color: C.gold, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
-          Unité {unit.unit} — {unit.title} · {unit.speakingPractice.length} chủ điểm
+          Unité {unit.unit} — {unit.title} · {topics.length} chủ điểm
         </div>
 
         <div style={{ background: C.cream, borderRadius: 12, padding: "0.6rem 0.8rem", fontSize: "0.71rem", color: C.gray, lineHeight: 1.6, marginBottom: "0.8rem" }}>
           💡 Đọc đề bài, bấm 🔈 nghe câu mẫu rồi nói to theo. Nói được trọn chủ điểm thì đánh dấu đã luyện.
         </div>
 
-        {unit.speakingPractice.map((topic, i) => (
+        {focused?.length > 0 && (
+          <FocusBar
+            label={`${focused.length} chủ điểm của bước này`}
+            total={allTopics.length}
+            onClear={() => setFocusIds(null)}
+          />
+        )}
+
+        {topics.map(({ topic, i }) => (
           <TopicCard
             key={i}
             topic={topic}

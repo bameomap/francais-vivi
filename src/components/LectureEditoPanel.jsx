@@ -3,6 +3,8 @@ import { C } from "../constants.js";
 import editoA1ReadingComprehension from "../data/editoA1ReadingComprehension.js";
 import { getBakedReading } from "../data/editoA1ReadingBaked.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
+import { takeParcoursFocus } from "../utils/parcoursFocus.js";
+import FocusBar from "./ui/FocusBar.jsx";
 import { callAI, callAIText } from "../utils/api.js";
 import { getSRSData, addWordToSRS, addWordsToSRS } from "../utils/srs.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -764,13 +766,18 @@ export default function LectureEditoPanel({
   const UNITS_LIST = unitsOf(readings);
   const [selectedUnit,     setSelectedUnit]     = useState(null);
   const [selectedActivity, setSelectedActivity] = useState(null);
+  const [focusIds, setFocusIds] = useState(null);
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
 
-  // Deep-link from Parcours: pre-select the unit passed down by LecturePanel.
+  // Deep-link from Parcours: pre-select the unit passed down by LecturePanel,
+  // and narrow to the readings this step owns.
   useEffect(() => {
     if (defaultUnitNum != null) setSelectedUnit(defaultUnitNum);
   }, [defaultUnitNum]);
+
+  useEffect(() => { const focus = takeParcoursFocus();
+    if (focus) setFocusIds(focus); }, []);
 
   // Parcours progress is tracked per reading (sub-lesson) under step "lecture".
   const unitId = selectedUnit !== null ? unitPrefix + selectedUnit : null;
@@ -787,9 +794,12 @@ export default function LectureEditoPanel({
     );
   }
 
-  const activities = selectedUnit !== null
+  const unitActivities = selectedUnit !== null
     ? readings.filter(a => a.unit === selectedUnit)
     : [];
+  const focused   = focusIds ? unitActivities.filter(a => focusIds.includes(a.id)) : null;
+  // Ignore a focus that matches nothing here rather than showing an empty list.
+  const activities = focused?.length ? focused : unitActivities;
 
   return (
     <div style={{ padding: "1rem", animation: "fadeUp 0.3s ease" }}>
@@ -828,6 +838,14 @@ export default function LectureEditoPanel({
             {readings.length} bài · U{UNITS_LIST[0]?.num} → U{UNITS_LIST[UNITS_LIST.length - 1]?.num}
           </div>
         </div>
+      )}
+
+      {focused?.length > 0 && (
+        <FocusBar
+          label={`${focused.length} bài đọc của bước này`}
+          total={unitActivities.length}
+          onClear={() => setFocusIds(null)}
+        />
       )}
 
       {/* Activity list */}

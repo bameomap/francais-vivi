@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import { callAIText } from "../utils/api.js";
 import GrammarBlocks from "./GrammarBlocks.jsx";
 import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
+import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
+import { takeParcoursFocus } from "../utils/parcoursFocus.js";
+import FocusBar from "./ui/FocusBar.jsx";
 
 const EMOJIS = { g0:"👋", g1:"🪪", g2:"🏘️", g3:"🥐", g4:"🗺️", g5:"👗", g6:"📅", g7:"🏠", g8:"💪", g9:"🌴", g10:"💼" };
 
 // ── Grammar accordion card ────────────────────────────────────
-function GrammarCard({ point, isOpen, onToggle }) {
+function GrammarCard({ point, isOpen, onToggle, isDone, onMark, onRedo }) {
   const [jp, setJp] = useState(null); // null | { loading } | { text }
 
   const handleJP = async (e) => {
@@ -165,6 +168,24 @@ function GrammarCard({ point, isOpen, onToggle }) {
               })}
             </div>
           )}
+          {onMark && (
+            <div style={{ padding:"0.5rem 1rem 0.75rem", borderTop:`1px dashed ${C.border}`, display:"flex", alignItems:"center", gap:"0.4rem" }}>
+              {isDone ? (
+                <>
+                  <span style={{ background:C.green, color:"#fff", borderRadius:20, padding:"0.12rem 0.55rem", fontSize:"0.63rem", fontWeight:700 }}>✓ Đã học</span>
+                  <button onClick={(e) => { e.stopPropagation(); onRedo(); }}
+                    style={{ background:"#fff", color:C.green, border:`1px solid ${C.green}66`, borderRadius:20, padding:"0.12rem 0.55rem", fontSize:"0.63rem", fontWeight:700, cursor:"pointer", fontFamily:"inherit" }}>
+                    ↻ Làm lại
+                  </button>
+                </>
+              ) : (
+                <button onClick={(e) => { e.stopPropagation(); onMark(); }}
+                  style={{ background:C.white, color:C.blue, border:`1.5px solid ${C.blue}66`, borderRadius:20, padding:"0.2rem 0.7rem", fontSize:"0.68rem", fontWeight:700, cursor:"pointer", fontFamily:"inherit" }}>
+                  ✓ Đánh dấu đã học
+                </button>
+              )}
+            </div>
+          )}
           {jp?.text && (
             <div style={{ padding:"0.55rem 1rem 0.9rem", borderTop:`1px solid #FECACA`, background:"#FFF5F5" }}>
               <div style={{ fontSize:"0.58rem", fontWeight:700, color:"#C0392B", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"0.45rem" }}>
@@ -182,15 +203,48 @@ function GrammarCard({ point, isOpen, onToggle }) {
 }
 
 // ── Main component ────────────────────────────────────────────
-export default function EditoGrammarPanel({ data = EDITO_GRAMMAR, emojis = EMOJIS, levelLabel = "Édito A1" }) {
+export default function EditoGrammarPanel({
+  data = EDITO_GRAMMAR,
+  emojis = EMOJIS,
+  levelLabel = "Édito A1",
+  // A2's grammar unit ids match the parcours ids ("b1"), so progress is keyed
+  // directly by them. A level whose ids differ would pass a mapper here.
+  unitIdFor = (u) => u.id,
+}) {
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [openCard,     setOpenCard]     = useState(null);
+  const [focusIds,     setFocusIds]     = useState(null);
+  const [, setTick] = useState(0);
+  const refresh = () => setTick(t => t + 1);
+
+  // Deep-link from the Parcours "Ngữ pháp" step: open that unit and narrow to
+  // the point(s) the step owns. Read in an effect so the read+remove stays
+  // StrictMode-safe.
+  useEffect(() => {
+    const idx = localStorage.getItem("parcours_unit_idx");
+    if (idx !== null) {
+      const u = data[Number(idx)];
+      if (u) setSelectedUnit(u.id);
+      localStorage.removeItem("parcours_unit_idx");
+    }
+    const focus = takeParcoursFocus();
+    if (focus) setFocusIds(focus);
+  }, [data]);
 
   const unitData = selectedUnit ? data.find(u => u.id === selectedUnit) : null;
 
-  const selectUnit = (id) => { setSelectedUnit(id); setOpenCard(null); };
-  const goBack     = ()   => { setSelectedUnit(null); setOpenCard(null); };
+  const selectUnit = (id) => { setSelectedUnit(id); setOpenCard(null); setFocusIds(null); };
+  const goBack     = ()   => { setSelectedUnit(null); setOpenCard(null); setFocusIds(null); };
   const toggleCard = (key) => setOpenCard(prev => prev === key ? null : key);
+
+  // Progress is per grammar point ("p0", "p1", …) under the "grammar" step.
+  const progressUnitId = unitData ? unitIdFor(unitData) : null;
+  const done = progressUnitId ? getSubDone(progressUnitId, "grammar") : {};
+
+  // Keep the original index so "p{i}" ids stay correct when filtered.
+  const allPoints     = unitData ? unitData.points.map((pt, i) => ({ pt, i })) : [];
+  const focusedPoints = focusIds ? allPoints.filter(x => focusIds.includes("p" + x.i)) : null;
+  const points        = focusedPoints?.length ? focusedPoints : allPoints;
 
   // ── Unit list ─────────────────────────────────────────────────
   if (!selectedUnit) return (
@@ -298,7 +352,15 @@ export default function EditoGrammarPanel({ data = EDITO_GRAMMAR, emojis = EMOJI
 
       {/* Cards */}
       <div style={{ padding:"0.75rem 1rem 4rem", display:"flex", flexDirection:"column", gap:8 }}>
-        {unitData.points.map((pt, i) => {
+        {focusedPoints?.length > 0 && (
+          <FocusBar
+            label={`${focusedPoints.length} điểm ngữ pháp của bước này`}
+            total={unitData.points.length}
+            onClear={() => setFocusIds(null)}
+          />
+        )}
+
+        {points.map(({ pt, i }) => {
           const key = `${selectedUnit}-${i}`;
           return (
             <GrammarCard
@@ -306,6 +368,9 @@ export default function EditoGrammarPanel({ data = EDITO_GRAMMAR, emojis = EMOJI
               point={pt}
               isOpen={openCard === key}
               onToggle={() => toggleCard(key)}
+              isDone={!!done["p" + i]}
+              onMark={() => { markSubDone(progressUnitId, "grammar", "p" + i); refresh(); }}
+              onRedo={() => { unmarkSubDone(progressUnitId, "grammar", "p" + i); refresh(); }}
             />
           );
         })}

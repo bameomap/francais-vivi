@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { callAI, callAIText } from "../utils/api.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
+import { takeParcoursFocus } from "../utils/parcoursFocus.js";
+import FocusBar from "./ui/FocusBar.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import Spinner from "./ui/Spinner.jsx";
 import { logError } from "./WeakSpotsPanel.jsx";
@@ -133,6 +135,7 @@ export default function WritingPanel({
     try { return JSON.parse(localStorage.getItem("writing_history") || "[]"); } catch { return []; }
   });
   const [editoUnit, setEditoUnit] = useState(0);
+  const [focusIds,  setFocusIds]  = useState(null);
   const [editoTask, setEditoTask] = useState(null);
   const [editoTaskIdx, setEditoTaskIdx] = useState(null);
   const [fromParcours, setFromParcours] = useState(false);
@@ -154,6 +157,9 @@ export default function WritingPanel({
       setEditoUnit(Number(idx));
       localStorage.removeItem("parcours_writing_idx");
     }
+    // Narrow to the writing tasks this parcours step owns.
+    const focus = takeParcoursFocus();
+    if (focus) setFocusIds(focus);
   }, []);
 
   const check = async (contextTask) => {
@@ -295,8 +301,23 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                 Unité {unit.unit} — {unit.title}
               </div>
 
-              {/* Task cards */}
-              {(() => { var wDone = getSubDone(unitPrefix + unit.unit, "ecrire"); return unit.writingPractice.map((p, i) => {
+              {/* Task cards — keep the original index so "w{i}" progress ids
+                  stay correct when the list is filtered by a parcours step. */}
+              {(() => {
+                var wDone = getSubDone(unitPrefix + unit.unit, "ecrire");
+                var all     = unit.writingPractice.map((p, i) => ({ p, i }));
+                var focused = focusIds ? all.filter(x => focusIds.includes("w" + x.i)) : null;
+                var list    = focused?.length ? focused : all;
+                return (
+                  <>
+                  {focused?.length > 0 && (
+                    <FocusBar
+                      label={`${focused.length} đề của bước này`}
+                      total={all.length}
+                      onClear={() => setFocusIds(null)}
+                    />
+                  )}
+                  {list.map(({ p, i }) => {
                 const isDone = !!wDone["w" + i];
                 return (
                 <button key={i} onClick={() => { setEditoTask(p); setEditoTaskIdx(i); setInput(""); setResult(null); }}
@@ -320,7 +341,10 @@ vocab: 5-7 key words/phrases relevant to the task.`);
                   </div>
                 </button>
                 );
-              }); })()}
+              })}
+                  </>
+                );
+              })()}
             </>
           ) : (
             <>

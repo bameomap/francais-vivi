@@ -4,6 +4,8 @@ import { EDITO_VOCAB_UNITS } from "../data/editoVocab.js";
 import { callAI, callAIBatched, buildPrompt } from "../utils/api.js";
 import { addWordToSRS, getSRSStats } from "../utils/srs.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
+import { takeParcoursFocus } from "../utils/parcoursFocus.js";
+import FocusBar from "./ui/FocusBar.jsx";
 import { FillSection, FlashcardSection } from "./QuizSections.jsx";
 import TranslateSection from "./TranslateSection.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
@@ -244,11 +246,14 @@ function GroupStudyView({ group, unit, onBack }) {
 }
 
 // ── Unit detail view — shows groups ───────────────────────
-function UnitDetailView({ unit, onBack, backLabel = "← Quay lại" }) {
+function UnitDetailView({ unit, onBack, backLabel = "← Quay lại", focusIds, onClearFocus }) {
   const [activeGroup, setActiveGroup] = useState(null);
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
   const done = getSubDone(unit.id, "vocab");
+
+  const focused = focusIds ? unit.groups.filter(g => focusIds.includes(g.id)) : null;
+  const groups  = focused?.length ? focused : unit.groups;
 
   if (activeGroup) {
     const group = unit.groups.find(g => g.id === activeGroup);
@@ -289,9 +294,17 @@ function UnitDetailView({ unit, onBack, backLabel = "← Quay lại" }) {
         </button>
       </div>
 
+      {focused?.length > 0 && (
+        <FocusBar
+          label={`${focused.length} nhóm từ của bước này`}
+          total={unit.groups.length}
+          onClear={onClearFocus}
+        />
+      )}
+
       {/* Group cards */}
       <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-        {unit.groups.map((g, i) => {
+        {groups.map((g, i) => {
           const isDone = !!done[g.id];
           return (
           <button key={g.id} onClick={() => setActiveGroup(g.id)}
@@ -360,6 +373,7 @@ export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_
   const [activeUnit,   setActiveUnit]   = useState(null);
   const [showExtra,    setShowExtra]    = useState(false);
   const [fromParcours, setFromParcours] = useState(false);
+  const [focusIds,     setFocusIds]     = useState(null);
 
   useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
@@ -368,6 +382,9 @@ export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_
       if (unit) { setActiveUnit(unit.id); setFromParcours(true); }
       localStorage.removeItem("parcours_unit_idx");
     }
+    // Narrow to the vocabulary groups this parcours step owns.
+    const focus = takeParcoursFocus();
+    if (focus) setFocusIds(focus);
   }, [units]);
 
   if (showExtra) return <ExtraVocabView onBack={() => setShowExtra(false)} />;
@@ -377,7 +394,8 @@ export default function EditoVocabPanel({ onBackToParcours, units = EDITO_VOCAB_
     const handleBack = fromParcours && onBackToParcours
       ? () => onBackToParcours()
       : () => { setActiveUnit(null); setFromParcours(false); };
-    return <UnitDetailView unit={unit} onBack={handleBack} backLabel={fromParcours ? "← Parcours" : "← Quay lại"} />;
+    return <UnitDetailView unit={unit} onBack={handleBack} backLabel={fromParcours ? "← Parcours" : "← Quay lại"}
+             focusIds={focusIds} onClearFocus={() => setFocusIds(null)} />;
   }
 
   // Unit list
