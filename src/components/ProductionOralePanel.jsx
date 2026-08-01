@@ -2,13 +2,22 @@ import { useState, useEffect } from "react";
 import { C } from "../constants.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
+import GrammarBlocks from "./GrammarBlocks.jsx";
+import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
 import { EDITO_A2_UNITS } from "../data/editoA2Units.js";
 import { EDITO_POUR_NOTES_A2 } from "../data/editoPourNotesA2.js";
 
 // Production orale — a preparation sheet, not a chatbot. For each speaking
 // topic of the unit it shows the book's task, the ready-made opening phrases,
-// and the « Pour communiquer » box behind it (structure + sample sentences
-// with Vietnamese glosses), all speakable.
+// and one of two possible phrasebooks behind it:
+//   • `topic.notes`  — keys into a per-lesson EDITO_POUR_NOTES map (structure
+//     + sample sentences with Vietnamese glosses), used where the book ties a
+//     communication box to a specific reading/listening document.
+//   • `topic.rule`   — a longer, self-contained script (A1's former
+//     "Production orale" grammar points, moved here since they were
+//     phrasebooks, not grammar). Rendered with the same GrammarBlocks used on
+//     the grammar screen, via parseRuleToBlocks.
+// Either way, every sample sentence is speakable.
 //
 // Progress ids match the parcours "parler" step ("s0", "s1", …) so the unit
 // tally is unchanged by how the step is presented.
@@ -64,10 +73,46 @@ function NoteBox({ note }) {
   );
 }
 
+function ScriptExample({ ex }) {
+  const parts = ex.split(" — ");
+  const fr = parts[0] || ex;
+  const vi = parts[1] || "";
+  return (
+    <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 8, padding: "0.45rem 0.65rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: vi ? "0.2rem" : 0 }}>
+        <span style={{ fontSize: "0.65rem", color: C.gold, flexShrink: 0 }}>▸</span>
+        <span style={{ fontFamily: "Georgia,serif", fontSize: "0.8rem", color: C.ink, fontStyle: "italic", flex: 1 }}>{fr}</span>
+        <SpeakBtn text={fr} size="0.7rem" />
+      </div>
+      {vi && <div style={{ fontSize: "0.72rem", color: C.gray, marginLeft: "1.1rem", lineHeight: 1.5 }}>→ {vi}</div>}
+    </div>
+  );
+}
+
+function ScriptBox({ rule, examples }) {
+  const blocks = parseRuleToBlocks(rule);
+  return (
+    <div style={{ marginBottom: "0.55rem" }}>
+      <div style={{ background: C.cream, borderRadius: 10, padding: "0.6rem 0.7rem", borderLeft: `3px solid ${C.gold}`, marginBottom: "0.6rem" }}>
+        <GrammarBlocks blocks={blocks} />
+      </div>
+      {examples?.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          {examples.map((ex, i) => <ScriptExample key={i} ex={ex} />)}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TopicCard({ topic, index, unitId, pourNotes, onChange }) {
   const [open, setOpen] = useState(false);
   const isDone = !!getSubDone(unitId, "parler")["s" + index];
   const notes  = (topic.notes || []).flatMap(k => pourNotes[k] || []);
+  const hasScript = !!topic.rule;
+  const scriptPhraseCount = hasScript
+    ? (topic.rule.match(/^•/gm) || []).length + (topic.examples?.length || 0)
+    : 0;
 
   return (
     <div style={{
@@ -115,7 +160,7 @@ function TopicCard({ topic, index, unitId, pourNotes, onChange }) {
         </>
       )}
 
-      {notes.length > 0 && (
+      {(notes.length > 0 || hasScript) && (
         <>
           <button
             onClick={() => setOpen(o => !o)}
@@ -127,9 +172,16 @@ function TopicCard({ topic, index, unitId, pourNotes, onChange }) {
               fontSize: "0.72rem", fontWeight: 700, color: C.ink, marginBottom: open ? "0.55rem" : 0,
             }}>
             <span>📝 Mẫu câu &amp; cách nói</span>
-            <span style={{ color: C.gold }}>{open ? "Ẩn ▲" : `${notes.reduce((a, n) => a + n.phrases.length, 0)} câu ▼`}</span>
+            <span style={{ color: C.gold }}>
+              {open ? "Ẩn ▲" : `${notes.reduce((a, n) => a + n.phrases.length, 0) + scriptPhraseCount} câu ▼`}
+            </span>
           </button>
-          {open && notes.map((note, i) => <NoteBox key={i} note={note} />)}
+          {open && (
+            <>
+              {hasScript && <ScriptBox rule={topic.rule} examples={topic.examples} />}
+              {notes.map((note, i) => <NoteBox key={i} note={note} />)}
+            </>
+          )}
         </>
       )}
 
