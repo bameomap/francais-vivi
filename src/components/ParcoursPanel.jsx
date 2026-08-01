@@ -280,35 +280,24 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
     setParcoursFocus(step.subIds, step.id);
 
     if (step.refTab) {
-      // Deep-link: open ReferenceHub at specific tab & pre-select unit
+      // Deep-link: open ReferenceHub at a specific sub-tab
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      // Opens ReferenceHub at a specific sub-tab
       localStorage.setItem("parcours_ref_tab", step.refTab);
       onNavigate(step.section, step.view);
-    } else if (key === "vocab") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      onNavigate("vocab", "edito");
-    } else if (key === "grammar") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      onNavigate("grammar", "grammar");
-    } else if (key === "lecture") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      onNavigate("lecture", "lecture");
-    } else if (key === "ecouter") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      onNavigate("dictee", "ecouter");
-    } else if (key === "ecrire") {
+      return;
+    }
+
+    // `key` picks which localStorage handle the target panel reads; the
+    // destination itself always comes from the step. They differ for the A2
+    // DELF card, which scores under "ecouter" but opens its own exam screen.
+    if (key === "ecrire") {
       localStorage.setItem("parcours_writing_idx", String(unitIdx));
-      onNavigate("writing", "writing");
-    } else if (key === "parler") {
-      localStorage.setItem("parcours_unit_idx", String(unitIdx));
-      onNavigate("conversation", "conversation");
     } else if (key === "quiz") {
       localStorage.setItem("parcours_quiz_unit", unitId);
-      onNavigate("quiz-unit", "quiz-unit");
     } else {
-      onNavigate(step.section, step.view);
+      localStorage.setItem("parcours_unit_idx", String(unitIdx));
     }
+    onNavigate(step.section, step.view);
   }, [unitId, unitIdx, onNavigate]);
 
   // First not-yet-complete step for the CTA

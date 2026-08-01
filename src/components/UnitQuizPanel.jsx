@@ -7,6 +7,7 @@ import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import { markStepDone } from "../utils/parcours.js";
 import { Confetti } from "./ui/Minou.jsx";
 import Spinner from "./ui/Spinner.jsx";
+import CahierExercises from "./CahierExercises.jsx";
 
 // ── Skill config ──────────────────────────────────────────────
 // bg is derived as a translucent tint of `color` at render → theme-safe.
@@ -214,6 +215,9 @@ export default function UnitQuizPanel({
   vocabUnits   = EDITO_VOCAB_UNITS,
   grammarUnits = EDITO_GRAMMAR,
   cefr         = "A1",
+  // Cahier "Bilan linguistique" for this unit — the book's own end-of-unit
+  // review. Shown before the AI quiz because its answers are authoritative.
+  cahier       = null,
 }) {
   const [unitId] = useState(() => localStorage.getItem("parcours_quiz_unit") || null);
   const [quiz,    setQuiz]    = useState(() => {
@@ -236,6 +240,7 @@ export default function UnitQuizPanel({
   // A2 reuses the same id on both sides.
   const grammarId  = unitId ? (unitId.startsWith("u") ? "g" + unitId.slice(1) : unitId) : null;
   const grammarUnit= grammarId ? grammarUnits.find(u => u.id === grammarId) : null;
+  const cahierBilan = unitId ? cahier?.[unitId]?.bilan : null;
   const vocabWords = vocabUnit ? vocabUnit.groups.flatMap(g => g.words) : [];
   const gramPoints = grammarUnit ? grammarUnit.points : [];
 
@@ -300,7 +305,24 @@ export default function UnitQuizPanel({
         <div style={{ fontSize:"0.78rem", opacity:0.75 }}>{unit.vi} · {unit.grammar}</div>
       </div>
 
-      {/* Skill chips */}
+      {/* The book's own end-of-unit review comes first: its answers are the
+          cahier's Corrigés, so a wrong verdict here is always trustworthy.
+          The AI quiz below is extra drilling on top. */}
+      {cahierBilan?.length > 0 && (
+        <div style={{ marginBottom:"1.25rem" }}>
+          <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.6rem", fontWeight:700, color:C.gray, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"0.4rem" }}>
+            Bilan linguistique · Cahier /40
+          </div>
+          <CahierExercises exercises={cahierBilan} color={C.accent} />
+        </div>
+      )}
+
+      {/* Skill chips — the "extra" label only makes sense under the Bilan */}
+      {cahierBilan?.length > 0 && (
+        <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:"0.6rem", fontWeight:700, color:C.gray, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"0.4rem" }}>
+          Quiz thêm · AI tạo
+        </div>
+      )}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.5rem", marginBottom:"1.25rem" }}>
         {Object.entries(SKILLS).map(([key, sk]) => (
           <div key={key} style={{ background:`${sk.color}1a`, borderRadius:12, padding:"0.6rem 0.75rem", border:`1px solid ${sk.color}33`, display:"flex", alignItems:"center", gap:8 }}>

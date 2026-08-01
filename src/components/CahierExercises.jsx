@@ -117,7 +117,10 @@ function Exercise({ ex, color }) {
                     color: C.ink, fontFamily: "inherit", fontSize: "0.72rem",
                   }}>
                   <option value="">— chọn —</option>
-                  {[...ex.pairs].map(o => o.r).sort().map((r, k) => <option key={k} value={r}>{r}</option>)}
+                  {/* `extraOptions` are candidates the book includes with no
+                      matching document — dropping them would give the answer away. */}
+                  {[...ex.pairs.map(o => o.r), ...(ex.extraOptions || [])].sort()
+                    .map((r, k) => <option key={k} value={r}>{r}</option>)}
                 </select>
                 {checked && !ok && <Verdict ok={false} expected={p.r} />}
               </div>

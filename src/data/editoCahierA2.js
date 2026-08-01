@@ -279,6 +279,147 @@ export const CAHIER_A2 = {
         },
       ],
     },
+
+    // ── Bilan linguistique (cahier p. 10-11, noté /40) ──────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    bilan: [
+      {
+        num: 1, page: 10,
+        instruction: "Transformez les phrases au passé composé. (/7)",
+        vi: "Chuyển sang passé composé — chú ý hợp giống–số.",
+        type: "transform",
+        items: [
+          { q: "Marc déménage à Paris.", answer: "Marc a déménagé à Paris." },
+          { q: "Lana a un enfant.", answer: "Lana a eu un enfant." },
+          { q: "Cathy tombe amoureuse.", answer: "Cathy est tombée amoureuse." },
+          { q: "Vincent et Ève se marient !", answer: "Vincent et Ève se sont mariés !" },
+          { q: "Ma conjointe va à un spectacle.", answer: "Ma conjointe est allée à un spectacle." },
+          { q: "Mon frère finit son stage.", answer: "Mon frère a fini son stage." },
+          { q: "Cédric et Anouk décident d'avoir un enfant.", answer: "Cédric et Anouk ont décidé d'avoir un enfant." },
+        ],
+      },
+      {
+        num: 2, page: 10,
+        instruction: "Dites le contraire. Utilisez rien, personne, jamais ou plus. (/7)",
+        vi: "Viết câu trái nghĩa bằng phủ định.",
+        type: "transform",
+        items: [
+          { q: "Je vois tout.", answer: "Je ne vois rien." },
+          { q: "Vous connaissez tout le monde ici.", answer: "Vous ne connaissez personne ici." },
+          { q: "Je fais encore de la compétition.", answer: "Je ne fais plus de compétition." },
+          { q: "Tu as toujours été en retard.", answer: "Tu n'as jamais été en retard." },
+          { q: "Quelqu'un a parlé de notre stage.", answer: "Personne n'a parlé de notre stage." },
+          { q: "Tout a été simple avec toi.", answer: "Rien n'a été simple avec toi." },
+          { q: "J'ai déjà fait cette balade.", answer: "Je n'ai jamais fait cette balade." },
+        ],
+      },
+      {
+        num: 3, page: 10,
+        instruction: "Complétez les phrases avec il y a, pendant, depuis. (/6)",
+        vi: "Điền il y a / pendant / depuis.",
+        type: "fill",
+        bank: ["il y a", "pendant", "depuis"],
+        items: [
+          { q: "Mon mari fait de l'escalade ___ 15 ans.", answer: "depuis" },
+          { q: "J'ai fait du kayak pour la première fois ___ six mois.", answer: "il y a" },
+          { q: "Hier, nous avons fait une promenade ___ deux heures.", answer: "pendant" },
+          { q: "J'ai vu ce musicien en concert ___ cinq ans.", answer: "il y a" },
+          { q: "Ali et moi, nous sommes mariés ___ septembre 2009.", answer: "depuis" },
+          { q: "J'ai travaillé dans cette entreprise ___ trois ans.", answer: "il y a" },
+        ],
+      },
+      {
+        num: 4, page: 11,
+        instruction: "Vocabulaire — Choisissez la réponse correcte. (/5)",
+        vi: "Chọn từ đúng.",
+        type: "choice",
+        items: [
+          { q: "Ma sœur n'est pas mariée mais elle vit en couple, ___ est musicien.", options: ["son mari", "son conjoint"], answer: "son conjoint" },
+          { q: "J'ai fini mes études et maintenant je ___.", options: ["fais un séjour Erasmus", "cherche du travail"], answer: "cherche du travail" },
+          { q: "Mon conjoint est ___, il écrit des livres pour enfants.", options: ["écrivain", "chanteur"], answer: "écrivain" },
+          { q: "Ma meilleure amie est ___, elle joue dans une pièce de théâtre.", options: ["actrice", "trader"], answer: "actrice" },
+          { q: "Mathieu et Mathilde se sont mariés et ils ont eu un ___.", options: ["enfant", "coup de foudre"], answer: "enfant" },
+        ],
+      },
+      {
+        num: 5, page: 11,
+        instruction: "Associez les phrases qui ont le même sens. (/5)",
+        vi: "Nối hai câu cùng nghĩa.",
+        type: "match",
+        pairs: [
+          { l: "Ils sont mariés.",                      r: "Ils sont mari et femme." },
+          { l: "Ils déménagent.",                       r: "Ils s'installent dans un autre lieu." },
+          { l: "Ils sont tombés amoureux tout de suite.", r: "Ils ont eu un coup de foudre." },
+          { l: "Ils se sont rencontrés.",               r: "Ils ont fait connaissance." },
+          { l: "Ils ont des enfants.",                  r: "Ils ont une vie de famille." },
+        ],
+      },
+      {
+        num: 6, page: 11,
+        instruction: "Répondez par vrai ou faux. (/5)",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "Le château est un monument.", answer: true },
+          { q: "Le vélo est un sport aquatique.", answer: false },
+          { q: "On va voir une exposition dans un musée.", answer: true },
+          { q: "On fait de l'escalade dans un théâtre.", answer: false },
+          { q: "Le bricolage est une activité en plein air.", answer: false },
+        ],
+      },
+      {
+        num: 7, page: 14,
+        instruction: "Jeux — Barrez l'intrus.",
+        vi: "Tìm từ lạc loài trong mỗi nhóm.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["le scénariste", "le compositeur", "l'interprète", "la conjointe"], answer: "la conjointe" },
+          { q: "b.", options: ["faire un stage", "partir en Erasmus", "s'installer", "obtenir un diplôme"], answer: "s'installer" },
+          { q: "c.", options: ["se marier", "avoir un enfant", "avoir un coup de foudre", "grandir"], answer: "grandir" },
+          { q: "d.", options: ["le cirque", "la peinture", "le cinéma", "le château"], answer: "la peinture" },
+          { q: "e.", options: ["le paddle", "une exposition", "le musée", "une visite guidée"], answer: "le paddle" },
+          { q: "f.", options: ["faire du vélo", "faire une balade", "regarder une série", "jouer au foot"], answer: "regarder une série" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 12-14) ────────────────────────────
+    delf: {
+      // Compréhension des écrits — 6 documents, 8 candidates, 6 to place.
+      ce: [
+        {
+          num: 1, page: 12,
+          instruction: "Compréhension des écrits — associez chaque document à la personne correspondante. (6 points)",
+          vi: "Bạn muốn rủ bạn bè đi chơi và đọc chương trình hoạt động của thành phố Rennes. Nối mỗi thông báo với người phù hợp — có 8 người nhưng chỉ 6 thông báo.",
+          type: "match",
+          pairs: [
+            { l: "1. Samedi 10 juin, l'Opéra de Bretagne va présenter ses nouveaux spectacles de chant et de danse.", r: "E. Nina enseigne le ballet." },
+            { l: "2. Promenade guidée du magnifique jardin du Tabor. Fleurs exotiques et arbres de cent ans.", r: "D. Timoteo s'intéresse à la nature." },
+            { l: "3. À la librairie Pagina, l'écrivain Sylvain Tesson signe son nouveau livre sur l'Asie traditionnelle.", r: "B. Rose aime les cultures du monde." },
+            { l: "4. Jeudi 15, enregistrement en public de l'émission politique de Radio Armorique.", r: "G. Blanche voudrait devenir journaliste." },
+            { l: "5. Pendant les vacances, la piscine de Bréquigny propose un stage de natation. 135 euros la semaine.", r: "C. Jasper adore les sports aquatiques." },
+            { l: "6. Des tableaux du XXe siècle de la collection du Louvre sont exposés pour la première fois à Rennes.", r: "H. Luca apprécie la peinture moderne." },
+          ],
+          // Distractors the book includes on purpose — offered in the dropdowns.
+          extraOptions: ["A. Mahé adore aller au cinéma.", "F. Jan a envie de bricoler."],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 13,
+          prompt: "Vous habitez en France. Vous êtes allé(e) aux Journées du Patrimoine de votre ville, samedi dernier. Vous écrivez à un(e) ami(e) français(e) pour lui raconter votre visite. Vous lui donnez aussi vos impressions. (60 mots minimum)",
+          vi: "Viết thư kể cho bạn Pháp nghe về chuyến đi Ngày Di sản. (tối thiểu 60 từ)",
+          model: "Salut ! Comment ça va ? Samedi dernier, c'était les journées du Patrimoine. Avec Thibaut, nous sommes allés visiter l'Opéra de Paris. C'était magnifique. Il y a de l'or et des sculptures partout ! Nous avons vu le hall, la salle de spectacle et les coulisses. J'ai adoré voir toutes les machines derrière la scène. Le soir, on a mangé au restaurant de l'Opéra. C'était très bon. On a passé une journée vraiment agréable. Si ça te dit, on peut y aller l'année prochaine ? Bisous Léo",
+        },
+        {
+          skill: "Production orale", points: "2 minutes environ", page: 13,
+          prompt: "Partie 2 — monologue suivi. Sujet : Vacances préférées. Racontez vos vacances préférées. Vous êtes parti où et avec qui ? Qu'est-ce que vous avez fait ? Pourquoi est-ce que vous avez aimé ces vacances ?",
+          vi: "Nói 2 phút về kỳ nghỉ bạn thích nhất: đi đâu, với ai, làm gì, vì sao thích.",
+          model: "Mes vacances préférées c'était en Suisse. J'y suis allée avec mon mari et ma fille l'année dernière. La première semaine, nous sommes restés dans une petite ville, près de Genève. Nous avons visité un vieux château et la maison de l'acteur de cinéma Charlie Chaplin. Elle est très grande. Il y a beaucoup de souvenirs de lui et de sa famille. On a regardé des extraits de ses films dans son studio de cinéma et on s'est promené dans le jardin. Il y a une belle vue sur le lac et les montagnes. C'était magnifique et en plus il faisait beau. Après, nous sommes allés voir mon cousin. Il habite à Neuchâtel. Ma fille a joué avec ses cousines. Nous nous sommes baignés et on a fait du paddle sur le lac. C'était mes vacances préférées parce que la Suisse est un très beau pays, c'est calme, on peut se reposer. Et j'ai aimé passer du temps avec ma famille.",
+        },
+      ],
+    },
   },
 };
 

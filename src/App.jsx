@@ -32,6 +32,7 @@ const PrononciationPanel   = lazy(() => import("./components/PrononciationPanel.
 const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"));
 const LevelSelectPanel     = lazy(() => import("./components/LevelSelectPanel.jsx"));
 const ProductionOralePanel = lazy(() => import("./components/ProductionOralePanel.jsx"));
+const DelfA2Panel          = lazy(() => import("./components/DelfA2Panel.jsx"));
 const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
@@ -77,6 +78,7 @@ const SECTION_TITLE = {
   "quiz-unit":"Le Quiz de l'Unité",
   prononciation:"La Prononciation",
   delf:"DELF A1",
+  "delf-a2":"DELF A2 blanc",
   profil:"Mon Profil",
   level:"Trình độ",
 };
@@ -1236,10 +1238,12 @@ function AppInner() {
                   vocabUnits={EDITO_VOCAB_A2_UNITS}
                   grammarUnits={EDITO_GRAMMAR_A2}
                   cefr="A2"
+                  cahier={CAHIER_A2}
                 />)}
             {view==="revision"      && <RevisionPanel />}
             {view==="fiche"         && <FichePanel onNavigate={(s, v) => goSection(s, v || s)} />}
             {view==="delf"          && <DelfPanel />}
+            {view==="delf-a2"       && <DelfA2Panel onBackToParcours={backToParcours} />}
             {view==="stats"         && <StatsPanel />}
             {view==="sentence"      && <SentenceBuilder />}
            </Suspense>

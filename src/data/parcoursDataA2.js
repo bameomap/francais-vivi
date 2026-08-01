@@ -117,8 +117,8 @@ export const STEP_GROUPS_A2 = [
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Organiser une sortie cho cả lớp",
         section:"conversation", view:"conversation" },
       { id:"b_delf", stepKey:"ecouter", subIds:["b1-delf"],
-        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Compréhension de l'oral · 6 annonces",
-        section:"dictee", view:"ecouter" },
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
