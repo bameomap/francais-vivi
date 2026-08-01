@@ -11,6 +11,7 @@ import { EDITO_POUR_NOTES } from "../data/editoAudioNotes.js";
 import AccentBar from "./ui/AccentBar.jsx";
 import FocusBar from "./ui/FocusBar.jsx";
 import { takeParcoursFocus } from "../utils/parcoursFocus.js";
+import { stripSpeaker } from "../utils/dictee.js";
 
 const EDITO_UNITS_A1 = EDITO_VOCAB_UNITS.map(u => ({ id: u.id, num: u.num, title: u.title }));
 
@@ -55,13 +56,6 @@ function parseSubQ(text) {
     }
   }
   return out;
-}
-
-// ── Strip "Speaker : " prefix from dictée sentences ──────────────
-// "Lars : Bonjour…"  →  "Bonjour…"
-// "La mère : Merci" →  "Merci"
-function stripSpeaker(s) {
-  return s.replace(/^[^:]+:\s+/, "").trim();
 }
 
 // ── Normalise a word for lenient comparison ───────────────────────
@@ -248,7 +242,7 @@ export default function EditoAudioPanel({
   };
 
   const openDictee = tid => {
-    setDictee(prev => ({ ...prev, [tid]: { current: 0, typed: {}, results: {} } }));
+    setDictee(prev => ({ ...prev, [tid]: { current: 0, typed: {}, results: {}, skipped: {} } }));
     setPanelMode(prev => ({ ...prev, [tid]: prev[tid] === "dictee" ? null : "dictee" }));
   };
 
@@ -276,7 +270,7 @@ export default function EditoAudioPanel({
   // ── Dictée helpers ────────────────────────────────────────────
   const dicteeSetTyped = (tid, i, val) =>
     setDictee(prev => {
-      const s = prev[tid] || { current: 0, typed: {}, results: {} };
+      const s = prev[tid] || { current: 0, typed: {}, results: {}, skipped: {} };
       return { ...prev, [tid]: { ...s, typed: { ...s.typed, [i]: val } } };
     });
 
@@ -294,8 +288,21 @@ export default function EditoAudioPanel({
       return { ...prev, [tid]: { ...s, current: Math.min(s.current + 1, total - 1) } };
     });
 
+  // Moving on without answering. Recorded, so the run can still finish and the
+  // summary can be honest about how many were left — but not scored as wrong,
+  // which is what submitting an empty box used to do.
+  const dicteeSkip = (tid, total) =>
+    setDictee(prev => {
+      const s = prev[tid];
+      return { ...prev, [tid]: {
+        ...s,
+        skipped: { ...s.skipped, [s.current]: true },
+        current: Math.min(s.current + 1, total - 1),
+      } };
+    });
+
   const dicteeReset = tid =>
-    setDictee(prev => ({ ...prev, [tid]: { current: 0, typed: {}, results: {} } }));
+    setDictee(prev => ({ ...prev, [tid]: { current: 0, typed: {}, results: {}, skipped: {} } }));
 
   // ── AI expand Pour note ───────────────────────────────────────
   const NOTE_CACHE_KEY = "pour_note_expansions_v2";
@@ -760,8 +767,11 @@ Trả về JSON thuần (không markdown):
                   const idx     = ds.current;
                   const result  = ds.results[idx];
                   const typed   = ds.typed[idx] || "";
-                  const doneCount = Object.keys(ds.results).length;
-                  const allDone = doneCount === total;
+                  const doneCount  = Object.keys(ds.results).length;
+                  const skipCount  = Object.keys(ds.skipped || {}).length;
+                  // A skipped sentence still counts as dealt with, otherwise
+                  // skipping one would leave the run unable to ever finish.
+                  const allDone = doneCount + skipCount >= total;
                   const score   = Object.values(ds.results).filter(r => r.ok).length;
 
                   return (
@@ -781,7 +791,7 @@ Trả về JSON thuần (không markdown):
                       {/* Progress bar */}
                       {!allDone && (
                         <div style={{ height: 3, background: "#E5E7EB", borderRadius: 2, marginBottom: "0.55rem", overflow: "hidden" }}>
-                          <div style={{ height: "100%", width: `${(doneCount / total) * 100}%`, background: track.color, transition: "width 0.3s" }} />
+                          <div style={{ height: "100%", width: `${((doneCount + skipCount) / total) * 100}%`, background: track.color, transition: "width 0.3s" }} />
                         </div>
                       )}
 
@@ -789,13 +799,14 @@ Trả về JSON thuần (không markdown):
                       {allDone ? (
                         <div style={{ textAlign: "center", padding: "0.8rem 0 0.4rem" }}>
                           <div style={{ fontSize: "2.2rem", marginBottom: "0.35rem" }}>
-                            {score === total ? "🎉" : score >= Math.ceil(total / 2) ? "👍" : "💪"}
+                            {doneCount > 0 && score === doneCount ? "🎉" : score >= Math.ceil(doneCount / 2) ? "👍" : "💪"}
                           </div>
                           <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1rem", fontWeight: 700, color: C.ink }}>
-                            {score} / {total} câu đúng
+                            {score} / {doneCount || total} câu đúng
                           </div>
                           <div style={{ fontSize: "0.72rem", color: C.gray, marginTop: "0.25rem", marginBottom: "0.75rem" }}>
-                            {score === total ? "Hoàn hảo! 🌟" : score >= Math.ceil(total / 2) ? "Khá tốt, tiếp tục cố gắng!" : "Hãy nghe lại và thử lần nữa!"}
+                            {skipCount > 0 && <>Bỏ qua {skipCount} câu · </>}
+                            {score === doneCount && doneCount > 0 ? "Hoàn hảo! 🌟" : score >= Math.ceil(doneCount / 2) ? "Khá tốt, tiếp tục cố gắng!" : "Hãy nghe lại và thử lần nữa!"}
                           </div>
                           <button onClick={() => dicteeReset(track.id)} style={{
                             padding: "0.42rem 1.2rem",
@@ -876,7 +887,10 @@ Trả về JSON thuần (không markdown):
                                   border: `1.5px solid ${track.color}50`,
                                   borderRadius: 8, fontFamily: "inherit",
                                   fontSize: "0.78rem", resize: "none",
-                                  outline: "none", color: C.ink,
+                                  // Without an explicit background the browser
+                                  // paints it white, and C.ink goes light in
+                                  // dark mode — invisible text.
+                                  outline: "none", color: C.ink, background: C.white,
                                   boxSizing: "border-box", lineHeight: 1.5,
                                 }}
                               />
@@ -896,17 +910,33 @@ Trả về JSON thuần (không markdown):
                                 >
                                   Kiểm tra ↵
                                 </button>
+                                {/* Chấm bài trống để xem đáp án — trước đây nút
+                                    này tên "Bỏ qua", nhưng nó chấm chứ không bỏ. */}
                                 <button
                                   onClick={() => dicteeSubmit(track.id, track.sentences)}
+                                  title="Chấm luôn để xem câu đúng"
                                   style={{
-                                    padding: "0.42rem 0.75rem",
+                                    padding: "0.42rem 0.6rem",
                                     background: "transparent",
                                     color: C.gray, border: `1px solid ${C.border}`,
                                     borderRadius: 8, fontSize: "0.68rem",
-                                    cursor: "pointer", fontFamily: "inherit",
+                                    cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
                                   }}
                                 >
-                                  Bỏ qua
+                                  👁 Đáp án
+                                </button>
+                                <button
+                                  onClick={() => dicteeSkip(track.id, total)}
+                                  title="Sang câu khác, không tính câu này"
+                                  style={{
+                                    padding: "0.42rem 0.6rem",
+                                    background: "transparent",
+                                    color: track.color, border: `1px solid ${track.color}55`,
+                                    borderRadius: 8, fontSize: "0.68rem", fontWeight: 600,
+                                    cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
+                                  }}
+                                >
+                                  Câu tiếp →
                                 </button>
                               </div>
                             </div>

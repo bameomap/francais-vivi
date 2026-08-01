@@ -706,7 +706,7 @@ function AppInner() {
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
               {[
                 { fr:"Lire",    vi:"Đọc",  glyph:"Aa", sub:"Đọc hiểu",   color:"#4A90D9", fn:()=>goSection("lecture","lecture")          },
-                { fr:"Écouter", vi:"Nghe", glyph:"))", sub:"Nghe chép",  color:"#7B6CF6", fn:()=>goSection("ecouter","ecouter")          },
+                { fr:"Écouter", vi:"Nghe", glyph:"))", sub:"Nghe theo sách", color:"#7B6CF6", fn:()=>goSection("ecouter","ecouter")       },
                 { fr:"Parler",  vi:"Nói",  glyph:"••", sub:"Chủ điểm nói", color:"#E67E22", fn:()=>goSection("conversation","conversation") },
                 { fr:"Écrire",  vi:"Viết", glyph:"/",  sub:"Luyện viết", color:"#10B981", fn:()=>goSection("writing","writing")          },
               ].map((s, i) => (
@@ -1220,17 +1220,15 @@ function AppInner() {
                   cefr="A2"
                 />)}
             {(view==="ecouter" || view==="dictee" || view==="listening") && (level==="a1"
-              ? <EcouterPanel key={section} words={words} section={section} onBackToParcours={backToParcours} />
+              ? <EcouterPanel key={section} section={section} onBackToParcours={backToParcours} />
               : <EcouterPanel
                   key={section}
-                  words={words}
                   section={section}
                   onBackToParcours={backToParcours}
                   vocabUnits={EDITO_VOCAB_A2_UNITS}
                   audio={EDITO_AUDIO_A2}
                   timings={EDITO_TIMINGS_A2}
                   pourNotes={EDITO_POUR_NOTES_A2}
-                  taskUnits={EDITO_A2_UNITS}
                   levelLabel="Édito A2"
                   cefr="A2"
                 />)}
