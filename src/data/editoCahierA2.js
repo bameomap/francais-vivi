@@ -486,6 +486,29 @@ export const CAHIER_A2 = {
 
     // ── DELF A2 blanc (cahier p. 12-14) ────────────────────────────
     delf: {
+      // The livre's own DELF prep listening (p.26). The book prints three of
+      // its six answer sets as photographs; those options are written out from
+      // the official transcript, where the answer is unambiguous. The audio
+      // lives with the livre tracks, not the cahier ones.
+      coLivre: [
+        {
+          num: 1, page: 26,
+          audioSrc: "https://bameomap.github.io/francais-vivi/010_Edito_A2_Livre.mp3",
+          instruction: "Livre p.26 — vous écoutez 6 annonces diffusées dans des lieux publics. (6 points)",
+          vi: "Nghe 6 thông báo nơi công cộng. Đọc câu hỏi TRƯỚC khi nghe — mỗi thông báo được nghe 2 lần.",
+          type: "choice",
+          transcript: "1. Mesdames et Messieurs, le concert va commencer. Merci d'éteindre vos téléphones portables. — 2. La ville de Bordeaux propose des activités pour la Semaine du patrimoine. Pour regarder le programme, connectez-vous sur le site internet de la ville. — 3. Nous informons les visiteurs que le château va bientôt fermer ses portes. Merci de marcher vers la sortie et bonne fin de journée. — 4. Mesdames et messieurs, notre spectacle de cirque va commencer. Merci d'aller vous asseoir à votre place. — 5. Bienvenue au centre aquatique ! Nous vous informons qu'il est interdit de courir près des piscines. — 6. Les inscriptions pour la sortie en canoë-kayak sont ouvertes. Venez vite réserver votre place pour la journée à la réception du camping.",
+          items: [
+            { q: "1. Qu'est-ce que vous devez faire ?", options: ["Allumer votre téléphone portable.", "Éteindre votre téléphone portable.", "Ranger votre téléphone portable."], answer: "Éteindre votre téléphone portable." },
+            { q: "2. Comment connaître le programme de la Semaine du patrimoine à Bordeaux ?", options: ["Sur le site internet de la ville.", "À l'office de tourisme.", "Par téléphone."], answer: "Sur le site internet de la ville." },
+            { q: "3. Quand entendez-vous ce message ?", options: ["Le matin.", "Le midi.", "Le soir."], answer: "Le soir." },
+            { q: "4. Qu'est-ce que vous devez faire ?", options: ["Aller vous asseoir à votre place.", "Sortir de la salle.", "Éteindre la lumière."], answer: "Aller vous asseoir à votre place." },
+            { q: "5. Qu'est-ce qui est interdit près des piscines ?", options: ["Courir.", "Sauter.", "Marcher."], answer: "Courir." },
+            { q: "6. À quelle activité pouvez-vous vous inscrire ?", options: ["Une sortie en canoë-kayak.", "Un cours de natation.", "Une randonnée en montagne."], answer: "Une sortie en canoë-kayak." },
+          ],
+        },
+      ],
+
       // Compréhension de l'oral — the cahier's own exam. Three of the six
       // questions use photographs as options in the book; they are written out.
       co: [

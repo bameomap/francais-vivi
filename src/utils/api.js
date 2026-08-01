@@ -30,8 +30,14 @@ export async function callAI(prompt) {
     system: "You are a JSON API. Output valid JSON only. No markdown, no backticks. Start with { end with }.",
     messages: [{ role: "user", content: prompt }],
   });
-  const data = await res.json();
+  // Same guard as callAIText: a proxy that 500s returns an empty body, and
+  // res.json() then throws a raw DOM error at the user instead of a message
+  // they can act on.
+  let data;
+  try { data = await res.json(); }
+  catch { throw new Error(`Lỗi kết nối máy chủ (${res.status}). Vui lòng thử lại.`); }
   if (data.error) throw new Error(data.error.message);
+  if (!data.content) throw new Error("Phản hồi không hợp lệ từ AI. Vui lòng thử lại.");
   const raw = data.content.map((c) => c.text || "").join("").trim();
   const s = raw.indexOf("{"), e = raw.lastIndexOf("}");
   if (s === -1 || e === -1) throw new Error("Phản hồi không hợp lệ");
