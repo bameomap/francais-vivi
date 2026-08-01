@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import { takeParcoursFocus } from "../utils/parcoursFocus.js";
 import FocusBar from "./ui/FocusBar.jsx";
+import ProductionBox from "./ProductionBox.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
 import GrammarBlocks from "./GrammarBlocks.jsx";
 import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
@@ -107,7 +108,7 @@ function ScriptBox({ rule, examples }) {
   );
 }
 
-function TopicCard({ topic, index, unitId, pourNotes, onChange }) {
+function TopicCard({ topic, index, unitId, pourNotes, onChange, cefr }) {
   const [open, setOpen] = useState(false);
   const isDone = !!getSubDone(unitId, "parler")["s" + index];
   const notes  = (topic.notes || []).flatMap(k => pourNotes[k] || []);
@@ -187,6 +188,22 @@ function TopicCard({ topic, index, unitId, pourNotes, onChange }) {
         </>
       )}
 
+      {/* Say it, then have it marked — the sheet above is only preparation. */}
+      <div style={{ marginTop: "0.7rem", borderTop: `1px dashed ${C.border}`, paddingTop: "0.6rem" }}>
+        <div style={{ fontSize: "0.6rem", fontWeight: 700, color: C.gray2, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "0.35rem" }}>
+          Đến lượt bạn nói
+        </div>
+        <ProductionBox
+          task={topic.task}
+          mode="oral"
+          cefr={cefr}
+          color={C.gold}
+          targetPhrases={topic.usefulPhrases}
+          storageKey={`parler_draft_${unitId}_s${index}`}
+          rows={4}
+        />
+      </div>
+
       <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.65rem" }}>
         {isDone ? (
           <>
@@ -217,6 +234,7 @@ export default function ProductionOralePanel({
   pourNotes  = EDITO_POUR_NOTES_A2,
   unitPrefix = "b",
   levelLabel = "Édito A2",
+  cefr       = "A2",
 }) {
   const [selUnit,      setSelUnit]      = useState(0);
   const [focusIds,     setFocusIds]     = useState(null);
@@ -309,6 +327,7 @@ export default function ProductionOralePanel({
             unitId={unitId}
             pourNotes={pourNotes}
             onChange={refresh}
+            cefr={cefr}
           />
         ))}
       </div>

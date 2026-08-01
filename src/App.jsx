@@ -1182,6 +1182,7 @@ function AppInner() {
                   pourNotes={EDITO_POUR_NOTES}
                   unitPrefix="u"
                   levelLabel="Édito A1"
+                  cefr="A1"
                 />
               : <ProductionOralePanel
                   onBackToParcours={backToParcours}
