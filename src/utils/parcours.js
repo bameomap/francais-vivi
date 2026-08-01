@@ -4,12 +4,12 @@ import { getStepSubIds, isA2Unit } from "./parcoursSteps.js";
 import { schedulePush } from "./cloudSync.js";
 
 const KEY = "parcours_progress";
-const STEP_IDS    = STEP_DEFS.map(s => s.id);
-const STEP_IDS_A2 = STEP_DEFS_A2.map(s => s.id);
 
-// A2 has a smaller step list than A1; tallying a "b" unit against A1's steps
-// would add phantom slots (écoute, verbes) that can never be completed.
-const stepIdsFor = (unitId) => (isA2Unit(unitId) ? STEP_IDS_A2 : STEP_IDS);
+// A1 has one card per skill; A2 splits each skill across the book's three
+// document→grammar→vocabulary cycles, so its cards carry an explicit subset
+// (see parcoursDataA2.js). Progress itself is still stored per skill, which is
+// why the activity panels needed no changes.
+const stepDefsFor = (unitId) => (isA2Unit(unitId) ? STEP_DEFS_A2 : STEP_DEFS);
 
 // Steps without enumerable content (e.g. U0 has no audio tracks) still get
 // one implicit slot so they can be marked done manually and counted in totals.
@@ -66,23 +66,31 @@ export function unmarkSubDone(unitId, stepId, subId = "_done") {
   save(p);
 }
 
-// Mark / clear the whole step (all sub-lessons) — used by the
-// step-level "Làm lại" affordance in ParcoursPanel.
-export function markStepDone(unitId, stepId) {
+// Mark / clear a step's sub-lessons — used by the step-level "Làm lại"
+// affordance in ParcoursPanel. `subIds` limits the operation to one card's
+// share of a skill (A2 splits e.g. "ecouter" across several cycles); omit it
+// to cover the whole step, as A1 does.
+export function markStepDone(unitId, stepId, subIds = null) {
   const p = getParcoursProgress();
   if (!p[unitId]) p[unitId] = {};
-  const set = {};
-  subIdsFor(unitId, stepId).forEach(id => { set[id] = true; });
+  const set = subIds ? doneSet(p, unitId, stepId) : {};
+  (subIds || subIdsFor(unitId, stepId)).forEach(id => { set[id] = true; });
   p[unitId][stepId] = set;
   save(p);
 }
 
-export function unmarkStepDone(unitId, stepId) {
+export function unmarkStepDone(unitId, stepId, subIds = null) {
   const p = getParcoursProgress();
-  if (p[unitId]) {
+  if (!p[unitId]) return;
+  if (!subIds) {
     delete p[unitId][stepId];
-    save(p);
+  } else {
+    const set = doneSet(p, unitId, stepId);
+    subIds.forEach(id => { delete set[id]; });
+    if (Object.keys(set).length === 0) delete p[unitId][stepId];
+    else p[unitId][stepId] = set;
   }
+  save(p);
 }
 
 export function resetUnit(unitId) {
@@ -94,8 +102,10 @@ export function resetUnit(unitId) {
 }
 
 // { done, total, pct, complete } for one step in one unit.
-export function getStepStat(unitId, stepId) {
-  const ids   = subIdsFor(unitId, stepId);
+// `subIds` narrows the stat to one card's share of the skill (see
+// parcoursDataA2.js); omit it to cover the whole step.
+export function getStepStat(unitId, stepId, subIds = null) {
+  const ids   = subIds || subIdsFor(unitId, stepId);
   const set   = getSubDone(unitId, stepId);
   const done  = ids.filter(id => set[id]).length;
   const total = ids.length;
@@ -110,11 +120,13 @@ export function getUnitStepProgress(unitId) {
   return getParcoursProgress()[unitId] || {};
 }
 
-// Sum done / total sub-lessons across every step of a unit.
+// Sum done / total sub-lessons across every step of a unit. A2's cards each
+// own a disjoint slice of a skill, so summing them still counts every
+// sub-lesson exactly once.
 function unitTally(unitId) {
   let done = 0, total = 0;
-  for (const s of stepIdsFor(unitId)) {
-    const st = getStepStat(unitId, s);
+  for (const s of stepDefsFor(unitId)) {
+    const st = getStepStat(unitId, s.stepKey || s.id, s.subIds);
     done  += st.done;
     total += st.total;
   }

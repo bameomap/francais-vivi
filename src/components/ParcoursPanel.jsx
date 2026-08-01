@@ -250,7 +250,8 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
 
   // Per-step fractional progress (recomputed each render)
   const stats = {};
-  stepDefs.forEach(s => { stats[s.id] = getStepStat(unitId, s.id); });
+  // A2 cards own a slice of a skill (stepKey + subIds); A1 cards own it whole.
+  stepDefs.forEach(s => { stats[s.id] = getStepStat(unitId, s.stepKey || s.id, s.subIds); });
 
   const subDone  = stepDefs.reduce((a, s) => a + stats[s.id].done, 0);
   const subTotal = stepDefs.reduce((a, s) => a + stats[s.id].total, 0);
@@ -258,8 +259,10 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
   const doneSteps = stepDefs.filter(s => stats[s.id].complete).length;
 
   const handleStep = useCallback((step, { redo = false } = {}) => {
+    const key = step.stepKey || step.id;
+
     if (redo) {
-      unmarkStepDone(unitId, step.id);
+      unmarkStepDone(unitId, key, step.subIds);
       refresh();
       return;
     }
@@ -272,25 +275,25 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
       // Opens ReferenceHub at a specific sub-tab
       localStorage.setItem("parcours_ref_tab", step.refTab);
       onNavigate(step.section, step.view);
-    } else if (step.id === "vocab") {
+    } else if (key === "vocab") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("vocab", "edito");
-    } else if (step.id === "grammar") {
+    } else if (key === "grammar") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("grammar", "grammar");
-    } else if (step.id === "lecture") {
+    } else if (key === "lecture") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("lecture", "lecture");
-    } else if (step.id === "ecouter") {
+    } else if (key === "ecouter") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("dictee", "ecouter");
-    } else if (step.id === "ecrire") {
+    } else if (key === "ecrire") {
       localStorage.setItem("parcours_writing_idx", String(unitIdx));
       onNavigate("writing", "writing");
-    } else if (step.id === "parler") {
+    } else if (key === "parler") {
       localStorage.setItem("parcours_unit_idx", String(unitIdx));
       onNavigate("conversation", "conversation");
-    } else if (step.id === "quiz") {
+    } else if (key === "quiz") {
       localStorage.setItem("parcours_quiz_unit", unitId);
       onNavigate("quiz-unit", "quiz-unit");
     } else {
