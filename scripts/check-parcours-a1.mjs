@@ -16,6 +16,7 @@
 
 import {
   PARCOURS_UNITS,
+  STEP_GROUPS_U1, STEP_GROUPS_U2, STEP_GROUPS_U3, STEP_GROUPS_U4,
   STEP_GROUPS_U5, STEP_GROUPS_U6, STEP_GROUPS_U7, STEP_GROUPS_U8, STEP_GROUPS_U9, STEP_GROUPS_U10,
 } from "../src/data/parcoursData.js";
 import { getStepSubIds } from "../src/utils/parcoursSteps.js";
@@ -23,6 +24,7 @@ import { getStepSubIds } from "../src/utils/parcoursSteps.js";
 // Registry of units with their own cycle layout — add new ones here as they
 // get migrated off the flat STEP_GROUPS.
 const UNIT_CYCLES = {
+  u1: STEP_GROUPS_U1, u2: STEP_GROUPS_U2, u3: STEP_GROUPS_U3, u4: STEP_GROUPS_U4,
   u5: STEP_GROUPS_U5, u6: STEP_GROUPS_U6, u7: STEP_GROUPS_U7, u8: STEP_GROUPS_U8, u9: STEP_GROUPS_U9,
   u10: STEP_GROUPS_U10,
 };

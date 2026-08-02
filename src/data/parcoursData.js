@@ -516,11 +516,277 @@ export const STEP_GROUPS_U9 = [
 ];
 export const STEP_DEFS_U9 = STEP_GROUPS_U9.flatMap(g => g.steps);
 
+// Unité 1 "Je suis…" — se présenter, le festival et les nationalités, faire
+// connaissance.
+export const STEP_GROUPS_U1 = [
+  {
+    id: "vong1", label: "Vòng 1 · Se présenter", emoji: "🪪",
+    steps: [
+      { id:"v1_lecture", stepKey:"lecture", subIds:["u1-livre-langues-en-duo"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Langues en duo", section:"lecture", view:"lecture" },
+      { id:"v1_ecouter", stepKey:"ecouter", subIds:["u1-b"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Parlez en français !", section:"dictee", view:"dictee" },
+      { id:"v1_grammar", stepKey:"grammar", subIds:["p1","p3"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Mạo từ xác định · quel/quelle", section:"grammar", view:"grammar" },
+      { id:"v1_vocab", stepKey:"vocab", subIds:["u1g1","u1g2"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Les loisirs · les nombres 32-69", section:"vocab", view:"edito" },
+      { id:"v1_parler", stepKey:"parler", subIds:["s0","s3"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Speak-dating · se présenter en détail", section:"conversation", view:"conversation" },
+      { id:"v1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Profil personnel", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "vong2", label: "Vòng 2 · Le festival et les nationalités", emoji: "🎨",
+    steps: [
+      { id:"v2_lecture", stepKey:"lecture", subIds:["u1-livre-festival-angouleme"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Au Festival d'Angoulême", section:"lecture", view:"lecture" },
+      { id:"v2_ecouter", stepKey:"ecouter", subIds:["u1-f"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"En route pour le festival !", section:"dictee", view:"dictee" },
+      { id:"v2_grammar", stepKey:"grammar", subIds:["p0","p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Tính từ quốc tịch · giới từ trước tên nước", section:"grammar", view:"grammar" },
+      { id:"v2_vocab", stepKey:"vocab", subIds:["u1g3"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Les pays et nationalités", section:"vocab", view:"edito" },
+      { id:"v2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Nationalité d'une personnalité", section:"conversation", view:"conversation" },
+      { id:"v2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Présentation d'un artiste", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "vong3", label: "Vòng 3 · Faire connaissance", emoji: "🚗",
+    steps: [
+      { id:"v3_ecouter", stepKey:"ecouter", subIds:["u1-e"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"En voiture avec BlaBlaCar !", section:"dictee", view:"dictee" },
+      { id:"v3_grammar", stepKey:"grammar", subIds:["p4","p5"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Đặt câu hỏi · les nombres 32-100", section:"grammar", view:"grammar" },
+      { id:"v3_vocab", stepKey:"vocab", subIds:["u1g4","u1g5"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"L'identité · les nombres 70-100", section:"vocab", view:"edito" },
+      { id:"v3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Questionnaire d'identité", section:"conversation", view:"conversation" },
+    ],
+  },
+  {
+    id: "bilan", label: "Tổng kết", emoji: "⚫",
+    steps: [
+      { id:"bilan_lecture", stepKey:"lecture", subIds:["u1-cahier-festival-bd","u1-delf-francofolies"],
+        icon:"📜", kind:"Đọc thêm", color:"#059669", sub:"Fiche auteur · Francofolies (DELF)", section:"lecture", view:"lecture" },
+      { id:"bilan_verbes", stepKey:"verbes", subIds:["present"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Ôn tập présent", section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"bilan_phono", stepKey:"phono", subIds:["son_s","son_z","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [s] et [z]", section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"bilan_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"Quiz bài", color:"#E8574A", sub:"Quiz tổng hợp toàn bài", section:"quiz-unit", view:"quiz-unit" },
+    ],
+  },
+];
+export const STEP_DEFS_U1 = STEP_GROUPS_U1.flatMap(g => g.steps);
+
+// Unité 2 "Près de moi" — le quartier et le logement, les goûts et les
+// loisirs, la famille.
+export const STEP_GROUPS_U2 = [
+  {
+    id: "vong1", label: "Vòng 1 · Le quartier et le logement", emoji: "🏘️",
+    steps: [
+      { id:"v1_lecture", stepKey:"lecture", subIds:["u2-livre-tu-habites-ou"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Tu habites où ?", section:"lecture", view:"lecture" },
+      { id:"v1_grammar", stepKey:"grammar", subIds:["p0","p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Mạo từ xác định/bất định · il y a", section:"grammar", view:"grammar" },
+      { id:"v1_vocab", stepKey:"vocab", subIds:["u2g1"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Les lieux", section:"vocab", view:"edito" },
+      { id:"v1_parler", stepKey:"parler", subIds:["s0","s3"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Parler de son quartier · chez les commerçants", section:"conversation", view:"conversation" },
+    ],
+  },
+  {
+    id: "vong2", label: "Vòng 2 · Les goûts et les loisirs", emoji: "🎵",
+    steps: [
+      { id:"v2_ecouter", stepKey:"ecouter", subIds:["u2-b"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Tu aimes le cinéma ?", section:"dictee", view:"dictee" },
+      { id:"v2_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Động từ đuôi -ER ở hiện tại", section:"grammar", view:"grammar" },
+      { id:"v2_vocab", stepKey:"vocab", subIds:["u2g2","u2g3","u2g4"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Musique · cinéma · sport", section:"vocab", view:"edito" },
+      { id:"v2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Exprimer ses goûts", section:"conversation", view:"conversation" },
+    ],
+  },
+  {
+    id: "vong3", label: "Vòng 3 · La famille", emoji: "👨‍👩‍👧",
+    steps: [
+      { id:"v3_lecture", stepKey:"lecture", subIds:["u2-livre-on-invite-qui"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"On invite qui ?", section:"lecture", view:"lecture" },
+      { id:"v3_ecouter", stepKey:"ecouter", subIds:["u2-e"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Dans la belle famille", section:"dictee", view:"dictee" },
+      { id:"v3_grammar", stepKey:"grammar", subIds:["p3","p4"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Tính từ sở hữu · nghề nghiệp giống đực/cái", section:"grammar", view:"grammar" },
+      { id:"v3_vocab", stepKey:"vocab", subIds:["u2g5","u2g6","u2g7"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Gia đình · tình trạng hôn nhân · nghề nghiệp", section:"vocab", view:"edito" },
+      { id:"v3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Présenter sa famille", section:"conversation", view:"conversation" },
+      { id:"v3_ecrire", stepKey:"ecrire", subIds:["w0","w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Portrait collectif · famille", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan", label: "Tổng kết", emoji: "⚫",
+    steps: [
+      { id:"bilan_lecture", stepKey:"lecture", subIds:["u2-cahier-comment-tu-vas","u2-delf-blanche"],
+        icon:"📜", kind:"Đọc thêm", color:"#059669", sub:"Comment tu vas ? · Week-end (DELF)", section:"lecture", view:"lecture" },
+      { id:"bilan_ecouter", stepKey:"ecouter", subIds:["u2-essentiel"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Compréhension orale cuối bài", section:"dictee", view:"dictee" },
+      { id:"bilan_verbes", stepKey:"verbes", subIds:["present"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Ôn tập présent", section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"bilan_phono", stepKey:"phono", subIds:["son_y","son_u","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [y] et [u]", section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"bilan_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"Quiz bài", color:"#E8574A", sub:"Quiz tổng hợp toàn bài", section:"quiz-unit", view:"quiz-unit" },
+    ],
+  },
+];
+export const STEP_DEFS_U2 = STEP_GROUPS_U2.flatMap(g => g.steps);
+
+// Unité 3 "Qu'est-ce qu'on mange ?" — faire les courses, en cuisine, au
+// restaurant.
+export const STEP_GROUPS_U3 = [
+  {
+    id: "vong1", label: "Vòng 1 · Faire les courses", emoji: "🛒",
+    steps: [
+      { id:"v1_lecture", stepKey:"lecture", subIds:["u3-livre-mon-panier","u3-livre-les-francais-courses"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Mon panier · Les Français et les courses", section:"lecture", view:"lecture" },
+      { id:"v1_ecouter", stepKey:"ecouter", subIds:["u3-b"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"À l'épicerie bio", section:"dictee", view:"dictee" },
+      { id:"v1_grammar", stepKey:"grammar", subIds:["p0","p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Số ít/số nhiều · giới từ chỉ nơi chốn", section:"grammar", view:"grammar" },
+      { id:"v1_vocab", stepKey:"vocab", subIds:["u3g1","u3g2","u3g3","u3g4"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Cửa hàng · trái cây · rau củ · các loại thực phẩm", section:"vocab", view:"edito" },
+      { id:"v1_parler", stepKey:"parler", subIds:["s0","s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Acheter dans une épicerie · parler des commerces", section:"conversation", view:"conversation" },
+      { id:"v1_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Courses", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "vong2", label: "Vòng 2 · En cuisine", emoji: "🍳",
+    steps: [
+      { id:"v2_ecouter", stepKey:"ecouter", subIds:["u3-f"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"En cuisine !", section:"dictee", view:"dictee" },
+      { id:"v2_grammar", stepKey:"grammar", subIds:["p2","p4"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Mạo từ phân lượng · acheter/payer/aller/faire", section:"grammar", view:"grammar" },
+      { id:"v2_vocab", stepKey:"vocab", subIds:["u3g5","u3g6"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Số lượng · phương thức thanh toán", section:"vocab", view:"edito" },
+      { id:"v2_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Pique-nique", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "vong3", label: "Vòng 3 · Au restaurant", emoji: "🍽️",
+    steps: [
+      { id:"v3_lecture", stepKey:"lecture", subIds:["u3-livre-le-plat-du-jour"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Le plat du jour", section:"lecture", view:"lecture" },
+      { id:"v3_ecouter", stepKey:"ecouter", subIds:["u3-g"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Au restaurant", section:"dictee", view:"dictee" },
+      { id:"v3_grammar", stepKey:"grammar", subIds:["p3"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Động từ -IR — choisir/finir", section:"grammar", view:"grammar" },
+      { id:"v3_vocab", stepKey:"vocab", subIds:["u3g7","u3g8","u3g9","u3g10","u3g11"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Ở nhà hàng · đồ uống · món ăn · tráng miệng · bát đĩa", section:"vocab", view:"edito" },
+      { id:"v3_parler", stepKey:"parler", subIds:["s2","s3"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Commander au restaurant", section:"conversation", view:"conversation" },
+      { id:"v3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Plat préféré", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan", label: "Tổng kết", emoji: "⚫",
+    steps: [
+      { id:"bilan_lecture", stepKey:"lecture", subIds:["u3-delf-annonces-canada"],
+        icon:"📜", kind:"Đọc thêm", color:"#059669", sub:"Annonces au bureau (DELF)", section:"lecture", view:"lecture" },
+      { id:"bilan_verbes", stepKey:"verbes", subIds:["present"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Ôn tập présent", section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"bilan_phono", stepKey:"phono", subIds:["nasal_an","nasal_on","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les voyelles nasales [ɑ̃] et [ɔ̃]", section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"bilan_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"Quiz bài", color:"#E8574A", sub:"Quiz tổng hợp toàn bài", section:"quiz-unit", view:"quiz-unit" },
+    ],
+  },
+];
+export const STEP_DEFS_U3 = STEP_GROUPS_U3.flatMap(g => g.steps);
+
+// Unité 4 "C'est où ?" — présenter sa ville, la vie de quartier, se déplacer
+// en ville.
+export const STEP_GROUPS_U4 = [
+  {
+    id: "vong1", label: "Vòng 1 · Présenter sa ville", emoji: "🏙️",
+    steps: [
+      { id:"v1_lecture", stepKey:"lecture", subIds:["u4-livre-artistes-grenoble"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Des artistes à Grenoble !", section:"lecture", view:"lecture" },
+      { id:"v1_ecouter", stepKey:"ecouter", subIds:["u4-b"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Bienvenue à Toulouse !", section:"dictee", view:"dictee" },
+      { id:"v1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"C'est un(e) — il est/elle est", section:"grammar", view:"grammar" },
+      { id:"v1_vocab", stepKey:"vocab", subIds:["u4g1","u4g2","u4g3","u4g4"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Đường phố · khu phố · địa danh · con người", section:"vocab", view:"edito" },
+      { id:"v1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Présenter son quartier", section:"conversation", view:"conversation" },
+      { id:"v1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Blog ville/quartier", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "vong2", label: "Vòng 2 · La vie de quartier", emoji: "🔁",
+    steps: [
+      { id:"v2_ecouter", stepKey:"ecouter", subIds:["u4-c"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Vous habitez à Lyon ?", section:"dictee", view:"dictee" },
+      { id:"v2_grammar", stepKey:"grammar", subIds:["p2","p3"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Liên từ · tần suất", section:"grammar", view:"grammar" },
+      { id:"v2_vocab", stepKey:"vocab", subIds:["u4g10"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"La fréquence", section:"vocab", view:"edito" },
+      { id:"v2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Enquête sur les lieux", section:"conversation", view:"conversation" },
+      { id:"v2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Post réseau social", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "vong3", label: "Vòng 3 · Se déplacer en ville", emoji: "🚌",
+    steps: [
+      { id:"v3_lecture", stepKey:"lecture", subIds:["u4-livre-prenez-bus-tram","u4-livre-metro-velo"],
+        icon:"📜", kind:"Đọc", color:"#059669", sub:"Prenez le bus, le tram… · En métro ou à vélo ?", section:"lecture", view:"lecture" },
+      { id:"v3_ecouter", stepKey:"ecouter", subIds:["u4-f"],
+        icon:"🎧", kind:"Nghe", color:"#0891B2", sub:"Comment on va aux Arènes ?", section:"dictee", view:"dictee" },
+      { id:"v3_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"L'impératif", section:"grammar", view:"grammar" },
+      { id:"v3_vocab", stepKey:"vocab", subIds:["u4g5","u4g6","u4g7","u4g8","u4g9"],
+        icon:"📖", kind:"Từ vựng", color:"#4A90D9", sub:"Phương tiện · chỉ đường · số đếm lớn", section:"vocab", view:"edito" },
+      { id:"v3_parler", stepKey:"parler", subIds:["s2","s3"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Demander le chemin · dans la ville", section:"conversation", view:"conversation" },
+      { id:"v3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Audioguide", section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan", label: "Tổng kết", emoji: "⚫",
+    steps: [
+      { id:"bilan_lecture", stepKey:"lecture", subIds:["u4-cahier-visite-rennes","u4-delf-grenoble"],
+        icon:"📜", kind:"Đọc thêm", color:"#059669", sub:"J'attends votre visite ! · Grenoble (DELF)", section:"lecture", view:"lecture" },
+      { id:"bilan_verbes", stepKey:"verbes", subIds:["present","futur_pro"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Ôn tập présent · futur proche", section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"bilan_phono", stepKey:"phono", subIds:["son_wa","son_ui","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [wa] et [ɥi]", section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"bilan_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"Quiz bài", color:"#E8574A", sub:"Quiz tổng hợp toàn bài", section:"quiz-unit", view:"quiz-unit" },
+    ],
+  },
+];
+export const STEP_DEFS_U4 = STEP_GROUPS_U4.flatMap(g => g.steps);
+
 const UNIT_STEP_GROUPS = {
+  u1: STEP_GROUPS_U1, u2: STEP_GROUPS_U2, u3: STEP_GROUPS_U3, u4: STEP_GROUPS_U4,
   u5: STEP_GROUPS_U5, u6: STEP_GROUPS_U6, u7: STEP_GROUPS_U7, u8: STEP_GROUPS_U8, u9: STEP_GROUPS_U9,
   u10: STEP_GROUPS_U10,
 };
 const UNIT_STEP_DEFS = {
+  u1: STEP_DEFS_U1, u2: STEP_DEFS_U2, u3: STEP_DEFS_U3, u4: STEP_DEFS_U4,
   u5: STEP_DEFS_U5, u6: STEP_DEFS_U6, u7: STEP_DEFS_U7, u8: STEP_DEFS_U8, u9: STEP_DEFS_U9,
   u10: STEP_DEFS_U10,
 };
