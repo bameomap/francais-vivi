@@ -5,6 +5,7 @@
 export const PARCOURS_UNITS_A2 = [
   { id:"b1", num:1, fr:"Nouvelles vies", vi:"Cuộc sống mới", grammar:"Passé composé · Négation · il y a/pendant/depuis", emoji:"🌱" },
   { id:"b2", num:2, fr:"Je me souviens", vi:"Tôi nhớ lại", grammar:"L'imparfait · Pronoms y/en · Place de l'adjectif", emoji:"📷" },
+  { id:"b3", num:3, fr:"Comme à la maison", vi:"Như ở nhà", grammar:"Pronoms relatifs qui/que/où · Comparaison · Si + présent", emoji:"🏠" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -239,9 +240,119 @@ export const STEP_GROUPS_B2 = [
 
 export const STEP_DEFS_B2 = STEP_GROUPS_B2.flatMap(g => g.steps);
 
+// ── Unité 3 · Comme à la maison ────────────────────────────────────
+// This unit's grammar (qui/que/où, comparaison, si) doesn't introduce a new
+// verb tense to drill, so — unlike b1/b2 — there's no "verbes" reference-hub
+// card here. The book's own vocab split (p.45 "Le logement et la location"
+// vs p.49 "Le mobilier et le cadre de vie") maps directly onto cycle 1 vs 2.
+export const STEP_GROUPS_B3 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Chercher un logement",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b3-livre-comment-trouver-toit"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Étudiants : comment trouver un toit ?",
+        section:"lecture", view:"lecture" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b3-livre-a-louer"],
+        icon:"📜", kind:"Đọc B", color:"#059669", sub:"À louer · petites annonces",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b3-c"],
+        icon:"🎧", kind:"Nghe C", color:"#0891B2", sub:"Je suis intéressé par votre annonce",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Pronoms relatifs qui, que, où",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b3g1","b3g2","b3g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le logement et la location · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Louer un logement",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Rédiger une petite annonce",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Logements atypiques",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b3-livre-cent-jours-cabine"],
+        icon:"📜", kind:"Đọc D", color:"#059669", sub:"Cent jours en cabine",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b3-e"],
+        icon:"🎧", kind:"Nghe E", color:"#0891B2", sub:"Vivre dans un bus",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La comparaison",
+        section:"grammar", view:"grammar" },
+      { id:"c2_culture", stepKey:"lecture", subIds:["b3-livre-architecture-horta"],
+        icon:"🏛️", kind:"Văn hóa F", color:"#7B6CF6", sub:"L'architecture de Victor Horta",
+        section:"lecture", view:"lecture" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b3g4","b3g5"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Mobilier & cadre de vie · 2 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Ville ou campagne ?",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1","w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Logement original · présenter son quartier",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Bon voisinage",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b3-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"La ville du quart d'heure",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b3-livre-voisins-solidaires"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Voisins solidaires",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b3-livre-entre-voisins"],
+        icon:"📜", kind:"Đọc I", color:"#059669", sub:"Entre voisins",
+        section:"lecture", view:"lecture" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Si + présent",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Consoler un voisin",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w3"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Réconforter un voisin (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_j","son_hu","son_w","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [j] [ɥ] [w]",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Organiser une colocation",
+        section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b3-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Compréhension de l'oral",
+        section:"delf-a2", view:"delf-a2" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B3 = STEP_GROUPS_B3.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

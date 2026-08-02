@@ -179,4 +179,71 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-3", unit: 3, title: "Comme à la maison",
+    speakingPractice: [
+      {
+        title: "Louer un logement",
+        notes: ["b3-c"],
+        task: "À deux ! Posez des questions à votre voisin(e) sur le logement décrit dans son annonce (superficie, loyer, charges…) ou un autre logement de son choix.",
+        usefulPhrases: [
+          "Je suis intéressé(e) par votre annonce.",
+          "Quelle est la superficie du logement ?",
+          "Quel est le montant du loyer ?",
+          "Ça inclut les charges ?",
+        ],
+      },
+      {
+        title: "Ville ou campagne ?",
+        notes: ["b3-e"],
+        task: "À deux ! Une personne veut vivre en ville et l'autre préfère la campagne. Défendez votre position avec des comparaisons (plus/moins/aussi… que, meilleur, mieux).",
+        usefulPhrases: [
+          "Je veux déménager à la campagne pour avoir une vie meilleure.",
+          "C'est plus calme qu'en ville.",
+          "On a un meilleur cadre de vie.",
+          "On vit mieux ici.",
+        ],
+      },
+      {
+        title: "Consoler un voisin",
+        notes: ["b3-i"],
+        task: "Un(e) ami(e) vous raconte un problème (objet perdu, voisin bruyant…). Réagissez : exprimez votre déception pour lui/elle, puis consolez-le/la.",
+        usefulPhrases: [
+          "Zut ! Mince ! C'est dommage.",
+          "Ce n'est pas grave.",
+          "Ça va aller.",
+          "Courage ! Ne t'inquiète pas.",
+        ],
+      },
+      {
+        title: "Organiser une colocation",
+        notes: ["b3-atelier"],
+        task: "Atelier médiation : avec votre groupe, mettez-vous d'accord sur les caractéristiques du logement idéal pour une colocation, puis présentez votre projet à la classe.",
+        usefulPhrases: [
+          "Je préfère habiter en ville : c'est plus animé qu'à la campagne.",
+          "Une maison, c'est mieux qu'un appartement parce que c'est plus grand.",
+          "Si vous êtes d'accord, on peut prendre un logement meublé.",
+          "J'ai trouvé un appartement qui a trois chambres et un grand salon.",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Rédiger une petite annonce",
+        task: "Vous avez un appartement à louer. Écrivez une petite annonce pour le décrire (localisation, pièces, loyer, caractéristiques).",
+      },
+      {
+        title: "Un logement original",
+        task: "Pensez à un endroit agréable, original ou amusant où dormir (bateau, bus, cabane…) et décrivez-le.",
+      },
+      {
+        title: "Présenter son quartier",
+        task: "Présentez votre quartier ou votre village sur un forum. Décrivez ses espaces, ses bâtiments, son ambiance, ses points positifs et négatifs.",
+      },
+      {
+        title: "Réconforter un voisin (DELF · 50 mots min.)",
+        task: "Un(e) ami(e) vous écrit que ses nouveaux voisins sont très bruyants et l'empêchent de dormir. Répondez-lui pour le/la réconforter et lui proposer une solution (50 mots minimum).",
+      },
+    ],
+  },
 ];

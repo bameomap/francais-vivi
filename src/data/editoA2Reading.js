@@ -358,6 +358,184 @@ Pour Estelle, responsable d'une boutique de produits locaux en Normandie, l'acha
       { id: "b2-vacances2-q7", type: "open", prompt: "Production orale : qu'est-ce que vous rapportez de vos vacances, en général ?" },
     ],
   },
+
+  // ═══════════════════ Unité 3 — Comme à la maison ═══════════════════
+
+  // ── A · Étudiants : comment trouver un toit ? (p. 41) ───────────────
+  {
+    id: "b3-livre-comment-trouver-toit",
+    unit: 3,
+    unitTitle: "Comme à la maison",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 41,
+    title: "Étudiants : comment trouver un toit ?",
+    instruction: "Lisez l'article et repérez les pronoms relatifs qui, que, où.",
+    text: `Chercher un logement quand on est étudiant n'est pas toujours simple. Environ un tiers des étudiants habitent encore chez leurs parents, un autre tiers vit en location (seul ou en couple), et un peu plus d'un dixième choisit la résidence universitaire. Heureusement, il existe plusieurs bons plans pour trouver une location qui reste abordable.
+
+La colocation est une option très populaire : on partage un appartement avec un ou plusieurs colocataires, des amis ou des personnes qu'on ne connaît pas encore. Cela permet d'avoir un logement plus grand pour un loyer moins cher, et une colocation qui se passe bien est aussi l'occasion de partager de bons moments.
+
+On peut aussi chercher un peu à l'extérieur de la ville, où les loyers sont souvent plus bas. Certaines associations proposent des petits logements aménagés dans des fermes, en pleine nature.
+
+Autre solution intéressante : la cohabitation intergénérationnelle. Une personne âgée propose une chambre gratuite ou à faible loyer à un jeune, en échange d'un peu de présence et de petits services — s'occuper du courrier, arroser les plantes. C'est une solution pratique pour tout le monde.
+
+Enfin, les foyers pour jeunes travailleurs accueillent les 16-30 ans : on y trouve des jeunes actifs, des stagiaires et des étudiants étrangers — de très bons endroits pour se faire des amis.`,
+    questions: [
+      { id: "b3-toit-q1", type: "open", prompt: "Est-ce qu'il existe des logements réservés aux étudiants dans votre pays ?" },
+      { id: "b3-toit-q2", type: "multiple_choice", prompt: "Quelle proportion d'étudiants vit en résidence universitaire ?", options: ["Environ un tiers.", "Un peu plus d'un dixième.", "La moitié."], answer: "Un peu plus d'un dixième." },
+      { id: "b3-toit-q3", type: "short_answer", prompt: "Quel est l'avantage principal de la colocation ?", answer: "Avoir un logement plus grand pour un loyer moins cher, et partager de bons moments." },
+      { id: "b3-toit-q4", type: "short_answer", prompt: "En quoi consiste la cohabitation intergénérationnelle ?", answer: "Une personne âgée propose une chambre gratuite ou à faible loyer à un jeune, en échange de présence et de petits services." },
+      { id: "b3-toit-q5", type: "multiple_choice", prompt: "Les foyers pour jeunes travailleurs sont accessibles à quel âge ?", options: ["16-30 ans.", "18-25 ans.", "Tous les âges."], answer: "16-30 ans." },
+      { id: "b3-toit-q6", type: "multi_select", prompt: "Grammaire : relevez les pronoms relatifs (qui/que/où) dans le texte.", options: ["une location qui reste abordable", "des personnes qu'on ne connaît pas encore", "où les loyers sont souvent plus bas", "on partage un appartement"], answer: ["une location qui reste abordable", "des personnes qu'on ne connaît pas encore", "où les loyers sont souvent plus bas"] },
+      { id: "b3-toit-q7", type: "open", prompt: "Production orale : vous préférez quel type d'hébergement ? Pourquoi ?" },
+    ],
+  },
+
+  // ── B · À louer (p. 43) ──────────────────────────────────────────
+  {
+    id: "b3-livre-a-louer",
+    unit: 3,
+    unitTitle: "Comme à la maison",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 43,
+    title: "À louer",
+    instruction: "Lisez les trois petites annonces et comparez-les.",
+    text: `Studio lumineux
+Studio de 30 m² à louer dans un quartier calme. Aménagé sous les toits, au cinquième étage sans ascenseur, très clair. Une grande pièce principale avec une cuisine américaine et une salle d'eau. 560 € par mois, charges comprises.
+
+Beau T2 rénové
+Appartement deux pièces entièrement rénové, dans un bel immeuble ancien du centre-ville, avec une cave. Il comprend une chambre avec un coin bureau, un séjour, une petite cuisine équipée, une salle de bain et un balcon. Loyer de 870 € par mois.
+
+Coliving à Nantes
+Cette maison neuve, située à proximité du centre, propose 15 chambres et studios meublés en location. Ses espaces communs sont : deux cuisines, un grand salon confortable, une véranda, une buanderie et un jardin partagé. De 600 € à 980 € par mois.`,
+    questions: [
+      { id: "b3-louer-q1", type: "open", prompt: "D'après vous, à qui s'adresse chaque annonce ?" },
+      { id: "b3-louer-q2", type: "short_answer", prompt: "Où se trouve le studio, et à quel étage ?", answer: "Dans un quartier calme, aménagé sous les toits, au cinquième étage sans ascenseur." },
+      { id: "b3-louer-q3", type: "short_answer", prompt: "Combien de pièces a le T2 rénové ? Quelles sont ses caractéristiques ?", answer: "Deux pièces : une chambre avec coin bureau, un séjour, une petite cuisine équipée, une salle de bain, un balcon et une cave." },
+      { id: "b3-louer-q4", type: "multiple_choice", prompt: "Quelle annonce propose la fourchette de prix la plus large ?", options: ["Le studio.", "Le T2 rénové.", "Le coliving."], answer: "Le coliving." },
+      { id: "b3-louer-q5", type: "multiple_choice", prompt: "Que veut dire « une cuisine américaine » ?", options: ["Une cuisine ouverte sur le salon.", "Une cuisine très grande.", "Une cuisine avec des appareils américains."], answer: "Une cuisine ouverte sur le salon." },
+      { id: "b3-louer-q6", type: "open", prompt: "Production écrite : vous avez un appartement à louer. Écrivez une petite annonce pour le décrire." },
+    ],
+  },
+
+  // ── D · Cent jours en cabine (p. 46) ─────────────────────────────
+  {
+    id: "b3-livre-cent-jours-cabine",
+    unit: 3,
+    unitTitle: "Comme à la maison",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 46,
+    title: "Cent jours en cabine",
+    instruction: "Lisez ce court récit (inspiré du thème du chapitre) et répondez aux questions.",
+    text: `À quarante ans, Léa décide de partir seule pour un long voyage en bateau : cent jours en mer, plusieurs continents, une dizaine de pays. Pendant tout le voyage, elle va loger seule dans une petite cabine.
+
+La cabine est plus grande qu'elle ne l'imaginait sur les photos de l'annonce. Dès qu'elle ouvre la porte, elle sait qu'elle va s'y plaire : un lit deux places avec une épaisse couette, un petit bureau et sa chaise, un canapé, des placards, une télévision, une table de chevet avec une lampe, une salle d'eau, un petit réfrigérateur et, luxe suprême, un balcon avec deux chaises et une table.
+
+Elle pose sa valise, s'assoit sur le balcon et regarde la mer. « Je crois que je vais très bien vivre ici », se dit-elle.`,
+    questions: [
+      { id: "b3-cabine-q1", type: "open", prompt: "Où peut-on dormir quand on est en voyage ?" },
+      { id: "b3-cabine-q2", type: "short_answer", prompt: "Que va faire Léa ? Pendant combien de temps ?", answer: "Un voyage en bateau, seule, pendant cent jours." },
+      { id: "b3-cabine-q3", type: "true_false", prompt: "Vrai ou faux ? La cabine est plus petite que Léa ne l'imaginait.", answer: false },
+      { id: "b3-cabine-q4", type: "short_answer", prompt: "Citez trois meubles présents dans la cabine.", answer: "Par exemple : un lit deux places, un bureau, un canapé, des placards, une table de chevet, une lampe." },
+      { id: "b3-cabine-q5", type: "true_false", prompt: "Vrai ou faux ? Ce logement plaît à Léa.", answer: true },
+      { id: "b3-cabine-q6", type: "open", prompt: "Production écrite : pensez à un endroit agréable, original ou amusant où dormir, et décrivez-le." },
+    ],
+  },
+
+  // ── F · L'architecture de Victor Horta (Culture(s), p. 48) ──────
+  {
+    id: "b3-livre-architecture-horta",
+    unit: 3,
+    unitTitle: "Comme à la maison",
+    source: "livre",
+    section: "culture(s)",
+    page: 48,
+    title: "L'architecture de Victor Horta",
+    instruction: "Lisez l'article sur l'Art nouveau à Bruxelles et répondez aux questions.",
+    text: `L'Art nouveau est un style artistique qu'on retrouve dans l'architecture et les arts décoratifs. Il s'inspire des formes de la nature et il est souvent très coloré. L'architecte Victor Horta a développé ce style en Belgique, à la fin du 19e siècle et au début du 20e siècle. Voici quelques-unes de ses réalisations, toutes à Bruxelles.
+
+L'hôtel Tassel, sa première grande œuvre, se situe dans un quartier populaire et vivant ; on le considère comme le bâtiment fondateur de l'Art nouveau à Bruxelles.
+
+L'hôtel Solvay, une magnifique maison qu'on peut admirer sur une avenue chic et commerçante, est ouvert à la visite depuis quelques années.
+
+Le musée Horta, installé dans une petite rue calme et tranquille, est en réalité l'ancienne maison personnelle de l'architecte — elle a conservé une grande partie de sa décoration intérieure.
+
+L'hôtel Van Eetvelde se trouve au milieu d'espaces verts, non loin des bureaux d'institutions européennes.
+
+Enfin, le Centre belge de la bande dessinée occupe d'anciens grands magasins transformés en musée, dans le centre historique de la ville.`,
+    questions: [
+      { id: "b3-horta-q1", type: "open", prompt: "Aimez-vous l'architecture ? Connaissez-vous des architectes célèbres ?" },
+      { id: "b3-horta-q2", type: "short_answer", prompt: "De quel style architectural parle ce document ? Qui l'a développé ?", answer: "L'Art nouveau, développé en Belgique par l'architecte Victor Horta." },
+      { id: "b3-horta-q3", type: "short_answer", prompt: "Qu'est-ce que les bâtiments présentés ont en commun ?", answer: "Ce sont tous des réalisations de Victor Horta, à Bruxelles." },
+      { id: "b3-horta-q4", type: "true_false", prompt: "Vrai ou faux ? L'hôtel Tassel est considéré comme le bâtiment fondateur de l'Art nouveau à Bruxelles.", answer: true },
+      { id: "b3-horta-q5", type: "true_false", prompt: "Vrai ou faux ? Le musée Horta était autrefois la maison personnelle de l'architecte.", answer: true },
+      { id: "b3-horta-q6", type: "short_answer", prompt: "Où se trouve l'hôtel Van Eetvelde ?", answer: "Au milieu d'espaces verts, près des bureaux d'institutions européennes." },
+      { id: "b3-horta-q7", type: "open", prompt: "Que pensez-vous du style Art nouveau ? Cela vous donne-t-il envie de visiter ces bâtiments ?" },
+    ],
+  },
+
+  // ── H · Voisins solidaires (vidéo/culture, p. 50) ───────────────
+  {
+    id: "b3-livre-voisins-solidaires",
+    unit: 3,
+    unitTitle: "Comme à la maison",
+    source: "livre",
+    section: "culture(s)",
+    page: 50,
+    title: "Voisins solidaires",
+    instruction: "Lisez ce reportage (résumé du document vidéo) et répondez aux questions.",
+    text: `Mireille a 75 ans. Elle vit seule dans un petit appartement depuis qu'elle est veuve, il y a dix ans. Enfin, seule… pas vraiment : chaque jour à 16 heures, Inès, sa jeune voisine de 9 ans, vient faire ses devoirs chez elle, et Mireille lui prépare un bon goûter. Le soir, c'est la maman d'Inès, Dona, qui passe apporter des courses à Mireille et récupérer sa fille.
+
+Dona et Inès habitent au troisième étage de cet immeuble un peu spécial : c'est ce qu'on appelle un habitat solidaire intergénérationnel. Le principe est simple — on mélange les âges et les situations, on se rend service, et on partage des moments et des espaces communs.
+
+Ainsi, dans cet immeuble : Arthur sort les poubelles pour deux voisins plus âgés ; Baptiste s'occupe du local à vélos ; Jade s'occupe du potager avec Dona ; un voisin plus âgé donne des conseils de jardinage et tond la pelouse ; et un autre habitant s'occupe du poulailler commun. Un voisin, Siméon, aide régulièrement Dona pour de petites réparations chez elle.
+
+« Être mieux, vivre mieux, habiter mieux » : voilà ce que cet habitat solidaire propose à tous ses habitants.`,
+    questions: [
+      { id: "b3-voisins-q1", type: "open", prompt: "Regardez le titre. Qui sont, à votre avis, les personnes de ce reportage ?" },
+      { id: "b3-voisins-q2", type: "true_false", prompt: "Vrai ou faux ? Toutes les personnes de l'immeuble ont le même âge.", answer: false },
+      { id: "b3-voisins-q3", type: "true_false", prompt: "Vrai ou faux ? Les habitants s'entendent bien et se rendent des services.", answer: true },
+      { id: "b3-voisins-q4", type: "matching", prompt: "Qui fait quoi ? Associez.", answer: "Arthur → sort les poubelles de deux voisins âgés\nBaptiste → s'occupe du local à vélos\nJade → s'occupe du potager avec Dona\nSiméon → aide Dona pour de petites réparations" },
+      { id: "b3-voisins-q5", type: "short_answer", prompt: "Que fait Inès chez Mireille chaque jour à 16 heures ?", answer: "Elle vient faire ses devoirs, et Mireille lui prépare un goûter." },
+      { id: "b3-voisins-q6", type: "open", prompt: "Et vous, vous avez quelles relations avec vos voisins ?" },
+    ],
+  },
+
+  // ── I · Entre voisins (p. 51) ────────────────────────────────────
+  {
+    id: "b3-livre-entre-voisins",
+    unit: 3,
+    unitTitle: "Comme à la maison",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 51,
+    title: "Entre voisins",
+    instruction: "Lisez ces échanges sur une application de voisinage et répondez aux questions.",
+    text: `Voisins solidaires — REJOINDRE →
+
+Hier
+Camille : J'ai perdu mon chat, Câlin… Si vous le voyez, contactez-moi s'il vous plaît !
+Antoine : Mince ! Je suis sûr qu'il va revenir, ne t'inquiète pas !
+Leïla : Courage Camille ! J'espère que tu vas le retrouver et que ça va aller !
+
+Aujourd'hui
+Leïla : Je donne un fauteuil, il est en très bon état. Ça vous intéresse ?
+Antoine : Ah zut, j'ai acheté un nouveau fauteuil hier, c'est dommage !
+Camille : Ça m'intéresse ! Il est comment ? Merci !
+Leïla : Il est bleu foncé. Si tu es disponible, tu peux passer le voir ce soir !
+Camille : Ce soir, je ne suis pas là…
+Leïla : C'est pas grave, tu peux passer ce week-end si ça t'arrange.`,
+    questions: [
+      { id: "b3-voisins2-q1", type: "open", prompt: "Qu'est-ce qu'on peut demander à ses voisins, selon vous ?" },
+      { id: "b3-voisins2-q2", type: "multiple_choice", prompt: "Qui donne un meuble ?", options: ["Camille", "Antoine", "Leïla"], answer: "Leïla" },
+      { id: "b3-voisins2-q3", type: "short_answer", prompt: "Que s'est-il passé avec le chat de Camille ?", answer: "Elle l'a perdu." },
+      { id: "b3-voisins2-q4", type: "short_answer", prompt: "Pourquoi Antoine n'est-il pas intéressé par le fauteuil ?", answer: "Parce qu'il a acheté un nouveau fauteuil la veille." },
+      { id: "b3-voisins2-q5", type: "multi_select", prompt: "Relevez les expressions qui servent à consoler ou réconforter.", options: ["Ne t'inquiète pas !", "Courage !", "Ça m'intéresse !", "C'est pas grave."], answer: ["Ne t'inquiète pas !", "Courage !", "C'est pas grave."] },
+      { id: "b3-voisins2-q6", type: "open", prompt: "Production écrite (DELF, 50 mots min.) : un(e) ami(e) vous écrit que ses nouveaux voisins sont très bruyants et l'empêchent de dormir. Répondez-lui pour le/la réconforter et lui proposer une solution." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

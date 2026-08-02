@@ -174,4 +174,77 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 3 · Comme à la maison ──────────────────────────────────
+  "b3-c": [
+    {
+      heading: "Pour louer un logement",
+      structure: "Mở đầu cuộc gọi hỏi thuê nhà: « Je suis intéressé(e) par votre annonce. » Hỏi thông tin bằng « Quel(le) est + danh từ ? » — quelle est la superficie, quel est le montant du loyer. Hỏi có bao gồm gì không: « Ça inclut + danh từ ? »",
+      phrases: [
+        { fr: "Je suis intéressé(e) par votre annonce.", vi: "Tôi quan tâm đến tin đăng của bạn." },
+        { fr: "Quelle est la superficie du logement ?", vi: "Diện tích chỗ ở là bao nhiêu?" },
+        { fr: "Quel est le montant du loyer ?", vi: "Tiền thuê nhà là bao nhiêu?" },
+        { fr: "Ça inclut les charges ?", vi: "Cái đó có bao gồm phí dịch vụ không?" },
+        { fr: "Quand est-ce que je peux venir visiter ?", vi: "Khi nào tôi có thể đến xem nhà?" },
+      ],
+    },
+  ],
+
+  "b3-e": [
+    {
+      heading: "Pour comparer deux logements ou deux façons de vivre",
+      structure: "Dùng cấu trúc so sánh học ở ngữ pháp: plus/moins/aussi + tính từ + que (so sánh tính chất); autant de + danh từ + que (so sánh số lượng); meilleur/mieux cho trường hợp bất quy tắc.",
+      phrases: [
+        { fr: "C'est plus calme qu'en ville.", vi: "Ở đây yên tĩnh hơn thành phố." },
+        { fr: "On a autant de pièces que dans notre ancien appartement.", vi: "Chúng tôi có số phòng bằng căn hộ cũ." },
+        { fr: "On a un meilleur cadre de vie.", vi: "Chúng tôi có môi trường sống tốt hơn." },
+        { fr: "On vit mieux ici qu'avant.", vi: "Ở đây sống tốt hơn trước." },
+      ],
+    },
+  ],
+
+  "b3-i": [
+    {
+      heading: "Pour exprimer sa déception",
+      structure: "Ba câu cảm thán ngắn, đi từ nhẹ tới mạnh hơn một chút: Zut ! (thân mật) → Mince ! (thân mật, hơi mạnh hơn) → C'est dommage. (trung tính, có thể dùng trang trọng hơn).",
+      phrases: [
+        { fr: "Zut !", vi: "Chết thật!" },
+        { fr: "Mince !", vi: "Ôi trời!" },
+        { fr: "C'est dommage.", vi: "Tiếc quá." },
+      ],
+    },
+    {
+      heading: "Pour consoler, réconforter",
+      structure: "Trấn an người khác: « Ce n'est pas grave » (không sao đâu), « Ça va aller » (rồi sẽ ổn thôi), « Courage ! » (cố lên!), « Ne t'inquiète pas » (đừng lo).",
+      phrases: [
+        { fr: "Ce n'est pas grave.", vi: "Không sao đâu." },
+        { fr: "Ça va aller.", vi: "Rồi sẽ ổn thôi." },
+        { fr: "Courage !", vi: "Cố lên!" },
+        { fr: "Ne t'inquiète pas.", vi: "Đừng lo lắng." },
+      ],
+    },
+  ],
+
+  "b3-atelier": [
+    {
+      heading: "Pour choisir un logement (en groupe)",
+      structure: "Đặt câu hỏi để cả nhóm thống nhất tiêu chí trước khi tìm nhà: nơi ở, loại nhà, số phòng, có nội thất hay không, không gian phụ (vườn, ban công, ga-ra…).",
+      phrases: [
+        { fr: "Où voulez-vous habiter ?", vi: "Các bạn muốn sống ở đâu?" },
+        { fr: "Est-ce mieux de prendre un appartement ou une maison ?", vi: "Nên thuê căn hộ hay nhà riêng thì hơn?" },
+        { fr: "Combien de chambres sont nécessaires ?", vi: "Cần bao nhiêu phòng ngủ?" },
+        { fr: "Préférez-vous un logement meublé ou non meublé ?", vi: "Các bạn thích nhà có sẵn nội thất hay không?" },
+      ],
+    },
+    {
+      heading: "Pour mettre vos informations en commun",
+      structure: "Trình bày ý kiến và đi đến thống nhất chung, dùng lại cấu trúc so sánh + mệnh đề si vừa học.",
+      phrases: [
+        { fr: "Je préfère habiter en ville : c'est plus animé qu'à la campagne.", vi: "Tôi thích sống ở thành phố hơn: nhộn nhịp hơn ở quê." },
+        { fr: "Une maison, c'est mieux qu'un appartement parce que c'est plus grand.", vi: "Nhà riêng thì tốt hơn căn hộ vì rộng hơn." },
+        { fr: "Si vous êtes d'accord, on peut prendre un logement meublé.", vi: "Nếu mọi người đồng ý, ta có thể chọn nhà có sẵn nội thất." },
+        { fr: "J'ai trouvé un appartement qui a trois chambres et un grand salon.", vi: "Tôi tìm được một căn hộ có ba phòng ngủ và phòng khách rộng." },
+      ],
+    },
+  ],
 };

@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -416,6 +416,173 @@ export const EDITO_GRAMMAR_A2 = [
           "Les touristes ont goûté d'excellentes épices marocaines. — Khách du lịch đã nếm thử gia vị Ma-rốc tuyệt hảo.",
           "Nous avons vu de gros bateaux blancs. — Chúng tôi thấy những chiếc thuyền trắng to lớn.",
           "La famille a très bien mangé dans ce bon restaurant toulousain. — Cả nhà đã ăn rất ngon ở nhà hàng Toulouse này.",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b3", num:"3", title:"Comme à la maison", points:[
+
+      // ── 1. Les pronoms relatifs qui, que, où ──────────────────
+      {
+        topic:"Les pronoms relatifs qui, que, où — Nối hai câu làm một",
+        summary:"Thay vì lặp lại một danh từ ở câu thứ hai, dùng MỘT trong ba chữ này để nối hai câu lại. Chọn chữ nào phụ thuộc vào VAI TRÒ của danh từ đó trong câu thứ hai: chủ ngữ → qui, tân ngữ trực tiếp → que, nơi chốn → où.",
+        blocks:[
+          { type:"lead", text:"So sánh: “Tôi thuê một căn hộ. Căn hộ đó rất đẹp.” — hai câu lặp “căn hộ”. Tiếng Pháp nối gọn lại bằng một pronom relatif: “Je loue un appartement qui est très beau.”" },
+
+          { type:"formula",
+            parts:["danh từ", "qui / que / où", "phần còn lại của câu 2"],
+            example:"J'habite dans une maison qui est grande. — Tôi sống trong một ngôi nhà mà nó (= ngôi nhà) rất lớn.",
+            note:"Cả ba đại từ đều đứng ngay sau danh từ mà chúng thay thế, không có khoảng cách." },
+
+          { type:"heading", text:"Chọn đại từ nào — nhìn vai trò trong câu 2" },
+          { type:"table",
+            caption:"Danh từ đó làm gì trong câu thứ hai?",
+            headers:["Đại từ", "Thay cho vai trò", "Ví dụ"],
+            rows:[
+              ["qui", "CHỦ NGỮ (đứng trước động từ)", "Il y a des offres qui mettent en contact propriétaires et locataires."],
+              ["que", "TÂN NGỮ TRỰC TIẾP (đứng sau động từ)", "Des personnes que vous ne connaissez pas."],
+              ["où", "NƠI CHỐN (bổ ngữ chỉ nơi chốn)", "Des lieux où on trouve beaucoup de jeunes actifs."],
+            ] },
+
+          { type:"cards", items:[
+            { badge:"qui", color:"#1B3A6B", title:"qui — luôn có ĐỘNG TỪ theo ngay sau",
+              lines:["Vì “qui” đóng vai chủ ngữ của mệnh đề sau, nó không bao giờ đứng một mình — theo sau luôn là một động từ chia."],
+              examples:[
+                { fr:"C'est la chambre qui coûte 650 euros.", vi:"Đó là căn phòng có giá 650 euro." },
+              ] },
+            { badge:"que", color:"#10B981", title:"que — có CHỦ NGỮ KHÁC + động từ theo ngay sau",
+              lines:["“que” làm tân ngữ, nên ngay sau nó là một chủ ngữ mới rồi mới đến động từ.", "que → qu' trước nguyên âm."],
+              examples:[
+                { fr:"Regarde cette annonce que je viens de lire !", vi:"Nhìn cái tin đăng mà tôi vừa đọc kìa!" },
+              ] },
+            { badge:"où", color:"#F5A623", title:"où — chỉ nơi chốn (đôi khi cả thời gian)",
+              lines:["Thay cho “dans + nơi”, “à + nơi”… — không dùng cho người hay vật thường."],
+              examples:[
+                { fr:"Voici la chambre où je dors.", vi:"Đây là căn phòng nơi tôi ngủ." },
+              ] },
+          ] },
+
+          { type:"heading", text:"Mẹo phân biệt qui vs que nhanh" },
+          { type:"callout", variant:"tip", title:"Thử bỏ đại từ ra, xem câu 2 còn thiếu gì",
+            text:"Je loue un studio ___ est dans une ferme. → bỏ trống rồi thử: “___ est dans une ferme” — thiếu CHỦ NGỮ → phải là qui.\nLe salon est la pièce ___ je préfère. → “je préfère ___” — thiếu TÂN NGỮ (tôi thích CÁI GÌ) → phải là que." },
+
+          { type:"compare", items:[
+            { wrong:"C'est un homme que est sympathique.", right:"C'est un homme qui est sympathique.", why:"“est sympathique” cần chủ ngữ ngay trước — đó là vai trò của qui, không phải que." },
+            { wrong:"Voici l'appartement qui j'aime.", right:"Voici l'appartement que j'aime.", why:"“j'aime” đã có chủ ngữ “j'” rồi — appartement là tân ngữ của “aime” → dùng que." },
+            { wrong:"Le quartier que j'habite est calme.", right:"Le quartier où j'habite est calme.", why:"“habiter” đi với nơi chốn (habiter DANS un quartier) → dùng où, không phải que." },
+          ] },
+        ],
+        examples:[
+          "Ces colocataires peuvent être des amis ou des personnes que vous ne connaissez pas. — Những người ở ghép này có thể là bạn bè hoặc những người mà bạn không quen.",
+          "Ce sont des lieux où on trouve beaucoup de jeunes actifs. — Đó là những nơi có nhiều người trẻ đang đi làm.",
+          "Mon propriétaire est un homme que j'aime beaucoup. — Chủ nhà tôi là một người đàn ông mà tôi rất quý.",
+          "J'habite dans un foyer où il y a beaucoup de jeunes actifs. — Tôi sống trong một khu nhà tập thể có rất nhiều người trẻ đi làm.",
+        ]
+      },
+
+      // ── 2. La comparaison ──────────────────────────────────────
+      {
+        topic:"La comparaison — Hơn, kém, bằng",
+        summary:"Ba mức so sánh (moins/aussi/plus) áp dụng lên BỐN loại từ khác nhau (trạng từ, tính từ, động từ, danh từ) — mỗi loại ghép với “que” theo một khuôn hơi khác nhau. Và 4 cặp từ bất quy tắc phải học thuộc riêng.",
+        blocks:[
+          { type:"lead", text:"Tiếng Việt chỉ cần thêm “hơn”/“kém”/“bằng”. Tiếng Pháp cũng đơn giản, nhưng khuôn câu đổi theo loại từ đi kèm — nắm 4 khuôn này là xong cả bài." },
+
+          { type:"formula",
+            parts:["moins / aussi / plus", "tính từ · trạng từ · danh từ · động từ", "que"],
+            example:"La chambre de Tom est plus grande que la chambre d'Anna. — Phòng của Tom rộng hơn phòng của Anna.",
+            note:"moins = kém hơn, aussi = bằng, plus = hơn. “que” luôn đóng vai trò như chữ “hơn/bằng…so với” trong tiếng Việt." },
+
+          { type:"heading", text:"4 khuôn câu — theo loại từ đi kèm" },
+          { type:"table",
+            caption:"Vị trí của moins/aussi/plus thay đổi theo loại từ",
+            headers:["Loại từ", "Khuôn câu", "Ví dụ"],
+            rows:[
+              ["trạng từ (adverbe)", "moins/aussi/plus + trạng từ + que", "Nous habitons plus loin que vous."],
+              ["tính từ (adjectif)", "moins/aussi/plus + tính từ + que", "La chambre de Tom est plus grande que la chambre d'Anna."],
+              ["động từ (verbe)", "verbe + moins/autant/plus + que", "Les jeunes déménagent plus que les personnes âgées."],
+              ["danh từ (nom)", "moins de/autant de/plus de + danh từ + que", "Il y a plus de chambres que dans notre maison."],
+            ] },
+
+          { type:"callout", variant:"warn", title:"Chú ý: “aussi” đổi thành “autant” với động từ và danh từ",
+            text:"Với trạng từ/tính từ: dùng aussi (aussi grande que…).\nVới động từ/danh từ: dùng autant / autant de (déménager autant que…, autant de chambres que…).\nĐây là lỗi hay gặp nhất của bài — nhớ “aussi” đi với tính từ/trạng từ, “autant” đi với động từ/danh từ." },
+
+          { type:"heading", text:"4 cặp bất quy tắc — không ghép plus + bon/bien" },
+          { type:"table",
+            caption:"Những từ này có dạng so sánh hơn RIÊNG, không theo khuôn plus + từ",
+            headers:["Từ gốc", "Kém hơn", "Bằng", "Hơn (bất quy tắc)"],
+            rows:[
+              ["bon(ne) — tính từ", "moins bon(ne)", "aussi bon(ne)", "meilleur(e)"],
+              ["mauvais(e) — tính từ", "moins mauvais(e)", "aussi mauvais(e)", "plus mauvais(e) / pire"],
+              ["bien — trạng từ", "moins bien", "aussi bien", "mieux"],
+              ["mal — trạng từ", "moins mal", "aussi mal", "plus mal / pire"],
+            ] },
+
+          { type:"cards", items:[
+            { badge:"★", color:"#10B981", title:"meilleur(e) — so sánh hơn của BON (tính từ)",
+              lines:["Không bao giờ nói “plus bon” — luôn dùng meilleur(e), hợp giống/số với danh từ."],
+              examples:[
+                { fr:"Mon four n'est pas très bon, je dois acheter un meilleur four.", vi:"Lò nướng của tôi không tốt lắm, tôi phải mua một cái lò tốt hơn." },
+              ] },
+            { badge:"★", color:"#7B6CF6", title:"mieux — so sánh hơn của BIEN (trạng từ)",
+              lines:["mieux KHÔNG đổi theo giống/số (vì là trạng từ, bổ nghĩa cho động từ, không phải danh từ)."],
+              examples:[
+                { fr:"On vit bien en ville, mais on vit mieux à la campagne.", vi:"Ở thành phố sống cũng ổn, nhưng ở quê sống tốt hơn." },
+              ] },
+          ] },
+
+          { type:"compare", items:[
+            { wrong:"Ce logement est plus bon que l'autre.", right:"Ce logement est meilleur que l'autre.", why:"bon → meilleur(e), không ghép plus + bon." },
+            { wrong:"On vit plus bien à la campagne.", right:"On vit mieux à la campagne.", why:"bien → mieux, không ghép plus + bien." },
+            { wrong:"Il y a aussi de chambres que chez moi.", right:"Il y a autant de chambres que chez moi.", why:"Với danh từ, dùng autant de, không phải aussi de." },
+          ] },
+        ],
+        examples:[
+          "Elle est moins grande qu'une cuisine classique, mais elle est aussi bien. — Nó nhỏ hơn một cái bếp bình thường, nhưng vẫn ổn không kém.",
+          "On a autant de pièces que dans notre ancien appartement. — Chúng tôi có số phòng bằng căn hộ cũ.",
+          "On sort plus qu'avant ! — Bọn tôi ra ngoài nhiều hơn trước!",
+          "Le désordre est pire dans un bus que dans un appartement. — Sự bừa bộn trong xe bus tệ hơn trong căn hộ.",
+          "On a un meilleur cadre de vie. — Chúng tôi có môi trường sống tốt hơn.",
+        ]
+      },
+
+      // ── 3. La condition avec si ────────────────────────────────
+      {
+        topic:"Si + présent — Điều kiện đơn giản, việc CÓ THỂ xảy ra",
+        summary:"Cấu trúc điều kiện cơ bản nhất: nếu vế “si” là thật/có thể, thì vế kia là kết quả — ở HIỆN TẠI (việc luôn đúng) hoặc MỆNH LỆNH (yêu cầu/gợi ý ngay lúc nói).",
+        blocks:[
+          { type:"lead", text:"Khác với “nếu… thì sẽ” trong tiếng Việt (thường nghĩ tới tương lai xa), câu điều kiện này nói về việc CÓ THỂ xảy ra bất cứ lúc nào — nên vế sau chia ở hiện tại hoặc mệnh lệnh, KHÔNG phải tương lai." },
+
+          { type:"formula",
+            parts:["Si", "chủ ngữ + hiện tại", "chủ ngữ + hiện tại / mệnh lệnh"],
+            example:"Si tu es disponible, tu peux passer chez moi. — Nếu bạn rảnh, bạn có thể ghé qua nhà tôi.",
+            note:"Vế “si” LUÔN ở hiện tại. Vế kết quả có thể ở hiện tại (sự thật chung) hoặc mệnh lệnh (đề nghị/yêu cầu ngay)." },
+
+          { type:"table",
+            caption:"Hai kiểu vế kết quả",
+            headers:["Vế kết quả", "Khi nào dùng", "Ví dụ"],
+            rows:[
+              ["hiện tại", "Kết quả LUÔN đúng, như một quy luật", "Si je veux lire, je vais à la bibliothèque."],
+              ["mệnh lệnh (impératif)", "Yêu cầu/gợi ý/đề nghị ngay lúc nói", "Si tu es malade, va à la pharmacie !"],
+            ] },
+
+          { type:"callout", variant:"warn", title:"si → s' trước il/ils",
+            text:"“si” rút gọn thành “s'” CHỈ trước il và ils (không rút trước elle/on/elles):\nS'il pleut, on peut aller au Centre de la BD.\nSi elle vient, on sera contents. (KHÔNG rút — elle không rút)" },
+
+          { type:"heading", text:"Không nhầm với đại từ “si” khác" },
+          { type:"text", text:"Vế “si” điều kiện luôn đứng đầu câu (hoặc giữa câu, ngăn cách bằng dấu phẩy) và đi kèm một mệnh đề kết quả riêng — khác với “si” dùng để trả lời khẳng định cho câu hỏi phủ định (Tu n'aimes pas ça ? — Si, j'aime bien !)." },
+
+          { type:"compare", items:[
+            { wrong:"Si tu es disponible, tu passeras chez moi.", right:"Si tu es disponible, tu peux passer chez moi.", why:"Vế kết quả của “si + hiện tại” không chia ở tương lai — dùng hiện tại hoặc mệnh lệnh." },
+            { wrong:"Si il pleut, on reste à la maison.", right:"S'il pleut, on reste à la maison.", why:"“si” phải rút thành “s'” trước “il”." },
+          ] },
+        ],
+        examples:[
+          "Si tes voisins sont bruyants, change d'appartement ! — Nếu hàng xóm bạn ồn ào, đổi căn hộ khác đi!",
+          "Si vous avez un problème, vous pouvez m'appeler. — Nếu bạn có vấn đề gì, bạn có thể gọi tôi.",
+          "S'il fait froid, on met le chauffage. — Nếu trời lạnh, chúng tôi bật lò sưởi.",
+          "Si vous voyez un chat noir, contactez-moi s'il vous plaît ! — Nếu bạn thấy một con mèo đen, làm ơn liên hệ với tôi!",
         ]
       },
     ]

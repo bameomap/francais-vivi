@@ -563,6 +563,46 @@ export const CAHIER_A2 = {
       ],
     },
   },
+
+  b3: {
+    // DELF A2 blanc (livre p. 54) — no cahier data built yet for this unit,
+    // so only the livre's own DELF prep listening is included here (same
+    // pattern as b1.delf.coLivre).
+    delf: {
+      coLivre: [
+        {
+          num: 1, page: 54,
+          audioSrc: "https://bameomap.github.io/francais-vivi/031_Edito_A2_Livre.mp3",
+          instruction: "Livre p.54, Exercice 3 — vous écoutez un message téléphonique. (6 points)",
+          vi: "Nghe tin nhắn thoại của Manon Ladier rồi trả lời 6 câu hỏi.",
+          type: "choice",
+          transcript: "Bonjour, c'est Manon Ladier. Je vous appelle parce qu'on a des questions pour la location de l'appartement rue Lamartine. Il est à quel étage ? Ce n'est pas écrit dans l'annonce. Et est-ce qu'il y a déjà un lave-linge dans l'appartement ? Parce qu'on n'a pas de machine à laver. Et la troisième chose, c'est... est-ce qu'il y a un parc ou des espaces verts dans le quartier ? Voilà, c'est tout. Ah non, on voudrait faire la visite jeudi à 15 h si c'est possible pour vous. Rappelez-moi quand vous pouvez au 06 09 92 66 65. Merci !",
+          items: [
+            { q: "1. Que souhaite Manon Ladier ?", options: ["Louer une maison.", "Louer un appartement.", "Acheter un appartement."], answer: "Louer un appartement." },
+            { q: "2. Sa première question porte sur :", options: ["le prix.", "la superficie.", "l'étage."], answer: "l'étage." },
+            { q: "3. Elle demande s'il y a déjà :", options: ["une machine à laver.", "une machine à café.", "une lampe."], answer: "une machine à laver." },
+            { q: "4. Qu'est-ce qu'elle voudrait dans le quartier ?", options: ["Un cinéma.", "Une piscine.", "Un parc ou un espace vert."], answer: "Un parc ou un espace vert." },
+            { q: "5. Quand voudrait-elle faire la visite ?", options: ["Le matin.", "L'après-midi.", "Le soir."], answer: "L'après-midi." },
+            { q: "6. Que faut-il faire ?", options: ["La rappeler.", "Attendre son prochain appel.", "Lui envoyer un message."], answer: "La rappeler." },
+          ],
+        },
+        {
+          num: 2, page: 54,
+          audioSrc: "https://bameomap.github.io/francais-vivi/032_Edito_A2_Livre.mp3",
+          instruction: "Livre p.54, Exercice 4 — vous écoutez 4 dialogues informels. Associez chacun à sa situation de communication. (7 points)",
+          vi: "Nghe 4 đoạn hội thoại và chọn đúng tình huống giao tiếp cho từng đoạn (6 tình huống có sẵn, chỉ 4 đúng).",
+          type: "choice",
+          transcript: "Dialogue 1 — La femme : Ça va ? — L'homme : Super ! J'ai trouvé un appartement ! — La femme : Mais c'est génial ! Tu dois être content. — L'homme : Très ! Allez, je t'invite à dîner, on va fêter ça. || Dialogue 2 — L'homme : Bonjour monsieur, je cherche l'hôtel Solvay... — La femme : Il est tout près. Continuez tout droit sur l'avenue. Vous allez le voir vite : c'est un très beau bâtiment. || Dialogue 3 — L'homme : Qu'est-ce que tu fais ? — La femme : Je fixe l'étagère. — L'homme : Tu veux que je t'aide ? — La femme : Ah oui, je veux bien. Merci ! || Dialogue 4 — La femme : Excusez-moi pour le retard. Je n'ai pas fait attention à l'heure. Je suis désolée. — L'homme : Ben maintenant vous êtes là. On commence la visite ?",
+          items: [
+            { q: "Dialogue 1 (2 points) — quelle situation ?", options: ["Demander/donner un renseignement", "Inviter quelqu'un à dîner", "Présenter quelqu'un", "Proposer de l'aide", "Raconter un souvenir", "S'excuser"], answer: "Inviter quelqu'un à dîner" },
+            { q: "Dialogue 2 (2 points) — quelle situation ?", options: ["Demander/donner un renseignement", "Inviter quelqu'un à dîner", "Présenter quelqu'un", "Proposer de l'aide", "Raconter un souvenir", "S'excuser"], answer: "Demander/donner un renseignement" },
+            { q: "Dialogue 3 (2 points) — quelle situation ?", options: ["Demander/donner un renseignement", "Inviter quelqu'un à dîner", "Présenter quelqu'un", "Proposer de l'aide", "Raconter un souvenir", "S'excuser"], answer: "Proposer de l'aide" },
+            { q: "Dialogue 4 (1 point) — quelle situation ?", options: ["Demander/donner un renseignement", "Inviter quelqu'un à dîner", "Présenter quelqu'un", "Proposer de l'aide", "Raconter un souvenir", "S'excuser"], answer: "S'excuser" },
+          ],
+        },
+      ],
+    },
+  },
 };
 
 // Answers are compared loosely: case, accents on the apostrophe, doubled
