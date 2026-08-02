@@ -107,4 +107,71 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 2 · Je me souviens ─────────────────────────────────────
+  "b2-a": [
+    {
+      heading: "Pour raconter un souvenir",
+      structure: "Hai động từ chính để mở đầu một kỷ niệm: « se souvenir DE + danh từ » (nhớ về), « se rappeler + danh từ » (không có « de »! nhớ lại). Sau đó thường chuyển sang imparfait để tả chi tiết.",
+      phrases: [
+        { fr: "Je me souviens des confitures de ma grand-mère.", vi: "Tôi nhớ về mứt của bà tôi." },
+        { fr: "Je me rappelle les bugnes qu'elle nous préparait.", vi: "Tôi nhớ lại món bugnes mà bà từng làm." },
+        { fr: "Ça sentait bon !", vi: "Thơm quá!" },
+        { fr: "C'est gravé dans ma mémoire.", vi: "Nó khắc sâu trong ký ức tôi." },
+        { fr: "Ça me rappelle mon enfance.", vi: "Cái đó làm tôi nhớ lại tuổi thơ." },
+      ],
+    },
+  ],
+
+  "b2-imparfait": [
+    {
+      heading: "Pour parler d'une habitude passée",
+      structure: "Dùng imparfait để kể một điều TỪNG lặp đi lặp lại, rồi đối lập với hiện tại. Cấu trúc quen thuộc: « Avant, + imparfait. Maintenant/Aujourd'hui, + hiện tại. »",
+      phrases: [
+        { fr: "Avant, je partais avec mes parents.", vi: "Trước đây, tôi hay đi cùng bố mẹ." },
+        { fr: "À cette époque, on allait chaque année à la mer.", vi: "Hồi đó, năm nào chúng tôi cũng ra biển." },
+        { fr: "Quand j'étais petit(e), nous nous voyions tous les jours.", vi: "Hồi bé, ngày nào chúng tôi cũng gặp nhau." },
+        { fr: "Maintenant, c'est différent : je pars avec des amis.", vi: "Giờ thì khác rồi: tôi đi cùng bạn bè." },
+      ],
+    },
+  ],
+
+  "b2-e": [
+    {
+      heading: "Pour interroger sur un souvenir",
+      structure: "Hỏi về trải nghiệm quá khứ, thường dùng thì hiện tại (vì hỏi về cảm nhận BÂY GIỜ về việc đã qua) hoặc futur proche (hỏi ý định).",
+      phrases: [
+        { fr: "Quels souvenirs vous gardez de votre expérience ?", vi: "Bạn giữ lại những kỷ niệm gì từ trải nghiệm đó?" },
+        { fr: "Vous êtes content(e) de votre expérience ?", vi: "Bạn có hài lòng với trải nghiệm đó không?" },
+        { fr: "Vous allez recommencer l'expérience ?", vi: "Bạn có định làm lại trải nghiệm đó không?" },
+        { fr: "Ça s'est bien passé ?", vi: "Mọi việc có suôn sẻ không?" },
+      ],
+    },
+  ],
+
+  "b2-h": [
+    {
+      heading: "Pour parler des souvenirs qu'on rapporte de vacances",
+      structure: "Dùng « rapporter/ramener + danh từ » (mang về). Nhớ đặt tính từ đúng vị trí — tính từ ngắn/quen thuộc (joli, bon, petit) đứng TRƯỚC danh từ.",
+      phrases: [
+        { fr: "En général, je rapporte une petite spécialité locale.", vi: "Thường thì tôi mang về một món đặc sản địa phương nho nhỏ." },
+        { fr: "J'aime bien ramener un joli objet artisanal.", vi: "Tôi thích mang về một món đồ thủ công xinh xắn." },
+        { fr: "Ce n'est pas du tout mon truc, les souvenirs-gadgets.", vi: "Đồ lưu niệm kiểu gadget chả phải gu tôi tí nào." },
+        { fr: "J'achète toujours d'excellentes épices.", vi: "Tôi luôn mua gia vị cực ngon." },
+      ],
+    },
+  ],
+
+  "b2-atelier": [
+    {
+      heading: "Pour présenter une exposition photo",
+      structure: "Giới thiệu một chủ đề trước lớp. Mở đầu: « Nous avons choisi + danh từ ». Tả thời kỳ bằng imparfait (vì đó là thói quen/đặc trưng của cả một giai đoạn): « on portait, on écoutait, on utilisait ».",
+      phrases: [
+        { fr: "Nous avons choisi les années 80.", vi: "Chúng tôi đã chọn thập niên 80." },
+        { fr: "À cette époque, on portait des vêtements très colorés.", vi: "Hồi đó, người ta mặc quần áo rất sặc sỡ." },
+        { fr: "On écoutait cette musique tout le temps.", vi: "Người ta nghe loại nhạc này suốt ngày." },
+        { fr: "Cette photo montre un objet emblématique de cette période.", vi: "Bức ảnh này cho thấy một món đồ tiêu biểu của thời kỳ đó." },
+      ],
+    },
+  ],
 };

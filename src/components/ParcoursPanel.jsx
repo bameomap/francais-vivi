@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { C } from "../constants.js";
 import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS, getStepGroupsFor, getStepDefsFor } from "../data/parcoursData.js";
+import { getStepGroupsForA2, getStepDefsForA2 } from "../data/parcoursDataA2.js";
 import { isA2Unit } from "../utils/parcoursSteps.js";
 import { setParcoursFocus } from "../utils/parcoursFocus.js";
 import {
@@ -256,11 +257,11 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
 
-  // A2 always passes its own groups; an A1 unit may define its own cycle
-  // layout (e.g. u10 — see STEP_GROUPS_U10) and otherwise falls back to the
-  // flat stepGroups/stepDefs prop passed by ParcoursPanel.
-  const groups = isA2Unit(unitId) ? stepGroups : getStepGroupsFor(unitId);
-  const defs   = isA2Unit(unitId) ? stepDefs   : getStepDefsFor(unitId);
+  // Each unit (A1 or A2) may define its own cycle layout (e.g. A1's u10 — see
+  // STEP_GROUPS_U10, or A2's b2 — see STEP_GROUPS_B2) and otherwise falls
+  // back to that level's flat step list.
+  const groups = isA2Unit(unitId) ? getStepGroupsForA2(unitId) : getStepGroupsFor(unitId);
+  const defs   = isA2Unit(unitId) ? getStepDefsForA2(unitId)   : getStepDefsFor(unitId);
 
   // Per-step fractional progress (recomputed each render)
   const stats = {};

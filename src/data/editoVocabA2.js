@@ -162,4 +162,94 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b2", num: "2", title: "Je me souviens",
+    color: "#7C3AED", bg: "#EDE9FE",
+    groups: [
+      {
+        id: "b2g1", label: "La mémoire", icon: "🧠",
+        words: [
+          { fr:"l'album photos (m.)",      vi:"cuốn album ảnh", ex_fr:"Je cherche l'album photos bleu.", ex_vi:"Tôi đang tìm cuốn album ảnh màu xanh." },
+          { fr:"oublier",                  vi:"quên", ex_fr:"Ils ne veulent pas oublier mon anniversaire.", ex_vi:"Họ không muốn quên sinh nhật tôi." },
+          { fr:"raconter un souvenir",     vi:"kể lại một kỷ niệm", ex_fr:"Je vais vous raconter mes souvenirs.", ex_vi:"Tôi sẽ kể cho các bạn nghe những kỷ niệm của tôi." },
+          { fr:"replonger dans son enfance", vi:"đắm chìm lại vào tuổi thơ", ex_fr:"J'ai envie de replonger dans mon enfance.", ex_vi:"Tôi muốn được đắm chìm lại vào tuổi thơ của mình." },
+          { fr:"se rappeler",              vi:"nhớ lại (nhớ ra)", ex_fr:"Je me rappelle les bugnes qu'elle nous préparait.", ex_vi:"Tôi nhớ lại món bugnes mà bà thường làm cho chúng tôi." },
+          { fr:"se souvenir (de)",         vi:"nhớ, ghi nhớ", ex_fr:"Je me souviens des confitures de ma grand-mère.", ex_vi:"Tôi nhớ mứt của bà tôi." },
+        ]
+      },
+      {
+        id: "b2g2", label: "Les cinq sens", icon: "👃",
+        words: [
+          { fr:"le bruit",                 vi:"tiếng động, âm thanh", ex_fr:"Le bruit du feu me rappelle mon grand-père.", ex_vi:"Tiếng lửa cháy làm tôi nhớ đến ông tôi." },
+          { fr:"le chant des oiseaux",     vi:"tiếng chim hót", ex_fr:"J'aimais le chant des oiseaux dans le jardin.", ex_vi:"Tôi thích tiếng chim hót trong vườn." },
+          { fr:"le goût",                  vi:"vị giác, mùi vị", ex_fr:"Le bout de la ligne avait le goût du bout du monde.", ex_vi:"Điểm cuối chặng đường có cái vị của tận cùng thế giới." },
+          { fr:"goûter",                   vi:"nếm thử", ex_fr:"D'accord, mais juste pour goûter !", ex_vi:"Được rồi, nhưng chỉ để nếm thử thôi nhé!" },
+          { fr:"l'odeur (f.)",             vi:"mùi hương", ex_fr:"L'odeur, le bruit, la vue du feu me rappellent ces moments.", ex_vi:"Mùi, tiếng động, cảnh lửa cháy làm tôi nhớ lại những khoảnh khắc ấy." },
+          { fr:"le parfum",                vi:"hương thơm", ex_fr:"La Corse, c'est le parfum des fleurs au printemps.", ex_vi:"Corse, đó là hương hoa mùa xuân." },
+          { fr:"regarder",                 vi:"nhìn, ngắm", ex_fr:"On regardait les étoiles.", ex_vi:"Chúng tôi ngắm những vì sao." },
+          { fr:"la saveur",                vi:"hương vị", ex_fr:"Quelles saveurs ! Mes préférées : figues, abricots et clémentines.", ex_vi:"Bao nhiêu hương vị! Tôi thích nhất là sung, mơ và quýt." },
+          { fr:"sentir bon ≠ sentir mauvais", vi:"có mùi thơm ≠ có mùi khó chịu", ex_fr:"Ça sentait bon !", ex_vi:"Thơm quá!" },
+          { fr:"tenir la main",            vi:"nắm tay", ex_fr:"Je lui tenais la main.", ex_vi:"Tôi nắm tay bà." },
+          { fr:"voir",                     vi:"nhìn thấy", ex_fr:"On voit la mer, c'est magnifique !", ex_vi:"Nhìn thấy biển kìa, đẹp quá!" },
+          { fr:"la vue",                   vi:"tầm nhìn, cảnh nhìn thấy", ex_fr:"Vous découvrez une vue magnifique sur les plages.", ex_vi:"Bạn sẽ thấy một tầm nhìn tuyệt đẹp ra các bãi biển." },
+        ]
+      },
+      {
+        id: "b2g3", label: "Qualifier un souvenir", icon: "💭",
+        words: [
+          { fr:"un souvenir d'adolescence", vi:"kỷ niệm thời thanh thiếu niên", ex_fr:"Elle adore replonger dans ses souvenirs d'adolescence.", ex_vi:"Cô ấy rất thích đắm chìm lại vào kỷ niệm thời thanh thiếu niên của mình." },
+          { fr:"un souvenir d'école",       vi:"kỷ niệm thời đi học", ex_fr:"J'ai des bons souvenirs d'école.", ex_vi:"Tôi có những kỷ niệm đẹp thời đi học." },
+          { fr:"un souvenir d'enfance",     vi:"kỷ niệm tuổi thơ", ex_fr:"Mon enfance est une boîte pleine de souvenirs.", ex_vi:"Tuổi thơ tôi là một hộp đầy ắp kỷ niệm." },
+          { fr:"un souvenir de famille",    vi:"kỷ niệm gia đình", ex_fr:"C'est un souvenir de famille très heureux.", ex_vi:"Đó là một kỷ niệm gia đình rất hạnh phúc." },
+          { fr:"un souvenir de jeunesse",   vi:"kỷ niệm thời trẻ", ex_fr:"Ils ne veulent pas oublier leurs souvenirs de jeunesse.", ex_vi:"Họ không muốn quên những kỷ niệm thời trẻ của mình." },
+          { fr:"des souvenirs de vacances", vi:"kỷ niệm những kỳ nghỉ", ex_fr:"C'est un souvenir de vacances inoubliable !", ex_vi:"Đó là một kỷ niệm nghỉ mát không thể quên!" },
+          { fr:"agréable",                 vi:"dễ chịu, thú vị", ex_fr:"Ce ne sont pas des souvenirs très agréables.", ex_vi:"Đó không phải là những kỷ niệm dễ chịu lắm." },
+          { fr:"bon",                      vi:"tốt, đẹp", ex_fr:"J'ai des bons souvenirs d'école.", ex_vi:"Tôi có những kỷ niệm đẹp thời đi học." },
+          { fr:"difficile",                vi:"khó khăn", ex_fr:"C'est un souvenir difficile pour elle.", ex_vi:"Đó là một kỷ niệm khó khăn với cô ấy." },
+          { fr:"heureux, heureuse",        vi:"hạnh phúc", ex_fr:"Quels souvenirs heureux !", ex_vi:"Những kỷ niệm hạnh phúc làm sao!" },
+          { fr:"inoubliable",              vi:"không thể quên", ex_fr:"Un souvenir inoubliable.", ex_vi:"Một kỷ niệm không thể quên." },
+          { fr:"joyeux, joyeuse",          vi:"vui vẻ", ex_fr:"C'est un souvenir d'enfance joyeux.", ex_vi:"Đó là một kỷ niệm tuổi thơ vui vẻ." },
+          { fr:"mauvais",                  vi:"xấu, tệ", ex_fr:"C'est un mauvais souvenir d'école.", ex_vi:"Đó là một kỷ niệm tệ thời đi học." },
+          { fr:"triste",                   vi:"buồn", ex_fr:"C'est un souvenir de jeunesse très triste.", ex_vi:"Đó là một kỷ niệm thời trẻ rất buồn." },
+        ]
+      },
+      {
+        id: "b2g4", label: "Les paysages", icon: "🏞️",
+        words: [
+          { fr:"à marée basse ≠ à marée haute", vi:"lúc thủy triều xuống ≠ lúc thủy triều lên", ex_fr:"À marée basse, on peut marcher jusqu'à l'île.", ex_vi:"Lúc thủy triều xuống, có thể đi bộ ra tới đảo." },
+          { fr:"la barrière de corail",    vi:"rạn san hô", ex_fr:"Le vent, la barrière de corail, les plages…", ex_vi:"Gió, rạn san hô, những bãi biển…" },
+          { fr:"la côte",                  vi:"bờ biển", ex_fr:"On fait de très belles balades sur la côte.", ex_vi:"Có thể đi dạo rất đẹp dọc bờ biển." },
+          { fr:"la dune",                  vi:"đụn cát", ex_fr:"On marchait dans le désert au milieu des dunes.", ex_vi:"Chúng tôi đi bộ trong sa mạc giữa những đụn cát." },
+          { fr:"l'île (f.)",               vi:"hòn đảo", ex_fr:"C'est une île très touristique.", ex_vi:"Đó là một hòn đảo rất du lịch." },
+          { fr:"la mouette",               vi:"chim mòng biển", ex_fr:"Oh regarde les mouettes !", ex_vi:"Ồ nhìn kìa, chim mòng biển!" },
+          { fr:"la plage",                 vi:"bãi biển", ex_fr:"Le camping est à côté des plages.", ex_vi:"Khu cắm trại ở ngay cạnh các bãi biển." },
+          { fr:"le port",                  vi:"bến cảng", ex_fr:"On y voit de très jolis bateaux dans le port.", ex_vi:"Ở đó ta thấy những chiếc thuyền rất đẹp trong bến cảng." },
+          { fr:"le sable",                 vi:"cát", ex_fr:"Les enfants jouent dans le sable.", ex_vi:"Bọn trẻ chơi trên cát." },
+          { fr:"le champ",                 vi:"cánh đồng", ex_fr:"On voit beaucoup de champs, de fermes et de prairies.", ex_vi:"Có thể thấy rất nhiều cánh đồng, trang trại và đồng cỏ." },
+          { fr:"la ferme",                 vi:"trang trại", ex_fr:"On va visiter cette ferme cet après-midi ?", ex_vi:"Chiều nay mình đi thăm trang trại này nhé?" },
+          { fr:"la prairie",               vi:"đồng cỏ", ex_fr:"J'adore ces paysages avec ces prairies !", ex_vi:"Tôi mê cảnh có những đồng cỏ như thế này!" },
+          { fr:"le chalet",                vi:"nhà gỗ (kiểu miền núi)", ex_fr:"Vous avez loué un chalet à la montagne ?", ex_vi:"Bạn có thuê một căn nhà gỗ trên núi không?" },
+          { fr:"le lac",                   vi:"hồ", ex_fr:"En randonnée, on passe parfois à côté de petits lacs.", ex_vi:"Khi đi trekking, thỉnh thoảng ta đi ngang những cái hồ nhỏ." },
+          { fr:"le sommet",                vi:"đỉnh (núi)", ex_fr:"Encore un petit effort, on arrive bientôt au sommet !", ex_vi:"Cố thêm chút nữa, sắp tới đỉnh rồi!" },
+        ]
+      },
+      {
+        id: "b2g5", label: "La météo", icon: "⛅",
+        words: [
+          { fr:"la canicule",              vi:"đợt nắng nóng gay gắt", ex_fr:"C'est la canicule ! Il fait très chaud la journée et la nuit aussi.", ex_vi:"Đợt nắng nóng ghê quá! Ban ngày lẫn ban đêm đều nóng." },
+          { fr:"la chaleur ≠ la fraîcheur", vi:"cái nóng ≠ sự mát mẻ", ex_fr:"L'été, je cherche la fraîcheur !", ex_vi:"Mùa hè, tôi tìm chỗ mát mẻ!" },
+          { fr:"le ciel (bleu, gris)",     vi:"bầu trời (xanh, xám)", ex_fr:"Le ciel est devenu gris.", ex_vi:"Bầu trời trở nên xám xịt." },
+          { fr:"le climat",                vi:"khí hậu", ex_fr:"Le climat y est agréable.", ex_vi:"Khí hậu ở đó dễ chịu." },
+          { fr:"l'orage (m.)",             vi:"cơn giông", ex_fr:"Il y a eu un gros orage !", ex_vi:"Đã có một cơn giông lớn!" },
+          { fr:"la pluie",                 vi:"mưa", ex_fr:"Tu as vu cette pluie ?", ex_vi:"Bạn có thấy trận mưa đó không?" },
+          { fr:"le soleil",                vi:"mặt trời, nắng", ex_fr:"Avec du soleil, c'est très différent !", ex_vi:"Có nắng thì khác hẳn!" },
+          { fr:"la température (les degrés)", vi:"nhiệt độ (số độ)", ex_fr:"Entre 18 et 20 degrés, c'est parfait pour moi.", ex_vi:"Từ 18 đến 20 độ là hoàn hảo với tôi." },
+          { fr:"le temps",                 vi:"thời tiết", ex_fr:"On va avoir ce temps gris tout le week-end ?", ex_vi:"Cả cuối tuần sẽ có kiểu thời tiết xám xịt này à?" },
+          { fr:"un temps humide ≠ un temps sec", vi:"thời tiết ẩm ≠ thời tiết khô", ex_fr:"Il fait un temps humide en Thaïlande.", ex_vi:"Ở Thái Lan thời tiết ẩm." },
+          { fr:"un temps gris",            vi:"trời âm u", ex_fr:"La météo annonce un temps gris.", ex_vi:"Dự báo thời tiết báo trời sẽ âm u." },
+          { fr:"le vent",                  vi:"gió", ex_fr:"Je déteste le vent, parfois il souffle à 80 kilomètres par heure.", ex_vi:"Tôi ghét gió lắm, đôi khi nó thổi tới 80 cây số một giờ." },
+        ]
+      },
+    ]
+  },
 ];

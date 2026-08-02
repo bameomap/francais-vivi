@@ -62,4 +62,46 @@ export const EDITO_A2_VERB_UNITS = [
       { infinitive: "visiter",      meaning: "tham quan" },
     ],
   },
+  {
+    unitId: "b2", unitNum: "2",
+    title: "Je me souviens",
+    color: "#7C3AED", bg: "#EDE9FE",
+    cefr: "A2",
+    tenses: [
+      { id: "present", label: "Présent",
+        note: "Gốc imparfait luôn lấy từ “nous” của thì này — ôn lại trước khi chia imparfait" },
+      { id: "imparfait", label: "Imparfait",
+        note: "Gốc (nous, bỏ -ons) + đuôi -ais/-ais/-ait/-ions/-iez/-aient · chỉ être là ngoại lệ" },
+    ],
+    verbs: [
+      // — être: ngoại lệ duy nhất —
+      { infinitive: "être",         meaning: "thì, là (gốc riêng: ét-)" },
+      // — -er đều đặn —
+      { infinitive: "aimer",        meaning: "yêu, thích" },
+      { infinitive: "habiter",      meaning: "sống, cư trú" },
+      { infinitive: "changer",      meaning: "thay đổi" },
+      { infinitive: "regarder",     meaning: "nhìn, xem" },
+      { infinitive: "raconter",     meaning: "kể lại" },
+      { infinitive: "adorer",       meaning: "mê, rất thích" },
+      { infinitive: "préparer",     meaning: "chuẩn bị, nấu" },
+      { infinitive: "voyager",      meaning: "du lịch" },
+      { infinitive: "goûter",       meaning: "nếm thử" },
+      // — -ir/-re/irrégulier —
+      { infinitive: "avoir",        meaning: "có" },
+      { infinitive: "aller",        meaning: "đi" },
+      { infinitive: "faire",        meaning: "làm" },
+      { infinitive: "rendre",       meaning: "trả lại, làm cho (ai thành sao)" },
+      { infinitive: "écrire",       meaning: "viết" },
+      { infinitive: "prendre",      meaning: "lấy, chụp (ảnh)" },
+      { infinitive: "attendre",     meaning: "chờ đợi" },
+      { infinitive: "partir",       meaning: "rời đi" },
+      { infinitive: "vouloir",      meaning: "muốn" },
+      // — phản thân —
+      { infinitive: "se déplacer",  meaning: "di chuyển" },
+      { infinitive: "se souvenir",  meaning: "nhớ, ghi nhớ" },
+      { infinitive: "se rappeler",  meaning: "nhớ lại" },
+      { infinitive: "s'amuser",     meaning: "vui chơi" },
+      { infinitive: "s'installer",  meaning: "định cư, ổn định chỗ ở" },
+    ],
+  },
 ];

@@ -4,6 +4,7 @@
 
 export const PARCOURS_UNITS_A2 = [
   { id:"b1", num:1, fr:"Nouvelles vies", vi:"Cuộc sống mới", grammar:"Passé composé · Négation · il y a/pendant/depuis", emoji:"🌱" },
+  { id:"b2", num:2, fr:"Je me souviens", vi:"Tôi nhớ lại", grammar:"L'imparfait · Pronoms y/en · Place de l'adjectif", emoji:"📷" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -130,3 +131,117 @@ export const STEP_GROUPS_A2 = [
 
 // Flat list — used by parcours.js for progress tracking
 export const STEP_DEFS_A2 = STEP_GROUPS_A2.flatMap(g => g.steps);
+
+// ── Unité 2 · Je me souviens ──────────────────────────────────────
+// Same three-beat rhythm (documents → grammar → vocab), but the book's own
+// order for this unit interleaves TWO grammar-linked speaking/writing tasks
+// inside cycle 1 (récit + imparfait) before moving on, so cycle 1 carries an
+// extra "parler"/"ecrire" pair compared to Unité 1.
+export const STEP_GROUPS_B2 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Souvenirs de famille",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b2-livre-saveurs-corse"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Saveurs de Corse",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b2-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Revivre de beaux moments !",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b2-livre-souvenirs-famille"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Souvenirs de famille · Foenkinos",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"L'imparfait",
+        section:"grammar", view:"grammar" },
+      { id:"c1_verbes", stepKey:"verbes", subIds:["present","imparfait"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Chia imparfait · 24 động từ",
+        section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b2g1","b2g2","b2g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le souvenir · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0","s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Kể một kỷ niệm · vacances avant/aujourd'hui",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0","w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Témoignage sensoriel · souvenir heureux (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Voyages & paysages",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b2-livre-vue-de-reve"],
+        icon:"📜", kind:"Đọc D", color:"#059669", sub:"Une vue de rêve · Île Maurice",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b2-e"],
+        icon:"🎧", kind:"Nghe E", color:"#0891B2", sub:"Quelle expérience !",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Les pronoms y et en",
+        section:"grammar", view:"grammar" },
+      { id:"c2_culture", stepKey:"lecture", subIds:["b2-livre-parlons-meteo","b2-livre-envie-fraicheur"],
+        icon:"🏛️", kind:"Văn hóa F + G", color:"#7B6CF6", sub:"Parlons météo · Envie de fraîcheur",
+        section:"lecture", view:"lecture" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b2g4","b2g5"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Paysages & météo · 2 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Interroger sur un souvenir (DELF)",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Un lieu fantastique sur votre blog",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Souvenirs de vacances",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b2-livre-souvenirs-vacances"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Pourquoi on achète des souvenirs ?",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b2-i"],
+        icon:"🎧", kind:"Nghe I", color:"#0891B2", sub:"La tendance rétro",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La place de l'adjectif",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s3"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Vos souvenirs de vacances",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w3"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Lettre aux parents · attention aux adjectifs",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_n","son_z","son_t","son_r","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les liaisons obligatoires",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s4"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Exposition photo · Souvenirs d'une époque",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B2 = STEP_GROUPS_B2.flatMap(g => g.steps);
+
+// ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2 };
+
+export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
+export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

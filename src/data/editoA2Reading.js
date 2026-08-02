@@ -190,6 +190,174 @@ Sources : Cécile D. & My B., Sortir à Paris, septembre 2021
       { id: "b1-patrimoine-q8", type: "open", prompt: "Oh, le cliché ! « Les Français sont fiers de Paris. » En réalité, les deux monuments préférés des Français (le mont Saint-Michel et le château de Versailles) ne sont pas dans la capitale. De quoi sont fiers les gens dans votre pays ?" },
     ],
   },
+
+  // ═══════════════════ Unité 2 — Je me souviens ═══════════════════
+
+  // ── A · Saveurs de Corse (p. 27) ───────────────────────────────────
+  {
+    id: "b2-livre-saveurs-corse",
+    unit: 2,
+    unitTitle: "Je me souviens",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 27,
+    title: "Saveurs de Corse",
+    instruction: "Lisez le témoignage de Lisandra et repérez tous les verbes à l'imparfait.",
+    text: `Lisandra se souvient de la maison de ses grands-parents, en Corse. « C'était d'abord des souvenirs de cuisine. Ma grand-mère préparait des confitures de figues et d'abricots, et toute la maison sentait bon pendant des heures. Le matin, je mangeais mes tartines à côté d'elle, et parfois je lui demandais de tremper mon pain dans son café. Elle répondait toujours : "D'accord, mais juste pour goûter !"
+
+Le soir, avec mon frère, on s'asseyait devant la cheminée et on mangeait des beignets tout chauds — on appelait ça des "frappes", en Corse.
+
+Mais ce que je n'oublie pas, c'est le jardin. Mon grand-père y faisait du feu presque tous les soirs, et on écoutait le chant des oiseaux jusqu'à la nuit. Puis on s'allongeait dans l'herbe pour regarder les étoiles. Il me montrait la Grande Ourse et me disait de faire un vœu à chaque étoile filante.
+
+Aujourd'hui encore, une odeur de confiture ou un feu de bois me ramène directement à ce jardin. »`,
+    questions: [
+      { id: "b2-corse-q1", type: "open", prompt: "Quel lieu lié à votre enfance est très important pour vous ? Pourquoi ?" },
+      { id: "b2-corse-q2", type: "multiple_choice", prompt: "De quel lieu Lisandra parle-t-elle ?", options: ["De son école en Corse.", "De la maison de ses grands-parents en Corse.", "D'un restaurant corse."], answer: "De la maison de ses grands-parents en Corse." },
+      { id: "b2-corse-q3", type: "multiple_choice", prompt: "De ce lieu, Lisandra a gardé :", options: ["de bons souvenirs.", "de mauvais souvenirs.", "de bons et de mauvais souvenirs."], answer: "de bons souvenirs." },
+      { id: "b2-corse-q4", type: "short_answer", prompt: "À quelle personne sont associés ses souvenirs de nourriture ? et ses souvenirs dans le jardin ?", answer: "Sa grand-mère (les confitures, les frappes) et son grand-père (le feu dans le jardin, les étoiles)." },
+      { id: "b2-corse-q5", type: "short_answer", prompt: "Qu'est-ce que Lisandra aimait manger ?", answer: "Des tartines avec du pain trempé dans le café, de la confiture de figues et d'abricots, et des beignets (« frappes »)." },
+      { id: "b2-corse-q6", type: "short_answer", prompt: "Qu'est-ce qu'elle aimait sentir et entendre dans le jardin ?", answer: "L'odeur du feu de bois et le chant des oiseaux." },
+      { id: "b2-corse-q7", type: "multi_select", prompt: "Vocabulaire : relevez trois verbes à l'imparfait dans le texte.", options: ["préparait", "s'est assise", "faisait", "on écoutait", "a mangé"], answer: ["préparait", "faisait", "on écoutait"] },
+      { id: "b2-corse-q8", type: "open", prompt: "Production écrite : écrivez un témoignage. Dites quels sont vos souvenirs liés à une odeur, à une saveur, à un lieu, à un objet…" },
+    ],
+  },
+
+  // ── C · Un été chez mon grand-père (p. 30) ──────────────────────────
+  {
+    id: "b2-livre-souvenirs-famille",
+    unit: 2,
+    unitTitle: "Je me souviens",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 30,
+    title: "Un été chez mon grand-père",
+    instruction: "Lisez cet extrait littéraire (inspiré du thème du chapitre) et répondez aux questions.",
+    text: `Mon grand-père n'était pas un homme comme les autres. Il changeait de métier presque chaque année, et personne dans la famille ne savait vraiment ce qu'il faisait. Il ressemblait plus à un acteur qu'à un grand-père ordinaire.
+
+Le mercredi, il venait me chercher à l'école, et rien que ça me rendait heureux. On prenait le bus, on traversait toute la ville, et pour moi c'était une vraie expédition — j'étais un explorateur, il était mon guide.
+
+On allait voir un spectacle de marionnettes, tout au bout de la ligne. Il regardait sa montre pendant tout le trajet, avec l'inquiétude d'un homme qui était toujours en retard. « On arrive bientôt ? », je demandais à chaque arrêt. « Le spectacle nous attend au bout du monde ! », il répondait en riant. Et on courait ensemble jusqu'à la porte pour ne pas rater le début.
+
+Il aimait la vie, il aimait rire, et moi, j'aimais être son petit-fils.`,
+    questions: [
+      { id: "b2-famille-q1", type: "open", prompt: "Regardez le titre. Vous avez un souvenir semblable avec un grand-parent ? Racontez." },
+      { id: "b2-famille-q2", type: "multiple_choice", prompt: "L'auteur raconte un souvenir avec :", options: ["son père.", "son grand-père.", "son oncle."], answer: "son grand-père." },
+      { id: "b2-famille-q3", type: "short_answer", prompt: "Comment ils se déplaçaient pour aller voir le spectacle ?", answer: "En bus, en traversant toute la ville." },
+      { id: "b2-famille-q4", type: "short_answer", prompt: "Pourquoi devaient-ils courir ?", answer: "Pour ne pas rater le début du spectacle — le grand-père était toujours en retard." },
+      { id: "b2-famille-q5", type: "true_false", prompt: "Vrai ou faux ? L'homme décrit avait un métier stable, comme tout le monde.", answer: false },
+      { id: "b2-famille-q6", type: "multiple_choice", prompt: "Vocabulaire : que signifie « ressembler plus à un acteur qu'à un grand-père ordinaire » ?", options: ["Il était très classique et prévisible.", "Il était original, imprévisible, plein de surprises."], answer: "Il était original, imprévisible, plein de surprises." },
+      { id: "b2-famille-q7", type: "multi_select", prompt: "Relevez les verbes à l'imparfait qui décrivent une HABITUDE (répétée chaque mercredi).", options: ["venait me chercher", "on prenait le bus", "j'étais un explorateur", "on courait"], answer: ["venait me chercher", "on prenait le bus"] },
+      { id: "b2-famille-q8", type: "open", prompt: "Production orale : racontez les souvenirs que vous avez avec une personne de votre famille. De qui parlez-vous ? Pourquoi ?" },
+    ],
+  },
+
+  // ── D · Une vue de rêve (p. 32) ────────────────────────────────────
+  {
+    id: "b2-livre-vue-de-reve",
+    unit: 2,
+    unitTitle: "Je me souviens",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 32,
+    title: "Une vue de rêve",
+    instruction: "Lisez cet article de blog voyage et repérez les pronoms y et en.",
+    text: `Blog Destination le paradis — Île Maurice — « Un souvenir inoubliable »
+Article écrit par Emmanuel
+
+Certains paysages vous marquent à jamais. Aujourd'hui, je voulais vous parler de l'île Maurice. C'est une destination très touristique, mais on y trouve encore des endroits calmes et magiques, entre mer et montagne.
+
+La photo que vous voyez ici, c'est le Morne Brabant, classé au patrimoine mondial de l'UNESCO. Après une randonnée assez facile de quelques heures, on arrive au sommet, et là, on découvre une vue magnifique sur les plages et sur toute l'île. Le vent, le silence, la barrière de corail en dessous… un vrai souvenir inoubliable.
+
+Vous ne savez pas quoi faire à l'île Maurice ? Prenez de bonnes chaussures et montez au sommet du Morne. On en revient toujours enchanté !`,
+    questions: [
+      { id: "b2-vue-q1", type: "open", prompt: "Observez le titre. Vous aimez ce genre de paysage ? Pourquoi ?" },
+      { id: "b2-vue-q2", type: "multiple_choice", prompt: "De quelle île francophone Emmanuel parle-t-il ?", options: ["La Corse", "L'île Maurice", "La Martinique"], answer: "L'île Maurice" },
+      { id: "b2-vue-q3", type: "short_answer", prompt: "Pourquoi Emmanuel aime-t-il cette île ?", answer: "Parce qu'on y trouve encore des endroits calmes et magiques, entre mer et montagne." },
+      { id: "b2-vue-q4", type: "short_answer", prompt: "De quelle montagne parle-t-il ? Pourquoi est-elle connue ?", answer: "Le Morne Brabant — il est classé au patrimoine mondial de l'UNESCO." },
+      { id: "b2-vue-q5", type: "true_false", prompt: "Vrai ou faux ? La randonnée jusqu'au sommet est très difficile.", answer: false },
+      { id: "b2-vue-q6", type: "multi_select", prompt: "Grammaire : relevez les pronoms y et en dans le texte.", options: ["on y trouve", "on en revient", "on découvre", "vous voyez"], answer: ["on y trouve", "on en revient"] },
+      { id: "b2-vue-q7", type: "short_answer", prompt: "Que remplace « y » dans « on y trouve des endroits calmes » ?", answer: "L'île Maurice (« sur l'île Maurice »)." },
+      { id: "b2-vue-q8", type: "open", prompt: "Production écrite : vous avez découvert un lieu fantastique pendant un de vos voyages. Présentez ce lieu sur votre blog." },
+    ],
+  },
+
+  // ── F · Quel temps fait-il ? (Culture(s), p. 34) ────────────────────
+  {
+    id: "b2-livre-parlons-meteo",
+    unit: 2,
+    unitTitle: "Je me souviens",
+    source: "livre",
+    section: "culture(s)",
+    page: 34,
+    title: "Parlons météo !",
+    instruction: "Lisez l'article et répondez aux questions.",
+    text: `Pourquoi les Français parlent-ils autant de la météo ?
+
+« Tu as vu cette pluie ? On va avoir ce temps gris tout le week-end ? » En France, on parle du temps qu'il fait partout, tout le temps. Selon une étude, plus de 8 Français sur 10 disent que la météo est leur sujet de conversation préféré pendant la pause au travail. C'est un sujet universel, facile, qui permet de parler avec des gens qu'on ne connaît pas encore.
+
+Le bulletin météo est apparu à la radio en 1922, puis à la télévision en 1946 : une vraie révolution ! Avant, pour décider de sortir, les gens regardaient simplement le ciel. Avec le bulletin météo, ils ont pu commencer à prévoir une sortie à vélo pour le week-end suivant. Aujourd'hui, avec les applications sur smartphone, les Français sont encore plus attachés aux prévisions.
+
+En français, on dit d'ailleurs « parler de la pluie et du beau temps » pour parler de sujets sans grande importance.`,
+    questions: [
+      { id: "b2-meteo-q1", type: "open", prompt: "Dans votre pays, est-ce que les gens parlent beaucoup du temps qu'il fait ?" },
+      { id: "b2-meteo-q2", type: "true_false", prompt: "Vrai ou faux ? La météo est un sujet de conversation courant en France.", answer: true },
+      { id: "b2-meteo-q3", type: "short_answer", prompt: "Qu'est-ce que le bulletin météo a changé dans l'organisation des loisirs des Français ?", answer: "Avant, les gens regardaient le ciel pour décider de sortir. Avec le bulletin météo, ils ont pu prévoir leurs sorties à l'avance." },
+      { id: "b2-meteo-q4", type: "multiple_choice", prompt: "Qu'est-ce qui a rendu les Français encore plus attachés à la météo récemment ?", options: ["La radio.", "Les applications sur smartphone.", "La télévision."], answer: "Les applications sur smartphone." },
+      { id: "b2-meteo-q5", type: "open", prompt: "Et vous, vous regardez souvent la météo ? Pour quelles raisons ?" },
+      { id: "b2-meteo-q6", type: "multiple_choice", prompt: "Que signifie « parler de la pluie et du beau temps » ?", options: ["Parler de sujets peu importants.", "Se plaindre du climat."], answer: "Parler de sujets peu importants." },
+    ],
+  },
+
+  // ── G · Envie de fraîcheur (vidéo/culture, p. 34) ───────────────────
+  {
+    id: "b2-livre-envie-fraicheur",
+    unit: 2,
+    unitTitle: "Je me souviens",
+    source: "livre",
+    section: "culture(s)",
+    page: 34,
+    title: "Envie de fraîcheur",
+    instruction: "Lisez ce reportage (résumé du document vidéo) et répondez aux questions.",
+    text: `Cet été, une vague de chaleur a poussé de nombreux Parisiens à quitter la capitale : il faisait presque 40 °C ! Direction le Cotentin, une presqu'île du Nord-Ouest de la France, à environ 350 kilomètres de Paris. Là-bas, la température était presque 15 °C plus fraîche.
+
+Les touristes peuvent s'y promener au bord de la mer, se baigner, ou simplement profiter du vent frais sur la côte. Beaucoup de familles y cherchent un peu de fraîcheur pendant les grosses chaleurs de l'été.
+
+Oh, le cliché ! On dit souvent qu'il pleut dans le Nord de la France et qu'il fait beau dans le Sud. En réalité, c'est dans le Nord-Ouest qu'il pleut le plus, mais le Sud-Ouest arrive juste après ! Les villes les plus ensoleillées sont d'abord Ajaccio, en Corse, puis Nice et Montpellier.`,
+    questions: [
+      { id: "b2-fraicheur-q1", type: "multiple_choice", prompt: "Les Parisiens ont quitté Paris parce qu'il y faisait environ :", options: ["30 °C.", "35 °C.", "40 °C."], answer: "40 °C." },
+      { id: "b2-fraicheur-q2", type: "true_false", prompt: "Vrai ou faux ? Il fait environ 15 °C de moins dans le Cotentin qu'à Paris.", answer: true },
+      { id: "b2-fraicheur-q3", type: "short_answer", prompt: "Quelles activités les touristes peuvent-ils faire dans le Cotentin ?", answer: "Se promener au bord de la mer, se baigner, profiter du vent frais." },
+      { id: "b2-fraicheur-q4", type: "multiple_choice", prompt: "Quel est le contraire de « chaleur » ?", options: ["Canicule.", "Fraîcheur."], answer: "Fraîcheur." },
+      { id: "b2-fraicheur-q5", type: "multiple_choice", prompt: "Quelle ville est la plus ensoleillée de France, selon le texte ?", options: ["Nice.", "Ajaccio.", "Montpellier."], answer: "Ajaccio." },
+      { id: "b2-fraicheur-q6", type: "open", prompt: "Pour vous, quelle est la température idéale ? Pourquoi ?" },
+    ],
+  },
+
+  // ── H · Pourquoi on achète des souvenirs de vacances ? (p. 36) ─────
+  {
+    id: "b2-livre-souvenirs-vacances",
+    unit: 2,
+    unitTitle: "Je me souviens",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 36,
+    title: "Pourquoi on achète des souvenirs de vacances ?",
+    instruction: "Lisez l'article et repérez la place des adjectifs.",
+    text: `Plus d'un touriste sur deux ramène des souvenirs de vacances. C'est une jolie paire d'espadrilles du Pays basque, d'excellentes épices marocaines, un grand plat à tajine ou du sirop d'érable canadien. Dans leurs valises, les voyageurs de l'été ramènent presque toujours un petit morceau de leur voyage.
+
+Selon un sondage récent, un peu plus de la moitié des touristes choisissent un petit objet-gadget : un mug, un porte-clés, un joli magnet. Environ 4 sur 10 préfèrent un beau vêtement typique, comme une marinière bretonne ou un sombrero mexicain. Un tiers ramène plutôt une spécialité gastronomique locale.
+
+Pour Estelle, responsable d'une boutique de produits locaux en Normandie, l'achat de souvenirs est une dépense presque obligatoire : les touristes français dépensent en moyenne 25 à 30 euros par famille.`,
+    questions: [
+      { id: "b2-vacances2-q1", type: "open", prompt: "Est-ce que vous achetez des souvenirs en vacances ? Pourquoi ?" },
+      { id: "b2-vacances2-q2", type: "true_false", prompt: "Vrai ou faux ? Plus de 50 % des touristes ramènent des souvenirs.", answer: true },
+      { id: "b2-vacances2-q3", type: "multiple_choice", prompt: "Quel type de souvenir est le PLUS populaire selon le sondage ?", options: ["Les vêtements typiques.", "Les gadgets (mug, porte-clés…).", "La gastronomie locale."], answer: "Les gadgets (mug, porte-clés…)." },
+      { id: "b2-vacances2-q4", type: "short_answer", prompt: "Combien les touristes français dépensent-ils en moyenne pour les souvenirs ?", answer: "Entre 25 et 30 euros par famille." },
+      { id: "b2-vacances2-q5", type: "multi_select", prompt: "Grammaire : relevez des adjectifs placés AVANT le nom.", options: ["une jolie paire", "d'excellentes épices", "un grand plat", "épices marocaines", "spécialité locale"], answer: ["une jolie paire", "d'excellentes épices", "un grand plat"] },
+      { id: "b2-vacances2-q6", type: "multi_select", prompt: "Grammaire : relevez des adjectifs placés APRÈS le nom.", options: ["épices marocaines", "sirop canadien", "vêtement typique", "jolie paire"], answer: ["épices marocaines", "sirop canadien", "vêtement typique"] },
+      { id: "b2-vacances2-q7", type: "open", prompt: "Production orale : qu'est-ce que vous rapportez de vos vacances, en général ?" },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

@@ -12,22 +12,23 @@
 //
 //   node scripts/check-parcours-a2.mjs
 
-import { PARCOURS_UNITS_A2, STEP_DEFS_A2 } from "../src/data/parcoursDataA2.js";
+import { PARCOURS_UNITS_A2, getStepDefsForA2 } from "../src/data/parcoursDataA2.js";
 import { getStepSubIds } from "../src/utils/parcoursSteps.js";
-
-// Derived, not hand-listed: a hand-listed set silently skips any skill added
-// later, which is exactly the case this script exists to catch.
-const SKILLS = [...new Set(STEP_DEFS_A2.map(s => s.stepKey || s.id))];
 
 let ok = true;
 
 for (const unit of PARCOURS_UNITS_A2) {
+  const defs = getStepDefsForA2(unit.id);
+  // Derived, not hand-listed: a hand-listed set silently skips any skill
+  // added later, which is exactly the case this script exists to catch.
+  const skills = [...new Set(defs.map(s => s.stepKey || s.id))];
+
   console.log(`\n── Unité ${unit.num} · ${unit.fr} (${unit.id}) ──`);
   let total = 0;
 
-  for (const skill of SKILLS) {
+  for (const skill of skills) {
     const real = getStepSubIds(unit.id, skill);
-    const used = STEP_DEFS_A2
+    const used = defs
       .filter(s => (s.stepKey || s.id) === skill)
       .flatMap(s => s.subIds || []);
 
@@ -47,7 +48,7 @@ for (const unit of PARCOURS_UNITS_A2) {
     );
   }
 
-  console.log(`   → ${total} sub-lessons · ${STEP_DEFS_A2.length} thẻ`);
+  console.log(`   → ${total} sub-lessons · ${defs.length} thẻ`);
 }
 
 console.log(ok ? "\n✅ Phân chia khớp hoàn toàn" : "\n❌ Có sai lệch — sửa subIds trong parcoursDataA2.js");

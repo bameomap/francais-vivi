@@ -103,4 +103,80 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-2", unit: 2, title: "Je me souviens",
+    speakingPractice: [
+      {
+        title: "Racontez un souvenir",
+        notes: ["b2-a"],
+        task: "Racontez à votre partenaire un souvenir lié à une odeur, une saveur, un lieu ou un objet — comme Lisandra avec les confitures de sa grand-mère. Utilisez « je me souviens de… » et « je me rappelle… ».",
+        usefulPhrases: [
+          "Je me souviens des confitures de ma grand-mère.",
+          "Je me rappelle les bugnes qu'elle nous préparait.",
+          "Ça sentait bon !",
+          "C'est gravé dans ma mémoire.",
+        ],
+      },
+      {
+        title: "Vos vacances, avant et aujourd'hui",
+        notes: ["b2-imparfait"],
+        task: "Discutez avec un(e) ami(e) de vos vacances, avant et aujourd'hui. Utilisez l'imparfait pour parler de vos habitudes d'avant. Exemple : « Avant, je partais avec mes parents. Aujourd'hui je pars avec des amis. »",
+        usefulPhrases: [
+          "Avant, je partais avec mes parents.",
+          "À cette époque, on allait chaque année à…",
+          "Quand j'étais petit(e), nous…",
+          "Maintenant, c'est différent : je…",
+        ],
+      },
+      {
+        title: "Interroger sur un souvenir (DELF)",
+        notes: ["b2-e"],
+        task: "À deux ! Questionnez votre voisin(e) sur un de ses souvenirs de vacances, puis inversez les rôles.",
+        usefulPhrases: [
+          "Quels souvenirs vous gardez de votre expérience ?",
+          "Vous êtes content(e) de votre expérience ?",
+          "Vous allez recommencer l'expérience ?",
+        ],
+      },
+      {
+        title: "Vos souvenirs de vacances",
+        notes: ["b2-h"],
+        task: "Qu'est-ce que vous rapportez en général de vos vacances ? Un objet, un vêtement, une spécialité gastronomique ? Expliquez pourquoi à votre partenaire.",
+        usefulPhrases: [
+          "En général, je rapporte…",
+          "J'aime bien ramener une petite spécialité locale.",
+          "Ce n'est pas du tout mon truc, les souvenirs-gadgets.",
+        ],
+      },
+      {
+        title: "Présenter l'exposition photo",
+        notes: ["b2-atelier"],
+        task: "Atelier médiation : présentez une exposition photo sur le thème « Souvenirs d'une époque » (années 70, 80 ou 90). Décrivez les objets, la mode, la musique de cette période et expliquez pourquoi vous l'avez choisie.",
+        usefulPhrases: [
+          "Nous avons choisi les années…",
+          "À cette époque, on portait / on écoutait / on utilisait…",
+          "Cette photo montre…",
+          "C'est un objet emblématique de cette période.",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Un témoignage sensoriel",
+        task: "Écrivez un témoignage. Dites quels sont vos souvenirs liés à une odeur, à une saveur, à un lieu, à un objet… (60–80 mots).",
+      },
+      {
+        title: "Un souvenir heureux (DELF · 50 mots min.)",
+        task: "Décrivez un souvenir heureux (âge, lieu, activités, etc.). Utilisez l'imparfait. Exemple : « J'avais 5 ans, j'étais en vacances avec mes parents à la mer… » (50 mots minimum).",
+      },
+      {
+        title: "Un lieu fantastique sur votre blog",
+        task: "Vous avez découvert un lieu fantastique pendant un de vos voyages. Présentez ce lieu sur votre blog (60–80 mots).",
+      },
+      {
+        title: "Lettre aux parents",
+        task: "Vous êtes en vacances. Écrivez à vos parents pour leur donner des nouvelles et leur dire quels souvenirs vous avez achetés. Attention à la place des adjectifs !",
+      },
+    ],
+  },
 ];
