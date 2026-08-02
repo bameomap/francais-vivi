@@ -1,15 +1,16 @@
-import { PARCOURS_UNITS, STEP_DEFS } from "../data/parcoursData.js";
+import { PARCOURS_UNITS, STEP_DEFS, getStepDefsFor as getA1StepDefsFor } from "../data/parcoursData.js";
 import { STEP_DEFS_A2 } from "../data/parcoursDataA2.js";
 import { getStepSubIds, isA2Unit } from "./parcoursSteps.js";
 import { schedulePush } from "./cloudSync.js";
 
 const KEY = "parcours_progress";
 
-// A1 has one card per skill; A2 splits each skill across the book's three
-// document→grammar→vocabulary cycles, so its cards carry an explicit subset
-// (see parcoursDataA2.js). Progress itself is still stored per skill, which is
-// why the activity panels needed no changes.
-const stepDefsFor = (unitId) => (isA2Unit(unitId) ? STEP_DEFS_A2 : STEP_DEFS);
+// Most A1 units have one card per skill; a unit can instead split each skill
+// across the book's document→grammar→vocabulary cycles (see STEP_GROUPS_U10
+// in parcoursData.js), the same idea A2 uses for every unit. Either way, its
+// cards carry an explicit subset via subIds. Progress itself is still stored
+// per skill, which is why the activity panels needed no changes.
+const stepDefsFor = (unitId) => (isA2Unit(unitId) ? STEP_DEFS_A2 : getA1StepDefsFor(unitId));
 
 // Steps without enumerable content (e.g. U0 has no audio tracks) still get
 // one implicit slot so they can be marked done manually and counted in totals.

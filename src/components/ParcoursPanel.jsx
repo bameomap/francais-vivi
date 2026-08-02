@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { C } from "../constants.js";
-import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS } from "../data/parcoursData.js";
+import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS, getStepGroupsFor, getStepDefsFor } from "../data/parcoursData.js";
+import { isA2Unit } from "../utils/parcoursSteps.js";
 import { setParcoursFocus } from "../utils/parcoursFocus.js";
 import {
   computeUnitStatuses,
@@ -255,15 +256,21 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
   const [, setTick] = useState(0);
   const refresh = () => setTick(t => t + 1);
 
+  // A2 always passes its own groups; an A1 unit may define its own cycle
+  // layout (e.g. u10 — see STEP_GROUPS_U10) and otherwise falls back to the
+  // flat stepGroups/stepDefs prop passed by ParcoursPanel.
+  const groups = isA2Unit(unitId) ? stepGroups : getStepGroupsFor(unitId);
+  const defs   = isA2Unit(unitId) ? stepDefs   : getStepDefsFor(unitId);
+
   // Per-step fractional progress (recomputed each render)
   const stats = {};
-  // A2 cards own a slice of a skill (stepKey + subIds); A1 cards own it whole.
-  stepDefs.forEach(s => { stats[s.id] = getStepStat(unitId, s.stepKey || s.id, s.subIds); });
+  // A2/cycle cards own a slice of a skill (stepKey + subIds); flat A1 cards own it whole.
+  defs.forEach(s => { stats[s.id] = getStepStat(unitId, s.stepKey || s.id, s.subIds); });
 
-  const subDone  = stepDefs.reduce((a, s) => a + stats[s.id].done, 0);
-  const subTotal = stepDefs.reduce((a, s) => a + stats[s.id].total, 0);
+  const subDone  = defs.reduce((a, s) => a + stats[s.id].done, 0);
+  const subTotal = defs.reduce((a, s) => a + stats[s.id].total, 0);
   const pct      = subTotal ? Math.round((subDone / subTotal) * 100) : 0;
-  const doneSteps = stepDefs.filter(s => stats[s.id].complete).length;
+  const doneSteps = defs.filter(s => stats[s.id].complete).length;
 
   const handleStep = useCallback((step, { redo = false } = {}) => {
     const key = step.stepKey || step.id;
@@ -301,14 +308,14 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
   }, [unitId, unitIdx, onNavigate]);
 
   // First not-yet-complete step for the CTA
-  const nextStep = stepDefs.find(s => !stats[s.id].complete);
+  const nextStep = defs.find(s => !stats[s.id].complete);
 
   // Only one group is expanded at a time — 22 A2 cards at once made the screen
   // unreadable. `openGroup` stays undefined until the learner picks a group,
   // so until then the open one follows their progress; "" collapses all.
   const [openGroup, setOpenGroup] = useState(undefined);
-  const autoGroup   = stepGroups.find(g => g.steps.some(s => !stats[s.id].complete))?.id
-                      || stepGroups[stepGroups.length - 1]?.id;
+  const autoGroup   = groups.find(g => g.steps.some(s => !stats[s.id].complete))?.id
+                      || groups[groups.length - 1]?.id;
   const activeGroup = openGroup === undefined ? autoGroup : openGroup;
   const toggleGroup = (id) => setOpenGroup(activeGroup === id ? "" : id);
 
@@ -350,7 +357,7 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
               {pct}<span style={{ fontSize: 12, opacity: 0.7 }}>%</span>
             </div>
             <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.6)" }}>
-              {doneSteps}/{stepDefs.length} kỹ năng · {subDone}/{subTotal} bài
+              {doneSteps}/{defs.length} kỹ năng · {subDone}/{subTotal} bài
             </div>
           </div>
         </div>
@@ -372,7 +379,7 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
 
       {/* ── Step groups ── */}
       <div style={{ padding: "0.85rem 1rem 1rem" }}>
-        {stepGroups.map(group => {
+        {groups.map(group => {
           const groupDone = group.steps.filter(st => stats[st.id].complete).length;
           const isOpen    = activeGroup === group.id;
           return (

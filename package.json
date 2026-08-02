@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "check:a1": "node scripts/check-parcours-a1.mjs",
     "check:a2": "node scripts/check-parcours-a2.mjs",
     "align:refs": "node scripts/align-audio/export-refs.mjs"
   },
