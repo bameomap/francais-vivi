@@ -370,4 +370,94 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b4", num: "4", title: "Tous pareils, tous différents",
+    color: "#E8574A", bg: "#FFF0EF",
+    groups: [
+      {
+        id: "b4g1", label: "La tête et le visage", icon: "😊",
+        words: [
+          { fr:"barbu(e)",                 vi:"để râu quai nón", ex_fr:"Il est barbu et dégarni du chef.", ex_vi:"Anh ấy để râu quai nón và hói đầu." },
+          { fr:"chauve, dégarni(e)",       vi:"hói đầu, hói tóc", ex_fr:"Je n'ai plus du tout la tête de l'emploi, je suis chauve maintenant.", ex_vi:"Tôi không còn hợp vai nữa, giờ tôi hói rồi." },
+          { fr:"les cheveux gris, bruns, longs, courts", vi:"tóc bạc, tóc nâu, tóc dài, tóc ngắn", ex_fr:"Elle pose avec ses longs cheveux gris.", ex_vi:"Cô ấy tạo dáng với mái tóc bạc dài." },
+          { fr:"la fossette",              vi:"lúm đồng tiền", ex_fr:"Il a la même fossette au menton que Bonaparte.", ex_vi:"Anh ấy có lúm đồng tiền trên cằm giống Bonaparte." },
+          { fr:"le menton",                vi:"cằm", ex_fr:"Il a la même fossette au menton.", ex_vi:"Anh ấy có lúm đồng tiền giống vậy trên cằm." },
+          { fr:"le sourire",               vi:"nụ cười", ex_fr:"Son sourire illumine son visage.", ex_vi:"Nụ cười của cô ấy làm sáng bừng khuôn mặt." },
+        ]
+      },
+      {
+        id: "b4g2", label: "Le corps et l'apparence", icon: "🧍",
+        words: [
+          { fr:"âgé(e) = vieux, vieille (fam.) ≠ jeune", vi:"lớn tuổi ≠ trẻ", ex_fr:"Caroline Ida Ours, mannequin de 61 ans.", ex_vi:"Caroline Ida Ours, người mẫu 61 tuổi." },
+          { fr:"corpulent(e), costaud(e), rond(e)", vi:"đẫy đà, vạm vỡ, tròn trịa", ex_fr:"Il se qualifie de « gros » : costaud, corpulent, taille plus.", ex_vi:"Anh ấy tự nhận mình là “béo”: vạm vỡ, đẫy đà, cỡ lớn." },
+          { fr:"être de grande/petite taille", vi:"người cao lớn / thấp nhỏ", ex_fr:"Il veut devenir le premier mannequin de petite taille.", ex_vi:"Anh ấy muốn trở thành người mẫu thấp nhỏ đầu tiên." },
+          { fr:"faire du 44 = faire une taille 44", vi:"mặc size 44", ex_fr:"Je fais du 44. Chaque corps est unique.", ex_vi:"Tôi mặc size 44. Mỗi cơ thể đều độc nhất." },
+          { fr:"fort(e)",                  vi:"khỏe mạnh, to khỏe", ex_fr:"Tu es trop fort(e) !", ex_vi:"Bạn giỏi quá!" },
+          { fr:"mesurer 1,60 m",           vi:"cao 1m60", ex_fr:"Il mesure 1,55 m.", ex_vi:"Anh ấy cao 1m55." },
+          { fr:"musclé(e)",                vi:"cơ bắp", ex_fr:"Il faut être grand, musclé, sec.", ex_vi:"Phải cao, cơ bắp, gầy săn chắc." },
+          { fr:"sec, sèche",               vi:"gầy săn chắc", ex_fr:"Je ne remplis aucun de ces critères.", ex_vi:"Tôi chẳng đáp ứng tiêu chí nào trong số đó." },
+          { fr:"avoir bonne/mauvaise mine", vi:"trông khỏe/mệt", ex_fr:"Cette couleur vous donne bonne mine.", ex_vi:"Màu này làm bạn trông khỏe khoắn hơn." },
+          { fr:"avoir un corps (im)parfait", vi:"có thân hình (không) hoàn hảo", ex_fr:"Qui a dit qu'un corps parfait, c'est un corps qui fait une taille 34-36 ?", ex_vi:"Ai bảo thân hình hoàn hảo là thân hình cỡ 34-36?" },
+          { fr:"les canons de beauté (m.)", vi:"chuẩn mực cái đẹp", ex_fr:"Un physique différent des canons de beauté.", ex_vi:"Một vóc dáng khác với chuẩn mực cái đẹp." },
+          { fr:"les critères de beauté (m.)", vi:"tiêu chí cái đẹp", ex_fr:"Il ne faut pas imposer de critères de beauté.", ex_vi:"Không nên áp đặt tiêu chí cái đẹp." },
+          { fr:"être/se sentir bien dans sa peau", vi:"cảm thấy thoải mái với chính mình", ex_fr:"Elle se sent très bien dans sa peau.", ex_vi:"Cô ấy cảm thấy rất thoải mái với chính mình." },
+          { fr:"avoir la tête de l'emploi", vi:"có gương mặt hợp vai/hợp việc", ex_fr:"Il était taillé pour le rôle.", ex_vi:"Anh ấy sinh ra để hợp với vai đó." },
+          { fr:"être le sosie de",         vi:"là bản sao giống hệt của", ex_fr:"C'est sa doublure officielle depuis dix ans.", ex_vi:"Đó là người đóng thế chính thức của ông ấy suốt mười năm." },
+          { fr:"ressembler à",             vi:"giống với", ex_fr:"Il ne ressemble plus autant qu'avant à l'empereur.", ex_vi:"Anh ấy không còn giống hoàng đế nhiều như trước." },
+        ]
+      },
+      {
+        id: "b4g3", label: "La mode", icon: "👗",
+        words: [
+          { fr:"le créateur, la créatrice", vi:"nhà thiết kế", ex_fr:"Elle défile pour beaucoup de créateurs.", ex_vi:"Cô ấy trình diễn cho nhiều nhà thiết kế." },
+          { fr:"défiler",                  vi:"trình diễn thời trang", ex_fr:"Elle pose et défile avec ses longs cheveux gris.", ex_vi:"Cô ấy tạo dáng và trình diễn với mái tóc bạc dài." },
+          { fr:"le/la mannequin",          vi:"người mẫu", ex_fr:"Mannequin depuis huit ans, il se qualifie de « gros ».", ex_vi:"Làm người mẫu tám năm nay, anh ấy tự nhận mình “béo”." },
+          { fr:"porter des vêtements",     vi:"mặc quần áo", ex_fr:"C'est nous qui portons les vêtements.", ex_vi:"Chính chúng tôi là người mặc quần áo." },
+          { fr:"poser",                    vi:"tạo dáng (chụp ảnh)", ex_fr:"Elle pose pour des photographes de mode.", ex_vi:"Cô ấy tạo dáng cho các nhiếp ảnh gia thời trang." },
+        ]
+      },
+      {
+        id: "b4g4", label: "Les qualités", icon: "✨",
+        words: [
+          { fr:"chaleureux, chaleureuse",  vi:"nồng hậu, ấm áp", ex_fr:"Vous êtes une personne sociable, chaleureuse et spontanée.", ex_vi:"Bạn là người hòa đồng, ấm áp và tự nhiên." },
+          { fr:"curieux, curieuse",        vi:"tò mò, ham tìm hiểu", ex_fr:"Seul, il se montre curieux et réfléchi.", ex_vi:"Một mình, cậu ta tỏ ra tò mò và biết suy nghĩ." },
+          { fr:"discret, discrète",        vi:"kín đáo, tế nhị", ex_fr:"Vous êtes quelqu'un de discret et réfléchi.", ex_vi:"Bạn là người kín đáo và chín chắn." },
+          { fr:"doux, douce",              vi:"dịu dàng, hiền lành", ex_fr:"L'agneau est doux et honnête.", ex_vi:"Con cừu con thì hiền lành và trung thực." },
+          { fr:"extraverti(e)",            vi:"hướng ngoại", ex_fr:"Vous êtes du genre extraverti ?", ex_vi:"Bạn thuộc kiểu người hướng ngoại à?" },
+          { fr:"fidèle",                   vi:"trung thành", ex_fr:"Le chien est fidèle à son maître.", ex_vi:"Con chó trung thành với chủ." },
+          { fr:"honnête",                  vi:"trung thực", ex_fr:"Tatiana ne ment jamais, elle est toujours honnête.", ex_vi:"Tatiana không bao giờ nói dối, cô ấy luôn trung thực." },
+          { fr:"indépendant(e)",           vi:"độc lập", ex_fr:"Le loup est indépendant.", ex_vi:"Con sói thì độc lập." },
+          { fr:"optimiste",                vi:"lạc quan", ex_fr:"La cigale est optimiste et paresseuse.", ex_vi:"Con ve sầu thì lạc quan và lười biếng." },
+          { fr:"ordonné(e)",               vi:"ngăn nắp", ex_fr:"Vous êtes ordonné(e) et rigoureux(-se).", ex_vi:"Bạn ngăn nắp và nghiêm túc." },
+          { fr:"prudent(e)",               vi:"thận trọng", ex_fr:"On peut compter sur votre prudence et votre tact.", ex_vi:"Có thể trông cậy vào sự thận trọng và tế nhị của bạn." },
+          { fr:"réfléchi(e)",              vi:"chín chắn, biết suy nghĩ", ex_fr:"Seul, il se montre curieux et réfléchi.", ex_vi:"Một mình, cậu ta tỏ ra tò mò và biết suy nghĩ." },
+          { fr:"spontané(e)",              vi:"tự nhiên, bộc trực", ex_fr:"Vous êtes chaleureuse et spontanée.", ex_vi:"Bạn ấm áp và tự nhiên." },
+          { fr:"travailleur, travailleuse", vi:"chăm chỉ", ex_fr:"La fourmi est toujours inquiète et travailleuse.", ex_vi:"Con kiến thì lúc nào cũng lo lắng và chăm chỉ." },
+        ]
+      },
+      {
+        id: "b4g5", label: "Les défauts", icon: "😬",
+        words: [
+          { fr:"autoritaire",              vi:"độc đoán", ex_fr:"Le lion est autoritaire et cruel.", ex_vi:"Con sư tử thì độc đoán và tàn nhẫn." },
+          { fr:"bruyant(e)",               vi:"ồn ào", ex_fr:"Vous vous trouvez bavard(e), bruyant(e) ?", ex_vi:"Bạn thấy mình hay nói, ồn ào à?" },
+          { fr:"cruel(le)",                vi:"tàn nhẫn", ex_fr:"Le lion est autoritaire et cruel.", ex_vi:"Con sư tử thì độc đoán và tàn nhẫn." },
+          { fr:"envieux, envieuse",        vi:"hay ganh tị", ex_fr:"La grenouille est envieuse et prétentieuse.", ex_vi:"Con ếch hay ganh tị và tự phụ." },
+          { fr:"inquiet, inquiète",        vi:"hay lo lắng", ex_fr:"La fourmi est toujours inquiète.", ex_vi:"Con kiến lúc nào cũng lo lắng." },
+          { fr:"maniaque (de l'ordre, de la propreté)", vi:"kỹ tính, cầu toàn (về trật tự, sạch sẽ)", ex_fr:"Vous êtes un peu maniaque ?", ex_vi:"Bạn hơi cầu toàn à?" },
+          { fr:"menteur, menteuse",        vi:"hay nói dối", ex_fr:"Le renard est intelligent et menteur.", ex_vi:"Con cáo thì thông minh và hay nói dối." },
+          { fr:"paresseux, paresseuse",    vi:"lười biếng", ex_fr:"La cigale est optimiste et paresseuse.", ex_vi:"Con ve sầu thì lạc quan và lười biếng." },
+          { fr:"pessimiste",               vi:"bi quan", ex_fr:"La Fontaine se montre pessimiste.", ex_vi:"La Fontaine tỏ ra bi quan." },
+          { fr:"peureux, peureuse",        vi:"hay sợ hãi", ex_fr:"Le loup est peureux face au renard.", ex_vi:"Con sói lại sợ hãi trước con cáo." },
+          { fr:"prétentieux, prétentieuse", vi:"tự phụ, kiêu ngạo", ex_fr:"La grenouille est envieuse et prétentieuse.", ex_vi:"Con ếch hay ganh tị và tự phụ." },
+          { fr:"sans gêne",                vi:"vô tư quá mức, thiếu tế nhị", ex_fr:"Un peu bavard(e), bruyant(e), parfois sans gêne.", ex_vi:"Hơi nhiều lời, ồn ào, đôi khi vô tư quá mức." },
+          { fr:"stupide",                  vi:"ngốc nghếch", ex_fr:"Le loup est souvent un peu stupide face au renard.", ex_vi:"Con sói thường hơi ngốc trước con cáo." },
+          { fr:"superficiel(le)",          vi:"hời hợt", ex_fr:"En groupe, le rat est superficiel.", ex_vi:"Khi ở trong nhóm, con chuột tỏ ra hời hợt." },
+          { fr:"têtu(e)",                  vi:"bướng bỉnh, cứng đầu", ex_fr:"Antoine ne va pas changer d'avis parce qu'il est vraiment têtu.", ex_vi:"Antoine sẽ không đổi ý đâu vì cậu ấy rất bướng." },
+          { fr:"avoir des yeux de lynx",   vi:"mắt tinh như cáo", ex_fr:"Le lynx a une très bonne vision.", ex_vi:"Con linh miêu có thị lực rất tốt." },
+          { fr:"avoir une mémoire d'éléphant", vi:"trí nhớ như voi", ex_fr:"On associe l'éléphant à une grande mémoire.", ex_vi:"Người ta gắn con voi với trí nhớ tuyệt vời." },
+          { fr:"être têtu(e) comme une mule/un âne", vi:"bướng như lừa", ex_fr:"Quand quelqu'un est têtu, on dit qu'il est une tête de mule.", ex_vi:"Khi ai đó bướng bỉnh, người ta bảo họ là “đầu lừa”." },
+        ]
+      },
+    ]
+  },
 ];

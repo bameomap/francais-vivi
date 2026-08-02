@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -583,6 +583,176 @@ export const EDITO_GRAMMAR_A2 = [
           "Si vous avez un problème, vous pouvez m'appeler. — Nếu bạn có vấn đề gì, bạn có thể gọi tôi.",
           "S'il fait froid, on met le chauffage. — Nếu trời lạnh, chúng tôi bật lò sưởi.",
           "Si vous voyez un chat noir, contactez-moi s'il vous plaît ! — Nếu bạn thấy một con mèo đen, làm ơn liên hệ với tôi!",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b4", num:"4", title:"Tous pareils, tous différents", points:[
+
+      // ── 1. La comparaison : l'équivalence ──────────────────────
+      {
+        topic:"La comparaison : l'équivalence — Giống nhau, bằng nhau",
+        summary:"Ở bài trước bạn đã học hơn/kém/bằng. Bài này đào sâu riêng mức BẰNG NHAU: aussi (với tính từ/trạng từ), même (với danh từ, để nói CÙNG MỘT thứ), autant (với động từ hoặc số lượng).",
+        blocks:[
+          { type:"lead", text:"“Bằng nhau” trong tiếng Pháp không chỉ có MỘT từ — chọn từ nào phụ thuộc bạn đang so sánh TÍNH CHẤT (aussi), CÙNG MỘT VẬT/ĐẶC ĐIỂM (même), hay HÀNH ĐỘNG/SỐ LƯỢNG (autant)." },
+
+          { type:"formula",
+            parts:["aussi / le·la·les même(s) / autant", "(+ danh từ)", "que"],
+            example:"Il est aussi grand que l'empereur. — Anh ấy cao bằng hoàng đế.",
+            note:"Ba từ đều dịch là “bằng”, nhưng đi với loại từ khác nhau — xem bảng dưới." },
+
+          { type:"table",
+            caption:"3 cách nói “bằng nhau” — chọn theo loại từ đi kèm",
+            headers:["Loại từ", "Từ dùng", "Ví dụ"],
+            rows:[
+              ["tính từ / trạng từ", "aussi … que", "Il est aussi blond que son père. · Il parle aussi bien que sa mère."],
+              ["danh từ — CÙNG MỘT đặc điểm", "le/la/les même(s) … que", "Il a le même nez que son père. · Elle a les mêmes yeux que sa sœur."],
+              ["danh từ — SỐ LƯỢNG bằng nhau", "autant de … que", "Il achète autant de vêtements que moi."],
+              ["động từ", "verbe + autant … que", "Il s'intéresse autant à la mode qu'au sport."],
+            ] },
+
+          { type:"callout", variant:"warn", title:"Đừng lẫn “aussi” và “même”",
+            text:"aussi + tính từ = GIỐNG MỨC ĐỘ nhưng có thể là 2 thứ khác nhau (Elle est aussi grande que moi — hai người khác nhau, chỉ chiều cao bằng nhau).\nle/la même + danh từ = CÙNG MỘT thứ, giống hệt (Elle a les mêmes yeux que sa sœur — không phải mắt giống nhau về độ cao, mà là kiểu mắt y hệt)." },
+
+          { type:"heading", text:"“le/la/les même(s)” — hợp giống số với danh từ theo sau" },
+          { type:"table",
+            caption:"même luôn đi kèm mạo từ xác định + hợp số với danh từ",
+            headers:["Danh từ", "le/la/les même(s)", "Ví dụ"],
+            rows:[
+              ["số ít, giống đực", "le même", "le même nez"],
+              ["số ít, giống cái", "la même", "la même physionomie"],
+              ["số nhiều", "les mêmes", "les mêmes yeux"],
+            ] },
+
+          { type:"heading", text:"pareil(le) — tính từ, không phải trạng từ so sánh" },
+          { type:"callout", variant:"note", title:"“pareil” đi MỘT MÌNH, không cần “que”",
+            text:"pareil(le) = giống hệt, y như nhau — là TÍNH TỪ thường, hợp giống-số với danh từ nó bổ nghĩa, và KHÔNG bắt buộc phải có “que” theo sau (khác với aussi/même/autant).\nIl n'y a pas deux corps pareils. — Không có hai cơ thể nào giống hệt nhau.\nCes deux robes sont pareilles. — Hai chiếc váy này giống hệt nhau." },
+
+          { type:"compare", items:[
+            { wrong:"Il a le même taille que moi.", right:"Il a la même taille que moi.", why:"“taille” giống cái → phải dùng “la même”, không phải “le même”." },
+            { wrong:"Je ne fais pas aussi de sport que ma sœur.", right:"Je ne fais pas autant de sport que ma sœur.", why:"Với danh từ (số lượng thể thao), dùng autant de, không phải aussi de." },
+            { wrong:"Ils parlent aussi l'un que l'autre.", right:"Ils parlent autant l'un que l'autre.", why:"“parlent” là động từ → dùng autant, không phải aussi (aussi chỉ đi với tính từ/trạng từ)." },
+          ] },
+        ],
+        examples:[
+          "Il n'y a pas deux corps pareils. — Không có hai cơ thể nào giống hệt nhau.",
+          "Il a la même physionomie, le même visage rond que Bonaparte. — Anh ấy có cùng vóc dáng, cùng khuôn mặt tròn như Bonaparte.",
+          "Il ne ressemble plus autant qu'avant à l'empereur. — Anh ấy không còn giống hoàng đế nhiều như trước nữa.",
+          "Mon fils me ressemble autant que ma fille. — Con trai tôi giống tôi ngang với con gái tôi.",
+          "Ce mannequin est aussi petit que moi. — Người mẫu này thấp bằng tôi.",
+        ]
+      },
+
+      // ── 2. Les adjectifs indéfinis ─────────────────────────────
+      {
+        topic:"Chaque, tout/toute/tous/toutes — Nói về TOÀN THỂ",
+        summary:"Hai cách nói “mọi, tất cả” — nhưng KHÁC NHAU về ngữ pháp: chaque luôn đi với danh từ SỐ ÍT và không đổi dạng; tout/toute/tous/toutes phải hợp giống-số với danh từ.",
+        blocks:[
+          { type:"lead", text:"Tiếng Việt chỉ cần “mọi” hay “tất cả”. Tiếng Pháp có hai từ khác hẳn nhau về ngữ pháp cho cùng một ý — nhầm giữa hai từ này là lỗi rất hay gặp." },
+
+          { type:"formula",
+            parts:["chaque + danh từ SỐ ÍT", "≈", "tout/toute/tous/toutes + danh từ (hợp giống-số)"],
+            example:"Chaque qualité peut cacher un défaut. ≈ Toutes les qualités peuvent cacher un défaut.",
+            note:"Hai cách diễn đạt gần như cùng nghĩa, nhưng chaque luôn kèm danh từ SỐ ÍT, còn tout nhóm phải hợp giống-số." },
+
+          { type:"table",
+            caption:"So sánh trực tiếp",
+            headers:["", "chaque", "tout, toute, tous, toutes"],
+            rows:[
+              ["Biến đổi hình thức?", "KHÔNG — luôn “chaque”, bất biến", "CÓ — đổi theo giống/số của danh từ"],
+              ["Đi với danh từ nào?", "Luôn SỐ ÍT", "Số ít (tout/toute) hoặc SỐ NHIỀU (tous/toutes)"],
+              ["Ví dụ", "Chaque qualité peut cacher un défaut.", "J'aime tous les aspects de sa personnalité."],
+            ] },
+
+          { type:"cards", items:[
+            { badge:"♂", color:"#1B3A6B", title:"tout / tous — giống đực",
+              lines:["tout + danh từ số ít giống đực.", "tous + danh từ số nhiều giống đực."],
+              examples:[
+                { fr:"Tout le monde a des défauts.", vi:"Ai cũng có khuyết điểm." },
+                { fr:"Tous les traits de caractère peuvent être utiles.", vi:"Mọi nét tính cách đều có thể hữu ích." },
+              ] },
+            { badge:"♀", color:"#E8574A", title:"toute / toutes — giống cái",
+              lines:["toute + danh từ số ít giống cái.", "toutes + danh từ số nhiều giống cái."],
+              examples:[
+                { fr:"Nous avons passé toute l'heure à parler de nos qualités.", vi:"Chúng tôi đã dành cả tiếng đồng hồ nói về ưu điểm của mình." },
+                { fr:"Vous trouvez vite toutes les choses que vous cherchez.", vi:"Bạn tìm nhanh mọi thứ bạn cần tìm." },
+              ] },
+          ] },
+
+          { type:"callout", variant:"tip", title:"Đổi qua lại giữa chaque và tous/toutes les",
+            text:"chaque + danh từ số ít ↔ tous/toutes les + danh từ số nhiều — nghĩa gần như nhau, chỉ đổi hình thức ngữ pháp:\nChaque créateur va présenter sa collection. ↔ Tous les créateurs vont présenter leur collection." },
+
+          { type:"heading", text:"“tout” — còn là đại từ trung tính" },
+          { type:"callout", variant:"note", title:"tout đứng một mình = “mọi thứ”",
+            text:"Khi KHÔNG đi kèm danh từ, “tout” là đại từ, luôn bất biến, nghĩa là “mọi thứ/mọi việc”:\nTout va bien. — Mọi thứ đều ổn." },
+
+          { type:"compare", items:[
+            { wrong:"Chaque les qualités ont un opposé.", right:"Chaque qualité a un opposé. / Toutes les qualités ont un opposé.", why:"chaque không bao giờ đi với “les” hay danh từ số nhiều." },
+            { wrong:"Tout le monde ont des défauts.", right:"Tout le monde a des défauts.", why:"“tout le monde” luôn chia động từ ở NGÔI THỨ BA SỐ ÍT (il/elle), dù nghĩa là “mọi người”." },
+          ] },
+        ],
+        examples:[
+          "Personne n'est parfait, tout le monde le sait. — Không ai hoàn hảo cả, ai cũng biết điều đó.",
+          "Chaque faiblesse est aussi une force. — Mỗi điểm yếu cũng là một điểm mạnh.",
+          "Le coach donne tous ces conseils sur son site. — Huấn luyện viên đưa hết những lời khuyên này lên trang web.",
+          "Faites la liste de toutes les qualités qui vous représentent. — Hãy liệt kê tất cả các ưu điểm đại diện cho bạn.",
+        ]
+      },
+
+      // ── 3. Les pronoms possessifs ──────────────────────────────
+      {
+        topic:"Les pronoms possessifs — Thay hẳn “của tôi/của bạn…”",
+        summary:"Thay vì nói “ma photo” (ảnh của tôi) rồi lặp lại “ta photo” (ảnh của bạn), tiếng Pháp gộp cả tính từ sở hữu + danh từ vào MỘT từ duy nhất: la mienne, la tienne… Luôn có mạo từ le/la/les phía trước.",
+        blocks:[
+          { type:"lead", text:"So sánh: “C'est ma photo de profil.” → “C'est la mienne.” — “la mienne” thay cho CẢ CỤM “ma photo de profil”, không lặp lại danh từ." },
+
+          { type:"formula",
+            parts:["le / la / les", "mien·tien·sien·nôtre·vôtre·leur (+ ne/s)"],
+            example:"C'est ma photo de profil. → C'est la mienne. — Đó là ảnh đại diện của tôi. → Đó là CỦA TÔI.",
+            note:"Luôn có mạo từ xác định (le/la/les) đứng trước — không bao giờ dùng pronom possessif một mình." },
+
+          { type:"table",
+            caption:"Bảng đầy đủ — hợp giống/số với danh từ được thay thế, KHÔNG phải với người sở hữu",
+            headers:["Ai sở hữu", "số ít giống đực", "số ít giống cái", "số nhiều giống đực", "số nhiều giống cái"],
+            rows:[
+              ["je", "le mien", "la mienne", "les miens", "les miennes"],
+              ["tu", "le tien", "la tienne", "les tiens", "les tiennes"],
+              ["il/elle/on", "le sien", "la sienne", "les siens", "les siennes"],
+              ["nous", "le nôtre", "la nôtre", "les nôtres", "les nôtres"],
+              ["vous", "le vôtre", "la vôtre", "les vôtres", "les vôtres"],
+              ["ils/elles", "le leur", "la leur", "les leurs", "les leurs"],
+            ] },
+
+          { type:"callout", variant:"warn", title:"Hợp giống/số theo DANH TỪ, không theo người sở hữu",
+            text:"Đây là điểm hay nhầm nhất: “la sienne” không có nghĩa “cô ấy” hay “anh ấy” — giống/số của pronom possessif đi theo DANH TỪ bị thay thế, còn NGÔI (je/tu/il…) mới quyết định ai sở hữu.\nsa photo (photo = giống cái) → la sienne (dù người sở hữu là anh hay chị)." },
+
+          { type:"cards", items:[
+            { badge:"👤", color:"#10B981", title:"nôtre/vôtre có dấu mũ (^), khác tính từ sở hữu",
+              lines:["notre/votre (tính từ, không dấu mũ) khác le nôtre/le vôtre (đại từ, CÓ dấu mũ) — dễ viết sai chính tả nhất bài này."],
+              examples:[
+                { fr:"C'est notre projet. → C'est le nôtre.", vi:"Đó là dự án của chúng tôi. → Đó là CỦA CHÚNG TÔI." },
+              ] },
+          ] },
+
+          { type:"heading", text:"So sánh cạnh nhau: tính từ sở hữu ≠ đại từ sở hữu" },
+          { type:"pairs", caption:"Tính từ sở hữu LUÔN có danh từ theo sau · Đại từ sở hữu THAY THẾ danh từ", items:[
+            { fr:"Ayez toujours une série de photos d'avance. Voici les miennes !", vi:"Luôn chuẩn bị sẵn một loạt ảnh. Đây là CỦA TÔI!" },
+            { fr:"Il a changé la sienne pour avoir l'air plus sérieux.", vi:"Anh ấy đã đổi CỦA MÌNH để trông nghiêm túc hơn." },
+            { fr:"Nous avons tous envie de rencontrer des gens qui ont des intérêts semblables aux nôtres.", vi:"Ai cũng muốn gặp những người có sở thích giống CỦA CHÚNG TA." },
+          ] },
+
+          { type:"compare", items:[
+            { wrong:"C'est mienne photo.", right:"C'est la mienne.", why:"Pronom possessif luôn cần mạo từ le/la/les phía trước." },
+            { wrong:"C'est le votre idée.", right:"C'est la vôtre.", why:"“idée” giống cái → la vôtre, không phải le votre (và phải có dấu mũ: vôtre)." },
+          ] },
+        ],
+        examples:[
+          "Je lui ai parlé de l'importance de la photo de profil et il a changé la sienne. — Tôi đã nói với anh ấy về tầm quan trọng của ảnh đại diện và anh ấy đã đổi ảnh của mình.",
+          "Évitez la photo avec vos amis, c'est votre tête que l'employeur veut voir, pas les leurs. — Tránh chụp ảnh cùng bạn bè, nhà tuyển dụng muốn thấy mặt bạn, không phải mặt của họ.",
+          "J'ai préparé ma photo. Et toi ? Tu as apporté la tienne ? — Tôi đã chuẩn bị ảnh của mình rồi. Còn bạn? Bạn mang ảnh của bạn chưa?",
+          "Ton appareil photo est en panne ? Prends le mien. — Máy ảnh của bạn hỏng à? Lấy cái của tôi mà dùng.",
         ]
       },
     ]

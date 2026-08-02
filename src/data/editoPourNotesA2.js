@@ -247,4 +247,86 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 4 · Tous pareils, tous différents ──────────────────────
+  "b4-a": [
+    {
+      heading: "Pour faire le portrait physique de quelqu'un",
+      structure: "Tả tóc/dáng người bằng « avoir + danh từ » hoặc « être + tính từ ». Chiều cao: « mesurer + số ». Size quần áo: « faire une taille + số ».",
+      phrases: [
+        { fr: "Il/Elle a les cheveux blancs/blonds/bruns, courts/longs.", vi: "Anh ấy/Cô ấy có tóc trắng/vàng/nâu, ngắn/dài." },
+        { fr: "Il/Elle fait une taille 44.", vi: "Anh ấy/Cô ấy mặc size 44." },
+        { fr: "Il/Elle est grand(e) / petit(e).", vi: "Anh ấy/Cô ấy cao / thấp." },
+        { fr: "Il/Elle mesure 1,55 m.", vi: "Anh ấy/Cô ấy cao 1m55." },
+        { fr: "Il/Elle est costaud(e) = corpulent(e).", vi: "Anh ấy/Cô ấy vạm vỡ = đẫy đà." },
+        { fr: "Il/Elle ressemble à…", vi: "Anh ấy/Cô ấy giống…" },
+      ],
+    },
+  ],
+
+  "b4-b": [
+    {
+      heading: "Pour faire un compliment",
+      structure: "Khen ngợi ngắn gọn, thân mật — dùng được với người lạ, không cần lý do đặc biệt.",
+      phrases: [
+        { fr: "Vous êtes une fée !", vi: "Bạn đúng là một bà tiên!" },
+        { fr: "Tu es trop fort(e) !", vi: "Bạn giỏi quá!" },
+        { fr: "Vous êtes la chance de ma journée.", vi: "Gặp bạn là may mắn của ngày hôm nay." },
+        { fr: "Cette couleur te/vous donne bonne mine.", vi: "Màu này làm bạn trông thật khỏe khoắn." },
+      ],
+    },
+  ],
+
+  "b4-d": [
+    {
+      heading: "Pour parler du caractère de quelqu'un",
+      structure: "« être du genre / d'un naturel + tính từ » để mô tả xu hướng tính cách chung. « être doué(e) pour + danh từ » để khen năng lực. « c'est quelqu'un/une personne de/qui... » để giới thiệu tính cách người khác.",
+      phrases: [
+        { fr: "Il/Elle est du genre extraverti.", vi: "Anh ấy/Cô ấy thuộc kiểu người hướng ngoại." },
+        { fr: "Il/Elle est d'un naturel timide.", vi: "Anh ấy/Cô ấy vốn tính nhút nhát." },
+        { fr: "Il/Elle est doué(e) pour la communication.", vi: "Anh ấy/Cô ấy có năng khiếu giao tiếp." },
+        { fr: "C'est quelqu'un de discret.", vi: "Đó là người kín đáo." },
+        { fr: "C'est une personne sociable.", vi: "Đó là người hòa đồng." },
+      ],
+    },
+  ],
+
+  "b4-h": [
+    {
+      heading: "Pour choisir une photo de profil",
+      structure: "Dùng pronom possessif (la mienne, la tienne…) khi so sánh ảnh của mình với người khác, tránh lặp từ « photo ».",
+      phrases: [
+        { fr: "Sur ce réseau, je préfère une photo sérieuse.", vi: "Trên mạng này, tôi thích ảnh nghiêm túc hơn." },
+        { fr: "J'aime bien montrer mes passions en photo.", vi: "Tôi thích thể hiện đam mê của mình qua ảnh." },
+        { fr: "C'est la mienne. / C'est la tienne.", vi: "Đó là của tôi. / Đó là của bạn." },
+        { fr: "Voici les miennes !", vi: "Đây là của tôi (số nhiều)!" },
+      ],
+    },
+  ],
+
+  "b4-i": [
+    {
+      heading: "Pour parler d'un souvenir scolaire",
+      structure: "Kể lại một kỷ niệm học đường, dùng imparfait (đã học ở Unité 2) để tả thói quen/khung cảnh.",
+      phrases: [
+        { fr: "Chez nous, on disait « ouistiti » pour la photo.", vi: "Ở chỗ chúng tôi, người ta hay nói “ouistiti” khi chụp ảnh." },
+        { fr: "C'était un moment important de l'année.", vi: "Đó là một khoảnh khắc quan trọng trong năm." },
+        { fr: "Je me souviens de ma photo de classe en CM2.", vi: "Tôi nhớ tấm ảnh lớp hồi lớp 5 của mình." },
+      ],
+    },
+  ],
+
+  "b4-atelier": [
+    {
+      heading: "Pour décrire une œuvre d'art",
+      structure: "Khuôn mẫu mô tả tác phẩm nghệ thuật: loại tác phẩm → chủ đề → bố cục (vị trí) → màu sắc → cảm xúc.",
+      phrases: [
+        { fr: "C'est un tableau/une photographie/un dessin. Cette œuvre date de…", vi: "Đây là một bức tranh/bức ảnh/bản vẽ. Tác phẩm này có từ năm…" },
+        { fr: "On voit… / On observe… / Elle représente…", vi: "Ta thấy… / Ta quan sát thấy… / Nó thể hiện…" },
+        { fr: "Au premier plan, au centre, à gauche, à droite.", vi: "Ở tiền cảnh, ở giữa, bên trái, bên phải." },
+        { fr: "Les couleurs sont chaudes/froides, claires/sombres.", vi: "Màu sắc ấm/lạnh, sáng/tối." },
+        { fr: "Cette œuvre inspire la joie/la tristesse/la surprise.", vi: "Tác phẩm này gợi lên niềm vui/nỗi buồn/sự ngạc nhiên." },
+      ],
+    },
+  ],
 };

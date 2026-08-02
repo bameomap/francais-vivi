@@ -6,6 +6,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b1", num:1, fr:"Nouvelles vies", vi:"Cuộc sống mới", grammar:"Passé composé · Négation · il y a/pendant/depuis", emoji:"🌱" },
   { id:"b2", num:2, fr:"Je me souviens", vi:"Tôi nhớ lại", grammar:"L'imparfait · Pronoms y/en · Place de l'adjectif", emoji:"📷" },
   { id:"b3", num:3, fr:"Comme à la maison", vi:"Như ở nhà", grammar:"Pronoms relatifs qui/que/où · Comparaison · Si + présent", emoji:"🏠" },
+  { id:"b4", num:4, fr:"Tous pareils, tous différents", vi:"Ai cũng giống, ai cũng khác", grammar:"Comparaison : équivalence · Adjectifs indéfinis · Pronoms possessifs", emoji:"🎭" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -350,9 +351,114 @@ export const STEP_GROUPS_B3 = [
 
 export const STEP_DEFS_B3 = STEP_GROUPS_B3.flatMap(g => g.steps);
 
+// ── Unité 4 · Tous pareils, tous différents ────────────────────────
+// Also no new verb tense here (comparaison/adjectifs indéfinis/pronoms
+// possessifs are structures, not tenses) — same shape as b3, no "verbes" card.
+export const STEP_GROUPS_B4 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Portraits & compliments",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b4-livre-mannequins-atypiques"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Les mannequins atypiques",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b4-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Faites des compliments !",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b4-livre-sosie-napoleon"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Le sosie de Napoléon",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La comparaison : l'équivalence",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b4g1","b4g2","b4g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"L'apparence physique · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Décrire et complimenter",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Décrire un(e) mannequin",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Qualités & défauts",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b4-livre-qualites-defauts"],
+        icon:"📜", kind:"Đọc D", color:"#059669", sub:"Les qualités de vos défauts",
+        section:"lecture", view:"lecture" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b4-livre-quadrant-ofman"],
+        icon:"🎬", kind:"Đọc E", color:"#7B6CF6", sub:"Le quadrant d'Ofman (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Chaque · tout, toute, tous, toutes",
+        section:"grammar", view:"grammar" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b4g4","b4g5"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Les traits de caractère · 2 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Parler du caractère",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Caractère d'un personnage de fiction (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Culture & réseaux",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b4-livre-la-fontaine"],
+        icon:"🏛️", kind:"Văn hóa F", color:"#7B6CF6", sub:"Jean de La Fontaine, roi des animaux",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b4-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"L'anthropomorphisme",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b4-livre-photos-profils"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Quelles photos pour vos profils ?",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter2", stepKey:"ecouter", subIds:["b4-i"],
+        icon:"🎧", kind:"Nghe I", color:"#0891B2", sub:"La photo de classe",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Les pronoms possessifs",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Choisir sa photo de profil",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Conseils pour une photo de profil",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_o_on","son_a_an","son_e_in","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les voyelles orales et nasales",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Café artistique · présenter une œuvre",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B4 = STEP_GROUPS_B4.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

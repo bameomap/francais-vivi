@@ -246,4 +246,68 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-4", unit: 4, title: "Tous pareils, tous différents",
+    speakingPractice: [
+      {
+        title: "Décrire et complimenter",
+        notes: ["b4-a", "b4-b"],
+        task: "Décrivez le physique d'une personne que vous admirez (mannequin, acteur/actrice…), puis faites-lui un compliment sincère à voix haute.",
+        usefulPhrases: [
+          "Il/Elle a les cheveux longs/courts, gris/bruns.",
+          "Il/Elle mesure 1,70 m.",
+          "Il/Elle est costaud(e) = corpulent(e).",
+          "Vous êtes trop fort(e) !",
+          "Cette couleur vous donne bonne mine.",
+        ],
+      },
+      {
+        title: "Parler du caractère",
+        notes: ["b4-d"],
+        task: "Choisissez trois traits de votre caractère (qualités ou défauts) et expliquez à votre voisin(e) dans quelles situations ils peuvent être utiles ou gênants.",
+        usefulPhrases: [
+          "Je suis du genre extraverti / d'un naturel timide.",
+          "Je suis doué(e) pour la communication.",
+          "C'est quelqu'un de discret et réfléchi.",
+          "Chaque défaut a aussi sa qualité.",
+        ],
+      },
+      {
+        title: "Choisir sa photo de profil",
+        notes: ["b4-h", "b4-i"],
+        task: "Discutez avec votre voisin(e) : quelle photo utilisez-vous sur les réseaux professionnels ? Et sur les réseaux personnels ? Pourquoi ?",
+        usefulPhrases: [
+          "Sur ce réseau, je préfère une photo sérieuse.",
+          "J'aime bien montrer mes passions en photo.",
+          "C'est la mienne / la tienne / la sienne.",
+          "Voici les miennes !",
+        ],
+      },
+      {
+        title: "Présenter une œuvre d'art",
+        notes: ["b4-atelier"],
+        task: "Atelier médiation : café artistique. Choisissez une œuvre d'art, décrivez-la (sujet, couleurs, composition) et partagez les émotions qu'elle vous inspire.",
+        usefulPhrases: [
+          "C'est un tableau/une photographie qui date de…",
+          "On voit… / On observe… / Elle représente…",
+          "Au premier plan… / Au centre… / À gauche…",
+          "Cette œuvre inspire la joie/la tristesse/la surprise.",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Décrire un(e) mannequin",
+        task: "Décrivez un(e) mannequin que vous avez vu(e) dans une publicité ou un magazine (physique, style, ce qui le/la rend particulier(-ère)).",
+      },
+      {
+        title: "Le caractère d'un personnage de fiction (DELF)",
+        task: "Décrivez le caractère d'un personnage de fiction que vous aimez : ses qualités, ses défauts, dans quelles situations ils apparaissent.",
+      },
+      {
+        title: "Conseils pour une photo de profil",
+        task: "Sur quels réseaux utiliseriez-vous une photo sérieuse ? Une photo plus personnelle ? Expliquez vos choix dans un court texte.",
+      },
+    ],
+  },
 ];

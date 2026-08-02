@@ -536,6 +536,162 @@ Leïla : C'est pas grave, tu peux passer ce week-end si ça t'arrange.`,
       { id: "b3-voisins2-q6", type: "open", prompt: "Production écrite (DELF, 50 mots min.) : un(e) ami(e) vous écrit que ses nouveaux voisins sont très bruyants et l'empêchent de dormir. Répondez-lui pour le/la réconforter et lui proposer une solution." },
     ],
   },
+
+  // ═══════════════ Unité 4 — Tous pareils, tous différents ═══════════════
+
+  // ── A · Les mannequins atypiques (p. 55) ─────────────────────────
+  {
+    id: "b4-livre-mannequins-atypiques",
+    unit: 4,
+    unitTitle: "Tous pareils, tous différents",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 55,
+    title: "Les mannequins atypiques",
+    instruction: "Lisez l'article et repérez le vocabulaire du portrait physique.",
+    text: `De plus en plus de mannequins « atypiques » posent aujourd'hui pour de grandes marques, loin des standards habituels de la mode.
+
+C'est le cas d'une mannequin de 61 ans qui défile avec ses longs cheveux gris. Pour elle, un corps parfait n'existe pas : « chaque corps est unique, et c'est ça qui le rend beau », explique-t-elle. Elle fait une taille 44 et ne s'en cache pas.
+
+Un autre mannequin, la quarantaine, travaille dans le métier depuis huit ans. Il se décrit lui-même comme « costaud », sans complexe. Pour lui, montrer des corps différents des canons de beauté habituels peut aider d'autres personnes à se sentir mieux dans leur peau.
+
+Enfin, un jeune mannequin de 1,55 m espère devenir le premier mannequin noir de petite taille reconnu dans le milieu. Il le reconnaît : dans le monde de la mode, on demande en général aux hommes d'être grands, musclés et secs. Il ne remplit aucun de ces critères — mais rappelle que ce sont les mannequins qui portent les vêtements, pas l'inverse.`,
+    questions: [
+      { id: "b4-mannequins-q1", type: "open", prompt: "Regardez des photos de mannequins atypiques. Qu'en pensez-vous ?" },
+      { id: "b4-mannequins-q2", type: "short_answer", prompt: "D'après la mannequin de 61 ans, pourquoi tous les corps sont-ils beaux ?", answer: "Parce que chaque corps est unique, et c'est ça qui le rend beau." },
+      { id: "b4-mannequins-q3", type: "short_answer", prompt: "Comment le deuxième mannequin se décrit-il ? Pourquoi ce mot ne le dérange pas ?", answer: "Il se décrit comme « costaud ». Il n'a pas de problème avec ce mot et pense que montrer des corps différents peut aider les autres." },
+      { id: "b4-mannequins-q4", type: "multiple_choice", prompt: "Quel est le rêve du jeune mannequin de 1,55 m ?", options: ["Devenir styliste.", "Devenir le premier mannequin noir de petite taille reconnu.", "Ouvrir sa propre marque."], answer: "Devenir le premier mannequin noir de petite taille reconnu." },
+      { id: "b4-mannequins-q5", type: "true_false", prompt: "Vrai ou faux ? Selon le texte, un homme mannequin doit habituellement être grand, musclé et sec.", answer: true },
+      { id: "b4-mannequins-q6", type: "open", prompt: "Production écrite : décrivez un(e) mannequin que vous avez vu(e) dans une publicité ou un magazine." },
+    ],
+  },
+
+  // ── C · Le sosie de Napoléon (p. 58) ─────────────────────────────
+  {
+    id: "b4-livre-sosie-napoleon",
+    unit: 4,
+    unitTitle: "Tous pareils, tous différents",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 58,
+    title: "Le sosie de Napoléon",
+    instruction: "Lisez l'article et répondez aux questions.",
+    text: `Ce n'est pas tous les jours qu'on croise Napoléon dans la rue — même si c'est seulement un sosie. Pendant dix ans, un homme a été la doublure officielle de l'empereur pour des reconstitutions historiques. Aujourd'hui âgé de 54 ans, barbu et un peu dégarni, il admet en riant : « Je n'ai plus du tout la tête de l'emploi ! »
+
+Au début, pourtant, tout collait parfaitement : il mesurait presque la même taille que Napoléon, avait la même silhouette, le même visage rond, et même la même petite fossette au menton. Mais ressembler physiquement ne suffisait pas — il fallait aussi « coller au personnage ». Il a donc appris à monter à cheval et s'est entraîné longuement à imiter les gestes typiques de l'empereur : son petit rictus, sa façon de toujours tirer sur sa manche.`,
+    questions: [
+      { id: "b4-napoleon-q1", type: "open", prompt: "Savez-vous qui était Napoléon Bonaparte ?" },
+      { id: "b4-napoleon-q2", type: "short_answer", prompt: "Qui est l'homme dont parle l'article ?", answer: "L'ancienne doublure officielle de Napoléon pendant dix ans, pour des reconstitutions historiques." },
+      { id: "b4-napoleon-q3", type: "short_answer", prompt: "Pourquoi ne ressemble-t-il plus à Napoléon aujourd'hui ?", answer: "Il est maintenant barbu et un peu dégarni." },
+      { id: "b4-napoleon-q4", type: "multi_select", prompt: "Qu'avait-il en commun avec Napoléon au départ ?", options: ["La même taille (à peu près).", "La même silhouette.", "Le même visage rond.", "La même fossette au menton.", "La même voix."], answer: ["La même taille (à peu près).", "La même silhouette.", "Le même visage rond.", "La même fossette au menton."] },
+      { id: "b4-napoleon-q5", type: "short_answer", prompt: "Qu'a-t-il fait pour bien jouer le rôle de Napoléon ?", answer: "Il a appris à monter à cheval et s'est entraîné à imiter les gestes typiques de l'empereur." },
+      { id: "b4-napoleon-q6", type: "multiple_choice", prompt: "Vocabulaire : que signifie « coller au personnage » ?", options: ["Correspondre vraiment au personnage, pas seulement physiquement.", "Se déguiser en personnage pour une fête."], answer: "Correspondre vraiment au personnage, pas seulement physiquement." },
+      { id: "b4-napoleon-q7", type: "open", prompt: "Production écrite : voudriez-vous être le sosie d'une personne célèbre ? Pourquoi ?" },
+    ],
+  },
+
+  // ── D · Les qualités de vos défauts (p. 60) ──────────────────────
+  {
+    id: "b4-livre-qualites-defauts",
+    unit: 4,
+    unitTitle: "Tous pareils, tous différents",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 60,
+    title: "Les qualités de vos défauts",
+    instruction: "Lisez l'article et répondez aux questions.",
+    text: `Personne n'est parfait, tout le monde le sait. Nous avons tous des qualités et des défauts, mais nous avons tendance à les voir de façon très binaire : c'est bien, ou c'est mal. En réalité, presque tous les traits de caractère peuvent devenir utiles selon la situation. Chaque « défaut » a son revers positif.
+
+Vous vous trouvez bavard(e) et un peu bruyant(e) ? C'est peut-être surtout que vous êtes sociable, chaleureux(-se) et spontané(e) dans toutes les situations — bref, doué(e) pour la communication !
+
+Vous êtes plutôt d'un naturel timide, mal à l'aise pour parler en public ? Voyez plutôt le bon côté : vous êtes discret(-ète) et réfléchi(e), on peut compter sur votre prudence.
+
+Le désordre vous rend fou/folle ? C'est simplement que vous êtes ordonné(e) et rigoureux(-se) — et ça vous fait gagner un temps fou au quotidien.
+
+Chaque faiblesse a donc aussi sa force. Le savoir rend plus tolérant, avec les autres comme avec soi-même.`,
+    questions: [
+      { id: "b4-qualites-q1", type: "open", prompt: "Citez un de vos défauts et une de vos qualités." },
+      { id: "b4-qualites-q2", type: "short_answer", prompt: "Comment voyons-nous les qualités et les défauts en général, selon le texte ?", answer: "De façon binaire : c'est bien, ou c'est mal." },
+      { id: "b4-qualites-q3", type: "matching", prompt: "Associez chaque « défaut » à sa qualité cachée.", answer: "bavard(e), bruyant(e) → sociable, chaleureux(-se), doué(e) pour la communication\ntimide → discret(-ète), réfléchi(e), prudent(e)\nmaniaque du désordre → ordonné(e), rigoureux(-se)" },
+      { id: "b4-qualites-q4", type: "open", prompt: "Dans quelles situations ces « défauts » peuvent-ils être des qualités ? a. Bavard(e). b. Désordonné(e). c. Nerveux, nerveuse." },
+      { id: "b4-qualites-q5", type: "open", prompt: "Production écrite (DELF) : décrivez le caractère d'un personnage de fiction." },
+    ],
+  },
+
+  // ── E · Le quadrant d'Ofman (vidéo, p. 61) ───────────────────────
+  {
+    id: "b4-livre-quadrant-ofman",
+    unit: 4,
+    unitTitle: "Tous pareils, tous différents",
+    source: "livre",
+    section: "culture(s)",
+    page: 61,
+    title: "Le quadrant d'Ofman",
+    instruction: "Lisez ce résumé du document vidéo et répondez aux questions.",
+    text: `Le quadrant d'Ofman est un outil conçu aux Pays-Bas dans les années 1990 pour comprendre nos qualités fondamentales — et leurs opposés.
+
+Il fonctionne en quatre cases. On part d'une QUALITÉ : par exemple, la détermination. Si on pousse cette qualité à l'extrême, elle devient un PIÈGE : l'obstination. Pour corriger ce piège, il faut développer son opposé positif, le CHALLENGE : ici, la souplesse. Mais si on pousse la souplesse elle-même à l'excès, on arrive à une quatrième case, l'ALLERGIE : l'indécision. Une personne très déterminée aura souvent du mal à s'entendre avec une personne très indécise — chacune est « l'allergie » de l'autre.
+
+Même logique avec le courage : poussé à l'extrême, il devient de la témérité (piège) ; son opposé positif est la prudence (challenge) ; mais une prudence excessive devient de la peur (allergie).`,
+    questions: [
+      { id: "b4-ofman-q1", type: "open", prompt: "Regardez le schéma en 4 cases. À quoi sert cet outil, à votre avis ?" },
+      { id: "b4-ofman-q2", type: "short_answer", prompt: "À quoi sert le quadrant d'Ofman ?", answer: "À comprendre nos qualités fondamentales, leurs pièges (l'excès), et comment les corriger." },
+      { id: "b4-ofman-q3", type: "matching", prompt: "Complétez le quadrant de la détermination.", answer: "Qualité → détermination\nPiège (excès) → obstination\nChallenge (opposé positif) → souplesse\nAllergie (excès du challenge) → indécision" },
+      { id: "b4-ofman-q4", type: "matching", prompt: "Complétez le quadrant du courage.", answer: "Qualité → courage\nPiège (excès) → témérité\nChallenge (opposé positif) → prudence\nAllergie (excès du challenge) → peur" },
+      { id: "b4-ofman-q5", type: "open", prompt: "Production écrite : choisissez une de vos qualités et faites son quadrant d'Ofman (qualité → piège → challenge → allergie)." },
+    ],
+  },
+
+  // ── F · Jean de La Fontaine, roi des animaux (Culture(s), p. 62) ──
+  {
+    id: "b4-livre-la-fontaine",
+    unit: 4,
+    unitTitle: "Tous pareils, tous différents",
+    source: "livre",
+    section: "culture(s)",
+    page: 62,
+    title: "Jean de La Fontaine, roi des animaux",
+    instruction: "Lisez l'article et répondez aux questions.",
+    text: `Écrivain du 17e siècle, Jean de La Fontaine est resté célèbre pour ses fables : de petites histoires avec une morale, écrites pour instruire le lecteur. Dans ses textes, La Fontaine met en scène des animaux qui représentent en réalité les humains de son époque.
+
+Chaque animal y symbolise un trait de caractère précis. Le renard est intelligent mais menteur. Le chien reste fidèle à son maître, alors que le loup, lui, est indépendant mais souvent naïf face au renard. L'agneau est doux et honnête, tandis que le lion, au contraire, se montre autoritaire et cruel. Le rat change selon les situations : superficiel en groupe, il devient curieux et réfléchi une fois seul. La grenouille, envieuse et prétentieuse, voudrait toujours être plus grosse qu'elle n'est. La Fontaine aime aussi jouer sur les contrastes : la fourmi, toujours inquiète et travailleuse, s'oppose à la cigale, optimiste mais paresseuse.
+
+Dans l'ensemble de son œuvre, La Fontaine se montre plutôt pessimiste sur la nature humaine — il conseille à ses lecteurs de vivre simplement, sans désirer l'impossible.`,
+    questions: [
+      { id: "b4-fontaine-q1", type: "open", prompt: "Connaissez-vous des histoires avec des animaux qui représentent des humains ?" },
+      { id: "b4-fontaine-q2", type: "short_answer", prompt: "Qui était Jean de La Fontaine ? Qu'est-ce qu'une fable ?", answer: "Un écrivain du 17e siècle, célèbre pour ses fables : de petites histoires avec une morale, pour instruire le lecteur." },
+      { id: "b4-fontaine-q3", type: "matching", prompt: "Associez chaque animal à son trait de caractère.", answer: "le renard → intelligent, menteur\nle chien → fidèle\nle loup → indépendant, un peu naïf\nl'agneau → doux, honnête\nle lion → autoritaire, cruel\nla fourmi → inquiète, travailleuse\nla cigale → optimiste, paresseuse" },
+      { id: "b4-fontaine-q4", type: "true_false", prompt: "Vrai ou faux ? Le rat a toujours le même caractère, seul ou en groupe.", answer: false },
+      { id: "b4-fontaine-q5", type: "true_false", prompt: "Vrai ou faux ? La Fontaine est plutôt optimiste sur la nature humaine.", answer: false },
+      { id: "b4-fontaine-q6", type: "open", prompt: "Quelle est la réputation des gens de votre pays, selon les clichés que vous connaissez ?" },
+    ],
+  },
+
+  // ── H · Quelles photos pour vos profils ? (p. 64) ────────────────
+  {
+    id: "b4-livre-photos-profils",
+    unit: 4,
+    unitTitle: "Tous pareils, tous différents",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 64,
+    title: "Quelles photos pour vos profils ?",
+    instruction: "Lisez l'article et repérez les pronoms possessifs.",
+    text: `La première question à se poser à propos d'une photo de profil, c'est de savoir si la vôtre est adaptée au réseau visé : on ne met pas la même photo sur un réseau professionnel et sur un réseau personnel.
+
+Sur les comptes professionnels, une photo réussie peut être originale, mais pas trop bizarre. Mieux vaut éviter les photos de groupe avec la famille ou les amis — c'est votre visage que l'employeur veut voir, pas le leur. On peut sourire, mais pas trop : il faut surtout paraître sûr(e) de soi. Un ami cherchait un emploi depuis plusieurs mois ; le jour où il a changé sa photo de profil pour une photo plus sérieuse, il a trouvé un poste dans la semaine.
+
+Sur les réseaux personnels ou les sites de rencontres, c'est différent : il s'agit plutôt d'attirer la sympathie et de sortir du lot. La photo peut en dire beaucoup sur votre personnalité — n'hésitez pas à vous mettre en scène pour montrer vos passions. On a tous envie de rencontrer des gens qui partagent des centres d'intérêt proches des nôtres.
+
+Enfin, pensez à changer votre photo de profil régulièrement : gardez toujours une petite série de photos d'avance !`,
+    questions: [
+      { id: "b4-profils-q1", type: "open", prompt: "Décrivez une photo que vous avez utilisée pour un profil de compte." },
+      { id: "b4-profils-q2", type: "multi_select", prompt: "D'après cet article, pourquoi faut-il avoir différentes photos de profil ?", options: ["Pour montrer toute sa vie.", "Pour s'adapter aux différents réseaux.", "Pour actualiser son profil."], answer: ["Pour s'adapter aux différents réseaux.", "Pour actualiser son profil."] },
+      { id: "b4-profils-q3", type: "multi_select", prompt: "Quels conseils concernent plutôt les réseaux professionnels ?", options: ["Il faut avoir l'air sérieux.", "Il faut avoir l'air sympathique.", "On peut montrer ses goûts et loisirs.", "Mieux vaut être seul(e) sur la photo."], answer: ["Il faut avoir l'air sérieux.", "Mieux vaut être seul(e) sur la photo."] },
+      { id: "b4-profils-q4", type: "multi_select", prompt: "Grammaire : relevez les pronoms possessifs du texte.", options: ["la vôtre", "des centres d'intérêt proches des nôtres", "votre visage", "le leur"], answer: ["la vôtre", "des centres d'intérêt proches des nôtres", "le leur"] },
+      { id: "b4-profils-q5", type: "open", prompt: "Sur quels réseaux utiliseriez-vous une photo sérieuse ? Une photo plus personnelle ? Pourquoi ?" },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;
