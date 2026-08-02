@@ -310,4 +310,67 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-5", unit: 5, title: "En route vers le futur !",
+    speakingPractice: [
+      {
+        title: "Imaginer l'avenir",
+        notes: ["b5-a"],
+        task: "Selon vous, quelles idées pour le futur (maisons volantes, navettes autonomes, repas en comprimé…) sont de bonnes idées ? De mauvaises idées ? Discutez avec votre voisin(e).",
+        usefulPhrases: [
+          "Bientôt, il y aura…",
+          "Un jour, on pourra…",
+          "Dans un avenir proche, des robots…",
+          "Ça paraît loin, la vie dans trente ans !",
+        ],
+      },
+      {
+        title: "Exprimer sa surprise",
+        notes: ["b5-d"],
+        task: "À deux ! Vous dites à votre ami(e) que vous avez remplacé votre smartphone par un téléphone sans Internet. Votre ami(e) est très surpris(e). Jouez la scène.",
+        usefulPhrases: [
+          "C'est pas possible !",
+          "Ah bon ?",
+          "Ça alors !",
+          "Sérieux ?",
+        ],
+      },
+      {
+        title: "Convaincre avec des conditions",
+        notes: ["b5-si"],
+        task: "Votre enfant vous demande un téléphone et vous explique pourquoi c'est utile. Vous répondez chacun avec des conditions (si… / quand…). Jouez la scène avec votre voisin(e).",
+        usefulPhrases: [
+          "Si tu m'achètes un portable…",
+          "Si tu as un portable, tu…",
+          "Quand tu seras plus grand(e), tu…",
+          "D'accord, mais seulement si…",
+        ],
+      },
+      {
+        title: "Interviewer un(e) scientifique",
+        notes: ["b5-atelier"],
+        task: "Atelier médiation : en groupe, préparez et jouez l'interview d'un(e) scientifique (Marie Curie, les frères Montgolfier, Arthur Zang…) sur sa vie et son invention.",
+        usefulPhrases: [
+          "Cette invention sert à…",
+          "Cette découverte est révolutionnaire parce que…",
+          "Dans le futur, cette invention permettra de…",
+          "Comment avez-vous eu cette idée ?",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Une ville dans 20 ans",
+        task: "Choisissez une ville et écrivez un petit texte pour raconter comment vous l'imaginez dans 20 ans (transports, logements, commerces, relations sociales…).",
+      },
+      {
+        title: "Une journée sans portable",
+        task: "Vous voulez participer à une journée sans portable. Écrivez un e-mail à vos amis pour expliquer pourquoi, et comment ils pourront vous contacter ce jour-là.",
+      },
+      {
+        title: "Rendez-vous à la RoboCup (DELF · 50-60 mots)",
+        task: "Vous rêvez d'aller à la prochaine RoboCup. Écrivez un mail à un(e) ami(e) : présentez cet événement et proposez-lui de vous accompagner (50 à 60 mots).",
+      },
+    ],
+  },
 ];

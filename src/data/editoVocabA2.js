@@ -460,4 +460,97 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b5", num: "5", title: "En route vers le futur !",
+    color: "#7B6CF6", bg: "#EDE9FE",
+    groups: [
+      {
+        id: "b5g1", label: "Le progrès", icon: "🔬",
+        words: [
+          { fr:"le chercheur, la chercheuse", vi:"nhà nghiên cứu", ex_fr:"Les chercheurs veulent l'utiliser pour étudier les océans.", ex_vi:"Các nhà nghiên cứu muốn dùng nó để nghiên cứu đại dương." },
+          { fr:"la découverte",             vi:"khám phá", ex_fr:"Ce chercheur a fait une découverte incroyable.", ex_vi:"Nhà nghiên cứu này đã có một khám phá đáng kinh ngạc." },
+          { fr:"l'énergie solaire (f.)",    vi:"năng lượng mặt trời", ex_fr:"Son moteur électrique marche à l'énergie solaire.", ex_vi:"Động cơ điện của nó chạy bằng năng lượng mặt trời." },
+          { fr:"l'évolution (f.)",          vi:"sự tiến hóa, tiến bộ", ex_fr:"L'évolution des technologies est très rapide.", ex_vi:"Sự tiến bộ của công nghệ diễn ra rất nhanh." },
+          { fr:"fabriquer",                 vi:"chế tạo", ex_fr:"Les ingénieurs comptent fabriquer un nouveau robot.", ex_vi:"Các kỹ sư dự định chế tạo một robot mới." },
+          { fr:"l'innovation (f.)",         vi:"sự đổi mới, cải tiến", ex_fr:"Cette machine est une innovation qui va révolutionner le monde.", ex_vi:"Cỗ máy này là một cải tiến sẽ làm thay đổi thế giới." },
+          { fr:"inventer",                  vi:"phát minh", ex_fr:"Qui a inventé cette machine ?", ex_vi:"Ai đã phát minh ra cỗ máy này?" },
+          { fr:"l'inventeur, l'inventrice", vi:"nhà phát minh", ex_fr:"Il est l'inventeur du CardioPad.", ex_vi:"Ông ấy là nhà phát minh ra CardioPad." },
+          { fr:"l'invention (f.)",          vi:"phát minh (danh từ)", ex_fr:"Cette invention est très utile pour la planète.", ex_vi:"Phát minh này rất hữu ích cho hành tinh." },
+          { fr:"la nouveauté",              vi:"cái mới, sản phẩm mới", ex_fr:"Nous irons voir les dernières nouveautés.", ex_vi:"Chúng tôi sẽ đi xem những sản phẩm mới nhất." },
+          { fr:"la technologie",            vi:"công nghệ", ex_fr:"Les technologies seront partout dans les écoles.", ex_vi:"Công nghệ sẽ có mặt khắp nơi trong trường học." },
+        ]
+      },
+      {
+        id: "b5g2", label: "Les machines et leur fonctionnement", icon: "⚙️",
+        words: [
+          { fr:"l'appareil (m.)",          vi:"thiết bị, máy móc", ex_fr:"Cet appareil ne fonctionne pas, je pense qu'il est en panne.", ex_vi:"Thiết bị này không hoạt động, tôi nghĩ nó bị hỏng." },
+          { fr:"le moteur",                vi:"động cơ", ex_fr:"Cet avion fonctionne avec un moteur électrique.", ex_vi:"Máy bay này chạy bằng động cơ điện." },
+          { fr:"la navette",                vi:"tàu con thoi", ex_fr:"Pour aller dans l'espace, il faut prendre une navette spatiale.", ex_vi:"Để lên vũ trụ, phải đi tàu con thoi." },
+          { fr:"le robot",                  vi:"người máy, robot", ex_fr:"Nous avons acheté un nouveau robot qui fait le ménage.", ex_vi:"Chúng tôi đã mua một con robot mới làm việc nhà." },
+          { fr:"être/tomber en panne",      vi:"bị hỏng, hỏng hóc", ex_fr:"Le bateau ne peut pas tomber en panne.", ex_vi:"Con tàu này không thể bị hỏng." },
+          { fr:"fonctionner = marcher bien/mal", vi:"hoạt động, vận hành", ex_fr:"J'ai réparé mon ordinateur, j'espère qu'il va bien fonctionner.", ex_vi:"Tôi đã sửa máy tính, hy vọng nó sẽ chạy tốt." },
+        ]
+      },
+      {
+        id: "b5g3", label: "Les innovations technologiques", icon: "🤖",
+        words: [
+          { fr:"automatique",               vi:"tự động", ex_fr:"Ce métro est automatique, sans chauffeur.", ex_vi:"Tàu điện ngầm này tự động, không có tài xế." },
+          { fr:"autonome",                  vi:"tự vận hành, độc lập", ex_fr:"Un jour, les voitures seront autonomes.", ex_vi:"Một ngày nào đó, xe hơi sẽ tự lái." },
+          { fr:"électrique",                vi:"chạy điện", ex_fr:"Des transports électriques autonomes.", ex_vi:"Những phương tiện tự lái chạy điện." },
+          { fr:"futuriste",                 vi:"mang phong cách tương lai", ex_fr:"Les films de science-fiction sont très futuristes.", ex_vi:"Phim khoa học viễn tưởng rất tương lai." },
+          { fr:"indispensable",             vi:"không thể thiếu", ex_fr:"Bientôt, les robots deviendront indispensables.", ex_vi:"Chẳng bao lâu nữa, robot sẽ trở nên không thể thiếu." },
+          { fr:"pratique",                  vi:"tiện lợi", ex_fr:"J'ai acheté une imprimante 3D, c'est très pratique.", ex_vi:"Tôi đã mua một máy in 3D, rất tiện lợi." },
+          { fr:"robotisé(e)",               vi:"được tự động hóa bằng robot", ex_fr:"Dans ce restaurant, le service est entièrement robotisé.", ex_vi:"Trong nhà hàng này, việc phục vụ hoàn toàn do robot đảm nhiệm." },
+          { fr:"utile ≠ inutile",           vi:"hữu ích ≠ vô ích", ex_fr:"Cet appareil ne sert à rien, il est vraiment inutile.", ex_vi:"Thiết bị này chẳng để làm gì, thật sự vô ích." },
+          { fr:"le GPS",                    vi:"định vị GPS", ex_fr:"Je mets mon GPS quand je vais dans un endroit inconnu.", ex_vi:"Tôi bật GPS khi đến một nơi lạ." },
+          { fr:"l'hologramme (m.)",         vi:"hình ảnh 3D nổi (hologram)", ex_fr:"Les professeurs utiliseront les hologrammes pour donner des cours.", ex_vi:"Giáo viên sẽ dùng hologram để dạy học." },
+          { fr:"l'imprimante 3D (f.)",      vi:"máy in 3D", ex_fr:"J'ai découvert l'imprimante 3D alimentaire.", ex_vi:"Tôi đã khám phá ra máy in 3D thực phẩm." },
+          { fr:"l'intelligence artificielle (f.)", vi:"trí tuệ nhân tạo", ex_fr:"Ce bateau fonctionne avec une intelligence artificielle.", ex_vi:"Con tàu này vận hành nhờ trí tuệ nhân tạo." },
+          { fr:"le logiciel",               vi:"phần mềm", ex_fr:"La machine marche avec un logiciel sur un ordinateur.", ex_vi:"Cỗ máy chạy bằng phần mềm trên máy tính." },
+          { fr:"la reconnaissance faciale", vi:"nhận diện khuôn mặt", ex_fr:"La reconnaissance faciale permettra d'adapter la nourriture.", ex_vi:"Nhận diện khuôn mặt sẽ giúp điều chỉnh phần ăn phù hợp." },
+          { fr:"la tablette",               vi:"máy tính bảng", ex_fr:"Chaque enfant aura une tablette numérique à l'école.", ex_vi:"Mỗi trẻ sẽ có một máy tính bảng ở trường." },
+          { fr:"la soucoupe volante",       vi:"đĩa bay", ex_fr:"Les navettes seront comme de petites soucoupes volantes.", ex_vi:"Những chiếc xe con thoi sẽ giống như những chiếc đĩa bay nhỏ." },
+          { fr:"la téléportation",          vi:"dịch chuyển tức thời", ex_fr:"Les maisons pourront se téléporter jusqu'à la plage.", ex_vi:"Những ngôi nhà sẽ có thể dịch chuyển tức thời tới bãi biển." },
+        ]
+      },
+      {
+        id: "b5g4", label: "Le téléphone", icon: "📱",
+        words: [
+          { fr:"l'appel (m.)",              vi:"cuộc gọi", ex_fr:"Il n'a pas répondu à mon appel.", ex_vi:"Anh ấy không trả lời cuộc gọi của tôi." },
+          { fr:"la batterie",                vi:"pin", ex_fr:"Mon téléphone n'a plus de batterie.", ex_vi:"Điện thoại tôi hết pin rồi." },
+          { fr:"le selfie",                  vi:"ảnh tự sướng", ex_fr:"On fait un selfie ?", ex_vi:"Chụp ảnh tự sướng nhé?" },
+          { fr:"le smartphone",              vi:"điện thoại thông minh", ex_fr:"Je n'ai plus Instagram sur mon smartphone.", ex_vi:"Tôi không còn Instagram trên điện thoại nữa." },
+          { fr:"le SMS = le texto",          vi:"tin nhắn văn bản", ex_fr:"Tu pourras m'envoyer un SMS ?", ex_vi:"Bạn nhắn tin cho tôi được không?" },
+          { fr:"le téléphone fixe",          vi:"điện thoại bàn", ex_fr:"Contactez-moi par téléphone fixe.", ex_vi:"Liên hệ với tôi qua điện thoại bàn." },
+          { fr:"le téléphone portable",      vi:"điện thoại di động", ex_fr:"J'ai remplacé mon smartphone par un téléphone portable sans Internet.", ex_vi:"Tôi đã đổi điện thoại thông minh sang điện thoại di động không có mạng." },
+          { fr:"contacter quelqu'un",        vi:"liên hệ với ai đó", ex_fr:"Marine n'est pas là ? Je vais la contacter.", ex_vi:"Marine không có ở đó à? Tôi sẽ liên hệ với cô ấy." },
+          { fr:"décrocher ≠ raccrocher",     vi:"nhấc máy ≠ cúp máy", ex_fr:"Je t'ai appelé trois fois mais tu n'as pas décroché.", ex_vi:"Tôi gọi bạn ba lần mà bạn không nhấc máy." },
+          { fr:"éteindre ≠ allumer",         vi:"tắt ≠ bật", ex_fr:"Julie a éteint son téléphone, elle n'est pas joignable.", ex_vi:"Julie đã tắt điện thoại, không liên lạc được." },
+          { fr:"être joignable",             vi:"có thể liên lạc được", ex_fr:"Elle n'est pas joignable en ce moment.", ex_vi:"Cô ấy hiện không thể liên lạc được." },
+        ]
+      },
+      {
+        id: "b5g5", label: "L'informatique et Internet", icon: "💻",
+        words: [
+          { fr:"le clavier",                vi:"bàn phím", ex_fr:"L'écran ou le clavier est cassé.", ex_vi:"Màn hình hoặc bàn phím bị hỏng." },
+          { fr:"la clé USB",                 vi:"USB", ex_fr:"J'ai mis le fichier sur une clé USB.", ex_vi:"Tôi đã lưu file vào USB." },
+          { fr:"l'écran (m.)",              vi:"màn hình", ex_fr:"On discute sans clavier et sans écran.", ex_vi:"Chúng tôi trò chuyện không cần bàn phím hay màn hình." },
+          { fr:"l'imprimante (f.)",         vi:"máy in", ex_fr:"J'ai besoin de mon ordinateur pour imprimer un document.", ex_vi:"Tôi cần máy tính để in một tài liệu." },
+          { fr:"imprimer",                  vi:"in ấn", ex_fr:"Je n'utilise mon PC que pour imprimer un document.", ex_vi:"Tôi chỉ dùng máy tính để in tài liệu thôi." },
+          { fr:"le PC = l'ordinateur",       vi:"máy tính (PC)", ex_fr:"Tu n'utilises plus du tout ton PC ?", ex_vi:"Bạn không dùng máy tính nữa à?" },
+          { fr:"la souris",                  vi:"chuột máy tính", ex_fr:"Retrouvez le nom des objets : imprimante, ordinateur, souris.", ex_vi:"Tìm tên các đồ vật: máy in, máy tính, chuột." },
+          { fr:"l'appli(cation) (f.)",       vi:"ứng dụng", ex_fr:"Cette application semble géniale, je vais la télécharger.", ex_vi:"Ứng dụng này có vẻ tuyệt, tôi sẽ tải về." },
+          { fr:"se connecter",               vi:"kết nối mạng", ex_fr:"Internet marche mal, je n'arrive pas à me connecter.", ex_vi:"Mạng chập chờn, tôi không kết nối được." },
+          { fr:"se désabonner",              vi:"hủy theo dõi, hủy đăng ký", ex_fr:"Je me suis désabonnée de tous les réseaux sociaux.", ex_vi:"Tôi đã hủy theo dõi tất cả mạng xã hội." },
+          { fr:"en ligne",                   vi:"trực tuyến", ex_fr:"Il fait des achats en ligne.", ex_vi:"Anh ấy mua sắm trực tuyến." },
+          { fr:"envoyer un courriel",        vi:"gửi email", ex_fr:"Ce n'est pas bon pour la planète d'envoyer des mails tout le temps.", ex_vi:"Gửi email liên tục không tốt cho hành tinh." },
+          { fr:"faire une visio(conférence)", vi:"gọi video call", ex_fr:"On pourra s'appeler en visio.", ex_vi:"Chúng ta có thể gọi video call." },
+          { fr:"le mail = l'e-mail = le courriel", vi:"thư điện tử", ex_fr:"Donnez-moi votre adresse mail.", ex_vi:"Cho tôi xin địa chỉ email của bạn." },
+          { fr:"le réseau social",           vi:"mạng xã hội", ex_fr:"Je ne veux plus utiliser les réseaux sociaux.", ex_vi:"Tôi không muốn dùng mạng xã hội nữa." },
+          { fr:"le site Internet",           vi:"trang web", ex_fr:"Je n'arrive pas à me connecter à ce site Internet.", ex_vi:"Tôi không vào được trang web này." },
+          { fr:"télécharger un document, une vidéo", vi:"tải xuống tài liệu, video", ex_fr:"Il faut télécharger une vidéo tout le temps.", ex_vi:"Cứ phải tải video suốt." },
+        ]
+      },
+    ]
+  },
 ];

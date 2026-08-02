@@ -692,6 +692,196 @@ Enfin, pensez à changer votre photo de profil régulièrement : gardez toujours
       { id: "b4-profils-q5", type: "open", prompt: "Sur quels réseaux utiliseriez-vous une photo sérieuse ? Une photo plus personnelle ? Pourquoi ?" },
     ],
   },
+
+  // ═══════════════ Unité 5 — En route vers le futur ! ═══════════════
+
+  // ── A · Comment seront nos vies en 2050 ? (p. 69) ────────────────
+  {
+    id: "b5-livre-vies-2050",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 69,
+    title: "Comment seront nos vies en 2050 ?",
+    instruction: "Lisez ce que des enfants imaginent du futur et repérez les verbes au futur simple.",
+    text: `Oh là là, comme ça paraît loin, la vie dans trente ans ! On a demandé à des enfants comment ils imaginent leur vie en 2050.
+
+Léo, 8 ans : « Bientôt, il y aura des maisons qui pourront se téléporter jusqu'à la plage ! Elles flotteront dans les airs, avec des escaliers volants et une piscine. À l'intérieur, il y aura plusieurs robots : un qui fera le ménage, un qui fera la cuisine et pourra tout cuire très vite, et un qui fera apparaître des burgers et des frites ! »
+
+Inès, 10 ans : « Un jour, pour remplacer les transports en commun, il y aura de petites navettes individuelles, comme de petites soucoupes volantes. Elles seront sous terre, dans des tubes, et elles sauront leur chemin toutes seules — on n'aura pas besoin de volant ! Il y aura juste des tickets, comme dans le bus. »
+
+Adam, 7 ans : « Dans le futur, on mangera un comprimé, quatre fois par jour, pour avoir tous nos repas. Mais on aura aussi le choix de continuer à manger d'autres aliments si on veut. Et dans un avenir proche, des robots nous serviront, à la maison et au restaurant ! »`,
+    questions: [
+      { id: "b5-2050-q1", type: "open", prompt: "Lisez le titre. Comment imaginez-vous votre vie dans trente ans ?" },
+      { id: "b5-2050-q2", type: "matching", prompt: "Associez chaque enfant à son sujet.", answer: "Léo → les logements du futur\nInès → les transports du futur\nAdam → la nourriture du futur" },
+      { id: "b5-2050-q3", type: "multi_select", prompt: "D'après Léo, les maisons pourront :", options: ["se déplacer.", "se transformer.", "voler."], answer: ["se déplacer.", "voler."] },
+      { id: "b5-2050-q4", type: "multiple_choice", prompt: "Inès pense que les navettes seront :", options: ["collectives.", "autonomes.", "gratuites."], answer: "autonomes." },
+      { id: "b5-2050-q5", type: "true_false", prompt: "Vrai ou faux ? Selon Adam, tout le monde devra obligatoirement manger des comprimés.", answer: false },
+      { id: "b5-2050-q6", type: "multi_select", prompt: "Grammaire : relevez des verbes au futur simple dans le texte.", options: ["pourront", "flotteront", "il y a", "sauront"], answer: ["pourront", "flotteront", "sauront"] },
+      { id: "b5-2050-q7", type: "open", prompt: "Production orale : selon vous, quelles idées présentées sont de bonnes idées pour le futur ? De mauvaises idées ? Pourquoi ?" },
+    ],
+  },
+
+  // ── C · L'école de demain (p. 73) ────────────────────────────────
+  {
+    id: "b5-livre-ecole-demain",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 73,
+    title: "L'école de demain",
+    instruction: "Lisez l'article et repérez les verbes au futur simple.",
+    text: `Un jour, les technologies seront partout dans les écoles : en classe, en amphi ou à la cantine.
+
+Dans un avenir proche, chaque enfant aura une tablette numérique à l'école et pourra faire ses exercices à son propre rythme. Quand un élève aura des difficultés à comprendre un texte, la tablette modifiera automatiquement le contenu de l'activité et l'adaptera à son niveau. Ces appareils seront aussi très utiles pour les professeurs, qui pourront connaître immédiatement les difficultés de chaque élève.
+
+Dans les universités, les professeurs utiliseront des hologrammes pour donner des cours à distance. Les étudiants verront leur enseignant apparaître en 3D dans leur amphithéâtre, avec l'impression qu'il est vraiment devant eux.
+
+La technologie sera aussi présente dans les cantines. La reconnaissance faciale permettra d'adapter la nourriture à chaque élève : on servira par exemple des plats sans viande aux élèves végétariens, et on adaptera les quantités à l'âge de chacun. De quoi avoir une alimentation plus saine, et gaspiller beaucoup moins de nourriture.`,
+    questions: [
+      { id: "b5-ecole-q1", type: "open", prompt: "Est-ce que vous aimez utiliser les nouvelles technologies pour apprendre ?" },
+      { id: "b5-ecole-q2", type: "short_answer", prompt: "Dans quels lieux les écoles vont-elles utiliser les nouvelles technologies ?", answer: "En classe, en amphi et à la cantine." },
+      { id: "b5-ecole-q3", type: "multi_select", prompt: "Quels sont les avantages de la tablette numérique ?", options: ["Elle adapte le contenu au niveau de l'élève.", "Elle permet au professeur de connaître les difficultés de chaque élève.", "Elle remplace complètement le professeur."], answer: ["Elle adapte le contenu au niveau de l'élève.", "Elle permet au professeur de connaître les difficultés de chaque élève."] },
+      { id: "b5-ecole-q4", type: "short_answer", prompt: "À quoi vont servir les hologrammes ?", answer: "À donner des cours à distance, en faisant apparaître l'enseignant en 3D." },
+      { id: "b5-ecole-q5", type: "true_false", prompt: "Vrai ou faux ? Tous les enfants mangeront exactement la même chose à la cantine.", answer: false },
+      { id: "b5-ecole-q6", type: "open", prompt: "Production orale : votre école vous propose des cours de français avec un professeur en hologramme. Vous inscrivez-vous ? Pourquoi ?" },
+    ],
+  },
+
+  // ── E · Comment vivre sans téléphone portable ? (p. 75) ──────────
+  {
+    id: "b5-livre-vivre-sans-portable",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 75,
+    title: "Comment vivre sans téléphone portable ?",
+    instruction: "Lisez ces conseils et répondez aux questions.",
+    text: `Vous voulez utiliser moins souvent votre téléphone portable mais vous ne savez pas comment faire ? Suivez ces conseils.
+
+1) Préparez vos itinéraires à l'avance. Si vous devez aller dans un endroit inconnu, cherchez le chemin sur un ordinateur avant de partir. Si vous vous perdez quand même, vous pourrez toujours demander votre route à quelqu'un.
+
+2) Remplacez par d'autres activités. Utilisez le temps que vous passez d'habitude sur votre smartphone pour faire autre chose. Par exemple, si vous avez l'habitude de jouer ou d'envoyer des SMS pendant la pause déjeuner, lisez plutôt un livre ou écoutez de la musique.
+
+3) Laissez votre téléphone à la maison de temps en temps. Si vous allez juste au supermarché, essayez de partir sans votre smartphone. Petit à petit, essayez de le laisser à la maison pendant une journée entière.
+
+4) Prévenez vos proches. Donnez-leur un autre moyen de vous contacter (téléphone fixe, e-mail) : comme ça, ils ne s'inquiéteront pas si vous ne décrochez pas tout de suite.`,
+    questions: [
+      { id: "b5-sansportable-q1", type: "short_answer", prompt: "À qui s'adresse ce document ?", answer: "Aux personnes qui veulent utiliser moins souvent leur téléphone portable." },
+      { id: "b5-sansportable-q2", type: "multi_select", prompt: "Les conseils donnés permettent de réduire l'utilisation de :", options: ["du GPS.", "des jeux.", "des SMS.", "de la navigation sur Internet."], answer: ["du GPS.", "des jeux.", "des SMS.", "de la navigation sur Internet."] },
+      { id: "b5-sansportable-q3", type: "short_answer", prompt: "Quel conseil pour quelqu'un qui veut aller dans un lieu inconnu sans utiliser son téléphone ?", answer: "Chercher le chemin sur un ordinateur à l'avance." },
+      { id: "b5-sansportable-q4", type: "short_answer", prompt: "Comment rester en contact avec ses proches sans portable ?", answer: "En leur donnant un autre moyen de contact : téléphone fixe ou e-mail." },
+      { id: "b5-sansportable-q5", type: "open", prompt: "Production écrite : vous voulez participer à une journée sans portable. Écrivez un e-mail à vos amis pour expliquer pourquoi et comment ils pourront vous contacter." },
+    ],
+  },
+
+  // ── F · 16 levers de soleil (vidéo, p. 76) ───────────────────────
+  {
+    id: "b5-livre-16-levers-de-soleil",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "culture(s)",
+    page: 76,
+    title: "16 levers de soleil",
+    instruction: "Lisez ce résumé du document vidéo et répondez aux questions.",
+    text: `16 levers de soleil est un film documentaire consacré à l'astronaute français Thomas Pesquet et à sa mission à bord de la Station spatiale internationale.
+
+Le film montre différentes scènes : les entraînements avant le départ, le lancement de la fusée, la vie quotidienne à bord de la station, et la vue extraordinaire de la Terre depuis l'espace.
+
+Le titre du film fait référence à un fait surprenant : en orbite autour de la Terre, la Station spatiale en fait le tour environ seize fois par jour. Les astronautes qui y vivent voient donc le soleil se lever... seize fois par jour !`,
+    questions: [
+      { id: "b5-levers-q1", type: "open", prompt: "Connaissez-vous Thomas Pesquet ? Quelle est sa profession ?" },
+      { id: "b5-levers-q2", type: "multiple_choice", prompt: "De quel type de document s'agit-il ?", options: ["Une bande annonce.", "Un extrait de film documentaire.", "Un reportage sportif."], answer: "Un extrait de film documentaire." },
+      { id: "b5-levers-q3", type: "short_answer", prompt: "Où se passent les scènes du film ?", answer: "Pendant les entraînements, au lancement, et à bord de la Station spatiale internationale." },
+      { id: "b5-levers-q4", type: "multiple_choice", prompt: "Le film s'appelle « 16 levers de soleil » parce que dans l'espace, les astronautes voient :", options: ["16 levers de soleil par jour.", "16 levers de soleil par semaine."], answer: "16 levers de soleil par jour." },
+    ],
+  },
+
+  // ── G · Connecté, même dans l'espace (p. 76) ─────────────────────
+  {
+    id: "b5-livre-connecte-espace",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "culture(s)",
+    page: 76,
+    title: "Connecté, même dans l'espace",
+    instruction: "Lisez l'article et répondez aux questions.",
+    text: `Un selfie flottant en apesanteur, une petite séquence de guitare improvisée, ou simplement la vue de la Terre sous ses pieds : pendant son séjour à bord de la Station spatiale internationale (ISS), l'astronaute français Thomas Pesquet a fait sensation avec ses messages envoyés depuis les étoiles sur les réseaux sociaux. Il n'a pas déçu son million d'abonnés, avec déjà une vingtaine de messages publiés, en français et en anglais.
+
+Thomas Pesquet publie-t-il lui-même ces messages depuis l'espace, avec un smartphone ? Pas tout à fait. En réalité, il choisit la majorité des messages que son équipe de communication publie depuis la Terre. Occasionnellement, il peut les envoyer lui-même grâce à un accès personnel à Internet.
+
+L'essentiel des échanges passe par un système de mails : l'astronaute envoie textes et images à son équipe, qui les met en forme, les traduit si nécessaire, puis les lui renvoie pour validation avant de les publier. L'équipe peut faire des propositions, mais rien n'est jamais publié sans l'accord de l'astronaute.`,
+    questions: [
+      { id: "b5-connecte-q1", type: "short_answer", prompt: "À qui s'adressent les messages de Thomas Pesquet sur les réseaux sociaux ?", answer: "À son million d'abonnés." },
+      { id: "b5-connecte-q2", type: "multiple_choice", prompt: "En général, ses messages sont envoyés :", options: ["depuis l'espace, directement avec son smartphone.", "depuis la Terre, par son équipe de communication."], answer: "depuis la Terre, par son équipe de communication." },
+      { id: "b5-connecte-q3", type: "true_false", prompt: "Vrai ou faux ? Thomas Pesquet valide toujours les messages avant leur publication.", answer: true },
+      { id: "b5-connecte-q4", type: "true_false", prompt: "Vrai ou faux ? C'est toujours l'équipe de communication qui traduit les messages si nécessaire.", answer: true },
+      { id: "b5-connecte-q5", type: "open", prompt: "Production écrite : imaginez le message que Thomas Pesquet aurait pu publier en découvrant la Station spatiale pour la première fois." },
+      { id: "b5-connecte-q6", type: "open", prompt: "Oh, le cliché ! On dit parfois que les Français sont mauvais en langues étrangères. Et dans votre pays, quelles langues apprend-on à l'école ?" },
+    ],
+  },
+
+  // ── H · Je fais un rêve (BD, p. 78) ──────────────────────────────
+  {
+    id: "b5-livre-je-fais-un-reve",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 78,
+    title: "Je fais un rêve",
+    instruction: "Lisez le résumé de cette bande dessinée en 6 vignettes et répondez aux questions.",
+    text: `Deux robots de service, un rouge et un jaune, travaillent côte à côte dans un restaurant. Le robot rouge semble fatigué et un peu triste : il porte des plateaux toute la journée, sans jamais s'arrêter.
+
+Le soir, pendant la pause, le robot rouge confie à son collègue jaune : « Cette nuit, j'ai fait un rêve. Je rêvais que je n'étais plus un robot de service — je voyageais, je découvrais le monde, libre. »
+
+Le robot jaune réfléchit un instant, puis répond : « C'est bien de rêver. Mais nous sommes des robots de service : demain, il faudra quand même retourner travailler. »
+
+Sur la dernière image, le robot rouge regarde les étoiles à travers la fenêtre du restaurant, pensif.`,
+    questions: [
+      { id: "b5-reve-q1", type: "multiple_choice", prompt: "Quel est le rôle des deux robots ?", options: ["Jouer avec les enfants.", "Faire les tâches ménagères.", "Faire le service dans un restaurant."], answer: "Faire le service dans un restaurant." },
+      { id: "b5-reve-q2", type: "short_answer", prompt: "Le robot rouge est-il heureux ? Pourquoi ?", answer: "Non, il semble fatigué et triste car il travaille sans arrêt." },
+      { id: "b5-reve-q3", type: "multiple_choice", prompt: "Sur la dernière image, le robot jaune pense que :", options: ["les robots ne sont pas capables de rêver.", "les robots peuvent rêver mais doivent quand même travailler.", "les robots doivent réaliser leurs rêves."], answer: "les robots peuvent rêver mais doivent quand même travailler." },
+      { id: "b5-reve-q4", type: "open", prompt: "Avez-vous des robots chez vous ? Si oui, à quoi servent-ils ? Si non, quel type de robot voudriez-vous avoir ?" },
+      { id: "b5-reve-q5", type: "open", prompt: "À votre avis, un jour, les robots pourront-ils penser et avoir des émotions ?" },
+    ],
+  },
+
+  // ── DELF · Compréhension des écrits — Des cadeaux technologiques (p. 82) ──
+  {
+    id: "b5-livre-delf-cadeaux-technologiques",
+    unit: 5,
+    unitTitle: "En route vers le futur !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 82,
+    title: "DELF A2 — Des cadeaux technologiques",
+    instruction: "Vous adorez les technologies et voulez faire plaisir à vos ami(e)s avec un cadeau. Lisez ces publicités et associez chaque personne au bon produit. (6 points)",
+    text: `Galac Tech 4 — Restez connecté(e) même pendant vos activités sportives ! Cette montre vous indiquera le nombre de kilomètres parcourus et les calories perdues.
+
+Ludo vidéo — Avec ce jeu vidéo, vous pouvez jouer et apprendre en même temps. Vous choisissez votre niveau de difficulté en fonction de votre âge !
+
+MG shiatsu — Vous avez besoin de vous détendre mais vous n'avez pas le temps ? En 30 minutes, ce coussin de massage vous offrira une détente complète pour le dos !
+
+Roborock S7 — Vous aimez votre intérieur mais détestez nettoyer ? Ce robot-aspirateur fait le ménage à votre place !
+
+Solar Nomade — Très pratique et écologique, ce chargeur sera votre meilleur ami pendant vos promenades, grâce aux rayons du soleil.
+
+Explore V40 — Vous avez des difficultés à vous orienter ? Cet assistant de conduite vous indiquera les meilleurs chemins pour arriver à destination.`,
+    questions: [
+      { id: "b5-delf-q1", type: "multiple_choice", prompt: "Sophie passe beaucoup de temps sur les écrans. Quel cadeau lui offrir ?", options: ["Galac Tech 4", "Ludo vidéo", "Roborock S7"], answer: "Ludo vidéo" },
+      { id: "b5-delf-q2", type: "multiple_choice", prompt: "Vincent apprend à conduire. Quel cadeau lui offrir ?", options: ["Explore V40", "Solar Nomade", "MG shiatsu"], answer: "Explore V40" },
+      { id: "b5-delf-q3", type: "multiple_choice", prompt: "Amalia est très sportive. Quel cadeau lui offrir ?", options: ["Galac Tech 4", "Roborock S7", "Ludo vidéo"], answer: "Galac Tech 4" },
+      { id: "b5-delf-q4", type: "multiple_choice", prompt: "Charles n'aime pas faire le ménage. Quel cadeau lui offrir ?", options: ["Roborock S7", "Solar Nomade", "Galac Tech 4"], answer: "Roborock S7" },
+      { id: "b5-delf-q5", type: "multiple_choice", prompt: "Nadia est très stressée par son travail. Quel cadeau lui offrir ?", options: ["MG shiatsu", "Explore V40", "Ludo vidéo"], answer: "MG shiatsu" },
+      { id: "b5-delf-q6", type: "multiple_choice", prompt: "Jérémy aime la nature et déteste gaspiller. Quel cadeau lui offrir ?", options: ["Solar Nomade", "MG shiatsu", "Roborock S7"], answer: "Solar Nomade" },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

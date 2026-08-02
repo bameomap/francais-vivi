@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -753,6 +753,159 @@ export const EDITO_GRAMMAR_A2 = [
           "Évitez la photo avec vos amis, c'est votre tête que l'employeur veut voir, pas les leurs. — Tránh chụp ảnh cùng bạn bè, nhà tuyển dụng muốn thấy mặt bạn, không phải mặt của họ.",
           "J'ai préparé ma photo. Et toi ? Tu as apporté la tienne ? — Tôi đã chuẩn bị ảnh của mình rồi. Còn bạn? Bạn mang ảnh của bạn chưa?",
           "Ton appareil photo est en panne ? Prends le mien. — Máy ảnh của bạn hỏng à? Lấy cái của tôi mà dùng.",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b5", num:"5", title:"En route vers le futur !", points:[
+
+      // ── 1. Le futur simple ─────────────────────────────────────
+      {
+        topic:"Le futur simple — Nói việc SẼ xảy ra",
+        summary:"Thì để dự đoán hoặc lên kế hoạch cho tương lai. Cách chia RẤT ĐƠN GIẢN: động từ nguyên thể + 6 đuôi cố định — hầu như không cần “gốc” riêng như imparfait, chỉ có một nhóm nhỏ động từ bất quy tắc phải học thuộc gốc.",
+        blocks:[
+          { type:"lead", text:"Passé composé/imparfait kể chuyện ĐÃ xảy ra. Futur simple thì ngược lại hoàn toàn — nói về một dự đoán hay kế hoạch SẼ xảy ra, giống chữ “sẽ” trong tiếng Việt." },
+
+          { type:"formula",
+            parts:["động từ NGUYÊN THỂ", "+ đuôi -ai/-as/-a/-ons/-ez/-ont"],
+            example:"On mangera un comprimé. — Chúng ta sẽ ăn một viên thuốc.",
+            note:"Điểm khác lớn nhất so với imparfait: gốc là NGUYÊN THỂ (không phải “nous” hiện tại bỏ -ons)." },
+
+          { type:"table",
+            caption:"Chia đều đặn — giữ nguyên động từ nguyên thể + đuôi",
+            headers:["Ngôi", "manger", "prendre *(bỏ -e cuối)*"],
+            rows:[
+              ["je/j'", "mangerai", "prendrai"],
+              ["tu", "mangeras", "prendras"],
+              ["il/elle/on", "mangera", "prendra"],
+              ["nous", "mangerons", "prendrons"],
+              ["vous", "mangerez", "prendrez"],
+              ["ils/elles", "mangeront", "prendront"],
+            ] },
+
+          { type:"callout", variant:"note", title:"Động từ tận cùng bằng -E: bỏ chữ E trước khi thêm đuôi",
+            text:"prendre → prendr- + ai → je prendrai (KHÔNG phải “prendrerai”). Áp dụng cho mọi động từ -re: vivre → je vivrai, répondre → je répondrai." },
+
+          { type:"heading", text:"Nhóm bất quy tắc — gốc riêng, đuôi vẫn y hệt" },
+          { type:"table",
+            caption:"Chỉ GỐC thay đổi — 6 đuôi phía sau luôn giữ nguyên -ai/-as/-a/-ons/-ez/-ont",
+            headers:["Động từ", "Gốc tương lai", "je (tương lai)"],
+            rows:[
+              ["avoir", "aur-", "j'aurai"],
+              ["être", "ser-", "je serai"],
+              ["faire", "fer-", "je ferai"],
+              ["aller", "ir-", "j'irai"],
+              ["voir", "verr-", "je verrai"],
+              ["savoir", "saur-", "je saurai"],
+              ["devoir", "devr-", "je devrai"],
+              ["pouvoir", "pourr-", "je pourrai"],
+              ["vouloir", "voudr-", "je voudrai"],
+              ["venir/devenir", "viendr-/deviendr-", "je viendrai"],
+              ["falloir (il faut)", "faudr-", "il faudra"],
+              ["pleuvoir (il pleut)", "pleuvr-", "il pleuvra"],
+            ] },
+
+          { type:"callout", variant:"tip", title:"Mẹo học 12 gốc bất quy tắc",
+            text:"Đa số gốc bất quy tắc kết thúc bằng “-R” hoặc “-RR” — cứ nhớ “thêm r vào cuối một dạng rút gọn của động từ” là chia được gần đúng, rồi học thuộc từng trường hợp cụ thể qua luyện tập nhiều." },
+
+          { type:"heading", text:"Khi nào dùng futur simple?" },
+          { type:"text", text:"Diễn tả một DỰ ĐOÁN (prévision) hoặc một DỰ ĐỊNH/kế hoạch (projet) trong tương lai — không phân biệt gần hay xa như futur proche (aller + inf.), cả hai đều tồn tại song song trong tiếng Pháp." },
+
+          { type:"compare", items:[
+            { wrong:"Il y a des maisons qui pourrer se téléporter.", right:"Il y aura des maisons qui pourront se téléporter.", why:"“avoir” → il y aura (không phải “il y a” giữ nguyên thì hiện tại khi nói về tương lai)." },
+            { wrong:"Nous allerons au salon.", right:"Nous irons au salon.", why:"aller có gốc bất quy tắc riêng: ir-, không phải allé-/aller-." },
+          ] },
+        ],
+        examples:[
+          "Bientôt, il y aura des maisons qui pourront se téléporter jusqu'à la plage. — Chẳng bao lâu nữa, sẽ có những ngôi nhà có thể dịch chuyển tức thời tới bãi biển.",
+          "Un jour, pour remplacer les transports en commun, il y aura de petites navettes individuelles. — Một ngày nào đó, để thay thế phương tiện công cộng, sẽ có những chiếc xe con thoi cá nhân nhỏ.",
+          "Dans le futur, on mangera un comprimé, quatre fois par jour. — Trong tương lai, người ta sẽ ăn một viên thuốc, bốn lần một ngày.",
+          "Les étudiants verront leur enseignant apparaître en 3D. — Sinh viên sẽ thấy giáo viên của mình xuất hiện dưới dạng 3D.",
+        ]
+      },
+
+      // ── 2. La condition avec si / quand ────────────────────────
+      {
+        topic:"Si / Quand + tương lai — Điều kiện & sự kiện chắc chắn",
+        summary:"Đã học “si + hiện tại + hiện tại/mệnh lệnh” ở Unité 3. Bài này thêm khuôn thứ ba: si + hiện tại + TƯƠNG LAI (kết quả chưa chắc chắn). Và giới thiệu “quand + tương lai + tương lai” — khi CHẮC CHẮN việc đó sẽ xảy ra, chỉ là chưa biết lúc nào.",
+        blocks:[
+          { type:"lead", text:"Điểm khác biệt cốt lõi: “si” dùng khi ĐIỀU KIỆN không chắc chắn xảy ra hay không; “quand” dùng khi bạn CHẮC CHẮN nó sẽ xảy ra, chỉ đang nói tới THỜI ĐIỂM." },
+
+          { type:"table",
+            caption:"3 khuôn với si — đã học 2, thêm 1 khuôn mới",
+            headers:["Khuôn", "Sắc thái", "Ví dụ"],
+            rows:[
+              ["Si + hiện tại + hiện tại", "Quy luật chung, luôn đúng", "Si quelqu'un m'appelle, je réponds."],
+              ["Si + hiện tại + mệnh lệnh", "Đề nghị/yêu cầu ngay", "Si vous voulez passer moins de temps sur votre téléphone, lisez un livre !"],
+              ["Si + hiện tại + tương lai *(MỚI)*", "Kết quả CHƯA CHẮC, ở tương lai", "Si tu passes une semaine sans ordi, tu perdras l'habitude."],
+            ] },
+
+          { type:"formula",
+            parts:["Quand", "chủ ngữ + TƯƠNG LAI", "chủ ngữ + TƯƠNG LAI"],
+            example:"Quand tu auras 18 ans, je t'achèterai un ordinateur. — Khi nào bạn tròn 18 tuổi, tôi sẽ mua cho bạn một cái máy tính.",
+            note:"CẢ HAI vế đều chia ở tương lai — khác hẳn tiếng Việt (“khi nào... thì sẽ...” chỉ vế sau mới có “sẽ”)." },
+
+          { type:"callout", variant:"warn", title:"Lỗi hay gặp nhất: chia “quand” ở hiện tại",
+            text:"Tiếng Việt nói “KHI bạn rảnh” (không có tương lai ở vế đầu), nên người học hay viết “Quand tu es disponible…”. Nhưng nếu chắc chắn việc đó SẼ xảy ra trong tương lai, tiếng Pháp bắt buộc chia CẢ HAI vế ở futur." },
+
+          { type:"heading", text:"So sánh trực tiếp: si ≠ quand" },
+          { type:"pairs", caption:"Cùng ý “khi/nếu” nhưng SẮC THÁI khác nhau", items:[
+            { fr:"Si tu gagnes le concours Lépine, ton invention deviendra célèbre.", vi:"Nếu bạn thắng cuộc thi Lépine (chưa chắc thắng), phát minh của bạn sẽ nổi tiếng." },
+            { fr:"Quand tu seras grand, tu seras ingénieur.", vi:"Khi bạn lớn (chắc chắn sẽ lớn), bạn sẽ là kỹ sư." },
+          ] },
+
+          { type:"compare", items:[
+            { wrong:"Quand tu es disponible, on s'appellera en visio ?", right:"Quand tu seras disponible, on s'appellera en visio ?", why:"“quand” + việc chắc chắn ở tương lai → CẢ HAI vế đều chia futur." },
+            { wrong:"Si l'ordinateur tombera en panne, appelle le réparateur.", right:"Si l'ordinateur tombe en panne, appelle le réparateur.", why:"Vế “si” LUÔN ở hiện tại, dù vế kết quả là mệnh lệnh hay tương lai." },
+          ] },
+        ],
+        examples:[
+          "Si tu passes une semaine sans ordi et sans smartphone, tu perdras l'habitude. — Nếu bạn không dùng máy tính và điện thoại thông minh trong một tuần, bạn sẽ bỏ được thói quen đó.",
+          "Nous vous téléphonerons quand nous serons arrivés. — Chúng tôi sẽ gọi điện cho bạn khi chúng tôi đã đến nơi.",
+          "Si Thomas a son bac, il fera des études d'ingénieur. — Nếu Thomas đỗ tú tài, cậu ấy sẽ học ngành kỹ sư.",
+          "Quand mes enfants seront grands, je voyagerai plus. — Khi các con tôi lớn, tôi sẽ đi du lịch nhiều hơn.",
+        ]
+      },
+
+      // ── 3. Le pronom on ─────────────────────────────────────────
+      {
+        topic:"Le pronom on — Một chữ, ba nghĩa",
+        summary:"“On” là một trong những từ hay dùng nhất tiếng Pháp nói — nhưng nghĩa của nó thay đổi tùy ngữ cảnh: có thể là “ai đó” (không xác định), “người ta/mọi người” (nói chung), hoặc “chúng ta” (thân mật, thay cho “nous”).",
+        blocks:[
+          { type:"lead", text:"Về mặt ngữ pháp, “on” LUÔN chia động từ như “il/elle” (ngôi thứ ba số ít) — dù nghĩa thực tế có thể là số nhiều (“chúng ta”, “mọi người”). Đây là điểm khác biệt lớn nhất so với tiếng Việt." },
+
+          { type:"formula",
+            parts:["On", "+ động từ chia NGÔI THỨ BA SỐ ÍT"],
+            example:"On a gagné quatre compétitions. — (Chúng tôi) đã thắng bốn cuộc thi.",
+            note:"“on” luôn đi với dạng động từ giống “il” — kể cả khi nghĩa là “chúng ta”." },
+
+          { type:"table",
+            caption:"3 nghĩa của “on” — suy luận từ ngữ cảnh",
+            headers:["Nghĩa", "Khi nào hiểu như vậy", "Ví dụ"],
+            rows:[
+              ["= Quelqu'un (ai đó)", "Chủ thể KHÔNG xác định, thường trong câu bị động-nghĩa", "On a volé mon téléphone. = Quelqu'un a volé mon téléphone."],
+              ["= Les gens (người ta, nói chung)", "Nói về một quy luật/thói quen CHUNG của xã hội", "Dans ce pays, on aime beaucoup les nouvelles technologies."],
+              ["= Nous (chúng ta, thân mật)", "Người nói tự gộp mình vào nhóm đang nhắc tới", "On va au salon des innovations. = Nous allons au salon des innovations."],
+            ] },
+
+          { type:"callout", variant:"tip", title:"Mẹo nhận diện nghĩa nào",
+            text:"Tự hỏi: “Ai đang làm việc này?”\n• Không rõ là ai, chỉ biết CÓ người làm → quelqu'un\n• Một quy luật chung, đúng với mọi người → les gens\n• Chính người nói + nhóm của họ → nous (thường thấy trong hội thoại thân mật, thay cho “nous” trang trọng hơn)" },
+
+          { type:"heading", text:"“on” trong văn nói VS “nous” trong văn viết" },
+          { type:"callout", variant:"note", title:"Văn nói ưu tiên “on”, văn viết trang trọng ưu tiên “nous”",
+            text:"Trong hội thoại đời thường, người Pháp gần như luôn dùng “on” thay cho “nous” — “On va au salon” tự nhiên hơn nhiều so với “Nous allons au salon”. Nhưng trong văn viết trang trọng (báo cáo, thư từ), “nous” vẫn là lựa chọn chuẩn mực." },
+
+          { type:"compare", items:[
+            { wrong:"On sont allés à la RoboCup.", right:"On est allés à la RoboCup.", why:"Dù nghĩa là “chúng tôi” (số nhiều), động từ vẫn PHẢI chia theo “on” = ngôi ba số ít → est, không phải sont." },
+          ] },
+        ],
+        examples:[
+          "C'est vrai ce qu'on raconte ? — Điều người ta kể có thật không?",
+          "Est-ce qu'on vous a déjà parlé de la RoboCup ? — Đã có ai từng nói với bạn về RoboCup chưa?",
+          "On a gagné quatre compétitions. — Chúng tôi đã thắng bốn cuộc thi.",
+          "On améliore nos robots chaque année. — Chúng tôi cải tiến robot của mình mỗi năm.",
         ]
       },
     ]

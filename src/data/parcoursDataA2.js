@@ -7,6 +7,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b2", num:2, fr:"Je me souviens", vi:"Tôi nhớ lại", grammar:"L'imparfait · Pronoms y/en · Place de l'adjectif", emoji:"📷" },
   { id:"b3", num:3, fr:"Comme à la maison", vi:"Như ở nhà", grammar:"Pronoms relatifs qui/que/où · Comparaison · Si + présent", emoji:"🏠" },
   { id:"b4", num:4, fr:"Tous pareils, tous différents", vi:"Ai cũng giống, ai cũng khác", grammar:"Comparaison : équivalence · Adjectifs indéfinis · Pronoms possessifs", emoji:"🎭" },
+  { id:"b5", num:5, fr:"En route vers le futur !", vi:"Trên đường đến tương lai!", grammar:"Futur simple · Si/Quand + futur · Le pronom on", emoji:"🚀" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -456,9 +457,118 @@ export const STEP_GROUPS_B4 = [
 
 export const STEP_DEFS_B4 = STEP_GROUPS_B4.flatMap(g => g.steps);
 
+// ── Unité 5 · En route vers le futur ! ─────────────────────────────
+export const STEP_GROUPS_B5 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Vie dans le futur",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b5-livre-vies-2050"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Comment seront nos vies en 2050 ?",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b5-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Les innovations du futur",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b5-livre-ecole-demain"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"L'école de demain",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le futur simple",
+        section:"grammar", view:"grammar" },
+      { id:"c1_verbes", stepKey:"verbes", subIds:["present","futur"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Chia futur simple · 24 động từ",
+        section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b5g1","b5g2","b5g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Sciences & techniques · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Imaginer l'avenir",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Une ville dans 20 ans",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Vivre avec (ou sans) écrans",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b5-d"],
+        icon:"🎧", kind:"Nghe D", color:"#0891B2", sub:"Accro aux nouvelles technologies",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b5-livre-vivre-sans-portable"],
+        icon:"📜", kind:"Đọc E", color:"#059669", sub:"Comment vivre sans téléphone portable ?",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Si / Quand + futur",
+        section:"grammar", view:"grammar" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b5g4","b5g5"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Technologies de la communication · 2 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Exprimer sa surprise",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Une journée sans portable",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Robots & espace",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b5-livre-16-levers-de-soleil"],
+        icon:"🎬", kind:"Văn hóa F", color:"#7B6CF6", sub:"16 levers de soleil (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b5-livre-connecte-espace"],
+        icon:"📜", kind:"Đọc G", color:"#059669", sub:"Connecté, même dans l'espace",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture3", stepKey:"lecture", subIds:["b5-livre-je-fais-un-reve"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Je fais un rêve (BD)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b5-i"],
+        icon:"🎧", kind:"Nghe I", color:"#0891B2", sub:"Rendez-vous à la RoboCup !",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le pronom on",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Convaincre avec des conditions",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Rendez-vous à la RoboCup (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_br_pr","son_cr_gr","son_dr_tr","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les groupes consonantiques",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_delf", stepKey:"lecture", subIds:["b5-livre-delf-cadeaux-technologiques"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Compréhension des écrits",
+        section:"lecture", view:"lecture" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Interviewer un(e) scientifique",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B5 = STEP_GROUPS_B5.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

@@ -329,4 +329,59 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 5 · En route vers le futur ! ───────────────────────────
+  "b5-a": [
+    {
+      heading: "Pour parler du futur, imaginer l'avenir",
+      structure: "Dùng futur simple. Mở đầu bằng mốc thời gian mơ hồ: « Bientôt », « Un jour », « Dans un avenir proche » — không cần ngày giờ chính xác, chỉ cần chia đúng futur.",
+      phrases: [
+        { fr: "Bientôt, il y aura des maisons qui pourront se téléporter.", vi: "Chẳng bao lâu nữa, sẽ có những ngôi nhà có thể dịch chuyển tức thời." },
+        { fr: "Un jour, il y aura de petites navettes.", vi: "Một ngày nào đó, sẽ có những chiếc xe con thoi nhỏ." },
+        { fr: "Dans le futur, on mangera un comprimé pour nos repas.", vi: "Trong tương lai, người ta sẽ ăn một viên thuốc thay bữa ăn." },
+        { fr: "Ça paraît loin la vie dans trente ans !", vi: "Cuộc sống sau ba mươi năm nghe xa vời quá!" },
+        { fr: "Dans un avenir proche, des robots nous serviront.", vi: "Trong tương lai gần, robot sẽ phục vụ chúng ta." },
+      ],
+    },
+  ],
+
+  "b5-d": [
+    {
+      heading: "Pour exprimer sa surprise",
+      structure: "Từ trang trọng đến rất thân mật. « C'est pas possible ! » và « Ah bon ? » dùng được rộng rãi; « Ça alors ! », « C'est pas vrai ! », « Quoi ? », « Sérieux ? » chỉ dùng trong văn nói thân mật.",
+      phrases: [
+        { fr: "C'est pas possible !", vi: "Không thể nào!" },
+        { fr: "Ah bon ?", vi: "Vậy à?" },
+        { fr: "Ça alors !", vi: "Trời đất ơi! (thân mật)" },
+        { fr: "C'est pas vrai !", vi: "Không đời nào! (thân mật)" },
+        { fr: "Sérieux ?", vi: "Thật á? (thân mật)" },
+      ],
+    },
+  ],
+
+  "b5-si": [
+    {
+      heading: "Pour poser des conditions",
+      structure: "Dùng « si + hiện tại » để nêu điều kiện, theo sau bằng hiện tại/mệnh lệnh/tương lai tùy mức chắc chắn. Dùng « quand + tương lai » khi chắc chắn việc đó sẽ xảy ra.",
+      phrases: [
+        { fr: "Si tu m'achètes un portable, je…", vi: "Nếu bố/mẹ mua điện thoại cho con, con sẽ…" },
+        { fr: "Si tu as un portable, tu devras faire attention.", vi: "Nếu con có điện thoại, con sẽ phải cẩn thận." },
+        { fr: "Quand tu seras plus grand(e), tu comprendras.", vi: "Khi con lớn hơn, con sẽ hiểu." },
+        { fr: "D'accord, mais seulement si tu…", vi: "Được, nhưng chỉ khi con…" },
+      ],
+    },
+  ],
+
+  "b5-atelier": [
+    {
+      heading: "Pour présenter une invention ou une découverte",
+      structure: "Khuôn phỏng vấn: hỏi về khoảnh khắc nảy ra ý tưởng, rồi hỏi về công dụng/đặc điểm phát minh. Trả lời bằng « Cette invention sert à… », nhấn mạnh tính cách mạng bằng « … est révolutionnaire parce que… ».",
+      phrases: [
+        { fr: "Cette invention sert à…", vi: "Phát minh này dùng để…" },
+        { fr: "Cette découverte est révolutionnaire parce que…", vi: "Khám phá này mang tính cách mạng vì…" },
+        { fr: "Dans le futur, cette invention permettra de…", vi: "Trong tương lai, phát minh này sẽ giúp…" },
+        { fr: "Comment avez-vous eu cette idée ?", vi: "Ông/Bà đã có ý tưởng này như thế nào?" },
+      ],
+    },
+  ],
 };
