@@ -22,13 +22,14 @@ import { EDITO_GRAMMAR_A2 }     from "../data/editoGrammarA2.js";
 import { EDITO_A2_UNITS }       from "../data/editoA2Units.js";
 import editoA2ReadingComprehension from "../data/editoA2Reading.js";
 import { EDITO_AUDIO_A2 }   from "../data/editoAudioA2.js";
+import { EDITO_A2_VERB_UNITS } from "../data/editoVerbsA2.js";
 
 // unitId is the parcours form "u0".."u10" (A1) or "b1".."b12" (A2).
 const numOf = (unitId) => Number(String(unitId).replace(/^[ub]/, ""));
 export const isA2Unit = (unitId) => String(unitId).startsWith("b");
 
-// A2 keeps its own data sources; unlike A1 it has no `verbes` step yet, so
-// that returns [] and never appears in an A2 unit's totals.
+// A2 keeps its own data sources. A unit with no verb set yet returns [] for
+// `verbes`, so the step simply never appears in that unit's totals.
 function getStepSubIdsA2(unitId, stepId) {
   const num = numOf(unitId);
   switch (stepId) {
@@ -58,6 +59,10 @@ function getStepSubIdsA2(unitId, stepId) {
     case "parler": {
       const u = EDITO_A2_UNITS.find(x => x.unit === num);
       return (u?.speakingPractice || []).map((_, i) => "s" + i);
+    }
+    case "verbes": {
+      const u = EDITO_A2_VERB_UNITS.find(x => x.unitId === unitId);
+      return (u?.tenses || []).map(t => t.id);
     }
     case "quiz":
       return ["quiz"];

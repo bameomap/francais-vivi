@@ -56,10 +56,12 @@ const REFERENCE_TABS_A2 = [
   { id: "dict",    label: "Tra từ",     icon: "🔍" },
   { id: "pronunc", label: "Phát âm",    icon: "🔊" },
   { id: "phono",   label: "Phono",      icon: "🎵" },
+  { id: "verbes",  label: "Động từ",    icon: "🖊️" },
   { id: "conjug",  label: "Chia tự do", icon: "✏️" },
 ];
 import { getLevel as getLevelInfo, DEFAULT_LEVEL } from "./data/levels.js";
 import { EDITO_VOCAB_A2_UNITS } from "./data/editoVocabA2.js";
+import { EDITO_A2_VERB_UNITS } from "./data/editoVerbsA2.js";
 import { EDITO_GRAMMAR_A2, GRAMMAR_A2_EMOJIS } from "./data/editoGrammarA2.js";
 
 const TABS = [
@@ -1201,6 +1203,7 @@ function AppInner() {
                   onBackToParcours={backToParcours}
                   tabs={REFERENCE_TABS_A2}
                   phonoData={EDITO_A2_PHONO}
+                  verbUnits={EDITO_A2_VERB_UNITS}
                   levelLabel="Édito A2"
                   cahier={CAHIER_A2}
                 />)}

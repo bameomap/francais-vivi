@@ -15,7 +15,9 @@
 import { PARCOURS_UNITS_A2, STEP_DEFS_A2 } from "../src/data/parcoursDataA2.js";
 import { getStepSubIds } from "../src/utils/parcoursSteps.js";
 
-const SKILLS = ["vocab", "phono", "grammar", "lecture", "ecouter", "ecrire", "parler", "quiz"];
+// Derived, not hand-listed: a hand-listed set silently skips any skill added
+// later, which is exactly the case this script exists to catch.
+const SKILLS = [...new Set(STEP_DEFS_A2.map(s => s.stepKey || s.id))];
 
 let ok = true;
 

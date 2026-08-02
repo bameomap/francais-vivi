@@ -9,6 +9,7 @@ import EditoPhonoPanel from "./EditoPhonoPanel.jsx";
 import DictionaryPanel from "./DictionaryPanel.jsx";
 
 import { EDITO_A1_PHONO } from "../data/editoPhono.js";
+import { EDITO_A1_VERB_UNITS } from "../data/editoVerbs.js";
 
 const TABS = [
   { id: "dict",      label: "Tra từ",       icon: "🔍" },
@@ -26,6 +27,7 @@ export default function ReferenceHub({
   onBackToParcours,
   tabs = TABS,
   phonoData = EDITO_A1_PHONO,
+  verbUnits = EDITO_A1_VERB_UNITS,
   levelLabel = "Édito A1",
   cahier = null,
 }) {
@@ -87,7 +89,7 @@ export default function ReferenceHub({
       {active === "pronunc" && <ReferencePanel />}
       {active === "grammar" && <GrammarCheatsheet />}
       {active === "phono"   && <EditoPhonoPanel fromParcours={fromParcours} data={phonoData} levelLabel={levelLabel} cahier={cahier} />}
-      {active === "verbes"  && <EditoVerbsPanel fromParcours={fromParcours} />}
+      {active === "verbes"  && <EditoVerbsPanel fromParcours={fromParcours} units={verbUnits} levelLabel={levelLabel} />}
       {active === "conjug"  && <ConjugaisonPanel />}
       {active === "phrases" && <PhrasebookPanel />}
     </div>

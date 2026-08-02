@@ -27,15 +27,15 @@ JSON hợp lệ KHÔNG có markdown:
 {"verb":"${verb}","tense":"${tenseLabel}","group":"nhóm (1/2/3/irrégulier)","meaning":"nghĩa tiếng Việt ngắn gọn, tối đa 4 từ","conjugations":["forme_je","forme_tu","forme_il","forme_nous","forme_vous","forme_ils"],"tip":"mẹo nhớ ngắn tiếng Việt tối đa 15 từ","example":"câu ví dụ tiếng Pháp ngắn — bản dịch tiếng Việt"}`;
 }
 
-function promptFill(verbs, tenseLabel) {
+function promptFill(verbs, tenseLabel, cefr) {
   return `Dùng các động từ sau ở thì ${tenseLabel}, tạo ${verbs.length} câu điền từ (mỗi động từ 1 lần):
 Động từ: ${verbs.join(", ")}
-Dùng nhiều ngôi khác nhau (je, tu, il, elle, nous, vous, ils). Câu ngắn, thực tế, trình độ A1.
+Dùng nhiều ngôi khác nhau (je, tu, il, elle, nous, vous, ils). Câu ngắn, thực tế, trình độ ${cefr}.
 JSON hợp lệ KHÔNG có markdown:
 {"questions":[{"fr":"Je ___ au marché.","answer":"vais","verb":"aller","subject":"je","vi":"Tôi đi chợ."}]}`;
 }
 
-function promptChoice(verbs, tenseLabel) {
+function promptChoice(verbs, tenseLabel, cefr) {
   return `Tạo ${verbs.length} câu trắc nghiệm chia động từ ở thì ${tenseLabel}.
 Dùng các động từ (mỗi động từ 1 lần): ${verbs.join(", ")}
 Mỗi câu: 4 lựa chọn (1 đúng, 3 sai là các dạng chia sai của cùng động từ đó, dùng nhiều ngôi khác nhau).
@@ -43,18 +43,18 @@ JSON hợp lệ KHÔNG có markdown:
 {"questions":[{"fr":"Elle ___ une robe.","options":["met","mets","mettons","mettez"],"correct":0,"verb":"mettre","vi":"Cô ấy mặc một chiếc váy."}]}`;
 }
 
-function promptTransform(verbs, fromLabel, toLabel) {
-  return `Tạo 5 câu yêu cầu học viên A1 chuyển từ thì ${fromLabel} sang thì ${toLabel}.
+function promptTransform(verbs, fromLabel, toLabel, cefr) {
+  return `Tạo 5 câu yêu cầu học viên ${cefr} chuyển từ thì ${fromLabel} sang thì ${toLabel}.
 Dùng các động từ: ${verbs.join(", ")} (có thể dùng lại). Câu ngắn, đơn giản.
 JSON hợp lệ KHÔNG có markdown:
 {"from":"${fromLabel}","to":"${toLabel}","questions":[{"original":"Je mange une pomme.","original_vi":"Tôi ăn một quả táo.","answer":"J'ai mangé une pomme.","answer_vi":"Tôi đã ăn một quả táo.","verb":"manger"}]}`;
 }
 
-function promptExpand(verb, meaning) {
-  return `Cho động từ tiếng Pháp "${verb}" (nghĩa: ${meaning}), trình độ A1.
+function promptExpand(verb, meaning, cefr) {
+  return `Cho động từ tiếng Pháp "${verb}" (nghĩa: ${meaning}), trình độ ${cefr}.
 Trả về JSON hợp lệ KHÔNG markdown, mở rộng cách dùng thực tế:
 {"collocations":[{"fr":"cụm từ ghép thường gặp","vi":"nghĩa tiếng Việt ngắn"}],"structures":[{"fr":"cấu trúc đi cùng (vd: ${verb} + qqch)","vi":"giải thích ngắn"}],"particles":[{"fr":"giới từ/trợ từ đi kèm (à, de, avec…)","vi":"khi nào dùng"}],"idioms":[{"fr":"thành ngữ/câu mẫu hay","vi":"nghĩa"}]}
-Mỗi mảng 2-4 phần tử, ngắn gọn, đúng A1. Nếu không có idiom phù hợp thì để mảng rỗng.`;
+Mỗi mảng 2-4 phần tử, ngắn gọn, đúng ${cefr}. Nếu không có idiom phù hợp thì để mảng rỗng.`;
 }
 
 // ── Cornell-style study note (baked core + AI expansion) ──────
@@ -76,7 +76,7 @@ function CornellNote({ unit, verb }) {
 
   const loadExpand = async () => {
     setLoading(true); setErr("");
-    try { setExpand(await callAI(promptExpand(verb.infinitive, verb.meaning))); }
+    try { setExpand(await callAI(promptExpand(verb.infinitive, verb.meaning, unit.cefr || "A1"))); }
     catch(e) { setErr(e.message); }
     setLoading(false);
   };
@@ -548,9 +548,9 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
       let prompt;
       const tense = unit.tenses[tIdx] || unit.tenses[0];
       if (type === "table")     prompt = promptTable(unit.verbs[vIdx].infinitive, tense.label);
-      else if (type === "fill") prompt = promptFill(pickVerbs(6), tense.label);
-      else if (type === "choice") prompt = promptChoice(pickVerbs(6), tense.label);
-      else if (type === "transform") prompt = promptTransform(pickVerbs(5), unit.tenses[0].label, unit.tenses[1].label);
+      else if (type === "fill") prompt = promptFill(pickVerbs(6), tense.label, unit.cefr || "A1");
+      else if (type === "choice") prompt = promptChoice(pickVerbs(6), tense.label, unit.cefr || "A1");
+      else if (type === "transform") prompt = promptTransform(pickVerbs(5), unit.tenses[0].label, unit.tenses[1].label, unit.cefr || "A1");
       const data = await callAI(prompt);
       setQuizData({ type, ...data });
       setQuizKey(k => k + 1);
@@ -878,20 +878,24 @@ function UnitExerciseView({ unit, onBack, fromParcours = false }) {
 }
 
 // ── Unit list (main view) ─────────────────────────────────────
-export default function EditoVerbsPanel({ fromParcours = false }) {
+export default function EditoVerbsPanel({
+  fromParcours = false,
+  units = EDITO_A1_VERB_UNITS,
+  levelLabel = "Édito A1",
+}) {
   const [activeUnit, setActiveUnit] = useState(null);
 
   useEffect(() => {
     const idx = localStorage.getItem("parcours_unit_idx");
     if (idx !== null) {
-      const unitId = EDITO_A1_VERB_UNITS[Number(idx)]?.unitId ?? null;
+      const unitId = units[Number(idx)]?.unitId ?? null;
       if (unitId) setActiveUnit(unitId);
       localStorage.removeItem("parcours_unit_idx");
     }
   }, []);
 
   if (activeUnit) {
-    const unit = EDITO_A1_VERB_UNITS.find(u => u.unitId === activeUnit);
+    const unit = units.find(u => u.unitId === activeUnit);
     return <UnitExerciseView unit={unit} onBack={() => setActiveUnit(null)} fromParcours={fromParcours} />;
   }
 
@@ -903,10 +907,10 @@ export default function EditoVerbsPanel({ fromParcours = false }) {
         padding:"1rem 1rem 0.85rem",
       }}>
         <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontSize:"1.15rem", color:"#fff", fontWeight:800, lineHeight:1.1 }}>
-          🖊️ Động từ Édito A1
+          🖊️ Động từ {levelLabel}
         </div>
         <div style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.65)", marginTop:4, lineHeight:1.5 }}>
-          11 bài · 15 động từ mỗi bài · 5 dạng bài tập có AI
+          {units.length} bài · {units.reduce((n, u) => n + u.verbs.length, 0)} động từ · 5 dạng bài tập có AI
         </div>
         {/* exercise type icons row */}
         <div style={{ display:"flex", gap:"0.4rem", marginTop:"0.7rem", flexWrap:"wrap" }}>
@@ -926,7 +930,7 @@ export default function EditoVerbsPanel({ fromParcours = false }) {
 
       <div style={{ padding:"0.85rem 1rem" }}>
         <div style={{ display:"flex", flexDirection:"column", gap:"0.55rem" }}>
-          {EDITO_A1_VERB_UNITS.map((unit, i) => (
+          {units.map((unit, i) => (
             <button
               key={unit.unitId}
               onClick={() => setActiveUnit(unit.unitId)}

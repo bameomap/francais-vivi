@@ -41,6 +41,11 @@ export const STEP_GROUPS_A2 = [
       { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
         icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Passé composé",
         section:"grammar", view:"grammar" },
+      // Ngay sau ngữ pháp: passé composé chỉ thuộc được khi luyện chia,
+      // vì chọn avoir/être và quá khứ phân từ bất quy tắc đều phải nhớ.
+      { id:"c1_verbes", stepKey:"verbes", subIds:["present","passe_compose"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Chia passé composé · 25 động từ",
+        section:"reference_hub", view:"reference_hub", refTab:"verbes" },
       { id:"c1_vocab", stepKey:"vocab", subIds:["b1g1","b1g2","b1g3","b1g4","b1g5"],
         icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Parcours de vie · 5 nhóm",
         section:"vocab", view:"edito" },

@@ -701,17 +701,40 @@ Trả về JSON thuần (không markdown):
                     <div style={{ fontSize: "0.6rem", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
                       📖 Script — Piste {track.trackNum}
                     </div>
+                    {timings?.[track.id] && (
+                      <div style={{ fontSize: "0.64rem", color: C.gray, marginBottom: "0.4rem", lineHeight: 1.5 }}>
+                        Bấm ▶ ở đầu dòng để nghe đúng câu đó — vừa nhìn chữ vừa nghe, hoặc nói nhại theo.
+                      </div>
+                    )}
                     <ol style={{ margin: 0, paddingLeft: "1.25rem" }}>
-                      {track.sentences.map((s, i) => (
-                        <li key={i} style={{
-                          fontSize: "0.78rem", color: C.ink, lineHeight: 1.75,
-                          paddingLeft: "0.2rem",
-                          borderBottom: i < track.sentences.length - 1 ? `1px dashed ${C.border}` : "none",
-                          paddingBottom: "0.2rem", marginBottom: "0.15rem",
-                        }}>
-                          {s}
-                        </li>
-                      ))}
+                      {track.sentences.map((s, i) => {
+                        const live = nowPlaying === `${track.id}|${i}`;
+                        return (
+                          <li key={i} style={{
+                            fontSize: "0.78rem", color: C.ink, lineHeight: 1.75,
+                            paddingLeft: "0.2rem",
+                            borderBottom: i < track.sentences.length - 1 ? `1px dashed ${C.border}` : "none",
+                            paddingBottom: "0.2rem", marginBottom: "0.15rem",
+                          }}>
+                            {clipOf(track.id, i) && (
+                              <button onClick={() => playSentence(track.id, i)}
+                                aria-label={live ? "Dừng" : `Nghe câu ${i + 1}`}
+                                style={{
+                                  background: live ? track.color : "transparent",
+                                  color: live ? "#fff" : track.color,
+                                  border: `1px solid ${track.color}${live ? "" : "55"}`,
+                                  borderRadius: 20, padding: "0 0.32rem",
+                                  fontSize: "0.6rem", lineHeight: 1.5, cursor: "pointer",
+                                  fontFamily: "inherit", marginRight: "0.35rem",
+                                  verticalAlign: "middle",
+                                }}>
+                                {live ? "⏸" : "▶"}
+                              </button>
+                            )}
+                            <span style={{ background: live ? `${track.color}1a` : "transparent", borderRadius: 4 }}>{s}</span>
+                          </li>
+                        );
+                      })}
                     </ol>
                   </div>
                 )}
