@@ -501,7 +501,10 @@ Trả về JSON thuần (không markdown):
                   const btns = [
                     { id: "questions", icon: "📋", label: "Câu hỏi", action: () => togglePanel(track.id, "questions") },
                     { id: "script",    icon: "📖", label: "Script",  action: () => togglePanel(track.id, "script") },
-                    { id: "dictee",    icon: "✏️",  label: "Chép",   action: () => openDictee(track.id) },
+                    // Bài thi DELF không có tab Chép — xem noDictee trong dữ liệu
+                    ...(track.noDictee ? [] : [
+                      { id: "dictee", icon: "✏️", label: "Chép", action: () => openDictee(track.id) },
+                    ]),
                     // Luôn hiện nút Note để bố cục các card đồng nhất; mờ đi khi bài không có ghi chú
                     { id: "notes", icon: "📝", label: "Note", disabled: !hasNotes, action: () => hasNotes && togglePanel(track.id, "notes") },
                   ];

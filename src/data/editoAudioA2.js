@@ -124,6 +124,10 @@ export const EDITO_AUDIO_A2 = {
       subtitle: "6 annonces dans des lieux publics",
       theme: "🏆", color: "#E8574A", colorLight: "#FFF0EF",
       audioSrc: url(10),
+      // Six public announcements, not six sentences: every one runs 8–13
+      // seconds. Copying them out word for word is a transcription exercise,
+      // not the listening-comprehension task the exam is testing.
+      noDictee: true,
       sentences: [
         "1. Mesdames et Messieurs, le concert va commencer. Merci d'éteindre vos téléphones portables.",
         "2. La ville de Bordeaux propose des activités pour la Semaine du patrimoine. Pour regarder le programme, connectez-vous sur le site internet de la ville.",
