@@ -463,4 +463,61 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 7 · À votre santé ! ──────────────────────────────────────
+  "b7-a": [
+    {
+      heading: "Pour donner un conseil (1)",
+      structure: "Dùng « il est important/conseillé de + infinitif » để khuyên chung chung, hoặc « je vous/te recommande/déconseille de + infinitif » để khuyên một cách cá nhân, trực tiếp. Dạng phủ định của « recommander » là « déconseiller ».",
+      phrases: [
+        { fr: "Il est important d'être attentif(ve) à votre position de sommeil.", vi: "Việc chú ý đến tư thế ngủ của bạn là quan trọng." },
+        { fr: "Il est conseillé de dormir sur le côté.", vi: "Nên nằm nghiêng khi ngủ." },
+        { fr: "Il faut poser sa tête au milieu de l'oreiller.", vi: "Phải đặt đầu ở giữa chiếc gối." },
+        { fr: "Je vous recommande de placer un oreiller entre vos jambes.", vi: "Tôi khuyên bạn nên đặt một chiếc gối giữa hai chân." },
+        { fr: "Je te déconseille de dormir sur le ventre.", vi: "Tôi khuyên bạn không nên ngủ sấp." },
+      ],
+    },
+  ],
+
+  "b7-e": [
+    {
+      heading: "Pour parler des problèmes de santé",
+      structure: "Khuôn hội thoại chuẩn ở phòng khám/nhà thuốc: dược sĩ hỏi triệu chứng bằng « Qu'est-ce qui ne va pas ? » và các câu hỏi có/không cụ thể; người bệnh trả lời bằng « je suis/j'ai + triệu chứng ».",
+      phrases: [
+        { fr: "Qu'est-ce qui ne va pas ? — Je suis un peu patraque.", vi: "Bạn thấy không khỏe chỗ nào? — Tôi thấy hơi mệt trong người." },
+        { fr: "Vous avez consulté votre médecin ? — Je me sens fatigué(e).", vi: "Bạn đã đi khám bác sĩ chưa? — Tôi thấy mệt." },
+        { fr: "Vous toussez ? — J'ai le nez bouché.", vi: "Bạn có ho không? — Tôi bị nghẹt mũi." },
+        { fr: "Vous avez mal à la gorge ? — J'ai mal à la tête.", vi: "Bạn có đau họng không? — Tôi bị đau đầu." },
+        { fr: "Vous avez de la fièvre ?", vi: "Bạn có bị sốt không?" },
+      ],
+    },
+  ],
+
+  "b7-j": [
+    {
+      heading: "Pour exprimer son point de vue",
+      structure: "Dùng « pour nous/moi » để nêu quan điểm cá nhân/tập thể, hoặc « je crois/pense/trouve que » + mệnh đề, hoặc « à mon avis » đứng đầu câu — cả ba cách đều có thể thay nhau khi trình bày ý kiến.",
+      phrases: [
+        { fr: "Pour nous/moi, ce n'est pas suffisant.", vi: "Theo chúng tôi/tôi, như vậy là chưa đủ." },
+        { fr: "Je crois/pense/trouve que les formations ne sont pas assez nombreuses.", vi: "Tôi tin/nghĩ/thấy rằng các khóa đào tạo chưa đủ nhiều." },
+        { fr: "À mon avis, il faut appeler les secours.", vi: "Theo tôi, phải gọi cấp cứu." },
+      ],
+    },
+  ],
+
+  "b7-atelier": [
+    {
+      heading: "Pour informer des risques pour la santé",
+      structure: "Khuôn câu cảnh báo/khuyên bảo trong một chiến dịch phòng ngừa sức khỏe: dùng mệnh lệnh (Évitez, Pensez à) hoặc « il est (dé)conseillé/important de + infinitif », hoặc « le mieux, c'est de + infinitif » để đề xuất giải pháp tốt nhất.",
+      phrases: [
+        { fr: "Évitez de…", vi: "Hãy tránh…" },
+        { fr: "Attention à…", vi: "Chú ý đến…" },
+        { fr: "Il est (dé)conseillé de…", vi: "Nên (không nên)…" },
+        { fr: "Il est important de…", vi: "Điều quan trọng là…" },
+        { fr: "Pensez à…", vi: "Hãy nhớ…" },
+        { fr: "La meilleure manière de…, c'est…", vi: "Cách tốt nhất để…, đó là…" },
+        { fr: "Le mieux, c'est de…", vi: "Tốt nhất là…" },
+      ],
+    },
+  ],
 };

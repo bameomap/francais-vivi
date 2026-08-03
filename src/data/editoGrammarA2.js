@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -1053,6 +1053,163 @@ export const EDITO_GRAMMAR_A2 = [
           "Il ne m'en reste qu'un. — Tôi chỉ còn lại một cái (bánh) thôi.",
           "Ce restaurant ne propose que des plats à base de riz. — Nhà hàng này chỉ phục vụ các món làm từ gạo.",
           "Je suis juste allergique aux œufs. → Je ne suis allergique qu'aux œufs. — Tôi chỉ dị ứng với trứng thôi.",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b7", num:"7", title:"À votre santé !", points:[
+
+      // ── 1. Les pronoms COD et COI ────────────────────────────────
+      {
+        topic:"Les pronoms COD et COI — Tránh lặp lại người/vật đã nhắc tới",
+        summary:"COD (complément d'objet direct) và COI (complément d'objet indirect) là hai loại đại từ thay thế bổ ngữ đã nhắc ở câu trước, giúp câu gọn hơn. COD trả lời câu hỏi « quoi ?/qui ? » (không có « à »); COI trả lời câu hỏi « à qui ?/à quoi ? » (động từ đi với « à »). Cả hai đều đứng NGAY TRƯỚC động từ chia.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi để chọn đúng loại đại từ: động từ có « à » trước bổ ngữ chỉ người không? Có « à » → COI (me, te, lui, nous, vous, leur). Không có « à » → COD (me, te, le/la/l', nous, vous, les)." },
+
+          { type:"table",
+            caption:"Bảng đại từ COD và COI theo ngôi",
+            headers:["Ngôi", "Pronom COD", "Pronom COI"],
+            rows:[
+              ["je", "me/m'", "me/m'"],
+              ["tu", "te/t'", "te/t'"],
+              ["il/elle", "le/la/l'", "lui"],
+              ["nous", "nous", "nous"],
+              ["vous", "vous", "vous"],
+              ["ils/elles", "les", "leur"],
+            ] },
+
+          { type:"formula",
+            parts:["Chủ ngữ", "+ pronom (COD/COI)", "+ động từ chia"],
+            example:"Tu donnes des conseils à Hamid ? – Oui, je lui conseille de dormir sur le côté. — Bạn có khuyên Hamid không? – Có, tôi khuyên anh ấy nên nằm nghiêng.",
+            note:"Đại từ luôn đứng NGAY TRƯỚC động từ được chia (hoặc trước trợ động từ ở passé composé)." },
+
+          { type:"heading", text:"COD — trả lời « quoi ? » hoặc « qui ? » (không « à »)" },
+          { type:"pairs", caption:"COD thay một danh từ KHÔNG đi với « à »", items:[
+            { fr:"Tu as acheté l'oreiller parfait ? – Oui, je l'ai acheté.", vi:"Bạn đã mua chiếc gối hoàn hảo chưa? – Rồi, tôi đã mua nó. (l' = l'oreiller)" },
+            { fr:"Placez un oreiller sous votre bras pour le surélever.", vi:"Đặt một chiếc gối dưới cánh tay để nâng nó lên. (le = votre bras)" },
+          ] },
+
+          { type:"heading", text:"COI — trả lời « à qui ? » hoặc « à quoi ? » (động từ + à)" },
+          { type:"callout", variant:"note", title:"Nhóm động từ hay đi với COI cần nhớ",
+            text:"apporter, conseiller, demander, donner, écrire, expliquer, lire, offrir, prêter/emprunter, répondre (quelque chose) À quelqu'un — tất cả đều có cấu trúc « verbe + à + người », nên bổ ngữ người phải thay bằng COI, không phải COD." },
+          { type:"pairs", caption:"COI thay một danh từ đi CÙNG « à »", items:[
+            { fr:"Vos chevilles seront plus reposées : l'oreiller leur évite des tensions inutiles.", vi:"Mắt cá chân bạn sẽ được nghỉ ngơi hơn: chiếc gối giúp chúng tránh những căng thẳng không cần thiết. (leur = à vos chevilles)" },
+            { fr:"Je vous déconseille de dormir sur le ventre.", vi:"Tôi khuyên bạn không nên ngủ sấp. (vous = à vous, COI vì « déconseiller à quelqu'un »)" },
+          ] },
+
+          { type:"callout", variant:"warn", title:"1re và 2e ngôi: COD và COI giống hệt nhau",
+            text:"me/m', te/t', nous, vous KHÔNG phân biệt COD/COI — chỉ ngôi thứ ba (il/elle, ils/elles) mới có hai dạng khác nhau: le/la/l'/les (COD) ≠ lui/leur (COI)." },
+
+          { type:"compare", items:[
+            { wrong:"Je téléphone lui tous les soirs.", right:"Je lui téléphone tous les soirs.", why:"Đại từ (COD/COI) luôn đứng TRƯỚC động từ chia, không phải sau." },
+            { wrong:"Raoul le lit une histoire tous les soirs à ses filles.", right:"Raoul leur lit une histoire tous les soirs.", why:"« lire une histoire À ses filles » → bổ ngữ người đi với « à » nên phải là COI « leur », không phải COD « le »." },
+          ] },
+        ],
+        examples:[
+          "J'aime beaucoup faire la sieste. → Je l'aime beaucoup. — Tôi rất thích ngủ trưa. → Tôi rất thích nó.",
+          "Vous écrirez un courrier à ce spécialiste du sommeil. → Vous lui écrirez un courrier. — Bạn sẽ viết thư cho chuyên gia về giấc ngủ này. → Bạn sẽ viết thư cho ông ấy.",
+          "J'offre une séance dans un bar à sieste à mon frère. → Je lui offre une séance. — Tôi tặng em trai một buổi trong quán bar ngủ trưa. → Tôi tặng anh ấy một buổi.",
+          "J'emprunte un livre sur le sommeil à Michèle. → Je lui emprunte un livre. — Tôi mượn Michèle một cuốn sách về giấc ngủ. → Tôi mượn cô ấy một cuốn sách.",
+          "Béatrice ne téléphone jamais à ses parents le soir. → Elle ne leur téléphone jamais. — Béatrice không bao giờ gọi điện cho bố mẹ vào buổi tối. → Cô ấy không bao giờ gọi cho họ.",
+        ]
+      },
+
+      // ── 2. Le superlatif ──────────────────────────────────────────
+      {
+        topic:"Le superlatif — So sánh HƠN NHẤT / KÉM NHẤT trong một nhóm",
+        summary:"Superlatif diễn tả mức độ CAO NHẤT (supériorité) hay THẤP NHẤT (infériorité) so với cả một nhóm — khác với so sánh hơn (comparatif) chỉ so sánh hai đối tượng. Có 2 trường hợp bất quy tắc cần nhớ riêng: meilleur(e)(s) (từ bon) và mieux (từ bien).",
+        blocks:[
+          { type:"lead", text:"Cấu trúc superlatif luôn cần mạo từ xác định (le/la/les) đứng trước « plus/moins » — mạo từ này hợp giống/số theo danh từ mà tính từ bổ nghĩa." },
+
+          { type:"table",
+            caption:"Superlatif de supériorité (+) và d'infériorité (–)",
+            headers:["Loại", "Công thức", "Ví dụ"],
+            rows:[
+              ["+ Supériorité", "le/la/les + PLUS + tính từ + (de + danh từ)", "C'est l'infirmière la plus sympathique de l'hôpital."],
+              ["– Infériorité", "le/la/les + MOINS + tính từ + (de + danh từ)", "C'est le sirop pour la toux le moins bon."],
+            ] },
+
+          { type:"formula",
+            parts:["le/la/les", "+ plus/moins", "+ tính từ", "(+ de + danh từ)"],
+            example:"L'eucalyptus est la plus efficace des plantes contre le rhume. — Bạch đàn là cây hiệu quả nhất trong số các cây chống cảm.",
+            note:"Cụm « de + danh từ » ở cuối (không bắt buộc) chỉ RÕ nhóm đang so sánh — dịch là « trong số… »." },
+
+          { type:"heading", text:"2 trường hợp bất quy tắc: meilleur(e)(s) và mieux" },
+          { type:"table",
+            caption:"bon → meilleur (tính từ) ≠ bien → mieux (trạng từ)",
+            headers:["Từ gốc", "Superlatif", "Bổ nghĩa cho"],
+            rows:[
+              ["bon, bonne, bons, bonnes (tính từ)", "le meilleur, la meilleure, les meilleur(e)s", "một DANH TỪ — Ce sont les meilleures plantes pour les tisanes."],
+              ["bien (trạng từ)", "le mieux (không đổi giống/số)", "một ĐỘNG TỪ — C'est le romarin qui soulage le mieux les migraines."],
+            ] },
+
+          { type:"callout", variant:"tip", title:"Mẹo phân biệt meilleur ≠ mieux",
+            text:"Tự hỏi: từ đang bổ nghĩa cho DANH TỪ hay ĐỘNG TỪ?\n• Bổ nghĩa danh từ (một cái gì đó « tốt ») → meilleur(e)(s), hợp giống/số\n• Bổ nghĩa động từ (làm việc gì « tốt/giỏi ») → mieux, không bao giờ đổi dạng\nC'est le meilleur bar à sieste de la ville. (danh từ « bar ») / C'est ce sirop qui fonctionne le mieux. (động từ « fonctionne »)" },
+
+          { type:"callout", variant:"warn", title:"Đừng nhầm « plus bon » — luôn dùng meilleur",
+            text:"Khác với đa số tính từ (plus + tính từ), « bon » KHÔNG BAO GIỜ dùng « le plus bon » — luôn phải là « le meilleur/la meilleure ». Đây là ngoại lệ bắt buộc nhớ." },
+
+          { type:"compare", items:[
+            { wrong:"C'est le plus bon remède.", right:"C'est le meilleur remède.", why:"« bon » có superlatif riêng « meilleur », không ghép với « plus »." },
+            { wrong:"C'est ce sirop qui fonctionne le meilleur.", right:"C'est ce sirop qui fonctionne le mieux.", why:"« fonctionner » là động từ → cần trạng từ « mieux », không phải tính từ « meilleur »." },
+          ] },
+        ],
+        examples:[
+          "C'est peut-être la plante la moins connue de cette liste. — Đây có lẽ là loại cây ít được biết đến nhất trong danh sách này.",
+          "Un bon lit, ce n'est pas le plus important pour bien dormir. — Một chiếc giường tốt không phải là điều quan trọng nhất để ngủ ngon.",
+          "Les tisanes ne coûtent pas cher. C'est le remède le plus économique. — Trà thảo mộc không đắt. Đó là phương thuốc kinh tế nhất.",
+          "C'est dans mon canapé que je dors le mieux. — Chính trên ghế sofa của tôi là nơi tôi ngủ ngon nhất.",
+          "Ce médecin est le plus célèbre de la région. — Bác sĩ này nổi tiếng nhất trong vùng.",
+        ]
+      },
+
+      // ── 3. Les pronoms interrogatifs (lequel…) ────────────────────
+      {
+        topic:"Les pronoms interrogatifs lequel, laquelle, lesquels, lesquelles — Hỏi để CHỌN giữa nhiều thứ",
+        summary:"Khác với « quel/quelle/quels/quelles » (adjectif interrogatif, luôn đi kèm một DANH TỪ), « lequel/laquelle/lesquels/lesquelles » là PRONOM — thay thế hẳn danh từ đã nhắc, dùng khi hỏi để CHỌN một hoặc nhiều phần tử trong số nhiều thứ đã biết.",
+        blocks:[
+          { type:"lead", text:"« quel/quelle » luôn đứng NGAY TRƯỚC một danh từ (Quelles gouttes tu prends ?). « lequel/laquelle… » đứng MỘT MÌNH, thay thế danh từ đó (Tu as vu ces tisanes ? Laquelle choisis-tu ?)." },
+
+          { type:"table",
+            caption:"Les pronoms interrogatifs — hợp giống/số với danh từ được thay thế",
+            headers:["", "Số ít", "Số nhiều"],
+            rows:[
+              ["Giống đực", "lequel", "lesquels"],
+              ["Giống cái", "laquelle", "lesquelles"],
+            ] },
+
+          { type:"formula",
+            parts:["Lequel/Laquelle/Lesquels/Lesquelles", "+ động từ (đảo chủ ngữ hoặc est-ce que)"],
+            example:"Voici trois numéros d'urgence, lequel composez-vous ? — Đây là ba số khẩn cấp, bạn sẽ gọi số nào?",
+            note:"Đại từ hợp giống/số theo danh từ nó thay thế — dù danh từ đó không còn xuất hiện trong câu hỏi." },
+
+          { type:"table",
+            caption:"So sánh: quel (adjectif) ≠ lequel (pronom)",
+            headers:["", "Vai trò", "Ví dụ"],
+            rows:[
+              ["quel, quelle, quels, quelles", "Adjectif — luôn kèm một DANH TỪ ngay sau", "Quelles gouttes pour le nez tu prends ?"],
+              ["lequel, laquelle, lesquels, lesquelles", "Pronom — đứng MỘT MÌNH, THAY danh từ đã biết", "Il y a beaucoup de traitements différents. Lesquels sont les moins chers ?"],
+            ] },
+
+          { type:"callout", variant:"tip", title:"Mẹo nhận biết: có danh từ đi kèm ngay sau không?",
+            text:"Nếu ngay sau từ hỏi CÓ một danh từ → dùng quel/quelle/quels/quelles (adjectif).\nNếu từ hỏi đứng MỘT MÌNH, không kèm danh từ → dùng lequel/laquelle/lesquels/lesquelles (pronom), vì danh từ đã được nhắc ở câu trước." },
+
+          { type:"heading", text:"« lequel » chỉ dùng khi có sự CHỌN LỰA giữa nhiều phần tử" },
+          { type:"text", text:"Un de tes enfants est malade ? Lequel ? — câu hỏi ngụ ý phải CHỌN một trong số các con đã biết trước (nhiều đứa trẻ), khác với một câu hỏi mở không có sự lựa chọn cụ thể." },
+
+          { type:"compare", items:[
+            { wrong:"Quel de ces traitements est le moins cher ?", right:"Lequel de ces traitements est le moins cher ?", why:"Khi hỏi để CHỌN trong một nhóm đã biết, dùng pronom « lequel », không phải adjectif « quel » (vì không có danh từ ngay sau « quel »)." },
+            { wrong:"Tu as vu ces tisanes ? Quelle choisis-tu ?", right:"Tu as vu ces tisanes ? Laquelle choisis-tu ?", why:"« tisanes » đã được nhắc ở câu trước, câu sau phải dùng pronom « laquelle » để THAY thế, không lặp lại bằng adjectif." },
+          ] },
+        ],
+        examples:[
+          "Dans quel ordre devez-vous agir ? — Bạn phải hành động theo thứ tự nào?",
+          "Parmi les actions suivantes, lesquelles sont utiles pour faciliter l'arrivée des secours ? — Trong số các hành động sau, hành động nào hữu ích để giúp cứu hộ đến nhanh hơn?",
+          "Tes malades vont-ils mieux ? Lesquels peuvent sortir de l'hôpital ? — Bệnh nhân của bạn có khỏe hơn không? Những ai có thể xuất viện?",
+          "D'après toi, quelles études médicales sont intéressantes ? — Theo bạn, ngành học y khoa nào thú vị?",
+          "À quelle heure tu rentres ? — Mấy giờ bạn về?",
         ]
       },
     ]

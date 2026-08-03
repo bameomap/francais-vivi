@@ -510,4 +510,90 @@ export const EDITO_A2_PHONO = [
       { word: "Oh zut, c'est déjà fini !",     target: "into_deception", label: "😞" },
     ],
   },
+  // ─────────────────────────────────────────────────────────────────
+  {
+    unitId: "b7", unitNum: "7", title: "À votre santé !",
+    color: "#0891B2", bg: "#E0F2FE",
+    topic: "La prononciation du mot « plus »",
+    topicVi: "3 cách đọc khác nhau của MỘT chữ « plus » — [ply], [plys], [plyz]",
+    // Không phải một cặp âm vị đối lập như thường lệ — bài này luyện nghe
+    // BA cách phát âm khác nhau của CÙNG một từ viết « plus », tùy vào vị trí
+    // của nó trong câu và từ theo sau. "phoneme" mang ký hiệu IPA của từng
+    // cách đọc, "graphemes" liệt kê NGỮ CẢNH khiến từ được đọc như vậy.
+    sounds: [
+      {
+        id: "plus_ply",
+        phoneme: "[ply]",
+        label: "« plus » câm — trước phụ âm, hoặc trong « ne… plus »",
+        graphemes: ["plus + phụ âm", "ne… plus (phủ định)"],
+        description: "[ply] — chữ « s » cuối HOÀN TOÀN câm, không đọc, không liaison",
+        descVi: "Xảy ra trong 2 trường hợp: (1) « plus » đứng trước một tính từ/danh từ bắt đầu bằng PHỤ ÂM — le plus compétent; (2) « plus » trong cấu trúc PHỦ ĐỊNH « ne… plus » (không còn… nữa) — dù từ sau là gì.",
+        examples: [
+          { word: "le plus compétent",  vi: "người giỏi nhất (trước phụ âm)" },
+          { word: "n'utilisent plus",   vi: "không còn dùng nữa (phủ định)" },
+          { word: "je n'en veux plus",  vi: "tôi không muốn nữa" },
+          { word: "il ne dort plus",    vi: "anh ấy không còn ngủ được nữa" },
+        ],
+        tip: "Mẹo: nếu « plus » có nghĩa « không… nữa » (phủ định với ne), LUÔN đọc [ply], câm hẳn chữ s — bất kể từ đứng sau là gì.",
+      },
+      {
+        id: "plus_plys",
+        phoneme: "[plys]",
+        label: "« plus » đọc rõ [s] — đứng CUỐI câu/cụm, không có từ theo sau",
+        graphemes: ["plus (đứng một mình, cuối câu hoặc cuối cụm động từ)"],
+        description: "[plys] — chữ « s » cuối được ĐỌC RÕ vì không có từ nào theo ngay sau để nối",
+        descVi: "Khi « plus » mang nghĩa « nhiều hơn » và đứng Ở CUỐI câu hay cuối một cụm (không có danh từ/tính từ theo ngay sau), chữ « s » LUÔN được phát âm rõ thành [s].",
+        examples: [
+          { word: "les médicaments qu'on achète le plus", vi: "loại thuốc được mua nhiều nhất (plus ở cuối cụm)" },
+          { word: "vous devez dormir plus",  vi: "bạn phải ngủ nhiều hơn" },
+          { word: "j'en veux plus",           vi: "tôi muốn nhiều hơn" },
+        ],
+        tip: "Mẹo: nếu sau « plus » không còn từ nào nữa trong câu (nó đứng cuối), luôn đọc rõ [plys], không câm chữ s.",
+      },
+      {
+        id: "plus_plyz",
+        phoneme: "[plyz]",
+        label: "« plus » liaison [z] — trước một NGUYÊN ÂM",
+        graphemes: ["plus + nguyên âm (liaison bắt buộc)"],
+        description: "[plyz] — chữ « s » cuối BẬT thành [z] vì từ theo sau bắt đầu bằng nguyên âm",
+        descVi: "Khi « plus » đứng ngay trước một từ bắt đầu bằng NGUYÊN ÂM (hoặc « h » câm), có LIAISON bắt buộc: chữ « s » câm được bật lên thành âm [z], nối liền hai từ.",
+        examples: [
+          { word: "le plus utile",     vi: "hữu ích nhất (utile bắt đầu bằng nguyên âm)" },
+          { word: "le plus efficace",  vi: "hiệu quả nhất" },
+          { word: "la plus calmante",  vi: "làm dịu nhất — không liaison, « c » là phụ âm, chú ý so sánh" },
+          { word: "le plus adapté",    vi: "phù hợp nhất" },
+        ],
+        tip: "Mẹo: nếu từ ngay sau « plus » bắt đầu bằng A, E, I, O, U hoặc H câm, luôn có liaison [z] — đây là kiểu liaison BẮT BUỘC, không được bỏ qua.",
+      },
+    ],
+    pairs: [
+      { a: "le plus compétent", b: "le plus efficace", aVi: "giỏi nhất ([ply], trước phụ âm)", bVi: "hiệu quả nhất ([plyz], liaison trước nguyên âm)", note: "[ply] vs [plyz] — cùng nghĩa « nhất », khác vì từ theo sau" },
+      { a: "n'utilisent plus",  b: "achètent le plus",  aVi: "không còn dùng nữa ([ply], phủ định)", bVi: "mua nhiều nhất ([plys], đứng cuối cụm)", note: "[ply] vs [plys] — cùng chữ viết, nghĩa và cách đọc khác hẳn" },
+    ],
+    practice: [
+      "Le conseil le plus utile. Le médecin le plus compétent.",
+      "Les médicaments que les Français achètent le plus.",
+      "Les remèdes que les Français n'utilisent plus.",
+      "C'est la tisane la plus utilisée. C'est l'infusion la plus connue.",
+      "Ce sont les revues médicales que je lis le plus.",
+      "C'est le remède le plus efficace. C'est le traitement le plus fort.",
+      "Ce sont les activités qu'il faut pratiquer le plus.",
+      "C'est le sport le plus adapté. C'est le médicament le plus vendu.",
+      "Pour être en meilleure forme, vous devez dormir plus et manger équilibré.",
+      "Si vous avez un rhume, le remède le plus efficace, c'est le thym.",
+      "Si vous avez du mal à dormir, la lavande est la plante la plus calmante.",
+    ],
+    quiz: [
+      { word: "le plus utile",          target: "plus_plyz", label: "[plyz]" },
+      { word: "le médecin le plus compétent", target: "plus_ply", label: "[ply]" },
+      { word: "achètent le plus",       target: "plus_plys", label: "[plys]" },
+      { word: "n'utilisent plus",       target: "plus_ply",  label: "[ply]" },
+      { word: "la plus utilisée",       target: "plus_plyz", label: "[plyz]" },
+      { word: "je lis le plus",         target: "plus_plys", label: "[plys]" },
+      { word: "le plus efficace",       target: "plus_plyz", label: "[plyz]" },
+      { word: "vous devez dormir plus", target: "plus_plys", label: "[plys]" },
+      { word: "le plus adapté",         target: "plus_plyz", label: "[plyz]" },
+      { word: "le médicament le plus vendu", target: "plus_plyz", label: "[plyz]" },
+    ],
+  },
 ];

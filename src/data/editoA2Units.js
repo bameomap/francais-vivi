@@ -447,4 +447,66 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-7", unit: 7, title: "À votre santé !",
+    speakingPractice: [
+      {
+        title: "Donner des conseils pour bien dormir",
+        notes: ["b7-a"],
+        task: "À deux ! Un(e) de vos amis vous explique qu'il/elle dort très mal. Vous lui donnez des conseils pour mieux dormir, en utilisant des pronoms COD et COI.",
+        usefulPhrases: [
+          "Il est important d'être attentif(ve) à votre position de sommeil.",
+          "Il est conseillé de dormir sur le côté.",
+          "Je vous recommande de placer un oreiller entre vos jambes.",
+          "Je te déconseille de dormir sur le ventre.",
+        ],
+      },
+      {
+        title: "Chez le/la pharmacien(ne)",
+        notes: ["b7-e"],
+        task: "À deux ! Vous ne vous sentez pas très bien, vous allez à la pharmacie. Le/La pharmacien(ne) vous pose des questions. Vous expliquez vos symptômes. Jouez la scène.",
+        usefulPhrases: [
+          "Qu'est-ce qui ne va pas ? – Je suis un peu patraque.",
+          "Vous avez consulté votre médecin ?",
+          "Vous avez mal à la gorge ? – J'ai le nez bouché.",
+          "Vous avez de la fièvre ?",
+        ],
+      },
+      {
+        title: "Débattre des gestes de premiers secours",
+        notes: ["b7-j"],
+        task: "À deux ! Faites le test « Que faire en cas d'urgence ? », puis débattez : doit-on enseigner les gestes de premiers secours à l'école ? Exprimez votre point de vue.",
+        usefulPhrases: [
+          "Pour nous/moi, ce n'est pas suffisant.",
+          "Je crois/pense/trouve que…",
+          "À mon avis, il faut appeler les secours.",
+        ],
+      },
+      {
+        title: "Participer à une campagne de prévention",
+        notes: ["b7-atelier"],
+        task: "Atelier médiation : en groupe, choisissez un domaine de santé (alimentation, pollution, sécurité routière, risques auditifs, sédentarité), faites des recherches, préparez un support (diaporama, affiche, flyer, vidéo) et présentez votre campagne de prévention à la classe.",
+        usefulPhrases: [
+          "Évitez de…",
+          "Il est (dé)conseillé de…",
+          "Pensez à…",
+          "Le mieux, c'est de…",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Un message après une sieste (DELF)",
+        task: "Vous avez découvert un bar à sieste dans votre quartier. Vous y êtes allé(e) et vous avez fait une sieste. Vous écrivez à un(e) ami(e) francophone pour lui raconter votre expérience et donner vos impressions.",
+      },
+      {
+        title: "Un message à son coach sportif",
+        task: "Vous avez mal dormi et vous ne pourrez pas participer à une compétition sportive. Vous écrivez à votre coach pour lui expliquer ce qui vous arrive.",
+      },
+      {
+        title: "Les gestes de premiers secours à l'école",
+        task: "Doit-on enseigner les gestes de premiers secours selon vous ? Pourquoi ? Rédigez un court texte pour donner votre avis.",
+      },
+    ],
+  },
 ];

@@ -1068,6 +1068,276 @@ Au fait ! Le poké est un plat d'origine hawaïenne avec du poisson cru coupé e
       { id: "b6-roulotte-q5", type: "open", prompt: "Production écrite : à deux ! Imaginez que vous créez une roulotte dans le pays, la région ou la ville de votre choix. Décidez ensemble de ses spécialités, ses horaires, les endroits où la garer, sa décoration, etc." },
     ],
   },
+
+  // ═══════════════ Unité 7 — À votre santé ! ═══════════════
+
+  // ── A · Pour bien dormir… (p. 97) ──────────────────────────────────
+  {
+    id: "b7-livre-bien-dormir",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 97,
+    title: "Pour bien dormir…",
+    instruction: "Vous n'êtes pas en pleine forme au réveil ? Voici quelques conseils pratiques de Nicolas, notre coach bien-être.",
+    text: `Vous n'êtes pas en pleine forme au réveil ? Vous avez des douleurs musculaires ? Saviez-vous que la qualité de votre repos dépend en partie de votre manière de dormir ? Il est donc important d'être attentif à votre position de sommeil.
+Voici quelques conseils pratiques de Nicolas, notre coach bien-être.
+
+SUR LE CÔTÉ
+Si vous avez mal au dos, il est conseillé de dormir sur le côté. Par contre, la colonne vertébrale subit des tensions car elle n'est pas alignée avec le cou. Il faut donc poser votre tête au milieu de l'oreiller : cet oreiller doit toucher votre épaule. Je vous recommande également de placer un oreiller entre vos jambes et un autre sous votre bras pour le surélever, vous relâchez ainsi les tensions dans le haut du corps.
+
+SUR LE DOS
+Placez votre tête au milieu de l'oreiller, le cou sera bien calé. Pour éviter de tordre votre colonne vertébrale, mettez un oreiller sous vos genoux. Vos chevilles seront plus reposées : l'oreiller leur évite des tensions inutiles.
+
+SUR LE VENTRE
+Je vous déconseille de dormir sur le ventre, c'est mauvais pour le dos. Évitez en général les positions qui lui imposent des tensions. Si vous préférez cette position, placez des oreillers sous votre corps : ventre, cuisses, genoux et pieds.
+
+Dans tous les cas, changez de position régulièrement pendant la nuit pour éviter les courbatures.
+
+… et pour bien se réveiller :
+Au réveil, restez allongé(e) quelques minutes et étirez-vous. Mettez-vous en position assise et attendez encore un instant pour habituer votre corps qui a été au repos toute la nuit. Enfin levez-vous doucement pour ne pas avoir de vertiges quand vous êtes debout.`,
+    questions: [
+      { id: "b7-dormir-q1", type: "open", prompt: "Entrée en matière : aimez-vous dormir ?" },
+      { id: "b7-dormir-q2", type: "short_answer", prompt: "Qui donne des conseils pour mieux dormir ?", answer: "Nicolas, le coach bien-être." },
+      { id: "b7-dormir-q3", type: "short_answer", prompt: "Que peut provoquer une mauvaise position de sommeil ?", answer: "Des douleurs musculaires, des tensions dans la colonne vertébrale et des courbatures." },
+      { id: "b7-dormir-q4", type: "short_answer", prompt: "À qui conseille-t-on la position sur le côté ?", answer: "Aux personnes qui ont mal au dos." },
+      { id: "b7-dormir-q5", type: "short_answer", prompt: "Où placer des oreillers pour mieux dormir sur le dos ?", answer: "Sous les genoux (et la tête au milieu de l'oreiller)." },
+      { id: "b7-dormir-q6", type: "multiple_choice", prompt: "Est-il conseillé de dormir sur le ventre ?", options: ["Oui, c'est la meilleure position.", "Non, c'est déconseillé, c'est mauvais pour le dos."], answer: "Non, c'est déconseillé, c'est mauvais pour le dos." },
+      { id: "b7-dormir-q7", type: "multi_select", prompt: "Grammaire : relevez les pronoms COD et COI dans le texte.", options: ["Je vous recommande de placer un oreiller.", "L'oreiller leur évite des tensions inutiles.", "Je vous déconseille de dormir sur le ventre.", "Il est important d'être attentif à votre position."], answer: ["Je vous recommande de placer un oreiller.", "L'oreiller leur évite des tensions inutiles.", "Je vous déconseille de dormir sur le ventre."] },
+      { id: "b7-dormir-q8", type: "open", prompt: "Et vous, dans quelle position dormez-vous ?" },
+      { id: "b7-dormir-q9", type: "open", prompt: "Production orale : à deux ! Un(e) de vos amis vous explique qu'il/elle dort très mal. Vous lui donnez des conseils pour mieux dormir." },
+    ],
+  },
+
+  // ── C · Le cycle du sommeil (infographie, p. 100) ───────────────────
+  {
+    id: "b7-livre-cycle-sommeil",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 100,
+    title: "Le cycle du sommeil",
+    instruction: "Infographie : pour passer une bonne nuit, il faut compter 4 à 5 cycles d'environ 90 minutes chacun. Lisez les 5 phases.",
+    text: `1. ENDORMISSEMENT (5 à 10 minutes) — Bâillements, engourdissement.
+
+2. SOMMEIL LENT LÉGER (10 à 15 minutes) — Le cerveau est réceptif mais ne comprend plus. Respiration et rythme cardiaque plus lents.
+
+3. SOMMEIL PROFOND (30 minutes) — Le cerveau ne perçoit plus rien. Respiration très lente, muscles relâchés.
+
+4. SOMMEIL TRÈS PROFOND (30 minutes) — Étape cruciale de récupération. Le corps se remet de la fatigue physique de la journée.
+
+5. SOMMEIL PARADOXAL (10 à 15 minutes) — Respiration et rythme cardiaque irréguliers. Déclenchement des rêves. Lorsque ce cycle prend fin, on peut se réveiller ou reprendre un cycle de sommeil lent léger.
+
+— Source : www.lefigaro.fr, André De Chastenet`,
+    questions: [
+      { id: "b7-cycle-q1", type: "open", prompt: "Entrée en matière : que savez-vous du cycle du sommeil ?" },
+      { id: "b7-cycle-q2", type: "matching", prompt: "Quelles sont les cinq phases d'un cycle de sommeil, dans l'ordre ?", answer: "1. Endormissement → 2. Sommeil lent léger → 3. Sommeil profond → 4. Sommeil très profond → 5. Sommeil paradoxal" },
+      { id: "b7-cycle-q3", type: "short_answer", prompt: "À partir de quelle phase le cerveau ne sent-il plus rien ?", answer: "À partir du sommeil profond (phase 3)." },
+      { id: "b7-cycle-q4", type: "true_false", prompt: "Vrai ou faux ? On rêve pendant toutes les phases de sommeil.", answer: false },
+      { id: "b7-cycle-q5", type: "open", prompt: "Production orale : faire un beau rêve, c'est rêver de quoi ? de succès, de voyage, d'amour ?" },
+    ],
+  },
+
+  // ── D · Les meilleures plantes pour les tisanes (p. 101) ────────────
+  {
+    id: "b7-livre-plantes-tisanes",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 101,
+    title: "Les meilleures plantes pour les tisanes",
+    instruction: "Lisez la présentation de six plantes médicinales et de leurs bienfaits.",
+    text: `Le thym : le thym est une plante aromatique et un formidable remède. Il est le plus souvent utilisé pour les maux de gorge, la toux et le rhume, mais il est aussi efficace pour les problèmes digestifs.
+
+Le romarin : c'est le romarin qui soulage le mieux les migraines. Il donne de l'énergie en cas de stress ou d'anxiété et il est bénéfique pour la concentration et la mémoire. C'est une plante qui donne du tonus.
+
+La lavande : cette plante est antiseptique¹ et aide à s'endormir. Elle soigne également les indigestions, les problèmes de peau et les piqûres d'insectes.
+
+L'eucalyptus : c'est la plus efficace des plantes contre les rhumes et les infections grâce à son pouvoir antiseptique. L'eucalyptus est particulièrement efficace contre la fièvre.
+
+Le millepertuis : c'est peut-être la plante la moins connue de cette liste mais c'est un excellent remède contre les insomnies et l'anxiété.
+
+L'échinacée : c'est une plante intéressante pour ses propriétés² antibiotiques, elle est efficace pour aider le système immunitaire. Elle soulage entre autres les allergies ou encore l'asthme.
+
+1 Désinfectante. 2 Qualités.`,
+    questions: [
+      { id: "b7-plantes-q1", type: "open", prompt: "Entrée en matière : utilisez-vous des plantes pour vous soigner ?" },
+      { id: "b7-plantes-q2", type: "open", prompt: "1re lecture : connaissez-vous les plantes de ce document ?" },
+      { id: "b7-plantes-q3", type: "matching", prompt: "Quelles plantes sont efficaces : a. contre le mal de tête ? b. en cas de problèmes de sommeil ? c. contre les allergies ? d. pour protéger le corps des infections ?", answer: "a. le romarin\nb. la lavande, le millepertuis\nc. l'échinacée\nd. l'eucalyptus, l'échinacée" },
+      { id: "b7-plantes-q4", type: "short_answer", prompt: "Quelle plante peut être utile aux étudiants ?", answer: "Le romarin (bénéfique pour la concentration et la mémoire)." },
+      { id: "b7-plantes-q5", type: "short_answer", prompt: "Vocabulaire : retrouvez dans le texte une expression qui signifie « apporter de l'énergie ».", answer: "Donner du tonus." },
+      { id: "b7-plantes-q6", type: "open", prompt: "Production écrite : vous avez découvert une nouvelle plante médicinale. Imaginez son nom et ses bienfaits." },
+    ],
+  },
+
+  // ── G · Le transport d'urgence au Québec (p. 104) ───────────────────
+  {
+    id: "b7-livre-transport-urgence-quebec",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "culture(s)",
+    page: 104,
+    title: "Le transport d'urgence au Québec",
+    instruction: "Lisez ce texte sur l'histoire du transport d'urgence à Montréal et au Québec.",
+    text: `Jusqu'aux années 50, la ville de Montréal ne propose pas de service ambulancier municipal aux citoyens victimes d'accidents de la circulation. Ce sont les pompes funèbres qui prennent en charge les blessés.
+Pour les aider, la mairie engage environ 120 policiers en 1959. Ils vont conduire des ambulances.
+La première loi sur les services de transport d'urgence est de 1972. Les entreprises privées doivent avoir un permis pour proposer des services ambulanciers.
+À partir de 1973, le transport ambulancier est réglementé. Les ambulanciers doivent être diplômés pour exercer leur métier et les entreprises de transport d'urgence doivent avoir des équipements adaptés.
+En 1977, les habitants de Laval sont les premiers au Québec à avoir un numéro central d'urgence : le 911. À la centrale d'urgence, les appels sont traités et renvoyés vers les pompiers, les ambulanciers ou les policiers, selon le cas.
+
+— www.urgences-sante.qc`,
+    questions: [
+      { id: "b7-quebec-q1", type: "matching", prompt: "Quel titre correspond à chaque paragraphe du document ? a. Une réglementation plus stricte. b. Un numéro pour les urgences. c. La naissance du service d'ambulance. d. Une première loi pour les services privés d'urgence.", answer: "§1 → c. La naissance du service d'ambulance.\n§2-3 → d. Une première loi pour les services privés d'urgence.\n§4 → a. Une réglementation plus stricte.\n§5 → b. Un numéro pour les urgences." },
+      { id: "b7-quebec-q2", type: "short_answer", prompt: "Qui conduisait les premières ambulances ?", answer: "Des policiers engagés par la mairie (environ 120 en 1959)." },
+      { id: "b7-quebec-q3", type: "short_answer", prompt: "Quelles sont les conditions pour travailler comme ambulancier à partir de 1973 ?", answer: "Être diplômé et travailler pour une entreprise ayant des équipements adaptés." },
+      { id: "b7-quebec-q4", type: "open", prompt: "Production écrite : aimeriez-vous travailler dans un service d'urgence (comme pompier(ère), ambulancier(ère)…) ? Expliquez pourquoi dans un court texte." },
+      { id: "b7-quebec-q5", type: "open", prompt: "Oh, le cliché ! « Les Français consomment beaucoup d'antibiotiques. » Les Français sont parmi les plus gros consommateurs d'antibiotiques au monde et se trouvent au troisième rang européen. Depuis quelques années, les organisations de santé alertent sur cette surconsommation. Et dans votre pays, quelle est la situation ?" },
+    ],
+  },
+
+  // ── H · Les Mille et Une Vies des urgences (BD, p. 106) ─────────────
+  {
+    id: "b7-livre-bd-urgences",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 106,
+    title: "Les Mille et Une Vies des urgences",
+    instruction: `Bande dessinée en 3 vignettes, intitulée « L'effet placebo du soignant¹ ». Vignette 1 : un jeune étudiant en médecine à l'allure décontractée à côté d'un médecin âgé aux lunettes à monture noire, barbe naissante, voix « Uncle Ben's », chemise de grand-père, stéthoscope dans la poche — « C'est ce gamin qui va me soigner ? » se demande le patient. Vignette 2 : texte « Étant un peu renard² et doutant encore de ma technique, je "placébolise" mes patients avec mon allure de jeune-futur-vieux professeur de médecine. » Vignette 3 : deux personnages se serrent la main devant un bâtiment hospitalier — « Baptiste, interne³ aux Urgences. Que puis-je pour vous ? » — « Je me sens déjà mieux, docteur. »`,
+    text: `1 Personne qui soigne, médecin, infirmier... 2 Être malin. 3 Étudiant en médecine en fin de cursus.
+
+— D. Mermoux, B. Beaulieu, Les Mille et Une Vies des urgences, 2017`,
+    questions: [
+      { id: "b7-bd-q1", type: "open", prompt: "Entrée en matière : expliquez ce qu'est l'effet placebo." },
+      { id: "b7-bd-q2", type: "short_answer", prompt: "Décrivez le jeune homme en haut à gauche. Pourquoi les patients ne lui font pas confiance ?", answer: "C'est un jeune étudiant en médecine à l'allure décontractée ; les patients doutent de sa compétence parce qu'il paraît trop jeune." },
+      { id: "b7-bd-q3", type: "short_answer", prompt: "Qu'essaie de changer l'étudiant en médecine dans son apparence ?", answer: "Il adopte une allure de « jeune-futur-vieux professeur » : lunettes à monture noire, barbe naissante, chemise de grand-père, stéthoscope dans la poche." },
+      { id: "b7-bd-q4", type: "short_answer", prompt: "Où se trouve-t-il sur la dernière image ?", answer: "Devant un bâtiment hospitalier, aux Urgences." },
+      { id: "b7-bd-q5", type: "short_answer", prompt: "Avec qui parle-t-il ?", answer: "Avec un patient / une patiente qu'il accueille aux Urgences." },
+      { id: "b7-bd-q6", type: "short_answer", prompt: "Qu'imagine-t-il ?", answer: "Que son apparence de médecin expérimenté rassure le patient et crée un effet placebo (« Je me sens déjà mieux »)." },
+      { id: "b7-bd-q7", type: "multiple_choice", prompt: "Vocabulaire : que signifie le mot « allure » ici ?", options: ["Apparence.", "Compétence.", "Sensation."], answer: "Apparence." },
+      { id: "b7-bd-q8", type: "open", prompt: "Production orale (DELF) : dans sa transformation d'étudiant à médecin, quel élément est le plus convaincant selon vous ?" },
+    ],
+  },
+
+  // ── I · Médecine d'Outre-mer (vidéo, p. 107) ────────────────────────
+  {
+    id: "b7-livre-medecine-outremer",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "culture(s)",
+    page: 107,
+    title: "Médecine d'Outre-mer",
+    instruction: "Lisez ce résumé du document vidéo sur les médecines traditionnelles à La Réunion et répondez aux questions.",
+    text: `Ce document présente une infirmière réunionnaise, dans un couloir d'hôpital, en tenue blanche. Le documentaire s'ouvre sur les paysages de l'île de La Réunion, un territoire français d'Outre-mer.
+
+Les Réunionnais utilisent depuis longtemps des méthodes traditionnelles pour se soigner, à côté de la médecine moderne : plantes médicinales, tisanes, remèdes transmis de génération en génération. Yohan, natif de La Réunion, parcourt son île pour rencontrer les personnes qui connaissent et utilisent encore ces remèdes traditionnels.
+
+Contre l'hypertension et le diabète, deux maladies très répandues sur l'île, les Réunionnais utilisent notamment des plantes locales en complément des traitements médicaux classiques.`,
+    questions: [
+      { id: "b7-outremer-q1", type: "open", prompt: "Entrée en matière : regardez la photo. Décrivez cette personne. Où se trouve-t-elle ?" },
+      { id: "b7-outremer-q2", type: "open", prompt: "1er visionnage (du début à « natif de La Réunion ») : décrivez les paysages." },
+      { id: "b7-outremer-q3", type: "open", prompt: "De quoi va-t-on parler dans ce documentaire à votre avis ?" },
+      { id: "b7-outremer-q4", type: "short_answer", prompt: "2e visionnage : quelles méthodes utilisent les Réunionnais pour se soigner ?", answer: "Des méthodes traditionnelles : plantes médicinales, tisanes et remèdes transmis de génération en génération, en complément de la médecine moderne." },
+      { id: "b7-outremer-q5", type: "short_answer", prompt: "Qui est Yohan ? Pourquoi va-t-il parcourir son île ?", answer: "Un habitant natif de La Réunion qui parcourt l'île pour rencontrer les personnes qui connaissent les remèdes traditionnels." },
+      { id: "b7-outremer-q6", type: "short_answer", prompt: "Qu'utilisent les Réunionnais contre l'hypertension et le diabète ?", answer: "Des plantes locales, en complément des traitements médicaux classiques." },
+      { id: "b7-outremer-q7", type: "open", prompt: "Production orale : que pensez-vous des médecines traditionnelles ?" },
+    ],
+  },
+
+  // ── J · Que faire en cas d'urgence ? (p. 109) ───────────────────────
+  {
+    id: "b7-livre-que-faire-urgence",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 109,
+    title: "Que faire en cas d'urgence ?",
+    instruction: "Seulement 20 % des Français sont formés aux gestes de premiers secours. Faites ce petit test proposé par des secouristes et formateurs.",
+    text: `Seulement 20 % des Français sont formés aux gestes de premiers secours. Pour nous, secouristes et formateurs, ce n'est pas suffisant. Nous pensons que les formations gratuites aux gestes d'urgence ne sont pas assez nombreuses. Accident, brûlure, malaise... dans ce genre de situation, garder son calme est très important. Nous vous proposons un petit test.
+
+À votre avis, que faut-il faire dans les situations suivantes ?
+
+1. Que faire en cas d'accident corporel ?
+   a. Protéger, alerter, secourir.
+   b. Alerter, protéger, secourir.
+   c. Secourir, alerter, protéger.
+
+2. En cas d'accident dans l'Union européenne, quel numéro d'urgence faut-il appeler ?
+   a. Le 15
+   b. Le 18
+   c. Le 112
+
+3. Comment vérifier qu'une personne inconsciente respire ?
+   a. Vous la tournez en douceur sur le côté.
+   b. Vous regardez si sa poitrine se soulève.
+   c. Vous pratiquez du bouche-à-bouche.
+
+4. Parmi les actions suivantes, lesquelles sont utiles pour faciliter l'arrivée des secours sur le lieu d'un accident ?
+   a. Indiquer aux secours l'adresse exacte du lieu de l'accident.
+   b. Laisser la victime et aller à la rencontre de l'ambulance.
+   c. Envoyer quelqu'un à la rencontre de l'ambulance.
+
+Réponses : 1. a. – 2. c. – 3. b. – 4. a./c.`,
+    questions: [
+      { id: "b7-urgence-q1", type: "short_answer", prompt: "1re lecture (1er paragraphe) : quel est le constat des secouristes et formateurs ?", answer: "Seulement 20 % des Français sont formés aux gestes de premiers secours, et les formations gratuites ne sont pas assez nombreuses." },
+      { id: "b7-urgence-q2", type: "short_answer", prompt: "Quelle attitude est la bonne en cas d'urgence ?", answer: "Garder son calme." },
+      { id: "b7-urgence-q3", type: "multiple_choice", prompt: "Faites le test — question 1 : que faire en cas d'accident corporel ?", options: ["Protéger, alerter, secourir.", "Alerter, protéger, secourir.", "Secourir, alerter, protéger."], answer: "Protéger, alerter, secourir." },
+      { id: "b7-urgence-q4", type: "multiple_choice", prompt: "Question 2 : en cas d'accident dans l'Union européenne, quel numéro d'urgence faut-il appeler ?", options: ["Le 15", "Le 18", "Le 112"], answer: "Le 112" },
+      { id: "b7-urgence-q5", type: "multiple_choice", prompt: "Question 3 : comment vérifier qu'une personne inconsciente respire ?", options: ["Vous la tournez en douceur sur le côté.", "Vous regardez si sa poitrine se soulève.", "Vous pratiquez du bouche-à-bouche."], answer: "Vous regardez si sa poitrine se soulève." },
+      { id: "b7-urgence-q6", type: "multi_select", prompt: "Question 4 : parmi les actions suivantes, lesquelles sont utiles pour faciliter l'arrivée des secours ?", options: ["Indiquer aux secours l'adresse exacte du lieu de l'accident.", "Laisser la victime et aller à la rencontre de l'ambulance.", "Envoyer quelqu'un à la rencontre de l'ambulance."], answer: ["Indiquer aux secours l'adresse exacte du lieu de l'accident.", "Envoyer quelqu'un à la rencontre de l'ambulance."] },
+      { id: "b7-urgence-q7", type: "open", prompt: "Lisez les réponses. Avez-vous appris des choses dans ce test ?" },
+      { id: "b7-urgence-q8", type: "open", prompt: "Production écrite : doit-on enseigner les gestes de premiers secours selon vous ? Pourquoi ?" },
+    ],
+  },
+
+  // ── DELF · Compréhension des écrits — Parcours de santé (p. 110) ────
+  {
+    id: "b7-livre-delf-parcours-sante",
+    unit: 7,
+    unitTitle: "À votre santé !",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 110,
+    title: "DELF A2 — Parcours de santé en famille",
+    instruction: "Vous faites partie d'une association « Famille et Santé » et vous recevez ce courriel. Pour répondre aux questions, cochez la bonne réponse. (6 points)",
+    text: `De : assofamillesante@edito.fr
+Objet : parcours de santé 2 février
+
+Chers membres,
+
+Nous vous invitons à notre premier événement de l'année : un parcours de santé en famille le dimanche 2 février.
+
+Programme :
+09 h 00 : Rendez-vous à l'association
+09 h 30 : Départ pour deux heures de marche sportive
+12 h 00 : Déjeuner (prévoir un pique-nique)
+14 h 00 : Balade-découverte des plantes sauvages (animée par Léa)
+15 h 00 : Atelier de fabrication de tisanes (avec Matteo)
+16 h 00 : Activités sportives et jeux concours (avec Livia). Des cadeaux pour les gagnants : jeux de cartes, ballons, billes…
+17 h 00 : Retour à l'association.
+
+Merci de confirmer votre présence par e-mail à assofamillesante@gmail.com au plus tard le 2 février.
+
+Nous recherchons aussi des personnes pour aider à l'organisation de nos prochains événements : yoga famille le 8 mars / week-end à la mer / soirée spéciale alimentation. Si vous êtes intéressé(e), contactez Sophie au 07 21 54 40 65.
+
+À bientôt !
+L'association Famille Santé`,
+    questions: [
+      { id: "b7-delf-q1", type: "multiple_choice", prompt: "Quelle est la première activité de l'événement organisé par l'association ?", options: ["Un pique-nique.", "Une marche sportive.", "Un jeu de cartes."], answer: "Une marche sportive." },
+      { id: "b7-delf-q2", type: "multiple_choice", prompt: "Le premier événement a lieu…", options: ["le 2 février.", "le 8 février.", "le 2 mars."], answer: "le 2 février." },
+      { id: "b7-delf-q3", type: "multiple_choice", prompt: "L'activité sports et jeux est animée par…", options: ["Matteo.", "Léa.", "Livia."], answer: "Livia." },
+      { id: "b7-delf-q4", type: "multiple_choice", prompt: "Que peut-on gagner ?", options: ["Des bonbons colorés.", "Des jeux de cartes.", "Une pile de livres."], answer: "Des jeux de cartes." },
+      { id: "b7-delf-q5", type: "multiple_choice", prompt: "Vous voulez participer au premier événement, vous devez…", options: ["envoyer un courriel.", "téléphoner à Sophie.", "aller à l'association."], answer: "envoyer un courriel." },
+      { id: "b7-delf-q6", type: "multiple_choice", prompt: "L'association cherche aussi des personnes pour…", options: ["animer les prochains événements.", "participer aux prochains événements.", "préparer les prochains événements."], answer: "préparer les prochains événements." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

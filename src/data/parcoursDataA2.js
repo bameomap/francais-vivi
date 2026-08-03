@@ -9,6 +9,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b4", num:4, fr:"Tous pareils, tous différents", vi:"Ai cũng giống, ai cũng khác", grammar:"Comparaison : équivalence · Adjectifs indéfinis · Pronoms possessifs", emoji:"🎭" },
   { id:"b5", num:5, fr:"En route vers le futur !", vi:"Trên đường đến tương lai!", grammar:"Futur simple · Si/Quand + futur · Le pronom on", emoji:"🚀" },
   { id:"b6", num:6, fr:"En cuisine", vi:"Vào bếp", grammar:"Le pronom en · L'obligation et l'interdiction · La restriction ne… que", emoji:"🍳" },
+  { id:"b7", num:7, fr:"À votre santé !", vi:"Chúc sức khỏe!", grammar:"Les pronoms COD et COI · Le superlatif · Les pronoms interrogatifs (lequel…)", emoji:"💊" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -679,9 +680,118 @@ export const STEP_GROUPS_B6 = [
 
 export const STEP_DEFS_B6 = STEP_GROUPS_B6.flatMap(g => g.steps);
 
+// ── Unité 7 · À votre santé ! ───────────────────────────────────────
+export const STEP_GROUPS_B7 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Sommeil & tisanes",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b7-livre-bien-dormir"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Pour bien dormir…",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b7-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Le bar à sieste",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b7-livre-cycle-sommeil"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Le cycle du sommeil",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Les pronoms COD et COI",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b7g1","b7g2","b7g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le corps et la santé · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Donner des conseils pour bien dormir",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Un message après une sieste (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Pharmacie & urgences",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b7-livre-plantes-tisanes"],
+        icon:"📜", kind:"Đọc D", color:"#059669", sub:"Les meilleures plantes pour les tisanes",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b7-e"],
+        icon:"🎧", kind:"Nghe E", color:"#0891B2", sub:"Chez la pharmacienne",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le superlatif",
+        section:"grammar", view:"grammar" },
+      { id:"c2_ecouter2", stepKey:"ecouter", subIds:["b7-f"],
+        icon:"🎭", kind:"Văn hóa F", color:"#7B6CF6", sub:"18 ou 112 ?",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b7-livre-transport-urgence-quebec"],
+        icon:"📜", kind:"Đọc G", color:"#059669", sub:"Le transport d'urgence au Québec",
+        section:"lecture", view:"lecture" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b7g4","b7g5"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"La médecine et les urgences · 2 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Chez le/la pharmacien(ne)",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Un message à son coach sportif",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Gestes qui sauvent",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b7-livre-bd-urgences"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Les Mille et Une Vies des urgences (BD)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b7-livre-medecine-outremer"],
+        icon:"🎬", kind:"Văn hóa I", color:"#7B6CF6", sub:"Médecine d'Outre-mer (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture3", stepKey:"lecture", subIds:["b7-livre-que-faire-urgence"],
+        icon:"📜", kind:"Đọc J", color:"#059669", sub:"Que faire en cas d'urgence ?",
+        section:"lecture", view:"lecture" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Les pronoms interrogatifs (lequel…)",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Débattre des gestes de premiers secours",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Les gestes de premiers secours à l'école",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["plus_ply","plus_plys","plus_plyz","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"La prononciation du mot « plus »",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_delf", stepKey:"lecture", subIds:["b7-livre-delf-parcours-sante"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Compréhension des écrits",
+        section:"lecture", view:"lecture" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Participer à une campagne de prévention",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B7 = STEP_GROUPS_B7.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;
