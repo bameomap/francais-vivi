@@ -635,4 +635,66 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-10", unit: 10, title: "Envies d'ailleurs ?",
+    speakingPractice: [
+      {
+        title: "Demander des renseignements sur un voyage",
+        notes: ["b10-a", "b10-b"],
+        task: "À deux ! Vous travaillez dans une agence de voyage. Un(e) client(e) veut faire un voyage sur-mesure dans votre pays et vous téléphone. Il/Elle vous demande des renseignements sur l'hébergement, le vol, le prix et les repas. Vous le/la renseignez. Inversez les rôles.",
+        usefulPhrases: [
+          "Je voudrais avoir des renseignements s'il vous plaît.",
+          "Vous pouvez me donner des précisions sur l'hébergement ?",
+          "Est-ce que les vols sont inclus dans le prix ?",
+        ],
+      },
+      {
+        title: "Exprimer et répondre à l'agacement",
+        notes: ["b10-i"],
+        task: "À deux ! Vous êtes en voyage avec un(e) ami(e). Mais il/elle a une attitude qui vous agace. Jouez la scène puis inversez les rôles.",
+        usefulPhrases: [
+          "Tu exagères !",
+          "Mais c'est pas possible !",
+          "Ça va ! Du calme !",
+        ],
+      },
+      {
+        title: "Échanger sur sa manière de visiter une ville",
+        task: "À deux ! Échangez avec votre voisin(e) sur votre manière de visiter une ville et sur les visites qui vous intéressent. Et vous, quel type de tourisme vous aimez ?",
+        usefulPhrases: [
+          "Je préfère…",
+          "Ça change !",
+          "Le tourisme local/lent/durable.",
+        ],
+      },
+      {
+        title: "Réagir à un article de blog (atelier médiation)",
+        notes: ["b10-atelier"],
+        task: "Les personnes de la classe lisent votre article de blog sur votre dernier voyage et vous envoient un petit commentaire pour y réagir.",
+        usefulPhrases: [
+          "J'ai bien ri !",
+          "Quel beau voyage ! Quelle aventure !",
+          "Bravo pour ce blog !",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Proposer un circuit à un ami",
+        task: "Un ami français va vous rendre visite dans votre pays. Vous lui écrivez un mail pour lui proposer un circuit (D'abord…, Après…, Ensuite…, Enfin…).",
+      },
+      {
+        title: "Expliquer sa manière de voyager",
+        task: "Un(e) ami(e) vous propose de faire une croisière pendant une semaine sur la Méditerranée mais vous n'aimez pas les voyages en bateau. Vous lui écrivez un message pour lui expliquer le type de voyages, d'hébergements, de déplacements, de rencontres que vous aimez.",
+      },
+      {
+        title: "Commenter deux visites touristiques",
+        task: "Vous avez visité deux lieux touristiques. La première visite vous a enchanté(e), mais la deuxième vous a déçu(e). Vous écrivez des commentaires sur un site.",
+      },
+      {
+        title: "Écrire un article de blog (atelier médiation)",
+        task: "Vous allez écrire un article sur votre blog pour raconter votre dernier voyage. Choisissez une destination (la Guadeloupe, Montréal ou Lausanne), préparez une présentation du lieu et rédigez quatre anecdotes qui ont eu lieu pendant votre voyage.",
+      },
+    ],
+  },
 ];

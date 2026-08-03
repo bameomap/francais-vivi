@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄", b10: "✈️" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -1552,6 +1552,108 @@ export const EDITO_GRAMMAR_A2 = [
           "Tous les gens seraient des consommateurs responsables. — Mọi người sẽ đều là những người tiêu dùng có trách nhiệm.",
           "Il n'y aurait pas de problèmes écologiques. — Sẽ không có vấn đề sinh thái nào cả.",
           "La planète se porterait bien. — Trái đất sẽ khỏe mạnh.",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b10", num:"10", title:"Envies d'ailleurs ?", points:[
+
+      // ── 1. Le passé composé et l'imparfait dans le récit ──────────────
+      {
+        topic:"Le passé composé et l'imparfait dans le récit — Kể một chuyện đã xảy ra khi đi du lịch",
+        summary:"Bạn đã học passé composé (Unité 1) và imparfait (Unité 2) riêng lẻ. Ở đây là ÔN LẠI và ghép hai thì đó vào CÙNG một câu chuyện: imparfait để MIÊU TẢ bối cảnh (đang kéo dài), passé composé để kể HÀNH ĐỘNG MỚI xen vào bối cảnh đó — thường có « quand », « soudain », « tout à coup » báo hiệu.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi khi kể chuyện quá khứ: câu này đang MIÊU TẢ một tình huống đang diễn ra (→ imparfait), hay đang kể một VIỆC MỚI xảy ra, làm thay đổi tình huống đó (→ passé composé) ?" },
+
+          { type:"table",
+            caption:"2 vai trò trong một câu chuyện",
+            headers:["Vai trò", "Thì", "Ví dụ"],
+            rows:[
+              ["Miêu tả bối cảnh (nơi chốn, người, cảm giác, hành động đang kéo dài)", "Imparfait", "Il travaillait dans une agence à Montréal, dans un bureau qui avait une vue sur la montagne."],
+              ["Giới thiệu hành động mới, một sự thay đổi bất ngờ", "Passé composé", "Et l'agence a fermé son service et a supprimé son poste !"],
+            ] },
+
+          { type:"formula",
+            parts:["Imparfait (bối cảnh đang kéo dài)", "…quand/soudain/tout à coup…", "Passé composé (hành động mới xen vào)"],
+            example:"Il était en route vers le Mexique quand il a eu l'idée de créer cette plateforme.",
+            note:"« quand », « soudain », « tout à coup » thường xuất hiện ngay trước động từ ở passé composé — đó là tín hiệu nhận biết rõ nhất." },
+
+          { type:"callout", variant:"tip", title:"Mẹo nhanh: phim nền vs. cắt cảnh",
+            text:"Hãy tưởng tượng imparfait là CẢNH QUAY NỀN đang chạy liên tục (máy quay không dừng), còn passé composé là một CÚ CẮT CẢNH đột ngột làm thay đổi câu chuyện. Một đoạn văn kể chuyện thường có NHIỀU câu imparfait làm nền, rồi MỘT sự kiện passé composé xen vào để câu chuyện tiến triển." },
+
+          { type:"callout", variant:"warn", title:"Đây là ÔN TẬP, không phải thì mới",
+            text:"Cách chia imparfait và passé composé không đổi so với Unité 1 và 2. Điều DUY NHẤT mới ở đây là cách PHỐI HỢP hai thì đó trong cùng một đoạn văn kể chuyện — chọn thì nào tùy theo VAI TRÒ của câu (miêu tả hay hành động mới), không tùy theo « quá khứ gần/xa »." },
+
+          { type:"compare", items:[
+            { wrong:"Nous étions dans l'avion. Soudain, je me sentais mal.", right:"Nous étions dans l'avion. Soudain, je me suis senti mal.", why:"« Soudain » báo hiệu một hành động MỚI, bất ngờ xen vào bối cảnh — phải dùng passé composé « je me suis senti », không phải imparfait." },
+            { wrong:"Elle marchait en montagne quand elle entendait un animal.", right:"Elle marchait en montagne quand elle a entendu un animal.", why:"« marchait » là bối cảnh đang kéo dài (imparfait, đúng), nhưng « entendre » ở đây là một sự việc xảy ra MỘT LẦN, xen vào bối cảnh đó → phải là passé composé « a entendu »." },
+          ] },
+        ],
+        examples:[
+          "Il travaillait dans une agence à Montréal, dans un bureau qui avait une vue sur la montagne. — Anh ấy làm việc ở một công ty tại Montréal, trong một văn phòng có tầm nhìn ra núi.",
+          "Mais il commençait à s'ennuyer, à trouver le temps long… — Nhưng anh ấy bắt đầu thấy chán, thấy thời gian trôi chậm…",
+          "Et l'agence a fermé son service et a supprimé son poste ! — Và công ty đã đóng cửa bộ phận của anh ấy và xóa bỏ vị trí của anh!",
+          "Alors, à 33 ans, il a profité de l'occasion pour partir faire un road trip de 4 000 km. — Vậy nên, ở tuổi 33, anh ấy đã tận dụng cơ hội để đi road trip 4.000 km.",
+          "Il était en route vers le Mexique quand il a eu l'idée de créer cette plateforme. — Anh ấy đang trên đường đến Mexico thì nảy ra ý tưởng tạo nền tảng này.",
+          "Nous marchions depuis des heures dans les Andes quand j'ai perdu l'équilibre et je suis tombé. — Chúng tôi đã đi bộ nhiều giờ ở dãy Andes thì tôi mất thăng bằng và ngã.",
+        ]
+      },
+
+      // ── 2. Les pronoms démonstratifs ─────────────────────────────────
+      {
+        topic:"Les pronoms démonstratifs — Thay thế danh từ để tránh lặp lại: celui, celle, ceux, celles",
+        summary:"Pronom démonstratif thay cho một danh từ (người/vật) đã nhắc tới, để KHỎI PHẢI NHẮC LẠI danh từ đó. Nó phải hợp GIỐNG và SỐ với danh từ mà nó thay thế. Có thể thêm « -ci »/« -là » để phân biệt/đối lập hai thứ, hoặc theo sau bởi « qui/que/de » để bổ nghĩa.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: pronom démonstratif đang thay cho danh từ NÀO trong câu? Xác định GIỐNG (nam/nữ) và SỐ (số ít/số nhiều) của danh từ đó để chọn đúng dạng." },
+
+          { type:"table",
+            caption:"Bảng các dạng pronom démonstratif",
+            headers:["", "Số ít", "Số nhiều"],
+            rows:[
+              ["Giống đực (masculin)", "celui", "ceux"],
+              ["Giống cái (féminin)", "celle", "celles"],
+            ] },
+
+          { type:"heading", text:"3 cách dùng" },
+          { type:"cards", items:[
+            { badge:"1", color:"#4A90D9", title:"+ -ci / -là để phân biệt, đối lập",
+              lines:["Dùng khi có HAI thứ cùng loại đang được nói tới và cần chỉ rõ « cái này » / « cái kia »."],
+              examples:[
+                { fr:"Celle-ci est vraiment bien ! Celui-là est magnifique !", vi:"Cái này thì rất tốt! Cái kia thì đẹp tuyệt vời!" },
+              ] },
+            { badge:"2", color:"#10B981", title:"+ qui / que + mệnh đề",
+              lines:["Dùng để bổ nghĩa thêm cho pronom bằng một mệnh đề quan hệ (giống như một « cái mà… »)."],
+              examples:[
+                { fr:"Tu sais, celle qui est partie en voyage en solo.", vi:"Bạn biết đấy, người mà đã đi du lịch một mình." },
+                { fr:"Le circuit que j'ai préféré, c'est le Sénégal.", vi:"Chuyến đi mà tôi thích nhất, đó là Sénégal." },
+              ] },
+            { badge:"3", color:"#F5A623", title:"+ de + danh từ (sở hữu)",
+              lines:["Dùng để so sánh « cái của… » mà không cần lặp lại danh từ."],
+              examples:[
+                { fr:"Mes photos sont moins belles que celles de ma sœur.", vi:"Ảnh của tôi không đẹp bằng ảnh của chị/em gái tôi." },
+              ] },
+          ] },
+
+          { type:"callout", variant:"tip", title:"Có thể dùng cùng lúc celui-ci và celui-là",
+            text:"Khi so sánh hai vật/người trong cùng một câu, có thể đặt cả hai dạng cạnh nhau: « Celui-ci est joli mais celui-là est encore plus beau ! » (Cái này đẹp nhưng cái kia còn đẹp hơn!)" },
+
+          { type:"callout", variant:"warn", title:"Đừng nhầm với pronom possessif hay adjectif démonstratif",
+            text:"« ce/cet/cette/ces » (adjectif démonstratif) LUÔN đứng trước một danh từ (ce bâtiment). Pronom démonstratif (celui/celle/ceux/celles) đứng MỘT MÌNH, THAY cho danh từ, không bao giờ đi kèm danh từ ngay sau nó — chỉ theo sau bởi -ci/-là, qui/que, hoặc de." },
+
+          { type:"compare", items:[
+            { wrong:"Regarde ces maisons, elles sont jolies ! Et ceux qui sont dans cette rue ont l'air encore plus belles !", right:"Regarde ces maisons, elles sont jolies ! Et celles qui sont dans cette rue ont l'air encore plus belles !", why:"« maisons » là giống cái số nhiều, nên pronom phải là « celles », không phải « ceux » (giống đực số nhiều)." },
+            { wrong:"J'ai visité beaucoup de pays, mais celui que j'ai préféré, c'est le Sénégal.", right:"J'ai visité beaucoup de pays, mais celui que j'ai préféré, c'est le Sénégal.", why:"Đúng rồi! « pays » giống đực số ít → « celui » là chính xác." },
+          ] },
+        ],
+        examples:[
+          "Attends, je cherche mon appli Guide de voyages. Celle-ci est vraiment bien ! — Đợi đã, tôi đang tìm ứng dụng Guide de voyages của tôi. Cái này thì rất tốt!",
+          "Tu as vu ce bâtiment ? Et celui-ci ! Il est magnifique ! — Bạn thấy tòa nhà đó chưa? Còn cái này nữa! Nó tuyệt đẹp!",
+          "Regarde ces maisons, elles sont jolies ! Et celles qui sont dans cette rue ont l'air encore plus belles ! — Nhìn những ngôi nhà này xem, chúng đẹp quá! Và những cái ở con phố này còn có vẻ đẹp hơn nữa!",
+          "Celle qui est au coin de la rue me semble sympa. — Cái ở góc phố có vẻ dễ thương đấy.",
+          "Ces deux circuits sont intéressants. Celui-ci est plus long, mais celui-là est plus culturel. — Hai lộ trình này đều thú vị. Cái này thì dài hơn, nhưng cái kia thì thiên về văn hóa hơn.",
+          "Ceux qui aiment le tourisme local visiteront leur région cet été ! — Những ai thích du lịch địa phương sẽ đi thăm vùng của mình vào hè này!",
         ]
       },
     ]

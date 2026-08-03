@@ -668,4 +668,91 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 10 · Envies d'ailleurs ? ──────────────────────────────────
+  "b10-a": [
+    {
+      heading: "Pour structurer son propos",
+      structure: "4 từ nối để trình bày các bước theo thứ tự thời gian, thường dùng khi kể lại một hành trình hay đề xuất một chương trình.",
+      phrases: [
+        { fr: "D'abord, …", vi: "Trước tiên, …" },
+        { fr: "Après, …", vi: "Sau đó, …" },
+        { fr: "Ensuite, …", vi: "Tiếp theo, …" },
+        { fr: "Enfin, …", vi: "Cuối cùng, …" },
+      ],
+    },
+  ],
+
+  "b10-b": [
+    {
+      heading: "Pour demander des renseignements sur un voyage",
+      structure: "Xin thông tin về một chuyến đi một cách lịch sự, dùng conditionnel « je voudrais » hoặc « vous pouvez/pourriez… ? », rồi hỏi cụ thể về từng khoản (hébergement, vol, repas, période).",
+      phrases: [
+        { fr: "Je voudrais avoir des renseignements s'il vous plaît.", vi: "Tôi muốn được biết thêm thông tin, làm ơn." },
+        { fr: "Vous pouvez me donner des précisions sur l'hébergement ?", vi: "Bạn có thể cho tôi biết thêm chi tiết về chỗ ở không?" },
+        { fr: "Est-ce que les vols sont inclus dans le prix ?", vi: "Vé máy bay có được tính trong giá không?" },
+        { fr: "Les repas sont compris ?", vi: "Các bữa ăn có được bao gồm không?" },
+        { fr: "Quelle est la meilleure période pour visiter le Vietnam ?", vi: "Thời điểm nào là tốt nhất để đi thăm Việt Nam?" },
+      ],
+    },
+  ],
+
+  "b10-e": [
+    {
+      heading: "Pour parler d'une visite touristique — de manière positive",
+      structure: "6 cách khen ngợi một chuyến tham quan, từ nhận xét chung chung (« Quelle bonne idée ! ») đến so sánh với một hình thức khác (« C'est mieux qu'avec un audioguide ! »).",
+      phrases: [
+        { fr: "C'est original et ludique.", vi: "Vừa độc đáo vừa vui nhộn." },
+        { fr: "C'est une visite que nous avons adorée.", vi: "Đây là một chuyến tham quan mà chúng tôi rất thích." },
+        { fr: "Quelle excursion !", vi: "Một chuyến du ngoạn tuyệt vời!" },
+        { fr: "Ça change !", vi: "Đổi gió thật đấy!" },
+        { fr: "Quelle bonne idée !", vi: "Ý tưởng hay quá!" },
+        { fr: "C'est mieux qu'avec un audioguide !", vi: "Cách này tốt hơn dùng máy hướng dẫn nghe tự động!" },
+      ],
+    },
+    {
+      heading: "Pour parler d'une visite touristique — de manière négative",
+      structure: "5 cách chê một chuyến tham quan, từ cảm xúc thất vọng chung (« Quelle déception ! ») đến nhận xét cụ thể về giá cả (« C'est cher pour ce que c'est ! »).",
+      phrases: [
+        { fr: "Quelle déception !", vi: "Thật đáng thất vọng!" },
+        { fr: "C'était horrible.", vi: "Thật kinh khủng." },
+        { fr: "C'est sans intérêt.", vi: "Chẳng có gì thú vị cả." },
+        { fr: "Ça ne m'a pas plu.", vi: "Tôi không thích chuyến này." },
+        { fr: "C'est cher pour ce que c'est !", vi: "Giá đắt so với những gì nhận được!" },
+      ],
+    },
+  ],
+
+  "b10-i": [
+    {
+      heading: "Pour exprimer l'agacement",
+      structure: "2 câu ngắn để thể hiện sự khó chịu, bực mình với ai đó.",
+      phrases: [
+        { fr: "Tu exagères !", vi: "Bạn quá đáng rồi đấy!" },
+        { fr: "Mais c'est pas possible !", vi: "Thật không thể chấp nhận được!" },
+      ],
+    },
+    {
+      heading: "Pour répondre à l'agacement",
+      structure: "2 câu ngắn để trấn an người đang khó chịu với mình.",
+      phrases: [
+        { fr: "Ça va !", vi: "Được rồi mà!" },
+        { fr: "Du calme !", vi: "Bình tĩnh nào!" },
+      ],
+    },
+  ],
+
+  "b10-atelier": [
+    {
+      heading: "Pour réagir à un article dans un commentaire",
+      structure: "5 câu bình luận ngắn, tích cực để phản hồi một bài viết blog kể chuyện du lịch của bạn học.",
+      phrases: [
+        { fr: "J'ai bien ri !", vi: "Mình đã cười rất nhiều!" },
+        { fr: "Quel beau voyage !", vi: "Chuyến đi đẹp quá!" },
+        { fr: "Quelle aventure !", vi: "Một cuộc phiêu lưu thật sự!" },
+        { fr: "Merci pour ces anecdotes et ces belles photos !", vi: "Cảm ơn vì những câu chuyện và những bức ảnh đẹp này!" },
+        { fr: "Bravo pour ce blog !", vi: "Chúc mừng bạn về trang blog này!" },
+      ],
+    },
+  ],
 };

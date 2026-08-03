@@ -12,6 +12,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b7", num:7, fr:"À votre santé !", vi:"Chúc sức khỏe!", grammar:"Les pronoms COD et COI · Le superlatif · Les pronoms interrogatifs (lequel…)", emoji:"💊" },
   { id:"b8", num:8, fr:"Dans les médias", vi:"Trong thế giới truyền thông", grammar:"La cause et la conséquence · Le subjonctif présent · La place des pronoms COD et COI", emoji:"📰" },
   { id:"b9", num:9, fr:"Consommer responsable", vi:"Tiêu dùng có trách nhiệm", grammar:"Le conditionnel présent (1) · Le gérondif · Le conditionnel présent (2)", emoji:"🔄" },
+  { id:"b10", num:10, fr:"Envies d'ailleurs ?", vi:"Nỗi thèm đi đây đi đó?", grammar:"Le passé composé et l'imparfait dans le récit · Les pronoms démonstratifs", emoji:"✈️" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -1003,9 +1004,115 @@ export const STEP_GROUPS_B9 = [
 
 export const STEP_DEFS_B9 = STEP_GROUPS_B9.flatMap(g => g.steps);
 
+// ─── Unité 10 · Envies d'ailleurs ? ──────────────────────────────────────
+export const STEP_GROUPS_B10 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Voyage sur-mesure",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b10-livre-voyage-sur-mesure"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Voyage sur-mesure !",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b10-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Allô, j'écoute !",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b10-livre-quelles-aventures"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Quelles aventures !",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le passé composé et l'imparfait dans le récit",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b10g1","b10g2","b10g3","b10g4"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le voyage · 4 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Demander des renseignements sur un voyage",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0","w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Proposer un circuit · expliquer sa manière de voyager",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Visites touristiques",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b10-livre-bus-amphibie"],
+        icon:"🎬", kind:"Đọc D", color:"#7B6CF6", sub:"Un bus amphibie ! (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b10-livre-ca-vous-a-plu"],
+        icon:"📜", kind:"Đọc E", color:"#059669", sub:"Ça vous a plu ?",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Les pronoms démonstratifs",
+        section:"grammar", view:"grammar" },
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b10-i"],
+        icon:"🎧", kind:"Nghe I", color:"#0891B2", sub:"Vous voyagez avec ou sans appli ?",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b10g5","b10g6","b10g7"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le tourisme · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Exprimer et répondre à l'agacement",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Commenter deux visites touristiques",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Culture & atelier blog",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_culture", stepKey:"lecture", subIds:["b10-livre-francais-nature"],
+        icon:"🏛️", kind:"Văn hóa F", color:"#7B6CF6", sub:"Les Français ont envie de nature !",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b10-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"Voyager en solo !",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_guadeloupe", stepKey:"lecture", subIds:["b10-livre-guadeloupe"],
+        icon:"📜", kind:"Atelier 1", color:"#059669", sub:"La Guadeloupe",
+        section:"lecture", view:"lecture" },
+      { id:"c3_montreal", stepKey:"lecture", subIds:["b10-livre-montreal"],
+        icon:"📜", kind:"Atelier 2", color:"#059669", sub:"Montréal",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lausanne", stepKey:"lecture", subIds:["b10-livre-lausanne"],
+        icon:"📜", kind:"Atelier 3", color:"#059669", sub:"Lausanne",
+        section:"lecture", view:"lecture" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Échanger sur sa manière de visiter une ville",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w3"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Écrire un article de blog (atelier médiation)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_e_muet","son_e_ferme","son_e_ouvert","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [ə], [e] et [ɛ]",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Réagir à un article de blog",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B10 = STEP_GROUPS_B10.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9, b10: STEP_GROUPS_B10 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9,   b10: STEP_DEFS_B10 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

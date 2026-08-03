@@ -1013,4 +1013,90 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b10", num: "10", title: "Envies d'ailleurs ?",
+    color: "#0EA5E9", bg: "#E0F2FE",
+    groups: [
+      {
+        id: "b10g1", label: "L'hébergement", icon: "🏨",
+        words: [
+          { fr:"l'auberge de jeunesse (f.)", vi:"nhà nghỉ thanh niên", ex_fr:"Où vous allez dormir ? au camping ou dans une auberge de jeunesse ?", ex_vi:"Bạn sẽ ngủ ở đâu? cắm trại hay ở nhà nghỉ thanh niên?" },
+          { fr:"le camping",           vi:"cắm trại, khu cắm trại", ex_fr:"On va faire du camping cet été.", ex_vi:"Mùa hè này chúng tôi sẽ đi cắm trại." },
+          { fr:"chez l'habitant",      vi:"ở nhà dân địa phương", ex_fr:"Je vais être logé chez l'habitant. J'adore dormir chez l'habitant.", ex_vi:"Tôi sẽ ở nhà dân địa phương. Tôi rất thích ngủ ở nhà dân." },
+          { fr:"l'hôtel (m.)",         vi:"khách sạn", ex_fr:"Nous proposons à nos clients de dormir chez l'habitant, pas à l'hôtel.", ex_vi:"Chúng tôi đề nghị khách hàng ngủ ở nhà dân, không phải khách sạn." },
+          { fr:"passer la nuit (chez quelqu'un)", vi:"ngủ qua đêm (ở nhà ai)", ex_fr:"Nous avons passé la nuit chez des amis.", ex_vi:"Chúng tôi đã ngủ qua đêm ở nhà bạn bè." },
+        ]
+      },
+      {
+        id: "b10g2", label: "Le séjour", icon: "🧳",
+        words: [
+          { fr:"le circuit",           vi:"lộ trình, chuyến đi vòng quanh", ex_fr:"J'ai réfléchi à un circuit pour notre voyage au Japon.", ex_vi:"Tôi đã nghĩ ra một lộ trình cho chuyến đi Nhật Bản của chúng ta." },
+          { fr:"la croisière",         vi:"chuyến du lịch bằng tàu biển", ex_fr:"Cet été, on va faire une croisière. Une semaine sur un bateau, le bonheur !", ex_vi:"Hè này chúng tôi sẽ đi du thuyền. Một tuần trên tàu, thật hạnh phúc!" },
+          { fr:"le départ ≠ l'arrivée (f.)", vi:"khởi hành ≠ đến nơi", ex_fr:"Nous travaillons avec des compagnies aériennes qui proposent des vols directs au départ de Paris.", ex_vi:"Chúng tôi hợp tác với các hãng hàng không có chuyến bay thẳng khởi hành từ Paris." },
+          { fr:"la destination",       vi:"điểm đến", ex_fr:"Tu as une idée pour la destination de notre prochain voyage ?", ex_vi:"Bạn có ý tưởng gì về điểm đến cho chuyến đi tiếp theo của chúng ta không?" },
+          { fr:"la direction",         vi:"hướng đi", ex_fr:"Ensuite, direction la Baie d'Halong pour une croisière inoubliable.", ex_vi:"Sau đó, hướng về vịnh Hạ Long cho một chuyến du thuyền khó quên." },
+          { fr:"faire le tour de France, du monde", vi:"đi vòng quanh nước Pháp, vòng quanh thế giới", ex_fr:"Après le Vercors, les volcans d'Auvergne, j'ai fini mon tour de France à Paris.", ex_vi:"Sau vùng Vercors, các núi lửa Auvergne, tôi đã kết thúc chuyến vòng quanh Pháp tại Paris." },
+          { fr:"l'itinéraire (m.)",    vi:"hành trình", ex_fr:"Selon l'itinéraire choisi, vous pourrez aller à Hoi An.", ex_vi:"Tùy theo hành trình đã chọn, bạn sẽ có thể đến Hội An." },
+          { fr:"le/la touriste",       vi:"khách du lịch", ex_fr:"Vous la découvrez sous l'angle du quotidien, non plus comme un(e) touriste.", ex_vi:"Bạn khám phá nó dưới góc nhìn đời thường, không còn như một khách du lịch nữa." },
+        ]
+      },
+      {
+        id: "b10g3", label: "L'avion", icon: "✈️",
+        words: [
+          { fr:"l'aéroport (m.)",      vi:"sân bay", ex_fr:"Vous atterrirez à l'aéroport d'Hanoï.", ex_vi:"Bạn sẽ hạ cánh xuống sân bay Hà Nội." },
+          { fr:"atterrir ≠ décoller",  vi:"hạ cánh ≠ cất cánh", ex_fr:"L'avion a décollé de Paris et va atterrir à Hanoï.", ex_vi:"Máy bay đã cất cánh từ Paris và sẽ hạ cánh xuống Hà Nội." },
+          { fr:"les bagages (m.)",     vi:"hành lý", ex_fr:"Ce sont mes sacs, mes valises : mes bagages.", ex_vi:"Đây là túi xách, va li của tôi: hành lý của tôi." },
+          { fr:"le billet",            vi:"vé", ex_fr:"Nous nous occupons de vos billets.", ex_vi:"Chúng tôi lo vé cho bạn." },
+          { fr:"la compagnie aérienne", vi:"hãng hàng không", ex_fr:"Nous travaillons avec différentes compagnies aériennes.", ex_vi:"Chúng tôi hợp tác với nhiều hãng hàng không khác nhau." },
+          { fr:"le vol (direct)",      vi:"chuyến bay (thẳng)", ex_fr:"Est-ce que les vols sont inclus dans le prix ?", ex_vi:"Các chuyến bay có được tính trong giá không?" },
+        ]
+      },
+      {
+        id: "b10g4", label: "Les prestations du séjour", icon: "🍽️",
+        words: [
+          { fr:"la chambre double",    vi:"phòng đôi", ex_fr:"Nous sommes deux. Vous avez une chambre double ?", ex_vi:"Chúng tôi có hai người. Bạn có phòng đôi không?" },
+          { fr:"la chambre simple",    vi:"phòng đơn", ex_fr:"Je voyage seul. Il vous reste une chambre simple ?", ex_vi:"Tôi đi du lịch một mình. Bạn còn phòng đơn không?" },
+          { fr:"compris = inclus",     vi:"được bao gồm", ex_fr:"Tous les repas sont inclus dans la pension complète ?", ex_vi:"Tất cả các bữa ăn có được bao gồm trong gói trọn bữa không?" },
+          { fr:"la demi-pension",      vi:"nửa suất ăn (2 bữa/ngày)", ex_fr:"On mangera le soir à l'hôtel mais pas le midi. On va prendre la demi-pension.", ex_vi:"Chúng tôi sẽ ăn tối ở khách sạn nhưng không ăn trưa. Chúng tôi sẽ đặt gói nửa suất ăn." },
+          { fr:"la pension complète",  vi:"trọn suất ăn (3 bữa/ngày)", ex_fr:"On veut prendre tous nos repas à l'hôtel : la pension complète.", ex_vi:"Chúng tôi muốn ăn tất cả các bữa ở khách sạn: gói trọn suất ăn." },
+          { fr:"le petit déjeuner",    vi:"bữa sáng", ex_fr:"Une chambre avec le petit déjeuner s'il vous plaît.", ex_vi:"Một phòng có kèm bữa sáng, làm ơn." },
+          { fr:"le repas",             vi:"bữa ăn", ex_fr:"Les repas sont compris ? Juste le petit déjeuner.", ex_vi:"Các bữa ăn có được bao gồm không? Chỉ có bữa sáng thôi." },
+        ]
+      },
+      {
+        id: "b10g5", label: "La visite touristique", icon: "🧭",
+        words: [
+          { fr:"l'audioguide (m.)",    vi:"máy hướng dẫn nghe tự động", ex_fr:"C'est mieux qu'avec un audioguide !", ex_vi:"Cách này tốt hơn là dùng audioguide!" },
+          { fr:"la brochure touristique", vi:"tờ rơi du lịch", ex_fr:"À l'hôtel, j'ai vu la brochure du bus amphibie.", ex_vi:"Ở khách sạn, tôi đã thấy tờ rơi về xe buýt lưỡng cư." },
+          { fr:"le bus touristique",   vi:"xe buýt du lịch", ex_fr:"C'est un véhicule qui fait le tour d'une ville en passant par les principaux monuments.", ex_vi:"Đó là một phương tiện đi vòng quanh thành phố, qua các di tích chính." },
+          { fr:"l'excursion (f.)",     vi:"chuyến du ngoạn", ex_fr:"Quelle excursion ! On fait souvent des visites guidées, mais en bus amphibie, ça change !", ex_vi:"Chuyến du ngoạn tuyệt vời! Chúng tôi thường đi tham quan có hướng dẫn, nhưng bằng xe buýt lưỡng cư thì khác hẳn!" },
+          { fr:"le/la guide",          vi:"hướng dẫn viên", ex_fr:"C'est la personne qui donne les explications aux touristes.", ex_vi:"Đó là người giải thích thông tin cho khách du lịch." },
+          { fr:"l'histoire (f.)",      vi:"lịch sử, câu chuyện", ex_fr:"C'est le récit des événements du passé.", ex_vi:"Đó là câu chuyện kể lại các sự kiện trong quá khứ." },
+          { fr:"les informations pratiques (f.)", vi:"thông tin thực tế, hữu ích", ex_fr:"À l'office de tourisme, on m'a donné toutes les informations pratiques.", ex_vi:"Ở văn phòng du lịch, người ta đã cho tôi tất cả thông tin hữu ích." },
+          { fr:"l'office de tourisme (m.)", vi:"văn phòng thông tin du lịch", ex_fr:"L'office de tourisme donne des informations pratiques aux visiteurs.", ex_vi:"Văn phòng du lịch cung cấp thông tin hữu ích cho du khách." },
+          { fr:"la visite guidée",     vi:"chuyến tham quan có hướng dẫn", ex_fr:"On fait souvent des visites guidées.", ex_vi:"Chúng tôi thường đi tham quan có hướng dẫn." },
+        ]
+      },
+      {
+        id: "b10g6", label: "Les sites", icon: "🏞️",
+        words: [
+          { fr:"la cascade",           vi:"thác nước", ex_fr:"On a la chance de pouvoir admirer de magnifiques cascades dans les montagnes françaises.", ex_vi:"Chúng ta may mắn được chiêm ngưỡng những thác nước tuyệt đẹp ở vùng núi Pháp." },
+          { fr:"la falaise",           vi:"vách đá", ex_fr:"Du haut de la falaise on peut voir toute la ville.", ex_vi:"Từ trên đỉnh vách đá có thể nhìn thấy toàn bộ thành phố." },
+          { fr:"la fontaine",          vi:"đài phun nước", ex_fr:"Les questions sur les fontaines de la Concorde étaient très intéressantes.", ex_vi:"Các câu hỏi về đài phun nước ở quảng trường Concorde rất thú vị." },
+          { fr:"la grotte",            vi:"hang động", ex_fr:"On a visité des grottes. C'était sombre et il faisait assez froid !", ex_vi:"Chúng tôi đã tham quan hang động. Ở đó tối và khá lạnh!" },
+          { fr:"le pont",              vi:"cây cầu", ex_fr:"On est passés sur le pont pour traverser la rivière.", ex_vi:"Chúng tôi đã đi qua cầu để băng qua sông." },
+          { fr:"les ruines (f.)",      vi:"tàn tích", ex_fr:"Il y a beaucoup de ruines de l'époque romaine dans le Sud de la France.", ex_vi:"Có rất nhiều tàn tích thời La Mã ở miền Nam nước Pháp." },
+          { fr:"le volcan",            vi:"núi lửa", ex_fr:"Les passionnés de nature pourront gravir le volcan de la Soufrière.", ex_vi:"Những người đam mê thiên nhiên có thể leo lên núi lửa Soufrière." },
+        ]
+      },
+      {
+        id: "b10g7", label: "Les types de tourisme", icon: "🌍",
+        words: [
+          { fr:"le tourisme de proximité/local", vi:"du lịch gần nhà/địa phương", ex_fr:"Cette année, ils voyagent dans leur région : c'est le tourisme local.", ex_vi:"Năm nay họ đi du lịch trong vùng của mình: đó là du lịch địa phương." },
+          { fr:"le tourisme lent = le slow tourisme", vi:"du lịch chậm", ex_fr:"Depuis plusieurs années, ils prennent le temps de voyager : le tourisme lent.", ex_vi:"Từ nhiều năm nay, họ dành thời gian để đi du lịch một cách thong thả: du lịch chậm." },
+          { fr:"le tourisme durable/responsable", vi:"du lịch bền vững/có trách nhiệm", ex_fr:"Ils voyagent en respectant l'environnement et les gens sur place.", ex_vi:"Họ đi du lịch trong khi tôn trọng môi trường và người dân địa phương." },
+        ]
+      },
+    ]
+  },
 ];

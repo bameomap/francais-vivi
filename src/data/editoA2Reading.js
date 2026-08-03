@@ -1705,6 +1705,226 @@ Infographie — Échanger et coopérer : vous aussi devenez accordeur(euse) ! Ca
       { id: "b9-services-q6", type: "open", prompt: "Production orale ➜ DELF : à deux ! Vous avez besoin de faire du bricolage dans votre appartement. Vous demandez de l'aide à votre voisin(e). Vous lui proposez un service en échange. Jouez la scène." },
     ],
   },
+
+  // ═══════════════ Unité 10 — Envies d'ailleurs ? ═══════════════
+
+  // ── A · Voyage sur-mesure ! (p. 139) ─────────────────────────────────
+  {
+    id: "b10-livre-voyage-sur-mesure",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 139,
+    title: "Voyage sur-mesure !",
+    instruction: "Une page du site « Le monde en voyages », agence spécialiste du Vietnam, avec une idée de circuit de 12 jours.",
+    text: `Le monde en voyages
+PROMOS | SÉJOURS | CIRCUITS | VOYAGES À THÈMES | DESTINATIONS
+
+Florence — spécialiste Vietnam
+DEMANDEZ UN DEVIS ou Personnalisez cette idée de voyage avec un(e) spécialiste
+01 19 10 27 25 — Du lundi au samedi de 10 h à 13 h et de 14 h à 18 h
+
+Idée de circuit de 12 jours
+Jours 1-2 — HANOÏ
+Jour 3 — BAIE D'HALONG
+Jour 4 — HANOÏ
+Jours 5-6-7 — HUÉ
+Jours 8-9-10-11-12 — HOI AN
+
+ASIE > Voyage Vietnam — 9,6/10 ★★★★★ (122 avis sur le Vietnam)
+[DEMANDER UN DEVIS] [PARTAGER]
+
+VIETNAM — Balade au pays du dragon
+voir nos 5 idées de voyages au Vietnam
+
+Vous passerez un séjour unique au Vietnam ! Entre amis, en famille, ou en couple, vous pourrez d'abord découvrir la capitale, Hanoï. Ensuite, direction la Baie d'Halong pour une croisière inoubliable. Après, vous pourrez prendre un vol pour aller dans la ville de Hué et visiter ses magnifiques monuments. Enfin, selon l'itinéraire choisi, vous pourrez aller à Hoi An. À vous sa campagne, ses rizières et ses plages !
+
+Pendant votre voyage, nous vous proposons de rencontrer des locaux si vous passez par la ville où ils habitent. Avec un(e) guide, vous en apprenez plus sur l'histoire de la ville et ses incontournables. Avec un(e) Welcome Host, francophone et expert(e) de sa ville, vous la découvrez sous l'angle du quotidien et l'appréhendez non plus comme un(e) touriste mais comme un(e) habitant(e) : vous découvrez une ville autrement !`,
+    questions: [
+      { id: "b10-voyagesurmesure-q1", type: "open", prompt: "Entrée en matière : regardez le document. Comment s'appelle cette agence de voyage ?" },
+      { id: "b10-voyagesurmesure-q2", type: "multi_select", prompt: "1re lecture : vrai ou faux ? a. L'agence propose un circuit appelé « Balade au pays du dragon ». b. Ce circuit sera le même pour tous les voyageurs intéressés.", options: ["a. Vrai", "b. Faux, il peut être personnalisé avec un(e) spécialiste"], answer: ["a. Vrai", "b. Faux, il peut être personnalisé avec un(e) spécialiste"] },
+      { id: "b10-voyagesurmesure-q3", type: "short_answer", prompt: "2e lecture : pendant leur voyage, les touristes peuvent passer un peu de temps avec qui ?", answer: "Avec des locaux : un(e) guide ou un(e) Welcome Host." },
+      { id: "b10-voyagesurmesure-q4", type: "short_answer", prompt: "Quelles sont les particularités de ces personnes ?", answer: "Le/la guide connaît l'histoire de la ville et ses incontournables ; le/la Welcome Host est francophone et expert(e) de sa ville." },
+      { id: "b10-voyagesurmesure-q5", type: "short_answer", prompt: "Pourquoi c'est différent de découvrir une ville avec elles ?", answer: "Parce qu'on la découvre sous l'angle du quotidien, non plus comme un(e) touriste mais comme un(e) habitant(e)." },
+      { id: "b10-voyagesurmesure-q6", type: "multiple_choice", prompt: "Vocabulaire : une agence de voyage fait un devis au client :", options: ["pour donner les détails et le prix d'un voyage.", "pour confirmer que le voyage est payé."], answer: "pour donner les détails et le prix d'un voyage." },
+      { id: "b10-voyagesurmesure-q7", type: "open", prompt: "Production écrite : un ami français va vous rendre visite dans votre pays. Vous lui écrivez un mail pour lui proposer un circuit (D'abord…, Après…, Ensuite…, Enfin…)." },
+    ],
+  },
+
+  // ── C · Quelles aventures ! (p. 142) ──────────────────────────────────
+  {
+    id: "b10-livre-quelles-aventures",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 142,
+    title: "Quelles aventures !",
+    instruction: "Un avis de lectrice (★★★★★ Charlotte T.) sur le livre Vie de van, récits et virtaventures à faire rêver, de Mathieu Côté dit Go-Van.",
+    text: `★★★★★ Charlotte. T
+VIE DE VAN — RÉCITS ET VIRTAVENTURES À FAIRE RÊVER — PAR MATHIEU CÔTÉ dit GO-VAN
+
+J'ai adoré ce livre ! Je suis moi aussi passionnée de voyage en van. Les anecdotes que l'auteur raconte montrent très bien la réalité du quotidien quand on fait ce type de voyage. Le passage que j'ai préféré, c'est quand il raconte comment cette aventure a commencé pour lui : il travaillait dans une agence à Montréal, dans un bureau qui avait une vue sur la montagne. Mais il commençait à s'ennuyer, à trouver le temps long… Et l'agence a fermé son service et a supprimé son poste ! Alors, à 33 ans, il a profité de l'occasion pour partir faire un road trip de 4 000 km entre Montréal et le Mexique ! J'ai adoré lire ses récits, ça m'a rappelé les voyages que j'ai faits en Argentine et au Chili. C'était extraordinaire. On sort de sa zone de confort, mais quelle liberté !
+
+Julien Roussin-Côté est aussi le fondateur du magazine en ligne Go-Van consacré à la culture de la Van life. Il était en route vers le Mexique quand il a eu l'idée de créer cette plateforme de voyageurs en van. On peut y partager des idées, des histoires, des conseils, des destinations sympas, des photos, des vidéos, etc. Il anime aussi une émission de télévision La belle vie avec Go-Van.`,
+    questions: [
+      { id: "b10-aventures-q1", type: "open", prompt: "Entrée en matière : regardez la couverture du livre. De quel type de voyage parle-t-on dans ce livre ?" },
+      { id: "b10-aventures-q2", type: "short_answer", prompt: "1re lecture : pourquoi Charlotte T. a beaucoup aimé ce livre et les récits de l'auteur ?", answer: "Parce que les anecdotes montrent bien la réalité du quotidien de ce type de voyage et lui rappellent ses propres voyages en Argentine et au Chili." },
+      { id: "b10-aventures-q3", type: "short_answer", prompt: "2e lecture : quel événement a permis à Julien Roussin-Côté de se lancer dans un voyage en van de 4 000 km ?", answer: "L'agence où il travaillait à Montréal a fermé son service et supprimé son poste." },
+      { id: "b10-aventures-q4", type: "short_answer", prompt: "Qu'est-ce qu'il a créé pour les voyageurs en van ? À quoi ça sert ?", answer: "Le magazine en ligne Go-Van : une plateforme pour partager des idées, des histoires, des conseils, des destinations, des photos et des vidéos." },
+      { id: "b10-aventures-q5", type: "short_answer", prompt: "Vocabulaire : trouvez dans le texte l'expression qui signifie « changer ses habitudes pour faire de nouvelles choses ».", answer: "Sortir de sa zone de confort." },
+      { id: "b10-aventures-q6", type: "open", prompt: "Production orale : est-ce que vous avez déjà fait un voyage en van ? Est-ce que vous aimeriez en faire un ? Pourquoi ?" },
+    ],
+  },
+
+  // ── D · Un bus amphibie ! (vidéo, p. 144) ─────────────────────────────
+  {
+    id: "b10-livre-bus-amphibie",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "compréhension audiovisuelle",
+    page: 144,
+    title: "Un bus amphibie !",
+    instruction: "Résumé du reportage vidéo : Sarah, guide touristique pour Les Canards de Paris, présente Marcel le Canard, un bus amphibie qui visite Paris.",
+    text: `Ce reportage présente Marcel le Canard, un bus amphibie qui permet de visiter Paris à la fois sur la route et sur l'eau : le véhicule roule dans les rues de la capitale puis « flotte » sur la Seine.
+
+Sarah est guide touristique et travaille pour Les Canards de Paris, l'entreprise qui propose ces visites. Grâce à ce bus amphibie, les touristes n'ont pas besoin de changer de véhicule entre la visite terrestre et la balade sur l'eau : le même bus fait les deux, ce qui évite le problème du changement de transport.
+
+« Flotter », c'est rester au-dessus de l'eau — le bus amphibie n'est pas un bus classique qui roule seulement sur les routes, il peut aussi naviguer.
+
+Le Lady Dive est le premier bus amphibie et il est canadien. Il y a aussi un bus amphibie en Belgique, le Crocodile rouge.`,
+    questions: [
+      { id: "b10-busamphibie-q1", type: "open", prompt: "Entrée en matière : regardez l'image. À votre avis, qu'est-ce qu'un bus amphibie ?" },
+      { id: "b10-busamphibie-q2", type: "multi_select", prompt: "Visionnage : vrai ou faux ? a. Sarah est guide touristique et travaille pour les Canards de Paris. b. Marcel le Canard est un bus classique qui se déplace sur les routes. c. Ce bus permet de visiter Paris et les Hauts-de-Seine.", options: ["a. Vrai", "b. Faux, il roule aussi bien qu'il flotte", "c. Faux, il visite Paris (pas les Hauts-de-Seine)"], answer: ["a. Vrai", "b. Faux, il roule aussi bien qu'il flotte", "c. Faux, il visite Paris (pas les Hauts-de-Seine)"] },
+      { id: "b10-busamphibie-q3", type: "short_answer", prompt: "Quel problème on évite grâce à ce bus amphibie ?", answer: "Le changement de véhicule entre la visite sur route et la balade sur l'eau." },
+      { id: "b10-busamphibie-q4", type: "multiple_choice", prompt: "Vocabulaire : « flotter » c'est :", options: ["rester au-dessus de l'eau.", "se déplacer sur une route."], answer: "rester au-dessus de l'eau." },
+      { id: "b10-busamphibie-q5", type: "open", prompt: "Production orale : est-ce que vous aimeriez visiter une ville en bus amphibie ? Pourquoi ?" },
+    ],
+  },
+
+  // ── E · Ça vous a plu ? (p. 145) ──────────────────────────────────────
+  {
+    id: "b10-livre-ca-vous-a-plu",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 145,
+    title: "Ça vous a plu ?",
+    instruction: "Trois avis publiés sur un site d'avis (rubrique ACTIVITÉS) à propos de la visite en bus amphibie Amphicoincoin.",
+    text: `Avis | HÔTELS | ACTIVITÉS | RESTAURANTS
+
+Jami a écrit un avis (Hier) — 1 avis — ★★★★★
+Amphicoincoin
+C'est une visite de Paris que nous avons adorée ! Quelle bonne idée de proposer un bus touristique qui roule et qui flotte ! Dans ce « bus bateau » on découvre la capitale autrement : les informations sur l'histoire et le patrimoine de la ville, on les a eues en faisant un quiz ! Les questions sur les fontaines de la Concorde et sur le pont des Arts étaient très intéressantes. Merci à la guide pour cette visite originale et ludique !
+
+Antonia V a écrit un avis (Hier) — 1 avis — ★★★★☆
+N'hésitez pas si vous passez dans le coin-coin !
+Quelle excursion ! On fait souvent des visites guidées, mais en bus amphibie, ça change ! Et les anecdotes que la guide a racontées étaient très drôles ! C'est mieux qu'avec un audioguide, mais 35 euros pour 1 h 45 de visite, c'est un peu cher pour ce que c'est… la visite d'1 h 30 qu'on a faite des ruines romaines du quartier latin ne coûte que 15 euros.
+
+Eva a écrit un avis (14 oct.) — 3 avis — ★☆☆☆☆
+À éviter
+Après le Vercors, les volcans d'Auvergne, les grottes de Lascaux et les falaises d'Étretat, j'ai fini mon tour de France à Paris. À l'hôtel, j'ai vu la brochure du bus amphibie et à l'office de tourisme, on m'a donné toutes les informations pratiques. Mais quelle déception ! Cette visite ne m'a pas plu, pour moi, elle est sans intérêt. Et puis j'ai eu froid, c'était horrible ! Et je n'ai pas pu profiter des monuments… C'était trop rapide pour moi ! Disons que ce n'est pas mon style de visite !`,
+    questions: [
+      { id: "b10-cavousaplu-q1", type: "open", prompt: "Entrée en matière : observez le document. De quoi s'agit-il ?" },
+      { id: "b10-cavousaplu-q2", type: "short_answer", prompt: "Lecture : pourquoi Jami trouve cette visite différente ?", answer: "Parce qu'on découvre l'histoire et le patrimoine de la ville en faisant un quiz, avec une guide, dans un bus qui roule et qui flotte." },
+      { id: "b10-cavousaplu-q3", type: "short_answer", prompt: "Qu'est-ce qui a plu à Antonia ?", answer: "Le changement par rapport aux visites guidées classiques, les anecdotes drôles racontées par la guide — meilleur qu'un audioguide, même si elle trouve le prix un peu élevé." },
+      { id: "b10-cavousaplu-q4", type: "short_answer", prompt: "Pourquoi Eva n'a pas aimé cette visite ?", answer: "Elle a trouvé la visite sans intérêt, elle a eu froid, elle n'a pas pu profiter des monuments et la visite était trop rapide pour elle." },
+      { id: "b10-cavousaplu-q5", type: "open", prompt: "Production écrite : vous avez visité deux lieux touristiques. La première visite vous a enchanté(e), mais la deuxième vous a déçu(e). Vous écrivez des commentaires sur un site." },
+    ],
+  },
+
+  // ── F · Les Français ont envie de nature ! (culture, p. 146) ─────────
+  {
+    id: "b10-livre-francais-nature",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "culture(s)",
+    page: 146,
+    title: "Les Français ont envie de nature !",
+    instruction: "Culture(s) — Des vacances grandeur nature. Un article sur la tendance des Français pour le tourisme local, écologique et le slow tourisme.",
+    text: `La tendance est claire : 82 % des Français ont envie de nature ! Ce désir de nature et de grands espaces montre que les Français sont de plus en plus sensibles à l'écologie. Les Français ont aussi un grand intérêt pour le tourisme local.
+
+Parmi les Français interrogés qui disent que l'écologie et le tourisme local sont importants dans leurs choix de voyage, 52 % sont des femmes.
+
+Le touriste responsable français est un adepte de la tendance du slow tourisme (ou tourisme lent) : il veut pouvoir communiquer avec les locaux quand il voyage, il veut rencontrer de nouvelles personnes et vivre des expériences culturelles sur place.
+
+Enfin, pour le logement, les Français souhaitent des hébergements plus locaux ou authentiques.
+
+https://interfacetourism.fr`,
+    questions: [
+      { id: "b10-francaisnature-q1", type: "short_answer", prompt: "Lecture : quelle est la tendance concernant les Français et le tourisme ?", answer: "82 % des Français ont envie de nature et sont de plus en plus sensibles à l'écologie et au tourisme local." },
+      { id: "b10-francaisnature-q2", type: "multiple_choice", prompt: "Est-ce que les Français interrogés veulent partir loin de chez eux ?", options: ["Non, ils préfèrent le tourisme local.", "Oui, ils préfèrent partir très loin."], answer: "Non, ils préfèrent le tourisme local." },
+      { id: "b10-francaisnature-q3", type: "short_answer", prompt: "Qu'est-ce que le touriste responsable souhaite quand il est en voyage ?", answer: "Communiquer avec les locaux, rencontrer de nouvelles personnes et vivre des expériences culturelles sur place." },
+      { id: "b10-francaisnature-q4", type: "short_answer", prompt: "Où les Français préfèrent-ils dormir ?", answer: "Dans des hébergements plus locaux ou authentiques." },
+      { id: "b10-francaisnature-q5", type: "open", prompt: "Production orale : et vous, quel type de tourisme vous aimez ?" },
+    ],
+  },
+
+  // ── Atelier médiation · 1. La Guadeloupe ──────────────────────────────
+  {
+    id: "b10-livre-guadeloupe",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "atelier médiation",
+    page: 152,
+    title: "Atelier médiation — 1. La Guadeloupe",
+    instruction: "Document destination pour l'atelier « Écrire un article de blog » : présentation de la Guadeloupe.",
+    text: `La Guadeloupe, ou Karukera en créole, est un archipel des Antilles situé au sud de la mer des Caraïbes. Vue du ciel, la Guadeloupe a la forme d'un papillon. Ses deux plus grandes îles, Grande-Terre et Basse-Terre, forment ses ailes. Grande-Terre (590 m²) est l'endroit idéal pour faire des balades en bateau sur une eau bleue magnifique, presque transparente. Parfois, les dauphins accompagnent les bateaux… Sur l'île de Basse-Terre (848 m²), les passionnés de nature pourront visiter le parc national de la Guadeloupe et ses chutes du Carbet ou encore gravir le volcan de la Soufrière.
+
+La petite île de Marie-Galante fera le bonheur des amateurs de marche grâce à ses nombreux sentiers de randonnée. Mais elle plaira aussi, comme les îles La Désirade ou Les Saintes, aux amateurs de plongée sous-marine qui pourront admirer les fonds marins et les récifs coralliens.
+
+Sur ce territoire français d'Outre-mer vous profiterez des richesses naturelles, des plaisirs de la mer et des spécialités culinaires bien épicées !`,
+    questions: [
+      { id: "b10-guadeloupe-q1", type: "short_answer", prompt: "Où se trouve cet endroit ?", answer: "Un archipel des Antilles, au sud de la mer des Caraïbes." },
+      { id: "b10-guadeloupe-q2", type: "short_answer", prompt: "Qu'est-ce qu'on peut y faire, y visiter ?", answer: "Des balades en bateau, le parc national et ses chutes du Carbet, gravir le volcan de la Soufrière, la randonnée à Marie-Galante, la plongée sous-marine à La Désirade et aux Saintes." },
+      { id: "b10-guadeloupe-q3", type: "open", prompt: "En groupes : préparez en quelques lignes une présentation de la Guadeloupe et imaginez quatre anecdotes de voyage (visite, activité, rencontre, hébergement) pour un article de blog." },
+    ],
+  },
+
+  // ── Atelier médiation · 2. Montréal ────────────────────────────────────
+  {
+    id: "b10-livre-montreal",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "atelier médiation",
+    page: 152,
+    title: "Atelier médiation — 2. Montréal",
+    instruction: "Document destination pour l'atelier « Écrire un article de blog » : présentation de Montréal.",
+    text: `Située au Québec, à l'est du Canada, Montréal est une des villes multiculturelles les plus attractives du pays et du monde. Elle est à la fois moderne et historique. Son quartier le Vieux Montréal date du XVIIe siècle. On peut y voir la basilique Notre-Dame et les ruines archéologiques de la ville dans le musée Pointe-à-Callière. Ses rues pavées vous mènent aussi vers des boutiques et des restaurants très modernes. Le Vieux-Montréal est un quartier en constante évolution, c'est l'un des plus dynamiques de la ville, comme le quartier du Vieux-Port, situé au bord du fleuve Saint-Laurent. Il abrite le Centre des sciences de Montréal et la célèbre tour de l'horloge. Du sommet de la tour, on a une magnifique vue sur les environs. En été, il est possible de faire une croisière sur le Saint-Laurent ou une excursion vers les îles du parc Jean-Drapeau. En plein milieu du Saint-Laurent, deux îles forment un espace vert d'environ 2,6 km² pour le divertissement et le sport. Piscine, plage, location de barques, rollers, vélos, etc. Et il y a des pique-niques avec de la musique électronique les dimanches en été, un parc d'attractions, un casino, deux musées… Montréal est une ville vivante et pleine d'histoire !`,
+    questions: [
+      { id: "b10-montreal-q1", type: "short_answer", prompt: "Où se trouve cet endroit ?", answer: "Au Québec, à l'est du Canada." },
+      { id: "b10-montreal-q2", type: "short_answer", prompt: "Qu'est-ce qu'on peut y faire, y visiter ?", answer: "Le Vieux-Montréal (basilique Notre-Dame, musée Pointe-à-Callière), le Vieux-Port (Centre des sciences, tour de l'horloge), une croisière sur le Saint-Laurent, les îles du parc Jean-Drapeau (piscine, plage, vélo, parc d'attractions, casino, musées)." },
+      { id: "b10-montreal-q3", type: "open", prompt: "En groupes : préparez en quelques lignes une présentation de Montréal et imaginez quatre anecdotes de voyage (visite, activité, rencontre, hébergement) pour un article de blog." },
+    ],
+  },
+
+  // ── Atelier médiation · 3. Lausanne ────────────────────────────────────
+  {
+    id: "b10-livre-lausanne",
+    unit: 10,
+    unitTitle: "Envies d'ailleurs ?",
+    source: "livre",
+    section: "atelier médiation",
+    page: 152,
+    title: "Atelier médiation — 3. Lausanne",
+    instruction: "Document destination pour l'atelier « Écrire un article de blog » : présentation de Lausanne.",
+    text: `Située sur les bords du lac Léman, Lausanne est une ville très agréable à vivre. Elle n'est qu'à une heure des montagnes du Jura et des Alpes suisses. Et la campagne est accessible en très peu de temps.
+
+La vie culturelle de Lausanne est d'une incroyable richesse pour une ville de cette taille. On y trouve de nombreux musées, comme le Musée Olympique, la Collection de l'art brut, ou encore le Musée de l'Élysée (musée de photographie). Et grâce aux nombreux festivals, aux petites scènes et théâtres qui animent les quartiers, tout le monde peut profiter de la culture.
+
+Dans la ville de Lausanne, il y a trois collines : la Cité, le Bourg et Saint-Laurent. Se promener dans cette ville, c'est donc sportif ! On monte et on descend les petites rues, on prend des escaliers… Au cœur de la Cité, qui est le quartier historique de la ville, la cathédrale de Lausanne domine la ville. C'est l'un des plus beaux monuments d'art gothique d'Europe. La Cité, c'est aussi le quartier des petits bistrots typiques et de l'artisanat. Et si vous souhaitez profiter du lac, vous pouvez faire une balade en barque sur ses eaux tranquilles.`,
+    questions: [
+      { id: "b10-lausanne-q1", type: "short_answer", prompt: "Où se trouve cet endroit ?", answer: "Sur les bords du lac Léman, en Suisse, à une heure des montagnes du Jura et des Alpes suisses." },
+      { id: "b10-lausanne-q2", type: "short_answer", prompt: "Qu'est-ce qu'on peut y faire, y visiter ?", answer: "Le Musée Olympique, la Collection de l'art brut, le Musée de l'Élysée, la cathédrale de Lausanne dans le quartier de la Cité, les bistrots et l'artisanat, une balade en barque sur le lac." },
+      { id: "b10-lausanne-q3", type: "open", prompt: "En groupes : préparez en quelques lignes une présentation de Lausanne et imaginez quatre anecdotes de voyage (visite, activité, rencontre, hébergement) pour un article de blog." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;
