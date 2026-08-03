@@ -520,4 +520,73 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 8 · Dans les médias ───────────────────────────────────────
+  "b8-b": [
+    {
+      heading: "Pour exprimer sa préférence",
+      structure: "Dùng « aimer mieux + inf. » hoặc « préférer + nom + à + nom » để so sánh hai lựa chọn, hoặc đơn giản « c'est mieux (que…) » để kết luận.",
+      phrases: [
+        { fr: "J'aime mieux lire la presse en ligne.", vi: "Tôi thích đọc báo mạng hơn." },
+        { fr: "Je préfère les réseaux sociaux aux médias traditionnels.", vi: "Tôi thích mạng xã hội hơn các phương tiện truyền thông truyền thống." },
+        { fr: "C'est mieux (que…).", vi: "Cái này tốt hơn (so với…)." },
+      ],
+    },
+  ],
+
+  "b8-d": [
+    {
+      heading: "Pour exprimer son intérêt",
+      structure: "Dùng « ça m'/nous intéresse/passionne » hoặc « je m'intéresse à + nom » để nói mình quan tâm đến điều gì; « c'est fascinant/passionnant » để nhấn mạnh; « je suis curieux/curieuse de + inf. » để nói mình tò mò muốn biết.",
+      phrases: [
+        { fr: "Ça m'/nous intéresse !", vi: "Điều đó khiến tôi/chúng tôi quan tâm!" },
+        { fr: "Ça me/nous passionne.", vi: "Điều đó khiến tôi/chúng tôi say mê." },
+        { fr: "Je m'intéresse à leur vie !", vi: "Tôi quan tâm đến cuộc sống của họ!" },
+        { fr: "C'est fascinant ! C'est passionnant !", vi: "Thật hấp dẫn! Thật đam mê!" },
+        { fr: "Je suis curieux/curieuse de savoir/de comprendre comment ça fonctionne.", vi: "Tôi tò mò muốn biết/hiểu nó hoạt động thế nào." },
+      ],
+    },
+  ],
+
+  "b8-h": [
+    {
+      heading: "Pour faire une critique positive",
+      structure: "Dùng « ce film est/c'est + tính từ » để đánh giá chung, « j'ai (bien) aimé » hoặc « ce film m'a (beaucoup) plu » để nói cảm nhận cá nhân.",
+      phrases: [
+        { fr: "Ce film est une bonne surprise.", vi: "Bộ phim này là một bất ngờ thú vị." },
+        { fr: "C'est passionnant !", vi: "Thật hấp dẫn!" },
+        { fr: "C'est très bien filmé !", vi: "Phim được quay rất đẹp!" },
+        { fr: "Je trouve ce film intéressant.", vi: "Tôi thấy bộ phim này thú vị." },
+        { fr: "J'ai bien aimé.", vi: "Tôi rất thích." },
+        { fr: "Ce film m'a (beaucoup) plu.", vi: "Bộ phim này khiến tôi (rất) thích." },
+      ],
+    },
+    {
+      heading: "Pour faire une critique négative",
+      structure: "Dùng « je n'ai pas (du tout) aimé » để phủ định trực tiếp, hoặc « le/la + nom + est + tính từ tiêu cực » để chỉ ra điểm yếu cụ thể (scénario, histoire…).",
+      phrases: [
+        { fr: "Je n'ai pas du tout aimé.", vi: "Tôi không thích chút nào." },
+        { fr: "Le scénario est mauvais.", vi: "Kịch bản tệ." },
+        { fr: "Ce film n'est pas réaliste.", vi: "Bộ phim này không thực tế." },
+        { fr: "C'est (très) ennuyeux.", vi: "Cái này (rất) nhàm chán." },
+        { fr: "Je l'ai trouvé(e) nul(le).", vi: "Tôi thấy nó dở tệ." },
+      ],
+    },
+  ],
+
+  "b8-atelier": [
+    {
+      heading: "Pour faire la critique d'un média",
+      structure: "Dùng « grâce à ce média » để mở đầu một lập luận tích cực (kèm parce que/car/c'est pour ça que), và « à cause de ce média » để mở đầu một lập luận tiêu cực — đúng theo cấu trúc nguyên nhân-kết quả của Unité 8.",
+      phrases: [
+        { fr: "C'est intéressant d'écouter des podcasts, parce que…", vi: "Thật thú vị khi nghe podcast, bởi vì…" },
+        { fr: "La télé, c'est très bien parce que…", vi: "Truyền hình rất hay bởi vì…" },
+        { fr: "Nous trouvons les journaux très intéressants, car…", vi: "Chúng tôi thấy báo chí rất thú vị, vì…" },
+        { fr: "C'est pour ça que le cinéma est un art passionnant.", vi: "Đó là lý do vì sao điện ảnh là một môn nghệ thuật đầy đam mê." },
+        { fr: "Regarder la télévision, ce n'est pas très intéressant pour nous.", vi: "Xem truyền hình không thú vị lắm đối với chúng tôi." },
+        { fr: "Les réseaux sociaux, c'est nul, parce que…", vi: "Mạng xã hội thật tệ, bởi vì…" },
+        { fr: "On trouve les journaux ennuyeux, parce que…", vi: "Chúng tôi thấy báo chí nhàm chán, bởi vì…" },
+      ],
+    },
+  ],
 };

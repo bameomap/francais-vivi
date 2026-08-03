@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -1210,6 +1210,189 @@ export const EDITO_GRAMMAR_A2 = [
           "Tes malades vont-ils mieux ? Lesquels peuvent sortir de l'hôpital ? — Bệnh nhân của bạn có khỏe hơn không? Những ai có thể xuất viện?",
           "D'après toi, quelles études médicales sont intéressantes ? — Theo bạn, ngành học y khoa nào thú vị?",
           "À quelle heure tu rentres ? — Mấy giờ bạn về?",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b8", num:"8", title:"Dans les médias", points:[
+
+      // ── 1. La cause et la conséquence ──────────────────────────────
+      {
+        topic:"La cause et la conséquence — Giải thích LÝ DO và KẾT QUẢ",
+        summary:"Để nối một lý do (cause) với kết quả của nó (conséquence), tiếng Pháp có hai bộ liên từ riêng biệt. Chọn từ nào phụ thuộc vào: (1) câu văn hay câu nói miệng, và (2) sau liên từ là MỆNH ĐỀ (chủ ngữ + động từ) hay chỉ một DANH TỪ.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: bạn đang giới thiệu LÝ DO (tại sao?) hay KẾT QUẢ (vậy nên?) — và sau liên từ có phải là một câu hoàn chỉnh hay chỉ một danh từ?" },
+
+          { type:"table",
+            caption:"La cause — parce que / car / à cause de / grâce à",
+            headers:["Liên từ", "Theo sau bởi", "Sắc thái", "Ví dụ"],
+            rows:[
+              ["parce que", "mệnh đề (chủ ngữ + động từ)", "trung tính, dùng cả nói lẫn viết", "Des journalistes utilisent Twitch parce que c'est interactif."],
+              ["car", "mệnh đề", "chỉ dùng trong VĂN VIẾT", "La Revue Dessinée est trimestrielle, car elle prend le temps de mener des enquêtes."],
+              ["à cause de + danh từ", "danh từ (không phải mệnh đề)", "cause TIÊU CỰC", "À cause d'Internet, la presse papier a des difficultés."],
+              ["grâce à + danh từ", "danh từ (không phải mệnh đề)", "cause TÍCH CỰC", "Je suis toujours informée grâce aux réseaux sociaux."],
+            ] },
+
+          { type:"table",
+            caption:"La conséquence — donc / alors / c'est pourquoi / c'est pour cela que",
+            headers:["Liên từ", "Sắc thái", "Ví dụ"],
+            rows:[
+              ["donc", "chủ yếu VĂN VIẾT", "L'interaction séduit le public, le succès de Twitch n'a donc rien d'étonnant."],
+              ["alors", "chủ yếu NÓI MIỆNG", "Tu reçois les nouvelles sur ton téléphone, alors tu n'as pas besoin de les chercher."],
+              ["c'est pourquoi / c'est pour cela que", "VĂN VIẾT trang trọng", "Nous donnons une grande importance à la diversité. C'est pourquoi vous découvrirez toutes sortes de sujets."],
+              ["c'est pour ça que", "NÓI MIỆNG (thân mật)", "Les articles sont trop longs, c'est pour ça que je ne lis que les titres."],
+            ] },
+
+          { type:"formula",
+            parts:["Cause", "+ parce que/car/donc/alors", "+ Conséquence"],
+            example:"Les jeunes préfèrent les réseaux sociaux, alors ils ne regardent plus la télévision.",
+            note:"Với « à cause de » và « grâce à », thứ tự có thể đảo: cụm cause có thể đứng ĐẦU câu, theo sau là dấu phẩy — À cause de(s) réseaux sociaux, il ne sort plus de chez lui." },
+
+          { type:"callout", variant:"tip", title:"Mẹo chọn à cause de ≠ grâce à",
+            text:"Cả hai đều + DANH TỪ (không phải mệnh đề), nhưng khác nhau ở SẮC THÁI: kết quả là điều XẤU/KHÔNG MONG MUỐN → à cause de; kết quả là điều TỐT/ĐÁNG MONG → grâce à.\nÀ cause des images horribles, je ne regarde plus le JT. (xấu)\nGrâce à Twitch, les médias touchent un public plus jeune. (tốt)" },
+
+          { type:"callout", variant:"warn", title:"Đừng nhầm « à cause de/grâce à » với « parce que/car »",
+            text:"« à cause de » và « grâce à » PHẢI theo sau bởi một DANH TỪ (à cause de + nom), KHÔNG được theo sau bởi một mệnh đề đầy đủ. Nếu muốn diễn đạt bằng mệnh đề (chủ ngữ + động từ), phải dùng « parce que » hoặc « car »." },
+
+          { type:"compare", items:[
+            { wrong:"À cause qu'il pleut, je reste chez moi.", right:"Parce qu'il pleut, je reste chez moi. / À cause de la pluie, je reste chez moi.", why:"« à cause de » cần một DANH TỪ theo sau (la pluie), không phải mệnh đề « qu'il pleut »." },
+            { wrong:"J'ai raté mon bus, grâce à ça je suis arrivé en retard.", right:"J'ai raté mon bus, à cause de ça je suis arrivé en retard.", why:"Đến muộn là kết quả TIÊU CỰC nên phải dùng « à cause de », không phải « grâce à » (chỉ dùng cho kết quả tích cực)." },
+          ] },
+        ],
+        examples:[
+          "Je ne peux pas regarder le journal télé, à cause des images qui sont souvent horribles. — Tôi không thể xem bản tin truyền hình, vì những hình ảnh thường rất kinh khủng.",
+          "Grâce à Twitch, les médias classiques essaient de toucher un public plus jeune. — Nhờ có Twitch, các phương tiện truyền thông truyền thống cố gắng tiếp cận một công chúng trẻ hơn.",
+          "Des journalistes font des revues de presse interactives car c'est bien l'interaction qui séduit le public actuel. — Các nhà báo làm điểm báo tương tác vì chính sự tương tác thu hút công chúng hiện nay.",
+          "L'interaction séduit le public, le succès de Twitch n'a donc rien d'étonnant. — Sự tương tác thu hút công chúng, vậy nên thành công của Twitch chẳng có gì đáng ngạc nhiên.",
+          "Tu reçois les nouvelles sur ton téléphone, alors tu n'as pas besoin de les chercher. — Bạn nhận tin tức trên điện thoại, vậy nên bạn không cần phải tìm kiếm chúng.",
+          "Nous donnons une grande importance à la diversité. C'est pourquoi vous découvrirez toutes sortes de sujets. — Chúng tôi rất coi trọng sự đa dạng. Đó là lý do vì sao bạn sẽ khám phá đủ loại chủ đề.",
+        ]
+      },
+
+      // ── 2. Le subjonctif présent (nécessité, opinion) ──────────────
+      {
+        topic:"Le subjonctif présent — Diễn đạt SỰ CẦN THIẾT và Ý KIẾN/ĐÁNH GIÁ",
+        summary:"Subjonctif présent là một thức (mode) mới, khác với indicatif (thì trình bày sự thật khách quan). Nó bắt buộc xuất hiện sau các động từ/cấu trúc diễn tả sự CẦN THIẾT (il faut que, il est important que) hoặc một Ý KIẾN/ĐÁNH GIÁ chủ quan (c'est bien que, il est normal que…) khi câu có « que » và chủ ngữ thứ hai khác chủ ngữ thứ nhất.",
+        blocks:[
+          { type:"lead", text:"Công thức chung: [động từ/cấu trúc diễn tả sự cần thiết hoặc ý kiến] + QUE + [chủ ngữ mới] + [động từ ở SUBJONCTIF]." },
+
+          { type:"table",
+            caption:"Khi nào dùng subjonctif?",
+            headers:["Loại cấu trúc", "Ví dụ mở đầu câu"],
+            rows:[
+              ["Sự cần thiết (nécessité)", "il faut que…, il est important que…, il est indispensable que…, il ne faut pas que…"],
+              ["Ý kiến/đánh giá (opinion, jugement de valeur)", "c'est/il est + tính từ + que…  (c'est bien que, c'est normal que, c'est génial que…)"],
+            ] },
+
+          { type:"heading", text:"Cách chia — động từ đều đặn (-er : informer)" },
+          { type:"table",
+            caption:"que j'informe — que nous informions",
+            headers:["Ngôi", "Subjonctif présent"],
+            rows:[
+              ["je", "que j'informe"],
+              ["tu", "que tu informes"],
+              ["il/elle/on", "qu'il/elle/on informe"],
+              ["nous", "que nous informions"],
+              ["vous", "que vous informiez"],
+              ["ils/elles", "qu'ils/elles informent"],
+            ] },
+
+          { type:"formula",
+            parts:["Gốc = ils/elles ở hiện tại (bỏ -ent)", "+ -e, -es, -e, -ent (je/tu/il/ils)", "nous/vous = như imparfait"],
+            example:"ils informent → j'informe, tu informes, il informe, ils informent. nous informions, vous informiez (giống hệt gốc imparfait).",
+            note:"Với động từ -er đều đặn, subjonctif ở je/tu/il/ils GIỐNG HỆT présent de l'indicatif — chỉ nous/vous khác (thêm -i- như imparfait)." },
+
+          { type:"heading", text:"3 động từ bất quy tắc quan trọng: être, avoir, aller" },
+          { type:"table",
+            caption:"être / avoir / aller ở subjonctif présent",
+            headers:["être", "avoir", "aller"],
+            rows:[
+              ["que je sois", "que j'aie", "que j'aille"],
+              ["que tu sois", "que tu aies", "que tu ailles"],
+              ["qu'il/elle/on soit", "qu'il/elle/on ait", "qu'il/elle/on aille"],
+              ["que nous soyons", "que nous ayons", "que nous allions"],
+              ["que vous soyez", "que vous ayez", "que vous alliez"],
+              ["qu'ils/elles soient", "qu'ils/elles aient", "qu'ils/elles aillent"],
+            ] },
+
+          { type:"callout", variant:"tip", title:"Mẹo nhớ 3 động từ bất quy tắc",
+            text:"être → gốc « soi- » (sois, soit, soient) nhưng nous/vous = soyons/soyez.\navoir → gốc « ai- » (aie, aies, ait, aient) nhưng nous/vous = ayons/ayez.\naller → gốc « aill- » (aille, ailles, aillent) nhưng nous/vous = allions/alliez (giống gốc présent « nous allons »)." },
+
+          { type:"callout", variant:"warn", title:"« il faut que » ≠ « il faut + infinitif »",
+            text:"« il faut + infinitif » dùng khi KHÔNG nêu rõ ai phải làm (chung chung): Il faut s'informer. « il faut que + subjonctif » dùng khi nêu RÕ chủ ngữ cụ thể: Il faut que tu t'informes." },
+
+          { type:"compare", items:[
+            { wrong:"Il faut que tu es plus prudent sur Internet.", right:"Il faut que tu sois plus prudent sur Internet.", why:"Sau « il faut que » PHẢI dùng subjonctif « sois » (être), không phải indicatif « es »." },
+            { wrong:"Il est important qu'ils ont cette information.", right:"Il est important qu'ils aient cette information.", why:"Sau cấu trúc ý kiến/cần thiết « il est important que », động từ « avoir » phải chia subjonctif « aient », không phải indicatif « ont »." },
+          ] },
+        ],
+        examples:[
+          "Il faut qu'on accompagne ces publics. — Cần phải đồng hành cùng những công chúng này.",
+          "Il est important que les réseaux sociaux s'adaptent aux différents publics. — Việc mạng xã hội thích ứng với các công chúng khác nhau là quan trọng.",
+          "C'est normal qu'on soit sur les réseaux sociaux, nous aussi ! — Chuyện chúng ta cũng dùng mạng xã hội là bình thường thôi!",
+          "C'est très bien que les personnes âgées soient plus connectées. — Việc người cao tuổi kết nối nhiều hơn là điều rất tốt.",
+          "Il ne faut pas que tu utilises Instagram tout le temps. — Bạn không nên dùng Instagram suốt cả ngày.",
+          "Il est indispensable qu'ils aient cette information. — Việc họ có được thông tin này là điều không thể thiếu.",
+        ]
+      },
+
+      // ── 3. La place des pronoms COD et COI ─────────────────────────
+      {
+        topic:"La place des pronoms COD et COI — Vị trí đại từ theo THÌ của câu",
+        summary:"Bài Unité 7 đã học pronoms COD/COI (le/la/les, lui/leur…) đứng TRƯỚC động từ ở thì đơn. Bài này mở rộng: vị trí đại từ THAY ĐỔI tùy theo cấu trúc thì — thì đơn, thì kép (passé composé), hay cấu trúc có động từ chia + động từ nguyên thể (futur proche, présent continu…).",
+        blocks:[
+          { type:"lead", text:"Nguyên tắc chung: đại từ COD/COI luôn đứng NGAY TRƯỚC động từ mà nó là bổ ngữ trực tiếp — nhưng trong câu có 2 động từ, phải xác định đại từ thuộc về động từ NÀO." },
+
+          { type:"table",
+            caption:"Vị trí pronom COD/COI theo cấu trúc thì",
+            headers:["Cấu trúc", "Quy tắc", "Ví dụ"],
+            rows:[
+              ["Présent và các thì đơn khác", "Đại từ đứng TRƯỚC động từ chia", "Vous la connaissez. / Vous ne la connaissez pas."],
+              ["Passé composé và các thì kép khác", "Đại từ đứng TRƯỚC trợ động từ (être/avoir)", "Je les ai aimés. / Je ne les ai pas aimés."],
+              ["Futur proche, passé récent, présent continu", "Đại từ đứng SAU động từ chia và TRƯỚC động từ nguyên thể", "Je vais le regarder. / Je ne vais pas le regarder."],
+            ] },
+
+          { type:"table",
+            caption:"Nhắc lại bảng đại từ COD/COI",
+            headers:["Ngôi", "Pronom COD", "Pronom COI"],
+            rows:[
+              ["je", "me/m'", "me/m'"],
+              ["tu", "te/t'", "te/t'"],
+              ["il/elle", "le/la/l'", "lui"],
+              ["nous", "nous", "nous"],
+              ["vous", "vous", "vous"],
+              ["ils/elles", "les", "leur"],
+            ] },
+
+          { type:"formula",
+            parts:["aller/venir de/être en train de", "+ pronom COD/COI", "+ động từ nguyên thể"],
+            example:"Ce film, je vais le regarder ce soir. — Bộ phim này, tối nay tôi sẽ xem nó.",
+            note:"Ở cấu trúc 2 động từ, đại từ luôn bám sát động từ NGUYÊN THỂ (động từ mà nó thực sự là bổ ngữ), không phải động từ chia đứng trước." },
+
+          { type:"heading", text:"Ở passé composé — phủ định « ne…pas » bao quanh cả trợ động từ" },
+          { type:"pairs", caption:"Phủ định ở passé composé: ne + pronom + trợ động từ + pas", items:[
+            { fr:"Je les ai aimés. → Je ne les ai pas aimés.", vi:"Tôi đã thích chúng. → Tôi đã không thích chúng." },
+            { fr:"Il lui a parlé. → Il ne lui a pas parlé.", vi:"Anh ấy đã nói chuyện với cô ấy. → Anh ấy đã không nói chuyện với cô ấy." },
+          ] },
+
+          { type:"callout", variant:"warn", title:"Đừng đặt đại từ trước động từ chia trong cấu trúc 2 động từ",
+            text:"Ở futur proche/présent continu, đại từ KHÔNG đứng trước động từ chia (vais/suis en train de) mà đứng ngay trước động từ NGUYÊN THỂ, vì đại từ là bổ ngữ của động từ nguyên thể đó, không phải của aller/être." },
+
+          { type:"compare", items:[
+            { wrong:"Je le vais regarder.", right:"Je vais le regarder.", why:"Đại từ phải đứng NGAY TRƯỚC động từ nguyên thể « regarder », không phải trước « vais »." },
+            { wrong:"Nous allons ne pas le voir.", right:"Nous n'allons pas le voir.", why:"« ne…pas » bao quanh động từ chia « allons », còn đại từ « le » vẫn đứng trước động từ nguyên thể « voir »." },
+            { wrong:"J'ai le aimé.", right:"Je l'ai aimé.", why:"Trước nguyên âm, « le/la » rút gọn thành « l' » — đại từ vẫn đứng trước trợ động từ « ai »." },
+          ] },
+        ],
+        examples:[
+          "Ce film, je le conseille à tous les fans de Romain Duris. — Bộ phim này, tôi giới thiệu nó cho tất cả người hâm mộ Romain Duris.",
+          "Le rôle de Gustave Eiffel lui va très bien ! — Vai diễn Gustave Eiffel rất hợp với anh ấy!",
+          "Les premières scènes, je les ai trouvées nulles. — Những cảnh đầu, tôi thấy chúng rất tệ.",
+          "Mes enfants aussi : le film leur a beaucoup plu ! — Con tôi cũng vậy: bộ phim đã rất được lòng chúng!",
+          "Nous allons voir ce film au cinéma. → Nous allons le voir au cinéma. — Chúng tôi sẽ đi xem bộ phim này ở rạp. → Chúng tôi sẽ đi xem nó ở rạp.",
+          "J'ai conseillé à mes parents de regarder cette série. → Je leur ai conseillé de la regarder. — Tôi đã khuyên bố mẹ xem bộ phim truyền hình này. → Tôi đã khuyên họ xem nó.",
         ]
       },
     ]

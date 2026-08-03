@@ -1338,6 +1338,174 @@ L'association Famille Santé`,
       { id: "b7-delf-q6", type: "multiple_choice", prompt: "L'association cherche aussi des personnes pour…", options: ["animer les prochains événements.", "participer aux prochains événements.", "préparer les prochains événements."], answer: "préparer les prochains événements." },
     ],
   },
+
+  // ═══════════════ Unité 8 — Dans les médias ═══════════════
+
+  // ── A · L'actualité en BD (p. 112) ──────────────────────────────────
+  {
+    id: "b8-livre-actualite-bd",
+    unit: 8,
+    unitTitle: "Dans les médias",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 112,
+    title: "L'actualité en BD",
+    instruction: "Découvrez La Revue Dessinée, un magazine qui raconte l'actualité en bande dessinée.",
+    text: `La Revue Dessinée — « L'actualité en bande dessinée »
+🕐 tous les trois mois · ✅ en librairie ou sur abonnement · 📖 18 € / 228 pages d'enquêtes et de reportages · ✏️ réalisée en équipe par des dessinateurs et des journalistes
+
+La Revue Dessinée raconte l'actualité en bande dessinée. Elle propose une information critique et engagée, grâce à des enquêtes, des reportages et des documentaires réalisés en équipe par des dessinateurs et des journalistes. La Revue Dessinée est une revue trimestrielle de 228 pages, parce qu'elle prend le temps de mener des enquêtes pour offrir un autre regard sur la réalité.
+Nous donnons une grande importance à la diversité des points de vue et des formes. C'est pourquoi vous découvrirez dans nos pages toutes sortes de sujets, de l'économie à l'écologie, sans oublier la politique, la société, la musique, le cinéma, les guerres et les utopies.`,
+    questions: [
+      { id: "b8-bd-q1", type: "open", prompt: "Entrée en matière : regardez le document. Quelle est la caractéristique de la revue présentée ?" },
+      { id: "b8-bd-q2", type: "short_answer", prompt: "1re lecture : quels contenus journalistiques met-on en BD dans cette revue ?", answer: "Des enquêtes, des reportages et des documentaires." },
+      { id: "b8-bd-q3", type: "short_answer", prompt: "2e lecture : qui publie dans cette revue ?", answer: "Des dessinateurs et des journalistes, en équipe." },
+      { id: "b8-bd-q4", type: "short_answer", prompt: "Pourquoi sort-elle tous les 3 mois ?", answer: "Parce qu'elle prend le temps de mener des enquêtes pour offrir un autre regard sur la réalité." },
+      { id: "b8-bd-q5", type: "short_answer", prompt: "Quels sujets y sont abordés ?", answer: "L'économie, l'écologie, la politique, la société, la musique, le cinéma, les guerres et les utopies." },
+      { id: "b8-bd-q6", type: "multiple_choice", prompt: "Vocabulaire : proposer « une information critique et engagée », c'est…", options: ["exprimer son opinion, prendre parti.", "ne pas exprimer d'opinion."], answer: "exprimer son opinion, prendre parti." },
+      { id: "b8-bd-q7", type: "open", prompt: "Production écrite : à votre avis, la BD est-elle un bon moyen d'informer et de s'informer ? Peut-elle être mieux que les photos ou les vidéos ? Pourquoi ?" },
+    ],
+  },
+
+  // ── C · Le succès de Twitch (p. 113) ────────────────────────────────
+  {
+    id: "b8-livre-succes-twitch",
+    unit: 8,
+    unitTitle: "Dans les médias",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 113,
+    title: "Le succès de Twitch",
+    instruction: "Lisez cet article sur Twitch, une plateforme qui bouleverse le journalisme numérique.",
+    text: `Dans le domaine du journalisme numérique, la nouvelle tendance, c'est Twitch : une plateforme de diffusion de vidéos en direct (streaming).
+
+Au début, seuls les joueurs de jeux vidéo (gamers) utilisaient cette plateforme. Ils filmaient et commentaient leurs parties en direct à travers le tchat. Aujourd'hui, les gamers ne sont plus seuls sur Twitch. Tout le monde peut créer sa chaîne pour parler de cuisine, de musique, de sport, de bricolage ou d'actualité.
+
+Grâce à Twitch, les médias classiques (la radio, la télévision et la presse) essaient de toucher un public plus jeune et plus connecté. C'est pour cela que le magazine Sciences & Avenir et le journal régional Ouest France proposent chacun une émission sur la plateforme. Des journalistes indépendants font aussi des revues de presse¹ quotidiennes interactives, car c'est bien l'interaction qui séduit le public actuel. Le succès de Twitch n'a donc rien d'étonnant.
+
+1 Résumés d'articles et points de vue publiés dans la presse.
+— Sources : larevuedesmedias.ina.fr, blogfr.influence4you.com et lefigaro.fr.`,
+    questions: [
+      { id: "b8-twitch-q1", type: "multiple_choice", prompt: "Entrée en matière : regardez l'image. À votre avis, qu'est-ce que Twitch ?", options: ["Une plateforme interactive.", "Un logiciel de visioconférence."], answer: "Une plateforme interactive." },
+      { id: "b8-twitch-q2", type: "short_answer", prompt: "1re lecture : qui étaient les premiers utilisateurs de Twitch ?", answer: "Les joueurs de jeux vidéo (gamers)." },
+      { id: "b8-twitch-q3", type: "short_answer", prompt: "Qui peut faire une émission sur Twitch aujourd'hui ?", answer: "Tout le monde : pour parler de cuisine, de musique, de sport, de bricolage ou d'actualité." },
+      { id: "b8-twitch-q4", type: "short_answer", prompt: "2e lecture : pourquoi les médias utilisent Twitch aujourd'hui ?", answer: "Pour essayer de toucher un public plus jeune et plus connecté." },
+      { id: "b8-twitch-q5", type: "short_answer", prompt: "Qu'est-ce que les gens aiment sur cette plateforme ?", answer: "L'interaction, qui séduit le public actuel." },
+      { id: "b8-twitch-q6", type: "open", prompt: "Production écrite : à deux ! Vous voulez créer une chaîne ou une émission sur Twitch. Écrivez une présentation de votre projet et partagez-la avec la classe." },
+    ],
+  },
+
+  // ── E · Sciences et réseaux sociaux (p. 116) ────────────────────────
+  {
+    id: "b8-livre-sciences-reseaux",
+    unit: 8,
+    unitTitle: "Dans les médias",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 116,
+    title: "Sciences et réseaux sociaux",
+    instruction: "Twitter, Facebook, Instagram, Snapchat, YouTube… sont-ils seulement des passe-temps, ou peuvent-ils aussi être des dispositifs de communication scientifique ?",
+    text: `Lutter contre les « infox »
+Nous entendons beaucoup parler d'« Infox » aujourd'hui. Mais les scientifiques peuvent passer par les réseaux sociaux pour faire barrage¹ à ces fausses nouvelles. Pour cela, il faut utiliser les mêmes codes et outils pour sensibiliser les internautes et leur apprendre à se méfier².
+
+Un véritable intérêt pour la communication scientifique
+Les réseaux sociaux permettent aux participants de congrès³ de collaborer. Ils facilitent les façons de commenter ou de compléter une présentation à distance.
+Aussi, ils sont un bon moyen pour montrer la science « en train de se faire ». Sur le compte Twitter @EnDirectDuLabo, chaque semaine, un nouveau scientifique présente ses travaux et sa façon de travailler.
+Donc oui, les réseaux sociaux sont un outil puissant pour la communication scientifique. Mais, il est important qu'ils s'adaptent aux différents publics. Il faut aussi qu'on accompagne ces publics pour qu'ils gardent un esprit critique.
+
+1 Arrêter, contrer, s'opposer à. 2 Faire attention, ne pas faire confiance. 3 Rencontres scientifiques, colloques.
+— www.raccoursci.com`,
+    questions: [
+      { id: "b8-sciences-q1", type: "open", prompt: "Entrée en matière : connaissez-vous des réseaux sociaux éducatifs ou scientifiques ?" },
+      { id: "b8-sciences-q2", type: "short_answer", prompt: "1re lecture : selon l'article, les réseaux sont-ils un bon outil pour diffuser les sciences ?", answer: "Oui : « les réseaux sociaux sont un outil puissant pour la communication scientifique »." },
+      { id: "b8-sciences-q3", type: "multi_select", prompt: "2e lecture : vrai ou faux ? Avec les réseaux sociaux…", options: ["les scientifiques peuvent apprendre aux internautes à identifier les fausses nouvelles. (Vrai)", "les congrès sont plus compliqués à préparer. (Faux)", "les scientifiques peuvent montrer leurs travaux, projets, recherches en cours. (Vrai)"], answer: ["les scientifiques peuvent apprendre aux internautes à identifier les fausses nouvelles. (Vrai)", "les scientifiques peuvent montrer leurs travaux, projets, recherches en cours. (Vrai)"] },
+      { id: "b8-sciences-q4", type: "short_answer", prompt: "Selon cet article, que faut-il faire pour bien diffuser les sciences ?", answer: "Adapter les réseaux sociaux aux différents publics et accompagner ces publics pour qu'ils gardent un esprit critique." },
+    ],
+  },
+
+  // ── F · La maison de la Radio (p. 118) ──────────────────────────────
+  {
+    id: "b8-livre-maison-radio",
+    unit: 8,
+    unitTitle: "Dans les médias",
+    source: "livre",
+    section: "culture(s)",
+    page: 118,
+    title: "La maison de la Radio",
+    instruction: "Charlie Zanello, Maison Ronde, 2020 — un bd reporter raconte un an passé à explorer la « maison ronde » de Radio France.",
+    text: `Pendant un an, Charlie Zanello a tenté de faire le tour de la « maison ronde ». Rouge, jaune, bleu, rose, violet, noir ou bordeaux, il est passé par toutes les couleurs des chaînes de Radio France au risque de s'y perdre ! À la fois monument architectural, haut lieu du journalisme, de la culture et de la musique, la « maison ronde » est en perpétuel mouvement, mue par les 4 000 professionnels passionnés qui y travaillent. Avec finesse et humour, le bd reporter livre une enquête passionnante entre et hors les murs d'une véritable institution.
+
+Trois vignettes extraites de la BD :
+a. Une femme dans une cuisine coiffée d'un bonnet de douche : « la radio cultive ce rapport intime avec l'auditeur. »
+b. Une femme devant une poêle en feu, regardant un écran de télévision : « à l'inverse de la vidéo qui nécessite une autre attention, plus passive. »
+c. Un homme âgé mangeant, écoutant la radio en marchant : « elle l'accompagne dans ses tâches quotidiennes. »
+
+Oh, le cliché ! « Les Français ne font pas confiance aux médias. » 52 % des Français font confiance aux informations à la radio, 48 % ont confiance dans les journaux et 42 % dans les informations à la télévision. Mais seulement 28 % des Français pensent que les informations d'Internet sont crédibles.`,
+    questions: [
+      { id: "b8-radio-q1", type: "open", prompt: "Entrée en matière : regardez la couverture et la quatrième de couverture de la BD. À votre avis, qu'est-ce qu'on appelle « la maison ronde » ? Pourquoi ?" },
+      { id: "b8-radio-q2", type: "short_answer", prompt: "Lecture : quels appareils utilisent les personnes des 3 vignettes ?", answer: "Une douche/radio en cuisinant, une télévision, une radio en marchant." },
+      { id: "b8-radio-q3", type: "matching", prompt: "Associez chaque vignette à un message. a → ? / b → ? / c → ?", answer: "a → On peut écouter la radio et cuisiner.\nb → Avec les écrans, on ne peut pas faire plusieurs choses à la fois.\nc → La radio nous accompagne partout." },
+      { id: "b8-radio-q4", type: "open", prompt: "Production orale : vous aimez écouter la radio ? Vous l'écoutez souvent ? Où ? Vous faites d'autres choses en même temps ?" },
+      { id: "b8-radio-q5", type: "open", prompt: "Oh, le cliché ! Et vous, vous faites confiance à quels supports d'information ?" },
+    ],
+  },
+
+  // ── H · Critiques du film Eiffel (p. 120) ───────────────────────────
+  {
+    id: "b8-livre-critiques-eiffel",
+    unit: 8,
+    unitTitle: "Dans les médias",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 120,
+    title: "Critiques du film Eiffel",
+    instruction: "cinémaFORUM — résumé du film Eiffel et discussions d'internautes qui l'ont vu.",
+    text: `RÉSUMÉ
+Paris, 1886. Gustave Eiffel (Romain Duris) rentre de New York où il a construit la structure métallique de la Statue de la Liberté. Il retrouve Adrienne Bourgès (Emma Mackey), son amour de jeunesse. Il propose alors de construire la plus haute tour de son époque pour l'exposition universelle de 1889.
+
+DISCUSSIONS
+Seb_32 : Ce film est une bonne surprise, je le conseille à tous les fans de Romain Duris. Le rôle de Gustave Eiffel lui va très bien ! Et si vous ne connaissez pas l'actrice Emma Mackey, c'est l'occasion de la découvrir : vous allez l'adorer ! C'est aussi l'occasion de découvrir comment le projet de la Tour Eiffel est né et comment il s'est concrétisé. C'est passionnant !
+
+Caro F. : Les vues du Paris de l'époque et les images de la construction de la tour Eiffel sont magnifiques. C'est très bien filmé, mais le scénario est mauvais. L'histoire d'amour entre Gustave Eiffel et Adrienne Bourgès prend beaucoup trop de place.
+
+Charles B. : Je n'ai pas du tout aimé. Ce film n'est pas réaliste. L'âge des acteurs ne correspond pas. L'héroïne, Adrienne Bourgès, avait 46 ans en 1886 : vingt ans de plus qu'Emma Mackey. Et le film ne parle pas assez de Claire Eiffel, la fille de Gustave qui l'assistait au quotidien. Je pensais voir un bon film historique, mais il est très ennuyeux !
+
+Cinéphilou : Les avis négatifs sur ce film m'étonnent, car je le trouve intéressant. C'est un film grand public, très sympa. Et, pour une fois, le héros n'est pas un politique ou un écrivain mais un ingénieur !
+
+Nath T. : Les premières scènes, je les ai trouvées nulles. Mais ensuite, j'ai bien aimé. Mes enfants aussi ; le film leur a beaucoup plu !`,
+    questions: [
+      { id: "b8-eiffel-q1", type: "multiple_choice", prompt: "Entrée en matière : regardez cette page Internet. Qui a écrit ces critiques ?", options: ["Des journalistes.", "Des gens qui ont vu le film."], answer: "Des gens qui ont vu le film." },
+      { id: "b8-eiffel-q2", type: "short_answer", prompt: "1re lecture : combien de critiques sont positives, négatives ou les deux ?", answer: "Positives : Seb_32, Cinéphilou (2). Négatives : Charles B. (1). Les deux (positif et négatif) : Caro F., Nath T. (2)." },
+      { id: "b8-eiffel-q3", type: "short_answer", prompt: "2e lecture : qu'est-ce que chaque personne a aimé ou n'a pas aimé dans le film ?", answer: "Seb_32 : aime les acteurs et l'histoire de la Tour Eiffel. Caro F. : aime les images, n'aime pas le scénario. Charles B. : n'aime pas le manque de réalisme et l'ennui. Cinéphilou : aime le film grand public avec un héros ingénieur. Nath T. : n'aime pas les premières scènes, aime la suite." },
+      { id: "b8-eiffel-q4", type: "matching", prompt: "Vocabulaire : trouvez dans le document les mots qu'on utilise pour parler a. de l'histoire d'un film ; b. des personnages principaux d'un film ; c. d'un film destiné à un maximum de personnes.", answer: "a. le scénario\nb. le héros, l'héroïne\nc. un film grand public" },
+      { id: "b8-eiffel-q5", type: "open", prompt: "Production écrite : écrivez une critique positive et/ou négative d'une série ou d'un film que vous avez vu." },
+    ],
+  },
+
+  // ── I · La tour Eiffel grandit ! (vidéo, p. 121) ────────────────────
+  {
+    id: "b8-livre-tour-eiffel-grandit",
+    unit: 8,
+    unitTitle: "Dans les médias",
+    source: "livre",
+    section: "compréhension audiovisuelle",
+    page: 121,
+    title: "La tour Eiffel grandit !",
+    instruction: "Résumé du reportage vidéo : une journaliste présente un plateau télé avec en fond la Tour Eiffel et un hélicoptère, qui vient d'installer une nouvelle antenne au sommet du monument.",
+    text: `Ce reportage montre l'installation d'une nouvelle antenne au sommet de la tour Eiffel, transportée par hélicoptère. Grâce à cette antenne, la tour Eiffel a grandi de plusieurs mètres.
+
+Cette nouvelle antenne va servir à diffuser la télévision numérique terrestre (TNT) pour la région parisienne. L'installation n'a pas été facile : il a fallu attendre une météo parfaite, sans vent, pour que l'hélicoptère puisse déposer l'antenne en toute sécurité au sommet du monument, à plus de 300 mètres de hauteur.
+
+Au fait ! La tour Eiffel est restée le plus haut monument du monde pendant 40 ans, jusqu'à la construction du Chrysler Building en 1930.`,
+    questions: [
+      { id: "b8-tour-q1", type: "open", prompt: "Entrée en matière : savez-vous combien mesure la tour Eiffel ? Connaissez-vous d'autres monuments très hauts ?" },
+      { id: "b8-tour-q2", type: "short_answer", prompt: "1er visionnage : la tour Eiffel a grandi de combien de mètres ?", answer: "De plusieurs mètres, grâce à la nouvelle antenne installée à son sommet." },
+      { id: "b8-tour-q3", type: "short_answer", prompt: "Comment ont-ils transporté l'antenne en haut de la tour Eiffel ?", answer: "Par hélicoptère." },
+      { id: "b8-tour-q4", type: "short_answer", prompt: "2e visionnage : à quoi va servir cette antenne ?", answer: "À diffuser la télévision numérique terrestre (TNT) pour la région parisienne." },
+      { id: "b8-tour-q5", type: "short_answer", prompt: "Pourquoi l'installation n'a pas été facile ?", answer: "Il a fallu attendre une météo parfaite, sans vent, pour déposer l'antenne en toute sécurité à plus de 300 mètres de hauteur." },
+      { id: "b8-tour-q6", type: "open", prompt: "Production orale : que pensez-vous de la tour Eiffel ? Comment la trouvez-vous ?" },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

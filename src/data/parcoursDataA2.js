@@ -10,6 +10,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b5", num:5, fr:"En route vers le futur !", vi:"Trên đường đến tương lai!", grammar:"Futur simple · Si/Quand + futur · Le pronom on", emoji:"🚀" },
   { id:"b6", num:6, fr:"En cuisine", vi:"Vào bếp", grammar:"Le pronom en · L'obligation et l'interdiction · La restriction ne… que", emoji:"🍳" },
   { id:"b7", num:7, fr:"À votre santé !", vi:"Chúc sức khỏe!", grammar:"Les pronoms COD et COI · Le superlatif · Les pronoms interrogatifs (lequel…)", emoji:"💊" },
+  { id:"b8", num:8, fr:"Dans les médias", vi:"Trong thế giới truyền thông", grammar:"La cause et la conséquence · Le subjonctif présent · La place des pronoms COD et COI", emoji:"📰" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -789,9 +790,115 @@ export const STEP_GROUPS_B7 = [
 
 export const STEP_DEFS_B7 = STEP_GROUPS_B7.flatMap(g => g.steps);
 
+// ─── Unité 8 · Dans les médias ──────────────────────────────────────────
+export const STEP_GROUPS_B8 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Presse & Twitch",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b8-livre-actualite-bd"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"L'actualité en BD",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b8-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Comment s'informent les jeunes ?",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b8-livre-succes-twitch"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Le succès de Twitch",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La cause et la conséquence",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b8g1","b8g2","b8g3","b8g4"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"L'info, la presse, la télé · 4 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Comment vous informez-vous ?",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Pourquoi je n'utilise plus certains médias (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Réseaux & podcasts",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b8-d"],
+        icon:"🎧", kind:"Nghe D", color:"#0891B2", sub:"Les séniors sur les réseaux",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b8-livre-sciences-reseaux"],
+        icon:"📜", kind:"Đọc E", color:"#059669", sub:"Sciences et réseaux sociaux",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le subjonctif présent (nécessité, opinion)",
+        section:"grammar", view:"grammar" },
+      { id:"c2_verbes", stepKey:"verbes", subIds:["present","subjonctif"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Chia subjonctif présent · 15 động từ",
+        section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b8-livre-maison-radio"],
+        icon:"🎭", kind:"Văn hóa F", color:"#7B6CF6", sub:"La maison de la Radio",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter2", stepKey:"ecouter", subIds:["b8-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"Le succès des podcasts",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b8g5","b8g6","b8g7"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Médias audios et réseaux sociaux · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Ce qui vous intéresse sur les réseaux sociaux",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Les réseaux sociaux et l'information sérieuse",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Critiques & Tour Eiffel",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b8-livre-critiques-eiffel"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Critiques du film Eiffel",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b8-livre-tour-eiffel-grandit"],
+        icon:"🎬", kind:"Văn hóa I", color:"#7B6CF6", sub:"La tour Eiffel grandit ! (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La place des pronoms COD et COI",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Critiquer un film ou une série",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Critique d'un film ou d'une série",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["muette_masc","muette_fem","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les lettres muettes",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Faire la critique d'un média",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B8 = STEP_GROUPS_B8.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

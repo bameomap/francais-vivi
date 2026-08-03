@@ -704,4 +704,66 @@ export const EDITO_AUDIO_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 8 · Dans les médias ──────────────────────────────
+  "b8": [
+    {
+      id: "b8-b", trackNum: 70, section: "B", page: 113,
+      title: "Comment s'informent les jeunes ?",
+      subtitle: "Micro-trottoir — Alix, Floriane et Abel racontent comment ils s'informent",
+      theme: "📱", color: "#DB2777", colorLight: "#FCE7F3",
+      audioSrc: url(70),
+      sentences: [
+        "Le journaliste : Bonjour à toutes et à tous ! Aujourd'hui, dans L'Instant média, nous allons à la rencontre des jeunes. Est-ce qu'ils suivent l'actualité nationale, internationale ? Comment s'informent-ils ? C'est ce que nous allons découvrir. On écoute d'abord Alix et Floriane.",
+        "Alix : Je peux pas regarder le journal télé, à cause des images qui sont souvent horribles. C'est pour ça que j'aime mieux lire la presse en ligne sur mon smartphone.",
+        "Floriane : Moi, tous les matins, j'allume mon téléphone et je fais le tour des réseaux pour être au courant. Si une information m'intéresse, je vais peut-être cliquer dessus. Mais en général c'est vrai que je lis les titres, pas les articles.",
+        "Le journaliste : Pourquoi ?",
+        "Floriane : Parce qu'ils sont trop longs, pour moi en tout cas.",
+        "Le journaliste : Et vous Abel, comment vous vous informez ?",
+        "Abel : Je préfère les réseaux sociaux aux médias traditionnels. Quand t'es sur Instagram, Twitter ou Snapchat, c'est facile. Tu reçois les nouvelles sur ton téléphone, alors t'as pas besoin de les chercher. C'est mieux. En plus, je peux lire les réactions des gens et me faire ma propre opinion.",
+        "Le journaliste : Et est-ce que les jeunes s'intéressent à des sujets sérieux, Floriane ?",
+        "Floriane : Bien sûr ! Moi par exemple, pour mes études, je suis abonnée à des journaux anglais sur Instagram. Ils publient des résumés d'articles de magazines économiques, culturels ou politiques. Alors c'est plus rapide à lire et c'est plus simple que les articles entiers, mais c'est très sérieux.",
+      ],
+      questions: [
+        { label: "Entrée en matière", text: "Regardez le graphique. Quel support les jeunes Français utilisent le plus pour s'informer ? Qu'en pensez-vous ? (smartphone 69 % · téléviseur 61 % · ordinateur 51 % · tablette tactile 19 %)" },
+        { label: "1ère écoute", text: "Est-ce que les réponses des 3 jeunes interrogés correspondent au graphique ?" },
+        { label: "2e écoute", text: "Pourquoi Alix ne regarde pas la télévision ? Pourquoi Floriane ne lit que les titres ? Pourquoi Abel aime s'informer via les réseaux sociaux ?" },
+        { label: "Production orale (DELF)", text: "À deux ! Vous parlez avec votre voisin(e) de votre manière de vous informer. Vous exprimez vos préférences : J'aime mieux lire la presse en ligne. Je préfère les réseaux sociaux aux médias traditionnels. C'est mieux (que…)." },
+      ],
+    },
+    {
+      id: "b8-d", trackNum: 73, section: "D", page: 116,
+      title: "Les séniors sur les réseaux",
+      subtitle: "Reportage — Christine, 68 ans, raconte sa vie sur les réseaux sociaux",
+      theme: "👵", color: "#7C3AED", colorLight: "#EDE9FE",
+      audioSrc: url(73),
+      sentences: [
+        "Le journaliste : Aujourd'hui on s'intéresse aux silver surfers, les personnes de plus de 60 ans qui utilisent les réseaux sociaux. Et ils sont de plus en plus nombreux ! Je peux prendre l'exemple de ma tante, Christine, qui a 68 ans. Elle était curieuse de savoir comment tout ça fonctionnait. Alors, en quelques mois, elle a appris à utiliser les réseaux sociaux et, aujourd'hui, elle passe une grande partie de sa journée en ligne ! Elle a ouvert un compte Facebook pour parler avec ses amies, un compte Instagram pour suivre la vie de son fils de 40 ans, et même un compte TikTok pour regarder les vidéos de ses petits-enfants. Elle veut savoir ce que font les jeunes et pourquoi ils passent tout leur temps sur ces réseaux.",
+        "Christine : Bien sûr que ça nous intéresse ! C'est normal qu'on soit sur les réseaux sociaux ! Il faut que les grands-parents connaissent l'univers de leurs petits-enfants. Les miens sont sur Facebook et sur Instagram, alors je me suis inscrite aussi. Je m'intéresse à leur vie ! Ma petite-fille Dina poste de superbes vidéos, on peut en parler et comme ça je la comprends mieux. C'est très bien que les personnes âgées soient plus connectées pour comprendre le monde d'aujourd'hui, mais c'est vrai que ce n'est pas toujours facile. Mon fils m'a montré comment ça marche et maintenant je vais tous les jours sur Facebook. Ce moyen de communication est fascinant ! Ça me passionne d'être en contact avec cette génération !",
+      ],
+      questions: [
+        { label: "Entrée en matière", text: "Connaissez-vous des personnes âgées qui utilisent les réseaux sociaux ?" },
+        { label: "1ère écoute", text: "Vrai ou faux ? Christine utilise les réseaux sociaux : a. pour savoir ce que fait son fils de 40 ans. b. pour regarder les vidéos de ses petits-enfants. c. pour poster des photos de ses plats préférés." },
+        { label: "2e écoute", text: "Qu'est-ce que Christine pense des réseaux sociaux ? Pourquoi ?" },
+        { label: "Production orale", text: "À deux ! Qu'est-ce qui vous intéresse sur les réseaux sociaux ? Qu'est-ce qui ne vous intéresse pas ? Discutez avec votre voisin(e). Utilisez : Ça m'/nous intéresse ! Ça me/nous passionne. C'est fascinant ! Je suis curieux/curieuse de savoir…" },
+      ],
+    },
+    {
+      id: "b8-g", trackNum: 74, section: "G", page: 118,
+      title: "Le succès des podcasts",
+      subtitle: "Reportage — Julie Nicolas et Camille Juzeau, deux passionnées de podcasts",
+      theme: "🎙️", color: "#0891B2", colorLight: "#E0F2FE",
+      audioSrc: url(74),
+      sentences: [
+        "Voix off : Julie Nicolas écoute des podcasts, des contenus sonores le plus souvent gratuits. Une fois téléchargé sur son téléphone, grâce à une application, elle choisit elle-même quand son programme préféré commence. Elle en écoute trois par jour. Comme elle, les Français sont de plus en plus accros aux podcasts. 9 % déclarent en écouter au moins un, une fois par semaine. Tout passe par la voix, comme celle de Camille Juzeau. Elle travaille dans des radios, mais réalise aussi le podcast d'un magazine consacré au voyage. Depuis plus d'un an, elle raconte des expéditions d'aventuriers. 27 épisodes et près de 800 000 écoutes.",
+        "Camille Juzeau : Il y a quelque chose de la proximité avec l'auditeur dans le podcast. Il y a beaucoup d'histoires à la première personne. Et c'est prendre par la main l'auditeur aussi, et lui dire : « Viens, je t'emmène dans mon histoire. »",
+      ],
+      questions: [
+        { label: "Entrée en matière", text: "Est-ce que vous écoutez des podcasts ? Pourquoi ?" },
+        { label: "1ère écoute", text: "Qui fait quoi ? Associez : a. Julie Nicolas → travaille à la radio et réalise des podcasts / écoute des podcasts sur son téléphone. b. Camille Juzeau → l'autre réponse." },
+        { label: "2e écoute", text: "Est-ce que Julie Nicolas écoute beaucoup de podcasts ? Combien ? Est-ce que les podcasts ont du succès en France ? Combien de personnes ont écouté les 27 épisodes sur le voyage ?" },
+        { label: "Production écrite", text: "Présentez une chaîne de radio ou une série de podcasts que vous aimez et que vous recommandez à la classe." },
+      ],
+    },
+  ],
 };

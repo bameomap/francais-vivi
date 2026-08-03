@@ -807,4 +807,98 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b8", num: "8", title: "Dans les médias",
+    color: "#DB2777", bg: "#FCE7F3",
+    groups: [
+      {
+        id: "b8g1", label: "L'information", icon: "📰",
+        words: [
+          { fr:"la diffusion en direct / en streaming", vi:"phát trực tiếp / phát trực tuyến", ex_fr:"Twitch est une plateforme de diffusion de vidéos en direct.", ex_vi:"Twitch là một nền tảng phát video trực tiếp." },
+          { fr:"le documentaire",      vi:"phim tài liệu", ex_fr:"Elle propose des enquêtes, des reportages et des documentaires.", ex_vi:"Nó cung cấp các cuộc điều tra, phóng sự và phim tài liệu." },
+          { fr:"l'enquête (f.) = le reportage", vi:"cuộc điều tra = phóng sự", ex_fr:"Le bd reporter livre une enquête passionnante entre et hors les murs.", ex_vi:"Người viết BD phóng sự mang đến một cuộc điều tra hấp dẫn." },
+          { fr:"le journalisme numérique", vi:"báo chí số", ex_fr:"Dans le domaine du journalisme numérique, la nouvelle tendance, c'est Twitch.", ex_vi:"Trong lĩnh vực báo chí số, xu hướng mới là Twitch." },
+          { fr:"le/la journaliste",    vi:"nhà báo", ex_fr:"Elle est réalisée en équipe par des dessinateurs et des journalistes.", ex_vi:"Nó được thực hiện theo nhóm bởi các họa sĩ và nhà báo." },
+          { fr:"les médias",           vi:"truyền thông", ex_fr:"Grâce à Twitch, les médias classiques essaient de toucher un public plus jeune.", ex_vi:"Nhờ Twitch, các phương tiện truyền thông truyền thống cố gắng tiếp cận công chúng trẻ hơn." },
+          { fr:"la plateforme",        vi:"nền tảng", ex_fr:"Twitch, une plateforme de diffusion de vidéos en direct.", ex_vi:"Twitch, một nền tảng phát video trực tiếp." },
+          { fr:"le(s) point(s) de vue", vi:"quan điểm", ex_fr:"Nous donnons une grande importance à la diversité des points de vue.", ex_vi:"Chúng tôi rất coi trọng sự đa dạng quan điểm." },
+          { fr:"publier un article",   vi:"đăng một bài báo", ex_fr:"Faire paraître un article dans un journal, c'est publier un article.", ex_vi:"Cho đăng một bài báo trên tờ báo, đó là xuất bản một bài báo." },
+          { fr:"la revue de presse",   vi:"điểm báo", ex_fr:"Des journalistes indépendants font aussi des revues de presse quotidiennes interactives.", ex_vi:"Các nhà báo tự do cũng làm điểm báo tương tác hằng ngày." },
+        ]
+      },
+      {
+        id: "b8g2", label: "La presse écrite", icon: "🗞️",
+        words: [
+          { fr:"l'article (m.)",       vi:"bài báo", ex_fr:"Ils publient des résumés d'articles de magazines économiques.", ex_vi:"Họ đăng tóm tắt các bài báo tạp chí kinh tế." },
+          { fr:"le dessinateur, la dessinatrice", vi:"họa sĩ minh họa", ex_fr:"Je ne suis pas journaliste ; je suis dessinateur de presse.", ex_vi:"Tôi không phải nhà báo; tôi là họa sĩ vẽ tranh báo chí." },
+          { fr:"le journal",           vi:"tờ báo", ex_fr:"Y'a un article sur notre université dans le journal.", ex_vi:"Có một bài báo về trường đại học của chúng ta trên báo." },
+          { fr:"le magazine = la revue", vi:"tạp chí = tập san", ex_fr:"Je viens de recevoir le dernier numéro de La Revue Dessinée.", ex_vi:"Tôi vừa nhận được số mới nhất của La Revue Dessinée." },
+          { fr:"le numéro",            vi:"số (báo)", ex_fr:"C'est une revue trimestrielle de 228 pages.", ex_vi:"Đó là một tập san ra ba tháng một lần, dày 228 trang." },
+          { fr:"la presse en ligne ≠ la presse papier", vi:"báo mạng ≠ báo giấy", ex_fr:"J'aime mieux lire la presse en ligne sur mon smartphone.", ex_vi:"Tôi thích đọc báo mạng trên điện thoại hơn." },
+          { fr:"le titre",             vi:"tiêu đề", ex_fr:"En général je lis les titres, pas les articles.", ex_vi:"Nhìn chung tôi đọc tiêu đề, không đọc bài báo." },
+        ]
+      },
+      {
+        id: "b8g3", label: "La télévision", icon: "📺",
+        words: [
+          { fr:"la chaîne",            vi:"kênh (truyền hình)", ex_fr:"Sur cette chaîne, les émissions sont très intéressantes.", ex_vi:"Trên kênh này, các chương trình rất thú vị." },
+          { fr:"le direct",            vi:"trực tiếp", ex_fr:"Ils chantent en direct dans cette émission ?", ex_vi:"Họ hát trực tiếp trong chương trình này à?" },
+          { fr:"l'émission (f.)",      vi:"chương trình", ex_fr:"Change de chaîne, s'il te plaît. J'aime pas du tout cette émission.", ex_vi:"Đổi kênh giùm tôi. Tôi không thích chương trình này chút nào." },
+          { fr:"le journal télé(visé) = le JT", vi:"bản tin thời sự truyền hình", ex_fr:"Je regarde toujours le JT de 20 h.", ex_vi:"Tôi luôn xem bản tin thời sự lúc 20 giờ." },
+          { fr:"le téléviseur, la télé(vision)", vi:"tivi, truyền hình", ex_fr:"Je peux pas regarder le journal télé, à cause des images qui sont souvent horribles.", ex_vi:"Tôi không xem được bản tin thời sự, vì hình ảnh thường rất kinh khủng." },
+        ]
+      },
+      {
+        id: "b8g4", label: "Les rubriques de l'info", icon: "🗂️",
+        words: [
+          { fr:"actualité internationale / nationale / régionale", vi:"thời sự quốc tế / quốc gia / vùng miền", ex_fr:"Est-ce qu'ils suivent l'actualité nationale, internationale ?", ex_vi:"Họ có theo dõi thời sự quốc gia, quốc tế không?" },
+          { fr:"la culture",           vi:"văn hóa", ex_fr:"« Un film magnifique ! » → la rubrique culture.", ex_vi:"« Một bộ phim tuyệt vời! » → mục văn hóa." },
+          { fr:"l'écologie (f.)",      vi:"sinh thái, môi trường", ex_fr:"« Des solutions pour la planète ? » → la rubrique écologie.", ex_vi:"« Giải pháp cho hành tinh? » → mục sinh thái." },
+          { fr:"l'économie (f.)",      vi:"kinh tế", ex_fr:"« Le prix de l'essence augmente » → la rubrique économie.", ex_vi:"« Giá xăng tăng » → mục kinh tế." },
+          { fr:"la météo",             vi:"dự báo thời tiết", ex_fr:"Elle publie des résumés d'articles de magazines économiques, culturels ou politiques.", ex_vi:"Cô ấy đăng tóm tắt bài báo tạp chí kinh tế, văn hóa hoặc chính trị." },
+          { fr:"la politique",         vi:"chính trị", ex_fr:"« 1er tour des élections présidentielles » → la rubrique politique.", ex_vi:"« Vòng 1 bầu cử tổng thống » → mục chính trị." },
+          { fr:"la société",           vi:"xã hội", ex_fr:"« Un meilleur contrôle parental sur Internet » → la rubrique société.", ex_vi:"« Kiểm soát của phụ huynh trên Internet tốt hơn » → mục xã hội." },
+          { fr:"le sport",             vi:"thể thao", ex_fr:"« Qui remportera la finale de la Ligue ? » → la rubrique sport.", ex_vi:"« Ai sẽ giành chức vô địch giải đấu? » → mục thể thao." },
+        ]
+      },
+      {
+        id: "b8g5", label: "La radio, les podcasts", icon: "🎙️",
+        words: [
+          { fr:"l'auditeur, l'auditrice", vi:"thính giả", ex_fr:"Il y a quelque chose de la proximité avec l'auditeur dans le podcast.", ex_vi:"Có một sự gần gũi với thính giả trong podcast." },
+          { fr:"les contenus sonores (m.)", vi:"nội dung âm thanh", ex_fr:"Julie Nicolas écoute des podcasts, des contenus sonores le plus souvent gratuits.", ex_vi:"Julie Nicolas nghe podcast, các nội dung âm thanh thường miễn phí." },
+          { fr:"l'écoute (f.)",        vi:"lượt nghe", ex_fr:"27 épisodes et près de 800 000 écoutes.", ex_vi:"27 tập và gần 800.000 lượt nghe." },
+          { fr:"écouter des podcasts", vi:"nghe podcast", ex_fr:"Est-ce que vous écoutez des podcasts ? Pourquoi ?", ex_vi:"Bạn có nghe podcast không? Tại sao?" },
+          { fr:"l'émission de radio (f.)", vi:"chương trình phát thanh", ex_fr:"Présentez une chaîne de radio ou une série de podcasts que vous aimez.", ex_vi:"Hãy giới thiệu một kênh radio hoặc chuỗi podcast mà bạn thích." },
+          { fr:"l'épisode (m.)",       vi:"tập (chương trình)", ex_fr:"C'est un chapitre, une partie d'une série, d'émissions ou de podcasts.", ex_vi:"Đó là một chương, một phần của loạt chương trình hoặc podcast." },
+          { fr:"le programme de radio", vi:"chương trình radio", ex_fr:"Elle choisit elle-même quand son programme préféré commence.", ex_vi:"Cô ấy tự chọn thời điểm chương trình yêu thích bắt đầu." },
+          { fr:"raconter",             vi:"kể lại", ex_fr:"Depuis plus d'un an, elle raconte des expéditions d'aventuriers.", ex_vi:"Hơn một năm nay, cô ấy kể lại các chuyến thám hiểm của các nhà phiêu lưu." },
+          { fr:"la voix",              vi:"giọng nói", ex_fr:"C'est grâce à elle qu'on reconnaît une personne à la radio : la voix.", ex_vi:"Nhờ nó mà người ta nhận ra một người trên radio: giọng nói." },
+        ]
+      },
+      {
+        id: "b8g6", label: "Les réseaux sociaux", icon: "📱",
+        words: [
+          { fr:"commenter",            vi:"bình luận", ex_fr:"C'est bien d'aimer les photos des gens qu'on suit ! C'est sympa d'écrire un petit message.", ex_vi:"Thật hay khi thích ảnh của những người mình theo dõi! Viết một dòng nhắn nhỏ cũng dễ thương." },
+          { fr:"être connecté(e)",     vi:"kết nối mạng", ex_fr:"Je ne veux pas être connecté(e) tout le temps.", ex_vi:"Tôi không muốn kết nối mạng liên tục." },
+          { fr:"être en contact (avec)", vi:"giữ liên lạc (với)", ex_fr:"Ça me passionne d'être en contact avec cette génération !", ex_vi:"Tôi rất thích được giữ liên lạc với thế hệ này!" },
+          { fr:"être sur un réseau social", vi:"có mặt trên mạng xã hội", ex_fr:"C'est normal qu'on soit sur les réseaux sociaux, nous aussi !", ex_vi:"Chúng tôi cũng có mặt trên mạng xã hội là chuyện bình thường!" },
+          { fr:"les fausses nouvelles, les infox", vi:"tin giả", ex_fr:"On y trouve parfois de fausses nouvelles.", ex_vi:"Đôi khi ở đó có tin giả." },
+          { fr:"l'internaute (m./f.)", vi:"cư dân mạng", ex_fr:"Il faut sensibiliser les internautes et leur apprendre à se méfier.", ex_vi:"Cần nâng cao nhận thức cho cư dân mạng và dạy họ cách đề phòng." },
+          { fr:"ouvrir un compte sur / s'inscrire sur un réseau social ≠ fermer son compte sur… / quitter un réseau social", vi:"mở tài khoản / đăng ký mạng xã hội ≠ đóng tài khoản / rời khỏi mạng xã hội", ex_fr:"Elle a ouvert un compte Facebook pour parler avec ses amies.", ex_vi:"Bà đã mở một tài khoản Facebook để trò chuyện với bạn bè." },
+          { fr:"poster des photos",    vi:"đăng ảnh", ex_fr:"Ma petite-fille Dina poste de superbes vidéos.", ex_vi:"Cháu gái tôi, Dina, đăng những video tuyệt đẹp." },
+          { fr:"regarder une vidéo",   vi:"xem video", ex_fr:"Elle a même ouvert un compte TikTok pour regarder les vidéos de ses petits-enfants.", ex_vi:"Bà còn mở tài khoản TikTok để xem video của các cháu." },
+          { fr:"suivre quelqu'un sur un réseau", vi:"theo dõi ai đó trên mạng", ex_fr:"Elle a ouvert un compte Instagram pour suivre la vie de son fils.", ex_vi:"Bà mở tài khoản Instagram để theo dõi cuộc sống của con trai." },
+        ]
+      },
+      {
+        id: "b8g7", label: "La communication", icon: "📡",
+        words: [
+          { fr:"diffuser une information", vi:"phát tán thông tin", ex_fr:"Les radios diffusent de l'information.", ex_vi:"Các đài radio phát tán thông tin." },
+          { fr:"un outil / un moyen de communication", vi:"công cụ / phương tiện truyền thông", ex_fr:"Internet est un moyen de communication très efficace.", ex_vi:"Internet là một phương tiện truyền thông rất hiệu quả." },
+          { fr:"sensibiliser un public", vi:"nâng cao nhận thức cho công chúng", ex_fr:"Des émissions essayent de sensibiliser les jeunes aux dangers des réseaux sociaux.", ex_vi:"Một số chương trình cố gắng nâng cao nhận thức cho giới trẻ về nguy cơ của mạng xã hội." },
+          { fr:"transmettre des connaissances", vi:"truyền đạt kiến thức", ex_fr:"Grâce aux podcasts, on peut transmettre des connaissances.", ex_vi:"Nhờ podcast, người ta có thể truyền đạt kiến thức." },
+        ]
+      },
+    ]
+  },
 ];

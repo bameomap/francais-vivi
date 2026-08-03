@@ -509,4 +509,66 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-8", unit: 8, title: "Dans les médias",
+    speakingPractice: [
+      {
+        title: "Comment vous informez-vous ?",
+        notes: ["b8-b"],
+        task: "À deux ! Vous parlez avec votre voisin(e) de votre manière de vous informer. Vous exprimez vos préférences.",
+        usefulPhrases: [
+          "J'aime mieux lire la presse en ligne.",
+          "Je préfère les réseaux sociaux aux médias traditionnels.",
+          "C'est mieux (que…).",
+        ],
+      },
+      {
+        title: "Ce qui vous intéresse sur les réseaux sociaux",
+        notes: ["b8-d"],
+        task: "À deux ! Qu'est-ce qui vous intéresse sur les réseaux sociaux ? Qu'est-ce qui ne vous intéresse pas ? Discutez avec votre voisin(e).",
+        usefulPhrases: [
+          "Ça m'/nous intéresse !",
+          "Je m'intéresse à leur vie !",
+          "C'est fascinant ! C'est passionnant !",
+          "Je suis curieux/curieuse de savoir comment ça fonctionne.",
+        ],
+      },
+      {
+        title: "Critiquer un film ou une série",
+        notes: ["b8-h"],
+        task: "À deux ! Discutez d'un film ou d'une série que vous avez vu(e) récemment. L'un(e) en fait une critique positive, l'autre une critique négative.",
+        usefulPhrases: [
+          "Ce film est une bonne surprise. C'est passionnant !",
+          "J'ai bien aimé. Ce film m'a plu.",
+          "Je n'ai pas du tout aimé. Le scénario est mauvais.",
+          "C'est (très) ennuyeux.",
+        ],
+      },
+      {
+        title: "Faire la critique d'un média (atelier médiation)",
+        notes: ["b8-atelier"],
+        task: "En groupes de trois ou quatre : choisissez un média (podcast, réseaux sociaux, télévision, presse people, cinéma…), listez ses points positifs et négatifs, puis préparez et présentez à la classe une critique positive et/ou négative sous forme de podcast ou de présentation orale.",
+        usefulPhrases: [
+          "C'est intéressant d'écouter des podcasts, parce que…",
+          "La télé, c'est très bien parce que…",
+          "Les réseaux sociaux, c'est nul, parce que…",
+          "On trouve les journaux ennuyeux, parce que…",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Pourquoi je n'utilise plus certains médias (DELF)",
+        task: "Sur un forum, expliquez pourquoi vous n'utilisez plus certains supports ou médias. Utilisez les connecteurs de l'écrit : parce que, car, c'est pourquoi, c'est pour cela que. (50-60 mots)",
+      },
+      {
+        title: "Les réseaux sociaux et l'information sérieuse",
+        task: "Sur un forum, vous répondez à la question : les réseaux sociaux sont-ils utiles pour diffuser des informations sérieuses ou complexes ?",
+      },
+      {
+        title: "Critique d'un film ou d'une série",
+        task: "Écrivez une critique positive et/ou négative d'une série ou d'un film que vous avez vu(e).",
+      },
+    ],
+  },
 ];

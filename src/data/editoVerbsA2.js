@@ -183,4 +183,36 @@ export const EDITO_A2_VERB_UNITS = [
       { infinitive: "attacher",     meaning: "buộc, cột (les cheveux)" },
     ],
   },
+  {
+    unitId: "b8", unitNum: "8",
+    title: "Dans les médias",
+    color: "#DB2777", bg: "#FCE7F3",
+    cefr: "A2",
+    tenses: [
+      { id: "present", label: "Présent",
+        note: "Ils/elles + présent = gốc của subjonctif cho je/tu/il/on/ils" },
+      { id: "subjonctif", label: "Subjonctif présent",
+        note: "Gốc = ils/elles présent (bỏ -ent) + -e/-es/-e/-ent · nous/vous = gốc imparfait + -ions/-iez" },
+    ],
+    verbs: [
+      // — bất quy tắc: gốc riêng hoàn toàn —
+      { infinitive: "être",         meaning: "thì, là (que je sois, que nous soyons)" },
+      { infinitive: "avoir",        meaning: "có (que j'aie, que nous ayons)" },
+      { infinitive: "aller",        meaning: "đi (que j'aille, que nous allions)" },
+      // — đều đặn -er: gốc = ils informent → que j'informe —
+      { infinitive: "informer",     meaning: "thông tin cho, đưa tin" },
+      { infinitive: "s'informer",   meaning: "tự cập nhật thông tin" },
+      { infinitive: "publier",      meaning: "đăng, xuất bản" },
+      { infinitive: "utiliser",     meaning: "sử dụng" },
+      { infinitive: "regarder",     meaning: "xem" },
+      { infinitive: "écouter",      meaning: "nghe" },
+      { infinitive: "poster",       meaning: "đăng (ảnh, video)" },
+      { infinitive: "accompagner",  meaning: "đồng hành, hỗ trợ" },
+      // — đều đặn -ir/-re, gốc theo présent —
+      { infinitive: "s'adapter",    meaning: "thích nghi" },
+      { infinitive: "connaître",    meaning: "biết, hiểu" },
+      // — đặc biệt ở présent, vẫn theo quy tắc subjonctif —
+      { infinitive: "demander",     meaning: "hỏi, yêu cầu" },
+    ],
+  },
 ];
