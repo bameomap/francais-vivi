@@ -571,4 +571,68 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-9", unit: 9, title: "Consommer responsable",
+    speakingPractice: [
+      {
+        title: "Exprimer un souhait et donner un conseil",
+        notes: ["b9-a", "b9-c"],
+        task: "À deux ! Vous parlez de vos souhaits et vous vous donnez des conseils pour les réaliser.",
+        usefulPhrases: [
+          "J'aimerais être riche ! → Tu devrais dépenser moins d'argent.",
+          "Je voudrais…",
+          "Tu devrais… / Je te conseille de…",
+        ],
+      },
+      {
+        title: "Proposer quelque chose à son voisin(e)",
+        task: "Écrivez un message à votre voisin(e) pour lui proposer de faire quelque chose. Utilisez le conditionnel présent.",
+        usefulPhrases: [
+          "Ça te dirait de… ?",
+          "On pourrait…",
+          "Tu ne voudrais pas… ?",
+        ],
+      },
+      {
+        title: "Demander et proposer un service",
+        notes: ["b9-h"],
+        task: "À deux ! Vous avez besoin de faire du bricolage dans votre appartement. Vous demandez de l'aide à votre voisin(e). Vous lui proposez un service en échange. Jouez la scène.",
+        usefulPhrases: [
+          "Pourriez-vous m'expliquer ?",
+          "J'ai besoin d'aide en…",
+          "Je propose de faire…",
+          "Je peux faire…",
+        ],
+      },
+      {
+        title: "Organiser un troc (atelier médiation)",
+        notes: ["b9-atelier"],
+        task: "En groupes de trois ou quatre : préparez des annonces pour proposer et rechercher des objets ou des services, collez-les au tableau, puis discutez avec les autres étudiant(e)s pour organiser des trocs.",
+        usefulPhrases: [
+          "Je donne… / Je cherche… / Je propose de…",
+          "J'aimerais avoir des informations sur…",
+          "Ça te dirait de… ?",
+          "Quand est-ce que tu es libre ?",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Liste de souhaits pour le défi « Rien de neuf »",
+        task: "Vous avez décidé de participer au défi « Rien de neuf ». Postez votre liste de souhaits sur Instagram et expliquez pourquoi vous faites ces souhaits.",
+      },
+      {
+        title: "Conseils pour vendre des meubles (DELF)",
+        task: "Félix a posté un message sur un forum : il déménage bientôt et veut vendre ses meubles sur Internet. Répondez-lui et donnez-lui des conseils.",
+      },
+      {
+        title: "Comment mieux consommer",
+        task: "Comment peut-on mieux consommer ? Faites une liste de propositions en utilisant le gérondif. Exemple : On peut mieux consommer en achetant moins d'objets neufs.",
+      },
+      {
+        title: "Une Troc Party entre amis",
+        task: "Vous écrivez un message à un(e) ami(e) pour lui proposer de vous accompagner à une Troc Party. Expliquez comment fonctionne cet événement et précisez quels objets vous allez apporter.",
+      },
+    ],
+  },
 ];

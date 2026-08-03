@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -1393,6 +1393,165 @@ export const EDITO_GRAMMAR_A2 = [
           "Mes enfants aussi : le film leur a beaucoup plu ! — Con tôi cũng vậy: bộ phim đã rất được lòng chúng!",
           "Nous allons voir ce film au cinéma. → Nous allons le voir au cinéma. — Chúng tôi sẽ đi xem bộ phim này ở rạp. → Chúng tôi sẽ đi xem nó ở rạp.",
           "J'ai conseillé à mes parents de regarder cette série. → Je leur ai conseillé de la regarder. — Tôi đã khuyên bố mẹ xem bộ phim truyền hình này. → Tôi đã khuyên họ xem nó.",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b9", num:"9", title:"Consommer responsable", points:[
+
+      // ── 1. Le conditionnel présent (1) ──────────────────────────────
+      {
+        topic:"Le conditionnel présent (1) — Xin lịch sự, ước muốn, lời khuyên, đề nghị",
+        summary:"Conditionnel présent là một thức mới. Cách chia GIỐNG futur simple (gốc = nguyên thể của động từ), nhưng đuôi lại là đuôi của imparfait (-ais, -ais, -ait, -ions, -iez, -aient). Thức này dùng để: xin một cách LỊCH SỰ, diễn đạt một ƯỚC MUỐN, đưa ra một LỜI KHUYÊN, hoặc ĐỀ NGHỊ làm gì.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: bạn đang làm gì với câu này — xin lịch sự, ước muốn, khuyên, hay đề nghị? Cả 4 chức năng đều dùng CÙNG một thức: conditionnel présent." },
+
+          { type:"table",
+            caption:"4 cách dùng của conditionnel présent (1)",
+            headers:["Chức năng", "Ví dụ"],
+            rows:[
+              ["Demande polie (xin lịch sự)", "Tu pourrais me donner plus d'informations s'il te plaît ?"],
+              ["Souhait (ước muốn)", "J'aimerais arrêter d'acheter du matériel de sport."],
+              ["Conseil (lời khuyên)", "Tu devrais refaire tes photos !"],
+              ["Proposition (đề nghị)", "Ça te dirait d'en discuter ?"],
+            ] },
+
+          { type:"heading", text:"Cách chia" },
+          { type:"formula",
+            parts:["Gốc = NGUYÊN THỂ của động từ (giống futur simple)", "+ -ais, -ais, -ait, -ions, -iez, -aient (đuôi của imparfait)"],
+            example:"aimer → j'aimerais. choisir → je choisirais. prendre → je prendrais (bỏ -e cuối trước khi thêm đuôi).",
+            note:"Mẹo nhớ nhanh: conditionnel présent = gốc futur + đuôi imparfait. Nếu đã thuộc futur simple (Unité 5), chỉ cần đổi đuôi -ai/-as/-a/-ons/-ez/-ont thành -ais/-ais/-ait/-ions/-iez/-aient." },
+
+          { type:"table",
+            caption:"Các động từ bất quy tắc — CÙNG gốc với futur simple",
+            headers:["Động từ", "Gốc", "je"],
+            rows:[
+              ["aller", "ir-", "j'irais"],
+              ["avoir", "aur-", "j'aurais"],
+              ["devoir", "devr-", "je devrais"],
+              ["être", "ser-", "je serais"],
+              ["faire", "fer-", "je ferais"],
+              ["pouvoir", "pourr-", "je pourrais"],
+              ["savoir", "saur-", "je saurais"],
+              ["venir", "viendr-", "je viendrais"],
+              ["voir", "verr-", "je verrais"],
+              ["vouloir", "voudr-", "je voudrais"],
+              ["il faut", "faudr-", "il faudrait"],
+            ] },
+
+          { type:"callout", variant:"tip", title:"« vouloir » và « pouvoir » ở conditionnel = lịch sự hơn",
+            text:"Thay vì nói thẳng « Je veux un café » (hơi cộc), người Pháp dùng conditionnel « Je voudrais un café » để xin một cách lịch sự. Tương tự, « Pourrais-tu m'expliquer ? » lịch sự hơn « Peux-tu m'expliquer ? ». Riêng « pouvoir » ở conditionnel còn dùng để ĐỀ NGHỊ: On pourrait aller au cinéma !" },
+
+          { type:"callout", variant:"warn", title:"Đừng nhầm conditionnel với futur simple",
+            text:"Futur simple (Unité 5) dùng đuôi -ai/-as/-a/-ons/-ez/-ont (không có « i » trước đuôi ở je/tu/il/ils). Conditionnel présent dùng đuôi -ais/-ais/-ait/-ions/-iez/-aient (LUÔN có gốc imparfait « ai/i »). Ví dụ: j'irai (futur, sẽ đi) ≠ j'irais (conditionnel, tôi sẽ đi/muốn đi, tùy ngữ cảnh)." },
+
+          { type:"compare", items:[
+            { wrong:"Je veux emprunter des livres à la bibliothèque, s'il te plaît.", right:"Je voudrais emprunter des livres à la bibliothèque, s'il te plaît.", why:"Khi xin một cách lịch sự (có kèm « s'il te plaît »), nên dùng conditionnel « je voudrais » thay vì présent « je veux » nghe cộc hơn." },
+            { wrong:"Tu devras regarder ce forum.", right:"Tu devrais regarder ce forum.", why:"Đưa ra LỜI KHUYÊN dùng conditionnel « tu devrais », không phải futur « tu devras » (diễn đạt một sự bắt buộc trong tương lai, không phải lời khuyên)." },
+          ] },
+        ],
+        examples:[
+          "J'aimerais arrêter d'acheter du matériel de sport. — Tôi muốn ngừng mua đồ dùng thể thao.",
+          "Tu pourrais me donner plus d'informations s'il te plaît ? — Bạn có thể cho tôi thêm thông tin được không?",
+          "Ça te dirait d'en discuter ? — Bạn có muốn bàn về chuyện đó không?",
+          "Tu devrais refaire tes photos ! — Bạn nên chụp lại ảnh đi!",
+          "Je souhaiterais économiser de l'argent. — Tôi ước gì có thể tiết kiệm được tiền.",
+          "On pourrait aller au cinéma ce week-end ! — Chúng ta có thể đi xem phim cuối tuần này!",
+        ]
+      },
+
+      // ── 2. Le gérondif ──────────────────────────────────────────────
+      {
+        topic:"Le gérondif — Diễn đạt HAI HÀNH ĐỘNG ĐỒNG THỜI hoặc CÁCH THỨC làm gì",
+        summary:"Gérondif (« en » + động từ chia « -ant ») dùng khi CHỦ NGỮ của câu làm hai việc CÙNG MỘT LÚC, hoặc để trả lời câu hỏi « Comment ? » (làm bằng cách nào). Khác với participe présent, gérondif LUÔN có « en » đứng trước.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: hai hành động trong câu có xảy ra ĐỒNG THỜI, do CÙNG một chủ ngữ thực hiện không? Nếu có, có thể nối chúng bằng gérondif." },
+
+          { type:"table",
+            caption:"2 cách dùng của gérondif",
+            headers:["Chức năng", "Ví dụ"],
+            rows:[
+              ["Đồng thời (simultanéité) — hai việc cùng lúc", "Elles cuisinent en écoutant de la musique."],
+              ["Cách thức (manière) — trả lời « Comment ? »", "Elle est venue à l'atelier en courant."],
+            ] },
+
+          { type:"heading", text:"Cách hình thành" },
+          { type:"formula",
+            parts:["en", "+ gốc của « nous » ở hiện tại (bỏ -ons)", "+ -ant"],
+            example:"regarder: nous regardons → en regardant. faire: nous faisons → en faisant.",
+            note:"Gốc của gérondif LUÔN lấy từ ngôi « nous » ở thì hiện tại, kể cả với động từ bất quy tắc (nous faisons → en faisant, nous prenons → en prenant)." },
+
+          { type:"table",
+            caption:"3 động từ bất quy tắc",
+            headers:["Động từ", "Gérondif"],
+            rows:[
+              ["être", "en étant"],
+              ["avoir", "en ayant"],
+              ["savoir", "en sachant"],
+            ] },
+
+          { type:"callout", variant:"tip", title:"Đại từ bổ ngữ đứng ở đâu?",
+            text:"Nếu động từ trong gérondif có đại từ bổ ngữ (le/la/les/lui/leur/en/y…), đại từ đó đứng NGAY GIỮA « en » và động từ: Je fais du jardinage en lui parlant. (không phải « en parlant lui »)." },
+
+          { type:"callout", variant:"warn", title:"Đừng nhầm gérondif với participe présent",
+            text:"Participe présent (không có « en » đứng trước) mô tả một danh từ hoặc diễn tả nguyên nhân, KHÁC chủ ngữ với động từ chính. Gérondif (LUÔN có « en ») diễn tả một hành động ĐỒNG THỜI với hành động chính, do CÙNG một chủ ngữ. Ở trình độ A2, chỉ cần nhớ: có « en » + -ant = gérondif." },
+
+          { type:"compare", items:[
+            { wrong:"Il travaille chantant.", right:"Il travaille en chantant.", why:"Gérondif LUÔN cần « en » đứng trước động từ chia -ant — thiếu « en » là sai cấu trúc." },
+            { wrong:"Nous bricolons en chante nos chansons préférées.", right:"Nous bricolons en chantant nos chansons préférées.", why:"Sau « en », động từ phải chia ở dạng -ANT (chanter → chantant), không phải một dạng chia khác." },
+          ] },
+        ],
+        examples:[
+          "Elles cuisinent en écoutant de la musique. — Họ nấu ăn trong lúc nghe nhạc.",
+          "Les fans du fait maison s'échangent des idées en mettant en ligne des tutoriels. — Những người mê đồ tự làm chia sẻ ý tưởng bằng cách đăng tải các video hướng dẫn.",
+          "On mange mieux en cuisinant soi-même. — Chúng ta ăn ngon hơn bằng cách tự nấu ăn.",
+          "Il a vendu son vélo en mettant une annonce sur Leboncoin. — Anh ấy đã bán chiếc xe đạp bằng cách đăng tin trên Leboncoin.",
+          "On peut mieux consommer en achetant moins d'objets neufs. — Chúng ta có thể tiêu dùng tốt hơn bằng cách mua ít đồ mới hơn.",
+          "Je fais du jardinage en lui parlant. — Tôi làm vườn trong lúc nói chuyện với anh ấy.",
+        ]
+      },
+
+      // ── 3. Le conditionnel présent (2) ──────────────────────────────
+      {
+        topic:"Le conditionnel présent (2) — Diễn đạt điều TƯỞNG TƯỢNG, GIẢ ĐỊNH",
+        summary:"Vẫn là thức conditionnel présent (chia y hệt phần 1), nhưng lần này dùng cho một chức năng khác: tưởng tượng những điều KHÔNG CÓ THẬT, đặt GIẢ THUYẾT về một thế giới hay tình huống không tồn tại.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: câu này mô tả sự thật, hay một điều TƯỞNG TƯỢNG/KHÔNG CÓ THẬT? Nếu là tưởng tượng, dùng conditionnel présent cho TẤT CẢ các động từ trong câu." },
+
+          { type:"table",
+            caption:"So sánh: sự thật (indicatif) vs. tưởng tượng (conditionnel)",
+            headers:["Loại câu", "Ví dụ"],
+            rows:[
+              ["Sự thật (indicatif présent)", "Il n'y a pas d'argent. On fait les magasins sans payer. Tout est gratuit."],
+              ["Tưởng tượng (conditionnel présent)", "Imaginez un monde où il n'y aurait pas d'argent, où on ferait les magasins sans payer, où tout serait gratuit !"],
+            ] },
+
+          { type:"heading", text:"Cách chia — GIỐNG HỆT conditionnel (1)" },
+          { type:"formula",
+            parts:["Gốc = nguyên thể (hoặc gốc bất quy tắc như futur)", "+ -ais, -ais, -ait, -ions, -iez, -aient"],
+            example:"Je rêve d'avoir des week-ends de quatre jours. J'aurais plus de temps pour moi, je pourrais faire des travaux manuels et j'apprendrais à jardiner.",
+            note:"Cấu trúc chia hoàn toàn giống conditionnel présent (1) — chỉ CHỨC NĂNG khác đi: ở đây không phải xin lịch sự/khuyên/đề nghị, mà là tưởng tượng một điều không có thật." },
+
+          { type:"callout", variant:"tip", title:"Từ khóa báo hiệu câu tưởng tượng",
+            text:"Các cụm « imaginez… », « dans un monde idéal… », « je rêve de… » thường mở đầu cho một chuỗi câu ở conditionnel, vì chúng báo hiệu người nói đang tưởng tượng, không mô tả thực tế." },
+
+          { type:"callout", variant:"warn", title:"Trong câu tưởng tượng, TẤT CẢ động từ đều ở conditionnel",
+            text:"Khi mô tả một thế giới/tình huống tưởng tượng gồm nhiều mệnh đề nối tiếp nhau, phải giữ NHẤT QUÁN conditionnel cho toàn bộ các động từ, không được trộn lẫn với indicatif présent." },
+
+          { type:"compare", items:[
+            { wrong:"Dans un monde idéal, tout le monde fait du troc.", right:"Dans un monde idéal, tout le monde ferait du troc.", why:"« dans un monde idéal » báo hiệu một điều tưởng tượng, nên động từ « faire » phải chia ở conditionnel « ferait », không phải présent « fait »." },
+            { wrong:"Nous n'achèterons pas de choses inutiles dans ce monde imaginaire.", right:"Nous n'achèterions pas de choses inutiles dans ce monde imaginaire.", why:"« monde imaginaire » là điều không có thật, nên phải dùng conditionnel « achèterions », không phải futur « achèterons » (futur nói về tương lai CÓ THẬT sẽ xảy ra)." },
+          ] },
+        ],
+        examples:[
+          "Imaginez un monde où il n'y aurait pas d'argent, où on ferait les magasins sans payer, où tout serait gratuit ! — Hãy tưởng tượng một thế giới không có tiền, nơi người ta đi mua sắm mà không cần trả tiền, nơi mọi thứ đều miễn phí!",
+          "Dans un monde idéal, tout le monde ferait du troc. — Trong một thế giới lý tưởng, mọi người sẽ trao đổi đồ với nhau.",
+          "Nous n'achèterions pas de choses inutiles. — Chúng tôi sẽ không mua những thứ vô ích.",
+          "Tous les gens seraient des consommateurs responsables. — Mọi người sẽ đều là những người tiêu dùng có trách nhiệm.",
+          "Il n'y aurait pas de problèmes écologiques. — Sẽ không có vấn đề sinh thái nào cả.",
+          "La planète se porterait bien. — Trái đất sẽ khỏe mạnh.",
         ]
       },
     ]

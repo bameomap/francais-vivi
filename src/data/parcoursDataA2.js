@@ -11,6 +11,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b6", num:6, fr:"En cuisine", vi:"Vào bếp", grammar:"Le pronom en · L'obligation et l'interdiction · La restriction ne… que", emoji:"🍳" },
   { id:"b7", num:7, fr:"À votre santé !", vi:"Chúc sức khỏe!", grammar:"Les pronoms COD et COI · Le superlatif · Les pronoms interrogatifs (lequel…)", emoji:"💊" },
   { id:"b8", num:8, fr:"Dans les médias", vi:"Trong thế giới truyền thông", grammar:"La cause et la conséquence · Le subjonctif présent · La place des pronoms COD et COI", emoji:"📰" },
+  { id:"b9", num:9, fr:"Consommer responsable", vi:"Tiêu dùng có trách nhiệm", grammar:"Le conditionnel présent (1) · Le gérondif · Le conditionnel présent (2)", emoji:"🔄" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -896,9 +897,115 @@ export const STEP_GROUPS_B8 = [
 
 export const STEP_DEFS_B8 = STEP_GROUPS_B8.flatMap(g => g.steps);
 
+// ─── Unité 9 · Consommer responsable ────────────────────────────────────
+export const STEP_GROUPS_B9 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Réduire ses achats",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b9-livre-reduisons-achats"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Réduisons nos achats !",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b9-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"Neuf ou d'occasion ?",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b9-livre-a-vendre"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"À vendre !",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le conditionnel présent (1)",
+        section:"grammar", view:"grammar" },
+      { id:"c1_verbes", stepKey:"verbes", subIds:["present","conditionnel"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Chia conditionnel présent · 20 động từ",
+        section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b9g1","b9g2","b9g3","b9g4"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"La consommation · 4 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Exprimer un souhait et donner un conseil",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0","w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Liste de souhaits · conseils pour vendre (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Fait maison & bricolage",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b9-livre-fait-maison"],
+        icon:"📜", kind:"Đọc D", color:"#059669", sub:"Le fait maison, c'est tendance",
+        section:"lecture", view:"lecture" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b9-livre-atelier-creatif"],
+        icon:"🎬", kind:"Đọc E", color:"#7B6CF6", sub:"Atelier créatif (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le gérondif",
+        section:"grammar", view:"grammar" },
+      { id:"c2_culture", stepKey:"lecture", subIds:["b9-livre-bricotheques"],
+        icon:"🏛️", kind:"Văn hóa F", color:"#7B6CF6", sub:"Les bricothèques",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b9-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"Réparer, c'est facile !",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b9g5","b9g6","b9g7","b9g8"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le travail manuel · 4 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Proposer quelque chose à son voisin(e)",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Comment mieux consommer (gérondif)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Échanges & troc",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b9-livre-echangez-services"],
+        icon:"📜", kind:"Đọc H", color:"#059669", sub:"Échangez des services",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b9-i"],
+        icon:"🎧", kind:"Nghe I", color:"#0891B2", sub:"Un monde de troc",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le conditionnel présent (2)",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Demander et proposer un service",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w3"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Inviter un(e) ami(e) à une Troc Party",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_g","son_j","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [g] et [ʒ]",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Organiser un troc",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B9 = STEP_GROUPS_B9.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

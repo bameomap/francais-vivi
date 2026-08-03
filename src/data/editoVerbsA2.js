@@ -215,4 +215,41 @@ export const EDITO_A2_VERB_UNITS = [
       { infinitive: "demander",     meaning: "hỏi, yêu cầu" },
     ],
   },
+  {
+    unitId: "b9", unitNum: "9",
+    title: "Consommer responsable",
+    color: "#059669", bg: "#D1FAE5",
+    cefr: "A2",
+    tenses: [
+      { id: "present", label: "Présent",
+        note: "Nguyên thể của động từ = gốc của conditionnel (giống futur simple)" },
+      { id: "conditionnel", label: "Conditionnel présent",
+        note: "Gốc futur + đuôi imparfait -ais/-ais/-ait/-ions/-iez/-aient · dùng để xin lịch sự, ước muốn, khuyên, đề nghị, hoặc tưởng tượng" },
+    ],
+    verbs: [
+      // — bất quy tắc: gốc riêng, giống hệt futur simple —
+      { infinitive: "aller",        meaning: "đi (gốc: ir-, j'irais)" },
+      { infinitive: "avoir",        meaning: "có (gốc: aur-, j'aurais)" },
+      { infinitive: "devoir",       meaning: "phải (gốc: devr-, je devrais)" },
+      { infinitive: "être",         meaning: "thì, là (gốc: ser-, je serais)" },
+      { infinitive: "faire",        meaning: "làm (gốc: fer-, je ferais)" },
+      { infinitive: "pouvoir",      meaning: "có thể (gốc: pourr-, je pourrais)" },
+      { infinitive: "savoir",       meaning: "biết (gốc: saur-, je saurais)" },
+      { infinitive: "venir",        meaning: "đến (gốc: viendr-, je viendrais)" },
+      { infinitive: "voir",         meaning: "thấy (gốc: verr-, je verrais)" },
+      { infinitive: "vouloir",      meaning: "muốn (gốc: voudr-, je voudrais)" },
+      // — đều đặn -er: gốc = nguyên thể —
+      { infinitive: "aimer",        meaning: "yêu, thích (j'aimerais)" },
+      { infinitive: "souhaiter",    meaning: "ước, mong (je souhaiterais)" },
+      { infinitive: "économiser",   meaning: "tiết kiệm" },
+      { infinitive: "emprunter",    meaning: "mượn, vay" },
+      { infinitive: "échanger",     meaning: "trao đổi" },
+      { infinitive: "acheter",      meaning: "mua" },
+      { infinitive: "négocier",     meaning: "thương lượng" },
+      { infinitive: "réparer",      meaning: "sửa chữa" },
+      // — đều đặn -ir/-re —
+      { infinitive: "conseiller",   meaning: "khuyên (je te conseillerais)" },
+      { infinitive: "partager",     meaning: "chia sẻ" },
+    ],
+  },
 ];

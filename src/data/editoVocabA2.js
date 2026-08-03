@@ -901,4 +901,116 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b9", num: "9", title: "Consommer responsable",
+    color: "#059669", bg: "#D1FAE5",
+    groups: [
+      {
+        id: "b9g1", label: "Consommer", icon: "💶",
+        words: [
+          { fr:"acheter",              vi:"mua", ex_fr:"Utilisons-les et arrêtons d'acheter des objets neufs !", ex_vi:"Hãy dùng chúng và ngừng mua đồ mới!" },
+          { fr:"l'argent (m.)",        vi:"tiền", ex_fr:"Je souhaiterais économiser de l'argent.", ex_vi:"Tôi ước gì có thể tiết kiệm được tiền." },
+          { fr:"dépenser",             vi:"tiêu (tiền)", ex_fr:"Nous dépensons trop d'argent.", ex_vi:"Chúng tôi tiêu quá nhiều tiền." },
+          { fr:"donner",               vi:"cho, tặng", ex_fr:"Quand on donne un objet, cet objet est gratuit.", ex_vi:"Khi ta cho một món đồ, món đồ đó là miễn phí." },
+          { fr:"économiser",           vi:"tiết kiệm", ex_fr:"Nous devons économiser pour partir en voyage.", ex_vi:"Chúng tôi phải tiết kiệm để đi du lịch." },
+          { fr:"emprunter",            vi:"mượn, vay", ex_fr:"Je voudrais emprunter plus de livres à la bibliothèque.", ex_vi:"Tôi muốn mượn nhiều sách hơn ở thư viện." },
+          { fr:"jeter",                vi:"vứt bỏ", ex_fr:"Je veux arrêter de jeter.", ex_vi:"Tôi muốn ngừng vứt bỏ đồ." },
+          { fr:"louer",                vi:"thuê, cho thuê", ex_fr:"On pourrait louer une voiture ce week-end !", ex_vi:"Chúng ta có thể thuê một chiếc xe cuối tuần này!" },
+          { fr:"négocier",             vi:"thương lượng (giá)", ex_fr:"Le prix n'est pas fixe, tu peux le négocier.", ex_vi:"Giá không cố định, bạn có thể thương lượng." },
+          { fr:"partager",             vi:"chia sẻ", ex_fr:"Vous devriez partager vos livres avec votre famille.", ex_vi:"Bạn nên chia sẻ sách của mình với gia đình." },
+          { fr:"payer",                vi:"trả tiền", ex_fr:"Comment voulez-vous payer ? Par carte bancaire ?", ex_vi:"Bạn muốn trả tiền như thế nào? Bằng thẻ ngân hàng à?" },
+          { fr:"vendre",               vi:"bán", ex_fr:"Tu ne vas pas vendre ces chaussures !", ex_vi:"Bạn sẽ không bán đôi giày này chứ!" },
+        ]
+      },
+      {
+        id: "b9g2", label: "Le produit", icon: "🏷️",
+        words: [
+          { fr:"cher",                 vi:"đắt", ex_fr:"Ça coûte souvent moins cher de réparer un objet.", ex_vi:"Việc sửa một món đồ thường đỡ tốn kém hơn." },
+          { fr:"la couleur",           vi:"màu sắc", ex_fr:"Vends vélo neuf, couleur noire.", ex_vi:"Bán xe đạp mới, màu đen." },
+          { fr:"gratuit",              vi:"miễn phí", ex_fr:"Certaines bricothèques proposent même des ateliers gratuits.", ex_vi:"Một số thư viện dụng cụ còn tổ chức các buổi hội thảo miễn phí." },
+          { fr:"la marque",            vi:"nhãn hiệu", ex_fr:"Il faut préciser la marque, la taille et la couleur.", ex_vi:"Cần ghi rõ nhãn hiệu, kích cỡ và màu sắc." },
+          { fr:"neuf ≠ d'occasion",    vi:"mới ≠ cũ (đã qua sử dụng)", ex_fr:"On voit ce marché de l'occasion qui explose.", ex_vi:"Ta thấy thị trường đồ cũ đang bùng nổ." },
+          { fr:"le prix",              vi:"giá", ex_fr:"Le prix aussi est important.", ex_vi:"Giá cả cũng quan trọng." },
+          { fr:"en promotion",         vi:"đang khuyến mãi", ex_fr:"Je suis toujours attirée par les soldes et les produits en promotion.", ex_vi:"Tôi luôn bị hấp dẫn bởi hàng giảm giá và sản phẩm khuyến mãi." },
+          { fr:"la taille",            vi:"kích cỡ", ex_fr:"Précise la taille de chaque vêtement.", ex_vi:"Hãy ghi rõ kích cỡ của mỗi món quần áo." },
+        ]
+      },
+      {
+        id: "b9g3", label: "Les personnes", icon: "🧑‍🤝‍🧑",
+        words: [
+          { fr:"l'acheteur, l'acheteuse", vi:"người mua", ex_fr:"Pour le même article, les acheteurs paieront toujours le minimum.", ex_vi:"Với cùng một món hàng, người mua luôn trả mức giá thấp nhất." },
+          { fr:"le client, la cliente", vi:"khách hàng", ex_fr:"J'ai déjà trouvé une cliente pour une robe !", ex_vi:"Tôi đã tìm được một khách hàng cho chiếc váy rồi!" },
+          { fr:"le consommateur, la consommatrice", vi:"người tiêu dùng", ex_fr:"Je veux mieux consommer, je veux arrêter de jeter.", ex_vi:"Tôi muốn tiêu dùng tốt hơn, tôi muốn ngừng vứt bỏ." },
+          { fr:"le particulier",       vi:"cá nhân (không phải cửa hàng)", ex_fr:"Votre site de petites annonces entre particuliers.", ex_vi:"Trang rao vặt giữa các cá nhân của bạn." },
+          { fr:"l'utilisateur, l'utilisatrice", vi:"người sử dụng", ex_fr:"Il y a combien d'utilisateurs du Leboncoin ?", ex_vi:"Có bao nhiêu người dùng trang Leboncoin?" },
+          { fr:"le vendeur, la vendeuse", vi:"người bán", ex_fr:"Regarde aussi les annonces proposées par les autres vendeurs !", ex_vi:"Hãy xem thêm những tin rao của các người bán khác!" },
+        ]
+      },
+      {
+        id: "b9g4", label: "Les catégories de produits", icon: "🛍️",
+        words: [
+          { fr:"l'alimentation (f.)",  vi:"thực phẩm", ex_fr:"Ça ne concerne pas l'alimentation ou les produits de beauté.", ex_vi:"Điều đó không liên quan đến thực phẩm hay mỹ phẩm." },
+          { fr:"l'électroménager (m.)", vi:"đồ điện gia dụng", ex_fr:"Que faites-vous quand un de vos appareils électroménagers ne fonctionne plus ?", ex_vi:"Bạn làm gì khi một thiết bị điện gia dụng của bạn không hoạt động nữa?" },
+          { fr:"le matériel de sport", vi:"dụng cụ thể thao", ex_fr:"J'aimerais arrêter d'acheter du matériel de sport.", ex_vi:"Tôi muốn ngừng mua dụng cụ thể thao." },
+          { fr:"le meuble",            vi:"đồ nội thất", ex_fr:"Je vais bientôt déménager et je veux vendre mes meubles.", ex_vi:"Tôi sắp chuyển nhà và muốn bán đồ nội thất của mình." },
+          { fr:"le multimédia",        vi:"đồ đa phương tiện", ex_fr:"La partie multimédia, les téléphones, les ordinateurs…", ex_vi:"Mảng đa phương tiện, điện thoại, máy tính…" },
+          { fr:"le produit de beauté", vi:"mỹ phẩm", ex_fr:"Les grands magasins vendent des kits pour fabriquer ses produits de beauté.", ex_vi:"Các cửa hàng lớn bán bộ dụng cụ để tự làm mỹ phẩm." },
+          { fr:"le vêtement",          vi:"quần áo", ex_fr:"J'essaie de vendre des vêtements sur Leboncoin.", ex_vi:"Tôi đang cố bán quần áo trên Leboncoin." },
+        ]
+      },
+      {
+        id: "b9g5", label: "Les travaux manuels", icon: "🧵",
+        words: [
+          { fr:"l'atelier (m.)",       vi:"xưởng, buổi hội thảo thủ công", ex_fr:"Est-ce que vous aimeriez participer à cet atelier ?", ex_vi:"Bạn có muốn tham gia buổi hội thảo này không?" },
+          { fr:"la couture",           vi:"may vá", ex_fr:"On fait de la couture en écoutant la radio.", ex_vi:"Chúng tôi may vá trong lúc nghe radio." },
+          { fr:"créer",                vi:"sáng tạo, tạo ra", ex_fr:"Beaucoup de personnes aiment créer.", ex_vi:"Nhiều người thích sáng tạo." },
+          { fr:"la cuisine",           vi:"nấu ăn", ex_fr:"Ils sont de plus en plus nombreux à pratiquer la cuisine.", ex_vi:"Ngày càng có nhiều người thực hành nấu ăn." },
+          { fr:"la décoration",        vi:"trang trí", ex_fr:"Le fait maison se développe aussi dans la décoration d'intérieur.", ex_vi:"Trào lưu tự làm cũng phát triển trong trang trí nội thất." },
+          { fr:"la mécanique",         vi:"cơ khí, sửa xe", ex_fr:"Elle a réparé sa voiture en faisant de la mécanique.", ex_vi:"Cô ấy đã sửa xe bằng cách làm cơ khí." },
+          { fr:"monter un meuble",     vi:"lắp ráp đồ nội thất", ex_fr:"Vous devez monter un meuble ?", ex_vi:"Bạn cần lắp ráp một món đồ nội thất à?" },
+          { fr:"le tricot",            vi:"đan len", ex_fr:"Elles tricotent en regardant la télévision.", ex_vi:"Họ đan len trong lúc xem tivi." },
+          { fr:"le tutoriel",          vi:"video hướng dẫn", ex_fr:"J'apprends la mécanique en regardant des tutoriels.", ex_vi:"Tôi học cơ khí bằng cách xem video hướng dẫn." },
+        ]
+      },
+      {
+        id: "b9g6", label: "Les matières", icon: "🧶",
+        words: [
+          { fr:"en bois",              vi:"bằng gỗ", ex_fr:"Poncer une table en bois.", ex_vi:"Đánh giấy nhám một cái bàn gỗ." },
+          { fr:"en carton",            vi:"bằng bìa carton", ex_fr:"Une boîte en carton.", ex_vi:"Một cái hộp bìa carton." },
+          { fr:"en coton",             vi:"bằng vải cotton", ex_fr:"Un t-shirt en coton.", ex_vi:"Một chiếc áo phông bằng vải cotton." },
+          { fr:"en cuir",              vi:"bằng da", ex_fr:"Des chaussures en cuir.", ex_vi:"Một đôi giày da." },
+          { fr:"en fer",               vi:"bằng sắt", ex_fr:"Une clé en fer.", ex_vi:"Một chiếc chìa khóa bằng sắt." },
+          { fr:"en jean",              vi:"bằng vải jean", ex_fr:"Je fais un sac en jean.", ex_vi:"Tôi làm một cái túi bằng vải jean." },
+          { fr:"en laine",             vi:"bằng len", ex_fr:"J'ai acheté de la laine.", ex_vi:"Tôi đã mua len." },
+          { fr:"en papier",            vi:"bằng giấy", ex_fr:"Un origami en papier plié.", ex_vi:"Một hình origami bằng giấy gấp." },
+          { fr:"en plastique",         vi:"bằng nhựa", ex_fr:"Un objet en plastique se recycle facilement.", ex_vi:"Một món đồ bằng nhựa dễ tái chế." },
+          { fr:"en tissu",             vi:"bằng vải", ex_fr:"Nous avons trouvé du tissu à la mercerie.", ex_vi:"Chúng tôi đã tìm được vải ở tiệm đồ may." },
+          { fr:"en verre",             vi:"bằng thủy tinh", ex_fr:"Une bouteille en verre.", ex_vi:"Một cái chai thủy tinh." },
+        ]
+      },
+      {
+        id: "b9g7", label: "La réparation", icon: "🔧",
+        words: [
+          { fr:"abîmé(e)",             vi:"hư hỏng, bị hỏng", ex_fr:"Un vêtement abîmé est un vêtement en mauvais état.", ex_vi:"Một cái áo bị hỏng là một cái áo trong tình trạng xấu." },
+          { fr:"cassé(e)",             vi:"bị gãy, bị vỡ", ex_fr:"Mon frigo est cassé.", ex_vi:"Tủ lạnh của tôi bị hỏng." },
+          { fr:"changer une pièce",    vi:"thay một bộ phận", ex_fr:"Il faut changer une pièce et c'est compliqué.", ex_vi:"Cần phải thay một bộ phận và việc đó phức tạp." },
+          { fr:"la panne",             vi:"sự cố, hỏng hóc", ex_fr:"La moitié des pannes n'ont pas besoin de pièces.", ex_vi:"Một nửa số sự cố không cần đến phụ tùng thay thế." },
+          { fr:"la pièce",             vi:"bộ phận, phụ tùng", ex_fr:"Vous la trouverez dans notre catalogue.", ex_vi:"Bạn sẽ tìm thấy nó trong danh mục của chúng tôi." },
+          { fr:"poncer",               vi:"đánh giấy nhám", ex_fr:"Poncer une table en bois.", ex_vi:"Đánh giấy nhám một cái bàn gỗ." },
+          { fr:"réparer",              vi:"sửa chữa", ex_fr:"J'ai essayé de le réparer mais je n'ai pas trouvé la panne.", ex_vi:"Tôi đã thử sửa nhưng không tìm ra sự cố." },
+          { fr:"le technicien, la technicienne", vi:"kỹ thuật viên", ex_fr:"Je vais demander à un technicien de faire cette réparation.", ex_vi:"Tôi sẽ nhờ một kỹ thuật viên làm việc sửa chữa này." },
+        ]
+      },
+      {
+        id: "b9g8", label: "L'équipement", icon: "🪜",
+        words: [
+          { fr:"l'échelle (f.)",       vi:"cái thang", ex_fr:"Installer une étagère ? Vous manquez d'outils…", ex_vi:"Lắp một cái kệ? Bạn thiếu dụng cụ…" },
+          { fr:"l'outil (m.)",         vi:"dụng cụ", ex_fr:"Vous avez l'embarras du choix !", ex_vi:"Bạn có vô vàn lựa chọn!" },
+          { fr:"la ponceuse",          vi:"máy đánh giấy nhám", ex_fr:"Scie, ponceuse, échelle, tondeuse…", ex_vi:"Cưa, máy đánh giấy nhám, thang, máy cắt cỏ…" },
+          { fr:"la scie",              vi:"cái cưa", ex_fr:"Quel objet on utilise pour couper du bois ?", ex_vi:"Người ta dùng đồ gì để cắt gỗ?" },
+          { fr:"la tondeuse",          vi:"máy cắt cỏ", ex_fr:"Quel objet on utilise pour couper l'herbe du jardin ?", ex_vi:"Người ta dùng đồ gì để cắt cỏ trong vườn?" },
+        ]
+      },
+    ]
+  },
 ];

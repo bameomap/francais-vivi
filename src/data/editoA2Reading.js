@@ -1506,6 +1506,205 @@ Au fait ! La tour Eiffel est restée le plus haut monument du monde pendant 40 a
       { id: "b8-tour-q6", type: "open", prompt: "Production orale : que pensez-vous de la tour Eiffel ? Comment la trouvez-vous ?" },
     ],
   },
+
+  // ═══════════════ Unité 9 — Consommer responsable ═══════════════
+
+  // ── A · Réduisons nos achats ! (p. 125) ─────────────────────────────
+  {
+    id: "b9-livre-reduisons-achats",
+    unit: 9,
+    unitTitle: "Consommer responsable",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 125,
+    title: "Réduisons nos achats !",
+    instruction: "Lina_712 publie sa liste de souhaits du défi « Rien de neuf » sur Instagram.",
+    text: `Lina_712
+Ma liste de souhaits du défi « Rien de neuf »
+
+Des millions d'objets existent déjà. Utilisons-les et arrêtons d'acheter des objets neufs !
+
+➜ Je voudrais emprunter plus de livres à la bibliothèque. En général, je ne les relis pas et ils restent sur une étagère. FAIT ✅
+➜ J'aimerais arrêter d'acheter du matériel de sport. C'est cher et je dépense trop d'argent pour mes loisirs. (PRESQUE)
+➜ Je souhaiterais économiser de l'argent mais je suis toujours attirée par les soldes et les produits en promotion. J'espère que je vais apprendre à résister ! À FAIRE !
+
+#riendeneuf #consommationresponsable #occasion #partage
+
+Le principe du défi « Rien de neuf » est d'essayer de réduire au maximum ses achats d'objets neufs (électroménager, meubles, vêtements...) pendant un an. Ça ne concerne pas l'alimentation ou les produits de beauté. Ça permet de réfléchir à sa consommation et de découvrir des alternatives au neuf (achat d'occasion, don, partage...). C'est un défi écologique, économique et stimulant !
+
+Commentaires
+Renato_à_Paris (il y a 2 j., 3 J'aime) : J'ai envie d'essayer ce défi. Tu pourrais me donner plus d'informations s'il te plaît ?
+Pat_bouquine (il y a 2 j., 4 J'aime) : Tu peux aussi partager tes livres avec tes amis.
+Jo_le_sportif (il y a 1 j., 2 J'aime) : Tu as pensé à la location ? Beaucoup de magasins louent du matériel de sport (vélos, tentes, kayaks...). C'est un bon moyen d'économiser.
+Sam_Eddie (il y a 1 j., 3 J'aime) : Je te comprends ! Avant, j'avais le même problème avec les offres « un produit acheté = un produit gratuit ». Ça te dirait d'en discuter ?`,
+    questions: [
+      { id: "b9-reduisons-q1", type: "open", prompt: "Entrée en matière : observez le document. Qu'est-ce que c'est ?" },
+      { id: "b9-reduisons-q2", type: "multiple_choice", prompt: "1re lecture : quel est le principe du défi « Rien de neuf » ?", options: ["Limiter ses achats d'objets neufs pendant un an.", "Ne pas acheter de produits neufs pendant un an."], answer: "Limiter ses achats d'objets neufs pendant un an." },
+      { id: "b9-reduisons-q3", type: "multi_select", prompt: "2e lecture : vrai ou faux ?", options: ["Ce défi concerne tous les produits. (Faux)", "Avec ce défi, on découvre de nouvelles manières de consommer. (Vrai)", "Avec ce défi, on peut économiser de l'argent. (Vrai)"], answer: ["Avec ce défi, on découvre de nouvelles manières de consommer. (Vrai)", "Avec ce défi, on peut économiser de l'argent. (Vrai)"] },
+      { id: "b9-reduisons-q4", type: "short_answer", prompt: "Lina_712 participe au défi. Quel est son souhait déjà réalisé, son souhait pas encore réalisé et son souhait bientôt réalisé ?", answer: "Déjà réalisé : emprunter plus de livres à la bibliothèque. Pas encore réalisé : économiser de l'argent. Bientôt réalisé : arrêter d'acheter du matériel de sport." },
+      { id: "b9-reduisons-q5", type: "short_answer", prompt: "Lisez les commentaires : comment lire sans acheter de livres neufs ? Comment faire du sport sans acheter de matériel neuf ?", answer: "En partageant ses livres avec ses amis ; en louant du matériel de sport (vélos, tentes, kayaks...)." },
+      { id: "b9-reduisons-q6", type: "matching", prompt: "Vocabulaire : associez les mots de sens contraire. a. neuf / b. dépenser / c. l'achat", answer: "a. neuf ≠ d'occasion\nb. dépenser ≠ économiser\nc. l'achat ≠ la location" },
+      { id: "b9-reduisons-q7", type: "open", prompt: "Production écrite : vous avez décidé de participer à ce défi. Vous postez votre liste de souhaits sur Instagram et vous expliquez pourquoi vous faites ces souhaits." },
+    ],
+  },
+
+  // ── C · À vendre ! (p. 128) ──────────────────────────────────────────
+  {
+    id: "b9-livre-a-vendre",
+    unit: 9,
+    unitTitle: "Consommer responsable",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 128,
+    title: "À vendre !",
+    instruction: "Sur un forum, Lou demande des conseils pour vendre des vêtements sur Leboncoin.",
+    text: `Lou — Publié il y a 18 heures
+Bonjour ! J'essaie de vendre des vêtements sur Leboncoin mais sans succès 😢 Est-ce que vous auriez des conseils à me donner ?
+♥ J'aime | Répondre — 5 réponses
+
+Clem (il y a 17 heures) : Salut Lou ! Déjà, ton annonce doit être complète. Il faut préciser la marque, la taille et la couleur de chaque vêtement. Et pour les photos, il y a quelques trucs pour mettre tes vêtements en valeur. Par exemple, c'est mieux de porter les vêtements pour les photographier. 📷
+Lou (il y a 16 heures) : C'est vrai que mes photos ne sont pas géniales…
+Clem (il y a 16 heures) : Tu devrais les refaire ! Et pour avoir une belle lumière, je te conseille de les prendre vers midi.
+Greg (il y a 14 heures) : Le prix aussi est important. Tu pourrais lire Je saute sur l'occasion de Pascal Poulin. Dans la deuxième partie, il donne des conseils pour choisir son prix et négocier. Regarde aussi les annonces proposées par les autres vendeurs ! C'est sûr que, pour le même article, les acheteurs paieront toujours le minimum…
+Lou (il y a 11 heures) : Merci pour vos conseils ! J'ai modifié mon annonce et j'ai déjà trouvé une cliente pour une robe !!`,
+    questions: [
+      { id: "b9-vendre-q1", type: "open", prompt: "Entrée en matière : est-ce que vous écrivez sur des forums de discussion ? Pourquoi ?" },
+      { id: "b9-vendre-q2", type: "short_answer", prompt: "1re lecture : quel est le problème de Lou ?", answer: "Elle n'arrive pas à vendre ses vêtements sur Leboncoin." },
+      { id: "b9-vendre-q3", type: "short_answer", prompt: "Que font Clem et Greg pour l'aider ?", answer: "Ils lui donnent des conseils : Clem sur l'annonce et les photos, Greg sur le prix." },
+      { id: "b9-vendre-q4", type: "short_answer", prompt: "2e lecture : que faut-il écrire dans l'annonce ?", answer: "La marque, la taille et la couleur de chaque vêtement." },
+      { id: "b9-vendre-q5", type: "short_answer", prompt: "Comment faire de belles photos ?", answer: "Porter les vêtements pour les photographier et les prendre vers midi pour avoir une belle lumière." },
+      { id: "b9-vendre-q6", type: "short_answer", prompt: "Que faut-il faire avant de fixer un prix de vente ?", answer: "Regarder les annonces proposées par les autres vendeurs pour le même article." },
+      { id: "b9-vendre-q7", type: "short_answer", prompt: "Vocabulaire : trouvez dans le texte un synonyme d'« une acheteuse ».", answer: "Une cliente." },
+      { id: "b9-vendre-q8", type: "open", prompt: "Production écrite ➜ DELF : Félix a posté un message sur un forum pour demander comment vendre ses meubles avant de déménager. Vous lui répondez et vous lui donnez des conseils." },
+    ],
+  },
+
+  // ── D · Le fait maison, c'est tendance (p. 130) ─────────────────────
+  {
+    id: "b9-livre-fait-maison",
+    unit: 9,
+    unitTitle: "Consommer responsable",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 130,
+    title: "Le fait maison, c'est tendance",
+    instruction: "Un article sur la nouvelle passion des Français pour les activités créatives et le fait maison.",
+    text: `Depuis quelques années, les Français ont une grande passion pour les activités créatives et le fait maison. Ils sont de plus en plus nombreux à pratiquer la cuisine, le jardinage, le bricolage, la décoration d'intérieur ou la mécanique.
+
+Alors comment expliquer cette nouvelle tendance ? D'abord, beaucoup de personnes aiment créer. Elles font ça par plaisir. Elles cuisinent en écoutant de la musique, elles tricotent en regardant la télévision et elles se détendent. D'autres personnes choisissent le fait maison pour des raisons économiques. Ça coûte souvent moins cher de fabriquer un objet ou de réparer un objet cassé plutôt que de l'acheter dans un magasin. Enfin, c'est aussi une pratique écologique, meilleure pour la planète.
+
+Les fans du fait maison s'échangent des idées en mettant en ligne des milliers de tutoriels et d'articles de blog chaque jour. Les magasins de bricolage et de loisirs créatifs connaissent aussi beaucoup de succès. De nombreuses merceries ouvrent pour vendre du matériel de couture et de tricot. Elles proposent aussi souvent des ateliers créatifs (fabrication de mouchoirs en tissu, d'écharpe en laine, etc.). Pour finir, le fait maison se développe aussi dans les grands magasins. Ils s'adaptent à cette pratique en vendant des kits pour fabriquer ses repas, ses produits de beauté et ses produits ménagers.`,
+    questions: [
+      { id: "b9-faitmaison-q1", type: "open", prompt: "Entrée en matière : lisez le titre de l'article. Qu'est-ce qui peut être fait maison ?" },
+      { id: "b9-faitmaison-q2", type: "short_answer", prompt: "1re lecture : à quelles activités s'intéressent de plus en plus de Français ?", answer: "La cuisine, le jardinage, le bricolage, la décoration d'intérieur et la mécanique." },
+      { id: "b9-faitmaison-q3", type: "short_answer", prompt: "2e lecture : pourquoi les Français aiment le fait maison ?", answer: "Par plaisir de créer, pour des raisons économiques (moins cher que d'acheter) et parce que c'est écologique." },
+      { id: "b9-faitmaison-q4", type: "short_answer", prompt: "Comment font-ils pour s'échanger des idées ?", answer: "En mettant en ligne des milliers de tutoriels et d'articles de blog chaque jour." },
+      { id: "b9-faitmaison-q5", type: "short_answer", prompt: "Quelles conséquences le fait maison a sur les commerces ?", answer: "Les magasins de bricolage et de loisirs créatifs, ainsi que les merceries, connaissent beaucoup de succès ; les grands magasins vendent des kits pour fabriquer ses repas, produits de beauté et produits ménagers." },
+      { id: "b9-faitmaison-q6", type: "open", prompt: "Vocabulaire : à quelles activités correspondent des pelotes de laine et des aiguilles à tricoter, une machine à coudre, une clé à molette ?" },
+      { id: "b9-faitmaison-q7", type: "open", prompt: "Production écrite : vous organisez un atelier créatif dans votre école. Vous préparez une affiche pour présenter cet atelier (date, lieu, activité...)." },
+    ],
+  },
+
+  // ── E · Atelier créatif (vidéo, p. 131) ──────────────────────────────
+  {
+    id: "b9-livre-atelier-creatif",
+    unit: 9,
+    unitTitle: "Consommer responsable",
+    source: "livre",
+    section: "compréhension audiovisuelle",
+    page: 131,
+    title: "Atelier créatif",
+    instruction: "Résumé du reportage vidéo : une femme utilise une machine à coudre dans un atelier créatif situé dans un magasin de bricolage/loisirs créatifs.",
+    text: `Ce reportage montre un atelier créatif où des clientes fabriquent des accessoires (comme des sacs) à partir de vieux objets, en utilisant notamment une machine à coudre.
+
+Ces ateliers sont écologiques car ils permettent de réutiliser des objets ou des matériaux qui, sans cela, seraient jetés : on recycle plutôt que de mettre à la poubelle.
+
+Ils sont aussi devenus de véritables « lieux de vie » : les clientes s'y retrouvent régulièrement, échangent des idées et des conseils, et créent du lien social autour d'une passion commune pour le fait maison et la réparation.`,
+    questions: [
+      { id: "b9-atelierav-q1", type: "open", prompt: "Entrée en matière : regardez le titre et l'image. À votre avis, quel est le thème de la vidéo ?" },
+      { id: "b9-atelierav-q2", type: "short_answer", prompt: "1er visionnage : dans quel type de magasin se trouve cet atelier ?", answer: "Un magasin de bricolage / loisirs créatifs." },
+      { id: "b9-atelierav-q3", type: "short_answer", prompt: "Les clientes fabriquent quel accessoire ? À partir de quel objet ?", answer: "Un accessoire (comme un sac), à partir d'un vieil objet ou d'un vêtement abîmé." },
+      { id: "b9-atelierav-q4", type: "short_answer", prompt: "2e visionnage : pourquoi ces ateliers sont écologiques ?", answer: "Parce qu'ils permettent de réutiliser et de recycler des objets, plutôt que de les jeter." },
+      { id: "b9-atelierav-q5", type: "short_answer", prompt: "Pourquoi sont-ils des « lieux de vie » ?", answer: "Parce que les clientes s'y retrouvent régulièrement, échangent des idées et créent du lien social." },
+      { id: "b9-atelierav-q6", type: "matching", prompt: "Vocabulaire : associez les synonymes. a. recycler / b. mettre à la poubelle / c. recoudre", answer: "a. recycler → réutiliser\nb. mettre à la poubelle → jeter\nc. recoudre → réparer" },
+      { id: "b9-atelierav-q7", type: "multiple_choice", prompt: "Un vêtement abîmé est un vêtement…", options: ["en bon état.", "en mauvais état."], answer: "en mauvais état." },
+      { id: "b9-atelierav-q8", type: "open", prompt: "Production orale : est-ce que vous aimeriez participer à cet atelier ? Pourquoi ?" },
+    ],
+  },
+
+  // ── F · Les bricothèques (p. 132) ────────────────────────────────────
+  {
+    id: "b9-livre-bricotheques",
+    unit: 9,
+    unitTitle: "Consommer responsable",
+    source: "livre",
+    section: "culture(s)",
+    page: 132,
+    title: "Les bricothèques",
+    instruction: "Culture(s) — Les bons plans pour bricoler. Un article sur les bricothèques, ces lieux où l'on emprunte des outils.",
+    text: `Vous devez monter un meuble ? Installer une étagère ? Poncer une table en bois ? Mais vous manquez d'outils et, surtout, vous n'avez pas envie de dépenser de l'argent… Empruntez-les !
+
+Une bricothèque fonctionne un peu comme une bibliothèque, avec une grosse différence : ici pas de romans sur les étagères, mais des outils, plein d'outils ! Scie, ponceuse, échelle, tondeuse… Vous avez l'embarras du choix¹ ! Il suffit de prendre un abonnement annuel (une dizaine d'euros en général) et de verser une caution². La durée de l'emprunt est en général de trois à quatre jours. Certaines bricothèques proposent même des ateliers gratuits animés par des bénévoles.
+
+Si vous vivez trop loin d'une bricothèque, pourquoi ne pas emprunter ou louer des outils à vos voisins ? Et vous pouvez aussi mettre votre matériel en location.
+
+Une façon simple d'éviter de grosses dépenses inutiles !
+
+https://www.femmeactuelle.fr
+1 Beaucoup de choix. 2 Une garantie.`,
+    questions: [
+      { id: "b9-bricotheque-q1", type: "short_answer", prompt: "1re lecture : qu'est-ce qu'une bricothèque ?", answer: "Un lieu qui fonctionne comme une bibliothèque, mais où l'on emprunte des outils au lieu de livres." },
+      { id: "b9-bricotheque-q2", type: "short_answer", prompt: "2e lecture : comment fonctionnent les emprunts dans les bricothèques ?", answer: "Il faut prendre un abonnement annuel (une dizaine d'euros) et verser une caution ; l'emprunt dure en général trois à quatre jours." },
+      { id: "b9-bricotheque-q3", type: "short_answer", prompt: "Quelle autre activité peut-on faire dans certaines bricothèques ?", answer: "Participer à des ateliers gratuits animés par des bénévoles." },
+      { id: "b9-bricotheque-q4", type: "short_answer", prompt: "Quelle autre solution d'emprunt est proposée ?", answer: "Emprunter ou louer des outils à ses voisins." },
+      { id: "b9-bricotheque-q5", type: "short_answer", prompt: "Quels outils sont cités dans le texte ?", answer: "Scie, ponceuse, échelle, tondeuse." },
+      { id: "b9-bricotheque-q6", type: "open", prompt: "Production écrite : imaginez un nouveau lieu (une « ...thèque ») où on emprunte des choses : des vêtements, du matériel de sport, des meubles... Présentez le fonctionnement de ce lieu dans un court article." },
+    ],
+  },
+
+  // ── H · Échangez des services (p. 134) ───────────────────────────────
+  {
+    id: "b9-livre-echangez-services",
+    unit: 9,
+    unitTitle: "Consommer responsable",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 134,
+    title: "Échangez des services",
+    instruction: "Un courriel de Fanny Latour à une accorderie, un système d'échange de services entre habitants d'un même lieu.",
+    text: `Courriel
+De : Fanny Latour
+Objet : Vous rejoindre
+
+Bonjour,
+
+J'ai lu un article sur votre accorderie et je suis très intéressée par son fonctionnement. Moi aussi, je souhaiterais échanger des services avec d'autres habitants de la ville. Pourriez-vous m'expliquer comment faire ?
+
+Pour me présenter en quelques mots, je m'appelle Fanny, j'ai 28 ans et je viens d'arriver dans la région.
+
+Avant je vivais à la campagne dans une maison avec un grand jardin. Maintenant, j'habite dans un appartement en ville et le jardinage me manque. J'adore ça et j'ai la main verte ! Je propose donc de faire du jardinage le soir et le week-end.
+
+En plus de ça, j'aime aussi conduire et j'utilise souvent ma voiture pour visiter la région. Donc je peux faire du covoiturage. C'est sympa de voyager à plusieurs !
+
+En échange, j'ai besoin d'aide en allemand parce que je travaille pour une entreprise allemande. J'ai un très bon niveau en grammaire et à l'écrit, mais j'aimerais améliorer l'oral. Je cherche donc quelqu'un avec qui pratiquer cette langue.
+
+J'attends votre réponse avec impatience. J'ai très envie de rejoindre votre accorderie !
+
+Bien cordialement,
+Fanny Latour
+
+Au fait ! Les accorderies viennent du Québec. Ce sont des systèmes d'échange de services entre habitants d'un même lieu.
+
+Infographie — Échanger et coopérer : vous aussi devenez accordeur(euse) ! Catégories : Aide aux personnes âgées, Cuisine, Garde d'enfants, Jardinage, Repassage, Déménagement, Ménage, Promenade du chien.`,
+    questions: [
+      { id: "b9-services-q1", type: "open", prompt: "Entrée en matière : regardez l'affiche. Que font les membres d'une accorderie ?" },
+      { id: "b9-services-q2", type: "short_answer", prompt: "1re lecture : dans quel objectif Fanny Latour écrit à l'accorderie ?", answer: "Pour rejoindre l'accorderie et échanger des services avec d'autres habitants de la ville." },
+      { id: "b9-services-q3", type: "short_answer", prompt: "2e lecture : Fanny propose quels services ? Pourquoi ?", answer: "Le jardinage (elle adore ça et a la main verte) et le covoiturage (elle aime conduire et utilise souvent sa voiture pour visiter la région)." },
+      { id: "b9-services-q4", type: "short_answer", prompt: "Qu'est-ce qu'elle recherche en échange ? Pourquoi ?", answer: "De l'aide en allemand à l'oral, parce qu'elle travaille pour une entreprise allemande et veut améliorer son niveau à l'oral." },
+      { id: "b9-services-q5", type: "matching", prompt: "Vocabulaire : quelles expressions du document signifient a. être bon en jardinage ? b. voyager à plusieurs dans une voiture ?", answer: "a. avoir la main verte\nb. faire du covoiturage" },
+      { id: "b9-services-q6", type: "open", prompt: "Production orale ➜ DELF : à deux ! Vous avez besoin de faire du bricolage dans votre appartement. Vous demandez de l'aide à votre voisin(e). Vous lui proposez un service en échange. Jouez la scène." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

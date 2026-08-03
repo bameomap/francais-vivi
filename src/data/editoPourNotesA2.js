@@ -589,4 +589,83 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 9 · Consommer responsable ────────────────────────────────
+  "b9-a": [
+    {
+      heading: "Pour exprimer un souhait, un désir",
+      structure: "Diễn đạt một ước muốn: « espérer que + phrase », « avoir envie de + inf. », « vouloir/souhaiter + inf. » ở présent, hoặc — LỊCH SỰ HƠN — ở conditionnel présent (je voudrais, je souhaiterais, j'aimerais).",
+      phrases: [
+        { fr: "J'espère que je vais apprendre à résister.", vi: "Tôi hy vọng mình sẽ học được cách kiềm chế." },
+        { fr: "J'ai envie d'essayer ce défi.", vi: "Tôi rất muốn thử thử thách này." },
+        { fr: "Je veux/Je voudrais emprunter des livres.", vi: "Tôi muốn mượn sách." },
+        { fr: "Je souhaite/Je souhaiterais économiser de l'argent.", vi: "Tôi mong/Tôi ước gì có thể tiết kiệm được tiền." },
+        { fr: "J'aimerais arrêter d'acheter du matériel de sport.", vi: "Tôi muốn ngừng mua dụng cụ thể thao." },
+      ],
+    },
+  ],
+
+  "b9-c": [
+    {
+      heading: "Pour donner un conseil (2)",
+      structure: "6 cách khuyên ai làm gì: « il faut + inf. » (nêu chung chung), « c'est mieux de + inf. », « tu devrais + inf. » (conditionnel), « je te conseille de + inf. », « tu pourrais + inf. » (conditionnel, nhẹ nhàng hơn), hoặc mệnh lệnh cách « Regarde… ! ».",
+      phrases: [
+        { fr: "Il faut préciser la marque.", vi: "Cần phải ghi rõ nhãn hiệu." },
+        { fr: "C'est mieux de porter les vêtements.", vi: "Tốt hơn là nên mặc quần áo (khi chụp ảnh)." },
+        { fr: "Tu devrais refaire les photos.", vi: "Bạn nên chụp lại ảnh." },
+        { fr: "Je te conseille de prendre tes photos vers midi.", vi: "Tôi khuyên bạn nên chụp ảnh vào khoảng giữa trưa." },
+        { fr: "Tu pourrais lire ce livre.", vi: "Bạn có thể đọc cuốn sách này." },
+        { fr: "Regarde aussi les autres annonces !", vi: "Hãy xem thêm các tin rao khác nữa!" },
+      ],
+    },
+  ],
+
+  "b9-h": [
+    {
+      heading: "Pour demander un service",
+      structure: "Xin giúp đỡ một cách lịch sự bằng conditionnel « Pourriez-vous… ? », hoặc nêu rõ nhu cầu bằng « avoir besoin de + nom », « chercher quelqu'un avec qui + inf. ».",
+      phrases: [
+        { fr: "Pourriez-vous m'expliquer ?", vi: "Bạn có thể giải thích cho tôi được không?" },
+        { fr: "J'ai besoin d'aide en allemand.", vi: "Tôi cần giúp đỡ về tiếng Đức." },
+        { fr: "Je cherche quelqu'un avec qui pratiquer l'allemand.", vi: "Tôi đang tìm người để luyện tập tiếng Đức cùng." },
+      ],
+    },
+    {
+      heading: "Pour proposer un service",
+      structure: "Đề nghị giúp đỡ ai bằng « souhaiter + inf. », « proposer de + inf. », hoặc đơn giản « pouvoir + inf. » để nêu khả năng của mình.",
+      phrases: [
+        { fr: "Je souhaiterais échanger des services.", vi: "Tôi mong muốn được trao đổi dịch vụ." },
+        { fr: "Je propose de faire du jardinage.", vi: "Tôi đề nghị làm vườn." },
+        { fr: "Je peux faire du covoiturage.", vi: "Tôi có thể đi chung xe (covoiturage)." },
+      ],
+    },
+  ],
+
+  "b9-atelier": [
+    {
+      heading: "Pour écrire une annonce",
+      structure: "4 cách mở đầu một tin rao trao đổi (troc): « je donne… » (cho tặng), « je cherche… » (tìm kiếm), « je propose de + inf. » (đề nghị làm gì), « je voudrais… » (muốn có món gì / muốn làm gì, + danh từ hoặc động từ nguyên thể).",
+      phrases: [
+        { fr: "Je donne...", vi: "Tôi cho/tặng..." },
+        { fr: "Je cherche...", vi: "Tôi đang tìm..." },
+        { fr: "Je propose de faire du jardinage.", vi: "Tôi đề nghị làm vườn." },
+        { fr: "Je voudrais des livres / échanger des services.", vi: "Tôi muốn có sách / trao đổi dịch vụ." },
+      ],
+    },
+    {
+      heading: "Pour demander des renseignements sur un objet ou un service",
+      structure: "Hỏi thêm thông tin về một món đồ hoặc dịch vụ trước khi trao đổi: hỏi chung bằng « aimerais avoir des informations sur… », hỏi cụ thể về đặc điểm (màu sắc, kích thước, trọng lượng, chất liệu) hoặc thời gian rảnh, và đề nghị giúp đỡ bằng conditionnel lịch sự.",
+      phrases: [
+        { fr: "J'aimerais avoir des informations sur…", vi: "Tôi muốn có thêm thông tin về…" },
+        { fr: "Comment est… ?", vi: "… như thế nào?" },
+        { fr: "De quelle couleur elle est ?", vi: "Nó màu gì?" },
+        { fr: "Il est grand/petit ?", vi: "Nó to/nhỏ không?" },
+        { fr: "Elle est lourde/légère ?", vi: "Nó nặng/nhẹ không?" },
+        { fr: "En quelle matière il est ?", vi: "Nó làm bằng chất liệu gì?" },
+        { fr: "Tu pourrais m'aider à…, s'il te plaît ?", vi: "Bạn có thể giúp tôi… được không?" },
+        { fr: "Ça te dirait de… ?", vi: "Bạn có muốn… không?" },
+        { fr: "Quand est-ce que tu es libre ?", vi: "Khi nào thì bạn rảnh?" },
+      ],
+    },
+  ],
 };
