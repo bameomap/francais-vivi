@@ -780,4 +780,88 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+
+  // ═══════════════ Unité 12 — Soif de nature ═══════════════
+  {
+    id: "unite-12", unit: 12, title: "Soif de nature",
+    speakingPractice: [
+      {
+        title: "Discuter de son inquiétude pour l'avenir de la Terre",
+        notes: ["b12-a"],
+        task: "À deux ! Est-ce que vous vous inquiétez de l'avenir de notre Terre ? Discutez !",
+        usefulPhrases: [
+          "Cela nous fait peur.",
+          "Nous sommes inquiets.",
+          "Vous vous inquiétez de l'avenir de notre Terre ?",
+        ],
+      },
+      {
+        title: "Présenter la fête de l'environnement (DELF)",
+        task: "Vous êtes membre du Centre de protection de l'environnement. Un(e) ami(e) veut participer à une action de protection de la nature et vous pose des questions. Vous lui présentez la fête de l'environnement. Vous lui expliquez pourquoi il faut y participer.",
+        usefulPhrases: [
+          "Nous voulons sensibiliser le public à…",
+          "Nous proposons des ateliers sur…",
+          "Il faut agir pour préserver…",
+        ],
+      },
+      {
+        title: "Approuver un changement positif pour l'environnement",
+        notes: ["b12-g"],
+        task: "Dans le domaine de l'environnement, présentez un changement positif. Dites pourquoi vous l'approuvez.",
+        usefulPhrases: [
+          "Bravo !",
+          "Nous approuvons cette décision.",
+          "Nous sommes pour les bonnes nouvelles !",
+        ],
+      },
+      {
+        title: "Protester contre une atteinte à la nature",
+        notes: ["b12-i"],
+        task: "À deux ! Choisissez un sujet (déforestation, pollution, maltraitance animale…) et exprimez votre désaccord. Votre voisin(e) vous répond.",
+        usefulPhrases: [
+          "Je ne suis pas d'accord avec cela.",
+          "Je proteste contre…",
+          "Je dis non à…",
+        ],
+      },
+      {
+        title: "Présenter ses compétences en jardinage",
+        notes: ["b12-j"],
+        task: "À deux ! Présentez vos compétences (jardinage, bricolage, informatique…) à votre voisin(e) et proposez de l'aider dans un domaine.",
+        usefulPhrases: [
+          "Je sais faire beaucoup de choses.",
+          "Je suis bon(ne) en…",
+          "Je connais très bien…",
+        ],
+      },
+      {
+        title: "Présenter et choisir des œuvres pour un festival (atelier médiation)",
+        notes: ["b12-atelier"],
+        task: "Formez trois groupes. Choisissez un texte, présentez-le à la classe (auteur(e), thème, vos sentiments sur le texte) puis, en grand groupe, choisissez les cinq œuvres qui seront présentées au festival Littérature et Écologie.",
+        usefulPhrases: [
+          "Ce texte est extrait de…",
+          "J'aime bien ce texte parce que…",
+          "Nous nous sommes mis(es) d'accord.",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Motiver les gens à protéger la biodiversité",
+        task: "À deux ! Choisissez un domaine d'action (pollution, gaspillage, protection des animaux…) et écrivez un petit texte pour motiver les gens à agir.",
+      },
+      {
+        title: "Écrire un message sur les objectifs d'une organisation (DELF)",
+        task: "Vous faites partie d'une organisation qui protège les animaux. Vous écrivez à un(e) camarade. Vous lui expliquez les objectifs de cette organisation et vous donnez vos impressions. (60 mots minimum)",
+      },
+      {
+        title: "Protester pour la forêt sur un réseau social",
+        task: "Vous travaillez dans une association active pour la protection de la nature. Contre quoi vous protestez ? Écrivez un message pour votre réseau social.",
+      },
+      {
+        title: "Poster une annonce de co-jardinage",
+        task: "Postez un message sur le site plantezcheznous. Présentez vos compétences et proposez de jardiner chez quelqu'un.",
+      },
+    ],
+  },
 ];

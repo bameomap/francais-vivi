@@ -858,4 +858,105 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 12 · Soif de nature ────────────────────────────────────
+  "b12-a": [
+    {
+      heading: "Pour exprimer la peur, l'inquiétude",
+      structure: "4 câu để nói lên nỗi sợ hãi, lo lắng — chủ ngữ có thể là « nous »/« vous », dùng « avoir peur (pour) », « être inquiet », « s'inquiéter de ».",
+      phrases: [
+        { fr: "Cela nous fait peur.", vi: "Điều đó khiến chúng tôi sợ hãi." },
+        { fr: "Nous sommes inquiets.", vi: "Chúng tôi lo lắng." },
+        { fr: "Nous avons peur pour notre faune et notre flore.", vi: "Chúng tôi lo sợ cho hệ động vật và thực vật của mình." },
+        { fr: "Vous vous inquiétez de l'avenir de notre Terre ?", vi: "Bạn có lo lắng về tương lai của Trái Đất chúng ta không?" },
+      ],
+    },
+  ],
+
+  "b12-c": [
+    {
+      heading: "Pour exprimer sa capacité de faire quelque chose",
+      structure: "3 câu khẳng định khả năng hành động của mình, dùng « être capable de + infinitif », « avoir un rôle à jouer », « pouvoir aider à + infinitif ».",
+      phrases: [
+        { fr: "Nous sommes capables d'agir.", vi: "Chúng tôi có khả năng hành động." },
+        { fr: "Chacun(e) a un rôle à jouer.", vi: "Mỗi người đều có một vai trò để đảm nhận." },
+        { fr: "Chacun(e) peut aider à préserver la biodiversité.", vi: "Mỗi người đều có thể góp phần bảo tồn đa dạng sinh học." },
+      ],
+    },
+  ],
+
+  "b12-g": [
+    {
+      heading: "Pour exprimer son approbation",
+      structure: "5 cách bày tỏ sự tán thành, ủng hộ một quyết định hay tin tức tích cực, từ ngắn gọn (« Bravo ! ») đến trang trọng hơn (« Nous approuvons cette décision »).",
+      phrases: [
+        { fr: "Bravo !", vi: "Tuyệt vời!" },
+        { fr: "Ils se sont mis d'accord pour réduire la pêche.", vi: "Họ đã đồng ý giảm đánh bắt cá." },
+        { fr: "Nous sommes pour les bonnes nouvelles !", vi: "Chúng tôi ủng hộ những tin tốt lành!" },
+        { fr: "Ils sont d'accord pour le protéger.", vi: "Họ đồng ý bảo vệ nó." },
+        { fr: "Nous approuvons cette décision.", vi: "Chúng tôi tán thành quyết định này." },
+      ],
+    },
+  ],
+
+  "b12-i": [
+    {
+      heading: "Pour protester",
+      structure: "3 câu để phản đối, không đồng tình với một hành động hay hiện tượng, dùng « ne pas être d'accord avec », « protester contre », « dire non à ».",
+      phrases: [
+        { fr: "L'association n'est pas d'accord avec cela.", vi: "Hiệp hội không đồng ý với điều đó." },
+        { fr: "Ils protestent contre la destruction des arbres.", vi: "Họ phản đối việc phá hủy cây cối." },
+        { fr: "Ils disent non à la violence.", vi: "Họ nói không với bạo lực." },
+      ],
+    },
+  ],
+
+  "b12-j": [
+    {
+      heading: "Pour dire ce qu'on sait faire",
+      structure: "5 câu để trình bày những kỹ năng mình có, dùng « savoir + infinitif » (biết làm gì) và « être bon(ne) en + danh từ » (giỏi về mảng gì), « connaître » (biết rõ về).",
+      phrases: [
+        { fr: "Elle sait faire beaucoup de choses.", vi: "Cô ấy biết làm rất nhiều việc." },
+        { fr: "Elle est bonne en informatique.", vi: "Cô ấy giỏi về công nghệ thông tin." },
+        { fr: "Elle sait animer un réseau.", vi: "Cô ấy biết cách điều hành một mạng lưới." },
+        { fr: "Il connaît très bien les plantes.", vi: "Anh ấy hiểu rất rõ về cây cối." },
+        { fr: "Il sait travailler dans un jardin.", vi: "Anh ấy biết cách làm việc trong vườn." },
+      ],
+    },
+  ],
+
+  "b12-atelier": [
+    {
+      heading: "Pour dire ses sentiments sur un texte",
+      structure: "3 cách để bày tỏ cảm nhận cá nhân về một văn bản văn học vừa đọc, trước khi trình bày trước nhóm.",
+      phrases: [
+        { fr: "J'aime bien ce texte parce que…", vi: "Tôi khá thích văn bản này vì…" },
+        { fr: "Je trouve que ce texte est…", vi: "Tôi thấy văn bản này…" },
+        { fr: "Ce texte me fait rire, réfléchir, rêver…", vi: "Văn bản này khiến tôi cười, suy nghĩ, mơ mộng…" },
+      ],
+    },
+    {
+      heading: "Pour présenter un texte",
+      structure: "3 câu mẫu để giới thiệu một tác phẩm văn học trước lớp: nguồn gốc, tác giả, chủ đề.",
+      phrases: [
+        { fr: "Ce texte est extrait de…", vi: "Văn bản này được trích từ…" },
+        { fr: "Il a été écrit par… en…", vi: "Nó được viết bởi… vào năm…" },
+        { fr: "Il parle de…", vi: "Nó nói về…" },
+      ],
+    },
+    {
+      heading: "Pour faire un choix",
+      structure: "8 cách bày tỏ ý kiến để cùng cả nhóm chọn ra năm tác phẩm sẽ được trình diễn tại festival — từ đồng thuận (« Nous nous sommes mis(es) d'accord ») đến bỏ phiếu (« Je vote pour/contre ! »).",
+      phrases: [
+        { fr: "Nous nous sommes mis(es) d'accord.", vi: "Chúng tôi đã đồng ý với nhau." },
+        { fr: "Vous êtes d'accord avec nous ?", vi: "Các bạn có đồng ý với chúng tôi không?" },
+        { fr: "Je vote pour/contre !", vi: "Tôi bỏ phiếu thuận/chống!" },
+        { fr: "Un grand oui pour ce roman !", vi: "Một tiếng đồng ý lớn cho cuốn tiểu thuyết này!" },
+        { fr: "Ce roman, c'est non !", vi: "Cuốn tiểu thuyết này, không được!" },
+        { fr: "Nous sommes pour/contre ce choix.", vi: "Chúng tôi ủng hộ/phản đối lựa chọn này." },
+        { fr: "Je pense que ce roman, c'est une excellente idée parce que…", vi: "Tôi nghĩ cuốn tiểu thuyết này là một ý tưởng tuyệt vời vì…" },
+        { fr: "C'est une très mauvaise idée parce que…", vi: "Đó là một ý tưởng rất tệ vì…" },
+      ],
+    },
+  ],
 };

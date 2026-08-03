@@ -2115,6 +2115,258 @@ Les critères indispensables pour les salariés :
       { id: "b11-jobideal-q3", type: "open", prompt: "En groupes : est-ce que ces critères sont aussi importants pour vous ? Commentez-les un par un. D'après vous, quels autres éléments sont nécessaires dans un travail ? Faites un « top 10 » des critères du travail idéal et présentez-le à la classe." },
     ],
   },
+
+  // ═══════════════ Unité 12 — Soif de nature ═══════════════
+
+  // ── A · Nettoyons les déchets ! (p. 168) ────────────────────────────────
+  {
+    id: "b12-livre-nettoyons-dechets",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 168,
+    title: "Nettoyons les déchets !",
+    instruction: "Affiche du Groupement Astre appelant à participer au « Trashtag Challenge », un défi de nettoyage de déchets à partager sur les réseaux sociaux.",
+    text: `Quotidiennement, nous constatons que les déchets sont partout autour de nous, dans nos villes, mais aussi dans les parcs naturels et les espaces protégés. Ils polluent les plages, les mers et les océans. On les retrouve même dans les déserts ou en Antarctique. Cela nous fait peur.
+
+Nous sommes inquiets car des centaines de milliers d'animaux meurent chaque année à cause de la pollution plastique. Nous avons peur pour notre faune et notre flore.
+
+Comme nous, vous vous inquiétez de l'avenir de notre Terre ? Mobilisons-nous et prenons nos responsabilités ensemble ! Le Groupement Astre a décidé d'agir à son échelle. Ce sont les petits gestes qui comptent. Multiplions-les pour faire changer les choses !
+
+Nous vous proposons de participer au Trashtag Challenge. Vous avez sans doute vu passer ce concept sur les réseaux sociaux. Cela consiste à nettoyer un endroit plein de déchets et à poster des photos avant/après. Individuellement ou collectivement, avec vos collègues ou votre famille, participez au nom de votre entreprise. Un jury sélectionnera les meilleures photos et vidéos et les publiera sur nos réseaux !
+
+Et rappelez-vous, le meilleur déchet est celui que l'on ne produit pas !
+
+TRASHTAG CHALLENGE — du 15 mars 2021 au 15 avril 2021
+Étape 1 : photographiez un endroit dont vous aurez nettoyé les déchets, avant et après.
+Étape 2 : scannez le QR code pour vous inscrire et envoyer votre photo.
+Étape 3 : votez sur les réseaux sociaux, après délibération du jury.
+
+https://www.astre.fr`,
+    questions: [
+      { id: "b12-dechets-q1", type: "open", prompt: "Entrée en matière : trouvez sur l'affiche un synonyme de « défi »." },
+      { id: "b12-dechets-q2", type: "short_answer", prompt: "1re lecture : qui organise le défi Trashtag ? Quel est son objectif ?", answer: "Le Groupement Astre l'organise. L'objectif est de nettoyer les endroits pleins de déchets et de faire changer les mentalités, en publiant des photos avant/après." },
+      { id: "b12-dechets-q3", type: "short_answer", prompt: "2e lecture : où est-ce qu'il y a des déchets ? Quelles sont les conséquences des déchets sur les animaux ?", answer: "Il y a des déchets partout : dans les villes, les parcs naturels, les espaces protégés, les plages, les mers, les océans, même dans les déserts ou en Antarctique. Des centaines de milliers d'animaux meurent chaque année à cause de la pollution plastique." },
+      { id: "b12-dechets-q4", type: "multi_select", prompt: "Quelles actions fait-on quand on participe au Trashtag Challenge ?", options: ["a. Publier des photos avant et après le défi.", "b. Photographier un endroit sale.", "c. Créer une équipe de cinq personnes.", "d. Photographier des animaux et des fleurs.", "e. Enlever les déchets.", "f. Informer ses collègues."], answer: ["a. Publier des photos avant et après le défi.", "b. Photographier un endroit sale.", "e. Enlever les déchets."] },
+      { id: "b12-dechets-q5", type: "matching", prompt: "Vocabulaire : associez chaque mot à son synonyme. a. les animaux b. les plantes c. agir d. les actions e. augmenter", answer: "a. les animaux → la faune\nb. les plantes → la flore\nc. agir → se mobiliser\nd. les actions → les gestes\ne. augmenter → multiplier" },
+      { id: "b12-dechets-q6", type: "open", prompt: "Expliquez la phrase suivante : « Le meilleur déchet est celui qu'on ne produit pas. »" },
+      { id: "b12-dechets-q7", type: "open", prompt: "Production orale : à deux ! Est-ce que vous vous inquiétez de l'avenir de notre Terre ? Discutez !" },
+    ],
+  },
+
+  // ── C · Agir pour la biodiversité (p. 170) ──────────────────────────────
+  {
+    id: "b12-livre-biodiversite",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 170,
+    title: "Agir pour la biodiversité",
+    instruction: "Campagne de l'OFB (Office français de la biodiversité) : quatre gestes simples pour protéger la biodiversité au quotidien.",
+    text: `La biodiversité, c'est la vie ! Indispensable pour manger, boire, respirer, elle régule aussi le climat.
+
+Les causes de la disparition des espèces sont connues : destruction des milieux naturels, surexploitation des ressources, changement climatique, pollutions, etc. Il n'est pas trop tard. État, entreprises, associations, citoyens : chacun a un rôle à jouer, chacun peut aider à préserver la biodiversité.
+
+- Ne jetez pas les appareils cassés. Réparez-les !
+- Choisissez des produits ménagers écologiques, ou fabriquez-en vous-même avec des ingrédients naturels.
+- Ne laissez pas vos déchets dans la nature, triez-les et jetez-les à la poubelle !
+- En mer, en forêt ou en montagne, soyez discret. Laissez les animaux où ils sont et ne leur faites pas peur.
+
+OFB — Office français de la biodiversité, « Biodiversité, les bons gestes »
+https://agir.biodiversitetousvivants.fr/`,
+    questions: [
+      { id: "b12-biodiversite-q1", type: "open", prompt: "Entrée en matière : observez le logo. D'après vous, que fait l'OFB ?" },
+      { id: "b12-biodiversite-q2", type: "short_answer", prompt: "1re lecture (texte) : quel est le rôle de la biodiversité ? Qu'est-ce qui la met en danger ? Peut-on faire quelque chose pour la préserver ?", answer: "La biodiversité est indispensable pour manger, boire, respirer, et elle régule le climat. Elle est mise en danger par la destruction des milieux naturels, la surexploitation des ressources, le changement climatique et les pollutions. Oui, chacun (État, entreprises, associations, citoyens) a un rôle à jouer pour la préserver." },
+      { id: "b12-biodiversite-q3", type: "matching", prompt: "2e lecture (illustrations) : à quel geste correspond chaque règle ? a. Évitez les produits chimiques ! b. Respectez la faune ! c. Remettez les objets en état ! d. Séparez les déchets !", answer: "a. Évitez les produits chimiques ! → Choisissez des produits ménagers écologiques.\nb. Respectez la faune ! → Laissez les animaux où ils sont, ne leur faites pas peur.\nc. Remettez les objets en état ! → Ne jetez pas les appareils cassés, réparez-les.\nd. Séparez les déchets ! → Triez vos déchets et jetez-les à la poubelle." },
+      { id: "b12-biodiversite-q4", type: "open", prompt: "Production écrite : à deux ! Choisissez un domaine d'action (pollution, gaspillage, protection des animaux…) et écrivez un petit texte pour motiver les gens à agir." },
+    ],
+  },
+
+  // ── D · Festival L'animal qui court (vidéo, p. 172) ─────────────────────
+  {
+    id: "b12-livre-festival-animal",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "compréhension audiovisuelle",
+    page: 172,
+    title: "Festival L'animal qui court",
+    instruction: "Bande-annonce vidéo d'un festival de films et documentaires animaliers : extraits montrant des animaux sauvages et de jardin dans leur milieu naturel.",
+    text: `Cette bande-annonce présente le festival de films et documentaires « L'animal qui court », consacré aux animaux dans la nature. Elle mêle des images positives (la beauté et la diversité de la faune) et des images plus sombres (les dangers qui menacent certaines espèces).
+
+On y voit défiler plusieurs animaux dans leur milieu naturel : un escargot sur un légume, une araignée sur une plante, des singes dans un arbre, un dauphin qui nage dans la mer, un lapin qui court et un aigle qui vole.
+
+Le festival invite le public à choisir un animal, à expliquer pourquoi il est en danger et à réfléchir à ce que l'on peut faire pour le protéger.`,
+    questions: [
+      { id: "b12-festivalanimal-q1", type: "open", prompt: "Entrée en matière : observez l'image de la chouette. Aimez-vous ce genre de films et documentaires ?" },
+      { id: "b12-festivalanimal-q2", type: "open", prompt: "1er visionnage : quels sont les thèmes positifs et négatifs de ce festival ?" },
+      { id: "b12-festivalanimal-q3", type: "multi_select", prompt: "2e visionnage : quels animaux voyez-vous ?", options: ["a. Un escargot sur un légume.", "b. Une panthère qui court.", "c. Une araignée sur une plante.", "d. Un serpent dans un jardin.", "e. Des singes dans un arbre.", "f. Un canari jaune qui vole.", "g. Un dauphin qui nage dans la mer.", "h. Un lapin qui court et un aigle qui vole."], answer: ["a. Un escargot sur un légume.", "c. Une araignée sur une plante.", "e. Des singes dans un arbre.", "g. Un dauphin qui nage dans la mer.", "h. Un lapin qui court et un aigle qui vole."] },
+      { id: "b12-festivalanimal-q4", type: "open", prompt: "Production écrite : choisissez un animal. Dites pourquoi il est en danger et ce que l'on peut faire pour le protéger." },
+    ],
+  },
+
+  // ── E · Ces étranges comportements d'animaux (p. 173) ───────────────────
+  {
+    id: "b12-livre-comportements-animaux",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 173,
+    title: "Ces étranges comportements d'animaux",
+    instruction: "Extraits d'un livre expliquant pourquoi les animaux ont parfois des comportements surprenants : le chat, la poule et le coq, l'hippopotame, le rat, les abeilles.",
+    text: `Pour se protéger, s'amuser, se nourrir, les animaux ont parfois des comportements surprenants. Un livre nous explique pourquoi. Extraits.
+
+L'eau à la bouche
+Par instinct, les chats préfèrent boire l'eau du robinet plutôt que celle de leur bol. Leurs ancêtres félins ne buvaient pas d'eau stagnante pour ne pas s'empoisonner. Pour la même raison, ils ne buvaient pas d'eau près de leur proie. Pour que votre chat se sente bien, éloignez la gamelle du bol d'eau !
+
+Alerte au poulailler
+La poule possède au moins vingt-quatre cris différents, utilisés pour que ses camarades sachent qu'il y a un danger. Connu pour son cocorico matinal, le coq, lui aussi, adapte ses chants en fonction des situations, surtout pour informer en cas d'urgence.
+
+Minuteur intégré
+Sur la terre ferme ou sous l'eau, l'hippopotame peut dormir partout. Il doit reprendre son souffle à la surface toutes les cinq minutes, mais la nature fait bien les choses : même en pleine sieste, il a un réflexe naturel et remonte automatiquement pour ne pas manquer d'oxygène.
+
+Joyeux compagnon
+Détesté et chassé par les hommes, le rat est aussi un bon camarade. D'après les chercheurs, il adore le contact et les jeux avec les humains. Mieux, ce rongeur est un excellent conducteur. Au volant de mini-véhicules, il sait se diriger dans toutes les directions.
+
+Dancing queen
+Lorsque les abeilles découvrent de nouvelles fleurs, elles font une sorte de danse pour que les autres abeilles de la ruche comprennent où est le lieu intéressant.
+
+Femme actuelle, 12-19 juillet 2021`,
+    questions: [
+      { id: "b12-comportements-q1", type: "open", prompt: "Entrée en matière : observez la couverture du livre. Quelle réponse pourriez-vous donner au titre du livre ?" },
+      { id: "b12-comportements-q2", type: "short_answer", prompt: "1re lecture : quel est le thème du document ?", answer: "Le document explique pourquoi certains animaux ont des comportements étranges ou surprenants (le chat, la poule et le coq, l'hippopotame, le rat, les abeilles)." },
+      { id: "b12-comportements-q3", type: "short_answer", prompt: "2e lecture : pourquoi est-ce que le chant du coq est spécial ? Pourquoi l'hippopotame sort-il de l'eau de manière automatique ?", answer: "Le coq adapte ses chants en fonction des situations, surtout pour informer en cas d'urgence. L'hippopotame remonte automatiquement à la surface toutes les cinq minutes, même en pleine sieste, pour ne pas manquer d'oxygène." },
+      { id: "b12-comportements-q4", type: "short_answer", prompt: "Quelles sont les qualités du rat ? Dans quel but est-ce que l'abeille danse ?", answer: "Le rat adore le contact et les jeux avec les humains ; c'est aussi un excellent conducteur de mini-véhicules. L'abeille danse pour que les autres abeilles de la ruche comprennent où se trouve le lieu intéressant (les nouvelles fleurs)." },
+      { id: "b12-comportements-q5", type: "open", prompt: "Production orale : avez-vous observé un comportement étrange chez un animal ? Racontez !" },
+    ],
+  },
+
+  // ── F · Des espèces menacées en Outre-mer… (culture, p. 174) ────────────
+  {
+    id: "b12-livre-especes-menacees",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "culture(s)",
+    page: 174,
+    title: "Des espèces menacées en Outre-mer…",
+    instruction: "Infographie sur l'état de la biodiversité menacée dans les territoires ultramarins français : Martinique, Mayotte, La Réunion, Guadeloupe, Guyane, Terres australes, Polynésie française.",
+    text: `Infographie — État de la biodiversité ultramarine
+
+Martinique : Oiseaux (118 espèces) 21 % menacées ; Mollusques continentaux (54 espèces) 28 % menacées.
+Mayotte : Reptiles terrestres (12 espèces) 42 % menacées ; Flore (610 espèces) 43 % menacée ; Coraux (257 espèces) 7 % menacés.
+La Réunion : Flore (905 espèces) 30 % menacée ; Libellules (19 espèces) 21 % menacées ; Poissons d'eau douce (24 espèces) 33 % menacés.
+Guadeloupe : Flore (1 706 espèces) 15 % menacée.
+Guyane : Poissons d'eau douce (345 espèces) 13 % menacés ; Amphibiens (130 espèces) 5 % menacés.
+Terres australes : Oiseaux (49 espèces) 29 % menacés.
+Polynésie française : Oiseaux (100 espèces) 34 % menacés.
+
+Boukan, le courrier ultramarin, 28 juin 2021`,
+    questions: [
+      { id: "b12-especesmenacees-q1", type: "short_answer", prompt: "Lecture : que présente ce document ?", answer: "Une infographie sur l'état de la biodiversité menacée dans les territoires français d'outre-mer (Martinique, Mayotte, La Réunion, Guadeloupe, Guyane, Terres australes, Polynésie française)." },
+      { id: "b12-especesmenacees-q2", type: "short_answer", prompt: "Quel territoire compte le plus grand nombre d'espèces menacées ?", answer: "La Guadeloupe, avec 1 706 espèces de flore recensées (dont 15 % menacées)." },
+      { id: "b12-especesmenacees-q3", type: "open", prompt: "Production orale : quelles espèces menacées connaissez-vous ?" },
+    ],
+  },
+
+  // ── G · … mais aussi des espèces préservées ! (culture, p. 174) ─────────
+  {
+    id: "b12-livre-especes-preservees",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "culture(s)",
+    page: 174,
+    title: "… mais aussi des espèces préservées !",
+    instruction: "Trois bonnes nouvelles environnementales : la découverte d'un minuscule reptile à Madagascar, l'augmentation du nombre de tigres en Inde, un accord international pour une pêche plus responsable.",
+    text: `Il y a parfois des informations positives sur l'environnement et la biodiversité. Heureusement ! Nous sommes pour les bonnes nouvelles ! En voici quelques-unes :
+
+On a découvert à Madagascar le plus petit reptile du monde. Le mâle mesure 13,5 millimètres et tient sur le bout d'un doigt ! Il s'appelle Brookesia nana et appartient à la famille du caméléon. Les scientifiques viennent de l'identifier, et ils sont déjà d'accord pour le protéger. La déforestation est une menace pour lui.
+
+L'Inde compte aujourd'hui 3 000 tigres sauvages. En cinq ans, c'est une augmentation de 30 % ! L'Inde, comme treize autres pays, s'est engagée à protéger et à faire augmenter régulièrement sa population de tigres. Bravo !
+
+L'an dernier, quatorze pays se sont mis d'accord pour réduire la pêche dans les mers et les océans. Pour que la pêche soit plus responsable, ils ont décidé de favoriser le renouvellement des poissons. Nous approuvons cette décision !
+
+Source : Les Échos`,
+    questions: [
+      { id: "b12-especespreservees-q1", type: "short_answer", prompt: "Lecture : quelle espèce a-t-on découverte ? Comment évolue le nombre de tigres en Inde ?", answer: "On a découvert à Madagascar le plus petit reptile du monde, Brookesia nana, un caméléon de 13,5 millimètres. Le nombre de tigres en Inde a augmenté de 30 % en cinq ans, pour atteindre 3 000 tigres sauvages." },
+      { id: "b12-especespreservees-q2", type: "short_answer", prompt: "Le nombre de poissons va-t-il encore baisser ?", answer: "Non : quatorze pays se sont mis d'accord pour réduire la pêche et favoriser le renouvellement des poissons." },
+      { id: "b12-especespreservees-q3", type: "matching", prompt: "Vocabulaire : associez. a. Heureusement ! b. Nous sommes pour les bonnes nouvelles.", answer: "a. Heureusement ! → C'est une chance.\nb. Nous sommes pour les bonnes nouvelles. → Nous aimons les bonnes nouvelles." },
+      { id: "b12-especespreservees-q4", type: "open", prompt: "Production orale : dans le domaine de l'environnement, présentez un changement positif. Dites pourquoi vous l'approuvez." },
+    ],
+  },
+
+  // ── I · Initiatives pour la forêt (p. 176) ──────────────────────────────
+  {
+    id: "b12-livre-initiatives-foret",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 176,
+    title: "Initiatives pour la forêt",
+    instruction: "Trois initiatives en faveur des arbres et des forêts en France : une déclaration des droits de l'arbre, les micro-forêts « MiniBigForest » de Nantes, le collectif #NOUSSOMMESFORÊT.",
+    text: `Droits de l'arbre
+Aujourd'hui, en France, les arbres sont encore considérés comme des objets. L'association A.R.B.R.E.S n'est pas d'accord avec cela. Le 5 avril, elle a rédigé une déclaration des droits de l'arbre. Quel est son but ? Protéger les arbres en France. Le texte affirme que « l'arbre est un être vivant ». Il doit donc être respecté comme tous les êtres vivants. Le texte propose aussi de considérer certains arbres comme des « monuments naturels ».
+
+Nantes : ils font pousser des forêts cent fois plus riches en biodiversité
+« MiniBigForest », c'est l'art de faire pousser 300 arbres sur l'équivalent de six places de parking ! La méthode consiste à créer une micro-forêt primitive. Elle a été développée par un botaniste japonais, Akira Miyawaki. La forêt est créée plus rapidement ; elle est trente fois plus dense, avec cent fois plus de biodiversité qu'une forêt traditionnelle.
+
+#NOUSSOMMESFORÊT
+Des citoyens et des associations de protection de la nature et de la santé protestent contre la destruction inutile des arbres. Ils se mobilisent et disent non à la violence contre les forêts et contre la nature en général.
+
+Natives n° 1, été 2020`,
+    questions: [
+      { id: "b12-initiativesforet-q1", type: "open", prompt: "1re lecture : de quoi parle cet article ?" },
+      { id: "b12-initiativesforet-q2", type: "short_answer", prompt: "2e lecture : quel est l'objectif de l'association A.R.B.R.E.S ?", answer: "Protéger les arbres en France : elle a rédigé une déclaration des droits de l'arbre, affirmant que « l'arbre est un être vivant » qui doit être respecté, et propose de considérer certains arbres comme des « monuments naturels »." },
+      { id: "b12-initiativesforet-q3", type: "short_answer", prompt: "Quelles sont les caractéristiques des mini-forêts de Miyawaki ?", answer: "Ce sont des micro-forêts primitives, créées rapidement, trente fois plus denses et cent fois plus riches en biodiversité qu'une forêt traditionnelle ; par exemple 300 arbres sur l'équivalent de six places de parking à Nantes." },
+      { id: "b12-initiativesforet-q4", type: "short_answer", prompt: "Contre quoi le collectif #NOUSSOMMESFORÊT se bat ?", answer: "Contre la destruction inutile des arbres et contre la violence envers les forêts et la nature en général." },
+      { id: "b12-initiativesforet-q5", type: "open", prompt: "Production écrite : vous travaillez dans une association active pour la protection de la nature. Contre quoi vous protestez ? Écrivez un message pour votre réseau social." },
+    ],
+  },
+
+  // ── Atelier médiation · Présenter des œuvres pour un festival (p. 179) ──
+  {
+    id: "b12-livre-atelier-festival-litterature",
+    unit: 12,
+    unitTitle: "Soif de nature",
+    source: "livre",
+    section: "atelier médiation",
+    page: 179,
+    title: "Atelier médiation — Présenter des œuvres pour un festival",
+    instruction: "Trois textes proposés pour le festival « Littérature et Écologie » : un poème de George Sand (1873, domaine public) qui célèbre la nature, et deux extraits d'ouvrages contemporains sur la place des animaux et la pollution plastique (résumés, sans reproduction intégrale).",
+    text: `À Aurore (poème)
+
+La nature est tout ce qu'on voit,
+Tout ce qu'on veut, tout ce qu'on aime.
+Tout ce qu'on sait, tout ce qu'on croit,
+Tout ce que l'on sent en soi-même.
+Elle est belle pour qui la voit,
+Elle est bonne à celui qui l'aime,
+Elle est juste quand on y croit
+Et qu'on la respecte en soi-même.
+Regarde le ciel, il te voit,
+Embrasse la terre, elle t'aime.
+La vérité c'est ce qu'on croit
+En la nature c'est toi-même.
+
+George Sand, 1873
+
+Cette planète n'est pas très sûre (Alexis Jenni, 2022)
+Dans cet extrait, le narrateur s'interroge avec humour sur les dinosaures : sont-ils vraiment tous disparus ? Il remarque qu'ils restent très présents dans notre imaginaire — quasiment des « animaux de compagnie » familiers — au point qu'on pourrait presque douter de leur disparition, avant qu'un simple geste circulaire ne vienne rappeler qu'« il n'y en a plus ».
+
+Nageur d'alerte (Ben Lecomte, 2020)
+L'auteur raconte comment, inspiré par la réplique culte du film Le Lauréat (« Le plastique, c'est l'avenir »), il a décidé de traverser à la nage le « continent de plastique » du Pacifique, afin de sensibiliser le public à la pollution plastique des océans et de réaliser des prélèvements scientifiques. Il explique que nous avons longtemps cru que l'océan pouvait absorber sans limite tout ce que l'on y jetait, avant de prendre conscience de l'impact réel du plastique sur la vie marine.`,
+    questions: [
+      { id: "b12-atelierfestival-q1", type: "open", prompt: "En groupes : choisissez un des trois textes. Qui est l'auteur(e) ? De quoi parle l'extrait littéraire ? Est-ce qu'il vous plaît ? Pourquoi ?" },
+      { id: "b12-atelierfestival-q2", type: "short_answer", prompt: "Quel est le thème commun des trois textes proposés pour le festival « Littérature et Écologie » ?", answer: "Tous les trois parlent, sous des formes différentes, du rapport entre l'être humain et la nature : la beauté et la vérité de la nature (Sand), la disparition des espèces (Jenni), et la pollution des océans par le plastique (Lecomte)." },
+      { id: "b12-atelierfestival-q3", type: "open", prompt: "Préparez une présentation orale de l'œuvre choisie (auteur(e), thème…) et recherchez d'autres œuvres qui pourraient être dans la programmation du festival." },
+      { id: "b12-atelierfestival-q4", type: "open", prompt: "En grand groupe : discutez pour choisir les cinq œuvres qui seront présentées au festival. Utilisez les formules pour faire un choix (voter pour/contre, donner son avis…)." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

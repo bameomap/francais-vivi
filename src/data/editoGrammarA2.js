@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄", b10: "✈️", b11: "🎓" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄", b10: "✈️", b11: "🎓", b12: "🌳" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -1803,6 +1803,138 @@ export const EDITO_GRAMMAR_A2 = [
           "Je n'y réponds pas. — Tôi không trả lời điều đó.",
           "– Tu réponds à ce message ? – Oui, j'y réponds tout de suite ! — Bạn có trả lời tin nhắn này không? – Có, tôi trả lời ngay đây!",
           "Il pense à ses vacances. Il y pense. — Anh ấy nghĩ về kỳ nghỉ của mình. Anh ấy nghĩ về điều đó.",
+        ]
+      },
+    ]
+  },
+
+  // ═══════════════ Unité 12 — Soif de nature ═══════════════
+  {
+    id:"b12", num:"12", title:"Soif de nature", points:[
+
+      // ── 1. L'impératif et les pronoms ───────────────────────────────────
+      {
+        topic:"L'impératif et les pronoms — Đặt đại từ với câu mệnh lệnh",
+        summary:"Ở câu mệnh lệnh (impératif), vị trí đại từ (me/te/le/la/les/lui/leur/en/y…) thay đổi tùy khẳng định hay phủ định: KHẲNG ĐỊNH → đại từ đứng SAU động từ, nối bằng gạch ngang; PHỦ ĐỊNH → đại từ đứng TRƯỚC động từ như bình thường.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: câu mệnh lệnh đó là KHẲNG ĐỊNH (làm gì) hay PHỦ ĐỊNH (đừng làm gì)? Từ đó suy ra đại từ đứng trước hay sau động từ." },
+
+          { type:"table",
+            caption:"Vị trí đại từ ở impératif",
+            headers:["Impératif affirmatif", "Impératif négatif"],
+            rows:[
+              ["Đại từ đứng SAU động từ, nối bằng gạch ngang (-) : Multiplions-**les** ! Mobilisons-**nous** !", "Đại từ đứng TRƯỚC động từ, không đổi dạng : Ne **leur** faites pas peur. N'**en** achète pas."],
+            ] },
+
+          { type:"formula",
+            parts:["Động từ ở impératif", "+ gạch ngang (-)", "+ đại từ (le/la/les/lui/leur/en/y/moi/toi…)"],
+            example:"Choisissez des produits écologiques, fabriquez-en vous-même !",
+            note:"« me »/« te » đổi thành « moi »/« toi » ở cuối câu khẳng định: Mobilise-toi ! (không nói « Mobilise-te »)." },
+
+          { type:"heading", text:"Thêm « -s » với « en »/« y » ở ngôi 2 số ít động từ nhóm -er" },
+          { type:"callout", variant:"tip", title:"Vì sao phải thêm « -s » ?",
+            text:"Động từ nhóm -er ở ngôi « tu » của impératif vốn không có « -s » (Mange ! Parle !). Nhưng khi theo sau là « en » hoặc « y », người Pháp thêm lại « -s » để nối liền âm, dễ đọc hơn: « Fabriques-en toi-même » (không nói « Fabrique-en »), « Penses-y ! » (không nói « Pense-y »)." },
+
+          { type:"compare", items:[
+            { wrong:"Ne faites-leur pas peur.", right:"Ne leur faites pas peur.", why:"Ở câu PHỦ ĐỊNH, đại từ « leur » phải đứng TRƯỚC động từ, không đứng sau — quy tắc gạch ngang chỉ áp dụng cho câu khẳng định." },
+            { wrong:"Fabrique-en toi-même.", right:"Fabriques-en toi-même.", why:"Trước « en », động từ nhóm -er ở ngôi « tu » phải thêm lại « -s » (Fabriques-en), dù bình thường impératif của « tu » với -er không có « -s »." },
+            { wrong:"Mobilise-te avec nous !", right:"Mobilise-toi avec nous !", why:"Ở cuối câu khẳng định, đại từ phản thân « te » luôn đổi thành « toi »." },
+          ] },
+        ],
+        examples:[
+          "Mobilisons-nous !— Chúng ta hãy cùng hành động!",
+          "Multiplions-les ! — Chúng ta hãy nhân nó lên nhiều lần!",
+          "Fabriquez-en vous-même. — Hãy tự làm lấy điều đó.",
+          "Laissez les animaux où ils sont et ne leur faites pas peur. — Hãy để động vật ở nguyên chỗ của chúng và đừng làm chúng sợ.",
+          "La nature est fragile, penses-y ! — Thiên nhiên rất mong manh, hãy nghĩ về điều đó!",
+          "Les produits chimiques sont dangereux, n'en achète pas. — Hóa chất rất nguy hiểm, đừng mua chúng.",
+        ]
+      },
+
+      // ── 2. L'expression du but ──────────────────────────────────────────
+      {
+        topic:"L'expression du but — « pour » và « pour que » diễn đạt mục đích",
+        summary:"« Pour »/« pour que » đều dùng để nói MỤC ĐÍCH (làm gì… để làm gì). Chọn cái nào phụ thuộc vào: chủ ngữ của hai vế câu có GIỐNG NHAU không? Giống nhau → « pour » + động từ nguyên thể (infinitif). Khác nhau → « pour que » + động từ chia ở subjonctif.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: ai làm hành động chính, và ai đạt được mục đích đó — có phải CÙNG MỘT NGƯỜI không?" },
+
+          { type:"table",
+            caption:"« pour » hay « pour que » ?",
+            headers:["Trường hợp", "Cấu trúc", "Ví dụ"],
+            rows:[
+              ["Cùng một chủ ngữ", "pour + infinitif (phủ định: pour ne pas + infinitif)", "Le coq chante pour informer en cas d'urgence. / Il travaille à la maison pour ne pas laisser son chien seul."],
+              ["Hai chủ ngữ khác nhau", "pour que + subjonctif (phủ định: pour que + subjonctif phủ định)", "La poule crie pour que ses camarades sachent qu'il y a un danger."],
+            ] },
+
+          { type:"formula",
+            parts:["Mệnh đề chính", "+ pour / pour que", "+ infinitif (pour) hoặc subjonctif (pour que)"],
+            example:"Pour que votre chat se sente bien, éloignez la gamelle du bol d'eau !",
+            note:"« pour que » luôn cần một chủ ngữ MỚI theo sau (votre chat ≠ vous), còn « pour » không có chủ ngữ mới vì cùng người thực hiện cả hai hành động." },
+
+          { type:"callout", variant:"warn", title:"Đừng quên chia subjonctif sau « pour que »",
+            text:"Sau « pour que », động từ LUÔN chia ở subjonctif, không phải indicatif: « pour que les espèces ne disparaissent pas » (không phải « ne disparaissent pas » ở hiện tại thường mà là subjonctif — với nhiều động từ thường thì hình thức giống present de l'indicatif ở ngôi il/elle/ils/elles, nhưng với động từ bất quy tắc như « être », « avoir », « savoir » thì khác hẳn: qu'il soit, qu'il ait, qu'il sache)." },
+
+          { type:"compare", items:[
+            { wrong:"Il lit un livre pour que comprendre le comportement des abeilles.", right:"Il lit un livre pour comprendre le comportement des abeilles.", why:"Chủ ngữ của « lire » và « comprendre » là CÙNG MỘT NGƯỜI (il) → phải dùng « pour » + infinitif, không dùng « pour que »." },
+            { wrong:"Il faut protéger la biodiversité pour que les espèces animales ne disparaissent.", right:"Il faut protéger la biodiversité pour que les espèces animales ne disparaissent pas.", why:"Ở thể phủ định, « pour que » vẫn cần đủ « ne… pas » bao quanh động từ chia ở subjonctif — không được bỏ « pas »." },
+          ] },
+        ],
+        examples:[
+          "Pour se protéger, les animaux ont des comportements surprenants. — Để tự bảo vệ mình, các loài vật có những hành vi đáng ngạc nhiên.",
+          "Ils ne buvaient pas d'eau stagnante pour ne pas s'empoisonner. — Chúng không uống nước đọng để khỏi bị nhiễm độc.",
+          "Pour que votre chat se sente bien, éloignez la gamelle du bol d'eau ! — Để mèo của bạn cảm thấy thoải mái, hãy để bát thức ăn xa bát nước!",
+          "Elles dansent pour que les autres abeilles comprennent où est le lieu intéressant. — Chúng nhảy múa để những con ong khác hiểu nơi có hoa thú vị ở đâu.",
+          "On célèbre la journée des animaux pour améliorer leurs conditions de vie. — Người ta tổ chức ngày động vật để cải thiện điều kiện sống của chúng.",
+          "Vous devez promener souvent votre chien pour qu'il soit en forme. — Bạn phải thường xuyên dắt chó đi dạo để nó khỏe mạnh.",
+        ]
+      },
+
+      // ── 3. La forme passive ──────────────────────────────────────────────
+      {
+        topic:"La forme passive — Câu bị động: ÊTRE + participe passé",
+        summary:"Forme passive nhấn mạnh vào KẾT QUẢ và ĐỐI TƯỢNG bị/được tác động, thay vì người thực hiện hành động. Cấu trúc: chủ ngữ (đối tượng bị tác động) + ÊTRE (chia đúng thì) + participe passé (hợp giống–số với chủ ngữ) + par + người thực hiện.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: câu đó muốn nhấn mạnh AI làm hành động (→ thể chủ động/actif) hay đối tượng NÀO bị/được tác động (→ thể bị động/passif)?" },
+
+          { type:"table",
+            caption:"Chuyển từ actif sang passif",
+            headers:["Forme active", "Forme passive"],
+            rows:[
+              ["Un botaniste développe la méthode.", "La méthode est développée par un botaniste."],
+              ["Chantal Perdigau a créé le site.", "Le site a été créé par Chantal Perdigau."],
+              ["Une personne compétente cultive mon jardin.", "Mon jardin est cultivé par une personne compétente."],
+            ] },
+
+          { type:"formula",
+            parts:["Chủ ngữ (đối tượng bị tác động)", "+ ÊTRE (chia đúng thì)", "+ participe passé (hợp giống–số)", "+ par + người/vật thực hiện"],
+            example:"Mon jardin a été cultivé par une personne compétente.",
+            note:"« être » chia đúng THÌ của câu gốc: hiện tại → est cultivé ; passé composé → a été cultivé ; futur → sera cultivé. Participe passé luôn hợp giống–số với chủ ngữ mới, giống hệt tính từ." },
+
+          { type:"heading", text:"3 thì thường gặp ở forme passive" },
+          { type:"cards", items:[
+            { badge:"1", color:"#059669", title:"Présent : être (hiện tại) + participe passé",
+              lines:["Mon jardin est cultivé par une personne compétente."] },
+            { badge:"2", color:"#0891B2", title:"Passé composé : avoir été + participe passé",
+              lines:["Mon jardin a été cultivé par une personne compétente."] },
+            { badge:"3", color:"#D97706", title:"Futur : être (futur) + participe passé",
+              lines:["Mon jardin sera cultivé par une personne compétente."] },
+          ] },
+
+          { type:"callout", variant:"warn", title:"Đừng quên hợp giống–số của participe passé",
+            text:"Participe passé ở thể bị động LUÔN hợp giống–số với chủ ngữ, dù đi với « être »: « La méthode est développée » (giống cái, không phải « développé »), « Les micro-forêts ont été inventées » (số nhiều giống cái)." },
+
+          { type:"compare", items:[
+            { wrong:"La méthode est développé par un botaniste.", right:"La méthode est développée par un botaniste.", why:"Chủ ngữ « la méthode » là giống cái → participe passé phải thêm « -e »: développée, không phải développé." },
+            { wrong:"Des milliers d'arbres seront planté par notre association.", right:"Des milliers d'arbres seront plantés par notre association.", why:"Chủ ngữ « des milliers d'arbres » (arbres, giống đực số nhiều) → participe passé phải thêm « -s »: plantés." },
+          ] },
+        ],
+        examples:[
+          "Le site a été créé par Chantal Perdigau. — Trang web đã được tạo ra bởi Chantal Perdigau.",
+          "Mon jardin est cultivé par une personne compétente. — Khu vườn của tôi được chăm sóc bởi một người có năng lực.",
+          "Votre argent est bien utilisé par cette association. — Tiền của bạn được hiệp hội này sử dụng tốt.",
+          "Les micro-forêts ont été inventées par Akira Miyawaki. — Những khu rừng tí hon đã được phát minh bởi Akira Miyawaki.",
+          "Des milliers d'arbres seront plantés par notre association. — Hàng nghìn cây sẽ được hiệp hội của chúng tôi trồng.",
+          "J'ai été contactée par Alexandre. — Tôi đã được Alexandre liên hệ.",
         ]
       },
     ]

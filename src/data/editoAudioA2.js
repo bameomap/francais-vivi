@@ -1044,4 +1044,64 @@ export const EDITO_AUDIO_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 12 · Soif de nature ──────────────────────────────────
+  "b12": [
+    {
+      id: "b12-b", trackNum: 110, section: "B", page: 169,
+      title: "La fête de l'environnement",
+      subtitle: "Interview — le Centre de protection de l'Environnement en Nouvelle-Calédonie",
+      theme: "🌺", color: "#059669", colorLight: "#D1FAE5",
+      audioSrc: url(110),
+      sentences: [
+        "La journaliste : La semaine prochaine, c'est la Fête de l'environnement en Nouvelle-Calédonie. Nous recevons aujourd'hui Clément Katoa, du Centre de protection de l'Environnement. Clément Katoa, pourquoi une fête de l'environnement dans notre archipel ?",
+        "Clément Katoa : Nous vivons sur un territoire exceptionnel avec une grande biodiversité et des paysages splendides. Nous avons le plus grand lagon du monde, des forêts tropicales, le parc naturel de la mer de Corail, des rivières, des lacs… Nous voulons sensibiliser le public à la richesse de nos milieux naturels, mais aussi à leur fragilité. Nous savons qu'il faut agir pour préserver l'archipel de la Nouvelle-Calédonie.",
+        "La journaliste : Quelles activités vous allez organiser pour la Fête de l'environnement ?",
+        "Clément Katoa : Sur Grande Terre, l'île principale, il y a des chemins pédagogiques qui traversent les plus beaux sites naturels. Nous proposons des sorties « nature » avec des animateurs qui connaissent très bien la faune et la flore. Connaître la nature permet de mieux la respecter. Une autre partie de notre activité, c'est de sensibiliser le public au problème du gaspillage. Nous consommons trop, nous produisons trop de déchets, nous polluons trop. Nous proposons donc des ateliers sur le recyclage, les produits écologiques…",
+        "La journaliste : Qu'est-ce que vous souhaitez dire aux Calédoniennes et Calédoniens qui nous écoutent ?",
+        "Clément Katoa : Ce que nous avons de plus important, c'est la nature. Aimez-la, respectez-la ! Toutes les informations sur nos activités sont sur notre site : www.protection.environnement.nc. Connectez-vous et rejoignez-nous !",
+      ],
+      questions: [
+        { label: "Entrée en matière", text: "Observez la photo et lisez la phrase extraite du document. Quel est le thème de l'interview ?" },
+        { label: "Écoute", text: "Pourquoi est-ce qu'on organise une fête de l'environnement ? Comment est la nature en Nouvelle-Calédonie ?" },
+        { label: "Écoute", text: "Quel est le programme de la fête de l'environnement ? a. Nettoyer les plages. b. Marcher dans la nature. c. Découvrir des choses sur la nature. d. Voir des films sur l'écologie. e. Apprendre à économiser les ressources." },
+        { label: "Production orale — DELF", text: "Vous êtes membre du Centre de protection de l'environnement. Un(e) ami(e) veut participer à une action de protection de la nature et vous pose des questions. Vous lui présentez la fête de l'environnement. Vous lui expliquez pourquoi il faut y participer." },
+      ],
+    },
+    {
+      id: "b12-h", trackNum: 113, section: "H", page: 176,
+      title: "Une action de reforestation en Côte d'Ivoire",
+      subtitle: "Message — Seedballs Côte d'Ivoire, une levée de fonds pour planter des arbres",
+      theme: "🌳", color: "#16A34A", colorLight: "#DCFCE7",
+      audioSrc: url(113),
+      sentences: [
+        "Sarah Traboulsi : Bonjour, je suis Sarah Traboulsi de Seedballs Côte d'Ivoire. Aujourd'hui, nous savons tous le rôle que jouent les forêts dans notre vie. Nous savons également qu'il nous faudra planter des milliards d'arbres pour assurer cette vie sur Terre. Ce que nous ne savons pas, c'est où, comment, quoi et à quel coût on plante des arbres. Seedballs Côte d'Ivoire a décidé d'organiser la première levée de fonds populaire pour participer au reboisement en Côte d'Ivoire.",
+        "Sarah Traboulsi : Écoute, avec 500 francs CFA, tu plantes cinq arbres forestiers. Oui, tu as bien entendu, tu as l'occasion, pour une fois et de façon individuelle et concrète, de t'engager pour la forêt ivoirienne. Nous planterons quoi ? Des essences de chez nous. Comment ? Grâce aux seedballs, mais aussi avec des plants. Où ? Dans la zone nord du pays qui est une zone favorable parce que c'est une zone interdite d'exploitation forestière. Quand ? Dès le début de la saison pluvieuse, mai-juin.",
+        "Sarah Traboulsi : Cette levée de fonds a pour objectif de planter 500 000 arbres. Je le répète, avec 500 francs CFA, vous pouvez planter cinq arbres forestiers. À vous de décider ce que vous voulez apporter à la forêt ivoirienne.",
+      ],
+      questions: [
+        { label: "Entrée en matière", text: "Lisez le titre et la phrase extraite du document (« Avec 500 francs CFA, tu plantes cinq arbres forestiers. »). Quel est le thème de ce document ?" },
+        { label: "1re écoute", text: "(du début à « en Côte d'Ivoire. ») D'après Sarah Traboulsi, les forêts sont importantes car : a. elles favorisent la biodiversité. b. elles font la beauté des paysages. c. elles permettent aux Hommes de vivre sur Terre." },
+        { label: "2e écoute", text: "(de « Écoute » à la fin) Comment les gens peuvent-ils participer à l'action ?" },
+        { label: "Production orale", text: "Avez-vous envie de participer à une campagne de ce type ? Pourquoi ?" },
+      ],
+    },
+    {
+      id: "b12-j", trackNum: 114, section: "J", page: 177,
+      title: "Jardinons ensemble !",
+      subtitle: "Reportage — le site de co-jardinage plantezcheznous.com",
+      theme: "🌱", color: "#65A30D", colorLight: "#ECFCCB",
+      audioSrc: url(114),
+      sentences: [
+        "Le journaliste : Le site de co-jardinage www.plantezcheznous.com a été créé par Chantal Perdigau il y a quelques années. La jeune femme connaissait des propriétaires de jardins qui ne jardinaient pas du tout. Elle connaissait aussi des gens qui voulaient cultiver un potager mais n'avaient pas de jardin. Alors elle a créé un site Internet. Oui ! Chantal a de bonnes idées et elle sait faire beaucoup de choses : elle est bonne en informatique et elle sait aussi animer un réseau. Elle a donc mis en contact ces personnes pour qu'elles puissent jardiner ensemble. Nous avons rencontré Nadia qui nous parle de son expérience avec plantezcheznous.com.",
+        "Nadia : Alors moi j'ai découvert plantezcheznous.com grâce à un reportage à la télé. J'ai tout de suite aimé l'idée ! J'ai un jardin assez grand. Je voudrais bien le cultiver mais avec le travail, la famille… ce n'est pas toujours facile… J'ai donc passé une annonce sur le site et j'ai décrit mon jardin. Très vite, j'ai été contactée par Alex, qui n'habite pas très loin de chez moi. Je suis vraiment ravie ! Maintenant, mon jardin est cultivé par une personne compétente et disponible. Il connaît très bien les plantes, il sait travailler dans un jardin. De temps en temps, je lui demande des conseils et il m'explique comment faire. Je lui ai donné les clés de chez moi. Il peut venir jardiner quand il veut ! Ce qui est très bien aussi, c'est que les récoltes de fruits et de légumes sont partagées entre nous. Je recommande ce site à tout le monde. Il y a des co-jardiniers à la Martinique, à la Réunion, en Guadeloupe, en Belgique, au Luxembourg. C'est un beau succès !",
+      ],
+      questions: [
+        { label: "Entrée en matière", text: "Observez l'image. Que font ces personnes ?" },
+        { label: "1re écoute", text: "(du début à « son expérience avec plantezcheznous.com. ») Le site plantezcheznous permet de : a. faire du co-jardinage entre particuliers. b. trouver des jardiniers professionnels. c. se former au jardinage. Comment est-ce que Chantal Perdigau a eu l'idée de créer ce site ?" },
+        { label: "2e écoute", text: "(de « Alors moi » à la fin) D'après le journaliste, quelles sont les compétences de Chantal Perdigau ? Le document parle d'Alex et Nadia : qui a un jardin ? qui n'a pas de jardin ? Que font Alex et Nadia avec les fruits et légumes récoltés ?" },
+        { label: "Production écrite", text: "Postez un message sur le site plantezcheznous. Présentez vos compétences et proposez de jardiner chez quelqu'un." },
+      ],
+    },
+  ],
 };

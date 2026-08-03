@@ -14,6 +14,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b9", num:9, fr:"Consommer responsable", vi:"Tiêu dùng có trách nhiệm", grammar:"Le conditionnel présent (1) · Le gérondif · Le conditionnel présent (2)", emoji:"🔄" },
   { id:"b10", num:10, fr:"Envies d'ailleurs ?", vi:"Nỗi thèm đi đây đi đó?", grammar:"Le passé composé et l'imparfait dans le récit · Les pronoms démonstratifs", emoji:"✈️" },
   { id:"b11", num:11, fr:"De jolis parcours", vi:"Những hành trình đẹp", grammar:"La mise en relief · Le discours rapporté au présent · Le pronom COI y", emoji:"🎓" },
+  { id:"b12", num:12, fr:"Soif de nature", vi:"Khát khao thiên nhiên", grammar:"L'impératif et les pronoms · L'expression du but · La forme passive", emoji:"🌳" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -1228,9 +1229,121 @@ export const STEP_GROUPS_B11 = [
 
 export const STEP_DEFS_B11 = STEP_GROUPS_B11.flatMap(g => g.steps);
 
+// ── Unité 12 · Soif de nature ──────────────────────────────────────
+export const STEP_GROUPS_B12 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Alerte environnementale",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b12-livre-nettoyons-dechets"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Nettoyons les déchets !",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b12-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"La fête de l'environnement",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b12-livre-biodiversite"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Agir pour la biodiversité",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"L'impératif et les pronoms",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b12g1","b12g2"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Milieux naturels · environnement",
+        section:"vocab", view:"edito" },
+      { id:"c1_vocab2", stepKey:"vocab", subIds:["b12g3","b12g4"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Agir pour l'environnement · pollution",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0","s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Exprimer son inquiétude · présenter la fête (DELF)",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Motiver les gens à agir",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Comportements et bonnes nouvelles",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b12-livre-festival-animal"],
+        icon:"🎬", kind:"Đọc D", color:"#7B6CF6", sub:"Festival L'animal qui court (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b12-livre-comportements-animaux"],
+        icon:"📜", kind:"Đọc E", color:"#059669", sub:"Ces étranges comportements d'animaux",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"L'expression du but",
+        section:"grammar", view:"grammar" },
+      { id:"c2_culture", stepKey:"lecture", subIds:["b12-livre-especes-menacees","b12-livre-especes-preservees"],
+        icon:"🏛️", kind:"Văn hóa F + G", color:"#7B6CF6", sub:"Espèces menacées · espèces préservées",
+        section:"lecture", view:"lecture" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b12g5","b12g6"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Animaux domestiques · animaux du jardin",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Approuver un changement positif",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Objectifs d'une organisation (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Forêts et jardins",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b12-h"],
+        icon:"🎧", kind:"Nghe H", color:"#0891B2", sub:"Une action de reforestation en Côte d'Ivoire",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b12-livre-initiatives-foret"],
+        icon:"📜", kind:"Đọc I", color:"#059669", sub:"Initiatives pour la forêt",
+        section:"lecture", view:"lecture" },
+      { id:"c3_ecouter2", stepKey:"ecouter", subIds:["b12-j"],
+        icon:"🎧", kind:"Nghe J", color:"#0891B2", sub:"Jardinons ensemble !",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La forme passive",
+        section:"grammar", view:"grammar" },
+      { id:"c3_vocab", stepKey:"vocab", subIds:["b12g7","b12g8"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Mammifères sauvages · oiseaux",
+        section:"vocab", view:"edito" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s3","s4"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Protester · présenter ses compétences",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w2","w3"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Protester pour la forêt · annonce de co-jardinage",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_e_muet","son_e_prononce","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Le e muet",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"lecture", subIds:["b12-livre-atelier-festival-litterature"],
+        icon:"🎨", kind:"Atelier", color:"#059669", sub:"Présenter des œuvres pour un festival",
+        section:"lecture", view:"lecture" },
+      { id:"b_atelier2", stepKey:"parler", subIds:["s5"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Choisir les œuvres du festival",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B12 = STEP_GROUPS_B12.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9, b10: STEP_GROUPS_B10, b11: STEP_GROUPS_B11 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9,   b10: STEP_DEFS_B10, b11: STEP_DEFS_B11 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9, b10: STEP_GROUPS_B10, b11: STEP_GROUPS_B11, b12: STEP_GROUPS_B12 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9,   b10: STEP_DEFS_B10, b11: STEP_DEFS_B11, b12: STEP_DEFS_B12 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

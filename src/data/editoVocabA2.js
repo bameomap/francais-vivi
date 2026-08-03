@@ -1232,4 +1232,112 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b12", num: "12", title: "Soif de nature",
+    color: "#059669", bg: "#D1FAE5",
+    groups: [
+      {
+        id: "b12g1", label: "Les milieux naturels, les espaces protégés", icon: "🏞️",
+        words: [
+          { fr:"l'archipel (m.)",     vi:"quần đảo", ex_fr:"Nous voulons préserver l'archipel de la Nouvelle-Calédonie.", ex_vi:"Chúng tôi muốn bảo tồn quần đảo Nouvelle-Calédonie." },
+          { fr:"le désert",           vi:"sa mạc", ex_fr:"On retrouve des déchets même dans les déserts.", ex_vi:"Người ta tìm thấy rác ngay cả ở các sa mạc." },
+          { fr:"la forêt (tropicale)", vi:"rừng (nhiệt đới)", ex_fr:"Nous avons des forêts tropicales et le parc naturel de la mer de Corail.", ex_vi:"Chúng tôi có rừng nhiệt đới và công viên tự nhiên biển San hô." },
+          { fr:"l'île (f.)",          vi:"hòn đảo", ex_fr:"Sur Grande Terre, l'île principale, il y a des chemins pédagogiques.", ex_vi:"Trên Grande Terre, đảo chính, có những con đường mang tính giáo dục." },
+          { fr:"le lagon",            vi:"đầm phá", ex_fr:"Nous avons le plus grand lagon du monde.", ex_vi:"Chúng tôi có đầm phá lớn nhất thế giới." },
+          { fr:"le milieu naturel",   vi:"môi trường tự nhiên", ex_fr:"Destruction des milieux naturels : c'est une des causes de la disparition des espèces.", ex_vi:"Phá hủy môi trường tự nhiên: đó là một trong những nguyên nhân khiến các loài biến mất." },
+          { fr:"la nature",           vi:"thiên nhiên", ex_fr:"Comme nous, vous vous inquiétez de l'avenir de notre Terre ?", ex_vi:"Giống chúng tôi, bạn cũng lo lắng cho tương lai của Trái Đất chứ?" },
+          { fr:"l'océan (m.)",        vi:"đại dương", ex_fr:"Les déchets polluent les plages, les mers et les océans.", ex_vi:"Rác thải làm ô nhiễm các bãi biển, biển và đại dương." },
+          { fr:"le parc naturel",     vi:"công viên tự nhiên", ex_fr:"Les déchets sont partout, dans nos villes mais aussi dans les parcs naturels.", ex_vi:"Rác thải ở khắp mọi nơi, trong thành phố nhưng cũng trong cả các công viên tự nhiên." },
+          { fr:"la planète",          vi:"hành tinh", ex_fr:"Sauvons la planète !", ex_vi:"Hãy cứu lấy hành tinh của chúng ta!" },
+          { fr:"la rivière",          vi:"dòng sông", ex_fr:"Nous avons des rivières, des lacs…", ex_vi:"Chúng tôi có những dòng sông, những hồ nước…" },
+          { fr:"le site naturel",     vi:"khu vực tự nhiên", ex_fr:"Des chemins pédagogiques traversent les plus beaux sites naturels.", ex_vi:"Những con đường mang tính giáo dục băng qua những khu vực tự nhiên đẹp nhất." },
+        ]
+      },
+      {
+        id: "b12g2", label: "L'environnement", icon: "🌍",
+        words: [
+          { fr:"la biodiversité",       vi:"đa dạng sinh học", ex_fr:"La biodiversité, c'est la vie !", ex_vi:"Đa dạng sinh học chính là sự sống!" },
+          { fr:"l'écologie (f.)",       vi:"sinh thái học, hệ sinh thái", ex_fr:"Vous voulez voir des films sur l'écologie ?", ex_vi:"Bạn muốn xem phim về sinh thái học không?" },
+          { fr:"écologique",            vi:"thuộc về sinh thái, xanh", ex_fr:"Choisissez des produits ménagers écologiques.", ex_vi:"Hãy chọn các sản phẩm gia dụng thân thiện với môi trường." },
+          { fr:"l'espèce protégée (f.)", vi:"loài được bảo vệ", ex_fr:"On considère certains arbres comme des monuments naturels ; d'autres sont des espèces protégées.", ex_vi:"Người ta coi một số cây là di tích tự nhiên; một số khác là loài được bảo vệ." },
+        ]
+      },
+      {
+        id: "b12g3", label: "Agir pour l'environnement", icon: "🤝",
+        words: [
+          { fr:"se mobiliser",          vi:"cùng hành động, huy động sức mình", ex_fr:"Mobilisons-nous et prenons nos responsabilités ensemble !", ex_vi:"Chúng ta hãy cùng hành động và cùng nhau có trách nhiệm!" },
+          { fr:"préserver (la biodiversité)", vi:"bảo tồn (đa dạng sinh học)", ex_fr:"Chacun peut aider à préserver la biodiversité.", ex_vi:"Mỗi người đều có thể góp phần bảo tồn đa dạng sinh học." },
+          { fr:"protéger (l'environnement)", vi:"bảo vệ (môi trường)", ex_fr:"L'association A.R.B.R.E.S veut protéger les arbres en France.", ex_vi:"Hiệp hội A.R.B.R.E.S muốn bảo vệ cây cối ở Pháp." },
+          { fr:"recycler",              vi:"tái chế", ex_fr:"Nous proposons des ateliers sur le recyclage.", ex_vi:"Chúng tôi tổ chức các buổi hội thảo về tái chế." },
+          { fr:"sauver (la planète)",   vi:"cứu lấy (hành tinh)", ex_fr:"Nous sommes capables d'agir pour sauver la planète.", ex_vi:"Chúng ta có khả năng hành động để cứu lấy hành tinh." },
+          { fr:"trier",                 vi:"phân loại", ex_fr:"Ne laissez pas vos déchets dans la nature, triez-les !", ex_vi:"Đừng vứt rác trong thiên nhiên, hãy phân loại chúng!" },
+          { fr:"valoriser (la biodiversité)", vi:"phát huy giá trị (đa dạng sinh học)", ex_fr:"Chacun peut aider à valoriser la biodiversité.", ex_vi:"Mỗi người đều có thể góp phần phát huy giá trị của đa dạng sinh học." },
+        ]
+      },
+      {
+        id: "b12g4", label: "La pollution", icon: "🏭",
+        words: [
+          { fr:"le changement climatique", vi:"biến đổi khí hậu", ex_fr:"Les causes de la disparition des espèces : changement climatique, pollutions, etc.", ex_vi:"Nguyên nhân của sự biến mất các loài: biến đổi khí hậu, ô nhiễm, v.v." },
+          { fr:"le déchet",             vi:"rác thải", ex_fr:"Le meilleur déchet est celui que l'on ne produit pas !", ex_vi:"Rác thải tốt nhất là loại rác mà ta không tạo ra!" },
+          { fr:"la destruction",        vi:"sự phá hủy", ex_fr:"La destruction des milieux naturels menace la biodiversité.", ex_vi:"Sự phá hủy môi trường tự nhiên đe dọa đa dạng sinh học." },
+          { fr:"disparaître",           vi:"biến mất", ex_fr:"Des centaines de milliers d'animaux meurent chaque année à cause de la pollution plastique.", ex_vi:"Hàng trăm nghìn loài động vật chết mỗi năm vì ô nhiễm nhựa." },
+          { fr:"être en danger",        vi:"gặp nguy hiểm, có nguy cơ tuyệt chủng", ex_fr:"Dites pourquoi cet animal est en danger.", ex_vi:"Hãy nói vì sao con vật này đang gặp nguy hiểm." },
+          { fr:"le gaspillage",         vi:"sự lãng phí", ex_fr:"Une autre partie de notre activité, c'est de sensibiliser le public au problème du gaspillage.", ex_vi:"Một phần khác trong hoạt động của chúng tôi là nâng cao nhận thức cộng đồng về vấn đề lãng phí." },
+          { fr:"les pesticides (m.)",   vi:"thuốc trừ sâu", ex_fr:"L'agriculture biologique n'utilise pas de pesticides.", ex_vi:"Nông nghiệp hữu cơ không sử dụng thuốc trừ sâu." },
+          { fr:"le plastique",          vi:"nhựa", ex_fr:"J'ai choisi de traverser le continent de plastique en nageant.", ex_vi:"Tôi đã chọn cách bơi qua lục địa nhựa." },
+          { fr:"polluant(e)",           vi:"gây ô nhiễm", ex_fr:"L'avion pollue beaucoup.", ex_vi:"Máy bay gây ô nhiễm rất nhiều." },
+          { fr:"la poubelle",           vi:"thùng rác", ex_fr:"Ne laissez pas vos déchets dans la nature, jetez-les à la poubelle !", ex_vi:"Đừng vứt rác trong thiên nhiên, hãy bỏ vào thùng rác!" },
+          { fr:"le recyclage",          vi:"sự tái chế", ex_fr:"Nous proposons des ateliers sur le recyclage, les produits écologiques.", ex_vi:"Chúng tôi tổ chức các buổi hội thảo về tái chế, các sản phẩm sinh thái." },
+          { fr:"la surexploitation des ressources", vi:"sự khai thác quá mức tài nguyên", ex_fr:"Surexploitation des ressources, changement climatique : les causes sont connues.", ex_vi:"Khai thác quá mức tài nguyên, biến đổi khí hậu: các nguyên nhân đã được biết rõ." },
+        ]
+      },
+      {
+        id: "b12g5", label: "Les animaux domestiques/de compagnie", icon: "🐕",
+        words: [
+          { fr:"le chat",   vi:"con mèo", ex_fr:"Les chats préfèrent boire l'eau du robinet plutôt que celle de leur bol.", ex_vi:"Mèo thích uống nước vòi hơn là nước trong bát của chúng." },
+          { fr:"le cheval, les chevaux", vi:"con ngựa, những con ngựa", ex_fr:"Il y a 700 000 poneys et chevaux en France.", ex_vi:"Có 700.000 con ngựa nhỏ và ngựa ở Pháp." },
+          { fr:"la chèvre", vi:"con dê", ex_fr:"Dans une ferme, on trouve souvent des chèvres et des moutons.", ex_vi:"Trong một trang trại, người ta thường thấy dê và cừu." },
+          { fr:"le chien",  vi:"con chó", ex_fr:"Le chien est considéré comme le meilleur ami de l'Homme.", ex_vi:"Chó được coi là người bạn tốt nhất của con người." },
+          { fr:"le lapin",  vi:"con thỏ", ex_fr:"Poser un lapin, ça veut dire ne pas aller à un rendez-vous.", ex_vi:"« Poser un lapin » nghĩa là không đến một cuộc hẹn." },
+          { fr:"le mouton", vi:"con cừu", ex_fr:"Le mouton perd sa laine.", ex_vi:"Cừu rụng lông len của nó." },
+          { fr:"le poisson", vi:"con cá", ex_fr:"Il y a 26 millions de poissons domestiques en France.", ex_vi:"Có 26 triệu con cá cảnh ở Pháp." },
+          { fr:"la vache",  vi:"con bò", ex_fr:"La vache broute dans le pré.", ex_vi:"Con bò gặm cỏ trên đồng." },
+        ]
+      },
+      {
+        id: "b12g6", label: "Les animaux du jardin", icon: "🐌",
+        words: [
+          { fr:"l'abeille (f.)",   vi:"con ong", ex_fr:"Lorsque les abeilles découvrent de nouvelles fleurs, elles font une sorte de danse.", ex_vi:"Khi ong phát hiện những bông hoa mới, chúng thực hiện một điệu nhảy." },
+          { fr:"l'araignée (f.)",  vi:"con nhện", ex_fr:"Elle a huit pattes mais pas d'ailes : c'est une araignée.", ex_vi:"Nó có tám chân nhưng không có cánh: đó là con nhện." },
+          { fr:"le caméléon",      vi:"con tắc kè hoa", ex_fr:"C'est un reptile qui peut changer de couleur : le caméléon.", ex_vi:"Đó là một loài bò sát có thể đổi màu: con tắc kè hoa." },
+          { fr:"l'escargot (m.)",  vi:"con ốc sên", ex_fr:"Avancer comme une tortue, c'est être très lent, comme un escargot.", ex_vi:"« Avancer comme une tortue » nghĩa là rất chậm, giống như một con ốc sên." },
+          { fr:"la libellule",     vi:"con chuồn chuồn", ex_fr:"On observe des libellules près de la rivière.", ex_vi:"Người ta quan sát thấy chuồn chuồn gần dòng sông." },
+          { fr:"le serpent",       vi:"con rắn", ex_fr:"Un serpent dans un jardin peut faire peur.", ex_vi:"Một con rắn trong vườn có thể khiến người ta sợ." },
+          { fr:"la tortue",        vi:"con rùa", ex_fr:"Avancer comme une tortue, ça veut dire être très lent(e).", ex_vi:"« Avancer comme une tortue » nghĩa là đi rất chậm." },
+        ]
+      },
+      {
+        id: "b12g7", label: "Les mammifères sauvages", icon: "🐒",
+        words: [
+          { fr:"le dauphin",       vi:"con cá heo", ex_fr:"On voit un dauphin qui nage dans la mer.", ex_vi:"Người ta thấy một con cá heo đang bơi trong biển." },
+          { fr:"l'hippopotame (m.)", vi:"con hà mã", ex_fr:"Même en pleine sieste, l'hippopotame remonte automatiquement pour respirer.", ex_vi:"Ngay cả khi đang ngủ trưa, hà mã vẫn tự động ngoi lên để thở." },
+          { fr:"la panthère",      vi:"con báo", ex_fr:"On voit une panthère qui court dans la savane.", ex_vi:"Người ta thấy một con báo đang chạy trên thảo nguyên." },
+          { fr:"le rat",           vi:"con chuột", ex_fr:"Le rat est un excellent conducteur de mini-véhicules.", ex_vi:"Con chuột là một tài xế xuất sắc của những chiếc xe mini." },
+          { fr:"le singe",         vi:"con khỉ", ex_fr:"On voit des singes dans un arbre.", ex_vi:"Người ta thấy những con khỉ trên cây." },
+          { fr:"le tigre",         vi:"con hổ", ex_fr:"L'Inde compte aujourd'hui 3 000 tigres sauvages.", ex_vi:"Ấn Độ hiện có 3.000 con hổ hoang dã." },
+        ]
+      },
+      {
+        id: "b12g8", label: "Les oiseaux", icon: "🦅",
+        words: [
+          { fr:"l'aigle (m.)",   vi:"con đại bàng", ex_fr:"C'est un oiseau qui a de grandes ailes et une bonne vue : l'aigle.", ex_vi:"Đó là một loài chim có đôi cánh lớn và thị lực tốt: con đại bàng." },
+          { fr:"le canard",      vi:"con vịt", ex_fr:"On trouve des canards près de la rivière.", ex_vi:"Người ta thấy vịt gần dòng sông." },
+          { fr:"le canari",      vi:"con chim hoàng yến", ex_fr:"Il y a 5,3 millions d'oiseaux, comme le canari, en France.", ex_vi:"Có 5,3 triệu con chim, như chim hoàng yến, ở Pháp." },
+          { fr:"la chouette",    vi:"con cú", ex_fr:"C'est un oiseau qui vit la nuit : la chouette.", ex_vi:"Đó là một loài chim sống về đêm: con cú." },
+          { fr:"le coq",         vi:"con gà trống", ex_fr:"Connu pour son cocorico matinal, le coq adapte ses chants en fonction des situations.", ex_vi:"Nổi tiếng với tiếng gáy buổi sáng, gà trống điều chỉnh tiếng gáy tùy theo tình huống." },
+          { fr:"la poule",       vi:"con gà mái", ex_fr:"La poule possède au moins vingt-quatre cris différents.", ex_vi:"Gà mái có ít nhất hai mươi bốn tiếng kêu khác nhau." },
+        ]
+      },
+    ]
+  },
 ];

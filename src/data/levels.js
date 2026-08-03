@@ -25,7 +25,7 @@ export const LEVELS = [
     book: "Édito A2 · Didier FLE",
     emoji: "🌿",
     color: "#10B981",
-    status: "building",       // some units done, more coming
+    status: "ready",
     unitCount: 12,
   },
   {
