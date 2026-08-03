@@ -755,4 +755,107 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 11 · De jolis parcours ────────────────────────────────────
+  "b11-a": [
+    {
+      heading: "Pour parler de sa formation",
+      structure: "7 câu ở thì passé composé (chủ yếu) để kể lại các mốc trong quá trình học tập của mình, từ kỳ thi tú tài đến việc đăng ký học và các kỳ thi.",
+      phrases: [
+        { fr: "J'ai passé mon bac scientifique.", vi: "Tôi đã thi tú tài khoa học." },
+        { fr: "J'ai obtenu mon baccalauréat à/au…", vi: "Tôi đã lấy được bằng tú tài tại…" },
+        { fr: "Je me suis inscrit(e) en…", vi: "Tôi đã đăng ký học…" },
+        { fr: "J'ai raté ma première année d'informatique.", vi: "Tôi đã trượt năm nhất công nghệ thông tin." },
+        { fr: "J'ai fait une année de césure.", vi: "Tôi đã có một năm nghỉ giữa khóa." },
+        { fr: "J'ai réussi mes examens.", vi: "Tôi đã thi đỗ các kỳ thi." },
+        { fr: "Je suis étudiant(e) en…", vi: "Tôi là sinh viên ngành…" },
+      ],
+    },
+  ],
+
+  "b11-b": [
+    {
+      heading: "Pour remercier",
+      structure: "3 cách nói lời cảm ơn trang trọng, dùng « vous » — phù hợp khi viết thư cho một người mình kính trọng (như một cựu giáo viên).",
+      phrases: [
+        { fr: "Je vous remercie pour tout.", vi: "Em xin cảm ơn cô/thầy vì tất cả." },
+        { fr: "Merci pour votre enseignement.", vi: "Cảm ơn vì sự dạy dỗ của cô/thầy." },
+        { fr: "Je vous dis merci.", vi: "Em xin nói lời cảm ơn." },
+      ],
+    },
+  ],
+
+  "b11-e": [
+    {
+      heading: "Pour écrire un message formel",
+      structure: "9 công thức để mở đầu, xin thông tin lịch sự và kết thúc một tin nhắn chuyên nghiệp trang trọng, ví dụ khi liên hệ với nhà tuyển dụng.",
+      phrases: [
+        { fr: "Madame, / Monsieur,", vi: "Kính gửi Bà, / Kính gửi Ông," },
+        { fr: "Bonjour Madame, / Bonjour Monsieur,", vi: "Xin chào Bà, / Xin chào Ông," },
+        { fr: "Je voudrais + infinitif", vi: "Tôi muốn + động từ nguyên thể" },
+        { fr: "Je me demande comment...", vi: "Tôi tự hỏi làm sao để..." },
+        { fr: "Acceptez-vous de + infinitif ?", vi: "Bà/Ông có đồng ý... không?" },
+        { fr: "Pouvez-vous + infinitif ?", vi: "Bà/Ông có thể... được không?" },
+        { fr: "Merci d'avance.", vi: "Xin cảm ơn trước." },
+        { fr: "Merci pour votre réponse.", vi: "Cảm ơn vì phản hồi của Bà/Ông." },
+        { fr: "Bien à vous, / Bien cordialement,", vi: "Trân trọng," },
+      ],
+    },
+  ],
+
+  "b11-h": [
+    {
+      heading: "Pour parler de ses projets professionnels",
+      structure: "4 câu để trình bày một dự định thay đổi nghề nghiệp trong tương lai, dùng « aller + infinitif » (futur proche) và cấu trúc mise en relief « ce qui me plaît, c'est… ».",
+      phrases: [
+        { fr: "Je vais mettre un terme à ma carrière pour devenir...", vi: "Tôi sẽ chấm dứt sự nghiệp hiện tại để trở thành..." },
+        { fr: "Je vais devoir me former et obtenir un diplôme de...", vi: "Tôi sẽ phải đào tạo lại và lấy một bằng cấp về..." },
+        { fr: "Après deux ans de formation, je vais...", vi: "Sau hai năm đào tạo, tôi sẽ..." },
+        { fr: "Ce qui me plaît dans ce métier, c'est...", vi: "Điều tôi thích ở nghề này, đó là..." },
+      ],
+    },
+  ],
+
+  "b11-i": [
+    {
+      heading: "Pour exprimer une évidence",
+      structure: "4 câu ngắn để khẳng định một điều là hiển nhiên, rõ ràng.",
+      phrases: [
+        { fr: "Évidemment !", vi: "Dĩ nhiên rồi!" },
+        { fr: "C'est sûr.", vi: "Chắc chắn rồi." },
+        { fr: "C'est évident.", vi: "Điều đó là hiển nhiên." },
+        { fr: "C'est certain.", vi: "Điều đó là chắc chắn." },
+      ],
+    },
+  ],
+
+  "b11-atelier": [
+    {
+      heading: "Pour mettre en relief",
+      structure: "4 cách dùng cấu trúc nhấn mạnh « c'est... » để trình bày điều quan trọng nhất trong buổi thảo luận nhóm về công việc lý tưởng.",
+      phrases: [
+        { fr: "L'important, c'est de...", vi: "Điều quan trọng, đó là..." },
+        { fr: "Le plus important, c'est de...", vi: "Điều quan trọng nhất, đó là..." },
+        { fr: "Ce qui est important, c'est...", vi: "Điều quan trọng, đó là..." },
+        { fr: "... c'est ce qui est important.", vi: "... đó là điều quan trọng." },
+      ],
+    },
+    {
+      heading: "Pour parler du travail",
+      structure: "11 cụm từ và động từ để mô tả các đặc điểm của một công việc lý tưởng, dùng khi trình bày kết quả « top 10 » của nhóm trước lớp.",
+      phrases: [
+        { fr: "Avoir/Prendre des vacances", vi: "Có/Nghỉ phép" },
+        { fr: "Avoir/Faire un travail amusant, collectif, créatif, facile, productif, utile...", vi: "Có/Làm một công việc thú vị, mang tính tập thể, sáng tạo, dễ dàng, hiệu quả, hữu ích..." },
+        { fr: "Être utile/Servir à quelque chose", vi: "Hữu ích/Có ích cho điều gì đó" },
+        { fr: "Gagner de l'argent", vi: "Kiếm tiền" },
+        { fr: "Partager des connaissances", vi: "Chia sẻ kiến thức" },
+        { fr: "Passer son temps (quelque part)", vi: "Dành thời gian (ở đâu đó)" },
+        { fr: "Passer son temps à (faire quelque chose)", vi: "Dành thời gian để (làm gì đó)" },
+        { fr: "Profiter de sa famille", vi: "Tận hưởng thời gian bên gia đình" },
+        { fr: "Se former/Suivre une formation", vi: "Tự đào tạo/Theo một khóa đào tạo" },
+        { fr: "Travailler avec ses mains", vi: "Làm việc bằng đôi tay" },
+        { fr: "Travailler en équipe", vi: "Làm việc theo nhóm" },
+      ],
+    },
+  ],
 };

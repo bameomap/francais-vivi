@@ -1099,4 +1099,137 @@ export const EDITO_VOCAB_A2_UNITS = [
       },
     ]
   },
+  {
+    id: "b11", num: "11", title: "De jolis parcours",
+    color: "#7C3AED", bg: "#EDE9FE",
+    groups: [
+      {
+        id: "b11g1", label: "Le système scolaire français", icon: "🏫",
+        words: [
+          { fr:"l'école primaire (f.)", vi:"trường tiểu học", ex_fr:"L'école primaire va de la maternelle au CM2, de 3 à 11 ans.", ex_vi:"Trường tiểu học kéo dài từ mẫu giáo đến lớp CM2, từ 3 đến 11 tuổi." },
+          { fr:"le collège",            vi:"trường trung học cơ sở", ex_fr:"Karima a 12 ans. Elle est au collège.", ex_vi:"Karima 12 tuổi. Cô bé đang học trung học cơ sở." },
+          { fr:"le lycée",              vi:"trường trung học phổ thông", ex_fr:"J'ai passé mon bac scientifique au lycée français d'Istanbul.", ex_vi:"Tôi đã thi tú tài khoa học tại trường trung học Pháp ở Istanbul." },
+          { fr:"l'université (f.)",     vi:"trường đại học", ex_fr:"J'ai choisi d'étudier l'informatique à l'université de Lille.", ex_vi:"Tôi đã chọn học công nghệ thông tin tại đại học Lille." },
+        ]
+      },
+      {
+        id: "b11g2", label: "La scolarité", icon: "📚",
+        words: [
+          { fr:"apprendre",            vi:"học, tiếp thu", ex_fr:"On travaillait beaucoup en classe pour apprendre.", ex_vi:"Chúng tôi học rất nhiều trên lớp để tiếp thu kiến thức." },
+          { fr:"le cours",             vi:"buổi học, môn học", ex_fr:"J'ai suivi des cours d'anglais pendant mon année de césure.", ex_vi:"Tôi đã theo học các khóa tiếng Anh trong năm nghỉ giữa khóa." },
+          { fr:"enseigner",            vi:"giảng dạy", ex_fr:"Vous n'avez pas seulement été mon extraordinaire prof de français.", ex_vi:"Cô không chỉ là giáo viên tiếng Pháp tuyệt vời của tôi." },
+          { fr:"la matière",           vi:"môn học", ex_fr:"Les maths, la physique-chimie, la biologie, ce sont des matières que j'ai toujours aimées.", ex_vi:"Toán, lý-hóa, sinh học, đó là những môn tôi luôn yêu thích." },
+          { fr:"la (salle de) classe / en classe", vi:"lớp học / trên lớp", ex_fr:"On travaillait beaucoup en classe, mais on s'amusait bien après les cours.", ex_vi:"Chúng tôi học rất nhiều trên lớp, nhưng lại chơi vui vẻ sau giờ học." },
+        ]
+      },
+      {
+        id: "b11g3", label: "Les personnes", icon: "🧑‍🎓",
+        words: [
+          { fr:"un(e) élève",          vi:"học sinh (từ mẫu giáo đến hết trung học)", ex_fr:"L'ambiance, c'est ce que j'ai préféré au lycée en tant qu'élève.", ex_vi:"Bầu không khí, đó là điều tôi thích nhất khi còn là học sinh trung học." },
+          { fr:"un(e) étudiant(e)",    vi:"sinh viên (bậc đại học)", ex_fr:"Vous êtes étudiant en informatique à Lille.", ex_vi:"Bạn là sinh viên ngành công nghệ thông tin tại Lille." },
+          { fr:"un(e) professeur(e) = un(e) enseignant(e)", vi:"giáo viên", ex_fr:"Chère Madame Lévy, vous avoir comme professeure a été une véritable révélation.", ex_vi:"Thưa cô Lévy, được cô làm giáo viên là một sự khai sáng thực sự." },
+          { fr:"le/la prof de français, de maths", vi:"thầy/cô giáo dạy Pháp văn, toán", ex_fr:"Vous n'avez pas seulement été mon extraordinaire prof de français.", ex_vi:"Cô không chỉ là giáo viên tiếng Pháp tuyệt vời của tôi." },
+        ]
+      },
+      {
+        id: "b11g4", label: "Les études", icon: "🎓",
+        words: [
+          { fr:"l'année de césure (f.)", vi:"năm nghỉ giữa khóa", ex_fr:"J'ai fait une année de césure et je suis parti en Belgique.", ex_vi:"Tôi đã có một năm nghỉ giữa khóa và sang Bỉ." },
+          { fr:"avoir bac +4",          vi:"có bằng sau tú tài 4 năm", ex_fr:"Un master 1 correspond à bac +4.", ex_vi:"Bằng thạc sĩ năm 1 tương đương với tú tài +4." },
+          { fr:"commencer ≠ arrêter ses études", vi:"bắt đầu ≠ dừng việc học", ex_fr:"J'ai commencé une fac de droit, que j'ai arrêtée.", ex_vi:"Tôi đã bắt đầu học luật, rồi bỏ dở." },
+          { fr:"être en 1re/2e/3e année", vi:"học năm 1/2/3", ex_fr:"Je suis maintenant en troisième année de licence.", ex_vi:"Bây giờ tôi đang học năm ba đại học." },
+          { fr:"être étudiant(e) en informatique", vi:"là sinh viên ngành công nghệ thông tin", ex_fr:"J'ai choisi d'étudier l'informatique à Lille pour devenir ingénieur du numérique.", ex_vi:"Tôi đã chọn học công nghệ thông tin tại Lille để trở thành kỹ sư số." },
+          { fr:"la fac de droit",       vi:"khoa luật", ex_fr:"J'ai commencé une fac de droit, que j'ai arrêtée.", ex_vi:"Tôi đã bắt đầu học khoa luật, rồi bỏ dở." },
+          { fr:"faire des études littéraires", vi:"học ngành văn học", ex_fr:"J'ai eu mon baccalauréat littéraire en 2015.", ex_vi:"Tôi đã đỗ tú tài văn học năm 2015." },
+          { fr:"la formation en alternance", vi:"đào tạo xen kẽ (học + làm)", ex_fr:"La formation en alternance permet d'apprendre un métier en travaillant.", ex_vi:"Đào tạo xen kẽ giúp học một nghề trong khi đi làm." },
+        ]
+      },
+      {
+        id: "b11g5", label: "L'évaluation", icon: "📝",
+        words: [
+          { fr:"avoir une bonne/mauvaise note", vi:"được điểm tốt/xấu", ex_fr:"Si j'étudie bien, j'aurai peut-être une bonne note !", ex_vi:"Nếu tôi học tốt, có lẽ tôi sẽ được điểm tốt!" },
+          { fr:"la mention (assez bien/bien/très bien)", vi:"xếp loại (khá/giỏi/xuất sắc)", ex_fr:"J'ai eu la mention « bien ».", ex_vi:"Tôi đã đạt xếp loại « giỏi »." },
+          { fr:"noter = mettre une note", vi:"cho điểm", ex_fr:"Merci pour votre rigueur et cette façon parfois trop sévère de me noter !", ex_vi:"Cảm ơn cô vì sự nghiêm khắc và cách cho điểm đôi khi quá khắt khe của cô!" },
+          { fr:"passer le bac/un examen", vi:"thi tú tài/một kỳ thi", ex_fr:"J'ai passé mon bac scientifique au lycée français d'Istanbul.", ex_vi:"Tôi đã thi tú tài khoa học tại trường trung học Pháp ở Istanbul." },
+          { fr:"rater un/son examen ou une/son année", vi:"trượt một kỳ thi hoặc trượt năm học", ex_fr:"J'ai raté ma première année parce que j'avais des mauvaises notes.", ex_vi:"Tôi đã trượt năm nhất vì tôi bị điểm kém." },
+          { fr:"redoubler une classe/une année", vi:"học lại một lớp/một năm", ex_fr:"Beaucoup d'étudiants ont redoublé.", ex_vi:"Nhiều sinh viên đã phải học lại." },
+          { fr:"réussir un/son examen ou une/son année", vi:"đỗ một kỳ thi hoặc đỗ năm học", ex_fr:"Je me suis à nouveau inscrit en première année et j'ai réussi mes examens.", ex_vi:"Tôi đã đăng ký lại năm nhất và đã thi đỗ các kỳ thi." },
+        ]
+      },
+      {
+        id: "b11g6", label: "Les diplômes", icon: "📜",
+        words: [
+          { fr:"le baccalauréat = le bac", vi:"bằng tú tài", ex_fr:"J'ai obtenu mon baccalauréat littéraire au Lycée Guez de Balzac.", ex_vi:"Tôi đã lấy bằng tú tài văn học tại trường Lycée Guez de Balzac." },
+          { fr:"un bachelor (bac +3, diplôme privé)", vi:"bằng cử nhân tư (tú tài +3, bằng của trường tư)", ex_fr:"J'ai commencé un bachelor en communication à Sup de Pub.", ex_vi:"Tôi đã bắt đầu học cử nhân truyền thông tại Sup de Pub." },
+          { fr:"une licence (bac +3, diplôme national)", vi:"bằng cử nhân quốc gia (tú tài +3)", ex_fr:"Mon objectif, c'est de réussir ma licence en trois ans.", ex_vi:"Mục tiêu của tôi là hoàn thành bằng cử nhân trong ba năm." },
+          { fr:"un master 1/M1 (bac +4)", vi:"thạc sĩ năm 1 (tú tài +4)", ex_fr:"Je vais rentrer en master Management et marketing du sport.", ex_vi:"Tôi sẽ vào học thạc sĩ Quản lý và marketing thể thao." },
+          { fr:"un master 2/M2 (bac +5)", vi:"thạc sĩ năm 2 (tú tài +5)", ex_fr:"Après la licence, je vais faire un master 1 puis un master 2.", ex_vi:"Sau cử nhân, tôi sẽ học thạc sĩ năm 1 rồi năm 2." },
+        ]
+      },
+      {
+        id: "b11g7", label: "Les secteurs professionnels", icon: "🏢",
+        words: [
+          { fr:"la beauté",             vi:"ngành làm đẹp", ex_fr:"Loubna a ouvert un espace pour les métiers de la beauté et du bien-être.", ex_vi:"Loubna đã mở một không gian cho các nghề làm đẹp và chăm sóc sức khỏe." },
+          { fr:"le bien-être",          vi:"ngành chăm sóc sức khỏe/thư giãn", ex_fr:"Le Salon Partagé, un espace de coworking pour les métiers de la beauté et du bien-être.", ex_vi:"Le Salon Partagé, một không gian làm việc chung cho các nghề làm đẹp và chăm sóc sức khỏe." },
+          { fr:"la communication",      vi:"ngành truyền thông", ex_fr:"C'est une passionnée de sport et de communication.", ex_vi:"Cô ấy là người đam mê thể thao và truyền thông." },
+          { fr:"la formation",         vi:"ngành đào tạo", ex_fr:"L'agent d'entretien travaille dans le nettoyage, le formateur dans la formation.", ex_vi:"Nhân viên vệ sinh làm trong ngành dọn dẹp, giảng viên làm trong ngành đào tạo." },
+          { fr:"l'informatique (f.)",  vi:"ngành công nghệ thông tin", ex_fr:"L'ingénieure du numérique travaille dans l'informatique.", ex_vi:"Kỹ sư số làm việc trong ngành công nghệ thông tin." },
+          { fr:"le management",        vi:"ngành quản lý", ex_fr:"Je vais rentrer en master Management et marketing du sport.", ex_vi:"Tôi sẽ vào học thạc sĩ Quản lý và marketing thể thao." },
+          { fr:"le marketing",         vi:"ngành tiếp thị", ex_fr:"Assistante communication marketing, Ligue de Surf Nouvelle-Aquitaine.", ex_vi:"Trợ lý truyền thông tiếp thị, Liên đoàn Lướt sóng Nouvelle-Aquitaine." },
+          { fr:"le nettoyage",         vi:"ngành dọn dẹp, vệ sinh", ex_fr:"Deux agents d'entretien pour le nettoyage.", ex_vi:"Hai nhân viên vệ sinh phụ trách việc dọn dẹp." },
+          { fr:"le numérique",         vi:"ngành kỹ thuật số", ex_fr:"J'ai choisi d'étudier l'informatique à Lille pour devenir ingénieur du numérique.", ex_vi:"Tôi đã chọn học công nghệ thông tin tại Lille để trở thành kỹ sư số." },
+          { fr:"la restauration",      vi:"ngành nhà hàng, ăn uống", ex_fr:"J'ai travaillé dans la restauration en Belgique.", ex_vi:"Tôi đã làm việc trong ngành nhà hàng ở Bỉ." },
+          { fr:"le sport",             vi:"ngành thể thao", ex_fr:"C'est une passionnée de sport et de communication.", ex_vi:"Cô ấy là người đam mê thể thao và truyền thông." },
+        ]
+      },
+      {
+        id: "b11g8", label: "Les professions", icon: "👩‍🔧",
+        words: [
+          { fr:"l'agent(e) d'entretien", vi:"nhân viên vệ sinh", ex_fr:"Le Salon Partagé a trois employés : deux agents d'entretien pour le nettoyage.", ex_vi:"Le Salon Partagé có ba nhân viên: hai nhân viên vệ sinh phụ trách dọn dẹp." },
+          { fr:"le/la chef(fe) d'entreprise = l'entrepreneur(e)", vi:"chủ doanh nghiệp", ex_fr:"Ses membres sont des entrepreneurs, des experts, des formateurs.", ex_vi:"Thành viên của họ là các doanh nhân, chuyên gia, giảng viên." },
+          { fr:"le coiffeur, la coiffeuse", vi:"thợ làm tóc", ex_fr:"En ce moment, on a un coiffeur, une tatoueuse, un masseur et une esthéticienne.", ex_vi:"Hiện tại, chúng tôi có một thợ làm tóc, một thợ xăm, một nhân viên mát-xa và một chuyên viên thẩm mỹ." },
+          { fr:"l'esthéticien(ne)",     vi:"chuyên viên thẩm mỹ", ex_fr:"On a un coiffeur, une tatoueuse, un masseur et une esthéticienne.", ex_vi:"Chúng tôi có một thợ làm tóc, một thợ xăm, một nhân viên mát-xa và một chuyên viên thẩm mỹ." },
+          { fr:"le formateur, la formatrice", vi:"giảng viên đào tạo", ex_fr:"Ses membres sont des entrepreneurs, des experts, des formateurs.", ex_vi:"Thành viên của họ là các doanh nhân, chuyên gia, giảng viên." },
+          { fr:"l'ingénieur(e)",        vi:"kỹ sư", ex_fr:"J'ai choisi d'étudier l'informatique pour devenir ingénieur du numérique.", ex_vi:"Tôi đã chọn học công nghệ thông tin để trở thành kỹ sư số." },
+          { fr:"le/la manucure",        vi:"thợ làm móng", ex_fr:"Si vous êtes manucure, vous pouvez louer un espace au Salon Partagé.", ex_vi:"Nếu bạn là thợ làm móng, bạn có thể thuê một không gian tại Le Salon Partagé." },
+          { fr:"le masseur, la masseuse", vi:"nhân viên mát-xa", ex_fr:"On a un coiffeur, une tatoueuse, un masseur et une esthéticienne.", ex_vi:"Chúng tôi có một thợ làm tóc, một thợ xăm, một nhân viên mát-xa và một chuyên viên thẩm mỹ." },
+          { fr:"le/la secrétaire",      vi:"thư ký", ex_fr:"Un secrétaire pour accueillir les gens et prendre les rendez-vous.", ex_vi:"Một thư ký để tiếp đón khách và sắp xếp lịch hẹn." },
+          { fr:"le tatoueur, la tatoueuse", vi:"thợ xăm", ex_fr:"On a un coiffeur, une tatoueuse, un masseur et une esthéticienne.", ex_vi:"Chúng tôi có một thợ làm tóc, một thợ xăm, một nhân viên mát-xa và một chuyên viên thẩm mỹ." },
+        ]
+      },
+      {
+        id: "b11g9", label: "Le travail", icon: "💼",
+        words: [
+          { fr:"l'ambiance de travail (f.)", vi:"bầu không khí làm việc", ex_fr:"Ils s'entendent bien. Il y a une bonne ambiance.", ex_vi:"Họ hòa hợp với nhau. Không khí làm việc rất tốt." },
+          { fr:"le coworking",          vi:"không gian làm việc chung", ex_fr:"Blue Working offre un environnement inspirant pour le travail collaboratif.", ex_vi:"Blue Working mang lại một môi trường truyền cảm hứng cho công việc hợp tác." },
+          { fr:"l'emploi = le job (fam.) = le poste = le travail", vi:"công việc, chỗ làm", ex_fr:"Je suis très intéressé(e) par le poste de secrétaire.", ex_vi:"Tôi rất quan tâm đến vị trí thư ký." },
+          { fr:"l'employé(e) = le/la salarié(e)", vi:"nhân viên, người làm công ăn lương", ex_fr:"Le Salon Partagé a trois employés.", ex_vi:"Le Salon Partagé có ba nhân viên." },
+          { fr:"l'entreprise (f.) = la société", vi:"doanh nghiệp, công ty", ex_fr:"J'ai regardé les offres d'emploi de votre entreprise.", ex_vi:"Tôi đã xem các thông báo tuyển dụng của công ty bạn." },
+          { fr:"les horaires (f., m.)", vi:"giờ giấc làm việc", ex_fr:"Ils sont vraiment indépendants : ils fixent leurs tarifs et leurs horaires.", ex_vi:"Họ thực sự độc lập: họ tự quyết định giá và giờ giấc làm việc." },
+          { fr:"le local",             vi:"mặt bằng, cửa hàng", ex_fr:"Les travailleurs indépendants qui débutent ne peuvent pas payer un local.", ex_vi:"Những người lao động tự do mới bắt đầu không thể trả tiền thuê mặt bằng." },
+          { fr:"le matériel",          vi:"trang thiết bị", ex_fr:"Le prix de la location inclut aussi les meubles et le matériel de base.", ex_vi:"Giá thuê còn bao gồm cả đồ đạc và trang thiết bị cơ bản." },
+          { fr:"le tarif",             vi:"mức giá, biểu giá", ex_fr:"Ils fixent leurs tarifs et leurs horaires.", ex_vi:"Họ tự quyết định giá và giờ giấc làm việc." },
+          { fr:"le travail à distance ≠ en présentiel", vi:"làm việc từ xa ≠ làm việc trực tiếp tại chỗ", ex_fr:"Il ne s'adresse pas à des gens qui travaillent à distance.", ex_vi:"Nơi này không dành cho những người làm việc từ xa." },
+          { fr:"le travail en équipe = collaboratif", vi:"làm việc theo nhóm, hợp tác", ex_fr:"Blue Working offre un environnement inspirant pour le travail collaboratif.", ex_vi:"Blue Working mang lại một môi trường truyền cảm hứng cho công việc hợp tác." },
+          { fr:"le travailleur indépendant, la travailleuse indépendante", vi:"người lao động tự do", ex_fr:"Les travailleurs indépendants qui débutent ne peuvent pas payer un local.", ex_vi:"Những người lao động tự do mới bắt đầu không thể trả tiền thuê mặt bằng." },
+        ]
+      },
+      {
+        id: "b11g10", label: "Le CV et la recherche d'emploi", icon: "📋",
+        words: [
+          { fr:"les activités extraprofessionnelles (f.) = les centres d'intérêt (m.)", vi:"hoạt động ngoại khóa, sở thích", ex_fr:"Centres d'intérêt : football, rugby, surf.", ex_vi:"Sở thích: bóng đá, bóng bầu dục, lướt sóng." },
+          { fr:"l'annonce = l'offre d'emploi (f.)", vi:"thông báo tuyển dụng", ex_fr:"J'ai regardé les offres d'emploi de votre entreprise.", ex_vi:"Tôi đã xem các thông báo tuyển dụng của công ty bạn." },
+          { fr:"le/la candidat(e)",     vi:"ứng viên", ex_fr:"Si vous êtes un(e) candidat(e) intéressant(e) pour l'entreprise, elle va vous contacter.", ex_vi:"Nếu bạn là ứng viên thú vị đối với công ty, họ sẽ liên hệ với bạn." },
+          { fr:"chercher/trouver du travail", vi:"tìm việc/tìm được việc", ex_fr:"Vous pouvez consulter les offres d'emploi pour chercher du travail.", ex_vi:"Bạn có thể xem các thông báo tuyển dụng để tìm việc." },
+          { fr:"la compétence (f.)",    vi:"kỹ năng", ex_fr:"Présentez vos expériences et vos compétences.", ex_vi:"Hãy trình bày kinh nghiệm và kỹ năng của bạn." },
+          { fr:"le curriculum vitae = le CV", vi:"sơ yếu lý lịch", ex_fr:"Ça sert encore à quelque chose de faire un CV ?", ex_vi:"Việc làm CV có còn ích lợi gì không?" },
+          { fr:"l'entretien d'embauche (m.)", vi:"buổi phỏng vấn xin việc", ex_fr:"Elle va vous proposer un entretien d'embauche.", ex_vi:"Cô ấy sẽ mời bạn tham gia một buổi phỏng vấn xin việc." },
+          { fr:"l'expérience (f.)",     vi:"kinh nghiệm", ex_fr:"Je n'ai pas d'expérience !", ex_vi:"Tôi không có kinh nghiệm gì cả!" },
+          { fr:"le parcours",           vi:"quá trình học tập/sự nghiệp", ex_fr:"Vous allez nous raconter votre parcours scolaire et universitaire.", ex_vi:"Bạn sẽ kể cho chúng tôi nghe về quá trình học tập phổ thông và đại học của bạn." },
+          { fr:"la recherche d'emploi", vi:"việc tìm việc làm", ex_fr:"Trouveur d'emploi, le podcast qui répond à toutes vos questions sur la recherche d'emploi.", ex_vi:"Trouveur d'emploi, podcast trả lời mọi câu hỏi của bạn về việc tìm việc làm." },
+          { fr:"le recrutement",       vi:"việc tuyển dụng", ex_fr:"C'est compliqué pour les recruteurs, qui se retrouvent toujours face au même CV.", ex_vi:"Điều này gây khó khăn cho nhà tuyển dụng, những người luôn phải đối mặt với cùng một kiểu CV." },
+        ]
+      },
+    ]
+  },
 ];

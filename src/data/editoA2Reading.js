@@ -1925,6 +1925,196 @@ Dans la ville de Lausanne, il y a trois collines : la Cité, le Bourg et Saint-L
       { id: "b10-lausanne-q3", type: "open", prompt: "En groupes : préparez en quelques lignes une présentation de Lausanne et imaginez quatre anecdotes de voyage (visite, activité, rencontre, hébergement) pour un article de blog." },
     ],
   },
+
+  // ═══════════════ Unité 11 — De jolis parcours ═══════════════
+
+  // ── B · Lettre à ce prof qui a changé ma vie (p. 156) ─────────────────
+  {
+    id: "b11-livre-lettre-prof",
+    unit: 11,
+    unitTitle: "De jolis parcours",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 156,
+    title: "Lettre à ce prof qui a changé ma vie",
+    instruction: "Aline Afanoukoé est une journaliste, animatrice de radio et télévision, et comédienne française. Dans Lettre à ce prof qui a changé ma vie, elle remercie sa professeure de français.",
+    text: `Chère Madame Lévy,
+
+Intégrer le collège Georges-Pompidou et vous avoir comme professeure a été une véritable révélation !
+
+Car vous n'avez pas seulement été mon extraordinaire prof de français motivante, captivante, optimiste et bienveillante, c'est vous qui m'avez fait découvrir le théâtre ! Vous m'avez ouvert la porte de cet univers merveilleux et infini (…).
+
+Madame Lévy, je vous remercie pour tout ce que vous m'avez apporté, merci pour votre rigueur et cette façon parfois trop sévère de me noter ! Merci pour vos appréciations, vos commentaires, ce sont eux qui m'ont permis d'avancer.
+
+Merci pour votre enseignement, merci pour ces livres et pistes de lecture qui m'ont guidée (…).
+
+C'est grâce à tout ce bagage que je me suis forgé une solide base de réflexion. (…)
+
+Chère Madame Lévy, je ne vous oublierai jamais. (…)
+
+On a tous un professeur qui nous a marqués. Votre importance dans la vie d'un élève, votre courage et votre dévouement ne sauraient être remis en question.
+
+Je pense à vous tous et je vous dis MERCI.
+
+Aline Afanoukoé
+COLLECTIF, Lettre à ce prof qui a changé ma vie, 2020`,
+    questions: [
+      { id: "b11-lettreprof-q1", type: "open", prompt: "Entrée en matière : gardez-vous de bons souvenirs de vos ancien(ne)s professeur(e)s ?" },
+      { id: "b11-lettreprof-q2", type: "short_answer", prompt: "1re lecture : à qui s'adresse la lettre d'Aline Afanoukoé ?", answer: "À Madame Lévy, son ancienne professeure de français au collège Georges-Pompidou." },
+      { id: "b11-lettreprof-q3", type: "short_answer", prompt: "Pourquoi écrit-elle à cette personne ?", answer: "Pour la remercier de tout ce qu'elle lui a apporté." },
+      { id: "b11-lettreprof-q4", type: "short_answer", prompt: "2e lecture : comment cette enseignante a-t-elle changé la vie d'Aline Afanoukoé ?", answer: "Elle lui a fait découvrir le théâtre, elle l'a notée avec rigueur, elle lui a donné des livres et des pistes de lecture qui l'ont guidée et lui ont permis de se forger une solide base de réflexion." },
+      { id: "b11-lettreprof-q5", type: "open", prompt: "Vocabulaire : relevez les mots du texte sur le thème de l'école." },
+      { id: "b11-lettreprof-q6", type: "open", prompt: "Production écrite ➜ DELF : écrivez une lettre à quelqu'un qui a changé votre vie pour lui dire merci. (60 mots minimum)" },
+    ],
+  },
+
+  // ── E · Premier contact professionnel (p. 159) ─────────────────────────
+  {
+    id: "b11-livre-premier-contact",
+    unit: 11,
+    unitTitle: "De jolis parcours",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 159,
+    title: "Premier contact professionnel",
+    instruction: "Forum — échange de messages sur la manière de créer son profil professionnel et d'entrer en contact avec un employeur ou une employeuse.",
+    text: `« Bonjour, je voudrais savoir ce que je dois indiquer sur mon profil professionnel. Merci d'avance. »
+
+« Votre profil doit avoir un titre (votre ou vos professions), présenter vos expériences et vos compétences. Si vous mettez une photo, elle doit être neutre. »
+
+« Merci pour votre réponse. Je me demande aussi comment écrire le premier message, pour entrer en contact avec un employeur ou une employeuse. Vous avez des exemples ? »
+
+« Vous pouvez écrire : « Bonjour Madame, / Bonjour Monsieur, j'ai regardé les offres d'emploi de votre entreprise et je suis très intéressé(e) par le poste de [nom du poste]. Acceptez-vous de m'ajouter à vos contacts ? Bien cordialement, [signature] ». Ou bien : « Madame, / Monsieur, j'ai lu votre annonce pour le poste de [nom du poste] dans votre société et je voudrais vous envoyer mon CV. Pouvez-vous m'accepter dans votre réseau ? Bien à vous, [signature] ». »`,
+    questions: [
+      { id: "b11-premiercontact-q1", type: "open", prompt: "Entrée en matière : connaissez-vous des réseaux sociaux utiles pour chercher du travail ?" },
+      { id: "b11-premiercontact-q2", type: "short_answer", prompt: "Lecture : selon ce forum, quels sont les éléments d'un profil de réseau social professionnel ?", answer: "Un titre (la ou les professions), la présentation des expériences et des compétences, et éventuellement une photo neutre." },
+      { id: "b11-premiercontact-q3", type: "short_answer", prompt: "Retrouvez dans les échanges les formules pour : saluer – dire quel poste nous intéresse – faire une demande polie – conclure un message formel.", answer: "Saluer : « Bonjour Madame, / Bonjour Monsieur » ou « Madame, / Monsieur ». Dire le poste : « je suis très intéressé(e) par le poste de… ». Demande polie : « Acceptez-vous de… ? » / « Pouvez-vous… ? ». Conclure : « Bien cordialement » / « Bien à vous »." },
+      { id: "b11-premiercontact-q4", type: "open", prompt: "Production orale : que pensez-vous de cette façon de chercher du travail ?" },
+      { id: "b11-premiercontact-q5", type: "open", prompt: "Production écrite : avec votre voisin(e), échangez des messages comme sur un réseau professionnel : vous faites une demande de connexion, votre voisin(e) vous accepte, vous lui répondez, etc." },
+    ],
+  },
+
+  // ── F · Coworking sur l'île de la Martinique (culture, p. 160) ────────
+  {
+    id: "b11-livre-coworking-martinique",
+    unit: 11,
+    unitTitle: "De jolis parcours",
+    source: "livre",
+    section: "culture(s)",
+    page: 160,
+    title: "Coworking sur l'île de la Martinique",
+    instruction: "Culture(s) — Espaces partagés. Présentation de Blue Working, un espace de coworking au cœur de la Marina du Marin, en Martinique.",
+    text: `Un espace de coworking au cœur de la Marina du Marin
+
+Situé dans un important port de plaisance de la Caraïbe, Blue Working offre un environnement inspirant pour le travail collaboratif. Cet espace de coworking vous permet de travailler de manière productive, créative et conviviale, selon vos envies et besoins. Les espaces de travail partagés favorisent la collaboration et les échanges entre coworkers. À Blue Working, vos journées sont à la fois productives et équilibrées : de nombreux restaurants et bars, une salle de sport, des sentiers de randonnées et des plages magnifiques sont à quelques minutes seulement.
+
+Ses membres sont des entrepreneurs, des experts, des formateurs et bien d'autres acteurs. C'est un réseau où on partage les connaissances et les expériences. La Marina du Marin accueille des milliers de voyageurs internationaux chaque année. Notre communauté vous permet donc d'élargir votre réseau professionnel.
+
+www.blueworking.com`,
+    questions: [
+      { id: "b11-coworkingmartinique-q1", type: "open", prompt: "Entrée en matière : connaissez-vous le principe du coworking ? Utilisez-vous des espaces partagés pour étudier ou travailler ?" },
+      { id: "b11-coworkingmartinique-q2", type: "short_answer", prompt: "Lecture : où se trouve Blue Working ?", answer: "Au cœur de la Marina du Marin, en Martinique, dans un important port de plaisance de la Caraïbe." },
+      { id: "b11-coworkingmartinique-q3", type: "short_answer", prompt: "Que propose ce coworking ?", answer: "Un environnement inspirant pour le travail collaboratif, des espaces de travail partagés, et à proximité des restaurants, bars, une salle de sport, des sentiers de randonnée et des plages ; ses membres élargissent aussi leur réseau professionnel." },
+      { id: "b11-coworkingmartinique-q4", type: "open", prompt: "Production orale : aimeriez-vous travailler à Blue Working ? Pourriez-vous y travailler de manière efficace ? Pourquoi ?" },
+    ],
+  },
+
+  // ── H · Nouveau métier, nouvelle vie (vidéo, p. 162) ───────────────────
+  {
+    id: "b11-livre-nouveau-metier",
+    unit: 11,
+    unitTitle: "De jolis parcours",
+    source: "livre",
+    section: "compréhension audiovisuelle",
+    page: 162,
+    title: "Nouveau métier, nouvelle vie",
+    instruction: "Résumé du reportage vidéo : Roland, Benjamin et Rita racontent leur reconversion professionnelle vers un métier manuel ou passion d'enfance.",
+    text: `Ce reportage présente trois personnes qui ont changé de vie professionnelle. Roland et Benjamin ont troqué leur ancien métier de bureau (consultants) pour devenir respectivement boucher et pâtissier : ils ont mis un terme à leur carrière précédente pour travailler avec leurs mains.
+
+Rita, elle, a eu une première vie professionnelle très différente de sa deuxième : après des années dans un métier de bureau, elle est devenue pianiste, réalisant ainsi un rêve d'enfant.
+
+Ces personnes ont changé de métier pour deux raisons principales : réaliser leurs rêves d'enfants et pouvoir travailler avec leurs mains, loin des écrans et du quotidien de bureau.
+
+« Troquer », c'est échanger. « Mettre un terme à sa carrière », c'est arrêter sa carrière.`,
+    questions: [
+      { id: "b11-nouveaumetier-q1", type: "open", prompt: "Entrée en matière : associez une profession à chaque image : boucher, bouchère – consultant(e) – pâtissier, pâtissière – pianiste." },
+      { id: "b11-nouveaumetier-q2", type: "short_answer", prompt: "1re écoute : quelle photo correspond à chaque situation ? a. Roland et Benjamin avant leur reconversion. b. Roland et Benjamin après leur reconversion. c. La première vie professionnelle de Rita. d. La deuxième vie professionnelle de Rita.", answer: "a. Consultants au bureau. b. Boucher et pâtissier dans leur nouveau métier. c. Un métier de bureau, loin de la musique. d. Pianiste." },
+      { id: "b11-nouveaumetier-q3", type: "multi_select", prompt: "2e écoute : pourquoi ces personnes changent-elles de vie professionnelle ? (2 réponses)", options: ["a. Pour réaliser leurs rêves d'enfants.", "b. Pour travailler avec leurs mains.", "c. Pour gagner plus d'argent.", "d. Pour passer plus de temps en famille."], answer: ["a. Pour réaliser leurs rêves d'enfants.", "b. Pour travailler avec leurs mains."] },
+      { id: "b11-nouveaumetier-q4", type: "matching", prompt: "Vocabulaire : que signifient ces expressions ? a. Ils ont troqué. b. Mettre un terme à sa carrière.", answer: "a. Ils ont troqué. → Ils ont échangé.\nb. Mettre un terme à sa carrière. → Arrêter sa carrière." },
+      { id: "b11-nouveaumetier-q5", type: "open", prompt: "Production orale : pensez-vous qu'on peut faire le même métier toute sa vie ? Avez-vous (déjà eu) envie de vous reconvertir ou de vous réorienter ?" },
+      { id: "b11-nouveaumetier-q6", type: "open", prompt: "Production écrite : choisissez deux professions très différentes et racontez le parcours d'une personne qui passe d'un métier à l'autre." },
+    ],
+  },
+
+  // ── I · Êtes-vous prêt(e) à changer de métier ? (p. 163) ───────────────
+  {
+    id: "b11-livre-changer-de-metier",
+    unit: 11,
+    unitTitle: "De jolis parcours",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 163,
+    title: "Êtes-vous prêt(e) à changer de métier ?",
+    instruction: "Un test de magazine : « Vous pensez à changer d'orientation professionnelle ? Vous y pensez vraiment ? Faites le point. »",
+    text: `Test : Vous pensez à changer d'orientation professionnelle ? Vous y pensez vraiment ? Faites le point.
+
+Quelle est votre relation avec votre travail ?
+a. C'est toute votre vie !
+b. Vous vous y intéressez plus ou moins.
+c. Vous pensez avant tout aux vacances.
+
+Votre rêve d'enfant ?
+a. Avoir un métier passionnant. Vous y êtes arrivé(e) !
+b. Avoir un travail amusant. Vive la récré !
+c. Être ministre. Évidemment, vous y avez renoncé…
+
+Votre collègue vous dit qu'il veut changer de travail. Quelle est votre réaction ?
+a. Ça alors ! Mais tu as un très bon poste…
+b. Vraiment ? Tu y as bien réfléchi ?
+c. Moi aussi, j'ai besoin de changement, c'est certain.
+
+Vous recevez un message très urgent.
+a. Vous y répondez tout de suite.
+b. Vous y répondez plus tard.
+c. Vous n'y répondez pas.
+
+Réponses
+Un maximum de A : heureux(se) au travail. C'est sûr, vous n'avez pas envie de vous reconvertir.
+Un maximum de B : prêt(e) pour le changement ? Vous faites votre travail mais vous ne vous y intéressez pas vraiment.
+Un maximum de C : c'est évident, vous devez changer de travail ! Pour commencer, vous pouvez faire un bilan de compétences.`,
+    questions: [
+      { id: "b11-changermetier-q1", type: "open", prompt: "Entrée en matière : observez le document. Qu'est-ce que c'est ?" },
+      { id: "b11-changermetier-q2", type: "multi_select", prompt: "Lecture : avec ce document, à quelles questions pouvez-vous répondre ?", options: ["a. Est-ce que mon travail me plaît ?", "b. Est-ce que je dois changer de travail ?", "c. Pourquoi suis-je stressé(e) au travail ?"], answer: ["a. Est-ce que mon travail me plaît ?", "b. Est-ce que je dois changer de travail ?"] },
+      { id: "b11-changermetier-q3", type: "open", prompt: "Répondez aux questions du test." },
+      { id: "b11-changermetier-q4", type: "open", prompt: "Production orale : commentez les résultats avec votre voisin(e). Sont-ils évidents pour vous ?" },
+    ],
+  },
+
+  // ── Atelier médiation · Faire une enquête sur le travail idéal (p. 165) ─
+  {
+    id: "b11-livre-atelier-travail-ideal",
+    unit: 11,
+    unitTitle: "De jolis parcours",
+    source: "livre",
+    section: "atelier médiation",
+    page: 165,
+    title: "Atelier médiation — Le job idéal ?",
+    instruction: "Document pour l'atelier « Faire une enquête sur le travail idéal » : infographie sur les critères indispensables pour les salariés (PageGroup, 2018).",
+    text: `Infographie — « C'est quoi pour vous, le job idéal ? »
+
+Les critères indispensables pour les salariés :
+- Bonnes relations avec son manager et ses collègues — 95 %
+- Reconnaissance du travail accompli — 91 %
+- Équilibre vie privée / vie professionnelle — 81 % (dont 79 % horaires de travail flexibles ; 52 % temps de transport réduit ; 49 % possibilité de télétravailler)
+- Travailler dans une entreprise socialement responsable — 74,5 %
+
+© 2018 - PageGroup`,
+    questions: [
+      { id: "b11-jobideal-q1", type: "open", prompt: "En groupes : cette étude présente le travail idéal pour qui ?" },
+      { id: "b11-jobideal-q2", type: "short_answer", prompt: "Pour les personnes interrogées, qu'est-ce qui est nécessaire dans un travail ? Dans quel ordre ?", answer: "De bonnes relations avec son manager et ses collègues (95 %), la reconnaissance du travail accompli (91 %), l'équilibre vie privée/vie professionnelle (81 %) et travailler dans une entreprise socialement responsable (74,5 %)." },
+      { id: "b11-jobideal-q3", type: "open", prompt: "En groupes : est-ce que ces critères sont aussi importants pour vous ? Commentez-les un par un. D'après vous, quels autres éléments sont nécessaires dans un travail ? Faites un « top 10 » des critères du travail idéal et présentez-le à la classe." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

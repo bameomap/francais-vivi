@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄", b10: "✈️" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳", b7: "💊", b8: "📰", b9: "🔄", b10: "✈️", b11: "🎓" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -1654,6 +1654,155 @@ export const EDITO_GRAMMAR_A2 = [
           "Celle qui est au coin de la rue me semble sympa. — Cái ở góc phố có vẻ dễ thương đấy.",
           "Ces deux circuits sont intéressants. Celui-ci est plus long, mais celui-là est plus culturel. — Hai lộ trình này đều thú vị. Cái này thì dài hơn, nhưng cái kia thì thiên về văn hóa hơn.",
           "Ceux qui aiment le tourisme local visiteront leur région cet été ! — Những ai thích du lịch địa phương sẽ đi thăm vùng của mình vào hè này!",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b11", num:"11", title:"De jolis parcours", points:[
+
+      // ── 1. La mise en relief ──────────────────────────────────────────
+      {
+        topic:"La mise en relief — Nhấn mạnh một từ trong câu bằng « c'est/ce sont… qui/que »",
+        summary:"Mise en relief = đặt « C'est/Ce sont » trước một từ, rồi thêm « qui » (nếu từ đó là chủ ngữ) hoặc « que/qu' » (nếu từ đó là bổ ngữ), để NHẤN MẠNH đúng từ đó. « Ce qui »/« Ce que » dùng khi thứ được nhấn mạnh không phải một danh từ cụ thể mà là « điều gì đó ».",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: từ muốn nhấn mạnh đóng vai trò CHỦ NGỮ hay BỔ NGỮ trong câu? Chủ ngữ → theo sau bởi « qui ». Bổ ngữ → theo sau bởi « que/qu' »." },
+
+          { type:"table",
+            caption:"Cấu trúc theo loại từ được nhấn mạnh",
+            headers:["Loại từ nhấn mạnh", "Nhấn mạnh CHỦ NGỮ", "Nhấn mạnh BỔ NGỮ"],
+            rows:[
+              ["Danh từ/nhóm danh từ", "C'est/Ce sont + danh từ + qui… — C'est la prof qui a changé ma vie.", "C'est/Ce sont + danh từ + que… — C'est une expérience que je ne regrette pas."],
+              ["Đại từ nhấn mạnh (moi, toi, lui…)", "C'est/Ce sont + moi/toi/lui/eux… + qui… — C'est vous qui m'avez fait découvrir le théâtre.", "C'est/Ce sont + moi/toi/lui/eux… + que… — C'est vous que j'ai vu."],
+              ["Đại từ chỉ định (ce)", "C'est ce qui… — C'est ce qui me plaît ici.", "C'est ce que… — C'est ce que j'ai préféré au lycée."],
+            ] },
+
+          { type:"formula",
+            parts:["C'est / Ce sont", "+ từ muốn nhấn mạnh", "+ qui (chủ ngữ) hoặc que/qu' (bổ ngữ)", "+ phần còn lại của câu"],
+            example:"Ce sont des matières que j'ai toujours aimées. (nhấn mạnh « des matières », bổ ngữ của « aimer »)",
+            note:"« Que » biến thành « Qu' » trước nguyên âm: C'est un prof qu'elle admire." },
+
+          { type:"heading", text:"« Ce qui »/« Ce que » đứng ĐẦU câu" },
+          { type:"cards", items:[
+            { badge:"1", color:"#4A90D9", title:"Ce qui/Ce que + mệnh đề, c'est/ce sont + phần nhấn mạnh",
+              lines:["Khi muốn đưa « điều nhấn mạnh » lên đầu câu để tạo hiệu ứng, đảo ngược thứ tự: bắt đầu bằng « Ce qui »/« Ce que », rồi thêm « c'est/ce sont » ở giữa câu."],
+              examples:[
+                { fr:"Ce qui est le plus difficile, c'est l'organisation du travail.", vi:"Điều khó nhất, đó là việc tổ chức công việc." },
+                { fr:"Ce que j'ai préféré au lycée, ce sont les fêtes de fin d'année.", vi:"Điều tôi thích nhất ở trường trung học, đó là các lễ hội cuối năm." },
+              ] },
+          ] },
+
+          { type:"callout", variant:"tip", title:"Ở văn nói, hay dùng « c'est » với ngôi thứ 3 số nhiều",
+            text:"Theo đúng ngữ pháp phải là « Ce sont elles qui… », nhưng trong khẩu ngữ người Pháp thường nói « C'est elles qui ont eu les meilleures notes » — vẫn hiểu và chấp nhận được ở trình độ giao tiếp." },
+
+          { type:"callout", variant:"warn", title:"Đừng lẫn « qui » và « que »",
+            text:"« Qui » luôn đứng ngay trước một ĐỘNG TỪ (vì nó thay cho chủ ngữ của động từ đó). « Que/Qu' » luôn đứng trước một CHỦ NGỮ + động từ khác (vì nó thay cho bổ ngữ của động từ đó). Thử tách câu ra: nếu sau « qui/que » không có chủ ngữ nào khác nữa → đó là « qui »." },
+
+          { type:"compare", items:[
+            { wrong:"C'est l'université que a les meilleurs résultats.", right:"C'est l'université qui a les meilleurs résultats.", why:"« l'université » là CHỦ NGỮ của « a » (a les meilleurs résultats) → phải dùng « qui », không phải « que »." },
+            { wrong:"C'est la littérature qui il étudie.", right:"C'est la littérature qu'il étudie.", why:"« la littérature » là BỔ NGỮ của « étudie » (il étudie la littérature) → phải dùng « que » (rút gọn thành « qu' » trước nguyên âm « il »), không phải « qui »." },
+          ] },
+        ],
+        examples:[
+          "Ce sont des matières que j'ai toujours aimées. — Đó là những môn mà tôi luôn yêu thích.",
+          "C'est une expérience que je ne regrette pas. — Đó là một trải nghiệm mà tôi không hối tiếc.",
+          "L'ambiance, c'est ce que j'ai préféré au lycée. — Bầu không khí, đó là điều tôi thích nhất ở trường trung học.",
+          "C'est un prof qui a changé ma vie. — Đó là một thầy/cô giáo đã thay đổi cuộc đời tôi.",
+          "C'est vous qui m'avez fait découvrir le théâtre. — Chính cô là người đã giúp tôi khám phá ra sân khấu kịch.",
+          "Ce sont eux qui m'ont permis d'avancer. — Chính họ là những người đã giúp tôi tiến bộ.",
+        ]
+      },
+
+      // ── 2. Le discours rapporté au présent ─────────────────────────────
+      {
+        topic:"Le discours rapporté au présent — Thuật lại lời nói của người khác",
+        summary:"Discours rapporté (thuật lại gián tiếp) dùng để kể lại lời một người khác đã nói, KHÔNG dùng dấu ngoặc kép nữa. Câu khẳng định → dùng « dire/répondre/expliquer… + que ». Câu hỏi → dùng « demander/vouloir savoir + từ nghi vấn », với vài thay đổi đặc biệt cho « est-ce que », « qu'est-ce que », « qu'est-ce qui ».",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: câu gốc là một CÂU KHẲNG ĐỊNH (→ thêm « que » sau động từ tường thuật) hay một CÂU HỎI (→ giữ từ nghi vấn, hoặc biến đổi « est-ce que/qu'est-ce que/qu'est-ce qui »)?" },
+
+          { type:"table",
+            caption:"2 loại câu tường thuật",
+            headers:["Loại câu gốc", "Cách tường thuật"],
+            rows:[
+              ["Câu khẳng định", "dire, répondre, affirmer, ajouter, annoncer, déclarer, expliquer, répéter… + que — « C'est plus facile pour nous. » → Ils disent que c'est plus facile pour eux."],
+              ["Câu hỏi", "demander, vouloir savoir, aimer savoir… + từ nghi vấn (où, qui, quand, comment, pourquoi…) — « Pourquoi ce poste vous intéresse ? » → Elle me demande pourquoi ce poste m'intéresse."],
+            ] },
+
+          { type:"heading", text:"3 biến đổi đặc biệt cho câu hỏi với est-ce que" },
+          { type:"table",
+            caption:"Bảng biến đổi",
+            headers:["Nghi vấn ở câu trực tiếp", "Ở discours indirect", "Ví dụ"],
+            rows:[
+              ["Est-ce que / không có từ nghi vấn", "→ si", "« Est-ce que le CV est utile ? » → Elle se demande si le CV est utile."],
+              ["Qu'est-ce que", "→ ce que", "« Qu'est-ce que vous pouvez apporter ? » → On vous demande ce que vous pouvez apporter."],
+              ["Qu'est-ce qui", "→ ce qui", "« Qu'est-ce qui est important ? » → Ils se demandent ce qui est important."],
+            ] },
+
+          { type:"formula",
+            parts:["Chủ ngữ", "+ dire/demander/vouloir savoir… (chia đúng thì)", "+ que / mot interrogatif / si / ce que / ce qui", "+ phần còn lại của câu (đổi đại từ nếu cần)"],
+            example:"« Je voudrais être dans ce réseau professionnel. » → Elle dit qu'elle voudrait être dans ce réseau professionnel.",
+            note:"« Je »→« elle », « ce réseau »→ giữ nguyên vì không phụ thuộc người nói. Luôn kiểm tra đại từ chủ ngữ VÀ sở hữu (mon/ton→son) cần đổi theo người được thuật lại." },
+
+          { type:"callout", variant:"tip", title:"Đừng quên đổi đại từ",
+            text:"Khi chuyển từ lời nói trực tiếp (« Je »/« tu »/« mon ») sang gián tiếp, phải đổi các đại từ và tính từ sở hữu cho khớp với người đang được nói tới: « Je vais créer un profil » (Elle) → Elle annonce qu'elle va créer un profil." },
+
+          { type:"callout", variant:"warn", title:"« Si » nghĩa là « nếu » HAY « có… không »?",
+            text:"Ở discours rapporté, « si » sau « demander/se demander » KHÔNG có nghĩa « nếu » — nó thay cho « est-ce que » để hỏi có/không: « Est-ce que le CV est mort ? » → Ils se demandent si le CV est mort. (= họ tự hỏi liệu CV có… hay không, không phải câu điều kiện)." },
+
+          { type:"compare", items:[
+            { wrong:"Elle se demande est-ce que le CV est utile.", right:"Elle se demande si le CV est utile.", why:"Trong discours indirect, « est-ce que » PHẢI biến thành « si » — không được giữ nguyên « est-ce que » sau động từ tường thuật." },
+            { wrong:"Ils se demandent qu'est-ce qui est important dans un CV.", right:"Ils se demandent ce qui est important dans un CV.", why:"« Qu'est-ce qui » (chủ ngữ nghi vấn) PHẢI biến thành « ce qui » ở discours indirect." },
+          ] },
+        ],
+        examples:[
+          "Ils disent que c'est plus facile d'avoir un CV d'une page. — Họ nói rằng có một CV một trang thì dễ hơn.",
+          "Je voudrais savoir ce que je dois indiquer sur mon profil. — Tôi muốn biết tôi phải ghi gì trên hồ sơ của mình.",
+          "Je me demande comment écrire le premier message. — Tôi tự hỏi làm sao để viết tin nhắn đầu tiên.",
+          "Elle se demande si le CV est utile. — Cô ấy tự hỏi liệu CV có hữu ích hay không.",
+          "On vous demande ce que vous pouvez apporter à l'entreprise. — Người ta hỏi bạn có thể mang lại gì cho công ty.",
+          "Ils se demandent ce qui est important dans un CV. — Họ tự hỏi điều gì là quan trọng trong một CV.",
+        ]
+      },
+
+      // ── 3. Le pronom COI y ──────────────────────────────────────────────
+      {
+        topic:"Le pronom COI « y » — Thay thế bổ ngữ gián tiếp bắt đầu bằng « à »",
+        summary:"« Y » thay cho một bổ ngữ (vật/ý tưởng, KHÔNG PHẢI người) đi sau giới từ « à » — của các động từ như « penser à, réfléchir à, s'intéresser à, répondre à, arriver à… ». Với NGƯỜI, phải dùng « à + đại từ nhấn mạnh » (à lui, à elle…), không dùng « y ».",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: bổ ngữ đi sau « à » là một VẬT/Ý TƯỞNG (→ dùng « y ») hay một NGƯỜI (→ dùng « à + moi/toi/lui/elle/nous/vous/eux/elles »)?" },
+
+          { type:"table",
+            caption:"Vị trí của « y » trong câu",
+            headers:["Trường hợp", "Vị trí", "Ví dụ"],
+            rows:[
+              ["Câu khẳng định/phủ định", "« y » đứng TRƯỚC động từ", "J'y ai bien réfléchi. Je n'y ai pas réfléchi. Je ne m'y intéresse pas."],
+              ["Câu mệnh lệnh khẳng định", "« y » đứng SAU động từ (nối bằng gạch ngang)", "Pensez-y !"],
+            ] },
+
+          { type:"formula",
+            parts:["Chủ ngữ", "+ y", "+ động từ (chia đúng thì)"],
+            example:"– Tu réponds à ce message ? – Oui, j'y réponds tout de suite !",
+            note:"Câu hỏi gốc dùng « à ce message » → « y » thay thế toàn bộ cụm giới từ đó, không chỉ danh từ." },
+
+          { type:"callout", variant:"tip", title:"So sánh với « le/la/les » (COD)",
+            text:"« Y » chỉ thay cho bổ ngữ có « à » đứng trước (COI). Nếu động từ không có giới từ (ví dụ « regarder quelque chose »), phải dùng « le/la/les », không phải « y ». Kiểm tra: động từ đó có « à » đi kèm không, trước khi chọn « y »." },
+
+          { type:"callout", variant:"warn", title:"NGƯỜI thì không dùng « y »",
+            text:"« Il pense à ses vacances. » (điều/vật) → « Il y pense. » Nhưng « Il pense à son collègue. » (người) → « Il pense à lui. » — không bao giờ nói « Il y pense » khi nói về một người cụ thể." },
+
+          { type:"compare", items:[
+            { wrong:"Je réponds toujours à eux.", right:"Je leur réponds toujours.", why:"« eux » (mails/khách hàng là VẬT ở đây tùy ngữ cảnh) — nếu bổ ngữ là người nhận thư, dùng đại từ COI « leur », không phải « à eux » (chỉ dùng « à + đại từ nhấn mạnh » với một số động từ đặc biệt như penser à)." },
+            { wrong:"Il y pense.", right:"Il pense à lui. (nếu nói về một người, ví dụ son collègue)", why:"« y » KHÔNG được dùng để thay cho một NGƯỜI — phải dùng « à + đại từ nhấn mạnh » (à lui, à elle…)." },
+          ] },
+        ],
+        examples:[
+          "Il y pense depuis toujours. — Anh ấy luôn nghĩ về điều đó.",
+          "Vous y êtes arrivé(e) ! — Bạn đã đạt được điều đó rồi!",
+          "J'y ai bien réfléchi. — Tôi đã suy nghĩ kỹ về điều đó.",
+          "Je n'y réponds pas. — Tôi không trả lời điều đó.",
+          "– Tu réponds à ce message ? – Oui, j'y réponds tout de suite ! — Bạn có trả lời tin nhắn này không? – Có, tôi trả lời ngay đây!",
+          "Il pense à ses vacances. Il y pense. — Anh ấy nghĩ về kỳ nghỉ của mình. Anh ấy nghĩ về điều đó.",
         ]
       },
     ]

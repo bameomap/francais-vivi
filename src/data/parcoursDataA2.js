@@ -13,6 +13,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b8", num:8, fr:"Dans les médias", vi:"Trong thế giới truyền thông", grammar:"La cause et la conséquence · Le subjonctif présent · La place des pronoms COD et COI", emoji:"📰" },
   { id:"b9", num:9, fr:"Consommer responsable", vi:"Tiêu dùng có trách nhiệm", grammar:"Le conditionnel présent (1) · Le gérondif · Le conditionnel présent (2)", emoji:"🔄" },
   { id:"b10", num:10, fr:"Envies d'ailleurs ?", vi:"Nỗi thèm đi đây đi đó?", grammar:"Le passé composé et l'imparfait dans le récit · Les pronoms démonstratifs", emoji:"✈️" },
+  { id:"b11", num:11, fr:"De jolis parcours", vi:"Những hành trình đẹp", grammar:"La mise en relief · Le discours rapporté au présent · Le pronom COI y", emoji:"🎓" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -1110,9 +1111,126 @@ export const STEP_GROUPS_B10 = [
 
 export const STEP_DEFS_B10 = STEP_GROUPS_B10.flatMap(g => g.steps);
 
+export const STEP_GROUPS_B11 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Parcours scolaire",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b11-a"],
+        icon:"🎧", kind:"Nghe A", color:"#0891B2", sub:"Les anciens élèves racontent",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b11-livre-lettre-prof"],
+        icon:"📜", kind:"Đọc B", color:"#059669", sub:"Lettre à ce prof qui a changé ma vie",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter2", stepKey:"ecouter", subIds:["b11-c"],
+        icon:"🎧", kind:"Nghe C", color:"#0891B2", sub:"Le parcours de Lenna Jouot",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La mise en relief",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b11g1","b11g2","b11g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le système scolaire · la scolarité · les personnes",
+        section:"vocab", view:"edito" },
+      { id:"c1_vocab2", stepKey:"vocab", subIds:["b11g4","b11g5","b11g6"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Les études · l'évaluation · les diplômes",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Présenter son parcours scolaire (DELF)",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Écrire une lettre de remerciement (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Le CV et la recherche d'emploi",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b11-d"],
+        icon:"🎧", kind:"Nghe D", color:"#0891B2", sub:"Faire son CV",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b11-livre-premier-contact"],
+        icon:"📜", kind:"Đọc E", color:"#059669", sub:"Premier contact professionnel",
+        section:"lecture", view:"lecture" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le discours rapporté au présent",
+        section:"grammar", view:"grammar" },
+      { id:"c2_culture", stepKey:"lecture", subIds:["b11-livre-coworking-martinique"],
+        icon:"🏛️", kind:"Văn hóa F", color:"#7B6CF6", sub:"Coworking sur l'île de la Martinique",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter2", stepKey:"ecouter", subIds:["b11-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"Le Salon Partagé",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b11g7","b11g8"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Les secteurs professionnels · les professions",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Faire son CV, échanger sur un profil professionnel",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1","w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Écrire un message formel · faire son CV",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Nouveau métier, nouvelle vie",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b11-livre-nouveau-metier"],
+        icon:"🎬", kind:"Đọc H", color:"#7B6CF6", sub:"Nouveau métier, nouvelle vie (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b11-livre-changer-de-metier"],
+        icon:"📜", kind:"Đọc I", color:"#059669", sub:"Êtes-vous prêt(e) à changer de métier ?",
+        section:"lecture", view:"lecture" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Le pronom COI y",
+        section:"grammar", view:"grammar" },
+      { id:"c3_vocab", stepKey:"vocab", subIds:["b11g9","b11g10"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Le travail · le CV et la recherche d'emploi",
+        section:"vocab", view:"edito" },
+      { id:"c3_atelier", stepKey:"lecture", subIds:["b11-livre-atelier-travail-ideal"],
+        icon:"📜", kind:"Atelier", color:"#059669", sub:"Le job idéal ?",
+        section:"lecture", view:"lecture" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Exprimer une évidence (DELF)",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w3"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Raconter une reconversion professionnelle",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["son_eu","son_o","son_u","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"Les sons [ø] [o] [u]",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s3"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Présenter le travail idéal de la classe",
+        section:"conversation", view:"conversation" },
+      { id:"b_delf2", stepKey:"parler", subIds:["s4"],
+        icon:"🎓", kind:"DELF", color:"#D97706", sub:"Monologue suivi (exercice 2)",
+        section:"conversation", view:"conversation" },
+      { id:"b_delf3", stepKey:"parler", subIds:["s5"],
+        icon:"🎓", kind:"DELF", color:"#D97706", sub:"Exercice en interaction (exercice 3)",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B11 = STEP_GROUPS_B11.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9, b10: STEP_GROUPS_B10 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9,   b10: STEP_DEFS_B10 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6, b7: STEP_GROUPS_B7, b8: STEP_GROUPS_B8, b9: STEP_GROUPS_B9, b10: STEP_GROUPS_B10, b11: STEP_GROUPS_B11 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6,   b7: STEP_DEFS_B7,   b8: STEP_DEFS_B8,   b9: STEP_DEFS_B9,   b10: STEP_DEFS_B10, b11: STEP_DEFS_B11 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

@@ -697,4 +697,87 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+
+  // ═══════════════ Unité 11 — De jolis parcours ═══════════════
+  {
+    id: "unite-11", unit: 11, title: "De jolis parcours",
+    speakingPractice: [
+      {
+        title: "Présenter son parcours scolaire ou professionnel (DELF)",
+        notes: ["b11-a"],
+        task: "À deux ! Présentez votre parcours scolaire, d'études ou professionnel à votre voisin(e).",
+        usefulPhrases: [
+          "J'ai passé mon bac scientifique.",
+          "Je me suis inscrit(e) en…",
+          "J'ai réussi mes examens.",
+        ],
+      },
+      {
+        title: "Faire un CV, échanger sur un profil professionnel",
+        notes: ["b11-e"],
+        task: "À deux ! Interrogez votre voisin(e) comme un recruteur ou une recruteuse pour connaître des éléments de son CV. Ensuite, échangez les rôles.",
+        usefulPhrases: [
+          "Quelles sont vos compétences ?",
+          "Quelle est votre expérience professionnelle ?",
+          "Quels sont vos centres d'intérêt ?",
+        ],
+      },
+      {
+        title: "Exprimer une évidence (DELF)",
+        notes: ["b11-i"],
+        task: "À deux ! Commentez les résultats du test « Êtes-vous prêt(e) à changer de métier ? » avec votre voisin(e). Sont-ils évidents pour vous ?",
+        usefulPhrases: [
+          "Évidemment !",
+          "C'est sûr.",
+          "C'est certain.",
+        ],
+      },
+      {
+        title: "Présenter le travail idéal de la classe (atelier médiation)",
+        notes: ["b11-atelier"],
+        task: "Présentez le « top 10 » des critères du travail idéal établi par votre groupe. Prenez des notes sur les réponses des autres groupes puis synthétisez les propositions pour faire le portrait-robot du travail idéal de la classe.",
+        usefulPhrases: [
+          "Le plus important, c'est de…",
+          "Ce qui est important, c'est…",
+          "Travailler en équipe, avoir un travail utile.",
+        ],
+      },
+      {
+        title: "DELF A2 — Monologue suivi (exercice 2)",
+        task: "Choisissez un sujet et parlez pendant deux minutes. Sujet A : parlez de votre professeur(e) préféré(e) — qu'est-ce qu'il/elle enseignait ? Où ? Quand ? Comment ? Quels souvenirs gardez-vous de cette personne ? Sujet B : avez-vous déjà passé un entretien pour un travail ou des études ? Où ? Quand ? Pourquoi ? Comment avez-vous vécu cette expérience ? Racontez.",
+        usefulPhrases: [
+          "Mon professeur préféré était…",
+          "J'ai passé un entretien pour…",
+          "Et, mais, alors, donc… (pour relier ses idées)",
+        ],
+      },
+      {
+        title: "DELF A2 — Exercice en interaction (exercice 3)",
+        task: "Choisissez un sujet et jouez la scène avec l'examinateur ou l'examinatrice. Sujet A : un(e) ami(e) francophone vient travailler dans votre pays et vous pose des questions sur le monde du travail (offres d'emploi, recrutement, salaires, vacances…). Sujet B : vous êtes en France et vous voulez étudier dans une école professionnelle — vous passez un entretien avec le directeur ou la directrice, vous vous présentez et expliquez pourquoi vous voulez étudier dans cette école.",
+        usefulPhrases: [
+          "Dans mon pays, le monde du travail…",
+          "Je voudrais étudier dans cette école parce que…",
+          "Est-ce que vous pouvez m'expliquer… ?",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Écrire une lettre de remerciement (DELF)",
+        task: "Écrivez une lettre à quelqu'un qui a changé votre vie pour lui dire merci. (60 mots minimum)",
+      },
+      {
+        title: "Écrire un message formel",
+        task: "Avec votre voisin(e), échangez des messages comme sur un réseau professionnel : vous faites une demande de connexion, votre voisin(e) vous accepte, vous lui répondez, etc.",
+      },
+      {
+        title: "Faire son CV",
+        task: "À votre tour, faites votre CV en français.",
+      },
+      {
+        title: "Raconter une reconversion professionnelle",
+        task: "Choisissez deux professions très différentes et racontez le parcours d'une personne qui passe d'un métier à l'autre.",
+      },
+    ],
+  },
 ];
