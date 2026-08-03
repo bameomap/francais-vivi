@@ -8,6 +8,7 @@ export const PARCOURS_UNITS_A2 = [
   { id:"b3", num:3, fr:"Comme à la maison", vi:"Như ở nhà", grammar:"Pronoms relatifs qui/que/où · Comparaison · Si + présent", emoji:"🏠" },
   { id:"b4", num:4, fr:"Tous pareils, tous différents", vi:"Ai cũng giống, ai cũng khác", grammar:"Comparaison : équivalence · Adjectifs indéfinis · Pronoms possessifs", emoji:"🎭" },
   { id:"b5", num:5, fr:"En route vers le futur !", vi:"Trên đường đến tương lai!", grammar:"Futur simple · Si/Quand + futur · Le pronom on", emoji:"🚀" },
+  { id:"b6", num:6, fr:"En cuisine", vi:"Vào bếp", grammar:"Le pronom en · L'obligation et l'interdiction · La restriction ne… que", emoji:"🍳" },
 ];
 
 // ── Step groups ────────────────────────────────────────────────────
@@ -566,9 +567,121 @@ export const STEP_GROUPS_B5 = [
 
 export const STEP_DEFS_B5 = STEP_GROUPS_B5.flatMap(g => g.steps);
 
+// ── Unité 6 · En cuisine ────────────────────────────────────────────
+export const STEP_GROUPS_B6 = [
+  {
+    id: "cycle1",
+    label: "Vòng 1 · Légumes & recettes",
+    emoji: "🔵",
+    steps: [
+      { id:"c1_lecture", stepKey:"lecture", subIds:["b6-livre-legumes-jardin"],
+        icon:"📜", kind:"Đọc A", color:"#059669", sub:"Manger des légumes du jardin",
+        section:"lecture", view:"lecture" },
+      { id:"c1_ecouter", stepKey:"ecouter", subIds:["b6-b"],
+        icon:"🎧", kind:"Nghe B", color:"#0891B2", sub:"De délicieux couscous",
+        section:"dictee", view:"ecouter" },
+      { id:"c1_lecture2", stepKey:"lecture", subIds:["b6-livre-clafoutis"],
+        icon:"📜", kind:"Đọc C", color:"#059669", sub:"Une recette sucrée — Clafoutis",
+        section:"lecture", view:"lecture" },
+      { id:"c1_grammar", stepKey:"grammar", subIds:["p0"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"Les quantités et le pronom en",
+        section:"grammar", view:"grammar" },
+      { id:"c1_vocab", stepKey:"vocab", subIds:["b6g1","b6g2","b6g3"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"Les aliments · 3 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c1_parler", stepKey:"parler", subIds:["s0"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Expliquer une recette",
+        section:"conversation", view:"conversation" },
+      { id:"c1_ecrire", stepKey:"ecrire", subIds:["w0"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Écrire une recette",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle2",
+    label: "Vòng 2 · Obligations & bonnes adresses",
+    emoji: "🟢",
+    steps: [
+      { id:"c2_lecture", stepKey:"lecture", subIds:["b6-livre-charte-locmiam"],
+        icon:"📜", kind:"Đọc D", color:"#059669", sub:"La charte Locmiam",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter", stepKey:"ecouter", subIds:["b6-e"],
+        icon:"🎧", kind:"Nghe E", color:"#0891B2", sub:"On mange où ?",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_grammar", stepKey:"grammar", subIds:["p1"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"L'obligation et l'interdiction",
+        section:"grammar", view:"grammar" },
+      { id:"c2_verbes", stepKey:"verbes", subIds:["present","imperatif"],
+        icon:"🖊️", kind:"Động từ", color:"#7B6CF6", sub:"Impératif · 20 động từ",
+        section:"reference_hub", view:"reference_hub", refTab:"verbes" },
+      { id:"c2_lecture2", stepKey:"lecture", subIds:["b6-livre-au-bistrot"],
+        icon:"🎭", kind:"Văn hóa F", color:"#7B6CF6", sub:"Au bistrot",
+        section:"lecture", view:"lecture" },
+      { id:"c2_ecouter2", stepKey:"ecouter", subIds:["b6-g"],
+        icon:"🎧", kind:"Nghe G", color:"#0891B2", sub:"ONA : végan et étoilé",
+        section:"dictee", view:"ecouter" },
+      { id:"c2_vocab", stepKey:"vocab", subIds:["b6g4","b6g5"],
+        icon:"📖", kind:"Từ vựng", color:"#2E8B57", sub:"La restauration · 2 nhóm",
+        section:"vocab", view:"edito" },
+      { id:"c2_parler", stepKey:"parler", subIds:["s1"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Mettre en garde",
+        section:"conversation", view:"conversation" },
+      { id:"c2_ecrire", stepKey:"ecrire", subIds:["w1"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Des règles pour un restaurant pas comme les autres",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "cycle3",
+    label: "Vòng 3 · Au restaurant",
+    emoji: "🟠",
+    steps: [
+      { id:"c3_ecouter", stepKey:"ecouter", subIds:["b6-h"],
+        icon:"🎧", kind:"Nghe H", color:"#0891B2", sub:"Dans un restaurant antillais",
+        section:"dictee", view:"ecouter" },
+      { id:"c3_lecture", stepKey:"lecture", subIds:["b6-livre-ca-vous-a-plu"],
+        icon:"📜", kind:"Đọc I", color:"#059669", sub:"Ça vous a plu ?",
+        section:"lecture", view:"lecture" },
+      { id:"c3_lecture2", stepKey:"lecture", subIds:["b6-livre-roulotte-tahiti"],
+        icon:"🎬", kind:"Văn hóa J", color:"#7B6CF6", sub:"Une roulotte à Tahiti (vidéo)",
+        section:"lecture", view:"lecture" },
+      { id:"c3_grammar", stepKey:"grammar", subIds:["p2"],
+        icon:"⚜️", kind:"Ngữ pháp", color:"#1B3A6B", sub:"La restriction : ne… que",
+        section:"grammar", view:"grammar" },
+      { id:"c3_parler", stepKey:"parler", subIds:["s2"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Passer commande au restaurant",
+        section:"conversation", view:"conversation" },
+      { id:"c3_parler2", stepKey:"parler", subIds:["s3"],
+        icon:"🗣️", kind:"Nói", color:"#D97706", sub:"Donner son avis sur un restaurant",
+        section:"conversation", view:"conversation" },
+      { id:"c3_ecrire", stepKey:"ecrire", subIds:["w2"],
+        icon:"🖋️", kind:"Viết", color:"#E67E22", sub:"Un avis sur un restaurant (DELF)",
+        section:"writing", view:"writing" },
+    ],
+  },
+  {
+    id: "bilan",
+    label: "Tổng kết",
+    emoji: "⚫",
+    steps: [
+      { id:"b_phono", stepKey:"phono", subIds:["into_surprise","into_joie","into_colere","into_deception","quiz"],
+        icon:"🎵", kind:"Phono", color:"#E8574A", sub:"L'intonation expressive",
+        section:"reference_hub", view:"reference_hub", refTab:"phono" },
+      { id:"b_quiz", stepKey:"quiz", subIds:["quiz"],
+        icon:"🏆", kind:"L'essentiel", color:"#E8574A", sub:"Quiz tổng hợp toàn bài",
+        section:"quiz-unit", view:"quiz-unit" },
+      { id:"b_atelier", stepKey:"parler", subIds:["s4"],
+        icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Réaliser un sondage sur l'alimentation",
+        section:"conversation", view:"conversation" },
+    ],
+  },
+];
+
+export const STEP_DEFS_B6 = STEP_GROUPS_B6.flatMap(g => g.steps);
+
 // ── Per-unit lookup (fallback registry, mirrors A1's getStepGroupsFor) ────
-const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5 };
-const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5 };
+const UNIT_STEP_GROUPS_A2 = { b1: STEP_GROUPS_A2, b2: STEP_GROUPS_B2, b3: STEP_GROUPS_B3, b4: STEP_GROUPS_B4, b5: STEP_GROUPS_B5, b6: STEP_GROUPS_B6 };
+const UNIT_STEP_DEFS_A2   = { b1: STEP_DEFS_A2,   b2: STEP_DEFS_B2,   b3: STEP_DEFS_B3,   b4: STEP_DEFS_B4,   b5: STEP_DEFS_B5,   b6: STEP_DEFS_B6 };
 
 export const getStepGroupsForA2 = (unitId) => UNIT_STEP_GROUPS_A2[unitId] || STEP_GROUPS_A2;
 export const getStepDefsForA2   = (unitId) => UNIT_STEP_DEFS_A2[unitId]   || STEP_DEFS_A2;

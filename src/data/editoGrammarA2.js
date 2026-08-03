@@ -6,7 +6,7 @@
 // Block types: lead · text · formula · cards · table · pairs · compare · callout · timeline
 // See GrammarBlocks.jsx for the renderer of each type.
 
-export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀" };
+export const GRAMMAR_A2_EMOJIS = { b1: "🌱", b2: "📷", b3: "🏠", b4: "🎭", b5: "🚀", b6: "🍳" };
 
 export const EDITO_GRAMMAR_A2 = [
   {
@@ -906,6 +906,153 @@ export const EDITO_GRAMMAR_A2 = [
           "Est-ce qu'on vous a déjà parlé de la RoboCup ? — Đã có ai từng nói với bạn về RoboCup chưa?",
           "On a gagné quatre compétitions. — Chúng tôi đã thắng bốn cuộc thi.",
           "On améliore nos robots chaque année. — Chúng tôi cải tiến robot của mình mỗi năm.",
+        ]
+      },
+    ]
+  },
+
+  {
+    id:"b6", num:"6", title:"En cuisine", points:[
+
+      // ── 1. Les quantités et le pronom en ────────────────────────
+      {
+        topic:"Les quantités et le pronom en — Thay thế số lượng, tránh lặp danh từ",
+        summary:"« en » thay cho một danh từ đi kèm « de/du/de la/des » (partitif), một danh từ đi kèm mạo từ không xác định (un/une/des), hoặc một cụm chỉ SỐ LƯỢNG + de. Dùng « en » để khỏi phải lặp lại tên món ăn, nguyên liệu đã nhắc ở câu trước.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi có « de la, du, un, une, des, une pincée de… » → câu trả lời thay cụm đó bằng MỘT chữ duy nhất: « en ». « en » luôn đứng ngay trước động từ chia (hoặc trước trợ động từ ở passé composé)." },
+
+          { type:"formula",
+            parts:["en", "+ động từ (chia)"],
+            example:"Tu manges de la viande ? – Non, je n'en mange pas. — Bạn có ăn thịt không? – Không, tôi không ăn (loại đó).",
+            note:"« en » đứng NGAY TRƯỚC động từ được chia, kể cả khi đó là trợ động từ avoir ở passé composé." },
+
+          { type:"table",
+            caption:"4 trường hợp « en » thay thế — theo cái gì đứng trước danh từ",
+            headers:["Danh từ đi kèm", "Ví dụ có danh từ", "Ví dụ với en"],
+            rows:[
+              ["partitif: de la/de l'/du/des", "De la salade, j'ai mis dans mon jardin.", "J'en ai mis dans mon jardin."],
+              ["mạo từ không xác định: un/une/des", "Vous proposez un couscous ? — Non, je n'en propose pas un.", "Je n'en propose pas un, mais trois."],
+              ["số lượng CHÍNH XÁC + de (kg, g, l, un pot de, une pincée de…)", "Vous proposez trois plats ?", "Non, je n'en propose pas trois, mais quatre."],
+              ["số lượng KHÔNG chính xác + de (beaucoup de, peu de, plein de, assez de…)", "Vous consommez beaucoup de légumes ?", "Oui, j'en consomme beaucoup."],
+            ] },
+
+          { type:"callout", variant:"warn", title:"Vị trí của « en » ở thể phủ định",
+            text:"Khẳng định: en đứng NGAY TRƯỚC động từ. J'en mange. / J'en ai mangé.\nPhủ định: en đứng giữa ne/n' và động từ (hoặc trợ động từ). Je n'en mange pas. / Je n'en ai pas mangé.\n« ne » KHÔNG đứng trước « en » mà đứng trước cả cụm « en + động từ »." },
+
+          { type:"callout", variant:"note", title:"Trong khẩu ngữ: « j'en ai pas »",
+            text:"Ở văn nói thân mật, người Pháp hay bỏ « ne » và chỉ nói « j'en ai pas » thay vì « je n'en ai pas ». Hiểu được cả hai, nhưng khi viết luôn giữ đủ « ne… pas »." },
+
+          { type:"heading", text:"Khi nào giữ lại số lượng sau « en »?" },
+          { type:"text", text:"Khi câu trả lời nêu một SỐ LƯỢNG khác với câu hỏi (kể cả bằng con số), số lượng đó vẫn phải nhắc lại sau động từ: « Je n'en propose pas un, mais trois. » — « en » thay « couscous », còn « trois » (số lượng mới) vẫn giữ nguyên." },
+
+          { type:"compare", items:[
+            { wrong:"Je ne mange pas en.", right:"Je n'en mange pas.", why:"« en » luôn đứng NGAY SAU ne/n', không phải sau động từ." },
+            { wrong:"Non, je ne propose pas en un.", right:"Non, je n'en propose pas un.", why:"« en » đứng giữa n' và động từ; số lượng « un » giữ nguyên ở cuối câu." },
+          ] },
+        ],
+        examples:[
+          "De la salade, j'en ai mis dans mon jardin. — Rau diếp, tôi đã trồng trong vườn.",
+          "De couscous, je n'en propose pas un, mais trois ! — Về couscous, tôi không chỉ có một loại, mà những ba loại!",
+          "Des tomates, des courges et des haricots, j'en consomme beaucoup. — Cà chua, bí và đậu, tôi ăn rất nhiều.",
+          "Tu as une grande poêle ? – Oui, j'en ai une. — Bạn có chảo to không? – Có, tôi có một cái.",
+          "Est-ce qu'il y a de la crème fraîche dans la tartiflette ? – Oui, il y en a. — Có kem tươi trong món tartiflette không? – Có, có đấy.",
+        ]
+      },
+
+      // ── 2. L'obligation et l'interdiction ────────────────────────
+      {
+        topic:"L'obligation et l'interdiction — Bắt buộc & cấm đoán",
+        summary:"Hai nhóm cấu trúc đối lập nhau: một nhóm diễn tả điều BẮT BUỘC phải làm (il faut, il est nécessaire de, vous avez l'obligation de…), nhóm kia diễn tả điều BỊ CẤM (il est interdit de, il est défendu de, vous ne devez pas…). Cả hai đều có thể diễn đạt bằng L'IMPÉRATIF, ở thể khẳng định hoặc phủ định.",
+        blocks:[
+          { type:"lead", text:"Cùng một ý « phải/không được », tiếng Pháp có nhiều cách diễn đạt trang trọng khác nhau (giống văn bản quy định, biển báo, nội quy) — học theo CẶP đối lập sẽ dễ nhớ hơn học rời rạc." },
+
+          { type:"table",
+            caption:"Bắt buộc ≠ Cấm đoán — 2 cột đối lập",
+            headers:["L'obligation (bắt buộc)", "L'interdiction (cấm đoán)"],
+            rows:[
+              ["Il faut + infinitif", "Il ne faut pas + infinitif"],
+              ["Il est nécessaire de + infinitif", "Il est interdit de + infinitif"],
+              ["Il est indispensable de + infinitif", "Il est défendu de + infinitif"],
+              ["Vous avez l'obligation de + infinitif", "Vous ne devez pas + infinitif"],
+              ["L'impératif, thể khẳng định : Faites attention !", "L'impératif, thể phủ định : Ne laissez pas entrer d'animal."],
+            ] },
+
+          { type:"formula",
+            parts:["Il est interdit / défendu / nécessaire / indispensable de", "+ infinitif"],
+            example:"Il est interdit de vendre vos plats de manière régulière. — Bị cấm bán các món ăn của bạn một cách thường xuyên.",
+            note:"Sau « il est + tính từ + de », động từ LUÔN ở dạng NGUYÊN THỂ, không chia." },
+
+          { type:"callout", variant:"warn", title:"Verbe pronominal ở mệnh lệnh khẳng định: đại từ ra SAU động từ",
+            text:"Se laver les mains → Lavez-vous les mains ! — đại từ phản thân (vous, te→toi, nous) chuyển ra SAU động từ và có gạch nối, khác hẳn câu bình thường (Vous vous lavez les mains).\nỞ thể PHỦ ĐỊNH, đại từ vẫn đứng TRƯỚC như bình thường: Ne vous lavez pas les mains sales." },
+
+          { type:"table",
+            caption:"Impératif — 3 ngôi duy nhất, không có chủ ngữ",
+            headers:["Ngôi", "Khẳng định", "Phủ định"],
+            rows:[
+              ["tu", "Fais attention !", "Ne fais pas ça !"],
+              ["nous", "Faisons attention !", "Ne faisons pas ça !"],
+              ["vous", "Faites attention !", "Ne faites pas ça !"],
+            ] },
+
+          { type:"heading", text:"« devoir » — trợ động từ diễn tả cả hai chiều" },
+          { type:"pairs", caption:"devoir (bắt buộc) ≠ ne pas devoir (cấm)", items:[
+            { fr:"Vous avez l'obligation de préparer uniquement des plats faits maison.", vi:"Bạn bắt buộc chỉ được chuẩn bị các món tự nấu tại nhà." },
+            { fr:"Vous ne devez pas être cuisinier ou cuisinière de métier.", vi:"Bạn không được phép là đầu bếp chuyên nghiệp." },
+          ] },
+
+          { type:"compare", items:[
+            { wrong:"Il est interdit vendre vos plats.", right:"Il est interdit de vendre vos plats.", why:"« il est interdit DE + infinitif » luôn cần « de » trước động từ nguyên thể." },
+            { wrong:"Lavez vous les mains !", right:"Lavez-vous les mains !", why:"Ở mệnh lệnh khẳng định, đại từ phản thân nối với động từ bằng GẠCH NỐI, không phải khoảng trắng." },
+          ] },
+        ],
+        examples:[
+          "Il faut avoir une bonne hygiène personnelle. — Phải giữ vệ sinh cá nhân tốt.",
+          "Il est indispensable de cuisiner des produits frais et de qualité. — Việc nấu ăn từ nguyên liệu tươi và chất lượng là không thể thiếu.",
+          "Il est défendu de cuisiner dans des conditions non hygiéniques. — Bị cấm nấu ăn trong điều kiện mất vệ sinh.",
+          "Ne laissez pas d'animal entrer dans votre cuisine, c'est dangereux. — Đừng để động vật vào bếp, nguy hiểm đấy.",
+          "Ne vous asseyez pas ici, un groupe a réservé cette table. — Đừng ngồi đây, một nhóm đã đặt bàn này rồi.",
+        ]
+      },
+
+      // ── 3. La restriction : ne… que ──────────────────────────────
+      {
+        topic:"La restriction : ne… que — Chỉ, duy nhất",
+        summary:"« ne… que » diễn tả một sự HẠN CHẾ/GIỚI HẠN — có thể thay bằng uniquement, juste hoặc seulement. Khác với phủ định « ne… pas », « ne… que » KHÔNG phủ định cả câu, mà chỉ giới hạn nó lại ở MỘT điều duy nhất.",
+        blocks:[
+          { type:"lead", text:"« Je ne mange que des légumes » không có nghĩa « tôi không ăn rau » — nó có nghĩa « tôi CHỈ ăn rau, không ăn gì khác ». Đây là điểm dễ nhầm nhất: « que » ở đây không phải liên từ « rằng », mà là nửa sau của cấu trúc phủ định-giới hạn." },
+
+          { type:"formula",
+            parts:["ne/n'", "+ động từ", "+ que/qu'", "+ phần bị giới hạn"],
+            example:"Je ne mets que 4 étoiles sur 5. — Tôi chỉ cho 4 trên 5 sao thôi.",
+            note:"« que/qu' » đứng NGAY TRƯỚC phần bị giới hạn (danh từ, số lượng…), không phải ngay sau động từ như « pas »." },
+
+          { type:"table",
+            caption:"Emploi và formation",
+            headers:["Emploi (dùng khi nào)", "Formation (cách đặt câu)"],
+            rows:[
+              ["Diễn tả một sự HẠN CHẾ — thay được bằng uniquement/juste/seulement.", "ne/n' đặt TRƯỚC động từ, que/qu' đặt SAU động từ (trước phần bị giới hạn)."],
+            ] },
+
+          { type:"callout", variant:"tip", title:"3 từ đồng nghĩa để kiểm tra nghĩa",
+            text:"Muốn chắc câu có « ne… que » đúng nghĩa « chỉ/duy nhất », thử thay bằng uniquement, juste hoặc seulement — nếu câu vẫn có nghĩa, đó là restriction:\nCe restaurant ne propose que des plats à base de riz. = Ce restaurant propose UNIQUEMENT des plats à base de riz." },
+
+          { type:"callout", variant:"warn", title:"« ne… pas que » ≠ « ne… que »",
+            text:"Elle n'achète pas que des produits sains. — Cô ấy KHÔNG CHỈ mua đồ lành mạnh (nghĩa là còn mua thứ khác nữa) — khác hẳn « elle n'achète que des produits sains » (cô ấy CHỈ mua đồ lành mạnh).\nIl ne mange plus que du poulet. — Trước đây anh ấy ăn mọi loại thịt; giờ CHỈ CÒN ăn gà thôi (« ne… plus que » = đã thay đổi thói quen, giờ chỉ giới hạn ở một thứ)." },
+
+          { type:"heading", text:"« il ne m'en reste qu'un » — kết hợp với pronom en" },
+          { type:"text", text:"« ne… que » có thể xuất hiện cùng « en » trong một câu: « Il ne m'en reste qu'un » (Tôi chỉ còn lại một cái) — « en » thay danh từ, « ne… que » giới hạn số lượng còn lại." },
+
+          { type:"compare", items:[
+            { wrong:"Je mange que des légumes de mon jardin.", right:"Je ne mange que des légumes de mon jardin.", why:"« ne » KHÔNG được bỏ trong văn viết — phải giữ đủ « ne… que »." },
+            { wrong:"Nous n'allons que dans des restaurants sans étoile pas.", right:"Nous n'allons que dans des restaurants sans étoile.", why:"« ne… que » không đi kèm « pas » — « que » đã đóng vai trò giới hạn, không cần thêm « pas »." },
+          ] },
+        ],
+        examples:[
+          "Je ne mets qu'une étoile, et encore, je suis gentil. — Tôi chỉ cho một sao thôi, thế còn là tôi tử tế đấy.",
+          "Ce restaurant, je ne peux en dire que du bien. — Về nhà hàng này, tôi chỉ có thể nói tốt thôi.",
+          "Il ne m'en reste qu'un. — Tôi chỉ còn lại một cái (bánh) thôi.",
+          "Ce restaurant ne propose que des plats à base de riz. — Nhà hàng này chỉ phục vụ các món làm từ gạo.",
+          "Je suis juste allergique aux œufs. → Je ne suis allergique qu'aux œufs. — Tôi chỉ dị ứng với trứng thôi.",
         ]
       },
     ]

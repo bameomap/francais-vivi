@@ -882,6 +882,192 @@ Explore V40 — Vous avez des difficultés à vous orienter ? Cet assistant de c
       { id: "b5-delf-q6", type: "multiple_choice", prompt: "Jérémy aime la nature et déteste gaspiller. Quel cadeau lui offrir ?", options: ["Solar Nomade", "MG shiatsu", "Roborock S7"], answer: "Solar Nomade" },
     ],
   },
+
+  // ═══════════════ Unité 6 — En cuisine ═══════════════
+
+  // ── A · Manger des légumes du jardin (p. 83) ──────────────────────
+  {
+    id: "b6-livre-legumes-jardin",
+    unit: 6,
+    unitTitle: "En cuisine",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 83,
+    title: "Manger des légumes du jardin",
+    instruction: "Guylaine Goulfier a écrit Guide de survie joyeuse pour donner des conseils et expliquer comment cultiver son jardin. Lisez son témoignage.",
+    text: `Avant, je faisais ma liste de courses chaque semaine et j'achetais des produits que je cuisinais. Mais, j'ai eu des problèmes d'argent, alors j'ai commencé à jardiner. Par exemple, j'ai arrêté d'acheter de la salade et j'en ai mis dans mon jardin.
+
+Aujourd'hui, bien sûr, je ne produis pas tous mes légumes. Je continue d'acheter les pommes de terre et les bottes d'oignons. Mais, je cultive des tomates, des courges, des haricots, parce que j'en consomme beaucoup. J'ai aussi une grande quantité d'herbes aromatiques.
+
+De juillet à septembre, je plante plein de légumes qui vont occuper le terrain jusqu'en mars de l'année suivante : des poireaux, des choux, des carottes, des betteraves, des radis noirs et des endives.
+
+Je cuisine mes légumes avec les œufs de mon poulailler, avec des yaourts et des fromages que je fais, avec des céréales (du riz), des légumes secs (des lentilles), un peu de miel et de la viande que j'achète.
+
+En bref, j'aime être plus indépendante sur le plan alimentaire. Et si on habite en ville sans jardin, on peut aussi arrêter d'acheter des plats transformés, cuisiner et faire des conserves avec des produits de saison.
+
+— Carine Mayo, Femme actuelle, octobre 2021`,
+    questions: [
+      { id: "b6-legumes-q1", type: "open", prompt: "D'où viennent les légumes que vous mangez ?" },
+      { id: "b6-legumes-q2", type: "short_answer", prompt: "Pourquoi Guylaine Goulfier a commencé à cultiver des légumes ?", answer: "Elle a eu des problèmes d'argent." },
+      { id: "b6-legumes-q3", type: "short_answer", prompt: "Pourquoi est-elle contente de cultiver son jardin ?", answer: "Elle aime être plus indépendante sur le plan alimentaire." },
+      { id: "b6-legumes-q4", type: "matching", prompt: "Complétez le tableau : les aliments qu'elle produit / les aliments qu'elle achète.", answer: "Produit → tomates, courges, haricots, herbes aromatiques, poireaux, choux, carottes, betteraves, radis noirs, endives, œufs, yaourts, fromages, miel\nAchète → pommes de terre, bottes d'oignons, riz, lentilles, viande" },
+      { id: "b6-legumes-q5", type: "multi_select", prompt: "Grammaire : relevez les phrases avec le pronom en.", options: ["J'en ai mis dans mon jardin.", "J'en consomme beaucoup.", "J'ai commencé à jardiner.", "Je ne produis pas tous mes légumes."], answer: ["J'en ai mis dans mon jardin.", "J'en consomme beaucoup."] },
+      { id: "b6-legumes-q6", type: "open", prompt: "Production orale : à deux ! Que pensez-vous de ses conseils ? Est-ce que vous mangez ou voudriez manger de cette façon ?" },
+    ],
+  },
+
+  // ── C · Une recette sucrée — Clafoutis aux fruits rouges (p. 85) ──
+  {
+    id: "b6-livre-clafoutis",
+    unit: 6,
+    unitTitle: "En cuisine",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 85,
+    title: "Une recette sucrée — Clafoutis aux fruits rouges",
+    instruction: "Lisez cette recette et repérez les instructions de cuisine (verbes à l'impératif).",
+    text: `INGRÉDIENTS POUR 4 PERSONNES
+20 cl de lait — 1 petit pot de crème liquide (20 cl) — 75 g de farine — 50 g de sucre en poudre — 1 g de sel (1 pincée) — 1 barquette de framboises (150 g) — 1 barquette de mûres (150 g) — 1 barquette de myrtilles (150 g) — 25 g de beurre — des groseilles ou un bouquet de menthe — de la glace à la vanille ou de la crème chantilly
+
+PRÉPARATION
+1. Préchauffez le four à 200°C.
+2. Lavez et séchez les fruits rouges.
+3. Dans un saladier, mélangez le lait avec la crème liquide, la farine, le sucre en poudre et une pincée de sel.
+4. Mettez les framboises, les mûres et les myrtilles dans un plat beurré.
+5. Versez la pâte sur les fruits.
+6. Coupez le beurre en petits morceaux et posez-les dessus.
+7. Enfournez le clafoutis et faites-le cuire pendant 35-40 minutes.
+8. Sortez le gâteau du four quand le dessus est doré et laissez refroidir.
+9. Ajoutez des feuilles de menthe ou des groseilles pour décorer.
+10. Servez tiède avec une boule de glace à la vanille ou de la crème chantilly.
+
+VARIANTES
+Vous pouvez remplacer les fruits rouges par des poires, des prunes, des kiwis ou des bananes.
+
+— Source : www.supertoinette.com`,
+    questions: [
+      { id: "b6-clafoutis-q1", type: "open", prompt: "Quels fruits rouges connaissez-vous ?" },
+      { id: "b6-clafoutis-q2", type: "matching", prompt: "Classez les ingrédients dans le tableau : les fruits / les produits laitiers / les autres ingrédients.", answer: "Fruits → framboises, mûres, myrtilles\nProduits laitiers → lait, crème liquide, beurre, glace à la vanille\nAutres → farine, sucre en poudre, sel, menthe, groseilles" },
+      { id: "b6-clafoutis-q3", type: "multiple_choice", prompt: "Dans ce gâteau, il y a :", options: ["plus de fruits que de pâte.", "plus de pâte que de fruits.", "autant de pâte que de fruits."], answer: "plus de pâte que de fruits." },
+      { id: "b6-clafoutis-q4", type: "multi_select", prompt: "Grammaire : relevez les verbes à l'impératif de la préparation.", options: ["Préchauffez", "Lavez", "vous pouvez remplacer", "Ajoutez"], answer: ["Préchauffez", "Lavez", "Ajoutez"] },
+      { id: "b6-clafoutis-q5", type: "multiple_choice", prompt: "Vocabulaire : le contraire du sucre en poudre est :", options: ["le sucre en morceaux.", "le sucre brun.", "le sucre glace."], answer: "le sucre en morceaux." },
+      { id: "b6-clafoutis-q6", type: "open", prompt: "Production orale : à deux ! Est-ce que vous cuisinez ? Des plats sucrés ou salés ? Qui cuisine bien autour de vous ?" },
+      { id: "b6-clafoutis-q7", type: "open", prompt: "Production écrite : choisissez un plat sucré ou salé que vous aimez et écrivez sa recette." },
+    ],
+  },
+
+  // ── D · La charte Locmiam (p. 88) ──────────────────────────────────
+  {
+    id: "b6-livre-charte-locmiam",
+    unit: 6,
+    unitTitle: "En cuisine",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 88,
+    title: "La charte Locmiam",
+    instruction: "Locmiam est une application qui permet de commander des plats faits maison à des cuisiniers passionnés mais non professionnels. Lisez sa charte.",
+    text: `« Je ne suis pas difficile, je suis un gourmet. »
+
+Si vous voulez être cuisinier ou cuisinière Locmiam, vous devez respecter notre charte.
+
+— Vous ne devez pas être cuisinier ou cuisinière de métier.
+— Vous avez l'obligation de préparer uniquement des plats « faits maison ».
+— Il est interdit de vendre vos plats de manière régulière. La vente doit rester occasionnelle.
+— Utilisez toujours de l'eau potable.
+— Il est indispensable de cuisiner des produits frais et de qualité.
+— Faites attention aux températures de conservation des aliments.
+— Il faut avoir une bonne hygiène personnelle. Quand vous cuisinez, portez un tablier propre, attachez-vous les cheveux et lavez-vous souvent les mains.
+— Il est défendu de cuisiner dans des conditions non hygiéniques et non sécuritaires. Votre espace de travail doit être propre et ordonné.
+— Attention ! Ne laissez pas d'animal entrer dans votre cuisine, c'est dangereux.
+— Il faut donner un maximum d'informations utiles sur vos plats.
+— Fixez toujours un prix juste.
+— Respectez vos engagements (plats, quantités, prix, horaires).
+
+☑ Oui, je m'engage à respecter la charte Locmiam.`,
+    questions: [
+      { id: "b6-locmiam-q1", type: "multiple_choice", prompt: "Une charte est :", options: ["un règlement.", "un menu."], answer: "un règlement." },
+      { id: "b6-locmiam-q2", type: "multi_select", prompt: "Vrai ou faux ? Cochez les affirmations VRAIES.", options: ["Locmiam est réservée aux cuisiniers professionnels.", "Les cuisiniers doivent préparer les plats chez eux.", "Ils peuvent vendre des plats tous les jours.", "Respecter les règles d'hygiène et de sécurité alimentaire est obligatoire.", "Il faut bien décrire les plats et ne pas faire payer trop cher."], answer: ["Respecter les règles d'hygiène et de sécurité alimentaire est obligatoire.", "Il faut bien décrire les plats et ne pas faire payer trop cher."] },
+      { id: "b6-locmiam-q3", type: "multiple_choice", prompt: "Choisissez l'image de la cuisine où il faut cuisiner.", options: ["une cuisine en désordre, avec un chat.", "une cuisine propre et rangée."], answer: "une cuisine propre et rangée." },
+      { id: "b6-locmiam-q4", type: "multi_select", prompt: "Grammaire : relevez les expressions d'obligation et d'interdiction.", options: ["Vous avez l'obligation de préparer…", "Il est interdit de vendre…", "Il est indispensable de cuisiner…", "Vous devez respecter notre charte.", "Vous ne devez pas être cuisinier de métier."], answer: ["Vous avez l'obligation de préparer…", "Il est interdit de vendre…", "Il est indispensable de cuisiner…", "Vous ne devez pas être cuisinier de métier."] },
+      { id: "b6-locmiam-q5", type: "open", prompt: "Est-ce que vous voudriez utiliser cette application pour acheter des plats ou pour cuisiner ?" },
+    ],
+  },
+
+  // ── F · Au bistrot (p. 90) ─────────────────────────────────────────
+  {
+    id: "b6-livre-au-bistrot",
+    unit: 6,
+    unitTitle: "En cuisine",
+    source: "livre",
+    section: "culture(s)",
+    page: 90,
+    title: "Au bistrot",
+    instruction: "Lisez cet article sur les bistrots parisiens et répondez aux questions.",
+    text: `Quand on vous dit « bistrot » vous pensez à quoi ? À Paris bien sûr ! Il y a des crêpes en Bretagne, des tartiflettes à la montagne, des saucisses en Alsace, du confit de canard dans le Sud et des bistrots à Paris. Dans ces cafés-bars-restaurants aussi appelés brasseries, on boit un verre, on grignote et on mange des plats traditionnels.
+
+Des nappes à carreaux rouges et blancs, un service rapide, une ambiance populaire et familiale, voilà pourquoi les bistrots parisiens ont du succès ! On y retrouve souvent les mêmes entrées et des plats simples mais goûteux, comme le pâté, le croque-monsieur, les petites salades, le poulet rôti avec ses frites ou sa purée, le bœuf bourguignon, le pot-au-feu, la choucroute ou le très classique poireaux-vinaigrette.
+
+— Source : www.cometoparis.com`,
+    questions: [
+      { id: "b6-bistrot-q1", type: "open", prompt: "Décrivez l'image. Comment s'appelle ce type de restaurant ?" },
+      { id: "b6-bistrot-q2", type: "short_answer", prompt: "Cet article présente les bistrots comme une spécialité de quelle ville ?", answer: "Paris." },
+      { id: "b6-bistrot-q3", type: "multi_select", prompt: "Qu'est-ce qui plaît dans les bistrots ?", options: ["Les nappes à carreaux rouges et blancs.", "Un service rapide.", "Une ambiance populaire et familiale.", "Des plats très chers et raffinés."], answer: ["Les nappes à carreaux rouges et blancs.", "Un service rapide.", "Une ambiance populaire et familiale."] },
+      { id: "b6-bistrot-q4", type: "open", prompt: "Production orale : à deux ! Où préférez-vous manger ? Pourquoi ?" },
+    ],
+  },
+
+  // ── I · Ça vous a plu ? (p. 93) ────────────────────────────────────
+  {
+    id: "b6-livre-ca-vous-a-plu",
+    unit: 6,
+    unitTitle: "En cuisine",
+    source: "livre",
+    section: "compréhension écrite",
+    page: 93,
+    title: "Ça vous a plu ?",
+    instruction: "Lisez ces trois avis laissés en ligne sur un restaurant et répondez aux questions.",
+    text: `S'abonner — Avis
+
+Teamclassique ★★★★☆
+Le cadre avec vue sur la mer est agréable. Le personnel est sympathique et professionnel. Mais je ne donne que quatre étoiles sur cinq parce que, ce soir, les plats étaient un peu trop épicés pour moi.
+
+Papygrognon ★☆☆☆☆
+Je n'aime pas attendre et, dans ce restaurant, le service est trop lent. Il faut patienter une demi-heure entre chaque plat. C'est une honte ! Et en plus, les plats sont mauvais. Dans ces conditions, c'est scandaleux de payer aussi cher ! Je ne mets qu'une étoile, et encore, je suis gentil.
+
+Miam-miam ★★★★★
+Un régal ! La cuisine est délicieuse, les desserts sont excellents et les prix sont très corrects. J'ai eu un coup de cœur pour ce restaurant. Je suis ravie de cette expérience ; je ne peux en dire que du bien.`,
+    questions: [
+      { id: "b6-avis-q1", type: "open", prompt: "Numérotez du plus au moins important pour vous quand vous mangez au restaurant : l'ambiance – le cadre – la présentation des plats – la qualité des plats – le prix – le service." },
+      { id: "b6-avis-q2", type: "short_answer", prompt: "Combien d'avis sur ce restaurant sont positifs ? négatifs ? un peu des deux ?", answer: "1 avis très positif (Miam-miam), 1 avis négatif (Papygrognon), 1 avis un peu des deux (Teamclassique)." },
+      { id: "b6-avis-q3", type: "multi_select", prompt: "Quels sont les points positifs de ce restaurant ?", options: ["Le cadre avec vue sur la mer.", "Le personnel sympathique et professionnel.", "Le service rapide.", "Les desserts excellents.", "Les prix très corrects."], answer: ["Le cadre avec vue sur la mer.", "Le personnel sympathique et professionnel.", "Les desserts excellents.", "Les prix très corrects."] },
+      { id: "b6-avis-q4", type: "multi_select", prompt: "Grammaire : relevez les phrases avec ne… que.", options: ["Je ne donne que quatre étoiles sur cinq.", "Je ne mets qu'une étoile.", "Je ne peux en dire que du bien.", "Le service est trop lent."], answer: ["Je ne donne que quatre étoiles sur cinq.", "Je ne mets qu'une étoile.", "Je ne peux en dire que du bien."] },
+      { id: "b6-avis-q5", type: "open", prompt: "Production écrite (DELF) : choisissez un restaurant que vous connaissez, et écrivez un commentaire pour exprimer votre satisfaction ou votre insatisfaction. Décrivez le lieu, le repas et vos impressions (60-80 mots)." },
+    ],
+  },
+
+  // ── J · Une roulotte à Tahiti (vidéo, p. 93) ───────────────────────
+  {
+    id: "b6-livre-roulotte-tahiti",
+    unit: 6,
+    unitTitle: "En cuisine",
+    source: "livre",
+    section: "culture(s)",
+    page: 93,
+    title: "Une roulotte à Tahiti",
+    instruction: "Lisez ce résumé du document vidéo sur les roulottes tahitiennes et répondez aux questions.",
+    text: `À Tahiti, les roulottes sont une véritable tradition : ces camions-restaurants garés sur les places et le long des routes servent à manger toute la journée, du petit déjeuner jusqu'au dîner. Ce type de restauration plaît à beaucoup de monde, pas seulement aux touristes — les habitants eux-mêmes s'y retrouvent régulièrement.
+
+Les plats servis dans les roulottes sont simples et frais : poissons crus marinés, grillades, chow mein, et bien sûr le poké, ce plat d'origine hawaïenne à base de poisson cru coupé en dés. Le poké bowl contient une base de riz vinaigré, du saumon ou du thon et quelques légumes et fruits froids.
+
+Au fait ! Le poké est un plat d'origine hawaïenne avec du poisson cru coupé en dés. Le poké bowl contient une base de riz vinaigré, du saumon ou du thon et quelques légumes et fruits froids.`,
+    questions: [
+      { id: "b6-roulotte-q1", type: "open", prompt: "Savez-vous où se situe Tahiti ? À votre avis, qu'est-ce qu'une roulotte ?" },
+      { id: "b6-roulotte-q2", type: "multi_select", prompt: "Choisissez les bonnes réponses.", options: ["À Tahiti, les roulottes sont une tradition.", "À Tahiti, les roulottes sont une nouvelle mode.", "Ce type de restaurant plaît à beaucoup de monde.", "Ce type de restaurant plaît seulement aux touristes.", "On y sert à manger toute la journée."], answer: ["À Tahiti, les roulottes sont une tradition.", "Ce type de restaurant plaît à beaucoup de monde.", "On y sert à manger toute la journée."] },
+      { id: "b6-roulotte-q3", type: "multiple_choice", prompt: "Les plats des roulottes sont :", options: ["gras et salés.", "simples et frais."], answer: "simples et frais." },
+      { id: "b6-roulotte-q4", type: "short_answer", prompt: "Qu'est-ce qu'un poké bowl ?", answer: "Une base de riz vinaigré avec du poisson cru (saumon ou thon) et des légumes/fruits froids." },
+      { id: "b6-roulotte-q5", type: "open", prompt: "Production écrite : à deux ! Imaginez que vous créez une roulotte dans le pays, la région ou la ville de votre choix. Décidez ensemble de ses spécialités, ses horaires, les endroits où la garer, sa décoration, etc." },
+    ],
+  },
 ];
 
 export default editoA2ReadingComprehension;

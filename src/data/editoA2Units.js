@@ -373,4 +373,78 @@ export const EDITO_A2_UNITS = [
       },
     ],
   },
+  {
+    id: "unite-6", unit: 6, title: "En cuisine",
+    speakingPractice: [
+      {
+        title: "Expliquer une recette",
+        notes: ["b6-c"],
+        task: "À deux ! Présentez à votre voisin(e) un plat sucré ou salé que vous aimez cuisiner, en donnant les instructions dans l'ordre (mélangez, coupez, versez, faites cuire…).",
+        usefulPhrases: [
+          "Mélangez le lait avec la crème.",
+          "Coupez le beurre en petits morceaux.",
+          "Versez la pâte sur les fruits.",
+          "Faites cuire pendant 35-40 minutes.",
+        ],
+      },
+      {
+        title: "Mettre en garde",
+        notes: ["b6-d"],
+        task: "À deux ! Imaginez et jouez une scène où vous donnez des règles et des mises en garde dans un lieu de votre choix (cuisine, restaurant, réunion de famille…), en utilisant des expressions d'obligation et d'interdiction.",
+        usefulPhrases: [
+          "Faites attention aux températures de conservation.",
+          "Attention ! C'est dangereux.",
+          "Il est interdit de…",
+          "Il ne faut pas…",
+        ],
+      },
+      {
+        title: "Passer commande au restaurant",
+        notes: ["b6-h"],
+        task: "À deux ! Au restaurant, posez des questions au serveur ou à la serveuse sur les plats, puis passez commande.",
+        usefulPhrases: [
+          "Vous avez choisi ? – En entrée, je voudrais…",
+          "Quel est le plat du jour ?",
+          "Qu'est-ce que vous me conseillez ?",
+          "Ça vous a plu ? – Oui, c'était très bon !",
+        ],
+      },
+      {
+        title: "Donner son avis sur un restaurant",
+        notes: ["b6-i"],
+        task: "À deux ! Vous sortez d'un restaurant : l'un(e) a adoré, l'autre a détesté. Discutez et exprimez votre satisfaction ou votre insatisfaction.",
+        usefulPhrases: [
+          "(C'est) un régal !",
+          "J'ai eu un coup de cœur.",
+          "Le service est trop lent.",
+          "C'est une honte !",
+        ],
+      },
+      {
+        title: "Réaliser un sondage sur l'alimentation",
+        notes: ["b6-atelier"],
+        task: "Atelier médiation : en groupe, choisissez un thème (consommation de viande/poisson, type de plats consommés, partage de photos, origine des recettes), préparez 2 questions, interrogez la classe et présentez vos résultats sous forme de graphique.",
+        usefulPhrases: [
+          "Manger de la viande ou du poisson ≠ être végétarien(ne).",
+          "Manger des plats préparés ≠ faits maison.",
+          "Partager des photos de plats en ligne.",
+          "Suivre ≠ ne pas suivre une recette.",
+        ],
+      },
+    ],
+    writingPractice: [
+      {
+        title: "Écrire une recette",
+        task: "Choisissez un plat sucré ou salé que vous aimez et écrivez sa recette (ingrédients + préparation à l'impératif).",
+      },
+      {
+        title: "Des règles pour un restaurant pas comme les autres",
+        task: "À deux ! Imaginez et écrivez une liste de règles amusantes ou originales pour un restaurant pas comme les autres. Utilisez des expressions d'interdiction et d'obligation.",
+      },
+      {
+        title: "Un avis sur un restaurant (DELF · 60-80 mots)",
+        task: "Choisissez un restaurant que vous connaissez et écrivez un commentaire pour exprimer votre satisfaction ou votre insatisfaction. Décrivez le lieu, le repas et vos impressions (60 à 80 mots).",
+      },
+    ],
+  },
 ];

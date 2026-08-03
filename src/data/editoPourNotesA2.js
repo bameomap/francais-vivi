@@ -384,4 +384,83 @@ export const EDITO_POUR_NOTES_A2 = {
       ],
     },
   ],
+
+  // ─── Unité 6 · En cuisine ──────────────────────────────────────────
+  "b6-c": [
+    {
+      heading: "Pour comprendre des instructions de cuisine",
+      structure: "Công thức nấu ăn luôn viết ở thể MỆNH LỆNH (impératif, ngôi vous), theo đúng thứ tự các bước. Mỗi câu thường chỉ có MỘT động từ hành động + nguyên liệu/thời gian.",
+      phrases: [
+        { fr: "Mélangez le lait avec la crème.", vi: "Trộn sữa với kem." },
+        { fr: "Coupez le beurre en petits morceaux.", vi: "Cắt bơ thành từng miếng nhỏ." },
+        { fr: "Versez la pâte sur les fruits.", vi: "Đổ bột nhão lên trên quả." },
+        { fr: "Faites cuire pendant 35-40 minutes.", vi: "Nấu trong 35-40 phút." },
+        { fr: "Ajoutez des feuilles de menthe.", vi: "Thêm lá bạc hà." },
+      ],
+    },
+  ],
+
+  "b6-d": [
+    {
+      heading: "Pour mettre en garde",
+      structure: "Dùng « Faites attention à… » để cảnh báo chung, hoặc « Attention ! » đơn giản trước một nguy cơ cụ thể. Có thể kết hợp với « il est dangereux de + infinitif » hoặc l'impératif phủ định.",
+      phrases: [
+        { fr: "Faites attention aux températures de conservation des aliments.", vi: "Chú ý nhiệt độ bảo quản thực phẩm." },
+        { fr: "Attention ! C'est dangereux.", vi: "Cẩn thận! Nguy hiểm đấy." },
+        { fr: "Ne laissez pas d'animal entrer dans votre cuisine.", vi: "Đừng để động vật vào bếp." },
+        { fr: "Il est interdit de… / Il ne faut pas…", vi: "Bị cấm… / Không được…" },
+      ],
+    },
+  ],
+
+  "b6-h": [
+    {
+      heading: "Pour communiquer au restaurant",
+      structure: "Khuôn hội thoại chuẩn khi ăn nhà hàng: người phục vụ hỏi món → khách gọi món bằng « je voudrais » → hỏi ý kiến bằng « Qu'est-ce que vous me conseillez ? » → cuối bữa, phục vụ hỏi cảm nhận bằng « Ça vous a plu ? ».",
+      phrases: [
+        { fr: "Vous avez choisi ? – En entrée, je voudrais…", vi: "Anh/chị đã chọn món chưa? – Món khai vị, tôi muốn…" },
+        { fr: "Quel est le plat du jour ? – Le plat du jour est…", vi: "Món đặc biệt hôm nay là gì? – Món hôm nay là…" },
+        { fr: "Qu'est-ce que vous me conseillez ? – C'est la spécialité de la maison.", vi: "Anh/chị gợi ý món gì? – Đó là đặc sản của quán." },
+        { fr: "Vous prendrez des desserts ? – Oui, c'est quoi… ?", vi: "Anh/chị dùng tráng miệng chứ? – Vâng, … là món gì vậy?" },
+        { fr: "Ça vous a plu ? – Oui, c'était très bon !", vi: "Anh/chị có thích không? – Có, ngon lắm!" },
+      ],
+    },
+  ],
+
+  "b6-i": [
+    {
+      heading: "Pour exprimer sa satisfaction",
+      structure: "Dùng các cụm cảm thán ngắn (un régal !) hoặc « avoir un coup de cœur pour… » để diễn tả sự yêu thích mạnh mẽ, tức thì.",
+      phrases: [
+        { fr: "(C'est) un régal !", vi: "Ngon tuyệt!" },
+        { fr: "J'ai eu un coup de cœur.", vi: "Tôi đã yêu thích ngay lập tức." },
+        { fr: "Je suis ravi(e) de cette expérience.", vi: "Tôi rất hài lòng với trải nghiệm này." },
+        { fr: "Je ne peux en dire que du bien.", vi: "Tôi chỉ có thể nói tốt về nó thôi." },
+      ],
+    },
+    {
+      heading: "Pour exprimer son insatisfaction",
+      structure: "Dùng « trop + tính từ » để chỉ ra điều gì đó thái quá, hoặc câu cảm thán mạnh (C'est une honte ! C'est scandaleux !) để phản ánh sự bức xúc.",
+      phrases: [
+        { fr: "Le service est trop lent.", vi: "Dịch vụ phục vụ quá chậm." },
+        { fr: "Les plats étaient trop…", vi: "Các món ăn thì quá…" },
+        { fr: "Les plats sont mauvais.", vi: "Món ăn dở." },
+        { fr: "C'est une honte !", vi: "Thật là một điều đáng xấu hổ!" },
+        { fr: "C'est scandaleux de payer aussi cher !", vi: "Trả nhiều tiền thế này thì thật là tai tiếng!" },
+      ],
+    },
+  ],
+
+  "b6-atelier": [
+    {
+      heading: "Pour parler d'habitudes alimentaires",
+      structure: "Dùng « ≠ » để đối lập hai khái niệm gần giống nhau nhưng KHÁC nhau (ví dụ ăn thịt/cá ≠ ăn chay), tránh nhầm lẫn khi khảo sát hoặc trình bày kết quả.",
+      phrases: [
+        { fr: "Manger de la viande ou du poisson ≠ être végétarien(ne).", vi: "Ăn thịt hoặc cá ≠ là người ăn chay." },
+        { fr: "Manger des produits d'origine animale ≠ être végan(e).", vi: "Ăn sản phẩm từ động vật ≠ là người ăn thuần chay." },
+        { fr: "Manger des plats préparés ≠ faits maison.", vi: "Ăn đồ ăn sẵn ≠ đồ tự nấu." },
+        { fr: "Partager des photos de plats en ligne / sur les réseaux.", vi: "Chia sẻ ảnh món ăn trực tuyến / trên mạng xã hội." },
+      ],
+    },
+  ],
 };

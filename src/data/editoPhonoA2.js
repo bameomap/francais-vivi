@@ -421,4 +421,93 @@ export const EDITO_A2_PHONO = [
       { word: "autre",    target: "son_dr_tr", label: "[tʁ]" },
     ],
   },
+  // ─────────────────────────────────────────────────────────────────
+  {
+    unitId: "b6", unitNum: "6", title: "En cuisine",
+    color: "#E8574A", bg: "#FFF0EF",
+    topic: "L'intonation expressive",
+    topicVi: "Nghe giọng điệu để nhận ra cảm xúc — ngạc nhiên, vui, giận, thất vọng",
+    // Không phải một cặp âm vị tối thiểu như các bài trước — bài này luyện
+    // nghe NGỮ ĐIỆU (intonation) để phân biệt 4 cảm xúc. "phoneme" ở đây
+    // mang một emoji thay vì ký hiệu IPA, và "graphemes" liệt kê các dấu
+    // hiệu ngôn ngữ (từ, cấu trúc câu) đi kèm cảm xúc đó.
+    sounds: [
+      {
+        id: "into_surprise",
+        phoneme: "😲",
+        label: "La surprise — giọng lên cao đột ngột",
+        graphemes: ["C'est étonnant !", "C'est incroyable !", "Ça alors !"],
+        description: "Giọng bổng lên nhanh ở âm tiết cuối, thường có « Oh », « Ah », hoặc tính từ mạnh",
+        descVi: "Câu ngạc nhiên thường bắt đầu hoặc kết bằng « C'est » + tính từ mạnh (étonnant, incroyable), giọng LÊN CAO đột ngột ở cuối câu, khác hẳn câu khẳng định bình thường (giọng đi xuống).",
+        examples: [
+          { word: "C'est étonnant !",  vi: "Ngạc nhiên thật!" },
+          { word: "C'est incroyable !", vi: "Không thể tin được!" },
+        ],
+        tip: "So sánh « C'est délicieux. » (giọng xuống, chỉ là nhận xét) với « C'est incroyable ! » (giọng lên vút, ngạc nhiên thật sự).",
+      },
+      {
+        id: "into_joie",
+        phoneme: "😊",
+        label: "La joie — giọng nhẹ nhàng, đi lên rồi giữ cao",
+        graphemes: ["C'est délicieux !", "C'est génial !", "Un régal !"],
+        description: "Giọng đều, tươi, âm lượng vừa phải nhưng ấm áp, thường có nụ cười trong giọng nói",
+        descVi: "Khi vui, người Pháp thường nói nhanh hơn một chút, giọng NHẸ và ẤM, không gằn giọng như khi giận — nghe như đang mỉm cười khi nói.",
+        examples: [
+          { word: "C'est délicieux !", vi: "Ngon tuyệt!" },
+          { word: "C'est génial !",    vi: "Tuyệt vời!" },
+        ],
+        tip: "« Un régal, de l'apéritif jusqu'au dessert ! » — kéo dài âm « régal » để nhấn sự hài lòng.",
+      },
+      {
+        id: "into_colere",
+        phoneme: "😠",
+        label: "La colère — giọng gằn, nhấn mạnh từng từ",
+        graphemes: ["C'est une honte !", "C'est scandaleux !"],
+        description: "Giọng to hơn, NHẤN MẠNH từng âm tiết, tốc độ nói chậm lại một cách cố ý để tạo sức nặng",
+        descVi: "Câu giận dữ thường nhấn thật mạnh vào tính từ (« honte », « scandaleux »), đôi khi tách rõ từng âm tiết — khác với câu ngạc nhiên (giọng lên nhanh) hay vui vẻ (giọng nhẹ).",
+        examples: [
+          { word: "C'est une honte !",    vi: "Thật là một điều đáng xấu hổ!" },
+          { word: "C'est scandaleux !",   vi: "Thật là một vụ tai tiếng!" },
+        ],
+        tip: "« C'est scandaleux de payer aussi cher ! » — nhấn mạnh từng chữ, đặc biệt là « scandaleux », để truyền sự bực bội.",
+      },
+      {
+        id: "into_deception",
+        phoneme: "😞",
+        label: "La déception — giọng đi xuống, chậm lại, hơi thở dài",
+        graphemes: ["C'est dommage.", "Oh zut, c'est déjà fini !"],
+        description: "Giọng nhỏ dần, đi XUỐNG ở cuối câu, tốc độ chậm, đôi khi có tiếng thở dài trước hoặc sau câu",
+        descVi: "Khác với câu giận (nhấn mạnh, to), câu thất vọng có giọng NHỎ và TRẦM dần, như đang tiếc nuối — « Oh zut » là một cách than nhẹ nhàng, không giận dữ.",
+        examples: [
+          { word: "C'est dommage.",              vi: "Tiếc quá." },
+          { word: "Oh zut, c'est déjà fini !",    vi: "Ôi trời, hết mất rồi!" },
+        ],
+        tip: "« Je n'ai pas pu goûter certains plats, c'est dommage. » — giọng chùng xuống ở « dommage », không lên cao như câu ngạc nhiên.",
+      },
+    ],
+    pairs: [
+      { a: "C'est incroyable !", b: "C'est dommage.",     aVi: "ngạc nhiên (giọng lên)", bVi: "thất vọng (giọng xuống)", note: "Trái ngược hướng giọng" },
+      { a: "C'est génial !",     b: "C'est scandaleux !",  aVi: "vui (giọng nhẹ)",        bVi: "giận (giọng gằn)",        note: "Cùng cường độ, khác sắc thái" },
+    ],
+    practice: [
+      "J'ai trouvé que les plats étaient mauvais. C'est scandaleux de payer aussi cher !",
+      "Un régal, de l'apéritif jusqu'au dessert !",
+      "Je n'ai pas pu goûter certains plats, c'est dommage.",
+      "Nous avons pris deux menus du jour et c'était délicieux.",
+      "Il faut patienter plus d'une demi-heure entre chaque plat. C'est une honte !",
+      "Les plats ont des saveurs très particulières, c'est incroyable !",
+      "Il y a une très bonne ambiance, c'est génial !",
+      "C'est étonnant de découvrir tous ces plats épicés.",
+    ],
+    quiz: [
+      { word: "C'est étonnant !",             target: "into_surprise",  label: "😲" },
+      { word: "C'est délicieux !",             target: "into_joie",      label: "😊" },
+      { word: "C'est une honte !",             target: "into_colere",    label: "😠" },
+      { word: "C'est incroyable !",            target: "into_surprise",  label: "😲" },
+      { word: "C'est scandaleux !",            target: "into_colere",    label: "😠" },
+      { word: "C'est dommage !",               target: "into_deception", label: "😞" },
+      { word: "C'est génial !",                target: "into_joie",      label: "😊" },
+      { word: "Oh zut, c'est déjà fini !",     target: "into_deception", label: "😞" },
+    ],
+  },
 ];

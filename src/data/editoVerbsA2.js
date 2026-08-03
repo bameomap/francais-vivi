@@ -145,4 +145,42 @@ export const EDITO_A2_VERB_UNITS = [
       { infinitive: "servir",       meaning: "phục vụ" },
     ],
   },
+  {
+    unitId: "b6", unitNum: "6",
+    title: "En cuisine",
+    color: "#E8574A", bg: "#FFF0EF",
+    cefr: "A2",
+    tenses: [
+      { id: "present", label: "Présent",
+        note: "Gốc của l'impératif lấy trực tiếp từ đây (chỉ bỏ chủ ngữ và, ở tu của -er, bỏ luôn -s)" },
+      { id: "imperatif", label: "Impératif",
+        note: "Chỉ 3 ngôi (tu/nous/vous), KHÔNG chủ ngữ · phản thân đổi vị trí đại từ ở thể khẳng định" },
+    ],
+    verbs: [
+      // — pronominal: đại từ đổi vị trí ở impératif khẳng định —
+      { infinitive: "se laver",     meaning: "rửa, tắm rửa (Lavez-vous les mains !)" },
+      { infinitive: "s'asseoir",    meaning: "ngồi xuống (bất quy tắc)" },
+      // — bất quy tắc thường gặp trong nội quy/mệnh lệnh —
+      { infinitive: "être",         meaning: "thì, là (Soyez prudent !)" },
+      { infinitive: "avoir",        meaning: "có (Ayez une bonne hygiène.)" },
+      { infinitive: "faire",        meaning: "làm, chú ý (Faites attention !)" },
+      { infinitive: "aller",        meaning: "đi" },
+      { infinitive: "vendre",       meaning: "bán (il est interdit de vendre)" },
+      { infinitive: "laisser",      meaning: "để, cho phép (Ne laissez pas entrer d'animal.)" },
+      // — đều đặn -er: gốc của mệnh lệnh cuộc sống bếp núc —
+      { infinitive: "préchauffer",  meaning: "làm nóng trước (lò)" },
+      { infinitive: "mélanger",     meaning: "trộn" },
+      { infinitive: "couper",       meaning: "cắt" },
+      { infinitive: "verser",       meaning: "đổ, rót" },
+      { infinitive: "ajouter",      meaning: "thêm vào" },
+      { infinitive: "décorer",      meaning: "trang trí" },
+      { infinitive: "utiliser",     meaning: "sử dụng" },
+      { infinitive: "fixer",        meaning: "ấn định (giá, giờ)" },
+      { infinitive: "respecter",    meaning: "tuân thủ" },
+      // — đều đặn -ir/-re —
+      { infinitive: "servir",       meaning: "dọn ra, phục vụ" },
+      { infinitive: "sortir",       meaning: "lấy ra, ra khỏi" },
+      { infinitive: "attacher",     meaning: "buộc, cột (les cheveux)" },
+    ],
+  },
 ];
