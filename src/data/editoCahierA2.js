@@ -4947,6 +4947,605 @@ export const CAHIER_A2 = {
     },
   },
 
+  b10: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    // ⚠️ Le cahier imprimé a 3 points de grammaire pour cette unité (p.111
+    // passé composé/imparfait, p.113 accord du participe passé, p.115
+    // pronoms démonstratifs) mais EDITO_GRAMMAR_A2.b10 n'en documente que 2
+    // (l'accord du participe passé manque — écart connu, à corriger dans un
+    // futur chantier séparé sur editoGrammarA2.js + parcoursDataA2.js). En
+    // attendant, seuls p0 et p1 existent ici ; les exercices de la p.113
+    // sont provisoirement dans `bilan` (voir le commentaire à cet endroit).
+    grammar: {
+
+      // p0 — Le passé composé et l'imparfait dans le récit (cahier p. 111)
+      p0: [
+        {
+          num: 1, page: 111,
+          instruction: "Associez les situations et les actions pour former des phrases.",
+          vi: "Nối tình huống (imparfait) với hành động mới xen vào (passé composé).",
+          type: "match",
+          pairs: [
+            { l: "Il pleuvait quand", r: "je suis rentré chez moi.", example: true },
+            { l: "Les enfants avaient très faim quand", r: "la mère a commencé à préparer le déjeuner." },
+            { l: "Je pensais partir en Asie quand", r: "mes amis ont proposé un circuit au Vietnam." },
+            { l: "Nous voulions faire le tour de France quand", r: "nous sommes partis à vélo." },
+          ],
+        },
+        {
+          num: 2, page: 111,
+          instruction: "Soulignez la forme correcte.",
+          vi: "Chọn dạng đúng: imparfait (bối cảnh) hay passé composé (hành động mới)?",
+          type: "choice",
+          items: [
+            { q: "Je ___ des précisions sur mon vol qui n'était pas direct.", options: ["Je demandais", "J'ai demandé"], answer: "J'ai demandé", example: true },
+            { q: "Quand nous ___ à l'aéroport de Montréal, nous ___ très fatigués du voyage. (2 từ)", options: ["avons atterri – étions", "atterrissions – avons été"], answer: "avons atterri – étions" },
+            { q: "On ___ à la terrasse de l'hôtel. Tout à coup, la pluie ___ . (2 từ)", options: ["déjeunait – est tombée", "a déjeuné – tombait"], answer: "déjeunait – est tombée" },
+            { q: "Au musée d'histoire de Chine, ils ___ une énorme sculpture en pierre, ___ un moment fort de leur voyage. (2 từ)", options: ["ont vu – c'était", "voyaient – ça a été"], answer: "ont vu – c'était" },
+            { q: "Je ___ mon vol sur le site Internet. Tout à coup, mon ordinateur ___ . (2 từ)", options: ["réservais – s'est éteint", "j'ai réservé – s'éteignait"], answer: "je réservais – s'est éteint" },
+          ],
+        },
+        {
+          num: 3, page: 111, audioSrc: piste(97),
+          instruction: "Écoutez et cochez : imparfait ou passé composé ?",
+          vi: "Nghe từng câu (a→f) và cho biết thì được dùng: imparfait hay passé composé?",
+          type: "choice",
+          items: [
+            { q: "a. Cet été, j'ai été malade en Tunisie.", options: ["imparfait", "passé composé"], answer: "passé composé", example: true },
+            { q: "b. À Noël, j'étais encore en Tunisie.", options: ["imparfait", "passé composé"], answer: "imparfait" },
+            { q: "c. Il a habité trois ans en Afrique.", options: ["imparfait", "passé composé"], answer: "passé composé" },
+            { q: "d. Avant, il habitait dans le Sud.", options: ["imparfait", "passé composé"], answer: "imparfait" },
+            { q: "e. J'aimais me balader dans les rues de la ville.", options: ["imparfait", "passé composé"], answer: "imparfait" },
+            { q: "f. J'ai aimé la visite au musée.", options: ["imparfait", "passé composé"], answer: "passé composé" },
+          ],
+        },
+        {
+          num: 4, page: 111,
+          instruction: "Transformez le texte au passé. Utilisez le passé composé et l'imparfait.",
+          vi: "Chuyển toàn bộ đoạn văn sang quá khứ, phối hợp passé composé và imparfait.",
+          type: "transform",
+          items: [
+            { q: "Il est minuit quand notre avion décolle de l'aéroport de Tokyo. Il fait mauvais et soudain nous sentons un fort coup de vent. Nous avons un peu peur quand l'avion fait un grand bruit. Heureusement, ce n'est pas grave et, après 13 heures de vol, nous atterrissons sans problème à Vienne.",
+              answer: "Il était minuit quand notre avion a décollé de l'aéroport de Tokyo. Il faisait mauvais et soudain nous avons senti un fort coup de vent. Nous avons eu un peu peur quand l'avion a fait un grand bruit. Heureusement, ce n'était pas grave et, après 13 heures de vol, nous avons atterri sans problème à Vienne." },
+          ],
+        },
+      ],
+
+      // p1 — Les pronoms démonstratifs (cahier p. 115)
+      p1: [
+        {
+          num: 1, page: 115,
+          instruction: "Remettez les mots dans l'ordre pour faire des phrases.",
+          vi: "Sắp xếp lại thành câu đúng — chú ý pronom démonstratif (celui/celle/ceux/celles).",
+          type: "order",
+          items: [
+            { tokens: ["pas", "ce", "guide,", "nous", "n'aimons", "Nous", "préférons", "nous", "celui-ci."],
+              answer: ["Nous", "n'aimons", "pas", "ce", "guide,", "nous", "préférons", "celui-ci."] },
+            { tokens: ["ou", "vous", "faire,", "voulez", "Quelle", "celle-là", "visite", "celle-ci", "?"],
+              answer: ["Quelle", "visite", "vous", "voulez", "faire,", "celle-ci", "ou", "celle-là", "?"] },
+            { tokens: ["est", "un", "audioguide,", "voudrais", "autre", "cassé.", "Je", "celui-ci"],
+              answer: ["Je", "voudrais", "un", "autre", "audioguide,", "celui-ci", "est", "cassé."] },
+            { tokens: ["ma", "solaire,", "avec", "crème", "Où", "l'indice", "est", "celle", "50+", "?"],
+              answer: ["Où", "est", "ma", "crème", "solaire,", "celle", "avec", "l'indice", "50+", "?"] },
+            { tokens: ["mes", "qui", "de", "applications,", "utile.", "celle", "s'orienter", "permet", "Parmi", "est"],
+              answer: ["Parmi", "mes", "applications,", "celle", "qui", "permet", "de", "s'orienter", "est", "utile."] },
+            { tokens: ["souvent", "bien", "cet", "voyagent", "hôtel.", "connaissent", "Ceux", "qui"],
+              answer: ["Ceux", "qui", "voyagent", "souvent", "connaissent", "bien", "cet", "hôtel."] },
+          ],
+        },
+        {
+          num: 2, page: 115,
+          instruction: "Remplacez les mots entre parenthèses par un pronom démonstratif.",
+          vi: "Thay từ trong ngoặc bằng pronom démonstratif phù hợp (celui/celle/ceux/celles).",
+          type: "fill",
+          bank: ["celui", "celle", "ceux", "celles"],
+          items: [
+            { q: "Elle a visité toutes les capitales européennes et elle a adoré (la capitale) ___ d'Autriche.", answer: "celle", example: true },
+            { q: "Notre agence propose différents circuits au Maroc. (Le circuit) ___ dans le désert est très populaire.", answer: "celui" },
+            { q: "Les visites au musée sont parfois ennuyeuses pour les enfants mais (la visite) ___ avec Martine les intéresse toujours.", answer: "celle" },
+            { q: "Les séjours à l'étranger coûtent cher, surtout (les séjours) ___ à l'hôtel 5 étoiles.", answer: "ceux" },
+            { q: "Tous les vols sont annulés à cause de la météo sauf (le vol) ___ pour New-York.", answer: "celui" },
+            { q: "En France, les touristes visitent toutes les régions mais (les régions) ___ où on mange bien ont le plus de succès.", answer: "celles" },
+          ],
+        },
+        {
+          num: 3, page: 115,
+          instruction: "Complétez avec un pronom démonstratif.",
+          vi: "Điền pronom démonstratif phù hợp.",
+          type: "fill",
+          bank: ["celui", "celle", "ceux", "celles", "celle-ci et celle-là"],
+          items: [
+            { q: "J'ai fait le circuit historique à Bordeaux, ___ qui est organisé par la mairie de la ville.", answer: "celui", example: true },
+            { q: "Pourriez-vous me conseiller d'autres excursions ? J'ai déjà fait ___ proposées par l'office de tourisme ?", answer: "celles" },
+            { q: "Je ne sais pas encore quel itinéraire choisir, peut-être ___ qui est déjà indiqué sur ma carte.", answer: "celui" },
+            { q: "Nous avons acheté deux cartes postales : ___ pour ma mère et ___ pour Coralie. (2 từ)", answer: "celle-ci et celle-là" },
+            { q: "C'est la même visite guidée que ___ de l'année dernière ?", answer: "celle" },
+            { q: "Nous aimons beaucoup les musées, particulièrement ___ de Paris.", answer: "ceux" },
+          ],
+        },
+        {
+          num: 4, page: 115, audioSrc: piste(101),
+          instruction: "Écoutez et écrivez une question comme dans l'exemple.",
+          vi: "Nghe rồi viết lại câu hỏi theo mẫu « Quel(le)(s) …, celui/celle/ceux/celles-ci ou -là ? ».",
+          type: "fill",
+          items: [
+            { q: "Donnez-moi la brochure !", answer: "Quelle brochure, celle-ci ou celle-là ?", example: true },
+            { q: "Regardez ces touristes !", answer: "Quels touristes, ceux-ci ou ceux-là ?" },
+            { q: "Passez-moi l'audioguide !", answer: "Quel audioguide, celui-ci ou celui-là ?" },
+            { q: "Donnez-moi les informations pratiques !", answer: "Quelles informations pratiques, celles-ci ou celles-là ?" },
+            { q: "Regardez ces ponts !", answer: "Quels ponts, ceux-ci ou ceux-là ?" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 116) — wired into the Phono step ─────
+    // Seules Discrimination (act. 1) et Dictée (act. 3) ont une réponse
+    // vérifiable ; Articulation (act. 2, dialogue à répéter) et
+    // Interprétation (act. 4, lecture à voix haute) restent orales, comme
+    // pour les autres unités.
+    phono: [
+      {
+        num: "1a", page: 116, audioSrc: piste(102),
+        instruction: "Discrimination — écoutez et dites si les deux sons [ə] et [e] entendus sont identiques ou différents.",
+        vi: "Nghe và cho biết hai âm [ə] (như « le ») và [e] (như « les ») trong câu là giống nhau hay khác nhau.",
+        type: "choice",
+        items: [
+          { q: "a. (exemple)", options: ["identiques", "différents"], answer: "différents", example: true },
+          { q: "b.", options: ["identiques", "différents"], answer: "identiques" },
+          { q: "c.", options: ["identiques", "différents"], answer: "identiques" },
+          { q: "d.", options: ["identiques", "différents"], answer: "différents" },
+          { q: "e.", options: ["identiques", "différents"], answer: "différents" },
+          { q: "f.", options: ["identiques", "différents"], answer: "identiques" },
+        ],
+      },
+      {
+        num: "1b", page: 116, audioSrc: piste(102),
+        instruction: "Discrimination — écoutez et dites si les deux sons [e] et [ɛ] entendus sont identiques ou différents.",
+        vi: "Nghe và cho biết hai âm [e] (như « les ») và [ɛ] (như « lait ») trong câu là giống nhau hay khác nhau.",
+        type: "choice",
+        items: [
+          { q: "a. (exemple)", options: ["identiques", "différents"], answer: "différents", example: true },
+          { q: "b.", options: ["identiques", "différents"], answer: "identiques" },
+          { q: "c.", options: ["identiques", "différents"], answer: "différents" },
+          { q: "d.", options: ["identiques", "différents"], answer: "différents" },
+          { q: "e.", options: ["identiques", "différents"], answer: "différents" },
+          { q: "f.", options: ["identiques", "différents"], answer: "identiques" },
+        ],
+      },
+      {
+        num: 3, page: 116, audioSrc: piste(104),
+        instruction: "Dictée — écoutez le texte et complétez les mots.",
+        vi: "Nghe và điền các phần còn thiếu (âm [ə], [e] hoặc [ɛ]).",
+        type: "fill",
+        items: [
+          { q: "La Réunion, ou « l'île intense », est ___ île ___ situ___ dans l'Océan Indien. (3 từ)", answer: "une française ée", example: true },
+          { q: "C'___ un volcan encore tr___ actif, le Piton de la Fournaise, qui offre un sp___tacle exceptionn___. (4 từ)", answer: "est ès ec el" },
+          { q: "Avec une flore ___ une faune uniques au monde, c'___ ___ paradis d___ amoureux d___ la nature. (5 từ)", answer: "et est le es e" },
+          { q: "Vous pourr___ aussi profit___ de s___ b___s plages d___ sable blanc, mais aussi d___ s___ côtes plus sauvages. (7 từ)", answer: "ez er es elle e e es" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 112, « Le voyage ») couvre les groupes b10g1-b10g4
+    // du livre (hébergement, séjour, avion, prestations) ; c2_vocab (cahier
+    // p. 114, « Le tourisme ») couvre b10g5-b10g7 (visite touristique,
+    // sites, types de tourisme) — voir parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 112,
+          instruction: "Associez.",
+          vi: "Nối đầu từ với phần cuối để tạo cụm từ đúng.",
+          type: "match",
+          pairs: [
+            { l: "passer", r: "la nuit", example: true },
+            { l: "le vol", r: "direct" },
+            { l: "la compagnie", r: "aérienne" },
+            { l: "le tour", r: "du monde" },
+            { l: "l'auberge", r: "de jeunesse" },
+            { l: "la pension", r: "complète" },
+          ],
+        },
+        {
+          num: 2, page: 112,
+          instruction: "Barrez l'intrus.",
+          vi: "Tìm từ lạc loài trong mỗi nhóm.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["l'avion", "atterrir", "décoller", "le petit déjeuner"], answer: "le petit déjeuner", example: true },
+            { q: "b.", options: ["l'habitant", "la destination", "la direction", "le départ"], answer: "l'habitant" },
+            { q: "c.", options: ["l'hôtel", "l'aéroport", "le camping", "l'auberge de jeunesse"], answer: "l'aéroport" },
+            { q: "d.", options: ["la demi-pension", "l'avion", "la pension complète", "le petit déjeuner"], answer: "l'avion" },
+            { q: "e.", options: ["compris", "les bagages", "le billet", "le vol"], answer: "compris" },
+            { q: "f.", options: ["l'itinéraire", "le circuit", "le repas", "le voyage"], answer: "le repas" },
+          ],
+        },
+        {
+          num: 3, page: 112,
+          instruction: "Complétez avec les mots suivants : simple – inclus – circuits – double – départ – croisière.",
+          vi: "Điền từ cho sẵn vào chỗ trống.",
+          type: "fill",
+          bank: ["simple", "inclus", "circuits", "double", "départ", "croisière"],
+          items: [
+            { q: "À l'hôtel, je prends toujours une chambre ___ parce que je voyage seul.", answer: "simple", example: true },
+            { q: "Une chambre d'hôtel pour deux personnes est une chambre ___ .", answer: "double" },
+            { q: "Julie adore les bateaux. Pour ses vacances, elle a choisi de faire une ___ .", answer: "croisière" },
+            { q: "La pension complète veut dire que tous les repas sont ___ dans le prix de l'hôtel.", answer: "inclus" },
+            { q: "Tu as regardé l'heure du ___ sur nos billets ?", answer: "départ" },
+            { q: "Notre agence de voyage propose des ___ touristiques au Maroc.", answer: "circuits" },
+          ],
+        },
+        {
+          num: 4, page: 112, audioSrc: piste(98),
+          instruction: "Écoutez la conversation et complétez la note sur la réservation de M. Norin.",
+          vi: "Nghe hội thoại và điền vào ghi chú đặt phòng của ông Norin.",
+          type: "fill",
+          items: [
+            { q: "Il a réservé une ___ simple du 15 au 18 mars.", answer: "chambre", example: true },
+            { q: "Il arrivera le 16 avec sa femme et a besoin d'une chambre ___ .", answer: "double" },
+            { q: "Il passera toujours 2 ___ à l'hôtel Solis.", answer: "nuits" },
+            { q: "Le ___ est compris dans le prix.", answer: "petit déjeuner" },
+            { q: "Le petit déjeuner est ___ dans le prix.", answer: "compris" },
+            { q: "M. Norin ne prend pas ses ___ à l'hôtel.", answer: "repas" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 114,
+          instruction: "Cochez la bonne réponse.",
+          vi: "Chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "Le bus touristique est…", options: ["un service pour visiter une région.", "un moyen pour aller au travail.", "une visite guidée à pied."], answer: "un service pour visiter une région.", example: true },
+            { q: "À l'office de tourisme, …", options: ["on trouve des informations sur les excursions.", "on réserve uniquement des hôtels.", "on vend des billets d'avion."], answer: "on trouve des informations sur les excursions." },
+            { q: "Pendant la visite guidée, on peut poser des questions…", options: ["à l'audioguide.", "au guide.", "à l'office de tourisme."], answer: "au guide." },
+            { q: "Quand on parle de l'histoire, …", options: ["on raconte le passé.", "on parle de la météo.", "on décrit un monument."], answer: "on raconte le passé." },
+            { q: "Dans la brochure touristique, on trouve…", options: ["des idées de visites de la ville.", "des billets d'avion.", "des informations sur l'hôtel."], answer: "des idées de visites de la ville." },
+          ],
+        },
+        {
+          num: 2, page: 114,
+          instruction: "Classez les phrases suivantes : quel type de tourisme illustrent-elles — lent, durable ou local ?",
+          vi: "Xếp mỗi câu vào loại du lịch tương ứng: chậm (lent), bền vững (durable) hay địa phương (local)?",
+          type: "choice",
+          items: [
+            { q: "a. En voyage, il est important de ne pas se presser pour tout voir.", options: ["le tourisme lent", "le tourisme durable", "le tourisme local"], answer: "le tourisme lent", example: true },
+            { q: "b. J'ai adoré faire toutes les visites à pied, c'est plus écologique !", options: ["le tourisme lent", "le tourisme durable", "le tourisme local"], answer: "le tourisme durable" },
+            { q: "c. Ma région a une histoire très riche, on peut même voir des ruines romaines.", options: ["le tourisme lent", "le tourisme durable", "le tourisme local"], answer: "le tourisme local" },
+            { q: "d. Pour les vacances, nous choisissons toujours l'hébergement chez l'habitant pour prendre le temps de rencontrer les locaux.", options: ["le tourisme lent", "le tourisme durable", "le tourisme local"], answer: "le tourisme lent" },
+            { q: "e. À l'étranger, je m'intéresse aussi aux problèmes d'écologie.", options: ["le tourisme lent", "le tourisme durable", "le tourisme local"], answer: "le tourisme durable" },
+            { q: "f. Nous préférons voyager dans notre pays pour découvrir le patrimoine.", options: ["le tourisme lent", "le tourisme durable", "le tourisme local"], answer: "le tourisme local" },
+          ],
+        },
+        {
+          num: 3, page: 114, audioSrc: piste(100),
+          instruction: "Écoutez et associez les phrases aux images (photos : 1. le pont, 2. la falaise, 3. le volcan, 4. la grotte, 5. la fontaine, 6. la cascade).",
+          vi: "Nghe rồi nối mỗi câu với hình ảnh tương ứng.",
+          type: "fill",
+          bank: ["1. le pont", "2. la falaise", "3. le volcan", "4. la grotte", "5. la fontaine", "6. la cascade"],
+          items: [
+            { q: "a. Le Vésuve est un volcan toujours actif.", answer: "3. le volcan", example: true },
+            { q: "b. Le site naturel des falaises d'Étretat se trouve en Normandie.", answer: "2. la falaise" },
+            { q: "c. On a construit plusieurs ponts pour traverser ce fleuve.", answer: "1. le pont" },
+            { q: "d. Cette fontaine au milieu de la place est très ancienne.", answer: "5. la fontaine" },
+            { q: "e. Au printemps, l'eau, qui descend des montagnes, forme des cascades qu'il faut traverser.", answer: "6. la cascade" },
+            { q: "f. Un animal comme l'ours peut passer l'hiver dans une grotte.", answer: "4. la grotte" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 118-119, noté /40) ────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // ⚠️ Les exercices 8-11 ci-dessous viennent de la p.113 (« L'accord du
+    // participe passé »), un point de grammaire qui existe dans le livre et
+    // le cahier mais PAS ENCORE dans EDITO_GRAMMAR_A2.b10 (voir le
+    // commentaire au-dessus de `grammar`). Ils sont rangés ici en attendant
+    // que ce point soit ajouté à editoGrammarA2.js — quand ce sera fait, il
+    // faudra les déplacer dans une clé `grammar.p1` dédiée et renuméroter
+    // les pronoms démonstratifs actuels (p1 → p2).
+    bilan: [
+      {
+        num: 1, page: 118,
+        instruction: "Grammaire — Conjuguez les verbes au passé composé ou à l'imparfait. Attention aux accords. (Alors ce voyage en Bourgogne ?) (/7)",
+        vi: "Chia động từ trong ngoặc ở passé composé hoặc imparfait — chú ý hợp giống–số.",
+        type: "fill",
+        items: [
+          { q: "C'(être) ___ magique ! Ana (faire) ___ un voyage de rêve. (2 từ)", answer: "était a fait" },
+          { q: "Ses copains (ne pas pouvoir) ___ partir, alors elle (partir) ___ en solo. (2 từ)", answer: "ne pouvaient pas est partie" },
+          { q: "Elle (ne pas avoir) ___ beaucoup d'argent, elle (prendre) ___ le bus pour faire un circuit de trois jours. (2 từ)", answer: "n'avait pas a pris" },
+          { q: "Le premier jour du voyage, quand son bus (arriver) ___ à destination, il (faire) ___ déjà nuit. (2 từ)", answer: "est arrivé faisait" },
+          { q: "Mais elle (voir) ___ tout de suite son hôtel qui (se trouver) ___ au centre-ville. (2 từ)", answer: "a vu se trouvait" },
+          { q: "Le lendemain, Ana (profiter) ___ du petit déjeuner qui (être) ___ délicieux. (2 từ)", answer: "a profité était" },
+          { q: "Après trois jours de visites extraordinaires, elle (ne plus vouloir) ___ repartir ! Elle (décider) ___ de retourner en Bourgogne l'année prochaine. (2 từ)", answer: "ne voulait plus a décidé" },
+        ],
+      },
+      {
+        num: 2, page: 118,
+        instruction: "Grammaire — Associez. (/7)",
+        vi: "Nối đầu câu với cuối câu.",
+        type: "match",
+        pairs: [
+          { l: "Les vacances,", r: "vous les avez prises en août ?" },
+          { l: "La famille Heintz", r: "est partie à vélo." },
+          { l: "Bruno", r: "a fait une visite originale." },
+          { l: "Ils", r: "se sont retrouvés au Canada." },
+          { l: "Sarah et Julie", r: "se sont rencontrées dans un bus." },
+          { l: "La destination", r: "que nous avons choisie est exotique." },
+          { l: "Le visa", r: "que j'attendais est enfin arrivé." },
+        ],
+      },
+      {
+        num: 3, page: 118,
+        instruction: "Grammaire — Répondez avec un pronom démonstratif. (/6)",
+        vi: "Trả lời bằng pronom démonstratif.",
+        type: "fill",
+        bank: ["ceux", "celle", "celui", "celles"],
+        items: [
+          { q: "– Où sont mes billets ? – Ils sont avec ___ de ton frère.", answer: "ceux" },
+          { q: "– Tu peux me montrer cette appli ? – ___ pour trouver les bonnes plages ?", answer: "Celle" },
+          { q: "– Est-ce que vous aimez mon projet ? – ___ de partir en solo ? Oui !", answer: "Celui" },
+          { q: "– Quelles photos tu as choisies ? – ___ du musée Picasso, elles sont exceptionnelles.", answer: "Celles" },
+          { q: "– Il veut faire cette croisière ? – Oui, il a choisi ___ sur la mer Baltique.", answer: "celle" },
+          { q: "– Quels guides de voyage tu me conseilles ? – ___ des éditions du Routard.", answer: "ceux" },
+        ],
+      },
+      {
+        num: 4, page: 118,
+        instruction: "Vocabulaire — Classez les mots suivants : hôtel – chambre double – demi-pension – repas inclus – auberge de jeunesse. (/5)",
+        vi: "Xếp từ vào bảng: dịch vụ đi kèm (les prestations du séjour) hay loại chỗ ở (les types d'hébergement)?",
+        type: "choice",
+        items: [
+          { q: "hôtel", options: ["les prestations du séjour", "les types d'hébergement"], answer: "les types d'hébergement" },
+          { q: "chambre double", options: ["les prestations du séjour", "les types d'hébergement"], answer: "les prestations du séjour" },
+          { q: "demi-pension", options: ["les prestations du séjour", "les types d'hébergement"], answer: "les prestations du séjour" },
+          { q: "repas inclus", options: ["les prestations du séjour", "les types d'hébergement"], answer: "les prestations du séjour" },
+          { q: "auberge de jeunesse", options: ["les prestations du séjour", "les types d'hébergement"], answer: "les types d'hébergement" },
+        ],
+      },
+      {
+        num: 5, page: 119,
+        instruction: "Vocabulaire — Regardez la carte d'embarquement d'Éric Lemaître et répondez aux questions. (/5)",
+        vi: "Đọc thẻ lên máy bay của Éric Lemaître rồi trả lời.",
+        type: "fill",
+        items: [
+          { q: "Dans quelle ville se trouve l'aéroport de départ ?", answer: "Paris" },
+          { q: "Quelle est la destination du vol ?", answer: "Saint-Denis" },
+          { q: "Quelle est la date du départ ?", answer: "Le 26 janvier" },
+          { q: "À quelle heure l'avion décolle-t-il ?", answer: "9 h 45" },
+          { q: "À partir de quelle heure on ne peut plus enregistrer ses bagages ?", answer: "8 h 35" },
+        ],
+      },
+      {
+        num: 6, page: 119,
+        instruction: "Vocabulaire — Vrai ou faux ? (/5)",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "La cascade descend de la montagne.", answer: true },
+          { q: "Les ruines antiques ne sont pas des lieux de visites touristiques.", answer: false },
+          { q: "Pour traverser une rivière, on passe sur un pont.", answer: true },
+          { q: "Les falaises se trouvent toujours en ville.", answer: false },
+          { q: "Le volcan n'est pas une montagne.", answer: false },
+        ],
+      },
+      {
+        num: 7, page: 119,
+        instruction: "Vocabulaire — Barrez l'intrus. (/5)",
+        vi: "Tìm từ lạc loài trong mỗi nhóm.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["l'audioguide", "les informations pratiques", "l'excursion", "la fontaine"], answer: "la fontaine" },
+          { q: "b.", options: ["les ruines", "le patrimoine", "le pont", "l'hébergement"], answer: "l'hébergement" },
+          { q: "c.", options: ["de proximité", "le guide", "le bus", "la visite"], answer: "de proximité" },
+          { q: "d.", options: ["l'histoire", "le volcan", "l'excursion", "la brochure touristique"], answer: "le volcan" },
+          { q: "e.", options: ["l'office de tourisme", "la guide", "les touristes", "les bagages"], answer: "les bagages" },
+        ],
+      },
+      {
+        // Page 113 — Grammaire : L'accord du participe passé, act. 1.
+        // Rangé ici temporairement — voir la note au-dessus de `bilan`.
+        num: 8, page: 113,
+        instruction: "L'accord du participe passé — Soulignez la forme correcte.",
+        vi: "Chọn dạng đúng của quá khứ phân từ (chú ý hợp giống–số với être/se + avoir).",
+        type: "choice",
+        items: [
+          { q: "Tu as ___ Paris ?", options: ["visitée", "visitées", "visité"], answer: "visité", example: true },
+          { q: "Elle s'est ___ des excursions.", options: ["occupés", "occupé", "occupée"], answer: "occupée" },
+          { q: "Nous avons ___ un itinéraire différent.", options: ["proposées", "proposé", "proposées (bis)"], answer: "proposé" },
+          { q: "La randonnée que j'ai ___ était très longue.", options: ["fait", "faite", "faites"], answer: "faite" },
+          { q: "Philippe et toi, vous êtes ___ au musée d'art ?", options: ["allés", "allé", "allées"], answer: "allés" },
+          { q: "Ils se sont ___ en bus amphibie.", options: ["déplacées", "déplacé", "déplacés"], answer: "déplacés" },
+        ],
+      },
+      {
+        num: 9, page: 113,
+        instruction: "L'accord du participe passé — Réécrivez les phrases avec les mots proposés.",
+        vi: "Viết lại câu với chủ ngữ mới — chú ý hợp giống–số của quá khứ phân từ.",
+        type: "transform",
+        items: [
+          { q: "Paul s'est inscrit sur un forum des voyageurs. → Léa ……", answer: "Léa s'est inscrite sur un forum des voyageurs.", example: true },
+          { q: "Ce sont les amis que j'ai rencontrés en Suisse. → Ce sont les amies ……", answer: "Ce sont les amies que j'ai rencontrées en Suisse." },
+          { q: "Antonia s'est installée chez nous. → Jérôme ……", answer: "Jérôme s'est installé chez nous." },
+          { q: "Les papiers ? Je les ai mis sur la table. → Les cartes ? Je les ……", answer: "Les cartes ? Je les ai mises sur la table." },
+          { q: "Le resto que j'ai réservé est très moderne. → La chambre ……", answer: "La chambre que j'ai réservée est très moderne." },
+          { q: "Le visa que tu as demandé est arrivé. → Les informations ……", answer: "Les informations que tu as demandées sont arrivées." },
+        ],
+      },
+      {
+        num: 10, page: 113,
+        instruction: "L'accord du participe passé — Complétez avec « e », « es » ou « s » si nécessaire (ou laissez vide s'il n'y a pas de terminaison).",
+        vi: "Điền « e », « es » hoặc « s » nếu cần hợp giống–số của quá khứ phân từ, hoặc để trống nếu không có tận cùng.",
+        type: "fill",
+        items: [
+          { q: "Les billets que tu m'as offert___ étaient très chers.", answer: "s", example: true },
+          { q: "L'audioguide que j'ai pris___ donnait de bonnes explications.", answer: "(rien)" },
+          { q: "Elles se sont inscrit___ à une visite qui a duré___ 1 heure. (2 từ)", answer: "inscrites, duré" },
+          { q: "Cette ville est fantastique, je l'ai découvert___ l'année passée.", answer: "découverte" },
+          { q: "Nous avons apprécié___ les commentaires que nous avons lu___ sur Internet. (2 từ)", answer: "apprécié, lus" },
+          { q: "Le vol que j'ai pris___ est arrivé___ en retard. (2 từ)", answer: "pris, arrivé" },
+        ],
+      },
+      {
+        num: 11, page: 113, audioSrc: piste(99),
+        instruction: "L'accord du participe passé — Écoutez les questions et écrivez les réponses.",
+        vi: "Nghe câu hỏi rồi viết câu trả lời — chú ý hợp giống–số.",
+        type: "fill",
+        items: [
+          { q: "Vous avez écrit cette phrase ?", answer: "Oui, nous l'avons écrite.", example: true },
+          { q: "Tu as pris les places pour demain ?", answer: "Oui, je les ai prises." },
+          { q: "Ils ont fait une croisière sur la Méditerranée ?", answer: "Oui, ils l'ont faite." },
+          { q: "Vous avez ouvert la brochure ?", answer: "Oui, nous l'avons ouverte." },
+          { q: "Tu as compris toutes les informations ?", answer: "Oui, je les ai comprises." },
+          { q: "Il a mis ses valises dans le bus ?", answer: "Oui, il les a mises." },
+        ],
+      },
+      {
+        // Page 117 — Compréhension écrite : blog « Lève l'encre », « Les
+        // escaliers de Fribourg ». Question 3 : le corrigé imprimé (p.164)
+        // ajoute une lettre « a. » en trop après « c. », sans sous-question
+        // correspondante ; réponse retenue conforme à l'énoncé : c.
+        num: 12, page: 117,
+        instruction: "Compréhension écrite — « Les escaliers de Fribourg » (blog Lève l'encre).",
+        vi: "Đọc bài blog du lịch « Les escaliers de Fribourg » của Camille rồi trả lời.",
+        type: "choice",
+        items: [
+          { q: "1. Le document est…", options: ["une page internet d'une agence de voyage", "une publicité d'un office de tourisme", "un blog touristique"], answer: "un blog touristique" },
+          { q: "2. Son objectif est…", options: ["de rencontrer des professionnels du tourisme", "de raconter les histoires et montrer des photos de voyages", "d'aider les voyageurs à acheter des billets de train"], answer: "de raconter les histoires et montrer des photos de voyages" },
+          { q: "3. En avril, Camille…", options: ["a visité Fribourg", "est partie à l'étranger", "est montée dans un bus"], answer: "est montée dans un bus" },
+          { q: "4. Pour organiser son activité, elle…", options: ["est allée à l'office du tourisme", "a regardé sur Internet", "a lu une brochure Fribourg et ses escaliers"], answer: "a regardé sur Internet" },
+          { q: "5. Vrai ou faux ? L'itinéraire de Camille dure plus de deux heures.", options: ["Vrai", "Faux"], answer: "Vrai" },
+          { q: "6. « J'ai opté pour la promenade intitulée Fribourg et ses escaliers » signifie :", options: ["J'ai aimé la promenade…", "J'ai choisi la promenade qui s'appelle Fribourg et ses escaliers.", "J'ai aimé la promenade… basée sur le livre…"], answer: "J'ai choisi la promenade qui s'appelle Fribourg et ses escaliers." },
+        ],
+      },
+      {
+        // Page 122 — Jeux, act. 1
+        num: 13, page: 122,
+        instruction: "Jeux — Associez 2 étiquettes pour retrouver 5 sites touristiques.",
+        vi: "Ghép 2 mảnh để tạo thành tên địa danh du lịch đúng.",
+        type: "match",
+        pairs: [
+          { l: "gr", r: "otte" },
+          { l: "vol", r: "can" },
+          { l: "cas", r: "cade" },
+          { l: "fon", r: "taine" },
+          { l: "fa", r: "laise" },
+        ],
+      },
+      {
+        // Page 122 — Jeux, act. 2 : mots croisés. Le corrigé imprimé ne
+        // donne que la liste des mots par indice (pas la grille avec ses
+        // coordonnées) — transcrit tel quel, sans inventer de grille.
+        num: 14, page: 122,
+        instruction: "Jeux — Mots croisés du voyage. Trouvez le mot correspondant à chaque indice.",
+        vi: "Ô chữ về du lịch — tìm từ tương ứng với mỗi gợi ý (không có lưới ô chữ trong corrigé gốc).",
+        type: "fill",
+        items: [
+          { q: "Verticalement a. Synonyme de « inclus ».", answer: "compris" },
+          { q: "Verticalement b. Contraire de « départ ».", answer: "arrivée" },
+          { q: "Verticalement c. Les avions en décollent.", answer: "aéroport" },
+          { q: "Verticalement d. Contraire de « décoller ».", answer: "atterrir" },
+          { q: "Horizontalement 1. On la prend dans un office de tourisme.", answer: "brochure" },
+          { q: "Horizontalement 2. On la choisit pour partir en voyage.", answer: "destination" },
+          { q: "Horizontalement 3. On l'achète pour prendre l'avion.", answer: "billet" },
+          { q: "Horizontalement 4. Type d'hébergement.", answer: "hôtel" },
+        ],
+      },
+      {
+        // Page 122 — Jeux, act. 3
+        num: 15, page: 122,
+        instruction: "Jeux — Remettez les lettres dans l'ordre pour retrouver les mots.",
+        vi: "Sắp xếp lại chữ cái để tìm ra từ đúng.",
+        type: "fill",
+        items: [
+          { q: "INDIRECTO", answer: "direction" },
+          { q: "RENIIÉRAIT", answer: "itinéraire" },
+          { q: "OIRTHIES", answer: "histoire" },
+          { q: "ONCRISEUX", answer: "excursion" },
+          { q: "SAPER", answer: "repas" },
+        ],
+      },
+      {
+        // Page 122 — Jeux, act. 4 : jeu de rôle à l'agence de voyage.
+        num: 16, page: 122,
+        instruction: "Jeux — À l'agence de voyage. Complétez la réponse de l'agent pour chaque situation (Exemple : Qu'est-ce que vous proposez aux Français qui ne partent pas à l'étranger ? – Pour ceux qui ne partent pas à l'étranger, on propose le tourisme local.).",
+        vi: "Đóng vai nhân viên đại lý du lịch — hoàn thành câu trả lời cho mỗi tình huống.",
+        type: "fill",
+        items: [
+          { q: "Les voyageurs qui aiment écouter le guide.", answer: "on propose les visites guidées." },
+          { q: "Les personnes qui visitent en solo.", answer: "on propose un audioguide." },
+          { q: "Les touristes qui préfèrent dormir dans la nature.", answer: "on propose le camping." },
+          { q: "Les voyageuses qui sont sensibles à l'écologie.", answer: "on propose le tourisme durable." },
+          { q: "Les gens qui adorent le bateau.", answer: "on propose les croisières." },
+          { q: "Les personnes qui n'ont pas peur.", answer: "on propose une excursion de nuit avec un guide-fantôme." },
+          { q: "Les sportifs.", answer: "on propose la découverte de la ville sur les toits." },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 120-121) ───────────────────────────
+    // Le livre n'a pas de page de préparation DELF dédiée pour cette unité
+    // (pas de section "DELF" dans editoAudioA2.js pour b10) — donc pas de
+    // coLivre, même pattern que b9.
+    delf: {
+      co: [
+        {
+          num: 1, page: 120, audioSrc: piste(106),
+          instruction: "Compréhension de l'oral — vous écoutez 4 dialogues. Associez chaque dialogue à sa situation (il y a 6 situations mais seulement 4 dialogues). (7 points)",
+          vi: "Nghe 4 đoạn hội thoại rồi nối mỗi đoạn với tình huống tương ứng (có 6 tình huống nhưng chỉ 4 đoạn hội thoại).",
+          type: "fill",
+          items: [
+            { q: "A. Demander des renseignements → quel dialogue ?", answer: "Dialogue 4" },
+            { q: "B. Inviter quelqu'un → quel dialogue ?", answer: "Dialogue 2" },
+            { q: "C. Donner des instructions → quel dialogue ?", answer: "aucun dialogue ne correspond" },
+            { q: "D. Raconter une expérience → quel dialogue ?", answer: "Dialogue 1" },
+            { q: "E. Proposer de l'aide → quel dialogue ?", answer: "Dialogue 3" },
+            { q: "F. Refuser une invitation → quel dialogue ?", answer: "aucun dialogue ne correspond" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — 3 documents sur le travail dans une agence
+      // de voyage (étapes d'enregistrement, message de Stéphanie sur le
+      // dossier famille Da, règlement de l'Hôtel le Lys).
+      ce: [
+        {
+          num: 1, page: 121,
+          instruction: "Compréhension des écrits — 3 documents professionnels d'une agence de voyage. (6 points)",
+          vi: "Đọc 3 tài liệu công việc của một đại lý du lịch (quy trình đăng ký khách hàng, tin nhắn của Stéphanie về hồ sơ gia đình Da, nội quy khách sạn Le Lys) rồi trả lời.",
+          type: "choice",
+          items: [
+            { q: "1. Pour tous les nouveaux clients, vous devez…", options: ["donner une carte de fidélité", "proposer un rendez-vous en agence", "offrir un circuit touristique personnalisé"], answer: "proposer un rendez-vous en agence" },
+            { q: "2. Les voyages sur mesure sont proposés en fonction…", options: ["des goûts", "du budget", "de la météo"], answer: "des goûts" },
+            { q: "3. Quel est le thème du circuit (famille Da) ?", options: ["Le sport", "L'histoire", "La nature"], answer: "La nature" },
+            { q: "4. La famille Da choisit…", options: ["un camping familial", "un hôtel très confortable", "une chambre d'hôte locale"], answer: "une chambre d'hôte locale" },
+            { q: "5. Un nouveau client arrive le matin, il peut…", options: ["s'installer dans sa chambre", "aller se baigner à la piscine", "déposer sa valise à l'accueil"], answer: "déposer sa valise à l'accueil" },
+            { q: "6. Le petit déjeuner est…", options: ["offert à tous les clients", "servi dans les chambres", "proposé à un horaire fixe"], answer: "proposé à un horaire fixe" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 121,
+          prompt: "Vous êtes parti(e) en voyage avec vos ami(e)s. Vous écrivez à un(e) ami(e) francophone pour lui raconter vos vacances. Vous lui donnez aussi vos impressions. (60 mots minimum)",
+          vi: "Bạn vừa đi du lịch với bạn bè. Viết thư cho một người bạn nói tiếng Pháp kể lại kỳ nghỉ và cảm nhận của bạn. (tối thiểu 60 từ)",
+          model: "Salut Hamza, Tu as passé de bonnes vacances aux États-Unis ? Nous sommes partis en famille en Italie avec les enfants. Nous avons logé dans un magnifique hôtel au bord du Lac de Garde. La cuisine était délicieuse et les enfants ont adoré faire du pédalo. Il a fait beau toute la semaine, c'était super ! À très vite, Emmanuel",
+        },
+        {
+          skill: "Production orale", points: "2 minutes environ", page: 121,
+          prompt: "Partie 2 de l'épreuve : monologue suivi (2 minutes environ). Sujet : Vacances. Racontez votre meilleur souvenir de vacances. Où êtes-vous allé(e) ? Qu'avez-vous visité ? Décrivez ce que vous avez vu et donnez vos impressions sur la ville/le pays que vous avez visité.",
+          vi: "Kể về kỷ niệm nghỉ mát đẹp nhất của bạn: bạn đã đi đâu, đã tham quan gì, và cảm nhận của bạn về nơi đó (độc thoại khoảng 2 phút).",
+          model: "L'année dernière, je suis parti(e) en vacances en Corse, avec ma meilleure amie. Nous avons visité le port de Bastia. Il y avait un restaurant sur un petit bateau et nous avons mangé du poisson frais, c'était délicieux. Nous avons vu le coucher du soleil sur le port, les couleurs étaient magnifiques. Nous avons aussi pris le ferry pour visiter les îles Lavezzi. Nous nous sommes baignés dans l'eau turquoise et l'eau était chaude ! Sur la plage, il y avait beaucoup de monde. Nous avons visité le musée de Bastia, c'était très intéressant. J'ai adoré ce voyage car nous sommes souvent allés dans la nature et nous avons vu des plages très belles. J'ai apprécié de prendre le bateau et de manger des produits de la mer. C'est un très bon souvenir !",
+        },
+      ],
+    },
+  },
+
   b12: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
