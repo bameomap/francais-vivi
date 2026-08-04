@@ -2413,6 +2413,633 @@ export const CAHIER_A2 = {
     },
   },
 
+  b9: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    grammar: {
+
+      // p0 — Le conditionnel présent (1) (cahier p. 99)
+      p0: [
+        {
+          num: 1, page: 99, audioSrc: piste(86),
+          instruction: "Écoutez et cochez le temps utilisé dans chaque phrase (futur simple ou conditionnel présent).",
+          vi: "Nghe từng câu (a→g) và cho biết đó là futur simple hay conditionnel présent.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["futur simple", "conditionnel présent"], answer: "conditionnel présent", example: true },
+            { q: "b.", options: ["futur simple", "conditionnel présent"], answer: "futur simple" },
+            { q: "c.", options: ["futur simple", "conditionnel présent"], answer: "futur simple" },
+            { q: "d.", options: ["futur simple", "conditionnel présent"], answer: "conditionnel présent" },
+            { q: "e.", options: ["futur simple", "conditionnel présent"], answer: "futur simple" },
+            { q: "f.", options: ["futur simple", "conditionnel présent"], answer: "conditionnel présent" },
+            { q: "g.", options: ["futur simple", "conditionnel présent"], answer: "conditionnel présent" },
+          ],
+        },
+        {
+          num: 2, page: 99,
+          instruction: "Entourez le verbe conjugué au conditionnel présent.",
+          vi: "Chọn động từ được chia đúng ở conditionnel présent.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["j'emprunte", "j'emprunterais", "j'emprunterai", "j'empruntais"], answer: "j'emprunterais", example: true },
+            { q: "b.", options: ["nous aurons", "nous avons", "nous avions", "nous aurions"], answer: "nous aurions" },
+            { q: "c.", options: ["elles pouvaient", "elles pourront", "elles pourraient", "elles peuvent"], answer: "elles pourraient" },
+            { q: "d.", options: ["tu dirais", "tu diras", "tu dis", "tu disais"], answer: "tu dirais" },
+            { q: "e.", options: ["vous aimez", "vous aimiez", "vous aimeriez", "vous aimerez"], answer: "vous aimeriez" },
+            { q: "f.", options: ["on offrira", "on offrait", "on offre", "on offrirait"], answer: "on offrirait" },
+          ],
+        },
+        {
+          num: 3, page: 99,
+          instruction: "a. Ajoutez aux verbes les terminaisons du conditionnel présent. b. Dites si c'est une proposition, un conseil, un souhait ou une demande polie.",
+          vi: "a. Chia động từ ở conditionnel présent. b. Đó là đề nghị, lời khuyên, ước muốn hay yêu cầu lịch sự?",
+          type: "fill",
+          bank: ["une proposition", "un conseil", "un souhait", "une demande polie"],
+          items: [
+            { q: "Tu devr___ acheter des produits en promotion. (verbe + type)", answer: "ais — un conseil", example: true },
+            { q: "Ils voudr…… apprendre à résister. (verbe + type)", answer: "voudraient — un souhait" },
+            { q: "Ça te dir…… de m'aider à choisir ? (verbe + type)", answer: "dirait — une proposition" },
+            { q: "Je pourr…… essayer ces chaussures ? (verbe + type)", answer: "pourrais — une demande polie" },
+            { q: "Il faudr…… changer la couleur. (verbe + type)", answer: "faudrait — un conseil" },
+            { q: "Excusez-moi, vous aur…… une autre taille ? (verbe + type)", answer: "auriez — une demande polie" },
+            { q: "Tu viendr…… voir les meubles avec moi ? (verbe + type)", answer: "viendrais — une proposition" },
+          ],
+        },
+        {
+          num: 4, page: 99,
+          instruction: "Transformez les phrases en utilisant le conditionnel présent.",
+          vi: "Chuyển câu sang conditionnel présent.",
+          type: "transform",
+          items: [
+            { q: "Il doit revendre ces objets.", answer: "Il devrait revendre ces objets.", example: true },
+            { q: "Je veux emprunter ton ordinateur.", answer: "Je voudrais emprunter ton ordinateur." },
+            { q: "Pierre souhaite être riche.", answer: "Pierre souhaiterait être riche." },
+            { q: "Nous pouvons acheter ces produits.", answer: "Nous pourrions acheter ces produits." },
+            { q: "Ils ont besoin d'un manteau neuf.", answer: "Ils auraient besoin d'un manteau neuf." },
+            { q: "Il ne faut pas aller au supermarché.", answer: "Il ne faudrait pas aller au supermarché." },
+            { q: "Pouvez-vous m'expliquer ce défi ?", answer: "Pourriez-vous m'expliquer ce défi ?" },
+          ],
+        },
+      ],
+
+      // p1 — Le gérondif (cahier p. 101)
+      p1: [
+        {
+          num: 1, page: 101,
+          instruction: "Lisez les phrases et dites si les verbes au gérondif expriment deux actions simultanées ou la manière.",
+          vi: "Gérondif trong câu diễn tả hai hành động đồng thời hay cách thức làm việc gì?",
+          type: "choice",
+          items: [
+            { q: "Il a acheté cette machine à coudre en faisant les courses.", options: ["deux actions simultanées", "la manière"], answer: "la manière", example: true },
+            { q: "J'ai vendu mon aspirateur en postant une annonce.", options: ["deux actions simultanées", "la manière"], answer: "la manière" },
+            { q: "Elle décore sa maison en chantant.", options: ["deux actions simultanées", "la manière"], answer: "deux actions simultanées" },
+            { q: "En surfant sur Internet, j'ai trouvé cette promotion.", options: ["deux actions simultanées", "la manière"], answer: "la manière" },
+            { q: "Tu devrais donner cette table en vendant les chaises.", options: ["deux actions simultanées", "la manière"], answer: "deux actions simultanées" },
+            { q: "Nous créons en imaginant la mode de demain.", options: ["deux actions simultanées", "la manière"], answer: "la manière" },
+          ],
+        },
+        {
+          num: 2, page: 101, audioSrc: piste(88),
+          instruction: "Écoutez et cochez les phrases avec un verbe au gérondif.",
+          vi: "Nghe từng câu (a→g) và cho biết câu đó có dùng gérondif không.",
+          type: "truefalse",
+          items: [
+            { q: "a. (exemple)", answer: true, example: true },
+            { q: "b.", answer: false },
+            { q: "c.", answer: false },
+            { q: "d.", answer: true },
+            { q: "e.", answer: true },
+            { q: "f.", answer: false },
+            { q: "g.", answer: true },
+          ],
+        },
+        {
+          num: 3, page: 101,
+          instruction: "Associez les éléments pour former des phrases.",
+          vi: "Nối đầu câu với cuối câu.",
+          type: "match",
+          pairs: [
+            { l: "Elle regarde la télévision",   r: "en tricotant." },
+            { l: "Ils obtiennent des informations", r: "en discutant avec le vendeur." },
+            { l: "Mon père bricole",             r: "en écoutant de la musique." },
+            { l: "Mathieu répare la tondeuse",   r: "en changeant la pièce cassée." },
+            { l: "Je gagne de l'argent",         r: "en louant mes vêtements sur Internet." },
+            { l: "Il économise",                 r: "en fabriquant ses produits." },
+          ],
+        },
+        {
+          num: 4, page: 101,
+          instruction: "Trouvez le gérondif des verbes suivants.",
+          vi: "Viết gérondif của các động từ sau.",
+          type: "fill",
+          items: [
+            { q: "fabriquer", answer: "en fabriquant", example: true },
+            { q: "savoir", answer: "en sachant" },
+            { q: "regarder", answer: "en regardant" },
+            { q: "être", answer: "en étant" },
+            { q: "payer", answer: "en payant" },
+            { q: "avoir", answer: "en ayant" },
+            { q: "travailler", answer: "en travaillant" },
+          ],
+        },
+        {
+          num: 5, page: 101,
+          instruction: "Transformez les phrases en utilisant le gérondif.",
+          vi: "Ghép hai câu thành một câu dùng gérondif.",
+          type: "transform",
+          items: [
+            { q: "J'achète du tissu. Je vais à la mercerie.", answer: "J'achète du tissu en allant à la mercerie.", example: true },
+            { q: "Je décore mon salon. J'installe une bibliothèque.", answer: "Je décore mon salon en installant une bibliothèque." },
+            { q: "Mon oncle coupe du bois. Il utilise une scie.", answer: "Mon oncle coupe du bois en utilisant une scie." },
+            { q: "J'apprends le bricolage. Je répare de vieux meubles.", answer: "J'apprends le bricolage en réparant de vieux meubles." },
+            { q: "Marie crée des vêtements. Elle s'intéresse au mélange de matières.", answer: "Marie crée des vêtements en s'intéressant au mélange de matières." },
+            { q: "Tu abîmes la lampe. Tu ne fais pas attention.", answer: "Tu abîmes la lampe en ne faisant pas attention." },
+          ],
+        },
+      ],
+
+      // p2 — Le conditionnel présent (2) (cahier p. 103)
+      p2: [
+        {
+          num: 1, page: 103,
+          instruction: "Associez. Dans un monde parfait…",
+          vi: "Nối đầu câu với cuối câu — « Dans un monde parfait… ».",
+          type: "match",
+          pairs: [
+            { l: "nous",           r: "réparerions nos objets cassés." },
+            { l: "il y",           r: "aurait plus de magasins de location." },
+            { l: "tu",             r: "serais mieux payé." },
+            { l: "tout le monde",  r: "pourrait avoir un jardin." },
+            { l: "vous",           r: "créeriez des produits recyclables." },
+          ],
+        },
+        {
+          num: 2, page: 103,
+          instruction: "Conjuguez les verbes au conditionnel présent (tu, elle, nous, ils).",
+          vi: "Chia động từ ở conditionnel présent với tu / elle / nous / ils.",
+          type: "fill",
+          items: [
+            { q: "acheter — tu", answer: "achèterais", example: true },
+            { q: "acheter — elle", answer: "achèterait" },
+            { q: "acheter — nous", answer: "achèterions" },
+            { q: "acheter — ils", answer: "achèteraient" },
+            { q: "devenir — tu", answer: "deviendrais" },
+            { q: "devenir — elle", answer: "deviendrait" },
+            { q: "devenir — nous", answer: "deviendrions" },
+            { q: "devenir — ils", answer: "deviendraient" },
+            { q: "savoir — tu", answer: "saurais" },
+            { q: "savoir — elle", answer: "saurait" },
+            { q: "savoir — nous", answer: "saurions" },
+            { q: "savoir — ils", answer: "sauraient" },
+            { q: "aller — tu", answer: "irais" },
+            { q: "aller — elle", answer: "irait" },
+            { q: "aller — nous", answer: "irions" },
+            { q: "aller — ils", answer: "iraient" },
+            { q: "finir — tu", answer: "finirais" },
+            { q: "finir — elle", answer: "finirait" },
+            { q: "finir — nous", answer: "finirions" },
+            { q: "finir — ils", answer: "finiraient" },
+            { q: "vendre — tu", answer: "vendrais" },
+            { q: "vendre — elle", answer: "vendrait" },
+            { q: "vendre — nous", answer: "vendrions" },
+            { q: "vendre — ils", answer: "vendraient" },
+          ],
+        },
+        {
+          num: 3, page: 103, audioSrc: piste(90),
+          instruction: "Écoutez et cochez si la situation entendue est réelle ou imaginaire.",
+          vi: "Nghe từng câu (a→f) và cho biết tình huống là thật hay tưởng tượng.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["situation réelle", "situation imaginaire"], answer: "situation imaginaire", example: true },
+            { q: "b.", options: ["situation réelle", "situation imaginaire"], answer: "situation imaginaire" },
+            { q: "c.", options: ["situation réelle", "situation imaginaire"], answer: "situation réelle" },
+            { q: "d.", options: ["situation réelle", "situation imaginaire"], answer: "situation imaginaire" },
+            { q: "e.", options: ["situation réelle", "situation imaginaire"], answer: "situation réelle" },
+            { q: "f.", options: ["situation réelle", "situation imaginaire"], answer: "situation imaginaire" },
+          ],
+        },
+        {
+          num: 4, page: 103,
+          instruction: "Conjuguez les verbes entre parenthèses au conditionnel présent.",
+          vi: "Chia động từ trong ngoặc ở conditionnel présent — « Dans un monde où… ».",
+          type: "fill",
+          items: [
+            { q: "Dans un monde où les livres n'(exister) ___ pas, on (regarder) ___ beaucoup plus la télévision. (2 từ)", answer: "existeraient regarderait", example: true },
+            { q: "Dans un monde où on (parler) ___ une seule langue, on (communiquer) ___ facilement. (2 từ)", answer: "parlerait communiquerait" },
+            { q: "Dans un monde où on ne (travailler) ___ pas, les gens (faire) ___ plus d'activités manuelles. (2 từ)", answer: "travaillerait feraient" },
+            { q: "Dans un monde où il n'y (avoir) ___ pas Internet, ce (être) ___ difficile de trouver des informations. (2 từ)", answer: "aurait serait" },
+            { q: "Dans un monde où on (vivre) ___ du troc, l'argent n'(exister) ___ pas. (2 từ)", answer: "vivrait existerait" },
+            { q: "Dans un monde où les gens (savoir) ___ jardiner, on (cultiver) ___ nos fruits et légumes. (2 từ)", answer: "sauraient cultiveraient" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 104) — wired into the Phono step ─────
+    // Seules Discrimination (act. 1) et Dictée (act. 3) ont une réponse
+    // vérifiable. Articulation (act. 2, dialogues à répéter) et
+    // Interprétation (act. 4, lecture à voix haute) restent des exercices
+    // oraux sans réponse unique — même choix que pour les autres unités.
+    phono: [
+      {
+        num: 1, page: 104, audioSrc: piste(91),
+        instruction: "Discrimination — écoutez et dites dans quel ordre vous entendez les sons [g] et [ʒ].",
+        vi: "Nghe và cho biết thứ tự hai âm: [g] (như « garder ») trước hay [ʒ] (như « jeter ») trước?",
+        type: "choice",
+        items: [
+          { q: "a. (exemple)", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[g] avant [ʒ]", example: true },
+          { q: "b.", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[ʒ] avant [g]" },
+          { q: "c.", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[g] avant [ʒ]" },
+          { q: "d.", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[g] avant [ʒ]" },
+          { q: "e.", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[g] avant [ʒ]" },
+          { q: "f.", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[g] avant [ʒ]" },
+          { q: "g.", options: ["[g] avant [ʒ]", "[ʒ] avant [g]"], answer: "[ʒ] avant [g]" },
+        ],
+      },
+      {
+        num: 3, page: 104, audioSrc: piste(93),
+        instruction: "Dictée — écoutez le texte et complétez les mots.",
+        vi: "Nghe và điền các từ còn thiếu (âm [g] hoặc [ʒ]).",
+        type: "fill",
+        items: [
+          { q: "Pour économiser de l'ar___ent,", answer: "g", example: true },
+          { q: "pensez au troc, à l'échan___e d'ob___ets et de services dans votre voisina___e. (3 từ, cách nhau bởi dấu cách)", answer: "g j g" },
+          { q: "Pour éviter le ___aspilla___e,", answer: "g g" },
+          { q: "___ardez vos appareils électroména___ers,", answer: "g g" },
+          { q: "ne les ___etez pas et faites-les réparer.", answer: "j" },
+          { q: "C'est plus écolo___ique !", answer: "g" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 100) couvre les groupes b9g1-b9g4 du livre
+    // (consommer, le produit, les personnes, les catégories de produits) ;
+    // c2_vocab (cahier p. 102) couvre b9g5-b9g8 (travaux manuels, matières,
+    // réparation, équipement) — voir parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 100,
+          instruction: "Remettez les lettres dans l'ordre pour trouver les catégories de produits.",
+          vi: "Sắp xếp lại các chữ cái để tìm ra tên các loại sản phẩm.",
+          type: "fill",
+          items: [
+            { q: "D P U O R T I D E T E B A E U", answer: "le produit de beauté", example: true },
+            { q: "E O M N A T A T L I I N", answer: "l'alimentation" },
+            { q: "B E M L U E", answer: "meubles" },
+            { q: "T S M E V E T N E", answer: "vêtements" },
+            { q: "G M E N E C O R L E A R T E", answer: "l'électroménager" },
+            { q: "I E M U M T I D A L", answer: "multimédia" },
+          ],
+        },
+        {
+          // Liste proposée : jeter – acheter – partager – économiser – louer –
+          // négocier – emprunter – vendre – dépenser. Trois intrus dans cette
+          // liste (acheter, économiser, dépenser ne servent à aucune image).
+          num: 2, page: 100, audioSrc: piste(87),
+          instruction: "Écoutez. Pour chaque situation (image a → f), associez un verbe de la liste : jeter – acheter – partager – économiser – louer – négocier – emprunter – vendre – dépenser. Attention, il y a trois intrus.",
+          vi: "Nghe và nối mỗi tình huống (hình a→f) với động từ phù hợp. Chú ý: có 3 từ gây nhiễu trong danh sách (không dùng cho hình nào).",
+          type: "fill",
+          bank: ["jeter", "acheter", "partager", "économiser", "louer", "négocier", "emprunter", "vendre", "dépenser"],
+          items: [
+            { q: "a. livre (exemple)", answer: "emprunter", example: true },
+            { q: "b. pull", answer: "jeter" },
+            { q: "c. télé", answer: "négocier" },
+            { q: "d. tente", answer: "vendre" },
+            { q: "e. gâteau", answer: "partager" },
+            { q: "f. voiture", answer: "louer" },
+          ],
+        },
+        {
+          num: 3, page: 100,
+          instruction: "Trouvez le féminin des noms suivants.",
+          vi: "Viết giống cái của các danh từ sau.",
+          type: "fill",
+          items: [
+            { q: "le client", answer: "la cliente", example: true },
+            { q: "le vendeur", answer: "la vendeuse" },
+            { q: "l'utilisateur", answer: "l'utilisatrice" },
+            { q: "le consommateur", answer: "la consommatrice" },
+            { q: "l'acheteur", answer: "l'acheteuse" },
+          ],
+        },
+        {
+          num: 4, page: 100,
+          instruction: "Classez dans le tableau les mots suivants : prix – taille – couleur – objet – promotion – marque.",
+          vi: "Phân loại từ vào bảng: prix – taille – couleur – objet – promotion – marque. (Ví dụ đã cho: « robe » → l'objet ; các dòng khác là ví dụ minh họa cho từng loại.)",
+          type: "fill",
+          bank: ["l'objet", "la couleur", "la taille", "la marque", "le prix", "la promotion"],
+          items: [
+            { q: "robe → catégorie de l'exemple", answer: "l'objet", example: true },
+            { q: "beige → quelle catégorie ?", answer: "la couleur" },
+            { q: "38 → quelle catégorie ?", answer: "la taille" },
+            { q: "BOYA → quelle catégorie ?", answer: "la marque" },
+            { q: "100 euros → quelle catégorie ?", answer: "le prix" },
+            { q: "50 % → quelle catégorie ?", answer: "la promotion" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 102,
+          instruction: "Reliez les objets aux matières.",
+          vi: "Nối đồ vật với chất liệu tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "des chaussures", r: "en cuir" },
+            { l: "une bouteille",  r: "en plastique" },
+            { l: "une veste",      r: "en laine" },
+            { l: "une assiette",   r: "en carton" },
+            { l: "une maison",     r: "en bois" },
+            { l: "une table",      r: "en fer" },
+          ],
+        },
+        {
+          num: 2, page: 102,
+          instruction: "Associez les mots suivants aux images : l'échelle – l'outil – la ponceuse – la scie – la tondeuse.",
+          vi: "Nối từ với hình ảnh tương ứng.",
+          type: "fill",
+          bank: ["l'échelle", "l'outil", "la ponceuse", "la scie", "la tondeuse"],
+          items: [
+            { q: "a. clé / tournevis (exemple)", answer: "l'outil", example: true },
+            { q: "b. échelle en bois", answer: "l'échelle" },
+            { q: "c. scie à main", answer: "la scie" },
+            { q: "d. ponceuse électrique", answer: "la ponceuse" },
+            { q: "e. tondeuse à gazon", answer: "la tondeuse" },
+          ],
+        },
+        {
+          num: 3, page: 102, audioSrc: piste(89),
+          instruction: "De quels travaux manuels s'agit-il ? Écoutez et associez (1. bricolage, 2. tricot, 3. mécanique auto, 4. décoration murale).",
+          vi: "Nghe và cho biết mỗi đoạn (a→g) nói về công việc thủ công nào trong 4 loại cho sẵn.",
+          type: "fill",
+          items: [
+            { q: "a. (exemple)", answer: "1", example: true },
+            { q: "b.", answer: "4" },
+            { q: "c.", answer: "2" },
+            { q: "d.", answer: "3" },
+            { q: "e.", answer: "1" },
+            { q: "f.", answer: "3" },
+            { q: "g.", answer: "4" },
+          ],
+        },
+        {
+          num: 4, page: 102,
+          instruction: "Entourez l'élément qui convient.",
+          vi: "Chọn từ phù hợp.",
+          type: "choice",
+          items: [
+            { q: "J'ai besoin d'___ pour peindre les murs.", options: ["une échelle", "une tondeuse"], answer: "une échelle", example: true },
+            { q: "Tu dois appeler un technicien pour ___ ta télévision.", options: ["réparer", "créer"], answer: "réparer" },
+            { q: "Il faut ___ la pièce de la voiture.", options: ["changer", "poncer"], answer: "changer" },
+            { q: "J'aimerais apprendre à ___, mais je n'ai aucun outil.", options: ["bricoler", "tricoter"], answer: "bricoler" },
+            { q: "Ce canapé est ___.", options: ["abîmé", "en panne"], answer: "abîmé" },
+            { q: "Regarde ___ pour comprendre comment ça fonctionne.", options: ["le tutoriel", "l'atelier"], answer: "le tutoriel" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 106-107, noté /40) ────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // La compréhension orale + production écrite de la page 105
+    // (« Consommer en recyclant ») est reprise ici aussi — même pattern que
+    // pour les p.81/p.9 des autres unités. La production est rangée dans
+    // delf.production, comme pour b7.
+    bilan: [
+      {
+        num: 1, page: 106,
+        instruction: "Transformez les phrases en utilisant le conditionnel présent. (/7)",
+        vi: "Chuyển câu sang conditionnel présent.",
+        type: "transform",
+        items: [
+          { q: "Tu veux t'inscrire à cet atelier ?", answer: "Tu voudrais t'inscrire à cet atelier ?" },
+          { q: "Nous aimons jardiner.", answer: "Nous aimerions jardiner." },
+          { q: "Il faut changer nos habitudes.", answer: "Il faudrait changer nos habitudes." },
+          { q: "Je souhaite décorer mon appartement.", answer: "Je souhaiterais décorer mon appartement." },
+          { q: "Vous pouvez me prêter ce livre ?", answer: "Vous pourriez me prêter ce livre ?" },
+          { q: "Ils doivent prendre une belle photo.", answer: "Ils devraient prendre une belle photo." },
+          { q: "Elle choisit le vélo en promotion.", answer: "Elle choisirait le vélo en promotion." },
+        ],
+      },
+      {
+        num: 2, page: 106,
+        instruction: "Reformulez avec un gérondif. (/7)",
+        vi: "Ghép hai câu thành một câu dùng gérondif.",
+        type: "transform",
+        items: [
+          { q: "J'ai voulu cuisiner ce plat quand j'ai vu la vidéo.", answer: "J'ai voulu cuisiner ce plat en voyant la vidéo." },
+          { q: "Martin a abîmé sa voiture quand il est venu prendre un café.", answer: "Martin a abîmé sa voiture en venant prendre un café." },
+          { q: "Il s'est fait mal quand il a installé le meuble.", answer: "Il s'est fait mal en installant le meuble." },
+          { q: "Nadège propose du covoiturage quand elle va au travail.", answer: "Nadège propose du covoiturage en allant au travail." },
+          { q: "Les gens consomment plus quand ils ont de l'argent.", answer: "Les gens consomment plus en ayant de l'argent." },
+          { q: "Elle s'est mise au troc quand elle a entendu ses voisins en parler.", answer: "Elle s'est mise au troc en entendant ses voisins en parler." },
+          { q: "Tu achèteras ces chaussures quand tu reviendras de vacances.", answer: "Tu achèteras ces chaussures en revenant de vacances." },
+        ],
+      },
+      {
+        num: 3, page: 106,
+        instruction: "Entourez la forme qui convient. (Dans un monde idéal…) (/6)",
+        vi: "Chọn dạng đúng — « Dans un monde idéal… ».",
+        type: "choice",
+        items: [
+          { q: "je ___ beaucoup d'argent.", options: ["gagnerais", "gagnerai"], answer: "gagnerais" },
+          { q: "mes parents ___ de travailler.", options: ["arrêteront", "arrêteraient"], answer: "arrêteraient" },
+          { q: "nous ___ une grande maison.", options: ["aurions", "aurons"], answer: "aurions" },
+          { q: "j'___ un magasin de vêtements d'occasion.", options: ["ouvrirai", "ouvrirais"], answer: "ouvrirais" },
+          { q: "les gens ___ troquer leurs affaires.", options: ["viendraient", "viendront"], answer: "viendraient" },
+          { q: "les bouteilles en plastique n'___ plus.", options: ["existeront", "existeraient"], answer: "existeraient" },
+        ],
+      },
+      {
+        num: 4, page: 107,
+        instruction: "Vocabulaire — Barrez l'intrus. (/5)",
+        vi: "Tìm từ lạc loài trong mỗi nhóm.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["acheter", "dépenser", "payer", "vendre"], answer: "vendre" },
+          { q: "b.", options: ["d'occasion", "en promotion", "cher", "gratuit"], answer: "cher" },
+          { q: "c.", options: ["le particulier", "la couleur", "la marque", "la taille"], answer: "le particulier" },
+          { q: "d.", options: ["négocier", "jeter", "emprunter", "louer"], answer: "jeter" },
+          { q: "e.", options: ["l'acheteur", "le consommateur", "le vendeur", "l'utilisateur"], answer: "le vendeur" },
+        ],
+      },
+      {
+        num: 5, page: 107,
+        instruction: "Vocabulaire — Où acheter ces produits ? Trouvez à quelle catégorie ils appartiennent. (/5)",
+        vi: "Sản phẩm thuộc loại nào?",
+        type: "fill",
+        items: [
+          { q: "tablette, téléphone, ordinateur", answer: "le multimédia" },
+          { q: "pyramide alimentaire", answer: "l'alimentation" },
+          { q: "aspirateur", answer: "l'électroménager" },
+          { q: "sac et chaussures de sport", answer: "le matériel de sport" },
+          { q: "crèmes, parfums", answer: "le produit de beauté" },
+        ],
+      },
+      {
+        num: 6, page: 107,
+        instruction: "Vocabulaire — Lisez la définition et trouvez la matière correspondante. (/5)",
+        vi: "Đọc định nghĩa rồi tìm ra chất liệu tương ứng.",
+        type: "fill",
+        bank: ["le papier", "le tissu", "le verre", "le coton", "le jean"],
+        items: [
+          { q: "On écrit et on dessine dessus.", answer: "le papier" },
+          { q: "On achète cette matière à la mercerie. On peut créer des vêtements.", answer: "le tissu" },
+          { q: "On utilise souvent cette matière pour boire. Elle se casse facilement.", answer: "le verre" },
+          { q: "C'est une matière douce qui vient d'une plante. On peut l'acheter avec les produits de beauté.", answer: "le coton" },
+          { q: "Les pantalons et les vestes sont souvent faits avec cette matière. La couleur principale est le bleu.", answer: "le jean" },
+        ],
+      },
+      {
+        num: 7, page: 107,
+        instruction: "Vocabulaire — Complétez le texte avec les mots suivants : une ponceuse – l'atelier – en bois – réparer – outils. (/5)",
+        vi: "Điền từ vào đoạn văn.",
+        type: "fill",
+        bank: ["une ponceuse", "l'atelier", "en bois", "réparer", "outils"],
+        items: [
+          { q: "Tu viens avec moi à …… , j'ai un problème avec une chaise et je n'ai pas les bons …… . (2 từ)", answer: "l'atelier outils" },
+          { q: "J'ai besoin d'…… .", answer: "une ponceuse" },
+          { q: "Comme elle est …… , je peux facilement la …… . (2 từ)", answer: "en bois réparer" },
+        ],
+      },
+      {
+        // Page 105 — Compréhension orale : « Consommer en recyclant »
+        num: 8, page: 105, audioSrc: piste(95),
+        instruction: "Compréhension orale — « Consommer en recyclant ».",
+        vi: "Nghe bài về Sarah, người tái chế đồ vật, rồi trả lời.",
+        type: "choice",
+        items: [
+          { q: "1. Que propose d'écouter le document ?", options: ["Un flash info", "Une émission de radio", "Une publicité"], answer: "Une émission de radio" },
+        ],
+      },
+      {
+        num: 9, page: 105, audioSrc: piste(95),
+        instruction: "Compréhension orale — complétez : Des hommes et des femmes nous expliquent comment ils ont adopté un mode de vie plus …… , bien …… pour l'environnement et plus …… . (3 từ, cách nhau bởi dấu cách)",
+        vi: "Vẫn bài nghe trên — điền 3 từ vào chỗ trống.",
+        type: "fill",
+        items: [
+          { q: "Des hommes et des femmes nous expliquent comment ils ont adopté un mode de vie plus …… , bien …… pour l'environnement et plus …… .", answer: "responsable meilleur créatif" },
+        ],
+      },
+      {
+        num: 10, page: 105, audioSrc: piste(95),
+        instruction: "Compréhension orale — vrai ou faux ?",
+        vi: "Vẫn bài nghe trên — đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "Sarah récupère des objets qu'elle transforme.", answer: true },
+          { q: "Elle achète des objets qui coûtent cher.", answer: false },
+          { q: "Le bois est un matériau solide.", answer: true },
+          { q: "Le bois n'est pas facile à peindre.", answer: false },
+        ],
+      },
+      {
+        num: 11, page: 105, audioSrc: piste(95),
+        instruction: "Compréhension orale — après la transformation, Sarah obtient un objet (2 réponses).",
+        vi: "Vẫn bài nghe trên — chọn 2 đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Après la transformation, Sarah obtient un objet…", options: ["nouveau", "gratuit", "original", "utile"], answer: "nouveau" },
+          { q: "Après la transformation, Sarah obtient aussi un objet…", options: ["nouveau", "gratuit", "original", "utile"], answer: "original" },
+        ],
+      },
+      {
+        // Page 110 — Jeux, act. 1 : associer 2 étiquettes pour retrouver 4 expressions.
+        num: 12, page: 110,
+        instruction: "Jeux — Associez 2 étiquettes pour retrouver 4 expressions.",
+        vi: "Ghép 2 mảnh để tạo thành cụm từ đúng.",
+        type: "match",
+        pairs: [
+          { l: "consommation", r: "responsable" },
+          { l: "travaux",      r: "manuels" },
+          { l: "fait",         r: "maison" },
+          { l: "objets",       r: "d'occasion" },
+        ],
+      },
+      {
+        // Page 110 — Jeux, act. 2 : code secret. Le message d'Henri est donné
+        // en clair dans le corrigé ; repris ici comme un exercice à trous
+        // pour que l'apprenant le retape lui-même.
+        num: 13, page: 110,
+        instruction: "Jeux — Code secret. Henri imagine un monde meilleur. Retrouvez son message (recopiez-le en entier).",
+        vi: "Giải mã và gõ lại toàn bộ thông điệp bí mật của Henri.",
+        type: "fill",
+        items: [
+          { q: "Message décodé d'Henri :", answer: "Dans ce monde, on n'aurait pas besoin d'argent. On ferait du troc. On profiterait de la vie. Ça vous dirait ?" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 108-109) ───────────────────────────
+    // Le livre n'a pas de page de préparation DELF dédiée pour cette unité
+    // (ni écoute dans editoAudioA2.js, ni lecture DELF dans
+    // editoA2Reading.js pour b9) — donc pas de coLivre, même pattern que
+    // b2/b5/b7.
+    delf: {
+      co: [
+        {
+          num: 1, page: 108, audioSrc: piste(96),
+          instruction: "Compréhension de l'oral — vous écoutez des annonces publiques. (6 points)",
+          vi: "Nghe các thông báo nơi công cộng rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Qu'est-ce que vous pouvez recevoir au troc ?", options: ["Des jouets", "Des livres", "Des vêtements"], answer: "Des livres" },
+            { q: "2. Qu'est-ce que vous pouvez acheter à petit prix ?", options: ["De l'alimentation", "De l'électroménager", "Des produits de beauté"], answer: "Des produits de beauté" },
+            { q: "3. Qu'est-ce que vous pouvez faire cet après-midi ?", options: ["Réparer un appareil", "Recoudre un vêtement", "Faire des loisirs créatifs"], answer: "Faire des loisirs créatifs" },
+            { q: "4. Quel service veulent les résidents ?", options: ["Jardinage", "Ménage", "Garde d'enfants"], answer: "Jardinage" },
+            { q: "5. Qu'est-ce que vous pouvez louer ?", options: ["Vélo", "Kayak", "Tente"], answer: "Tente" },
+            { q: "6. Pour monter votre meuble, qu'est-ce que vous devez faire ?", options: ["Regarder un tutoriel", "Lire le mode d'emploi", "Attendre un technicien"], answer: "Lire le mode d'emploi" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — article « Les loisirs créatifs, l'activité
+      // préférée des Français » (Magosha, 26 ans, et Claire, 38 ans).
+      ce: [
+        {
+          num: 1, page: 108,
+          instruction: "Compréhension des écrits — « Les loisirs créatifs, l'activité préférée des Français ». (7 points)",
+          vi: "Đọc bài báo về trào lưu thủ công tự làm (Magosha, 26 tuổi, và Claire, 38 tuổi) rồi trả lời.",
+          type: "choice",
+          items: [
+            { q: "1. Comment s'occupaient les femmes le dimanche ?", options: ["Elles tricotaient", "Elles discutaient", "Elles cuisinaient"], answer: "Elles tricotaient" },
+            { q: "2. Magosha fait des loisirs créatifs pour…", options: ["recycler ses vieux objets", "réparer ce qui est abîmé", "dépenser moins d'argent"], answer: "dépenser moins d'argent" },
+            { q: "3. Magosha sait bricoler.", options: ["Vrai", "Faux"], answer: "Vrai" },
+            { q: "4. Que propose Claire ?", options: ["De créer des vêtements", "D'expliquer le bricolage", "De décorer des maisons"], answer: "D'expliquer le bricolage" },
+            { q: "5. Que veulent les clients de Claire ?", options: ["Acheter du fait maison", "Travailler avec leurs mains", "Faire attention à la planète"], answer: "Travailler avec leurs mains" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          // Page 105 — production libre en fin de cycle 1 (pas notée DELF,
+          // mais rangée ici comme les autres productions non auto-corrigeables
+          // — même pattern que la p.81 de b7).
+          skill: "Production écrite (page 105)", points: "70 mots", page: 105,
+          prompt: "Vous recevez le message d'une amie. Vous lui répondez et lui donnez des conseils. — Message reçu : « Chère Camille, Je déménage la semaine prochaine et j'ai des travaux à faire. Je dois aussi acheter tout mon électroménager. Mais je n'ai pas beaucoup d'argent. Aurais-tu des conseils à me donner pour économiser ? Je te remercie. Bises, Katia »",
+          vi: "Bạn nhận được tin nhắn của một người bạn sắp chuyển nhà, cần lời khuyên để tiết kiệm tiền cho việc sửa nhà và mua đồ điện gia dụng. Viết thư trả lời và cho lời khuyên. (70 từ)",
+          model: "Bonjour Katia, C'est une excellente nouvelle ! Je suis contente pour toi. Alors, pour tes travaux, je te conseille de regarder des tutoriels sur internet pour apprendre à bricoler seule. Tu peux trouver des bricothèques près de chez toi pour louer les outils. Pour l'électroménager, n'achète rien de neuf, regarde sur les sites d'occasion, tu trouveras de bonnes affaires. Ne t'inquiète pas, tu peux vraiment limiter ton budget. Je t'embrasse, j'espère découvrir bientôt ton appartement ! Camille",
+        },
+        {
+          skill: "Production écrite", points: "12,5 points", page: 109,
+          prompt: "Vous avez reçu ce message de votre ami Fred : « Salut ! J'aimerais proposer mes services à l'association de mon quartier mais je ne sais pas quoi faire. Tu voudrais venir avec moi ? Qu'est-ce que nous pourrions proposer ? J'attends tes idées ! À bientôt. Fred » — Vous répondez à Fred. Vous acceptez sa proposition. Vous demandez des informations sur cette association et vous proposez des idées de services. (60 mots minimum)",
+          vi: "Bạn Fred muốn đề nghị làm tình nguyện cho hội khu phố nhưng chưa biết làm gì. Viết thư trả lời: chấp nhận đề nghị, hỏi thêm thông tin về hội, và đề xuất ý tưởng dịch vụ. (tối thiểu 60 từ)",
+          model: "Salut Fred ! Merci pour ta proposition, c'est une très bonne idée ! L'association de ton quartier aide les habitants en faisant quoi ? J'ai encore mes livres de cours à l'université. Je pourrais les offrir. Et toi, tu pourrais donner de vieux vêtements ou enseigner les maths aux jeunes du quartier. Moi, j'adore la technologie, je pourrais proposer un atelier de réparation, le samedi, quand je ne travaille pas. Nous pouvons rencontrer ton association demain pour discuter de nos idées ? À demain ! Évelyne",
+        },
+        {
+          skill: "Production orale", points: "3 à 4 minutes", page: 109,
+          prompt: "Partie 3 de l'épreuve : exercice en interaction (3 à 4 minutes). Sujet : Le troc. Vous êtes étudiant(e) en France. Vous voulez organiser un troc dans votre université. Vous allez voir le responsable de l'association des étudiants. Vous discutez de l'organisation du troc et des objets et services que vous pourriez échanger. L'examinateur joue le rôle du responsable de l'association des étudiants.",
+          vi: "Đóng vai sinh viên đề xuất tổ chức buổi trao đổi đồ (troc) trong trường với người phụ trách hội sinh viên (giám khảo đóng vai người phụ trách).",
+          model: "– Bonjour ! – Bonjour ! – Je suis étudiant(e) ici, à l'université, et je voudrais discuter avec vous d'une idée. – Ah oui ? Je vous écoute. – Je propose d'organiser un troc dans l'université parce que les étudiants n'ont pas beaucoup d'argent. – Un troc ? C'est une bonne idée mais il faut échanger des choses, ce n'est pas juste pour acheter moins cher. – Je sais. On pourrait organiser une fois par mois, dans le hall, un grand marché. Chaque étudiant apporterait un objet et pourrait en prendre un, en échange. – Pourquoi pas. Mais où est-ce qu'on mettrait ces objets ? – Il y aurait une caisse pour les vêtements, une caisse pour les livres et une caisse pour les objets de décoration, par exemple. – Et s'il reste des objets à la fin du troc, où est-ce qu'on les rangerait ? – On pourrait les donner à une association. – Vous connaissez des associations ? – Oui. Je travaille comme bénévole dans une association, je pourrai leur demander si ça les intéresse. – Et où on trouverait des caisses ? – Le supermarché à côté de l'université a toujours des grands cartons qu'ils jettent. Je vais leur demander de nous les donner. – C'est une très bonne idée. Je pense qu'il faudrait demander l'autorisation du directeur de l'université avant. – Je vais aller le voir. J'espère qu'il sera d'accord. Est-ce que l'association des étudiants pourrait m'aider à organiser le marché ? – Oui, bien sûr ! Vous me dites quand vous avez parlé au directeur ? On pourra se voir la semaine prochaine pour commencer à organiser le troc. – C'est super, merci beaucoup ! À la semaine prochaine ! – À la semaine prochaine !",
+        },
+      ],
+    },
+  },
+
 };
 
 // Answers are compared loosely: case, accents on the apostrophe, doubled
