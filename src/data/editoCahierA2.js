@@ -1218,6 +1218,692 @@ export const CAHIER_A2 = {
       ],
     },
   },
+
+  b4: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    // points[0]=comparaison d'équivalence, [1]=adjectifs indéfinis (chaque/
+    // tout), [2]=pronoms possessifs — voir editoGrammarA2.js b4.points.
+    grammar: {
+
+      // p0 — La comparaison : l'équivalence (cahier p. 39)
+      p0: [
+        {
+          num: 1, page: 39, audioSrc: piste(35),
+          instruction: "Écoutez les phrases et dites si vous entendez une ressemblance, une équivalence ou une différence.",
+          vi: "Nghe từng câu (a→g) và cho biết đó là sự giống nhau (ressemblance), bằng nhau (équivalence) hay khác nhau (différence).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["ressemblance", "équivalence", "différence"], answer: "ressemblance", example: true },
+            { q: "b.", options: ["ressemblance", "équivalence", "différence"], answer: "équivalence" },
+            { q: "c.", options: ["ressemblance", "équivalence", "différence"], answer: "différence" },
+            { q: "d.", options: ["ressemblance", "équivalence", "différence"], answer: "équivalence" },
+            { q: "e.", options: ["ressemblance", "équivalence", "différence"], answer: "différence" },
+            { q: "f.", options: ["ressemblance", "équivalence", "différence"], answer: "ressemblance" },
+            { q: "g.", options: ["ressemblance", "équivalence", "différence"], answer: "différence" },
+          ],
+        },
+        {
+          num: 2, page: 39,
+          instruction: "Entourez la réponse correcte.",
+          vi: "Chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "Ali fait ___ poids que Paul.", options: ["le même", "la même"], answer: "le même", example: true },
+            { q: "Nous ressemblons ___ à notre père qu'à notre mère.", options: ["autant", "aussi"], answer: "autant" },
+            { q: "Vous ne faites pas ___ taille que Lise.", options: ["la même", "autant"], answer: "la même" },
+            { q: "Ils font ___ sport que leurs voisins.", options: ["autant de", "aussi"], answer: "autant de" },
+            { q: "Judith a ___ vêtements que Cécile.", options: ["les mêmes", "aussi"], answer: "les mêmes" },
+            { q: "Leur mère les habille avec ___ pantalon.", options: ["autant de", "le même"], answer: "le même" },
+          ],
+        },
+        {
+          num: 3, page: 39,
+          instruction: "Complétez les phrases avec aussi ou autant.",
+          vi: "Điền aussi hoặc autant.",
+          type: "fill",
+          bank: ["aussi", "autant"],
+          items: [
+            { q: "Paul est ___ musclé que son frère.", answer: "aussi", example: true },
+            { q: "Pourquoi tu t'intéresses ___ à la mode qu'au sport ?", answer: "autant" },
+            { q: "Ma cousine est ___ brune que toi.", answer: "aussi" },
+            { q: "Il achète ___ de chemises que de pantalons tous les ans.", answer: "autant" },
+            { q: "Maintenant, la fille de Patrick ne ressemble plus ___ à sa mère.", answer: "autant" },
+            { q: "Tu es ___ grande que ce mannequin.", answer: "aussi" },
+          ],
+        },
+        {
+          num: 4, page: 39,
+          instruction: "Associez les éléments pour former des phrases.",
+          vi: "Nối đầu câu với cuối câu.",
+          type: "match",
+          pairs: [
+            { l: "Paul a",                  r: "le même menton que son frère." },
+            { l: "Nos cousins ressemblent", r: "autant à Paul qu'à Louise." },
+            { l: "Tu fais",                 r: "autant de sport que ta sœur." },
+            { l: "Jules et Gabriel ont",    r: "les mêmes cheveux bruns." },
+            { l: "Natacha est",             r: "aussi ronde que sa cousine." },
+            { l: "Vous portez",             r: "la même robe que Marion Cotillard." },
+            { l: "Vos cheveux sont",        r: "pareils." },
+          ],
+        },
+      ],
+
+      // p1 — Les adjectifs indéfinis : chaque, tout/toute/tous/toutes (cahier p. 41)
+      p1: [
+        {
+          num: 1, page: 41, audioSrc: piste(37),
+          instruction: "Écoutez et dites si vous entendez le masculin, féminin ou pluriel.",
+          vi: "Nghe từng câu (a→f) và cho biết đó là giống đực, giống cái hay số nhiều.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["masculin", "féminin", "pluriel"], answer: "féminin", example: true },
+            { q: "b.", options: ["masculin", "féminin", "pluriel"], answer: "pluriel" },
+            { q: "c.", options: ["masculin", "féminin", "pluriel"], answer: "féminin" },
+            { q: "d.", options: ["masculin", "féminin", "pluriel"], answer: "pluriel" },
+            { q: "e.", options: ["masculin", "féminin", "pluriel"], answer: "masculin" },
+            { q: "f.", options: ["masculin", "féminin", "pluriel"], answer: "féminin" },
+          ],
+        },
+        {
+          num: 2, page: 41,
+          instruction: "Complétez le texte avec tout, tous, toute, toutes.",
+          vi: "Điền tout / tous / toute / toutes.",
+          type: "fill",
+          bank: ["tout", "tous", "toute", "toutes"],
+          items: [
+            { q: "Il a acheté ___ les magazines de mode.", answer: "tous", example: true },
+            { q: "Dans ce défilé, ___ les mannequins font du 44.", answer: "tous" },
+            { q: "Heureusement, ___ le monde a des qualités et des défauts.", answer: "tout" },
+            { q: "Il est maniaque, il range ses affaires ___ la journée.", answer: "toute" },
+            { q: "___ les compliments sont agréables à entendre !", answer: "tous" },
+            { q: "___ les personnes de notre famille ont les mêmes défauts.", answer: "toutes" },
+          ],
+        },
+        {
+          num: 3, page: 41,
+          instruction: "Entourez la bonne réponse.",
+          vi: "Chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "Marie n'a pas ___ les défauts de sa sœur.", options: ["toutes", "chaque", "tous"], answer: "tous", example: true },
+            { q: "Max change sa photo de profil ___ les semaines.", options: ["toutes", "chaque", "tous"], answer: "toutes" },
+            { q: "J'aime ___ ses qualités et ses défauts.", options: ["tous", "toutes", "toute"], answer: "toutes" },
+            { q: "___ jour, Nina voit la vie en rose !", options: ["Chaque", "Tout", "Tous"], answer: "Chaque" },
+            { q: "___ défaut peut devenir une qualité.", options: ["Toutes", "Tous", "Chaque"], answer: "Chaque" },
+            { q: "Pourquoi tu es ___ le temps inquiet ?", options: ["toute", "tout", "chaque"], answer: "tout" },
+          ],
+        },
+        {
+          num: 4, page: 41,
+          instruction: "Répondez aux questions avec chaque, tout, tous, toute, toutes.",
+          vi: "Trả lời câu hỏi bằng chaque / tout / tous / toute / toutes (viết cả câu).",
+          type: "fill",
+          items: [
+            { q: "Vous êtes optimiste ?", answer: "Oui, tous les jours sont agréables !", example: true },
+            { q: "Vous connaissez bien Céline ?", answer: "Oui, je connais bien Céline, je connais toutes ses qualités et toutes ses défauts." },
+            { q: "Vous suivez la mode ?", answer: "Oui, chaque année, je regarde les nouvelles collections dans les magazines." },
+            { q: "Vous êtes très ordonné ?", answer: "Oui, je range tout le temps mes affaires." },
+            { q: "Vous êtes calme ?", answer: "Oui, je reste calme dans chaque situation." },
+          ],
+        },
+        {
+          // Exercice original : « Associez les éléments pour former des
+          // phrases » — colonne a-d (Tout/Tous/Toute/Toutes) à associer à 7
+          // fins de phrase numérotées 1-7. Le corrigé imprimé donne « b. 3.,
+          // 5., 6. – c. 2. – d. 1. » (b associé à TROIS fins à la fois, car
+          // « Tous » est compatible avec les trois — voir note dans le .md
+          // source) ; « a » n'apparaît pas dans le corrigé et sa fin (n°4)
+          // n'est déduite que d'une flèche imprimée marquant l'exemple. Une
+          // association 1-vers-1 « colonne → fin de phrase » n'est donc pas
+          // reconstructible sans ambiguïté. L'exercice est repris ici dans
+          // l'autre sens — chaque fin de phrase numérotée devient un item, et
+          // la réponse demandée est le mot indéfini qui la complète — ce qui
+          // reste bijectif (un seul mot correct par fin de phrase) et fidèle
+          // au contenu grammatical du corrigé.
+          num: 5, page: 41,
+          instruction: "Associez chaque fin de phrase au bon mot (tout, tous, toute, toutes).",
+          vi: "Nối mỗi vế câu với từ chỉ định phù hợp (tout / tous / toute / toutes).",
+          type: "fill",
+          bank: ["tout", "tous", "toute", "toutes"],
+          items: [
+            { q: "4. (exemple) ___ le monde peut admirer son optimisme.", answer: "Tout", example: true },
+            { q: "1. ___ mes amies sont chaleureuses.", answer: "Toutes" },
+            { q: "2. ___ la famille se réunit pour l'anniversaire de Louis.", answer: "Toute" },
+            { q: "3. ___ les enfants de Marie sont ordonnés.", answer: "Tous" },
+            { q: "5. ___ nos collègues sont travailleurs.", answer: "Tous" },
+            { q: "6. ___ tes voisins sont bruyants.", answer: "Tous" },
+          ],
+        },
+      ],
+
+      // p2 — Les pronoms possessifs (cahier p. 43)
+      p2: [
+        {
+          num: 1, page: 43, audioSrc: piste(39),
+          instruction: "Écoutez et cochez si le pronom possessif est masculin, féminin ou pluriel.",
+          vi: "Nghe từng câu (a→g) và cho biết đại từ sở hữu là giống đực, giống cái hay số nhiều.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["féminin", "masculin", "pluriel"], answer: "féminin", example: true },
+            { q: "b.", options: ["féminin", "masculin", "pluriel"], answer: "pluriel" },
+            { q: "c.", options: ["féminin", "masculin", "pluriel"], answer: "masculin" },
+            { q: "d.", options: ["féminin", "masculin", "pluriel"], answer: "pluriel" },
+            { q: "e.", options: ["féminin", "masculin", "pluriel"], answer: "féminin" },
+            { q: "f.", options: ["féminin", "masculin", "pluriel"], answer: "pluriel" },
+            { q: "g.", options: ["féminin", "masculin", "pluriel"], answer: "masculin" },
+          ],
+        },
+        {
+          num: 2, page: 43,
+          instruction: "Associez les questions et les réponses.",
+          vi: "Nối câu hỏi với câu trả lời tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "C'est votre profil ?",              r: "Oui, c'est le mien." },
+            { l: "Ce sont tes photos ?",               r: "Oui, ce sont les miennes." },
+            { l: "C'est la caméra de Mme Potier ?",    r: "Oui, c'est la sienne." },
+            { l: "Ce sont tes chiens ?",                r: "Oui, ce sont les miens." },
+            { l: "Ce sont les chats des voisins ?",     r: "Oui, ce sont les leurs." },
+            { l: "C'est ta passion ?",                  r: "Oui, c'est la mienne." },
+          ],
+        },
+        {
+          num: 3, page: 43,
+          instruction: "Répondez aux questions avec un pronom possessif.",
+          vi: "Trả lời câu hỏi bằng đại từ sở hữu (viết cả câu).",
+          type: "fill",
+          items: [
+            { q: "– C'est ton copain ?", answer: "Oui, c'est le mien.", example: true },
+            { q: "– Cette veste est à toi ?", answer: "Oui, c'est la mienne." },
+            { q: "– Ce téléphone est à Pierre ?", answer: "Oui, c'est le sien." },
+            { q: "– Cette tablette est à Cyril et Delphine ?", answer: "Oui, c'est la leur." },
+            { q: "– Ces photos de vacances sont à Léa et toi ?", answer: "Oui, ce sont les nôtres." },
+            { q: "– Ce profil est à toi ?", answer: "Oui, c'est le mien." },
+            { q: "– Ces magazines sont à Lisa ?", answer: "Oui, ce sont les siens." },
+          ],
+        },
+        {
+          num: 4, page: 43,
+          instruction: "Complétez les phrases avec un pronom possessif.",
+          vi: "Điền đại từ sở hữu phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Tu utilises ton profil et moi, j'utilise ___.", answer: "le mien", example: true },
+            { q: "J'ai oublié mon appareil photo, Lucie me prête ___.", answer: "le sien" },
+            { q: "Louis n'a plus d'idées, tu lui donnes ___.", answer: "les tiennes" },
+            { q: "Solène me présente ses amis, je lui montre ___.", answer: "les miens" },
+            { q: "Tu photographies tes enfants et ils photographient ___.", answer: "les leurs" },
+            { q: "Je vous prête ma caméra et vous me prêtez ___.", answer: "la vôtre" },
+            { q: "Ils montrent leurs photos et nous montrons ___.", answer: "les nôtres" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 44) — wired into the Phono step ─────
+    // Seules Discrimination (act. 1) et Dictée (act. 3) ont une réponse
+    // vérifiable. Articulation (act. 2, dialogues à répéter) et
+    // Interprétation (act. 4, citation de Gabrielle Chanel à lire à voix
+    // haute) restent des exercices oraux sans réponse unique — même choix
+    // que pour les autres unités.
+    phono: [
+      {
+        // Trois séries de sons distinctes sur cette page (au lieu d'une
+        // seule comme dans les autres unités) : [i]/[ɛ̃], [a]/[ɑ̃], [ɔ]/[ɔ̃].
+        num: 1, page: 44, audioSrc: piste(40),
+        instruction: "Discrimination — écoutez et cochez le son que vous entendez, dans les trois séries proposées.",
+        vi: "Nghe và chọn âm đúng nghe được, trong 3 chuỗi câu hỏi khác nhau.",
+        type: "choice",
+        items: [
+          { q: "[i] (« vrai ») ou [ɛ̃] (« vingt ») — a. la mienne / le mien", options: ["la mienne", "le mien"], answer: "le mien", example: true },
+          { q: "[i] ou [ɛ̃] — b. elles viennent / elle vient", options: ["elles viennent", "elle vient"], answer: "elles viennent" },
+          { q: "[i] ou [ɛ̃] — c. la sienne / le sien", options: ["la sienne", "le sien"], answer: "le sien" },
+          { q: "[a] (« la ») ou [ɑ̃] (« an ») — a. des grammes / des grands", options: ["des grammes", "des grands"], answer: "des grammes" },
+          { q: "[a] ou [ɑ̃] — b. une dame / une dent", options: ["une dame", "une dent"], answer: "une dent" },
+          { q: "[a] ou [ɑ̃] — c. il passe / il pense", options: ["il passe", "il pense"], answer: "il pense" },
+          { q: "[ɔ] (« dort ») ou [ɔ̃] (« on ») — a. la mode / le monde", options: ["la mode", "le monde"], answer: "le monde" },
+          { q: "[ɔ] ou [ɔ̃] — b. elle est bonne / il est bon", options: ["elle est bonne", "il est bon"], answer: "elle est bonne" },
+          { q: "[ɔ] ou [ɔ̃] — c. il sort / ils sont", options: ["il sort", "ils sont"], answer: "ils sont" },
+        ],
+      },
+      {
+        num: 3, page: 44, audioSrc: piste(42),
+        instruction: "Dictée — écoutez le texte et complétez les mots.",
+        vi: "Nghe và điền các âm còn thiếu.",
+        type: "fill",
+        items: [
+          { q: "Être mannequ___ est ___ métier qui fait rêver. (2 từ)", answer: "in un", example: true },
+          { q: "___ général, Il faut être gr___, jeune et m___ce. (3 từ)", answer: "En and ince" },
+          { q: "Mais heureusem___ le m___de ch___e (3 từ)", answer: "ent onde ange" },
+          { q: "et les mannequ___s différ___s s___t mieux acceptés et ___ beaucoup de succès ! (4 từ)", answer: "ins ents ont ont" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 40) couvre b4g1-b4g3 (tête/visage, corps/
+    // apparence, mode) ; c2_vocab (cahier p. 42) couvre b4g4-b4g5
+    // (qualités, défauts) — voir parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 40, audioSrc: piste(36),
+          instruction: "Qui suis-je ? Écoutez et trouvez à qui correspond la description (1. Rose – 2. Gaëlle – 3. Mona – 4. André – 5. Joachim).",
+          vi: "Nghe và tìm ra người được miêu tả trong mỗi đoạn (a→e).",
+          type: "fill",
+          transcript: "a. « Je suis blonde. J'ai les cheveux longs et j'ai les yeux bleus… Je suis très jeune » (Rose) — b. « Je suis brun, j'ai les cheveux courts… je suis barbu. J'ai des fossettes… » (Joachim) — c. « J'ai les cheveux longs et blancs, je ne suis plus très jeune, j'ai les yeux clairs » (Mona) — d. « Je suis barbu et je suis dégarni… Je suis âgé » (André) — e. « Je suis brune et j'ai les cheveux longs… J'ai une fossette quand je souris » (Gaëlle).",
+          items: [
+            { q: "a.", answer: "1. Rose", example: true },
+            { q: "b.", answer: "5. Joachim" },
+            { q: "c.", answer: "3. Mona" },
+            { q: "d.", answer: "4. André" },
+            { q: "e.", answer: "2. Gaëlle" },
+          ],
+        },
+        {
+          // « jeune » est barré dans la liste de mots proposée par le cahier
+          // (déjà utilisé comme exemple) — il n'est donc pas repris dans le
+          // bank ci-dessous, comme dans le texte source.
+          num: 2, page: 40,
+          instruction: "Complétez le texte avec les mots suivants : costaud – défile – se sent bien dans sa peau – porte des vêtements – musclé – mesure – sosie – créateur – fait – chauve.",
+          vi: "Điền từ cho sẵn vào đoạn văn (« jeune » đã dùng làm ví dụ nên không nằm trong danh sách từ).",
+          type: "fill",
+          bank: ["costaud", "défile", "se sent bien dans sa peau", "porte des vêtements", "musclé", "mesure", "sosie", "créateur", "fait", "chauve"],
+          items: [
+            { q: "Lise a 26 ans, elle est ___ (26 tuổi).", answer: "jeune", example: true },
+            { q: "elle ___ 1,78 m,", answer: "mesure" },
+            { q: "elle ___ du 34 : elle est très mince.", answer: "fait" },
+            { q: "Elle travaille pour un grand ___ de vêtements,", answer: "créateur" },
+            { q: "elle ___ pour présenter la nouvelle collection.", answer: "défile" },
+            { q: "Elle ___ originaux, qui la rendent encore plus belle.", answer: "porte des vêtements" },
+            { q: "Elle ressemble beaucoup à l'actrice Audrey Tautou : c'est son ___.", answer: "sosie" },
+            { q: "Amaury… il est ___ parce qu'il fait beaucoup de sport", answer: "costaud" },
+            { q: "donc il est ___.", answer: "musclé" },
+            { q: "Il est jeune mais il a déjà perdu ses cheveux, il est ___.", answer: "chauve" },
+            { q: "Pour lui, ce n'est pas un problème parce qu'il ___.", answer: "se sent bien dans sa peau" },
+          ],
+        },
+        {
+          // ⚠️ Note du corrigé source : le corrigé imprimé donne littéralement
+          // « a. sosie – b. ressembler – c. chauve – d. poser – e. beau –
+          // f. vieux ». La logique de chaque intrus est reproduite ici telle
+          // qu'imprimée, sans réinterprétation.
+          num: 3, page: 40,
+          instruction: "Barrez l'intrus.",
+          vi: "Tìm từ lạc loài trong mỗi nhóm.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["menton", "sosie", "sourire", "barbu"], answer: "sosie", example: true },
+            { q: "b.", options: ["créateur", "ressembler", "vêtements", "défiler"], answer: "ressembler" },
+            { q: "c.", options: ["chauve", "sec", "musclé", "costaud"], answer: "chauve" },
+            { q: "d.", options: ["avoir bonne mine", "poser", "avoir un corps parfait", "être bien dans sa peau"], answer: "poser" },
+            { q: "e.", options: ["beau", "vieux", "rond", "corpulent"], answer: "vieux" },
+            { q: "f.", options: ["bruns", "gris", "longs", "vieux"], answer: "vieux" },
+          ],
+        },
+        {
+          num: 4, page: 40,
+          instruction: "Dites le contraire.",
+          vi: "Viết câu trái nghĩa.",
+          type: "fill",
+          items: [
+            { q: "Roméo est sec. → Samy est ___.", answer: "musclé", example: true },
+            { q: "Agnès est jeune. Louise est ___.", answer: "vieille" },
+            { q: "Susie a mauvaise mine. Léa a ___.", answer: "bonne mine" },
+            { q: "Paul a beaucoup de cheveux. Son père est ___.", answer: "chauve" },
+            { q: "Jérémy est de petite taille. Valentin est ___.", answer: "de grande taille" },
+            { q: "Pauline a un corps parfait. Justine a ___.", answer: "un corps imparfait" },
+            { q: "Akim a beaucoup de cheveux. Léo est ___.", answer: "chauve" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 42, audioSrc: piste(38),
+          instruction: "Écoutez et dites si on parle de la qualité ou du défaut d'une personne.",
+          vi: "Nghe từng câu (a→h) và cho biết đó là điểm tốt (qualité) hay điểm xấu (défaut).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["qualité", "défaut"], answer: "défaut", example: true },
+            { q: "b.", options: ["qualité", "défaut"], answer: "qualité" },
+            { q: "c.", options: ["qualité", "défaut"], answer: "qualité" },
+            { q: "d.", options: ["qualité", "défaut"], answer: "défaut" },
+            { q: "e.", options: ["qualité", "défaut"], answer: "qualité" },
+            { q: "f.", options: ["qualité", "défaut"], answer: "défaut" },
+            { q: "g.", options: ["qualité", "défaut"], answer: "défaut" },
+            { q: "h.", options: ["qualité", "défaut"], answer: "qualité" },
+          ],
+        },
+        {
+          // ⚠️ Note du corrigé source : le corrigé imprimé porte « b. maniaque
+          // – c. fidèle – d. chaleureux – d. peureux – e. pessimiste –
+          // f. autoritaire », avec la lettre d répétée deux fois et aucune
+          // lettre g — probable coquille d'impression (décalage à partir du
+          // deuxième « d. »). Les réponses ci-dessous appliquent la
+          // correction logique (d→e→f→g) via la correspondance évidente
+          // entre chaque citation et le trait de caractère associé.
+          num: 2, page: 42,
+          instruction: "Dites quel est le trait de caractère de chaque personne.",
+          vi: "Xác định tính cách qua từng câu trích dẫn.",
+          type: "fill",
+          items: [
+            { q: "« La vie est belle, il fait beau, demain va être aussi agréable qu'aujourd'hui. »", answer: "optimiste", example: true },
+            { q: "« Je ne supporte pas le désordre, tout doit être propre et à sa place ! »", answer: "maniaque" },
+            { q: "« Mon ami Pierre est très important pour moi, je lui téléphone souvent et je le vois régulièrement. »", answer: "fidèle" },
+            { q: "« Entrez chez moi, je suis content de vous voir, qu'est-ce que vous voulez boire ? »", answer: "chaleureux" },
+            { q: "« Rentrer seul chez moi le soir, oh non, je préfère ne pas sortir, je ne suis pas tranquille. »", answer: "peureux" },
+            { q: "« Je suis sûr que ça va mal se passer, la vie est toujours difficile ! »", answer: "pessimiste" },
+            { q: "« Tu vas faire ce que je te demande et tu ne dis rien ! »", answer: "autoritaire" },
+          ],
+        },
+        {
+          // ⚠️ Note du corrigé source : même type de coquille que l'exercice
+          // 2 (« b. menteur – b. réfléchi – c. envieuse – d. discret –
+          // e. curieuse », lettre b répétée). Les réponses ci-dessous
+          // appliquent la correspondance logique avec l'énoncé de chaque
+          // phrase (c→réfléchi, d→envieuse, e→discret, f→curieuse).
+          num: 3, page: 42,
+          instruction: "Comment sont-ils ? Complétez avec une qualité ou un défaut.",
+          vi: "Điền tính từ chỉ tính cách phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Sophie parle facilement avec tout le monde, elle est ___.", answer: "spontanée", example: true },
+            { q: "Paul ne dit pas la vérité à ses amis, il est ___.", answer: "menteur" },
+            { q: "Gabriel pense beaucoup avant de dire ou de faire quelque chose, il est ___.", answer: "réfléchi" },
+            { q: "Lou veut avoir les mêmes vêtements que ses amies, elle est ___.", answer: "envieuse" },
+            { q: "Anatole ne fait pas de bruit, personne ne le remarque, il est ___.", answer: "discret" },
+            { q: "Paloma s'intéresse à tout, elle pose des questions, elle est ___.", answer: "curieuse" },
+          ],
+        },
+        {
+          num: 4, page: 42,
+          instruction: "Trouvez l'expression correspondant à l'image.",
+          vi: "Tìm thành ngữ ứng với hình ảnh.",
+          type: "fill",
+          items: [
+            { q: "âne perplexe", answer: "être têtu comme une mule" },
+            { q: "éléphant qui réfléchit", answer: "avoir une mémoire d'éléphant" },
+            { q: "chat aux yeux perçants", answer: "avoir des yeux de lynx" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 46-47, noté /40) ────────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // La Compréhension écrite & Production orale de la page 45 (« La
+    // musique et notre personnalité ») n'a pas de piste audio — elle est
+    // reprise ici (items 8-10), après le /40 linguistique, même pattern que
+    // la CO p.141 ajoutée à la suite du bilan de b12. Sa Production orale
+    // (jeu de rôle, réponses libres) est rangée dans delf.production. Les
+    // Jeux p.50 (items 11-14) suivent, même pattern que b9/b12.
+    bilan: [
+      {
+        // Le tableau jumbled du corrigé source ne fournit pas toujours assez
+        // de jetons pour reconstruire la phrase imprimée telle quelle (ex. c
+        // et g ont besoin de « qu'à »/« qu'au », absents du découpage
+        // imprimé). Les jetons ci-dessous sont donc redécoupés au niveau du
+        // mot/groupe directement depuis la phrase corrigée, comme pour
+        // l'exercice équivalent de b12.
+        num: 1, page: 46,
+        instruction: "Remettez les mots dans l'ordre pour former des phrases. (/7)",
+        vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+        type: "order",
+        items: [
+          { tokens: ["sourire", "le même", "que", "Noémie", "a", "sa", "sœur."], answer: ["Noémie", "a", "le même", "sourire", "que", "sa", "sœur."], example: true },
+          { tokens: ["tous", "n'avons", "le même", "pas", "Nous", "caractère."], answer: ["Nous", "n'avons", "pas", "tous", "le même", "caractère."] },
+          { tokens: ["à", "sa", "ressemble", "mère", "Il", "autant", "qu'à", "son", "père."], answer: ["Il", "ressemble", "autant", "à", "sa", "mère", "qu'à", "son", "père."] },
+          { tokens: ["musclé", "aussi", "Cet", "que", "ce", "sportif professionnel.", "acteur", "est"], answer: ["Cet", "acteur", "est", "aussi", "musclé", "que", "ce", "sportif professionnel."] },
+          { tokens: ["cheveux", "aussi", "les", "longs", "Vous", "que", "avez", "votre amie."], answer: ["Vous", "avez", "les", "cheveux", "aussi", "longs", "que", "votre amie."] },
+          { tokens: ["les mêmes", "pas", "ne", "vêtements", "Tu", "que", "Joachim.", "portes"], answer: ["Tu", "ne", "portes", "pas", "les mêmes", "vêtements", "que", "Joachim."] },
+          { tokens: ["à la mode", "autant", "cinéma.", "Je", "qu'au", "m'intéresse"], answer: ["Je", "m'intéresse", "autant", "à la mode", "qu'au", "cinéma."] },
+        ],
+      },
+      {
+        num: 2, page: 46,
+        instruction: "Complétez les phrases avec tout, tous, toute, toutes ou chaque. (/7)",
+        vi: "Điền tout / tous / toute / toutes / chaque.",
+        type: "fill",
+        bank: ["tout", "tous", "toute", "toutes", "chaque"],
+        items: [
+          { q: "___ ses amis sont sympathiques.", answer: "Tous" },
+          { q: "Les mannequins défilent ___ année pour présenter la nouvelle collection.", answer: "chaque" },
+          { q: "J'aime cet acteur pour ___ ses qualités.", answer: "toutes" },
+          { q: "Vous connaissez ___ la collection automne-hiver ?", answer: "toute" },
+          { q: "___ le monde lui fait des compliments pour son travail.", answer: "Tout" },
+          { q: "Vous portez ___ ces vêtements ?", answer: "tous" },
+          { q: "___ jour, Olivia choisit une tenue différente.", answer: "Chaque" },
+        ],
+      },
+      {
+        num: 3, page: 46,
+        instruction: "Entourez la réponse correcte. (/6)",
+        vi: "Chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "– Ces albums photos sont à vous ? – Oui, ce sont ___.", options: ["les nôtres", "les vôtres"], answer: "les nôtres" },
+          { q: "– C'est le sosie de Fanny ? – Oui, c'est ___.", options: ["le sien", "le leur"], answer: "le sien" },
+          { q: "– Ce sont les petits-enfants de vos voisins ? – Oui, ce sont ___.", options: ["les siennes", "les leurs"], answer: "les leurs" },
+          { q: "– C'est ta tablette ? – Oui, c'est ___.", options: ["la mienne", "la tienne"], answer: "la mienne" },
+          { q: "– C'est la photo de classe de Théo et Élise ? – Oui, c'est ___.", options: ["le leur", "la leur"], answer: "la leur" },
+          { q: "– Macha, c'est ton amie ? – Oui, c'est ___.", options: ["la mienne", "le mien"], answer: "la mienne" },
+        ],
+      },
+      {
+        num: 4, page: 46,
+        instruction: "Vocabulaire — Écrivez le commentaire correspondant à la photo. (/5)",
+        vi: "Chọn câu bình luận phù hợp với hình ảnh.",
+        type: "fill",
+        bank: ["Je suis dégarni.", "Je suis musclé.", "J'ai bonne mine.", "J'ai une fossette.", "J'ai trouvé mon sosie !"],
+        items: [
+          { q: "homme qui rit", answer: "J'ai une fossette." },
+          { q: "homme qui se touche le crâne", answer: "Je suis dégarni." },
+          { q: "homme musclé qui crie", answer: "Je suis musclé." },
+          { q: "dessin ancien + homme au chapeau", answer: "J'ai trouvé mon sosie !" },
+          { q: "femme souriante", answer: "J'ai bonne mine." },
+        ],
+      },
+      {
+        num: 5, page: 47,
+        instruction: "Vocabulaire — Complétez les phrases avec les mots ou expressions. (/5)",
+        vi: "Điền từ/cụm từ phù hợp.",
+        type: "fill",
+        items: [
+          { q: "Marie mesure 1,80 m, elle est de ___.", answer: "grande taille" },
+          { q: "Paul mesure 1,70 m et pèse 85 kg, il est ___.", answer: "corpulent" },
+          { q: "Depuis qu'Olivia accepte son corps, elle se sent mieux dans sa ___.", answer: "peau" },
+          { q: "Pour photographier les mannequins, le créateur leur demande de ___.", answer: "poser" },
+          { q: "Cet acteur ___ à Napoléon alors il peut jouer le rôle dans ce film historique.", answer: "ressemble" },
+        ],
+      },
+      {
+        num: 6, page: 47,
+        instruction: "Vocabulaire — À quels qualités ou défauts correspondent les définitions suivantes ? (/5)",
+        vi: "Tìm tính từ chỉ tính cách ứng với định nghĩa.",
+        type: "fill",
+        items: [
+          { q: "Qui dit toujours la vérité", answer: "honnête" },
+          { q: "Qui aime commander les autres", answer: "autoritaire" },
+          { q: "Qui ne change pas d'idée", answer: "têtu" },
+          { q: "Qui veut avoir ce que les autres possèdent", answer: "envieux" },
+          { q: "Qui s'intéresse aux autres", answer: "curieux" },
+        ],
+      },
+      {
+        // Le corrigé source ne donne que la lettre (« 1. b. – 2. a. – 3. b. –
+        // 4. b. ») ; le texte des deux propositions (a/b) pour chaque image
+        // n'est pas reproduit dans le .md transcrit. La réponse demandée
+        // ci-dessous est donc la lettre elle-même, comme pour des cas
+        // similaires ailleurs dans ce fichier (ex. b12 DELF CE).
+        num: 7, page: 47,
+        instruction: "Vocabulaire — Entourez la phrase qui correspond à l'image (répondez avec la lettre a ou b, imprimée dans le corrigé). (/5)",
+        vi: "Ghi chữ cái (a hoặc b) của câu đúng ứng với hình ảnh — văn bản đầy đủ của 2 lựa chọn không có trong bản gốc được số hoá.",
+        type: "fill",
+        items: [
+          { q: "1. homme, main sur le cœur", answer: "b" },
+          { q: "2. femme perplexe", answer: "a" },
+          { q: "3. homme endormi sur le canapé", answer: "b" },
+          { q: "4. femme qui nettoie", answer: "b" },
+        ],
+      },
+      {
+        // Page 45 — Compréhension écrite, article « Vos goûts musicaux
+        // révèlent votre personnalité » (© ETX Studio). Pas de piste audio.
+        num: 8, page: 45,
+        instruction: "Compréhension écrite — « La musique et notre personnalité ». Cochez les bonnes réponses.",
+        vi: "Đọc bài về sở thích âm nhạc và tính cách rồi chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Ce texte présente :", options: ["les goûts des musiciens dans le monde", "les goûts musicaux et les traits de caractère", "les styles de musique en Europe et en Australie"], answer: "les goûts musicaux et les traits de caractère" },
+          { q: "Les chercheurs ont fait une étude :", options: ["en Europe et en Australie", "dans plus de 50 pays", "en Inde, en France et en Australie"], answer: "dans plus de 50 pays" },
+          { q: "Les personnes qui aiment la compagnie des autres aiment :", options: ["les musiques rythmées", "le jazz", "les musiques douces"], answer: "les musiques douces" },
+        ],
+      },
+      {
+        num: 9, page: 45,
+        instruction: "Compréhension écrite — Vrai ou faux ?",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "Nous n'aimons pas les mêmes musiques quand nous sommes de nationalité différente.", answer: false },
+          { q: "Quand on aime le jazz, en général, on s'intéresse aux autres et aux choses.", answer: true },
+        ],
+      },
+      {
+        num: 10, page: 45,
+        instruction: "Vocabulaire — Que signifie l'expression « avoir tendance à » ?",
+        vi: "« Avoir tendance à » có nghĩa là gì?",
+        type: "choice",
+        items: [
+          { q: "« avoir tendance à » signifie :", options: ["Préférer", "Être à la mode", "Avoir besoin de"], answer: "Préférer" },
+        ],
+      },
+      {
+        // Page 50 — Jeux, act. 1 : Micmac ! (associer phrases et images).
+        num: 11, page: 50,
+        instruction: "Jeux — Micmac ! Associez les phrases aux bonnes images (1. homme pensif ; 2. groupe surpris ; 3. homme souriant, pouces levés ; 4. femme qui écoute).",
+        vi: "Nối câu với hình ảnh tương ứng.",
+        type: "match",
+        pairs: [
+          { l: "« Je suis optimiste. »", r: "Image 3 (homme souriant, pouces levés)" },
+          { l: "« Je suis curieuse. »",  r: "Image 4 (femme qui écoute)" },
+          { l: "« Ils sont peureux. »",  r: "Image 2 (groupe surpris)" },
+          { l: "« Je suis réfléchi. »",  r: "Image 1 (homme pensif)" },
+        ],
+      },
+      {
+        num: 12, page: 50,
+        instruction: "Jeux — Remettez les lettres dans l'ordre pour trouver des traits de caractère.",
+        vi: "Sắp xếp lại chữ cái để tìm ra tính từ chỉ tính cách.",
+        type: "fill",
+        items: [
+          { q: "HAUCELXRUE", answer: "chaleureux" },
+          { q: "CHÉFRLIÉ", answer: "réfléchi" },
+          { q: "FECIPSILEUR", answer: "superficiel" },
+          { q: "QIAMUNAE", answer: "maniaque" },
+          { q: "ESEUTIPÉNRTE", answer: "prétentieuse" },
+        ],
+      },
+      {
+        // Page 50 — Jeux, act. 4 : grille de mots mêlés. Les 6 mots et leur
+        // position sont donnés avec certitude dans le corrigé source.
+        num: 13, page: 50,
+        instruction: "Jeux — Retrouvez 6 mots en relation avec la tête et le visage (grille de mots mêlés).",
+        vi: "Tìm 6 từ liên quan đến đầu và khuôn mặt trong bảng chữ.",
+        type: "fill",
+        items: [
+          { q: "1re ligne, horizontal", answer: "SOURIRE" },
+          { q: "3e ligne, horizontal", answer: "CHEVEUX" },
+          { q: "colonne 6, vertical", answer: "BARBU" },
+          { q: "colonne 1, vertical", answer: "CHAUVE" },
+          { q: "colonne 10, vertical", answer: "FOSSETTE" },
+          { q: "dernière ligne, horizontal", answer: "MENTON" },
+        ],
+      },
+      {
+        num: 14, page: 50,
+        instruction: "Jeux — Charades : qu'est-ce que c'est ?",
+        vi: "Giải câu đố ghép chữ.",
+        type: "fill",
+        items: [
+          { q: "Mon premier est le contraire de « avec » ; mon deuxième est une forme à la première personne du verbe « avoir » ; mon troisième est une partie de la forme négative ; mon tout qualifie une personne qui est impolie en société.", answer: "sans-gêne" },
+          { q: "Mon premier est un métal précieux ; mon deuxième est une partie du corps ; mon troisième est une partie du visage ; mon tout qualifie une personne qui range bien ses affaires.", answer: "ordonné" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 48-49) ────────────────────────────
+    // Le livre n'a pas de page « Préparation au DELF » propre à l'Unité 4
+    // (ni écoute DELF dans editoAudioA2.js, ni lecture DELF dans
+    // editoA2Reading.js pour b4) — donc pas de coLivre, même pattern que
+    // b2/b5/b7/b9/b12. Le Parcours de cette unité ne route d'ailleurs pas
+    // vers DelfA2Panel (pas de step "delf-a2" dans STEP_GROUPS_B4).
+    delf: {
+      co: [
+        {
+          num: 1, page: 48, audioSrc: piste(44),
+          instruction: "Compréhension de l'oral — vous écoutez des annonces publiques. Répondez avec la lettre A, B ou C. (6 points)",
+          vi: "Nghe 6 thông báo nơi công cộng rồi chọn đáp án đúng (A/B/C).",
+          type: "fill",
+          items: [
+            { q: "1. Quel enfant est attendu ? (photos A · B · C)", answer: "A" },
+            { q: "2. Que va faire la mannequin ? (A. Un défilé de mode · B. Une séance de dédicaces · C. Une interview avec ses fans)", answer: "C" },
+            { q: "3. Vous pouvez gagner… (A. de l'argent · B. une séance photo en famille · C. un appareil photo)", answer: "B" },
+            { q: "4. Le coach aide à développer… (A. vos qualités personnelles · B. vos connaissances informatiques · C. vos compétences professionnelles)", answer: "A" },
+            { q: "5. Pour candidater, vous devez… (A. aller à l'agence · B. écrire un courriel · C. créer un dossier en ligne)", answer: "B" },
+            { q: "6. Que pourrez-vous faire ? (A. Rencontrer des artistes · B. Dessiner dans un atelier · C. Préparer des plats sucrés)", answer: "A" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — « Photo de classe », article sur
+      // l'histoire et l'évolution des photos de classe (source : slate.fr).
+      ce: [
+        {
+          num: 1, page: 48,
+          instruction: "Compréhension des écrits — « Photo de classe ». Répondez avec la lettre A, B ou C. (7 points)",
+          vi: "Đọc bài về ảnh lớp học rồi chọn đáp án đúng (A/B/C).",
+          type: "fill",
+          items: [
+            { q: "1. D'après l'article, les photos de classe sont… (A. adorées · B. critiquées · C. inutilisées) par les parents.", answer: "A" },
+            { q: "2. D'après l'article, les photos de classe évoluent avec le temps. (A. Vrai · B. Faux)", answer: "B" },
+            { q: "3. Selon l'article, les habits des élèves donnent des informations sur… (A. leur milieu social · B. la mode de l'époque · C. les températures de saison)", answer: "B" },
+            { q: "4. La vente des photos est utile pour… (A. payer les voyages des élèves · B. donner de l'argent au photographe · C. financer la construction d'autres écoles)", answer: "A" },
+            { q: "5. Les photos sont mises sur Internet pour… (A. retrouver des amis · B. féliciter les professeurs · C. partager avec ses enfants)", answer: "A" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 49,
+          prompt: "Vous êtes parti(e) en vacances avec un(e) collègue de travail. Vous écrivez un courriel à un(e) ami(e) francophone pour lui raconter vos vacances. Vous décrivez votre collègue et son caractère. Vous donnez vos impressions sur votre voyage. (60 mots minimum)",
+          vi: "Viết thư kể cho bạn Pháp nghe về chuyến du lịch với đồng nghiệp, mô tả tính cách đồng nghiệp và cảm nghĩ về chuyến đi. (tối thiểu 60 từ)",
+          model: "Salut Léo, Tu as passé de bonnes vacances ? Je suis parti avec mon collègue, Jean, pendant dix jours à Paris. C'était super ! Jean est très gentil. Il adore jouer au tennis et visiter des musées. Nous avons visité le Louvre et nous avons adoré. Les peintures sont très belles mais il y avait beaucoup de monde. À bientôt, Éric",
+        },
+        {
+          // Page 45 — Production orale (jeu de rôle à deux, pas notée DELF) :
+          // pas de corrigé unique dans le cahier ("Réponses libres").
+          skill: "Production orale — jeu de rôle (page 45)", points: "réponses libres", page: 45,
+          prompt: "À deux. Choisissez la fiche A ou B. Apprenant A : Vous participez à l'émission de radio Histoires d'amitiés. Le/La journaliste vous demande de présenter votre meilleur(e) ami(e), ses qualités et ses défauts, et les ressemblances ou différences dans vos caractères. Apprenant B : Vous êtes journaliste, vous animez l'émission et posez ces questions à votre invité(e).",
+          vi: "Đóng vai theo cặp: người A giới thiệu bạn thân của mình (ưu/nhược điểm, điểm giống/khác) trên đài phát thanh; người B đóng vai nhà báo phỏng vấn. (Réponses libres — không có đáp án mẫu duy nhất trong cahier.)",
+          model: "Réponses libres — le cahier ne donne pas de corrigé unique pour ce jeu de rôle.",
+        },
+        {
+          // ⚠️ Note du corrigé source : contrairement aux autres épreuves de
+          // production de cette unité, aucun exemple de production n'est
+          // fourni dans les Corrigés imprimés pour cette question de
+          // monologue suivi — l'incertitude est signalée telle quelle,
+          // sans exemple inventé.
+          skill: "Production orale — DELF, monologue suivi", points: "2 minutes environ", page: 49,
+          prompt: "Partie 2 de l'épreuve : monologue suivi (2 minutes environ). Sujet : Amitié. Décrivez votre meilleur(e) ami(e). Parlez de son physique. Quelles sont ses qualités ? Ses défauts ? Pourquoi est-ce qu'il/elle est votre meilleur(e) ami(e) ?",
+          vi: "Nói 2 phút mô tả bạn thân: ngoại hình, ưu điểm, nhược điểm, vì sao là bạn thân.",
+          model: "Réponses libres — aucun exemple de production n'est fourni dans les Corrigés du cahier pour cette question.",
+        },
+      ],
+    },
+  },
   b5: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
