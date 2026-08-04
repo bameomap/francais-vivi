@@ -1799,6 +1799,620 @@ export const CAHIER_A2 = {
     },
   },
 
+  b7: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    grammar: {
+
+      // p0 — Les pronoms COD et COI (cahier p. 75)
+      p0: [
+        {
+          num: 1, page: 75,
+          instruction: "Entourez la bonne réponse.",
+          vi: "Chọn đại từ COD/COI đúng.",
+          type: "choice",
+          items: [
+            // Item « a » n'est pas redonné dans le corrigé imprimé (déjà
+            // résolu dans le cahier) ; « l' » est déduit ici de la règle
+            // d'élision devant voyelle — « ton lit » (masc. sing.) + « ai ».
+            { q: "Où as-tu mis ton lit ? Je ___ ai mis sous la fenêtre.", options: ["le", "la", "l'", "les", "lui", "leur"], answer: "l'", example: true },
+            { q: "Placez-vous l'oreiller sous votre tête pour bien dormir ? Non, je ___ place sous mes pieds.", options: ["le", "la", "l'", "les", "lui", "leur"], answer: "le" },
+            { q: "Qu'as-tu conseillé à Vincent ? Je ___ ai conseillé de partir en voyage.", options: ["le", "la", "l'", "les", "lui", "leur"], answer: "lui" },
+            { q: "Tu peux coucher les enfants, s'il te plaît ? D'accord, je vais ___ coucher tout de suite.", options: ["le", "la", "l'", "les", "lui", "leur"], answer: "les" },
+            { q: "As-tu acheté ton nouveau canapé ? Oui, je ___ ai acheté hier et il est génial !", options: ["le", "la", "l'", "les", "lui", "leur"], answer: "l'" },
+            { q: "Tu as expliqué à tes collègues que tu étais fatiguée ? Non, je ne ___ ai pas dit, j'ai oublié !", options: ["le", "la", "l'", "les", "lui", "leur"], answer: "leur" },
+          ],
+        },
+        {
+          num: 2, page: 75,
+          instruction: "Remplacez les mots soulignés par un pronom COD ou COI.",
+          vi: "Thay từ được gạch chân bằng đại từ COD hoặc COI.",
+          type: "fill",
+          items: [
+            { q: "Jeanne ne regarde pas la télé le soir. Elle ne …… regarde pas.", answer: "la", example: true },
+            { q: "Va voir le spécialiste du sommeil de ma femme ! Oui, j'irai …… voir la semaine prochaine.", answer: "le" },
+            { q: "Qu'est-ce que tu offres à Mirella et Jean dimanche ? Je …… offre une plante pour le jardin.", answer: "leur" },
+            { q: "Mon mari a très mal au dos. Qu'est-ce que je peux …… conseiller ?", answer: "lui" },
+            { q: "Tu as pris tes oreillers pour bien dormir ? Oui, je …… ai pris.", answer: "les" },
+            { q: "Elle a écrit à Paul et à Julien pour dire qu'elle partait à New York, mais à moi elle ne …… a pas écrit.", answer: "m'" },
+          ],
+        },
+        {
+          num: 3, page: 75,
+          instruction: "Remettez les mots dans l'ordre pour faire des phrases.",
+          vi: "Sắp xếp lại các từ thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["je", "Mon café,", "bois", "le matin.", "le"], answer: ["Mon café,", "je", "le", "bois", "le matin."], example: true },
+            { tokens: ["nous", "très stressés.", "Ils ont dit", "qu'ils", "étaient"], answer: ["Ils ont dit", "nous", "qu'ils", "étaient", "très stressés."] },
+            { tokens: ["pour", "Ce spécialiste", "donne", "des conseils", "vous", "bien dormir."], answer: ["Ce spécialiste", "vous", "donne", "des conseils", "pour", "bien dormir."] },
+            { tokens: ["l'", "Son nouveau", "fatigué.", "travail", "a beaucoup"], answer: ["Son nouveau", "travail", "l'", "a beaucoup", "fatigué."] },
+            { tokens: ["Il", "a expliqué", "se sentir bien.", "comment", "leur"], answer: ["Il", "leur", "a expliqué", "comment", "se sentir bien."] },
+            // Le corrigé imprimé omet « de tisane », pourtant présent dans les
+            // éléments à réordonner (sic) — repris tel quel, sans « corriger »
+            // la coquille du cahier ; le jeton « de tisane. » reste simplement
+            // inutilisé dans le tiroir.
+            { tokens: ["a demandé", "une tasse", "lui", "de tisane.", "Elle"], answer: ["Elle", "lui", "a demandé", "une tasse."] },
+          ],
+        },
+        {
+          num: 4, page: 75, audioSrc: piste(66),
+          instruction: "Pronom COD ou COI ? Écoutez et cochez.",
+          vi: "Nghe từng câu (a→f) và cho biết đại từ là COD hay COI.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["COD", "COI"], answer: "COI", example: true },
+            { q: "b.", options: ["COD", "COI"], answer: "COI" },
+            { q: "c.", options: ["COD", "COI"], answer: "COD" },
+            { q: "d.", options: ["COD", "COI"], answer: "COI" },
+            { q: "e.", options: ["COD", "COI"], answer: "COD" },
+            { q: "f.", options: ["COD", "COI"], answer: "COD" },
+          ],
+        },
+      ],
+
+      // p1 — Le superlatif (cahier p. 77)
+      p1: [
+        {
+          num: 1, page: 77,
+          instruction: "Complétez les phrases avec le meilleur, la meilleure, les meilleures ou le mieux.",
+          vi: "Điền le meilleur / la meilleure / les meilleures / le mieux.",
+          type: "fill",
+          bank: ["le meilleur", "la meilleure", "les meilleures", "le mieux"],
+          items: [
+            { q: "Ce médecin est …… médecin du village.", answer: "le meilleur", example: true },
+            { q: "Ces tisanes sont …… de toutes.", answer: "les meilleures" },
+            { q: "C'est la lavande qui soigne …… les insomnies.", answer: "le mieux" },
+            { q: "Ce sont les enfants qui dorment toujours …… .", answer: "le mieux" },
+            { q: "La …… fatigue est la fatigue sportive.", answer: "meilleure" },
+            { q: "J'ai pris beaucoup d'antibiotiques, mais celui-ci est …… .", answer: "le meilleur" },
+          ],
+        },
+        {
+          num: 2, page: 77,
+          instruction: "Transformez les phrases avec un superlatif.",
+          vi: "Chuyển câu sang thể so sánh cực cấp (superlatif).",
+          type: "transform",
+          items: [
+            { q: "Cet infirmier est gentil. (+)", answer: "Cet infirmier est le plus gentil.", example: true },
+            { q: "Marja est stressée (–).", answer: "Marja est la moins stressée." },
+            { q: "Son activité physique est régulière (+).", answer: "Son activité physique est la plus régulière." },
+            { q: "Le rythme cardiaque d'Igor est lent. (+)", answer: "Le rythme cardiaque d'Igor est le plus lent." },
+            { q: "Faire du sport est important (+) pour nous.", answer: "Faire du sport est le plus important pour nous." },
+            { q: "Ce remède est cher (–) de tous.", answer: "Ce remède est le moins cher de tous." },
+          ],
+        },
+        {
+          num: 3, page: 77, audioSrc: piste(68),
+          instruction: "Superlatif de supériorité (+) ou d'infériorité (–) ? Écoutez et cochez.",
+          vi: "Nghe từng câu (a→f) và cho biết đó là superlatif hơn (+) hay kém (–).",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["supériorité (+)", "infériorité (–)"], answer: "infériorité (–)", example: true },
+            { q: "b.", options: ["supériorité (+)", "infériorité (–)"], answer: "supériorité (+)" },
+            { q: "c.", options: ["supériorité (+)", "infériorité (–)"], answer: "supériorité (+)" },
+            { q: "d.", options: ["supériorité (+)", "infériorité (–)"], answer: "infériorité (–)" },
+            { q: "e.", options: ["supériorité (+)", "infériorité (–)"], answer: "supériorité (+)" },
+            { q: "f.", options: ["supériorité (+)", "infériorité (–)"], answer: "infériorité (–)" },
+          ],
+        },
+        {
+          num: 4, page: 77,
+          instruction: "Écrivez le contraire des expressions en italique.",
+          vi: "Viết ngược nghĩa của cụm từ in nghiêng.",
+          type: "fill",
+          items: [
+            { q: "J'ai fait le rêve le plus fou de ma vie.", answer: "le moins fou", example: true },
+            { q: "C'est moi qui ai le sommeil le moins léger de tous.", answer: "le plus léger" },
+            { q: "De toute la famille, c'est Bruno qui a le meilleur médecin.", answer: "le moins bon" },
+            { q: "L'échinacée est la plante la moins bonne pour moi.", answer: "la meilleure" },
+            { q: "C'est ma mère qui m'a donné les meilleurs conseils.", answer: "les moins bons" },
+            { q: "Pour lui, ce sont les tisanes qui fonctionnent le mieux.", answer: "le moins bien" },
+          ],
+        },
+      ],
+
+      // p2 — Les pronoms interrogatifs (cahier p. 79)
+      // (Note : le corrigé imprimé étiquette cette section « Page 77 » par
+      // erreur — doublon avec la page du Superlatif, artefact de numérotation
+      // sans ambiguïté réelle sur le contenu, qui est bien celui de la p.79.)
+      p2: [
+        {
+          num: 1, page: 79,
+          instruction: "Entourez le pronom interrogatif correct.",
+          vi: "Chọn đại từ nghi vấn đúng.",
+          type: "choice",
+          items: [
+            { q: "…… numéro d'urgence connais-tu ?", options: ["Quel", "Lequel"], answer: "Quel", example: true },
+            { q: "…… massages te font du bien ?", options: ["Quels", "Quelles"], answer: "Quels" },
+            { q: "Tu connais deux médecins. …… veux-tu consulter ?", options: ["Quel", "Lequel"], answer: "Lequel" },
+            { q: "J'ai plein de tisanes différentes dans mon placard. Tu veux ……  ?", options: ["laquelle", "lesquelles"], answer: "laquelle" },
+            { q: "…… activités allez-vous faire cet hiver ?", options: ["Quelles", "Lesquelles"], answer: "Quelles" },
+            { q: "Vos enfants, ce sont …… ?", options: ["lesquels", "lesquelles"], answer: "lesquels" },
+            { q: "Pouvez-vous me dire …… sport est le meilleur pour le dos ?", options: ["quel", "lequel"], answer: "quel" },
+          ],
+        },
+        {
+          num: 2, page: 79,
+          instruction: "Associez les éléments pour former des phrases.",
+          vi: "Nối đầu câu với cuối câu.",
+          type: "match",
+          pairs: [
+            { l: "Tu as mal à quelle",                              r: "jambe ?" },
+            { l: "Tu as deux oreillers",                             r: "lequel veux-tu ?" },
+            { l: "Tu prends quelles",                                r: "tasses pour boire le thé ?" },
+            { l: "Il t'a donné quel",                                r: "numéro pour l'appeler ?" },
+            { l: "Lequel des deux est",                               r: "le cousin de Théo ?" },
+            { l: "Il y a plusieurs infirmières aujourd'hui :",       r: "laquelle voulez-vous voir ?" },
+            { l: "Ce magasin vend de très bonnes tisanes.",          r: "Lesquelles voulez-vous acheter ?" },
+          ],
+        },
+        {
+          num: 3, page: 79,
+          instruction: "Complétez les phrases avec lequel, laquelle, lesquelles, lesquels.",
+          vi: "Điền lequel / laquelle / lesquelles / lesquels.",
+          type: "fill",
+          bank: ["lequel", "laquelle", "lesquelles", "lesquels"],
+          items: [
+            { q: "J'ai deux lits. Dans …… des deux veux-tu dormir ?", answer: "lequel", example: true },
+            { q: "Elle a trois chambres, mais je ne sais pas …… est la sienne.", answer: "laquelle" },
+            { q: "Il a le nom de plusieurs médecins, mais il voudrait savoir …… est le meilleur.", answer: "lequel" },
+            { q: "Vous prenez plusieurs remèdes. Pourriez-vous me dire …… est pour le soir ?", answer: "lequel" },
+            { q: "Parmi les actions suivantes, …… sont les plus utiles ?", answer: "lesquelles" },
+            { q: "Il y a plusieurs cycles de sommeil. …… durent 30 minutes ?", answer: "lesquels" },
+            { q: "Parmi vos enfants, …… fait des allergies au printemps ?", answer: "lequel" },
+          ],
+        },
+        {
+          num: 4, page: 79, audioSrc: piste(70),
+          instruction: "Écoutez et cochez.",
+          vi: "Nghe và chọn Laquelle / Lequel / Lesquels-Lesquelles.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["Laquelle", "Lequel", "Lesquels/Lesquelles"], answer: "Laquelle", example: true },
+            { q: "b.", options: ["Laquelle", "Lequel", "Lesquels/Lesquelles"], answer: "Lequel" },
+            { q: "c.", options: ["Laquelle", "Lequel", "Lesquels/Lesquelles"], answer: "Lesquels/Lesquelles" },
+            { q: "d.", options: ["Laquelle", "Lequel", "Lesquels/Lesquelles"], answer: "Laquelle" },
+            { q: "e.", options: ["Laquelle", "Lequel", "Lesquels/Lesquelles"], answer: "Lequel" },
+            { q: "f.", options: ["Laquelle", "Lequel", "Lesquels/Lesquelles"], answer: "Lesquels/Lesquelles" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 80) — wired into the Phono step ─────
+    // Seule la Discrimination (act. 1) a une réponse imprimée vérifiable
+    // (l'ordre 1-2/2-1 des deux variantes entendues). Articulation (act. 2,
+    // dialogues à répéter) et Interprétation (act. 3, questions à réponse
+    // libre à l'oral) ne sont pas reprises, faute de réponse unique à
+    // vérifier — même choix que pour b1/b2/b5.
+    phono: [
+      {
+        num: 1, page: 80, audioSrc: piste(71),
+        instruction: "Discrimination — écoutez et dites dans quel ordre vous entendez les phrases.",
+        vi: "Nghe và cho biết thứ tự phát âm của 2 câu (1-2 hoặc 2-1).",
+        type: "choice",
+        items: [
+          { q: "a. 1. la plus efficace — 2. le plus efficace", options: ["1-2", "2-1"], answer: "1-2" },
+          { q: "b. 1. les plus importants — 2. les plus importantes", options: ["1-2", "2-1"], answer: "2-1" },
+          { q: "c. 1. le plus célèbre — 2. la plus célèbre", options: ["1-2", "2-1"], answer: "1-2" },
+          { q: "d. 1. les plus compétents — 2. les plus compétentes", options: ["1-2", "2-1"], answer: "1-2" },
+          { q: "e. 1. le plus économique — 2. la plus économique", options: ["1-2", "2-1"], answer: "2-1" },
+          { q: "f. 1. les plus sérieux — 2. les plus sérieuses", options: ["1-2", "2-1"], answer: "2-1" },
+          { q: "g. 1. la plus urgente — 2. le plus urgent", options: ["1-2", "2-1"], answer: "1-2" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 76) couvre les groupes b7g1-b7g3 du livre (corps,
+    // douleur/bien-être, sommeil) ; c2_vocab (cahier p. 78) couvre b7g4-b7g5
+    // (maux/soins, urgences) — voir parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 76,
+          instruction: "Barrez l'intrus.",
+          vi: "Tìm từ lạc loài trong mỗi nhóm.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["le bras", "le ventre", "l'épaule"], answer: "le ventre" },
+            { q: "b.", options: ["le cerveau", "la tête", "le corps"], answer: "le corps" },
+            { q: "c.", options: ["le cou", "la cuisse", "le genou"], answer: "le cou" },
+            { q: "d.", options: ["le pied", "la tête", "la jambe"], answer: "la tête" },
+            { q: "e.", options: ["la cuisse", "le dos", "la colonne vertébrale"], answer: "la cuisse" },
+            { q: "f.", options: ["le genou", "le bras", "la cheville"], answer: "le bras" },
+          ],
+        },
+        {
+          // Nuage de mots : tête, repos, rêve, sieste, bras, malade, manger,
+          // jambe, assis, bâillement, allongé, s'endormir — le cahier
+          // demande d'entourer seulement les mots liés au sommeil.
+          num: 2, page: 76,
+          instruction: "Entourez les mots du sommeil.",
+          vi: "Từ nào thuộc chủ đề giấc ngủ?",
+          type: "truefalse",
+          items: [
+            { q: "tête", answer: false },
+            { q: "repos", answer: true },
+            { q: "rêve", answer: true },
+            { q: "sieste", answer: true },
+            { q: "bras", answer: false },
+            { q: "malade", answer: false },
+            { q: "manger", answer: false },
+            { q: "jambe", answer: false },
+            { q: "assis", answer: false },
+            { q: "bâillement", answer: true },
+            { q: "allongé", answer: true },
+            { q: "s'endormir", answer: true },
+          ],
+        },
+        {
+          num: 3, page: 76, audioSrc: piste(67),
+          instruction: "Écoutez et indiquez la bonne situation (image 1 à 5).",
+          vi: "Nghe và cho biết mỗi đoạn ứng với hình nào (chữ cái tình huống).",
+          type: "fill",
+          items: [
+            { q: "Image 1", answer: "c" },
+            { q: "Image 2 (exemple)", answer: "a", example: true },
+            { q: "Image 3", answer: "d" },
+            { q: "Image 4", answer: "e" },
+            { q: "Image 5", answer: "b" },
+          ],
+        },
+        {
+          num: 4, page: 76,
+          instruction: "Associez.",
+          vi: "Nối cụm từ với nghĩa tương đương.",
+          type: "match",
+          pairs: [
+            { l: "sentir une douleur", r: "avoir mal" },
+            { l: "être en forme",      r: "se sentir bien" },
+            { l: "être malade",        r: "souffrir" },
+            { l: "récupérer",          r: "se remettre" },
+            { l: "être apaisé",        r: "se sentir léger" },
+            { l: "être relaxé",        r: "être reposé" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 78,
+          instruction: "Classez les maux et les remèdes de la liste.",
+          vi: "Phân loại: đây là một chứng bệnh (mal) hay một phương thuốc (remède)?",
+          type: "choice",
+          items: [
+            { q: "antibiotique", options: ["un mal", "un remède"], answer: "un remède", example: true },
+            { q: "antiseptique", options: ["un mal", "un remède"], answer: "un remède" },
+            { q: "asthme", options: ["un mal", "un remède"], answer: "un mal" },
+            { q: "gouttes", options: ["un mal", "un remède"], answer: "un remède" },
+            { q: "indigestion", options: ["un mal", "un remède"], answer: "un mal" },
+            { q: "infection", options: ["un mal", "un remède"], answer: "un mal" },
+            { q: "migraine", options: ["un mal", "un remède"], answer: "un mal" },
+            { q: "sirop", options: ["un mal", "un remède"], answer: "un remède" },
+            { q: "tisane", options: ["un mal", "un remède"], answer: "un remède" },
+          ],
+        },
+        {
+          num: 2, page: 78,
+          instruction: "Mettez les lettres dans l'ordre pour retrouver les mots.",
+          vi: "Sắp xếp lại các chữ cái để tìm ra từ đúng.",
+          type: "fill",
+          items: [
+            { q: "I E A U L A N C R M B", answer: "ambulancier", example: true },
+            { q: "C A C I D T E N", answer: "accident" },
+            { q: "P C I E R E O L I", answer: "policière" },
+            { q: "P P I E R O M", answer: "pompier" },
+            { q: "C E G U R E N", answer: "urgence" },
+            { q: "S S E B E L", answer: "blessé" },
+          ],
+        },
+        {
+          num: 3, page: 78,
+          instruction: "Complétez le texte avec les mots suivants : bien – fatigue – patraque – tonus – traitement – vitamines.",
+          vi: "Điền từ vào chỗ trống trong đoạn văn.",
+          type: "fill",
+          bank: ["bien", "fatigue", "patraque", "tonus", "traitement", "vitamines"],
+          items: [
+            { q: "Éloïse est …… .", answer: "patraque", example: true },
+            { q: "Pour lui donner du …… le médecin lui a recommandé des vitamines en gouttes.", answer: "tonus" },
+            { q: "… des …… en gouttes, à prendre tous les matins.", answer: "vitamines" },
+            { q: "Ce …… lui fait le plus grand bien.", answer: "traitement" },
+            { q: "Ce traitement lui fait le plus grand …… .", answer: "bien" },
+            { q: "… et elle ne sent plus sa …… physique.", answer: "fatigue" },
+          ],
+        },
+        {
+          num: 4, page: 78, audioSrc: piste(69),
+          instruction: "Écoutez et associez les phrases aux images (image 1 à 5).",
+          vi: "Nghe và nối mỗi câu với hình tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Image 1 (crise d'asthme)", answer: "e" },
+            { q: "Image 2 (allergies)", answer: "c" },
+            { q: "Image 3 (exemple : insomnies)", answer: "a", example: true },
+            { q: "Image 4 (migraine)", answer: "b" },
+            { q: "Image 5 (indigestion)", answer: "d" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 82-83, noté /40) ──────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // Comme pour b1/b2/b5, la compréhension orale + production écrite de la
+    // page 81 (« Rêve et cauchemars ») et les mini-jeux corrigeables de la
+    // page 86 sont repris ici aussi. Le jeu 3 (« enlevez les x ») n'est pas
+    // repris : le texte encodé avec les « x » n'est pas donné dans la
+    // source, seulement les phrases décodées — même logique que pour les
+    // jeux non reconstructibles de b1/b2/b5. Le pendu (jeu 5) est un jeu
+    // oral en groupe, non auto-corrigeable.
+    bilan: [
+      {
+        num: 1, page: 82,
+        instruction: "Complétez les phrases avec un pronom COD ou COI. (/7)",
+        vi: "Điền đại từ COD hoặc COI.",
+        type: "fill",
+        items: [
+          { q: "Quand tu iras voir ton frère, tu …… apporteras ses livres.", answer: "lui" },
+          { q: "Je suis allé voir le médecin et il …… conseillé du repos.", answer: "m'" },
+          { q: "Ton fauteuil est vraiment super ! Où …… as-tu acheté ?", answer: "l'" },
+          { q: "Mes parents dorment très mal et je …… ai offert de nouveaux oreillers.", answer: "leur" },
+          { q: "Tu n'as pas bu ta tisane ? Non, je …… boirai plus tard.", answer: "la" },
+          { q: "Vous êtes allés voir un spécialiste, non ? Qu'est-ce qu'il …… a expliqué ?", answer: "vous" },
+          { q: "J'ai emprunté un livre sur la santé et je vais …… prêter à ma sœur.", answer: "le" },
+        ],
+      },
+      {
+        num: 2, page: 82,
+        instruction: "Complétez les phrases avec le mieux, le meilleur, la meilleure, les meilleur(e)s. (/7)",
+        vi: "Điền le mieux / le meilleur / la meilleure / les meilleur(e)s.",
+        type: "fill",
+        items: [
+          { q: "…… fauteuils massants sont en vente chez Dupont-Durand.", answer: "Les meilleurs" },
+          { q: "Le romarin est la plante qui agit …… contre la migraine.", answer: "le mieux" },
+          { q: "Consulter votre médecin est …… solution.", answer: "la meilleure" },
+          { q: "Il dit que le sirop au miel est …… traitement contre les maux de gorge.", answer: "le meilleur" },
+          { q: "Mettre un oreiller sous les genoux est vraiment …… pour ne pas avoir mal au dos.", answer: "le mieux" },
+          { q: "Regarder un film d'horreur le soir est …… moyen de ne pas dormir !", answer: "le meilleur" },
+          { q: "Je trouve que …… plantes sont celles de ton jardin !", answer: "les meilleures" },
+        ],
+      },
+      {
+        num: 3, page: 82,
+        instruction: "Mettez les mots dans l'ordre pour former des phrases. (/6)",
+        vi: "Sắp xếp lại các từ thành câu đúng.",
+        type: "order",
+        items: [
+          { tokens: ["ne sais pas", "quel", "Je", "médecin", "consulter ;", "conseilles-tu ?", "me", "lequel"], answer: ["Je", "ne sais pas", "quel", "médecin", "consulter ;", "lequel", "me", "conseilles-tu ?"] },
+          { tokens: ["font", "de vos amies", "Lesquelles", "de l'hypertension ?"], answer: ["Lesquelles", "de vos amies", "font", "de l'hypertension ?"] },
+          { tokens: ["sont là", "Deux infirmières", "aujourd'hui ;", "te", "voir ?", "laquelle"], answer: ["Deux infirmières", "sont là", "aujourd'hui ;", "laquelle", "te", "voir ?"] },
+          { tokens: ["remèdes", "ne sais pas", "quels", "prendre ;", "Je", "les moins chers ?", "lesquels", "sont"], answer: ["Je", "ne sais pas", "quels", "remèdes", "prendre ;", "lesquels", "sont", "les moins chers ?"] },
+          { tokens: ["acheter", "se demande", "quelles", "Il", "gouttes ; à ton avis", "sont", "les plus efficaces ?", "lesquelles"], answer: ["Il", "se demande", "quelles", "gouttes ; à ton avis", "lesquelles", "sont", "les plus efficaces ?"] },
+          { tokens: ["parties du corps ?", "fait travailler", "quelles", "La natation"], answer: ["La natation", "fait travailler", "quelles", "parties du corps ?"] },
+        ],
+      },
+      {
+        num: 4, page: 82,
+        instruction: "Vocabulaire — Remettez les actions dans l'ordre et écrivez le verbe sous chaque image. (/5)",
+        vi: "Sắp xếp đúng thứ tự chu kỳ giấc ngủ và viết động từ dưới mỗi hình.",
+        type: "fill",
+        items: [
+          { q: "1re action — image b", answer: "dormir" },
+          { q: "2e action — image e", answer: "rêver" },
+          { q: "3e action — image d", answer: "se réveiller" },
+          { q: "4e action — image c", answer: "s'étirer" },
+          { q: "5e action — image a", answer: "se lever" },
+        ],
+      },
+      {
+        num: 5, page: 83,
+        instruction: "Vocabulaire — Vrai ou faux ? (/5)",
+        vi: "Đúng hay Sai?",
+        type: "truefalse",
+        items: [
+          { q: "Quand je suis en pleine forme, je me sens léger.", answer: true },
+          { q: "La sérénité, c'est quand on est stressé.", answer: false },
+          { q: "Quand on dort, on peut rêver.", answer: true },
+          { q: "Masser veut dire se remettre.", answer: false },
+          { q: "Quand on fait du sport, on peut avoir des courbatures.", answer: true },
+        ],
+      },
+      {
+        num: 6, page: 83,
+        instruction: "Vocabulaire — Donnez des conseils avec les mots de la liste : traitement – gouttes – antiseptique – sirop – antibiotique. (/5)",
+        vi: "Điền từ vào lời khuyên.",
+        type: "fill",
+        bank: ["traitement", "gouttes", "antiseptique", "sirop", "antibiotique"],
+        items: [
+          { q: "Je tousse. → Prends du …… .", answer: "sirop" },
+          { q: "J'ai une infection. → Prenez cet …… .", answer: "antibiotique" },
+          { q: "Je dors très mal. → Tiens, mets 10 …… dans un verre d'eau tous les soirs.", answer: "gouttes" },
+          { q: "Je suis tombé et je me suis fait mal au genou. → Je vais vous donner un …… .", answer: "antiseptique" },
+          { q: "J'ai le nez bouché, de la fièvre, mal à la gorge. → Ce …… te fera le plus grand bien !", answer: "traitement" },
+        ],
+      },
+      {
+        num: 7, page: 83,
+        instruction: "Vocabulaire — Classez les mots suivants : le SAMU – une victime – les pompiers – un blessé – un malade – une ambulancière – un policier. (/5)",
+        vi: "Đây là một dịch vụ cấp cứu, hay là người được cấp cứu?",
+        type: "choice",
+        items: [
+          { q: "le SAMU", options: ["un service d'urgence", "la personne aidée"], answer: "un service d'urgence" },
+          { q: "une victime", options: ["un service d'urgence", "la personne aidée"], answer: "la personne aidée" },
+          { q: "les pompiers", options: ["un service d'urgence", "la personne aidée"], answer: "un service d'urgence" },
+          { q: "un blessé", options: ["un service d'urgence", "la personne aidée"], answer: "la personne aidée" },
+          { q: "un malade", options: ["un service d'urgence", "la personne aidée"], answer: "la personne aidée" },
+          { q: "une ambulancière", options: ["un service d'urgence", "la personne aidée"], answer: "un service d'urgence" },
+          { q: "un policier", options: ["un service d'urgence", "la personne aidée"], answer: "un service d'urgence" },
+        ],
+      },
+      {
+        // Page 81 — Compréhension orale : « Rêve et cauchemars : que traduisent-ils ? »
+        num: 8, page: 81, audioSrc: piste(74),
+        instruction: "Compréhension orale — « Rêve et cauchemars » — Vrai ou faux ?",
+        vi: "Nghe bài về giấc mơ rồi trả lời Đúng/Sai.",
+        type: "truefalse",
+        items: [
+          { q: "Rêver quand on dort n'est pas normal.", answer: false },
+          { q: "Il y a plusieurs phases dans le sommeil.", answer: true },
+        ],
+      },
+      {
+        num: 9, page: 81, audioSrc: piste(74),
+        instruction: "Compréhension orale — cochez la bonne réponse.",
+        vi: "Vẫn bài nghe trên — chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Rêver fait partie de :", options: ["notre sommeil", "nos émotions"], answer: "notre sommeil" },
+          { q: "Le sommeil paradoxal dure :", options: ["90 minutes", "10 minutes"], answer: "90 minutes" },
+          // Le corrigé imprimé étiquette cette réponse « e. » par erreur —
+          // simple glissement de numérotation, l'exercice ne compte que les
+          // items a, b, c.
+          { q: "Rêver est l'expression des émotions :", options: ["de la soirée", "de la journée"], answer: "de la journée" },
+        ],
+      },
+      {
+        num: 10, page: 81, audioSrc: piste(74),
+        instruction: "Compréhension orale — complétez les phrases.",
+        vi: "Vẫn bài nghe trên — điền từ vào chỗ trống.",
+        type: "fill",
+        items: [
+          { q: "Quand on rêve, le …… est en pleine action.", answer: "cerveau" },
+          { q: "Le sommeil est une spécialité …… .", answer: "médicale" },
+        ],
+      },
+      {
+        // Page 86 — Jeux, act. 1 : reconstituer les mots à partir des étiquettes.
+        num: 11, page: 86,
+        instruction: "Jeux — Associez 2 étiquettes pour retrouver 5 mots.",
+        vi: "Ghép 2 mảnh để tạo thành từ đúng.",
+        type: "match",
+        pairs: [
+          { l: "MÉDE + CINE",  r: "médecine" },
+          { l: "INFEC + TION", r: "infection" },
+          { l: "MI + GRAINE",  r: "migraine" },
+          { l: "PAT + RAQUE",  r: "patraque" },
+          { l: "SYMP + TOMES", r: "symptômes" },
+        ],
+      },
+      {
+        // Page 86 — Jeux, act. 2 : grille menant au mot mystère.
+        num: 12, page: 86,
+        instruction: "Jeux — Complétez la grille pour trouver le mot mystère.",
+        vi: "Điền vào ô chữ để tìm ra từ bí ẩn.",
+        type: "fill",
+        items: [
+          { q: "Quand on ne peut pas dormir la nuit, on a une … .", answer: "insomnie", example: true },
+          { q: "C'est une maladie qui empêche de respirer. C'est l'… .", answer: "asthme" },
+          { q: "Elle arrive très vite quand il y a un accident. C'est une … .", answer: "ambulance" },
+          { q: "Quand on a beaucoup de travail, on est … .", answer: "stressé" },
+          { q: "Le mot mystère est :", answer: "matelas" },
+        ],
+      },
+      {
+        // Page 86 — Jeux, act. 4 : remettre le bon second mot à chaque expression.
+        num: 13, page: 86,
+        instruction: "Jeux — Quel désordre ! Retrouvez la bonne expression.",
+        vi: "Ghép lại đúng cụm từ.",
+        type: "match",
+        pairs: [
+          { l: "fatigue d'urgence",   r: "fatigue physique" },
+          { l: "colonne cardiaque",   r: "colonne vertébrale" },
+          { l: "corps physique",      r: "corps humain" },
+          { l: "transport vertébrale", r: "transport d'urgence" },
+          { l: "rythme humain",       r: "rythme cardiaque" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 84-85) ────────────────────────────
+    // Le livre a bien une page de préparation DELF pour cette unité
+    // (« Santé au parcours », p. 181-183), mais c'est une compréhension des
+    // écrits (routée via le step "lecture" du Parcours, editoA2Reading.js),
+    // pas une écoute — donc pas de coLivre ici, même pattern que b2/b5.
+    delf: {
+      co: [
+        {
+          num: 1, page: 84, audioSrc: piste(75),
+          instruction: "Compréhension de l'oral — vous écoutez 4 dialogues. Associez chacun à sa situation (6 situations proposées, seulement 4 utilisées). (7 points)",
+          vi: "Nghe 4 đoạn hội thoại và chọn đúng tình huống giao tiếp cho từng đoạn (6 tình huống có sẵn, chỉ 4 đúng).",
+          type: "choice",
+          items: [
+            { q: "Dialogue 1 (2 points) — quelle situation ?", options: ["Inviter quelqu'un", "Donner un conseil", "Demander de l'aide", "Féliciter", "S'informer sur un produit", "Exprimer un désaccord"], answer: "Féliciter" },
+            { q: "Dialogue 2 (2 points) — quelle situation ?", options: ["Inviter quelqu'un", "Donner un conseil", "Demander de l'aide", "Féliciter", "S'informer sur un produit", "Exprimer un désaccord"], answer: "S'informer sur un produit" },
+            { q: "Dialogue 3 (2 points) — quelle situation ?", options: ["Inviter quelqu'un", "Donner un conseil", "Demander de l'aide", "Féliciter", "S'informer sur un produit", "Exprimer un désaccord"], answer: "Exprimer un désaccord" },
+            { q: "Dialogue 4 (1 point) — quelle situation ?", options: ["Inviter quelqu'un", "Donner un conseil", "Demander de l'aide", "Féliciter", "S'informer sur un produit", "Exprimer un désaccord"], answer: "Donner un conseil" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — article « Santé au travail » : le Dr
+      // Peccari donne des conseils contre les problèmes physiques liés au
+      // travail de bureau. Le texte de l'article n'est pas reproduit dans le
+      // corrigé source, seulement les questions et réponses.
+      ce: [
+        {
+          num: 1, page: 84,
+          instruction: "Compréhension des écrits — article « Santé au travail ». (7 points)",
+          vi: "Đọc bài báo « Santé au travail » (Bác sĩ Peccari cho lời khuyên về các vấn đề thể chất do làm việc văn phòng) rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Quel conseil donne le Docteur Peccari contre le mal de dos ? (2 points)", options: ["S'étirer", "Marcher", "Se reposer"], answer: "Marcher" },
+            { q: "2. Changer de position de travail est bon pour… (1 point)", options: ["les bras", "les yeux", "les jambes"], answer: "les jambes" },
+            { q: "3. Le thym soigne les maladies de l'hiver. (1 point)", options: ["Vrai", "Faux"], answer: "Vrai" },
+            { q: "4. Le romarin est efficace contre… (2 points)", options: ["l'anxiété", "les rhumes", "les allergies"], answer: "l'anxiété" },
+            { q: "5. Quelle bonne habitude aide à mieux travailler ? (1 point)", options: ["Manger léger", "Sortir dehors", "Se coucher tôt"], answer: "Manger léger" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          // Page 81 — production libre de la fin de l'unité (pas notée DELF,
+          // mais rangée ici comme les autres exercices de production non
+          // auto-corrigeables — même pattern que la p.57 de b5).
+          skill: "Production écrite (page 81)", points: "60 mots", page: 81,
+          prompt: "Votre meilleure amie vous a envoyé un message. Vous êtes très inquiet/inquiète. Vous répondez à son message et lui posez des questions pour savoir ce qu'elle a. Vous lui donnez des conseils. (60 mots) — Message reçu : « Salut, je ne viendrai pas ce soir, je suis un peu patraque. Je t'appelle demain. Bonne soirée. Bises. » — Lina",
+          vi: "Bạn thân gửi tin nhắn báo không đến được vì thấy không khỏe. Viết thư trả lời, hỏi thăm và cho lời khuyên. (60 từ)",
+          model: "Salut Rémi, Merci pour ton message. Tu dis que tu es malade, mais qu'est-ce qui ne va pas ? Tu es patraque ou très fatigué ? Tu as mal où : à la gorge, au dos… ? Je te conseille de te coucher et de dormir. Tu as de la fièvre peut-être ? Alors, il est important de consulter un médecin. Est-ce que je peux t'aider ? J'attends de tes nouvelles très vite ! Bises, Flo",
+        },
+        {
+          skill: "Production écrite", points: "12,5 points", page: 85,
+          prompt: "Vous avez fait un stage santé pour être en meilleure forme. Vous écrivez à un(e) ami(e) français(e) pour lui raconter le stage (lieu, activités). Vous lui donnez aussi vos impressions. (60 mots minimum)",
+          vi: "Viết thư kể cho bạn Pháp nghe về một khóa tu sức khỏe bạn đã tham gia: địa điểm, hoạt động, cảm nhận. (tối thiểu 60 từ)",
+          model: "Chère Marie, Le mois dernier, j'ai fait un stage santé pendant 3 jours. C'était génial ! Nous étions 15 stagiaires. Nous avons dormi dans une grande maison, au milieu des montagnes. C'était calme et magnifique. Le matin, nous avions des cours sur le corps et les remèdes naturels. L'après-midi, nous faisions des activités physiques. Moi, j'ai fait du yoga et de la marche. Grâce à ce stage, je suis en pleine forme maintenant ! Je te conseille de le faire ! Je t'appelle bientôt ! Bisous, Lucie",
+        },
+        {
+          skill: "Production orale", points: "3 à 4 minutes", page: 85,
+          prompt: "Partie 3 de l'épreuve : monologue suivi (2 minutes environ). Sujet : Le sport. Quelle est votre activité sportive préférée ? Quand, où et avec qui la pratiquez-vous ? Pourquoi est-ce que vous aimez cette activité ? Quel sport n'aimez-vous pas ? Pourquoi ?",
+          vi: "Độc thoại khoảng 2 phút về chủ đề Thể thao: môn thể thao yêu thích, khi nào/ở đâu/với ai, vì sao thích, và môn không thích vì sao.",
+          model: "Je fais du karaté depuis 3 ans. J'adore ça ! Je suis inscrite au club de karaté de ma ville. Il n'y a pas de dojo, la salle spéciale pour les arts martiaux. Je vais au gymnase. Il y a une salle avec des tatamis, ce sont des grands coussins plats. J'y vais deux fois par semaine, le lundi et le mercredi soir, avec mon amie Maxine. J'ai la ceinture verte maintenant, c'est un bon niveau. J'adore le karaté parce que les gestes sont très beaux, c'est un peu comme de la danse. J'apprends aussi la discipline et le respect du professeur. Avant le karaté, je faisais du volley-ball. C'était trop difficile, le ballon arrivait fort donc j'avais toujours mal aux mains. Je n'ai pas aimé, j'ai arrêté au bout d'un an. Le karaté n'est pas aussi violent.",
+        },
+      ],
+    },
+  },
+
 };
 
 // Answers are compared loosely: case, accents on the apostrophe, doubled
