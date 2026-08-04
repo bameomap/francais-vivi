@@ -564,6 +564,621 @@ export const CAHIER_A2 = {
     },
   },
 
+  b2: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    grammar: {
+
+      // p0 — L'imparfait (cahier p. 15)
+      p0: [
+        {
+          // Only the answer key is printed in the corrigé (présent/imparfait
+          // per case) — the cahier doesn't reprint the individual sentences
+          // for this listening exercise, so the items below are labelled by
+          // case letter only, as in the source.
+          num: 1, page: 15, audioSrc: piste(12),
+          instruction: "Écoutez et cochez : la phrase est-elle au présent ou à l'imparfait ?",
+          vi: "Nghe từng câu (a→f) và cho biết câu đó ở thì hiện tại hay imparfait.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["présent", "imparfait"], answer: "présent", example: true },
+            { q: "b.", options: ["présent", "imparfait"], answer: "imparfait" },
+            { q: "c.", options: ["présent", "imparfait"], answer: "présent" },
+            { q: "d.", options: ["présent", "imparfait"], answer: "imparfait" },
+            { q: "e.", options: ["présent", "imparfait"], answer: "présent" },
+            { q: "f.", options: ["présent", "imparfait"], answer: "imparfait" },
+          ],
+        },
+        {
+          num: 2, page: 15,
+          instruction: "Complétez les terminaisons des verbes à l'imparfait.",
+          vi: "Điền đuôi động từ ở imparfait.",
+          type: "fill",
+          items: [
+            { q: "Je me rappelle, nous étudi…… ensemble.", answer: "étudiions", example: true },
+            { q: "Chaque semaine, j'écriv…… une lettre à ma meilleure amie.", answer: "écrivais" },
+            { q: "On chang…… souvent de professeur.", answer: "changeait" },
+            { q: "Dans ma famille, on chant…… beaucoup.", answer: "chantait" },
+            { q: "À cette époque, vous espér…… devenir célèbres.", answer: "espériez" },
+            { q: "Tu voy…… souvent tes cousins ?", answer: "voyais" },
+          ],
+        },
+        {
+          num: 3, page: 15,
+          instruction: "Conjuguez les verbes entre parenthèses à l'imparfait.",
+          vi: "Chia động từ trong ngoặc ở imparfait — đoạn văn kể kỷ niệm nghỉ hè.",
+          type: "fill",
+          items: [
+            { q: "L'hiver, on (partir) ___ à la neige.", answer: "partait", example: true },
+            { q: "Mon frère et moi, nous (faire) ___ du ski,", answer: "faisions" },
+            { q: "ma sœur (préférer) ___ le snowboard.", answer: "préférait" },
+            { q: "L'été, nous (aller) ___ toujours chez ma tante et mon oncle.", answer: "allions" },
+            { q: "À cette époque, ils (habiter) ___ dans le sud de la France.", answer: "habitaient" },
+            { q: "J'(adorer) ___ leur maison, leur jardin et tous ces moments passés en famille.", answer: "adorais" },
+            { q: "On (cuisiner) ___", answer: "cuisinait" },
+            { q: "et on (manger) ___ toujours tous ensemble.", answer: "mangeait" },
+            { q: "C'(être) ___ des moments inoubliables.", answer: "était" },
+          ],
+        },
+        {
+          num: 4, page: 15,
+          instruction: "Transformez les phrases au présent à l'imparfait.",
+          vi: "Chuyển câu từ hiện tại sang imparfait.",
+          type: "transform",
+          items: [
+            { q: "Anne oublie toujours tout.", answer: "Anne oubliait toujours tout.", example: true },
+            { q: "Étienne et Alex se déplacent souvent.", answer: "Étienne et Alex se déplaçaient souvent." },
+            { q: "Tu as beaucoup de photos de vacances.", answer: "Tu avais beaucoup de photos de vacances." },
+            { q: "Nous sommes souvent en retard.", answer: "Nous étions souvent en retard." },
+            { q: "Vous faites beaucoup de choses ensemble.", answer: "Vous faisiez beaucoup de choses ensemble." },
+            { q: "J'adore écouter le chant des oiseaux.", answer: "J'adorais écouter le chant des oiseaux." },
+            { q: "Tu me tiens toujours la main quand on va à l'école.", answer: "Tu me tenais toujours la main quand on allait à l'école." },
+          ],
+        },
+      ],
+
+      // p1 — Les pronoms y et en (cahier p. 17)
+      p1: [
+        {
+          num: 1, page: 17,
+          instruction: "Entourez le pronom y ou en qui convient dans les réponses.",
+          vi: "Chọn đại từ y hoặc en phù hợp trong câu trả lời.",
+          type: "choice",
+          items: [
+            { q: "– Tu reviens sur la même île l'été prochain ? – Oui, j'___ reviens.", options: ["y", "en"], answer: "y", example: true },
+            { q: "– Tu descends du sommet ? – Oui, j'___ descends.", options: ["y", "en"], answer: "en" },
+            { q: "– Vous êtes partis quand de chez vous ? – On ___ est partis il y a deux heures.", options: ["y", "en"], answer: "en" },
+            { q: "– Tes parents habitent à Cannes ? – Oui, ils ___ habitent depuis l'année dernière.", options: ["y", "en"], answer: "y" },
+            { q: "– Les enfants sont rentrés de leur balade ? – Oui, ils ___ sont rentrés.", options: ["y", "en"], answer: "en" },
+            { q: "– Tu aimes le climat dans ce pays ? – Oui, il ___ fait toujours beau.", options: ["y", "en"], answer: "y" },
+          ],
+        },
+        {
+          num: 2, page: 17,
+          instruction: "Complétez les phrases avec le pronom y ou en.",
+          vi: "Điền đại từ y hoặc en.",
+          type: "fill",
+          bank: ["y", "en"],
+          items: [
+            { q: "Ma sœur va tous les ans en Croatie. Elle ___ retourne encore cette année.", answer: "y", example: true },
+            { q: "Adrien va bientôt rentrer de Montpellier, il ___ est parti à 15 heures.", answer: "en" },
+            { q: "Cathy a visité une ferme. Elle ___ a acheté du fromage.", answer: "y" },
+            { q: "Je pars de Nice. J'___ pars très contente, c'était génial !", answer: "en" },
+            { q: "On revient de notre chalet. C'était difficile d'___ repartir, on était tellement bien !", answer: "en" },
+            { q: "Laure adore aller dans ce pays. Elle veut s'___ installer.", answer: "y" },
+          ],
+        },
+        {
+          // Le corrigé imprimé donne « en » pour d, alors que la question
+          // transcrite (« Ton père est parti à l'aéroport ? ») suggère plutôt
+          // « y ». Incohérence signalée dans la source, non résolue ici —
+          // réponse reprise telle quelle du corrigé p. 156.
+          num: 3, page: 17, audioSrc: piste(14),
+          instruction: "Écoutez et complétez les réponses comme dans l'exemple.",
+          vi: "Nghe câu hỏi rồi hoàn thành câu trả lời bằng y/en (như ví dụ). Lưu ý: câu d có một mâu thuẫn nhỏ trong sách gốc — đáp án giữ nguyên theo corrigé in sẵn.",
+          type: "fill",
+          items: [
+            { q: "Réponse a (exemple)", answer: "nous y allons souvent", example: true },
+            { q: "Réponse b", answer: "il en est revenu" },
+            { q: "Réponse c", answer: "elle n'y est pas" },
+            { q: "Réponse d", answer: "il en est parti" },
+            { q: "Réponse e", answer: "je n'y suis pas allé(e)" },
+            { q: "Réponse f", answer: "ils n'en sont pas rentrés" },
+            { q: "Réponse g", answer: "elles y sont toujours" },
+          ],
+        },
+        {
+          num: 4, page: 17,
+          instruction: "Complétez la carte postale avec les pronoms y ou en.",
+          vi: "Điền y hoặc en vào tấm bưu thiếp.",
+          type: "fill",
+          bank: ["y", "en"],
+          items: [
+            { q: "Je t'envoie un bisou de La Rochelle. J'___ suis avec mes amis.", answer: "y", example: true },
+            { q: "Nous ___ avons fait du vélo, c'était super !", answer: "y" },
+            { q: "Nous sommes partis de là-bas le soir. Nous ___ sommes revenus fatigués, mais heureux.", answer: "en" },
+            { q: "Hier, on est allés chez mes amis à Rochefort. On ___ a passé un très bon moment.", answer: "y" },
+            { q: "On est rentrés tard de chez eux : nous ___ sommes partis à minuit !", answer: "en" },
+            { q: "Demain, on retourne à Paris. Je dois ___ être lundi, je reprends le travail.", answer: "y" },
+          ],
+        },
+      ],
+
+      // p2 — La place de l'adjectif (cahier p. 19)
+      p2: [
+        {
+          // Comme pour p0/num1, seul le corrigé (avant/après le nom par cas)
+          // est imprimé — les phrases individuelles ne sont pas retranscrites.
+          num: 1, page: 19, audioSrc: piste(16),
+          instruction: "Écoutez et cochez : l'adjectif est-il placé avant ou après le nom ?",
+          vi: "Nghe từng câu (a→g) và cho biết tính từ đứng trước hay sau danh từ.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["avant le nom", "après le nom"], answer: "après le nom", example: true },
+            { q: "b.", options: ["avant le nom", "après le nom"], answer: "avant le nom" },
+            { q: "c.", options: ["avant le nom", "après le nom"], answer: "après le nom" },
+            { q: "d.", options: ["avant le nom", "après le nom"], answer: "après le nom" },
+            { q: "e.", options: ["avant le nom", "après le nom"], answer: "avant le nom" },
+            { q: "f.", options: ["avant le nom", "après le nom"], answer: "après le nom" },
+            { q: "g.", options: ["avant le nom", "après le nom"], answer: "avant le nom" },
+          ],
+        },
+        {
+          num: 2, page: 19,
+          instruction: "Remettez les mots dans l'ordre.",
+          vi: "Sắp xếp lại các từ thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["chaud", "un", "vêtement"], answer: "un vêtement chaud", example: true },
+            { tokens: ["touristes", "des", "japonais"], answer: "des touristes japonais" },
+            { tokens: ["souvenir", "inoubliable", "un"], answer: "un souvenir inoubliable" },
+            { tokens: ["une", "fraîcheur", "grande"], answer: "une grande fraîcheur" },
+            { tokens: ["vieux", "un", "port"], answer: "un vieux port" },
+            { tokens: ["des", "spéciaux", "moments"], answer: "des moments spéciaux" },
+            { tokens: ["gros", "un", "bateau"], answer: "un gros bateau" },
+          ],
+        },
+        {
+          num: 3, page: 19,
+          instruction: "Placez les adjectifs entre parenthèses dans les phrases.",
+          vi: "Đặt tính từ trong ngoặc vào đúng vị trí trong câu.",
+          type: "transform",
+          items: [
+            { q: "On a mangé un plat. (hongrois/bon)", answer: "On a mangé un bon plat hongrois.", example: true },
+            { q: "Regarde ce ciel ! (beau/bleu)", answer: "Regarde ce beau ciel bleu." },
+            { q: "Nous avons visité des villages. (corses/jolis)", answer: "Nous avons visité de jolis villages corses." },
+            { q: "J'ai vu des bâtiments. (modernes/grands)", answer: "J'ai vu de grands bâtiments modernes." },
+            { q: "Il nous a offert un souvenir. (petit/original)", answer: "Il nous a offert un petit souvenir original." },
+            { q: "C'est une fête. (traditionnelle/grande)", answer: "C'est une grande fête traditionnelle." },
+            { q: "Je préfère acheter des produits. (locaux/bons)", answer: "Je préfère acheter de bons produits locaux." },
+          ],
+        },
+        {
+          num: 4, page: 19,
+          instruction: "Complétez les réponses avec l'adjectif entre parenthèses. Attention aux accords et à la place des adjectifs.",
+          vi: "Hoàn thành câu trả lời với tính từ trong ngoặc — chú ý hợp giống–số và vị trí.",
+          type: "transform",
+          items: [
+            { q: "Tu as acheté des cadeaux ? (petit)", answer: "Oui, j'ai acheté de petits cadeaux.", example: true },
+            { q: "Vous vous souvenez de ces moments ? (incroyable)", answer: "Oui, on se souvient de ces moments incroyables." },
+            { q: "Tu es content de cette expérience ? (fantastique)", answer: "Oui, je suis contente d'une expérience fantastique." },
+            { q: "Quelle cuisine tu préfères ? (italien)", answer: "Je préfère la cuisine italienne." },
+            { q: "Tu as des chaussures de randonnée ? (bon)", answer: "Oui, j'ai de bonnes chaussures de randonnée." },
+            { q: "Vous allez louer un chalet ? (grand)", answer: "Oui, nous allons louer un grand chalet." },
+            { q: "Tu connais cette île ? (magique)", answer: "Oui, je connais une île magique." },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 20) — wired into the Phono step ─────
+    // Les 4 sous-exercices de la page sont Discrimination / Articulation /
+    // Graphies / Interprétation. Comme pour l'unité 1, seule la discrimination
+    // se prête à une correction automatique ; Articulation et Interprétation
+    // sont des exercices de répétition/lecture à voix haute sans réponse à
+    // vérifier (même choix que cahier_unite_1 : ces deux-là ne sont pas
+    // repris ici). Graphies (act. 3, marquage des liaisons ‿ sur un texte
+    // continu) n'est pas non plus repris : le corrigé source signale que la
+    // position exacte des liaisons n'est pas fiablement lisible sur le scan,
+    // donc il n'y a pas de réponse texte exploitable pour ce format.
+    phono: [
+      {
+        num: 1, page: 20, audioSrc: piste(17),
+        instruction: "Discrimination — écoutez et dites combien de fois vous entendez [n], [z] ou [t] dans chaque phrase.",
+        vi: "Nghe và đếm số lần xuất hiện của liên kết [n] (như « un ami »), [z] (như « des amis ») và [t] (như « petit ami ») trong mỗi câu.",
+        type: "choice",
+        items: [
+          { q: "a. (exemple) — combien de [n] ?", options: ["0", "1", "2"], answer: "1", example: true },
+          { q: "a. (exemple) — combien de [z] ?", options: ["0", "1", "2"], answer: "2", example: true },
+          { q: "a. (exemple) — combien de [t] ?", options: ["0", "1", "2"], answer: "1", example: true },
+          { q: "b. — combien de [n] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "b. — combien de [z] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "b. — combien de [t] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "c. — combien de [n] ?", options: ["0", "1", "2"], answer: "0" },
+          { q: "c. — combien de [z] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "c. — combien de [t] ?", options: ["0", "1", "2"], answer: "2" },
+          { q: "d. — combien de [n] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "d. — combien de [z] ?", options: ["0", "1", "2"], answer: "2" },
+          { q: "d. — combien de [t] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "e. — combien de [n] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "e. — combien de [z] ?", options: ["0", "1", "2"], answer: "1" },
+          { q: "e. — combien de [t] ?", options: ["0", "1", "2"], answer: "1" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed by the cycle's vocab step ──────────────────
+    vocab: {
+      // Cycle 1 — Le souvenir (cahier p. 16)
+      c1_vocab: [
+        {
+          num: 1, page: 16,
+          instruction: "Associez les phrases aux images correspondantes (indiquez le numéro de l'image).",
+          vi: "Nối câu với số ảnh tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Tu vois, c'est là-bas.", answer: "1", example: true },
+            { q: "Le chant des oiseaux le matin, j'adore !", answer: "4" },
+            { q: "Ça sent mauvais !", answer: "5" },
+            { q: "Je te tiens la main.", answer: "6" },
+            { q: "On aime regarder des albums photos.", answer: "3" },
+            { q: "Ça n'a pas bon goût.", answer: "2" },
+          ],
+        },
+        {
+          num: 2, page: 16,
+          instruction: "Entourez le mot ou l'expression correct.",
+          vi: "Chọn từ hoặc cụm từ đúng.",
+          type: "choice",
+          items: [
+            { q: "Le chant des oiseaux, c'est un ___ agréable.", options: ["bruit", "goût"], answer: "bruit", example: true },
+            { q: "J'aime ___ l'odeur du pain frais.", options: ["sentir", "voir"], answer: "sentir" },
+            { q: "Elle regarde l'album photo pour ___.", options: ["oublier son enfance", "replonger dans son enfance"], answer: "replonger dans son enfance" },
+            { q: "On ne veut pas se rappeler un ___.", options: ["souvenir heureux", "mauvais souvenir"], answer: "mauvais souvenir" },
+            { q: "Avant, on avait une grande maison avec une jolie ___ sur la mer.", options: ["vue", "saveur"], answer: "vue" },
+            { q: "J'ai adoré ma fête d'anniversaire, c'est un souvenir ___.", options: ["difficile", "inoubliable"], answer: "inoubliable" },
+            { q: "J'aime ce parfum, ça sent ___.", options: ["bon", "mauvais"], answer: "bon" },
+          ],
+        },
+        {
+          num: 3, page: 16,
+          instruction: "Complétez le texte avec les mots et expressions suivants : saveurs – souvenirs heureux – sentir – regarde – raconte – goûter.",
+          vi: "Điền từ vào đoạn văn.",
+          type: "fill",
+          bank: ["saveurs", "souvenirs heureux", "sentir", "regarde", "raconte", "goûter"],
+          items: [
+            { q: "On ___ souvent les vieilles photos de famille avec ma mère.", answer: "regarde", example: true },
+            { q: "Elle me ___ toujours plein de ……", answer: "raconte" },
+            { q: "… plein de ___ . Ça me plaît.", answer: "souvenirs heureux" },
+            { q: "Elle aimait ___ les bonnes odeurs,", answer: "sentir" },
+            { q: "……, ___ les plats qu'elles cuisinaient ensemble.", answer: "goûter" },
+            { q: "Elle se souvient de toutes ces ___, comme si c'était hier.", answer: "saveurs" },
+          ],
+        },
+        {
+          num: 4, page: 16, audioSrc: piste(13),
+          instruction: "Écoutez et associez chaque phrase à un souvenir.",
+          vi: "Nghe và nối mỗi câu với một loại kỷ niệm.",
+          type: "fill",
+          items: [
+            { q: "Souvenir d'adolescence → quelle phrase ?", answer: "a", example: true },
+            { q: "Souvenir de vacances → quelle phrase ?", answer: "e" },
+            { q: "Souvenir d'enfance → quelle phrase ?", answer: "b" },
+            { q: "Souvenir de famille → quelle phrase ?", answer: "d" },
+            { q: "Souvenir de jeunesse → quelle phrase ?", answer: "f" },
+            { q: "Souvenir d'école → quelle phrase ?", answer: "c" },
+          ],
+        },
+      ],
+
+      // Cycle 2 — Les paysages et la météo (cahier p. 18)
+      c2_vocab: [
+        {
+          num: 1, page: 18,
+          instruction: "Classez les mots et expressions suivants : une île – une prairie – un chalet – une mouette – un sommet – un port – une ferme.",
+          vi: "Xếp các từ vào đúng nhóm: biển / núi / nông thôn.",
+          type: "match",
+          pairs: [
+            { l: "une île (exemple)", r: "La mer" },
+            { l: "une mouette",        r: "La mer" },
+            { l: "un port",            r: "La mer" },
+            { l: "un chalet",          r: "La montagne" },
+            { l: "un sommet",          r: "La montagne" },
+            { l: "une ferme",          r: "La campagne" },
+            { l: "une prairie",        r: "La campagne" },
+          ],
+        },
+        {
+          num: 2, page: 18,
+          instruction: "Lisez et associez les phrases aux images (indiquez le numéro de l'image).",
+          vi: "Đọc và nối câu với số ảnh tương ứng.",
+          type: "fill",
+          items: [
+            { q: "On a passé nos vacances au bord d'un lac.", answer: "5", example: true },
+            { q: "Le ciel est tout gris, il va y avoir un orage.", answer: "3" },
+            { q: "Aujourd'hui, il y a beaucoup de vent.", answer: "6" },
+            { q: "Derrière la ferme, il y a ce très beau champ.", answer: "1" },
+            { q: "Sur cette côte, il y a beaucoup de dunes.", answer: "4" },
+            { q: "Cette barrière de corail est magnifique.", answer: "2" },
+          ],
+        },
+        {
+          num: 3, page: 18,
+          instruction: "Répondez par vrai ou faux.",
+          vi: "Đúng hay sai?",
+          type: "truefalse",
+          items: [
+            { q: "Quand la mer avance sur la plage, c'est la marée haute.", answer: true, example: true },
+            { q: "Quand il fait froid, on parle de chaleur.", answer: false },
+            { q: "Un agriculteur habite et travaille dans une ferme.", answer: true },
+            { q: "Le sommet est le point le plus haut d'une montagne.", answer: true },
+            { q: "Quand il y a du soleil, le ciel est gris.", answer: false },
+            { q: "On peut voir des animaux manger dans une prairie.", answer: true },
+            { q: "Quand on habite sur la côte, on est loin de la mer.", answer: false },
+          ],
+        },
+        {
+          num: 4, page: 18, audioSrc: piste(15),
+          instruction: "Écoutez et associez les dialogues aux situations (indiquez le numéro du dialogue).",
+          vi: "Nghe và nối mỗi tình huống với số đoạn hội thoại tương ứng.",
+          type: "fill",
+          items: [
+            { q: "C'est la canicule. → quel dialogue ?", answer: "1", example: true },
+            { q: "Le temps est gris. → quel dialogue ?", answer: "5" },
+            { q: "C'est la marée basse. → quel dialogue ?", answer: "2" },
+            { q: "À la plage, c'est agréable. → quel dialogue ?", answer: "4" },
+            { q: "C'est un climat différent. → quel dialogue ?", answer: "6" },
+            { q: "C'est un temps sec. → quel dialogue ?", answer: "3" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 22-23, noté /40) ──────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // Comme pour b1, la compréhension écrite de la page 21 (texte + vrai/faux
+    // + QCM + vocabulaire) et les mini-jeux corrigeables de la page 26 sont
+    // repris ici aussi (même traitement que le num7-9 « Abd Al Malik » /
+    // « Barrez l'intrus » de b1). Le jeu de rôle libre de la page 21 et les
+    // jeux 1 et 3 de la page 26 (brainstorm en groupe, mots cachés à
+    // découper) n'ont pas de réponse à vérifier et ne sont pas repris.
+    bilan: [
+      {
+        num: 1, page: 22,
+        instruction: "Conjuguez les verbes entre parenthèses à l'imparfait. (/7)",
+        vi: "Chia động từ trong ngoặc ở imparfait.",
+        type: "fill",
+        items: [
+          { q: "À cette époque, nous (habiter) ___ près d'un lac.", answer: "habitions" },
+          { q: "On (se déplacer) ___ beaucoup à vélo.", answer: "se déplaçait" },
+          { q: "Nos enfants (aller) ___ à l'école près de la maison.", answer: "allaient" },
+          { q: "Tu (faire) ___ une randonnée tous les week-ends.", answer: "faisais" },
+          { q: "Je (voyager) ___ souvent.", answer: "voyageais" },
+          { q: "Elle (commencer) ___ à comprendre le français.", answer: "commençait" },
+          { q: "Nous (écrire) ___ des poèmes ensemble.", answer: "écrivions" },
+        ],
+      },
+      {
+        num: 2, page: 22,
+        instruction: "Transformez les phrases en remplaçant les éléments soulignés par y ou en. (/7)",
+        vi: "Thay thành phần được gạch chân bằng y hoặc en.",
+        type: "transform",
+        items: [
+          { q: "Je n'étais pas heureuse dans cette école.", answer: "Je n'y étais pas heureuse." },
+          { q: "Nous sommes partis de Lyon à 13 heures.", answer: "Nous en sommes partis à 13 heures." },
+          { q: "À quelle heure tu vas à la plage ?", answer: "À quelle heure tu y vas ?" },
+          { q: "Elle est descendue rapidement de l'avion.", answer: "Elle en est descendue rapidement." },
+          { q: "Tu ne passes pas beaucoup de temps dans l'eau.", answer: "Tu n'y passes pas beaucoup de temps." },
+          { q: "Vous vous promenez souvent sur le port ?", answer: "Vous vous y promenez souvent ?" },
+          { q: "Quand est-ce que tu repars de la ville ?", answer: "Quand est-ce que tu en repars ?" },
+        ],
+      },
+      {
+        num: 3, page: 22,
+        instruction: "Accordez et placez les adjectifs entre parenthèses dans les phrases. (/6)",
+        vi: "Hợp giống–số và đặt tính từ trong ngoặc vào đúng vị trí.",
+        type: "transform",
+        items: [
+          { q: "Nous avons créé une affiche. (nouveau)", answer: "Nous avons créé une nouvelle affiche." },
+          { q: "J'ai acheté des espadrilles au Maroc. (confortable)", answer: "J'ai acheté des espadrilles confortables au Maroc." },
+          { q: "Ce plat a un goût. (fort)", answer: "Ce plat a un goût fort." },
+          { q: "C'est une odeur. (insupportable)", answer: "C'est une odeur insupportable." },
+          { q: "Je me rappelle toutes ces saveurs. (incroyable)", answer: "Je me rappelle de toutes ces saveurs incroyables." },
+          { q: "Tu as rencontré beaucoup d'étudiants. (étranger)", answer: "Tu as rencontré beaucoup d'étudiants étrangers." },
+        ],
+      },
+      {
+        num: 4, page: 23,
+        instruction: "Vocabulaire — Associez les débuts et les fins de phrases. (/5)",
+        vi: "Nối đầu câu với cuối câu.",
+        type: "match",
+        pairs: [
+          { l: "C'est un mauvais souvenir,",       r: "je veux oublier ce moment." },
+          { l: "Je n'aime pas cette odeur,",        r: "ça sent mauvais." },
+          { l: "Le matin, on allait à l'école avec ma sœur,", r: "je lui tenais souvent la main." },
+          { l: "Je regarde mes photos d'enfance,",  r: "je replonge dans mon enfance." },
+          { l: "Par ma fenêtre, je vois les montagnes,", r: "c'est une jolie vue." },
+        ],
+      },
+      {
+        num: 5, page: 23,
+        instruction: "Complétez les phrases avec les mots suivants : bruit – jeunesse – goûter – joyeux – sent. (/5)",
+        vi: "Điền từ vào chỗ trống.",
+        type: "fill",
+        bank: ["bruit", "jeunesse", "goûter", "joyeux", "sent"],
+        items: [
+          { q: "J'ai fait un gâteau, tu veux ___ ?", answer: "goûter" },
+          { q: "Le chant des oiseaux est un ___ agréable.", answer: "bruit" },
+          { q: "À cette époque, j'avais 25 ans, j'ai beaucoup de souvenirs de ___ .", answer: "jeunesse" },
+          { q: "J'adore son parfum, il ___ très bon.", answer: "sent" },
+          { q: "On a beaucoup ri ensemble, on a beaucoup de souvenirs ___ .", answer: "joyeux" },
+        ],
+      },
+      {
+        num: 6, page: 23,
+        instruction: "Entourez la réponse correcte. (/5)",
+        vi: "Chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Il n'y a pas de soleil, le ciel est ___.", options: ["bleu", "gris"], answer: "gris" },
+          { q: "On annonce encore de la pluie pour ce week-end, le temps est ___.", options: ["sec", "humide"], answer: "humide" },
+          { q: "Pendant notre randonnée, on s'est baigné dans un ___ de montagne.", options: ["lac", "champ"], answer: "lac" },
+          { q: "Il y a des ___ de sable sur cette plage.", options: ["dunes", "prairies"], answer: "dunes" },
+          { q: "Il a fait plus de 40 degrés, c'était ___.", options: ["la canicule", "l'orage"], answer: "la canicule" },
+        ],
+      },
+      {
+        num: 7, page: 23,
+        instruction: "Remplacez les images par les mots correspondants. (/5)",
+        vi: "Thay hình ảnh bằng từ tương ứng.",
+        type: "fill",
+        items: [
+          { q: "Nous passions tous les hivers dans notre …… (image : un chalet)", answer: "chalet" },
+          { q: "L'été dernier, j'ai travaillé dans une …… (image : une ferme)", answer: "ferme" },
+          { q: "Nous sommes montés jusqu'au …… (image : un sommet)", answer: "sommet" },
+          { q: "Regarde cette jolie …… (image : une prairie)", answer: "prairie" },
+          { q: "Nous nous promenions souvent sur le …… (image : un port)", answer: "port" },
+        ],
+      },
+      {
+        // Page 21 — Compréhension écrite : « La Commode aux tiroirs de
+        // couleurs », Olivia Ruiz, 2020.
+        num: 8, page: 21,
+        instruction: "Compréhension écrite — « La Commode aux tiroirs de couleurs » — Vrai ou faux ?",
+        vi: "Đọc đoạn trích của Olivia Ruiz rồi trả lời Đúng/Sai.",
+        type: "truefalse",
+        items: [
+          { q: "L'écrivaine raconte un souvenir d'école.", answer: false },
+          { q: "Elle aimait faire les courses et parler français aux commerçants.", answer: true },
+        ],
+      },
+      {
+        num: 9, page: 21,
+        instruction: "Compréhension écrite — Cochez la bonne réponse.",
+        vi: "Chọn đáp án đúng dựa trên đoạn trích.",
+        type: "choice",
+        items: [
+          { q: "Quand elle parlait français, elle :", options: ["avait un accent espagnol", "n'avait pas d'accent espagnol"], answer: "n'avait pas d'accent espagnol" },
+          { q: "André était :", options: ["français", "espagnol"], answer: "français" },
+          { q: "Il habitait :", options: ["dans la même rue", "en face de l'immeuble"], answer: "dans la même rue" },
+          { q: "Il savait très bien :", options: ["coudre", "cuisiner"], answer: "coudre" },
+        ],
+      },
+      {
+        num: 10, page: 21,
+        instruction: "De quoi parlent l'écrivaine et André ?",
+        vi: "Hai người nói chuyện về đề tài gì?",
+        type: "fill",
+        items: [
+          { q: "De quoi parlent-ils ?", answer: "Ils parlent de l'Espagne." },
+        ],
+      },
+      {
+        num: 11, page: 21,
+        instruction: "Vocabulaire — Cochez la bonne signification.",
+        vi: "Chọn đúng nghĩa của cụm từ.",
+        type: "choice",
+        items: [
+          { q: "« Ces moments étaient un bol d'air. »", options: ["Ces moments sortaient de la vie ordinaire et c'était agréable.", "Ces moments étaient fatigants."], answer: "Ces moments sortaient de la vie ordinaire et c'était agréable." },
+          { q: "« Il regardait les femmes à l'œuvre. »", options: ["Il regardait les femmes travailler.", "Il regardait un tableau."], answer: "Il regardait les femmes travailler." },
+          { q: "« Ma place prenait une autre tournure. »", options: ["Ma place changeait.", "Ma place disparaissait."], answer: "Ma place changeait." },
+        ],
+      },
+      {
+        // Page 26 — Jeux, act. 2 : correspondance symbole → verbe non
+        // entièrement lisible sur le scan source ; réponses reprises fidèlement
+        // dans l'ordre d'apparition des blancs, sans reconstruction indépendante.
+        num: 12, page: 26,
+        instruction: "Jeux — Remplacez les symboles par les verbes correspondants et conjuguez-les à l'imparfait.",
+        vi: "Thay các ký hiệu bằng động từ phù hợp rồi chia ở imparfait (thứ tự chỗ trống trong bài).",
+        type: "fill",
+        bank: ["se sentir", "se réveiller", "être", "préparer", "avoir", "descendre", "s'installer", "dire", "boire", "commencer"],
+        items: [
+          { q: "Tous les dimanches matin, je [♥] ___ avec l'odeur des crêpes", answer: "me réveillais", example: true },
+          { q: "que mon père [♦] ___ dans la cuisine.", answer: "était" },
+          { q: "Mon frère et moi, nous y [■] ___, encore en pyjama.", answer: "descendions" },
+          { q: "On [★] ___ un rapide bonjour à nos parents,", answer: "disait" },
+          { q: "on [★] ___ à table", answer: "s'installait" },
+          { q: "et on [❖] ___ à manger.", answer: "commençait" },
+          { q: "Mes parents [❖] ___ leur café au lait,", answer: "buvaient" },
+          { q: "nous, on [▲] ___ notre chocolat chaud.", answer: "avait" },
+          { q: "Ces moments [♦] ___ très simples", answer: "étaient" },
+          { q: "mais on [✳] ___ heureux.", answer: "se sentait" },
+        ],
+      },
+      {
+        num: 13, page: 26,
+        instruction: "Jeux — Qui suis-je ?",
+        vi: "Tôi là ai?",
+        type: "fill",
+        items: [
+          { q: "Je suis blanche, j'aime la mer et les poissons.", answer: "une mouette", example: true },
+          { q: "Je vois la mer de tous les côtés.", answer: "une île" },
+          { q: "Je me lève le matin et je me couche le soir.", answer: "le soleil" },
+          { q: "Je suis la frontière entre la mer et la terre.", answer: "la côte" },
+          { q: "Les enfants m'utilisent pour faire un château sur la plage.", answer: "le sable" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 24-25) ────────────────────────────
+    // Le livre n'a pas de page « Préparation au DELF » propre à l'Unité 2
+    // (contrairement aux unités 1 et 3) — aucun coLivre pour cette unité.
+    delf: {
+      co: [
+        {
+          num: 1, page: 24, audioSrc: piste(21),
+          instruction: "Compréhension de l'oral — vous écoutez trois annonces radio. (6 points)",
+          vi: "Nghe 3 thông báo radio rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Ce week-end, la médiathèque propose…", options: ["de lire des BD", "de voir des artistes", "d'écrire ses souvenirs"], answer: "d'écrire ses souvenirs" },
+            { q: "2. Pour participer, il faut…", options: ["s'inscrire en ligne", "téléphoner", "se présenter à l'accueil"], answer: "s'inscrire en ligne" },
+            { q: "3. Le thème de l'émission est…", options: ["la santé", "le travail", "les congés"], answer: "les congés" },
+            { q: "4. Pour témoigner, vous devez…", options: ["téléphoner", "écrire un mail", "envoyer un sms"], answer: "téléphoner" },
+            { q: "5. Vous allez prendre des photos de…", options: ["nature", "maison", "nourriture"], answer: "nourriture" },
+            { q: "6. Vous pouvez gagner…", options: ["de l'argent", "un petit-déjeuner", "des magazines"], answer: "des magazines" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — lettre de l'association « Les amoureux de
+      // la Bretagne » (anniversaire des 10 ans de l'association, le 7 juin).
+      // Le texte de la lettre elle-même n'est pas reproduit dans le corrigé
+      // source, seulement les questions et réponses — items ci-dessous.
+      ce: [
+        {
+          num: 2, page: 24,
+          instruction: "Compréhension des écrits — Lettre de l'association « Les amoureux de la Bretagne ». (6 points)",
+          vi: "Đọc thư mời của hội « Les amoureux de la Bretagne » (kỷ niệm 10 năm, ngày 7 tháng 6) rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Vous êtes invité pour fêter…", options: ["un mariage", "une naissance", "un anniversaire"], answer: "un anniversaire" },
+            { q: "2. Quelle activité est proposée aux enfants ?", options: ["des crayons de couleur", "des crêpes", "des jouets de plage"], answer: "des crêpes" },
+            { q: "3. L'exposition a pour thème…", options: ["les animaux", "les paysages de la région", "les plats typiques"], answer: "les paysages de la région" },
+            { q: "4. Que recevra le gagnant ?", options: ["des billets", "un trophée", "un poisson rouge"], answer: "des billets" },
+            { q: "5. L'association a besoin d'aide pour…", options: ["la cuisine", "la décoration", "le rangement"], answer: "le rangement" },
+            { q: "6. Pour vous inscrire, vous devez…", options: ["aller sur place", "téléphoner à Aude", "envoyer un message"], answer: "envoyer un message" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 25,
+          prompt: "Vous avez reçu ce courriel de votre amie belge Ève : « Coucou, Je t'invite pour mon anniversaire le week-end prochain à Arcachon ! J'ai loué une petite maison pour 15 personnes, ça va être génial ! Tu peux m'aider pour préparer les repas ? Je suis nulle en cuisine ! À bientôt, Ève » Vous répondez à Ève. Vous acceptez son invitation, vous posez des questions sur l'organisation et vous lui proposez quelques idées de repas. (60 mots minimum)",
+          vi: "Viết thư trả lời Ève: nhận lời mời sinh nhật, hỏi thêm về tổ chức, gợi ý vài món ăn. (tối thiểu 60 từ)",
+          model: "Salut Ève, Merci pour l'invitation. Oui, je viens à ton anniversaire, ça va être super ! Je peux venir avec une amie ? Elle s'appelle Salomé, elle est très sympa. J'adore cuisiner alors je vais t'aider. Pour le dîner, nous pouvons préparer de grandes salades à partager ou faire des crêpes. J'apporte ma recette de gâteau au chocolat pour le dessert ! À samedi ! Diane",
+        },
+        {
+          skill: "Production orale", points: "3 à 4 minutes", page: 25,
+          prompt: "Partie 3 de l'épreuve : exercice en interaction. Sujet : Souvenirs de vacances. Vous êtes en vacances à Montpellier, dans le sud de la France. Vous voulez acheter des souvenirs pour vos amis et votre famille. Vous êtes dans un magasin, vous demandez des conseils au vendeur et vous vous renseignez sur les prix. (L'examinateur joue le rôle du vendeur.)",
+          vi: "Đóng vai: bạn đang đi mua quà lưu niệm ở Montpellier, hỏi người bán tư vấn và hỏi giá. (giám khảo đóng vai người bán hàng)",
+          model: "– Bonjour madame. – Bonjour. – Je voudrais acheter un souvenir de Montpellier pour mon père. Vous pouvez me conseiller ? Il adore lire et il aime beaucoup l'architecture. – Oui, bien sûr. Il y a un livre sur les plus beaux monuments de la ville avec de très belles photos. Il y a aussi un magazine sur l'histoire de l'architecture dans le sud de la France. – Je préfère le livre avec les photos. Quel est le prix s'il vous plaît ? – Il est à 29,99 euros. – Je vais le prendre, merci. Je cherche aussi un petit souvenir pour mon neveu, il a 7 ans. Il adore jouer bien sûr et il aime beaucoup les animaux. – Pour un enfant je vous conseille ce puzzle avec des bateaux, il plaît beaucoup aux petits. Nous avons aussi un livre de coloriages sur les animaux de la mer. – Vous avez un puzzle avec des animaux ? – Oui, j'ai un puzzle avec des éléphants mais ce ne sont pas des animaux de Montpellier ! – Ah d'accord. Alors je ne prends pas le puzzle mais je prends le livre de coloriage sur les animaux. Il coûte combien ? – Il est à 7 euros. – D'accord, merci. Pour ma meilleure amie, je cherche un tee-shirt ou une robe. Vous vendez aussi des habits ? – J'ai seulement des tee-shirts avec le nom de la ville dessus. – Vous avez un tee-shirt de couleur jaune ? C'est sa couleur préférée. – Non, désolée. Je n'ai que du blanc, du rouge et du bleu. – Dommage. Alors je vais prendre le tee-shirt rouge. Est-ce que vous avez la taille M pour ce modèle ? – Ah non, désolée. Il reste seulement les tailles S et L. – Alors je ne prends pas de tee-shirt. Ce n'est pas grave. – D'accord. Vous voulez des paquets cadeaux pour les deux livres ? – Oui, s'il vous plaît. – D'accord. Le total est à 51,14 euros s'il vous plaît. – Très bien. Je peux payer par carte ? – Oui, c'est possible. – Merci beaucoup. Bonne journée. – À vous aussi, au revoir.",
+        },
+      ],
+    },
+  },
+
   b3: {
     // DELF A2 blanc (livre p. 54) — no cahier data built yet for this unit,
     // so only the livre's own DELF prep listening is included here (same
