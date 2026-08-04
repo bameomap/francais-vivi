@@ -1218,6 +1218,587 @@ export const CAHIER_A2 = {
       ],
     },
   },
+  b5: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    grammar: {
+
+      // p0 — Le futur simple (cahier p. 51)
+      p0: [
+        {
+          // Seul le corrigé (présent/futur par cas) est imprimé — les phrases
+          // individuelles ne sont pas retranscrites dans le cahier (même
+          // traitement que b2 p0 num1 / p2 num1).
+          num: 1, page: 51, audioSrc: piste(45),
+          instruction: "Écoutez et dites si la phrase est au présent ou au futur simple.",
+          vi: "Nghe từng câu (a→g) và cho biết câu đó ở thì hiện tại hay futur simple.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["présent", "futur simple"], answer: "présent", example: true },
+            { q: "b.", options: ["présent", "futur simple"], answer: "futur simple" },
+            { q: "c.", options: ["présent", "futur simple"], answer: "présent" },
+            { q: "d.", options: ["présent", "futur simple"], answer: "futur simple" },
+            { q: "e.", options: ["présent", "futur simple"], answer: "futur simple" },
+            { q: "f.", options: ["présent", "futur simple"], answer: "présent" },
+            { q: "g.", options: ["présent", "futur simple"], answer: "futur simple" },
+          ],
+        },
+        {
+          num: 2, page: 51,
+          instruction: "Entourez le verbe correct.",
+          vi: "Chọn dạng động từ đúng.",
+          type: "choice",
+          items: [
+            { q: "Ils ___ l'intelligence artificielle pour fabriquer ce robot.", options: ["utiliseront", "utilisera"], answer: "utiliseront", example: true },
+            { q: "En 2050, tu ___ l'évolution des machines.", options: ["verras", "verrai"], answer: "verras" },
+            { q: "La semaine prochaine, elle ___ un robot très utile.", options: ["fabriquera", "fabriqueras"], answer: "fabriquera" },
+            { q: "Vous ___ imprimer cet objet en 3D ?", options: ["pourrez", "pourrai"], answer: "pourrez" },
+            { q: "Avec un moteur électrique, l'appareil ne ___ pas en panne.", options: ["tombera", "tomberas"], answer: "tombera" },
+            { q: "Je ___ cette innovation au salon des technologies.", options: ["découvrira", "découvrirai"], answer: "découvrirai" },
+          ],
+        },
+        {
+          num: 3, page: 51,
+          instruction: "Conjuguez les verbes entre parenthèses au futur simple.",
+          vi: "Chia động từ trong ngoặc ở futur simple.",
+          type: "fill",
+          items: [
+            { q: "Ils (être) ___ au salon des innovations technologiques.", answer: "seront", example: true },
+            { q: "Où (vivre) ___-tu l'année prochaine ?", answer: "vivras" },
+            { q: "Ils (aller) ___ travailler avec de nouveaux moyens de transport.", answer: "iront" },
+            { q: "Je (voir) ___ comment organiser mon travail à distance.", answer: "verrai" },
+            { q: "Les étudiants (avoir) ___ des cours avec un hologramme.", answer: "auront" },
+            { q: "Qu'est-ce que vous (faire) ___ après vos cours à l'université ?", answer: "ferez" },
+            { q: "Je ne (pouvoir) ___ pas me téléporter !", answer: "pourrai" },
+          ],
+        },
+        {
+          num: 4, page: 51,
+          instruction: "Transformez les phrases au présent au futur simple.",
+          vi: "Chuyển câu từ hiện tại sang futur simple.",
+          type: "transform",
+          items: [
+            { q: "Il invente un logiciel.", answer: "Demain, il inventera un logiciel.", example: true },
+            { q: "Pauline veut changer de voiture.", answer: "Demain, Pauline voudra aussi changer de voiture." },
+            { q: "Nous fabriquons des objets pratiques.", answer: "L'année prochaine, nous fabriquerons aussi des objets pratiques." },
+            { q: "Vous savez travailler à distance.", answer: "Dans le futur, vous saurez aussi travailler à distance." },
+            { q: "Il y a des cours avec des hologrammes.", answer: "Demain, il y aura aussi des cours avec des hologrammes." },
+            { q: "Des robots ménagers font des tâches domestiques.", answer: "Dans le futur, des robots ménagers feront aussi des tâches domestiques." },
+          ],
+        },
+      ],
+
+      // p1 — La condition avec si (cahier p. 53)
+      p1: [
+        {
+          num: 1, page: 53, audioSrc: piste(47),
+          instruction: "Écoutez les phrases et cochez la structure entendue.",
+          vi: "Nghe từng câu (a→f) và cho biết cấu trúc nào được dùng.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["Si + présent + présent", "Si + présent + impératif", "Si + présent + futur"], answer: "Si + présent + impératif", example: true },
+            { q: "b.", options: ["Si + présent + présent", "Si + présent + impératif", "Si + présent + futur"], answer: "Si + présent + présent" },
+            { q: "c.", options: ["Si + présent + présent", "Si + présent + impératif", "Si + présent + futur"], answer: "Si + présent + futur" },
+            { q: "d.", options: ["Si + présent + présent", "Si + présent + impératif", "Si + présent + futur"], answer: "Si + présent + futur" },
+            { q: "e.", options: ["Si + présent + présent", "Si + présent + impératif", "Si + présent + futur"], answer: "Si + présent + présent" },
+            { q: "f.", options: ["Si + présent + présent", "Si + présent + impératif", "Si + présent + futur"], answer: "Si + présent + impératif" },
+          ],
+        },
+        {
+          num: 2, page: 53,
+          instruction: "Entourez le verbe correct.",
+          vi: "Chọn dạng động từ đúng.",
+          type: "choice",
+          items: [
+            { q: "Tu pourras lire mon mail si tu ___ ta tablette.", options: ["prends", "prendras"], answer: "prends", example: true },
+            { q: "Si vous ___ une visioconférence, nous y participerons.", options: ["organisez", "organiserez"], answer: "organisez" },
+            { q: "J'enverrai un message à Pierre s'il ne ___ pas au téléphone.", options: ["répond", "répondra"], answer: "répond" },
+            { q: "Si tu ne ___ pas cette imprimante en magasin, commande-la en ligne !", options: ["trouves", "trouveras"], answer: "trouves" },
+            { q: "Les jeunes se désabonneront des réseaux sociaux quand ils ___ se déconnecter de leur téléphone.", options: ["voudront", "veulent"], answer: "voudront" },
+            { q: "Si notre ordinateur ___ toujours en panne lundi prochain, nous ne serons pas joignables par mail.", options: ["est", "sera"], answer: "est" },
+            { q: "Vous gagnerez du temps si vous ___ cette application.", options: ["téléchargez", "téléchargerez"], answer: "téléchargez" },
+          ],
+        },
+        {
+          num: 3, page: 53,
+          instruction: "Conjuguez les verbes entre parenthèses au futur simple.",
+          vi: "Chia động từ trong ngoặc ở futur simple.",
+          type: "fill",
+          items: [
+            { q: "Gaëlle (lire) ___ ses courriels au bureau si son PC fonctionne.", answer: "lira", example: true },
+            { q: "Je te (répondre) ___ si tu m'envoies un message.", answer: "répondrai" },
+            { q: "Quand vous (contacter) ___ M. Moreaux, il vous expliquera comment utiliser ce logiciel.", answer: "contacterez" },
+            { q: "Si vous continuez à me parler comme ça, la prochaine fois, je vous (raccrocher) ___ au nez.", answer: "raccrocherai" },
+            { q: "Votre téléphone (s'éteindre) ___ très vite si vous le laissez dans le froid !", answer: "s'éteindra" },
+            { q: "Si tu ne peux pas venir samedi, on (s'appeler) ___ .", answer: "s'appellera" },
+            { q: "Quand tes amis (venir) ___ à la fête, on fera un selfie.", answer: "viendront" },
+          ],
+        },
+        // Act. 4 « Terminez les phrases » n'est pas reprise : sauf pour
+        // l'exemple, le corrigé ne donne que des exemples de réponses
+        // libres (production personnelle), sans réponse unique à vérifier —
+        // même choix que pour Articulation/Interprétation en phono.
+      ],
+
+      // p2 — Le pronom on (cahier p. 55)
+      p2: [
+        {
+          num: 1, page: 55,
+          instruction: "Quels mots peuvent remplacer le pronom on ? Associez.",
+          vi: "Nối câu với từ có thể thay thế cho « on » (Nous / Quelqu'un / Les gens).",
+          type: "match",
+          pairs: [
+            { l: "Dans ma famille, on utilise de plus en plus de robots ménagers.", r: "Nous" },
+            { l: "On fait un selfie tous ensemble ?",                              r: "Quelqu'un" },
+            { l: "On va au salon des innovations, tu viens ?",                     r: "Nous" },
+            { l: "On a volé mon smartphone dans le bus.",                          r: "Quelqu'un" },
+            { l: "Dans ces entreprises, on utilise une imprimante 3D.",            r: "Les gens" },
+            { l: "En 2050, on mangera des comprimés dans tous les pays.",          r: "Les gens" },
+          ],
+        },
+        {
+          num: 2, page: 55, audioSrc: piste(49),
+          instruction: "Que remplace le pronom on ? Écoutez et cochez.",
+          vi: "Nghe từng câu (a→g) và cho biết « on » thay cho Quelqu'un / Nous / Les gens.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Quelqu'un", example: true },
+            { q: "b.", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Nous" },
+            { q: "c.", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Les gens" },
+            { q: "d.", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Nous" },
+            { q: "e.", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Quelqu'un" },
+            { q: "f.", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Les gens" },
+            { q: "g.", options: ["Quelqu'un", "Nous", "Les gens"], answer: "Nous" },
+          ],
+        },
+        {
+          num: 3, page: 55,
+          instruction: "Transformez les phrases avec quelqu'un, les gens ou nous.",
+          vi: "Chuyển câu dùng « on » sang quelqu'un / les gens / nous.",
+          type: "transform",
+          items: [
+            { q: "Dans le futur, on voyagera en voiture volante.", answer: "Dans le futur, les gens voyageront en voiture volante.", example: true },
+            { q: "On emploie la reconnaissance faciale dans les aéroports.", answer: "Les gens emploient la reconnaissance faciale dans les aéroports." },
+            { q: "On a découvert des innovations intéressantes dans notre entreprise.", answer: "Nous avons découvert des innovations intéressantes dans notre entreprise." },
+            { q: "On envoie moins de lettres et plus de courriels dans le monde actuel.", answer: "Les gens envoient moins de lettres et plus de courriels dans le monde actuel." },
+            { q: "On t'invite à découvrir notre dernière invention, viens chez nous !", answer: "Nous t'invitons à découvrir notre dernière invention, viens chez nous !" },
+            { q: "On a utilisé sa tablette sans lui demander l'autorisation.", answer: "Quelqu'un a utilisé sa tablette sans lui demander l'autorisation." },
+          ],
+        },
+        {
+          num: 4, page: 55,
+          instruction: "Transformez les phrases avec le pronom on.",
+          vi: "Chuyển câu sang dùng đại từ « on ».",
+          type: "transform",
+          items: [
+            { q: "Les gens utilisent des robots pour faire le ménage.", answer: "On utilise des robots pour faire le ménage.", example: true },
+            { q: "Nous avons créé une coupe du monde de robots.", answer: "On a créé une coupe du monde de robots." },
+            { q: "Les gens veulent se déconnecter des réseaux sociaux.", answer: "On veut se déconnecter des réseaux sociaux." },
+            { q: "Quelqu'un nous a pris en photo sans demander l'autorisation.", answer: "On nous a pris en photo sans demander l'autorisation." },
+            { q: "Nous envoyons des tweets à nos amis.", answer: "On envoie des tweets à nos amis." },
+            { q: "Les gens parlent mal l'anglais en France !", answer: "On parle mal l'anglais en France !" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 56) — wired into the Phono step ─────
+    // Discrimination et Dictée se prêtent à une correction automatique.
+    // Articulation (act. 2, questions à réponse libre sur 2050) et
+    // Interprétation (act. 4, lecture à voix haute d'un texte) ne sont pas
+    // reprises, faute de réponse unique à vérifier — même choix que pour b1/b2.
+    phono: [
+      {
+        num: 1, page: 56, audioSrc: piste(50),
+        instruction: "Discrimination — écoutez et cochez le mot que vous entendez.",
+        vi: "Nghe và chọn từ nào được phát âm.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["drap", "bras"], answer: "drap", example: true },
+          { q: "b.", options: ["trois", "croit"], answer: "croit" },
+          { q: "c.", options: ["grand", "prend"], answer: "prend" },
+          { q: "d.", options: ["brun", "train"], answer: "brun" },
+          { q: "e.", options: ["très", "prêt"], answer: "très" },
+          { q: "f.", options: ["cri", "gris"], answer: "gris" },
+        ],
+      },
+      {
+        num: 3, page: 56, audioSrc: piste(52),
+        instruction: "Dictée — écoutez le texte et complétez les mots avec le groupe consonantique manquant.",
+        vi: "Nghe và điền nhóm phụ âm còn thiếu vào mỗi từ.",
+        type: "fill",
+        items: [
+          { q: "Comment vivre sans téléphone portable ? Dans no___e monde très", answer: "tr", example: true },
+          { q: "a___o aux technologies,", answer: "ccr" },
+          { q: "il est important d'utiliser moins souvent vo___e téléphone portable", answer: "tr" },
+          { q: "et de ne pas répon___e immédiatement aux messages.", answer: "dr" },
+          { q: "Laissez-le une ___ande partie la journée à la maison.", answer: "gr" },
+          { q: "Vous pouvez ___endre rendez-vous avec vos amis par courriel ou téléphone fixe.", answer: "pr" },
+          { q: "Faites d'au___es activités :", answer: "tr" },
+          { q: "___atiquer un sport, écouter de la musique, se promener.", answer: "pr" },
+          { q: "Vous serez plus li___e !", answer: "br" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed by the cycle's vocab step ──────────────────
+    vocab: {
+      // Cycle 1 — Les sciences et les techniques (cahier p. 52)
+      c1_vocab: [
+        {
+          num: 1, page: 52,
+          instruction: "Complétez les phrases avec les mots suivants : moteur – énergie solaire – en panne – navette – soucoupe volante – indispensable.",
+          vi: "Điền từ vào chỗ trống.",
+          type: "fill",
+          bank: ["moteur", "énergie solaire", "en panne", "navette", "soucoupe volante", "indispensable"],
+          items: [
+            { q: "Notre nouvelle voiture fonctionne avec un ___ électrique.", answer: "moteur", example: true },
+            { q: "Dans ce film de science-fiction, les gens prennent une ___ pour aller au travail.", answer: "soucoupe volante" },
+            { q: "L'ordinateur restera un objet nécessaire ? Oui, il sera ___ !", answer: "indispensable" },
+            { q: "L'astronaute Thomas Pesquet a pris une ___ pour aller sur la station spatiale.", answer: "navette" },
+            { q: "Cet appareil ne s'allume plus, il est ___ depuis hier.", answer: "en panne" },
+            { q: "Notre moteur ne fonctionne pas à l'électricité mais avec de l'___.", answer: "énergie solaire" },
+          ],
+        },
+        {
+          num: 2, page: 52, audioSrc: piste(46),
+          instruction: "Écoutez et dites à quelle innovation correspondent les phrases entendues.",
+          vi: "Nghe và cho biết mỗi câu nói về phát minh nào.",
+          type: "fill",
+          items: [
+            { q: "Phrase a (exemple)", answer: "l'hologramme", example: true },
+            { q: "Phrase b", answer: "le logiciel" },
+            { q: "Phrase c", answer: "la reconnaissance faciale" },
+            { q: "Phrase d", answer: "la téléportation" },
+            { q: "Phrase e", answer: "le GPS" },
+            { q: "Phrase f", answer: "l'imprimante 3D" },
+          ],
+        },
+        {
+          num: 3, page: 52,
+          instruction: "Associez la caractéristique d'un objet à chaque image : automatique – électrique – futuriste – robotisé – pratique.",
+          vi: "Nối mỗi hình với tính từ phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Image a (exemple)", answer: "pratique", example: true },
+            { q: "Image b", answer: "robotisé" },
+            { q: "Image c", answer: "électrique" },
+            { q: "Image d", answer: "automatique" },
+            { q: "Image e", answer: "futuriste" },
+          ],
+        },
+        {
+          num: 4, page: 52,
+          instruction: "Trouvez les mots qui ont le même sens que les mots soulignés.",
+          vi: "Tìm từ đồng nghĩa với từ được gạch chân.",
+          type: "fill",
+          items: [
+            { q: "Cette machine peut remplacer mon travail !", answer: "robot", example: true },
+            { q: "L'inventeur fait un objet robotisé très pratique pour notre vie quotidienne.", answer: "fabrique" },
+            { q: "Regarde ce métro sans chauffeur ! Il est autonome !", answer: "automatique" },
+            { q: "Le changement des technologies est très rapide au XXIe siècle.", answer: "l'évolution" },
+            { q: "L'imprimante 3D ne marche pas, elle a un problème.", answer: "fonctionne" },
+            { q: "Cet objet nouveau nous aidera à travailler plus rapidement.", answer: "innovation" },
+          ],
+        },
+      ],
+
+      // Cycle 2 — Les technologies de la communication (cahier p. 54)
+      c2_vocab: [
+        {
+          num: 1, page: 54,
+          instruction: "Associez les mots à leur définition.",
+          vi: "Nối từ với định nghĩa.",
+          type: "match",
+          pairs: [
+            { l: "l'appel",     r: "une communication téléphonique" },
+            { l: "le smartphone", r: "un téléphone avec plusieurs applications" },
+            { l: "le SMS",      r: "un message écrit" },
+            { l: "la batterie", r: "l'énergie du téléphone" },
+            { l: "le selfie",   r: "une photo de moi ou de mes amis et moi" },
+          ],
+        },
+        {
+          num: 2, page: 54, audioSrc: piste(48),
+          instruction: "Écoutez et associez les phrases aux actions correspondantes.",
+          vi: "Nghe và nối mỗi câu với hành động tương ứng.",
+          type: "fill",
+          items: [
+            { q: "allumer (exemple) → quelle phrase ?", answer: "a", example: true },
+            { q: "décrocher → quelle phrase ?", answer: "f" },
+            { q: "éteindre → quelle phrase ?", answer: "d" },
+            { q: "répondre → quelle phrase ?", answer: "b" },
+            { q: "raccrocher → quelle phrase ?", answer: "e" },
+            { q: "contacter → quelle phrase ?", answer: "c" },
+          ],
+        },
+        {
+          num: 3, page: 54,
+          instruction: "Écrivez le nom des objets sous les images.",
+          vi: "Viết tên đồ vật dưới mỗi hình.",
+          type: "fill",
+          items: [
+            { q: "Image 1 (exemple)", answer: "un écran", example: true },
+            { q: "Image 2", answer: "une souris" },
+            { q: "Image 3", answer: "un clavier" },
+            { q: "Image 4", answer: "une imprimante" },
+            { q: "Image 5", answer: "une clé USB" },
+            { q: "Image 6", answer: "un ordinateur" },
+          ],
+        },
+        {
+          num: 4, page: 54,
+          instruction: "Complétez les phrases avec les mots suivants : appli – télécharger – faire une visio – courriel – en ligne – se désabonner – se connecter.",
+          vi: "Điền từ vào chỗ trống.",
+          type: "fill",
+          bank: ["appli", "télécharger", "faire une visio", "courriel", "en ligne", "se désabonner", "se connecter"],
+          items: [
+            { q: "Vous pouvez m'envoyer un ___ pour confirmer votre venue.", answer: "courriel", example: true },
+            { q: "Je n'ai plus besoin de mon GPS, je vais télécharger une ___ sur mon smartphone.", answer: "appli" },
+            { q: "Alice ne se sent plus libre, elle préfère ___ des réseaux sociaux.", answer: "se désabonner" },
+            { q: "Nos amis vivent loin de la ville, ils font donc beaucoup d'achats ___.", answer: "en ligne" },
+            { q: "Les voisins ont des problèmes avec Internet, ils ne peuvent pas ___.", answer: "se connecter" },
+            { q: "Tous nos collègues ne pourront pas venir à la réunion, nous allons donc ___ demain.", answer: "faire une visio" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 58-59, noté /40) ──────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // Comme pour b1/b2, la compréhension orale + production écrite de la
+    // page 57 (« Un robot à notre service ! ») et les mini-jeux corrigeables
+    // de la page 62 sont repris ici aussi. Les mots croisés (act. 1, sans
+    // texte de définition, seulement les réponses) et les voyelles manquantes
+    // (act. 2, format des blancs non reproductible fidèlement depuis la
+    // source) ne sont pas repris — même logique que pour les jeux non
+    // reconstructibles de b1/b2.
+    bilan: [
+      {
+        num: 1, page: 58,
+        instruction: "Conjuguez les verbes entre parenthèses au futur simple. (/7)",
+        vi: "Chia động từ trong ngoặc ở futur simple.",
+        type: "fill",
+        items: [
+          { q: "Un jour, tous les professeurs (avoir) ___ des hologrammes pour faire cours.", answer: "auront" },
+          { q: "L'année prochaine, cet ingénieur (fabriquer) ___ un appareil robotisé.", answer: "fabriquera" },
+          { q: "Demain, ils (aller) ___ au musée des découvertes.", answer: "iront" },
+          { q: "Un jour, tous les appareils (fonctionner) ___ avec de l'énergie solaire.", answer: "fonctionneront" },
+          { q: "La vie (être) ___ très différente en 2050.", answer: "sera" },
+          { q: "Tu (pouvoir) ___ m'expliquer comment fonctionne ta tablette ?", answer: "pourras" },
+          { q: "Le mois prochain, je (changer) ___ de smartphone.", answer: "changerai" },
+        ],
+      },
+      {
+        num: 2, page: 58,
+        instruction: "Remettez les mots dans l'ordre pour faire des phrases. (/7)",
+        vi: "Sắp xếp lại các từ thành câu đúng.",
+        type: "order",
+        items: [
+          { tokens: ["change", "un nouveau logiciel,", "Si tu", "d'ordinateur.", "veux"], answer: "Si tu veux un nouveau logiciel, change d'ordinateur." },
+          { tokens: ["serez", "des robots.", "fabriquerez", "Quand vous", "serez ingénieur,", "vous"], answer: "Quand vous serez ingénieur, vous fabriquerez des robots." },
+          { tokens: ["moins de temps", "lisons.", "nous", "sur notre smartphone,", "voulons", "Si nous", "passer"], answer: "Si nous voulons passer moins de temps sur notre smartphone, nous lisons." },
+          { tokens: ["les maisons", "Quand nous", "pourront", "se téléporter !", "en 2050,", "serons"], answer: "Quand nous serons en 2050, les maisons pourront se téléporter !" },
+          { tokens: ["je vous", "Si vous", "répondrai", "un courriel,", "m'envoyez", "très rapidement."], answer: "Si vous m'envoyez un courriel, je vous répondrai très rapidement." },
+          { tokens: ["tu", "on", "cette technologie,", "comprendras", "découvrira", "son utilité.", "Quand"], answer: "Quand on découvrira cette technologie, tu comprendras son utilité." },
+          { tokens: ["prendras", "une navette.", "Si tu", "dans l'espace,", "voyages", "tu."], answer: "Si tu voyages dans l'espace, tu prendras une navette." },
+        ],
+      },
+      {
+        num: 3, page: 58,
+        instruction: "Transformez les phrases avec nous, quelqu'un ou les gens. (/6)",
+        vi: "Chuyển câu dùng « on » sang nous / quelqu'un / les gens.",
+        type: "transform",
+        items: [
+          { q: "Mes amis et moi, on communique beaucoup sur les réseaux sociaux.", answer: "Mes amis et moi, nous communiquons beaucoup sur les réseaux sociaux." },
+          { q: "On m'a conseillé de changer d'ordinateur.", answer: "Quelqu'un m'a conseillé de changer d'ordinateur." },
+          { q: "On apprendra à vivre sans téléphone.", answer: "Les gens apprendront à vivre sans téléphone." },
+          { q: "Avec mon mari, on fait nos courses en ligne, c'est plus pratique !", answer: "Nous faisons nos courses en ligne, c'est plus pratique !" },
+          { q: "On n'aura plus de téléphone fixe dans le futur.", answer: "Les gens n'auront plus de téléphone dans le futur." },
+          { q: "On m'a appelé mais je n'ai pas pu répondre.", answer: "Quelqu'un m'a appelé mais je n'ai pas pu répondre." },
+        ],
+      },
+      {
+        num: 4, page: 58,
+        instruction: "Vocabulaire — Qu'est-ce que c'est ? Écrivez le nom sous l'image. (/5)",
+        vi: "Viết tên đồ vật dưới mỗi hình.",
+        type: "fill",
+        items: [
+          { q: "Image 1", answer: "une navette" },
+          { q: "Image 2", answer: "une chercheuse" },
+          { q: "Image 3", answer: "un moteur" },
+          { q: "Image 4", answer: "une soucoupe volante" },
+          { q: "Image 5", answer: "un hologramme" },
+        ],
+      },
+      {
+        num: 5, page: 59,
+        instruction: "Vocabulaire — Chassez l'intrus. (/5)",
+        vi: "Tìm từ lạc loài trong mỗi nhóm.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["le chercheur", "l'inventeur", "l'ordinateur", "l'ingénieur"], answer: "l'ordinateur" },
+          { q: "b.", options: ["le robot", "l'appareil", "le moteur", "le logiciel"], answer: "le logiciel" },
+          { q: "c.", options: ["automatique", "sympathique", "pratique", "futuriste"], answer: "sympathique" },
+          { q: "d.", options: ["une navette", "une tablette", "un logiciel", "un hologramme"], answer: "une navette" },
+          { q: "e.", options: ["marcher", "fonctionner", "courir", "tomber en panne"], answer: "courir" },
+        ],
+      },
+      {
+        num: 6, page: 59,
+        instruction: "Vocabulaire — Associez les deux parties des phrases. (/5)",
+        vi: "Nối đầu câu với cuối câu.",
+        type: "match",
+        pairs: [
+          { l: "J'ai téléchargé une application",       r: "pour apprendre à cuisiner." },
+          { l: "Ton téléphone sonne,",                   r: "décroche !" },
+          { l: "L'ingénieur va voir son objet en 3D",    r: "quand il va l'imprimer." },
+          { l: "Pourquoi tu n'as pas répondu,",          r: "quand je t'ai appelé ?" },
+          { l: "Vous n'avez plus beaucoup de batterie,",  r: "votre téléphone va s'éteindre." },
+        ],
+      },
+      {
+        num: 7, page: 59,
+        instruction: "Vocabulaire — Choisissez la réponse correcte. (/5)",
+        vi: "Chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Je ne peux plus écrire parce que … est en panne.", options: ["l'écran", "le clavier", "la clé USB"], answer: "le clavier" },
+          { q: "Maryse commande son imprimante sur … .", options: ["un réseau", "un courriel", "un site"], answer: "un site" },
+          { q: "Pour trouver les documents à envoyer, tu vas les chercher sur … .", options: ["ta clé USB", "ton imprimante", "le logiciel"], answer: "ta clé USB" },
+          { q: "Marie m'a appelé pendant une heure, je viens de … .", options: ["répondre", "décrocher", "raccrocher"], answer: "raccrocher" },
+          { q: "Va sur Internet pour … cette vidéo !", options: ["télécharger", "connecter", "allumer"], answer: "télécharger" },
+        ],
+      },
+      {
+        // Page 57 — Compréhension orale : « Un robot à notre service ! »
+        num: 8, page: 57, audioSrc: piste(54),
+        instruction: "Compréhension orale — « Un robot à notre service ! » — Vrai ou faux ?",
+        vi: "Nghe bài về robot phục vụ nhà hàng rồi trả lời Đúng/Sai.",
+        type: "truefalse",
+        items: [
+          { q: "Le robot est fabriqué en Suisse.", answer: true },
+        ],
+      },
+      {
+        num: 9, page: 57, audioSrc: piste(54),
+        instruction: "Compréhension orale — cochez la bonne réponse.",
+        vi: "Vẫn bài nghe trên — chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Le document présente un robot utile :", options: ["pour faire le ménage", "pour être un animal de compagnie", "pour transporter des plats"], answer: "pour transporter des plats" },
+          { q: "Quand les clients voient le robot, ils sont :", options: ["surpris", "tristes", "en colère"], answer: "surpris" },
+          { q: "Avec leur nouveau collègue, les serveurs sont :", options: ["contents de leur nouveau collègue", "inquiets", "déçus"], answer: "contents de leur nouveau collègue" },
+          { q: "Il coûte :", options: ["1 100 euros", "11 000 euros", "11 100 euros"], answer: "11 000 euros" },
+        ],
+      },
+      {
+        num: 10, page: 57, audioSrc: piste(54),
+        instruction: "Compréhension orale — répondez à la question.",
+        vi: "Vẫn bài nghe trên — trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "Combien de kilomètres fait le robot par jour ?", answer: "Le robot fait 10 kilomètres par jour." },
+        ],
+      },
+      {
+        // Page 62 — Jeux, act. 3 : reconstituer les mots à partir des étiquettes.
+        num: 11, page: 62,
+        instruction: "Jeux — Associez 2 étiquettes pour former des mots.",
+        vi: "Ghép 2 mảnh để tạo thành từ đúng.",
+        type: "match",
+        pairs: [
+          { l: "DÉCR + OCHER", r: "décrocher" },
+          { l: "VI + SIO",     r: "visio" },
+          { l: "CONT + ACTER", r: "contacter" },
+          { l: "IMPR + IMANTE", r: "imprimante" },
+          { l: "FUTU + RISTE", r: "futuriste" },
+        ],
+      },
+      {
+        num: 12, page: 62,
+        instruction: "Jeux — À l'aide des 3 indices, devinez le mot ou l'expression.",
+        vi: "Dựa vào 3 gợi ý, đoán từ hoặc cụm từ.",
+        type: "fill",
+        items: [
+          { q: "appareil, appeler, communication", answer: "téléphone", example: true },
+          { q: "texto, message, téléphone", answer: "SMS" },
+          { q: "problème technique, éteindre, ne pas fonctionner", answer: "en panne" },
+          { q: "image, télévision, ordinateur", answer: "écran" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 60-61) ────────────────────────────
+    // Le livre a bien une page « DELF A2 — Stratégies » pour cette unité
+    // (Compréhension des écrits, p. 181-183 du livre), mais l'exercice
+    // d'entraînement qu'elle propose n'a pas de corrigé imprimé dans la
+    // source .md (tableau à remplir sans réponses) — pas de coLivre pour
+    // cette unité, comme pour b2.
+    delf: {
+      co: [
+        {
+          num: 1, page: 60, audioSrc: piste(55),
+          instruction: "Compréhension de l'oral — vous écoutez la radio, trois documents. (6 points)",
+          vi: "Nghe đài radio (3 đoạn) rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Où sera Thomas Pesquet le 10 juin ?", options: ["Chez lui", "À la radio", "Dans l'espace"], answer: "À la radio" },
+            { q: "2. De quoi Thomas Pesquet parlera ?", options: ["De santé", "De travail", "De nourriture"], answer: "De nourriture" },
+            { q: "3. Qu'est-ce que vous pouvez réparer gratuitement ?", options: ["un ordinateur portable", "une imprimante 3D", "un vélo électrique"], answer: "un ordinateur portable" },
+            { q: "4. Où devez-vous aller pour utiliser le service ?", options: ["Au café", "À la mairie", "Au marché"], answer: "Au café" },
+            { q: "5. Où devez-vous mettre votre téléphone portable demain ?", options: ["Dans votre sac", "Dans votre poche", "Dans votre placard"], answer: "Dans votre placard" },
+            { q: "6. Qu'est-ce que le journaliste vous propose de faire demain ?", options: ["rester à la maison à lire", "faire une promenade", "aller au cinéma"], answer: "rester à la maison à lire" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — courriel de Marine (vacances en Suisse
+      // chez son cousin Florent ; salon des innovations technologiques à
+      // Genève le 21 octobre). Le texte du courriel n'est pas reproduit
+      // dans le corrigé source, seulement les questions et réponses.
+      ce: [
+        {
+          num: 1, page: 60,
+          instruction: "Compréhension des écrits — courriel de Marine. (6 points)",
+          vi: "Đọc thư của Marine (kỳ nghỉ ở Thụy Sĩ nhà anh họ Florent ; hội chợ công nghệ ở Genève ngày 21/10) rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Qu'a fait Marine la semaine dernière ?", options: ["Elle a visité Genève", "Elle a révisé ses examens", "Elle s'est reposée en famille"], answer: "Elle s'est reposée en famille" },
+            { q: "2. Que fait le robot de Florent ?", options: ["il nettoie les fenêtres", "il passe l'aspirateur", "il tond la pelouse"], answer: "il nettoie les fenêtres" },
+            { q: "3. Pour Marine, les inventions du salon sont…", options: ["inutiles", "pratiques", "incroyables"], answer: "inutiles" },
+            { q: "4. Quand est-ce que vous partez ?", options: ["Le 20 octobre", "Le 21 octobre", "Le 22 octobre"], answer: "Le 20 octobre" },
+            { q: "5. Qu'est-ce que vous devez faire ?", options: ["Acheter des billets", "Réserver les chambres", "Téléphoner au restaurant"], answer: "Réserver les chambres" },
+            { q: "6. Comment est-ce que vous irez au salon ?", options: ["en voiture", "en train", "en bus"], answer: "en train" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          // Page 57 — production libre de la fin de l'unité (pas notée DELF,
+          // mais rangée ici comme les autres exercices de production non
+          // auto-corrigeables).
+          skill: "Production écrite (page 57)", points: "60 mots", page: 57,
+          prompt: "Vous avez découvert un objet extraordinaire, très utile dans la vie quotidienne, qui fonctionne grâce à l'intelligence artificielle. Vous écrivez à votre ami(e) pour lui décrire votre découverte. Vous lui donnez des détails sur son aspect, sa fonction et son utilité. (60 mots)",
+          vi: "Viết thư kể cho bạn nghe về một vật dụng đặc biệt bạn khám phá được, hoạt động nhờ trí tuệ nhân tạo: hình dáng, chức năng, công dụng. (60 từ)",
+          model: "Salut Paolo, Tu es toujours d'accord pour venir chez moi samedi ? J'ai découvert un objet très intéressant au salon des innovations à Paris. Il s'appelle Dominhome. Il est petit, rectangulaire et connecté à Internet. Grâce à son intelligence artificielle, je peux le programmer pour allumer et éteindre les lumières, augmenter ou baisser le chauffage et quand j'ai besoin d'informations, je lui pose ma question et il me répond ! Quand tu viendras chez moi, je te présenterai Dominhome et je suis sûr qu'il te plaira. À samedi ! Samuel",
+        },
+        {
+          skill: "Production écrite", points: "12,5 points", page: 61,
+          prompt: "Vous avez reçu ce message de votre ami Élie : « Salut ! Jeudi prochain, c'est le salon des Technologies. Je vais y aller avec Saskia. Nous y resterons toute la journée. Tu veux venir avec nous ? À jeudi j'espère ! Élie » Vous répondez à Élie. Vous acceptez sa proposition. Vous lui demandez des informations sur la journée (programme, horaires, prix…). Vous lui proposez une sortie à faire après le salon. (60 mots minimum)",
+          vi: "Viết thư trả lời Élie: nhận lời, hỏi thêm về chương trình/giờ giấc/giá vé, đề xuất một hoạt động sau hội chợ. (tối thiểu 60 từ)",
+          model: "Salut Élie ! Merci pour ton invitation. Oui, je viens avec vous, j'adore les nouvelles technologies ! J'aimerais découvrir de nouveaux appareils, est-ce qu'il y aura des inventeurs et des robots ? Combien coûte l'entrée ? Vous y allez à quelle heure ? Moi, je suis libre à partir de 11 heures. On pourrait se retrouver pour déjeuner. Il y aura un restaurant ? Après le salon, nous pouvons aller au cinéma, il y a un film documentaire sur Thomas Pesquet. À jeudi ! Meriem",
+        },
+        {
+          skill: "Production orale", points: "3 à 4 minutes", page: 61,
+          prompt: "Partie 3 de l'épreuve : exercice en interaction. Sujet : Au bureau. Vous travaillez dans une entreprise en France. Vous voulez organiser un événement pour parler des nouvelles technologies au travail. Vous allez voir la directrice de votre entreprise pour discuter avec elle de l'organisation de l'événement. (L'examinateur joue le rôle de la directrice.)",
+          vi: "Đóng vai: bạn muốn tổ chức một sự kiện về công nghệ mới tại công ty, đến gặp giám đốc để bàn bạc. (giám khảo đóng vai giám đốc)",
+          model: "– Bonjour madame. – Bonjour. – J'étais au salon des technologies la semaine dernière, c'était très intéressant. Il y avait des inventeurs qui ont présenté des nouveaux appareils technologiques très utiles. J'ai eu une idée. Nous pourrions organiser une réunion avec tous les employés de notre entreprise pour présenter des nouvelles technologies pratiques pour notre travail. – Oui, pourquoi pas. Mais qui présentera ces nouvelles technologies ? – Je connais le directeur du salon. Je pourrais lui demander de venir pour les présenter. – Et quelles technologies seraient utiles pour nous ? – Je pense aux imprimantes 3D, par exemple, ou à des nouveaux ordinateurs. – C'est une bonne idée. Vous avez pensé à l'organisation de cette réunion ? – Oui, bien sûr. Nous pouvons la faire vendredi matin, à 11 heures, dans la grande salle. Il y a de la place pour tout le monde. Après, à 12 h 30, nous pouvons organiser un déjeuner. Je connais aussi un restaurant qui livre des plats. C'est bon et pas cher. – D'accord. Et pour la présentation, le directeur va parler pendant une heure et demie ? – Oui mais il pourrait aussi apporter des exemples d'imprimantes et d'ordinateurs. On pourra les essayer. Et si c'est vraiment utile pour nous, nous pourrons en acheter. – Je ne sais pas si nous allons acheter de nouveaux ordinateurs mais nous pouvons organiser cette présentation. Vous pouvez vous en occuper ? – Oui, bien sûr ! Je vais téléphoner au directeur du salon et au restaurant. Je demanderai de l'aide à mes collègues pour installer la salle. – C'est parfait alors. Venez me voir mardi pour me donner les détails. – D'accord. Merci beaucoup, bonne journée madame. – Bonne journée !",
+        },
+      ],
+    },
+  },
+
 };
 
 // Answers are compared loosely: case, accents on the apostrophe, doubled
