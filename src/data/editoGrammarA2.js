@@ -1601,7 +1601,57 @@ export const EDITO_GRAMMAR_A2 = [
         ]
       },
 
-      // ── 2. Les pronoms démonstratifs ─────────────────────────────────
+      // ── 2. L'accord du participe passé ────────────────────────────────
+      {
+        topic:"L'accord du participe passé — Hợp giống–số của quá khứ phân từ với être và avoir",
+        summary:"Với être, participe passé LUÔN hợp giống–số với CHỦ NGỮ (như một tính từ). Với avoir, participe passé CHỈ hợp giống–số khi có một COD (bổ ngữ trực tiếp) đứng TRƯỚC động từ — qua pronom COD (le/la/les/l') hoặc pronom quan hệ « que ». Nếu COD đứng ở vị trí bình thường (sau động từ) hoặc không có COD nào, participe passé giữ nguyên, không hợp.",
+        blocks:[
+          { type:"lead", text:"Câu hỏi cốt lõi: động từ này chia với être hay avoir? Nếu là avoir — có COD nào (le/la/les/l' hoặc que) đứng NGAY TRƯỚC động từ không?" },
+
+          { type:"table",
+            caption:"2 trường hợp hợp giống–số",
+            headers:["Trợ động từ", "Quy tắc", "Ví dụ"],
+            rows:[
+              ["Être", "LUÔN hợp với chủ ngữ", "Eva est allée à Paris pour finir son tour de France."],
+              ["Avoir", "CHỈ hợp khi COD đứng TRƯỚC động từ (không hợp nếu COD đứng sau hoặc không có)", "La visite, on l'a faite en bus amphibie ! / Les informations que la guide a données étaient très intéressantes."],
+            ] },
+
+          { type:"heading", text:"COD đứng trước động từ bằng cách nào?" },
+          { type:"cards", items:[
+            { badge:"1", color:"#4A90D9", title:"Pronom COD (le/la/les/l') đặt ngay trước avoir",
+              lines:["Khi COD được thay bằng pronom le/la/les/l' và đặt trước động từ, participe passé hợp giống–số với danh từ mà pronom đó thay thế."],
+              examples:[
+                { fr:"La visite, on l'a faite en bus amphibie !", vi:"Chuyến tham quan đó, chúng tôi đã đi bằng xe buýt lội nước! (l' = la visite, giống cái → faite)" },
+              ] },
+            { badge:"2", color:"#10B981", title:"Pronom quan hệ « que » đứng đầu mệnh đề",
+              lines:["Khi « que » thay cho một COD và đứng trước mệnh đề có avoir, participe passé hợp giống–số với danh từ mà « que » thay thế."],
+              examples:[
+                { fr:"Les anecdotes que la guide a racontées étaient très drôles !", vi:"Những giai thoại mà hướng dẫn viên đã kể rất buồn cười! (que = les anecdotes, số nhiều → racontées)" },
+              ] },
+          ] },
+
+          { type:"callout", variant:"tip", title:"Đôi khi NGHE cũng phân biệt được!",
+            text:"Với những participe passé tận cùng bằng phụ âm không phát âm ở dạng nam (offert, pris, dit…), thêm « -e » ở dạng nữ làm phụ âm đó ĐƯỢC PHÁT ÂM lên: « Ces fleurs, nous les avons offertes à nos hôtes. », « Regarde la jolie photo que j'ai prise ! » — nghe ra ngay sự hợp giống mà không cần nhìn chữ viết." },
+
+          { type:"callout", variant:"warn", title:"Đừng hợp khi COD đứng SAU động từ",
+            text:"« Elle a visité la capitale l'année dernière. » — « la capitale » đúng là COD, nhưng nó đứng SAU động từ ở vị trí bình thường (không có pronom hay « que » đảo nó lên trước) → participe passé KHÔNG hợp, giữ nguyên « visité »." },
+
+          { type:"compare", items:[
+            { wrong:"Ces îles, nous les avons découvert avec des locaux.", right:"Ces îles, nous les avons découvertes avec des locaux.", why:"« les » thay cho « ces îles » (giống cái, số nhiều) và đứng trước « avons » → participe passé phải hợp: « découvertes »." },
+            { wrong:"Elle a visitée la capitale l'année dernière.", right:"Elle a visité la capitale l'année dernière.", why:"« la capitale » là COD nhưng đứng SAU động từ (không bị đảo lên trước bằng pronom hay « que ») → participe passé KHÔNG hợp, giữ « visité »." },
+          ] },
+        ],
+        examples:[
+          "C'est une visite de Paris que nous avons adorée ! — Đây là một buổi tham quan Paris mà chúng tôi đã rất thích!",
+          "Les informations sur l'histoire et le patrimoine de la ville, on les a eues en faisant un quiz ! — Những thông tin về lịch sử và di sản của thành phố, chúng tôi đã có được nhờ làm một bài quiz!",
+          "Les anecdotes que la guide a racontées étaient très drôles ! — Những giai thoại mà hướng dẫn viên đã kể rất buồn cười!",
+          "Eva est allée à Paris pour finir son tour de France. — Eva đã đi Paris để kết thúc chuyến đi vòng quanh nước Pháp của mình.",
+          "La visite, on l'a faite en bus amphibie ! — Chuyến tham quan đó, chúng tôi đã đi bằng xe buýt lội nước!",
+          "Les informations que la guide a données étaient très intéressantes. — Những thông tin mà hướng dẫn viên đã đưa ra rất thú vị.",
+        ]
+      },
+
+      // ── 3. Les pronoms démonstratifs ─────────────────────────────────
       {
         topic:"Les pronoms démonstratifs — Thay thế danh từ để tránh lặp lại: celui, celle, ceux, celles",
         summary:"Pronom démonstratif thay cho một danh từ (người/vật) đã nhắc tới, để KHỎI PHẢI NHẮC LẠI danh từ đó. Nó phải hợp GIỐNG và SỐ với danh từ mà nó thay thế. Có thể thêm « -ci »/« -là » để phân biệt/đối lập hai thứ, hoặc theo sau bởi « qui/que/de » để bổ nghĩa.",

@@ -4950,13 +4950,9 @@ export const CAHIER_A2 = {
   b10: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
-    // ⚠️ Le cahier imprimé a 3 points de grammaire pour cette unité (p.111
-    // passé composé/imparfait, p.113 accord du participe passé, p.115
-    // pronoms démonstratifs) mais EDITO_GRAMMAR_A2.b10 n'en documente que 2
-    // (l'accord du participe passé manque — écart connu, à corriger dans un
-    // futur chantier séparé sur editoGrammarA2.js + parcoursDataA2.js). En
-    // attendant, seuls p0 et p1 existent ici ; les exercices de la p.113
-    // sont provisoirement dans `bilan` (voir le commentaire à cet endroit).
+    // Le cahier imprimé a 3 points de grammaire pour cette unité : p.111
+    // passé composé/imparfait (p0), p.113 accord du participe passé (p1,
+    // livre p.145), p.115 pronoms démonstratifs (p2).
     grammar: {
 
       // p0 — Le passé composé et l'imparfait dans le récit (cahier p. 111)
@@ -5012,8 +5008,68 @@ export const CAHIER_A2 = {
         },
       ],
 
-      // p1 — Les pronoms démonstratifs (cahier p. 115)
+      // p1 — L'accord du participe passé (cahier p. 113, livre p. 145)
       p1: [
+        {
+          num: 1, page: 113,
+          instruction: "L'accord du participe passé — Soulignez la forme correcte.",
+          vi: "Chọn dạng đúng của quá khứ phân từ (chú ý hợp giống–số với être/se + avoir).",
+          type: "choice",
+          items: [
+            { q: "Tu as ___ Paris ?", options: ["visitée", "visitées", "visité"], answer: "visité", example: true },
+            { q: "Elle s'est ___ des excursions.", options: ["occupés", "occupé", "occupée"], answer: "occupée" },
+            { q: "Nous avons ___ un itinéraire différent.", options: ["proposées", "proposé", "proposées (bis)"], answer: "proposé" },
+            { q: "La randonnée que j'ai ___ était très longue.", options: ["fait", "faite", "faites"], answer: "faite" },
+            { q: "Philippe et toi, vous êtes ___ au musée d'art ?", options: ["allés", "allé", "allées"], answer: "allés" },
+            { q: "Ils se sont ___ en bus amphibie.", options: ["déplacées", "déplacé", "déplacés"], answer: "déplacés" },
+          ],
+        },
+        {
+          num: 2, page: 113,
+          instruction: "L'accord du participe passé — Réécrivez les phrases avec les mots proposés.",
+          vi: "Viết lại câu với chủ ngữ mới — chú ý hợp giống–số của quá khứ phân từ.",
+          type: "transform",
+          items: [
+            { q: "Paul s'est inscrit sur un forum des voyageurs. → Léa ……", answer: "Léa s'est inscrite sur un forum des voyageurs.", example: true },
+            { q: "Ce sont les amis que j'ai rencontrés en Suisse. → Ce sont les amies ……", answer: "Ce sont les amies que j'ai rencontrées en Suisse." },
+            { q: "Antonia s'est installée chez nous. → Jérôme ……", answer: "Jérôme s'est installé chez nous." },
+            { q: "Les papiers ? Je les ai mis sur la table. → Les cartes ? Je les ……", answer: "Les cartes ? Je les ai mises sur la table." },
+            { q: "Le resto que j'ai réservé est très moderne. → La chambre ……", answer: "La chambre que j'ai réservée est très moderne." },
+            { q: "Le visa que tu as demandé est arrivé. → Les informations ……", answer: "Les informations que tu as demandées sont arrivées." },
+          ],
+        },
+        {
+          num: 3, page: 113,
+          instruction: "L'accord du participe passé — Complétez avec « e », « es » ou « s » si nécessaire (ou laissez vide s'il n'y a pas de terminaison).",
+          vi: "Điền « e », « es » hoặc « s » nếu cần hợp giống–số của quá khứ phân từ, hoặc để trống nếu không có tận cùng.",
+          type: "fill",
+          items: [
+            { q: "Les billets que tu m'as offert___ étaient très chers.", answer: "s", example: true },
+            { q: "L'audioguide que j'ai pris___ donnait de bonnes explications.", answer: "(rien)" },
+            { q: "Elles se sont inscrit___ à une visite qui a duré___ 1 heure. (2 từ)", answer: "inscrites, duré" },
+            { q: "Cette ville est fantastique, je l'ai découvert___ l'année passée.", answer: "découverte" },
+            { q: "Nous avons apprécié___ les commentaires que nous avons lu___ sur Internet. (2 từ)", answer: "apprécié, lus" },
+            { q: "Le vol que j'ai pris___ est arrivé___ en retard. (2 từ)", answer: "pris, arrivé" },
+          ],
+        },
+        {
+          num: 4, page: 113, audioSrc: piste(99),
+          instruction: "L'accord du participe passé — Écoutez les questions et écrivez les réponses.",
+          vi: "Nghe câu hỏi rồi viết câu trả lời — chú ý hợp giống–số.",
+          type: "fill",
+          items: [
+            { q: "Vous avez écrit cette phrase ?", answer: "Oui, nous l'avons écrite.", example: true },
+            { q: "Tu as pris les places pour demain ?", answer: "Oui, je les ai prises." },
+            { q: "Ils ont fait une croisière sur la Méditerranée ?", answer: "Oui, ils l'ont faite." },
+            { q: "Vous avez ouvert la brochure ?", answer: "Oui, nous l'avons ouverte." },
+            { q: "Tu as compris toutes les informations ?", answer: "Oui, je les ai comprises." },
+            { q: "Il a mis ses valises dans le bus ?", answer: "Oui, il les a mises." },
+          ],
+        },
+      ],
+
+      // p2 — Les pronoms démonstratifs (cahier p. 115)
+      p2: [
         {
           num: 1, page: 115,
           instruction: "Remettez les mots dans l'ordre pour faire des phrases.",
@@ -5348,69 +5404,11 @@ export const CAHIER_A2 = {
         ],
       },
       {
-        // Page 113 — Grammaire : L'accord du participe passé, act. 1.
-        // Rangé ici temporairement — voir la note au-dessus de `bilan`.
-        num: 8, page: 113,
-        instruction: "L'accord du participe passé — Soulignez la forme correcte.",
-        vi: "Chọn dạng đúng của quá khứ phân từ (chú ý hợp giống–số với être/se + avoir).",
-        type: "choice",
-        items: [
-          { q: "Tu as ___ Paris ?", options: ["visitée", "visitées", "visité"], answer: "visité", example: true },
-          { q: "Elle s'est ___ des excursions.", options: ["occupés", "occupé", "occupée"], answer: "occupée" },
-          { q: "Nous avons ___ un itinéraire différent.", options: ["proposées", "proposé", "proposées (bis)"], answer: "proposé" },
-          { q: "La randonnée que j'ai ___ était très longue.", options: ["fait", "faite", "faites"], answer: "faite" },
-          { q: "Philippe et toi, vous êtes ___ au musée d'art ?", options: ["allés", "allé", "allées"], answer: "allés" },
-          { q: "Ils se sont ___ en bus amphibie.", options: ["déplacées", "déplacé", "déplacés"], answer: "déplacés" },
-        ],
-      },
-      {
-        num: 9, page: 113,
-        instruction: "L'accord du participe passé — Réécrivez les phrases avec les mots proposés.",
-        vi: "Viết lại câu với chủ ngữ mới — chú ý hợp giống–số của quá khứ phân từ.",
-        type: "transform",
-        items: [
-          { q: "Paul s'est inscrit sur un forum des voyageurs. → Léa ……", answer: "Léa s'est inscrite sur un forum des voyageurs.", example: true },
-          { q: "Ce sont les amis que j'ai rencontrés en Suisse. → Ce sont les amies ……", answer: "Ce sont les amies que j'ai rencontrées en Suisse." },
-          { q: "Antonia s'est installée chez nous. → Jérôme ……", answer: "Jérôme s'est installé chez nous." },
-          { q: "Les papiers ? Je les ai mis sur la table. → Les cartes ? Je les ……", answer: "Les cartes ? Je les ai mises sur la table." },
-          { q: "Le resto que j'ai réservé est très moderne. → La chambre ……", answer: "La chambre que j'ai réservée est très moderne." },
-          { q: "Le visa que tu as demandé est arrivé. → Les informations ……", answer: "Les informations que tu as demandées sont arrivées." },
-        ],
-      },
-      {
-        num: 10, page: 113,
-        instruction: "L'accord du participe passé — Complétez avec « e », « es » ou « s » si nécessaire (ou laissez vide s'il n'y a pas de terminaison).",
-        vi: "Điền « e », « es » hoặc « s » nếu cần hợp giống–số của quá khứ phân từ, hoặc để trống nếu không có tận cùng.",
-        type: "fill",
-        items: [
-          { q: "Les billets que tu m'as offert___ étaient très chers.", answer: "s", example: true },
-          { q: "L'audioguide que j'ai pris___ donnait de bonnes explications.", answer: "(rien)" },
-          { q: "Elles se sont inscrit___ à une visite qui a duré___ 1 heure. (2 từ)", answer: "inscrites, duré" },
-          { q: "Cette ville est fantastique, je l'ai découvert___ l'année passée.", answer: "découverte" },
-          { q: "Nous avons apprécié___ les commentaires que nous avons lu___ sur Internet. (2 từ)", answer: "apprécié, lus" },
-          { q: "Le vol que j'ai pris___ est arrivé___ en retard. (2 từ)", answer: "pris, arrivé" },
-        ],
-      },
-      {
-        num: 11, page: 113, audioSrc: piste(99),
-        instruction: "L'accord du participe passé — Écoutez les questions et écrivez les réponses.",
-        vi: "Nghe câu hỏi rồi viết câu trả lời — chú ý hợp giống–số.",
-        type: "fill",
-        items: [
-          { q: "Vous avez écrit cette phrase ?", answer: "Oui, nous l'avons écrite.", example: true },
-          { q: "Tu as pris les places pour demain ?", answer: "Oui, je les ai prises." },
-          { q: "Ils ont fait une croisière sur la Méditerranée ?", answer: "Oui, ils l'ont faite." },
-          { q: "Vous avez ouvert la brochure ?", answer: "Oui, nous l'avons ouverte." },
-          { q: "Tu as compris toutes les informations ?", answer: "Oui, je les ai comprises." },
-          { q: "Il a mis ses valises dans le bus ?", answer: "Oui, il les a mises." },
-        ],
-      },
-      {
         // Page 117 — Compréhension écrite : blog « Lève l'encre », « Les
         // escaliers de Fribourg ». Question 3 : le corrigé imprimé (p.164)
         // ajoute une lettre « a. » en trop après « c. », sans sous-question
         // correspondante ; réponse retenue conforme à l'énoncé : c.
-        num: 12, page: 117,
+        num: 8, page: 117,
         instruction: "Compréhension écrite — « Les escaliers de Fribourg » (blog Lève l'encre).",
         vi: "Đọc bài blog du lịch « Les escaliers de Fribourg » của Camille rồi trả lời.",
         type: "choice",
@@ -5425,7 +5423,7 @@ export const CAHIER_A2 = {
       },
       {
         // Page 122 — Jeux, act. 1
-        num: 13, page: 122,
+        num: 9, page: 122,
         instruction: "Jeux — Associez 2 étiquettes pour retrouver 5 sites touristiques.",
         vi: "Ghép 2 mảnh để tạo thành tên địa danh du lịch đúng.",
         type: "match",
@@ -5441,7 +5439,7 @@ export const CAHIER_A2 = {
         // Page 122 — Jeux, act. 2 : mots croisés. Le corrigé imprimé ne
         // donne que la liste des mots par indice (pas la grille avec ses
         // coordonnées) — transcrit tel quel, sans inventer de grille.
-        num: 14, page: 122,
+        num: 10, page: 122,
         instruction: "Jeux — Mots croisés du voyage. Trouvez le mot correspondant à chaque indice.",
         vi: "Ô chữ về du lịch — tìm từ tương ứng với mỗi gợi ý (không có lưới ô chữ trong corrigé gốc).",
         type: "fill",
@@ -5458,7 +5456,7 @@ export const CAHIER_A2 = {
       },
       {
         // Page 122 — Jeux, act. 3
-        num: 15, page: 122,
+        num: 11, page: 122,
         instruction: "Jeux — Remettez les lettres dans l'ordre pour retrouver les mots.",
         vi: "Sắp xếp lại chữ cái để tìm ra từ đúng.",
         type: "fill",
@@ -5472,7 +5470,7 @@ export const CAHIER_A2 = {
       },
       {
         // Page 122 — Jeux, act. 4 : jeu de rôle à l'agence de voyage.
-        num: 16, page: 122,
+        num: 12, page: 122,
         instruction: "Jeux — À l'agence de voyage. Complétez la réponse de l'agent pour chaque situation (Exemple : Qu'est-ce que vous proposez aux Français qui ne partent pas à l'étranger ? – Pour ceux qui ne partent pas à l'étranger, on propose le tourisme local.).",
         vi: "Đóng vai nhân viên đại lý du lịch — hoàn thành câu trả lời cho mỗi tình huống.",
         type: "fill",
