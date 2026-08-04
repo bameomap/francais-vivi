@@ -243,6 +243,9 @@ export const STEP_GROUPS_B2 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s4"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Exposition photo · Souvenirs d'une époque",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b2-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -458,6 +461,9 @@ export const STEP_GROUPS_B4 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s3"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Café artistique · présenter une œuvre",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b4-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -567,6 +573,9 @@ export const STEP_GROUPS_B5 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s3"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Interviewer un(e) scientifique",
         section:"conversation", view:"conversation" },
+      { id:"b_delf_cahier", stepKey:"ecouter", subIds:["b5-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -679,6 +688,9 @@ export const STEP_GROUPS_B6 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s4"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Réaliser un sondage sur l'alimentation",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b6-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -788,6 +800,9 @@ export const STEP_GROUPS_B7 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s3"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Participer à une campagne de prévention",
         section:"conversation", view:"conversation" },
+      { id:"b_delf_cahier", stepKey:"ecouter", subIds:["b7-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -894,6 +909,9 @@ export const STEP_GROUPS_B8 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s3"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Faire la critique d'un média",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b8-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -1000,6 +1018,9 @@ export const STEP_GROUPS_B9 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s3"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Organiser un troc",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b9-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -1109,6 +1130,9 @@ export const STEP_GROUPS_B10 = [
       { id:"b_atelier", stepKey:"parler", subIds:["s3"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Réagir à un article de blog",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b10-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -1226,6 +1250,9 @@ export const STEP_GROUPS_B11 = [
       { id:"b_delf3", stepKey:"parler", subIds:["s5"],
         icon:"🎓", kind:"DELF", color:"#D97706", sub:"Exercice en interaction (exercice 3)",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b11-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
@@ -1338,6 +1365,9 @@ export const STEP_GROUPS_B12 = [
       { id:"b_atelier2", stepKey:"parler", subIds:["s5"],
         icon:"🎨", kind:"Atelier", color:"#D97706", sub:"Choisir les œuvres du festival",
         section:"conversation", view:"conversation" },
+      { id:"b_delf", stepKey:"ecouter", subIds:["b12-delf"],
+        icon:"🎓", kind:"DELF A2", color:"#0891B2", sub:"Đề thi thử · 4 kỹ năng",
+        section:"delf-a2", view:"delf-a2" },
     ],
   },
 ];
