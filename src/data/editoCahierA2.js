@@ -5546,6 +5546,609 @@ export const CAHIER_A2 = {
     },
   },
 
+  b11: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    grammar: {
+
+      // p0 — La mise en relief (cahier p. 123)
+      p0: [
+        {
+          // ⚠️ Note : le corrigé imprimé (p. 164) s'arrête après « que (qu') :
+          // c, e, » sans classer la case f. D'après la transcription (« f.
+          // C'est ma prof de maths que je remercie »), f utiliserait « que »,
+          // mais ceci reste une déduction, non une réponse imprimée — f est
+          // donc omis ici plutôt qu'inventé. Par ailleurs, l'exemple imprimé
+          // du tableau coche la case a dans la ligne « que (qu') », alors que
+          // la phrase a de la transcription (« C'est moi qui ai envoyé ce
+          // CV ») est grammaticalement une structure avec « qui » — tension
+          // reproduite telle quelle, sans correction.
+          num: 1, page: 123, audioSrc: piste(107),
+          instruction: "Écoutez et cochez : « C'est + qui » ou « C'est/Ce sont + que (qu') » ?",
+          vi: "Nghe từng câu (a→e) và cho biết đó là cấu trúc với « qui » hay « que (qu') ».",
+          type: "choice",
+          items: [
+            { q: "a. (exemple imprimé, voir note ⚠️ ci-dessus)", options: ["qui", "que (qu')"], answer: "que (qu')", example: true },
+            { q: "b.", options: ["qui", "que (qu')"], answer: "qui" },
+            { q: "c.", options: ["qui", "que (qu')"], answer: "que (qu')" },
+            { q: "d.", options: ["qui", "que (qu')"], answer: "qui" },
+            { q: "e.", options: ["qui", "que (qu')"], answer: "que (qu')" },
+          ],
+        },
+        {
+          num: 2, page: 123,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["C'est", "Juliette", "qui", "a", "eu", "la", "meilleure", "note."], answer: "C'est Juliette qui a eu la meilleure note.", example: true },
+            { tokens: ["C'est", "le", "bachelor", "que", "j'ai", "obtenu", "l'année", "dernière."], answer: "C'est le bachelor que j'ai obtenu l'année dernière." },
+            { tokens: ["Ce", "que", "je", "préfère,", "ce", "sont", "mes", "études."], answer: "Ce que je préfère, ce sont mes études." },
+            { tokens: ["C'est", "à", "l'université", "que", "tu", "peux", "t'inscrire."], answer: "C'est à l'université que tu peux t'inscrire." },
+            { tokens: ["Ce", "qui", "me", "plaît,", "c'est", "la", "formation", "en", "alternance."], answer: "Ce qui me plaît, c'est la formation en alternance." },
+            { tokens: ["Ce", "sont", "les", "diplômes", "que", "nous", "recherchons."], answer: "Ce sont les diplômes que nous recherchons." },
+          ],
+        },
+        {
+          num: 3, page: 123,
+          instruction: "Répondez aux questions avec un pronom tonique mis en relief.",
+          vi: "Trả lời câu hỏi, dùng đại từ nhấn mạnh (moi, toi, lui, elle...).",
+          type: "transform",
+          items: [
+            { q: "C'est toi qui as appelé le lycée ?", answer: "Oui, c'est moi qui ai appelé.", example: true },
+            { q: "C'est toi qui as fait un bac scientifique ?", answer: "Oui, c'est moi qui ai fait ce bac." },
+            { q: "C'est au directeur de master que je dois parler de mon examen ?", answer: "Oui, c'est à lui que tu dois parler de ton examen." },
+            { q: "Ce sont les personnes qui ont réussi la première année de droit ?", answer: "Oui, ce sont elles qui ont réussi leur examen." },
+            { q: "Ce sont tes amis qui font un master en économie ?", answer: "Oui, ce sont eux qui font ces études." },
+          ],
+        },
+        {
+          num: 4, page: 123,
+          instruction: "Mettez en relief les mots soulignés.",
+          vi: "Nhấn mạnh (mise en relief) phần được gạch chân trong câu.",
+          type: "transform",
+          items: [
+            { q: "La mention « bien » est importante.", answer: "C'est la mention « bien » qui est importante.", example: true },
+            { q: "Nous choisissons les matières scientifiques.", answer: "Ce sont les matières scientifiques que nous choisissons." },
+            { q: "Je veux devenir un enseignant motivant.", answer: "C'est un enseignant motivant que je veux devenir." },
+            { q: "L'année de césure m'a fait du bien.", answer: "C'est l'année de césure qui m'a fait du bien." },
+            { q: "Les études ont changé sa vie.", answer: "Ce sont les études qui ont changé ma vie." },
+            { q: "À la fin de l'année, on passe un examen de droit.", answer: "C'est un examen de droit qu'on passe à la fin de l'année." },
+          ],
+        },
+      ],
+
+      // p1 — Le discours rapporté au présent (cahier p. 125)
+      p1: [
+        {
+          num: 1, page: 125,
+          instruction: "Lisez les phrases et cochez : discours direct ou discours indirect ?",
+          vi: "Đọc từng câu (a→f) và cho biết đó là lời nói trực tiếp hay gián tiếp.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["discours direct", "discours indirect"], answer: "discours direct", example: true },
+            { q: "b.", options: ["discours direct", "discours indirect"], answer: "discours indirect" },
+            { q: "c.", options: ["discours direct", "discours indirect"], answer: "discours direct" },
+            { q: "d.", options: ["discours direct", "discours indirect"], answer: "discours indirect" },
+            { q: "e.", options: ["discours direct", "discours indirect"], answer: "discours indirect" },
+            { q: "f.", options: ["discours direct", "discours indirect"], answer: "discours direct" },
+          ],
+        },
+        {
+          num: 2, page: 125,
+          instruction: "Retrouvez la question directe.",
+          vi: "Tìm lại câu hỏi trực tiếp ban đầu.",
+          type: "transform",
+          items: [
+            { q: "Elle veut savoir comment prendre contact avec un employeur.", answer: "Comment prendre contact avec un employeur ?", example: true },
+            { q: "Elle demande si je veux créer mon profil professionnel.", answer: "Est-ce que tu veux créer ton profil professionnel ?" },
+            { q: "Tu te demandes ce qui est utile dans un CV.", answer: "Qu'est-ce qui est utile dans un CV ?" },
+            { q: "Il aimerait savoir pourquoi je m'intéresse à cet emploi.", answer: "Pourquoi tu t'intéresses à cet emploi ?" },
+            { q: "Je demande ce qu'il dit.", answer: "Qu'est-ce qu'il dit ?" },
+            { q: "Nous aimerions savoir ce que nous devons faire pour obtenir ce poste.", answer: "Qu'est-ce que nous devons faire pour obtenir ce poste ?" },
+          ],
+        },
+        {
+          num: 3, page: 125,
+          instruction: "Complétez les phrases avec : qu', ce que, s', pourquoi, ce qui, que.",
+          vi: "Điền từ phù hợp: qu', ce que, s', pourquoi, ce qui, que.",
+          type: "fill",
+          bank: ["ce que", "s'", "pourquoi", "ce qui", "que"],
+          items: [
+            { q: "Le candidat explique …… il n'a pas beaucoup d'expérience professionnelle.", answer: "qu'", example: true },
+            { q: "La recruteuse demande au candidat …… il connaît le site internet de l'entreprise.", answer: "s'" },
+            { q: "Les employeurs veulent savoir …… motive les candidats.", answer: "ce qui" },
+            { q: "Le candidat ne comprend pas …… on lui pose des questions.", answer: "pourquoi" },
+            { q: "Expliquez-moi …… vous avez fait pour devenir travailleur indépendant.", answer: "ce que" },
+            { q: "Il affirme …… les réseaux professionnels sont vraiment efficaces.", answer: "que" },
+          ],
+        },
+        {
+          num: 4, page: 125, audioSrc: piste(109),
+          instruction: "Écoutez et rapportez les paroles des personnes à l'écrit.",
+          vi: "Nghe và tường thuật lại lời nói bằng văn viết (discours rapporté).",
+          type: "transform",
+          items: [
+            { q: "a. (exemple) — « Ce n'est pas mon profil. »", answer: "Il affirme que ce n'est pas son profil.", example: true },
+            { q: "b. — « Tu es sûr de ton choix ? »", answer: "Elle demande si je suis sûr de mon choix." },
+            { q: "c. — « Je ne peux pas faire mon CV. »", answer: "Il explique qu'il ne peut pas faire son CV." },
+            { q: "d. — « Est-ce que tu as regardé cette annonce ? »", answer: "Elle veut savoir si j'ai regardé cette annonce." },
+            { q: "e. — « Qu'est-ce que tu veux obtenir ? »", answer: "Il demande ce que je veux obtenir." },
+            { q: "f. — « Tu dois faire une autre formation. »", answer: "Elle dit que je dois faire une autre formation." },
+          ],
+        },
+      ],
+
+      // p2 — Le pronom COI y (cahier p. 127)
+      p2: [
+        {
+          num: 1, page: 127,
+          instruction: "Entourez les mots que le pronom y remplace.",
+          vi: "Chọn từ/cụm từ được thay thế bởi đại từ « y ».",
+          type: "fill",
+          items: [
+            { q: "Nous sommes prêts à réfléchir à cette formation, nous allons y réfléchir ensemble. (exemple)", answer: "à cette formation", example: true },
+            { q: "Après le déménagement, ils commencent à s'habituer à leur nouvelle vie, mais ils s'y habituent très lentement.", answer: "à leur nouvelle vie" },
+            { q: "C'est facile à dire que vous croyez à cette candidature, mais y croyez-vous sérieusement ?", answer: "à cette candidature" },
+            { q: "Je ne cherche pas à renoncer à mes rêves d'enfant, y renoncer serait triste.", answer: "à mes rêves d'enfant" },
+            { q: "Tu réponds toujours à temps aux messages urgents, il faut donc que tu y répondes avant la fin de la journée.", answer: "aux messages urgents" },
+            { q: "Elle continue à penser à son travail même le week-end, elle y pense tout le temps.", answer: "à son travail" },
+          ],
+        },
+        {
+          num: 2, page: 127,
+          instruction: "Associez les questions et les réponses qui conviennent.",
+          vi: "Nối câu hỏi với câu trả lời phù hợp.",
+          type: "match",
+          pairs: [
+            { l: "Tu joues au basket avec quelle équipe ?", r: "J'y joue souvent avec les Rockets." },
+            { l: "Vous vous intéressez aux maths ?", r: "Non, je ne m'y intéresse pas." },
+            { l: "Il a fait attention à toi ?", r: "Pas du tout, il n'a pas fait attention à moi." },
+            { l: "Vous vous intéressez aux entrepreneurs indépendants ?", r: "Oui, je m'intéresse à eux." },
+            { l: "Tu as fait attention à ta lettre de motivation ?", r: "Oui, j'y ai fait bien attention." },
+            { l: "Tu réfléchis à ma proposition ?", r: "Bien sûr, j'y réfléchis beaucoup." },
+          ],
+        },
+        {
+          num: 3, page: 127,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["Les", "conditions", "de", "travail", "y", "sont", "difficiles."], answer: "Les conditions de travail y sont difficiles.", example: true },
+            { tokens: ["C'est", "vrai", "que", "tu", "n'y", "renonces", "pas", "?"], answer: "C'est vrai que tu n'y renonces pas ?" },
+            { tokens: ["Faites-y", "attention", "pendant", "votre", "entretien", "!"], answer: "Faites-y attention pendant votre entretien !" },
+            { tokens: ["C'est", "facile", "quand", "vous", "n'y", "pensez", "pas."], answer: "C'est facile quand vous n'y pensez pas." },
+            { tokens: ["Pour", "réussir,", "il", "est", "important", "d'y", "croire."], answer: "Pour réussir, il est important d'y croire." },
+            { tokens: ["Le", "foot", "est", "un", "sport", "d'équipe,", "nous", "y", "jouons", "avec", "des", "collègues."], answer: "Le foot est un sport d'équipe, nous y jouons avec des collègues." },
+          ],
+        },
+        {
+          num: 4, page: 127, audioSrc: piste(111),
+          instruction: "Écoutez les questions et répondez à l'écrit. Utilisez le pronom y.",
+          vi: "Nghe câu hỏi và trả lời bằng văn viết, dùng đại từ « y ».",
+          type: "transform",
+          items: [
+            { q: "a. (exemple) — Tu penses à ta carrière ?", answer: "Oui, j'y pense.", example: true },
+            { q: "b. — Votre chef pense à ses employés ?", answer: "Non, il ne pense pas à eux." },
+            { q: "c. — Ils sont sensibles à leur salaire ?", answer: "Non, ils n'y sont pas sensibles." },
+            { q: "d. — Vous vous êtes abonnés au réseau professionnel de l'entreprise ?", answer: "Oui, nous y sommes abonnés." },
+            { q: "e. — Tu fais attention à ton profil professionnel ?", answer: "Oui, j'y fais attention." },
+            { q: "f. — Ton chef a répondu à ta demande de congés ?", answer: "Non, il n'y a pas répondu." },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 128) — wired into the Phono step ─────
+    // Seules Discrimination (act. 1) et Dictée (act. 3) ont une réponse
+    // vérifiable. Articulation (act. 2, phrases à répéter puis avis
+    // personnel) et Interprétation (act. 4, lecture à voix haute) restent
+    // des exercices oraux sans réponse unique — même choix que les autres
+    // unités.
+    phono: [
+      {
+        num: 1, page: 128, audioSrc: piste(112),
+        instruction: "Discrimination — écoutez et entourez le mot que vous entendez deux fois.",
+        vi: "Nghe và chọn từ được lặp lại hai lần trong mỗi hàng.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["bœufs", "beau", "bout"], answer: "beau", example: true },
+          { q: "b.", options: ["eux", "haut", "où"], answer: "eux" },
+          { q: "c.", options: ["le", "l'eau", "loup"], answer: "l'eau" },
+          { q: "d.", options: ["ne", "nos", "nous"], answer: "nous" },
+          { q: "e.", options: ["peu", "peau", "pou"], answer: "peu" },
+          { q: "f.", options: ["jeu", "jo", "joue"], answer: "joue" },
+        ],
+      },
+      {
+        num: 3, page: 128, audioSrc: piste(114),
+        instruction: "Dictée — écoutez le texte et complétez les mots.",
+        vi: "Nghe và điền các âm còn thiếu ([ø] [o] [u]) vào mỗi từ.",
+        type: "fill",
+        items: [
+          { q: "B__nj__r, j_ m'appelle Denisa. (3 từ)", answer: "o ou e", example: true },
+          { q: "J_ suis r__maine. (2 từ)", answer: "e ou" },
+          { q: "J'ai obt_nu mon dipl_me du bac cette année __ lycée français d_ Bucarest __ j'ai étudié pendant six ans. (5 từ)", answer: "e ô au e où" },
+          { q: "Mon pr_jet pr_fessionnel est d_ d_v_nir traductrice français-r__main, __ niv__ __ropéen. (9 từ)", answer: "o o e e e ou au eau eu" },
+          { q: "J_ v__x v_nir en France, à Toulouse, p__r c_mmencer une licence et continuer avec un master. (5 từ)", answer: "e eu e ou o" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab / c1_vocab2 (cahier p. 124, « Les études ») couvrent les
+    // groupes b11g1-b11g6 du livre (système scolaire, scolarité, personnes,
+    // études, évaluation, diplômes) ; c2_vocab / c3_vocab (cahier p. 126,
+    // « Le monde du travail ») couvrent b11g7-b11g10 (secteurs
+    // professionnels, professions, le travail, le CV) — voir parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 124,
+          instruction: "Associez les lieux de la liste aux images : le collège – l'université – la salle de classe – le lycée.",
+          vi: "Nối tên nơi học với hình ảnh tương ứng.",
+          type: "fill",
+          bank: ["le collège", "l'université", "la salle de classe", "le lycée"],
+          items: [
+            { q: "a. (salle de classe, enseignante au tableau) — exemple", answer: "l'école primaire", example: true },
+            { q: "b. (salle vide avec pupitres)", answer: "la salle de classe" },
+            { q: "c. (groupe de jeunes qui écrivent)", answer: "le lycée" },
+            { q: "d. (amphithéâtre, étudiants)", answer: "l'université" },
+            { q: "e. (jeunes collégiens autour d'une table)", answer: "le collège" },
+          ],
+        },
+        {
+          num: 4, page: 124, audioSrc: piste(108),
+          instruction: "Qui parle ? Écoutez et cochez.",
+          vi: "Nghe và cho biết ai đang nói (a→e).",
+          type: "fill",
+          items: [
+            { q: "Un élève (exemple)", answer: "a", example: true },
+            { q: "Un enseignant de lycée", answer: "e" },
+            { q: "Une étudiante", answer: "b" },
+            { q: "Un professeur d'université", answer: "c" },
+            { q: "La mère d'un élève à l'école primaire", answer: "d" },
+          ],
+        },
+      ],
+
+      c1_vocab2: [
+        {
+          num: 2, page: 124,
+          instruction: "Trouvez les mots qui correspondent aux définitions suivantes.",
+          vi: "Tìm từ tương ứng với định nghĩa.",
+          type: "fill",
+          items: [
+            { q: "Le diplôme qui valide la fin des études à l'école secondaire.", answer: "le bac", example: true },
+            { q: "Une personne qui enseigne à l'université.", answer: "un professeur" },
+            { q: "Ne pas réussir ses examens.", answer: "rater" },
+            { q: "Le diplôme national qui correspond à bac + 3.", answer: "une licence" },
+            { q: "Refaire une année d'études.", answer: "redoubler" },
+          ],
+        },
+        {
+          num: 3, page: 124,
+          instruction: "Complétez les phrases avec les mots suivants : bien – de césure – réussir – commencer.",
+          vi: "Điền từ phù hợp: bien – de césure – réussir – commencer.",
+          type: "fill",
+          bank: ["bien", "de césure", "réussir", "commencer"],
+          items: [
+            { q: "Nous avons de bonnes notes et vous avez toujours de …… notes.", answer: "mauvaises", example: true },
+            { q: "Après son bac, elle a décidé de continuer ses études, mais sa meilleure amie a fait une année …… .", answer: "de césure" },
+            { q: "J'ai arrêté mes études à l'université et je veux …… une formation.", answer: "commencer" },
+            { q: "Il risque de rater ses examens, mais les autres étudiants vont …… .", answer: "réussir" },
+            { q: "J'ai eu mon bac sans mention, mais ma sœur a obtenu la mention …… .", answer: "bien" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 2, page: 126,
+          instruction: "Classez les mots de la liste dans le tableau : le tatoueur – le nettoyage – le numérique – l'entrepreneur – le bien-être.",
+          vi: "Phân loại từ vào bảng: đó là một ngành nghề (secteur) hay một nghề nghiệp (profession)?",
+          type: "fill",
+          items: [
+            { q: "le manucure (exemple)", answer: "les professions", example: true },
+            { q: "le nettoyage", answer: "les secteurs professionnels" },
+            { q: "le numérique", answer: "les secteurs professionnels" },
+            { q: "l'entrepreneur", answer: "les professions" },
+            { q: "le bien-être", answer: "les secteurs professionnels" },
+            { q: "le tatoueur", answer: "les professions" },
+          ],
+        },
+        {
+          num: 4, page: 126,
+          instruction: "Vrai ou faux ? Cochez.",
+          vi: "Đúng hay sai?",
+          type: "truefalse",
+          items: [
+            { q: "Un chef d'entreprise est un entrepreneur.", answer: true },
+            { q: "Les formateurs travaillent dans le secteur du management.", answer: false },
+            { q: "Le job est un mot familier pour dire « emploi ».", answer: true },
+            { q: "Le travail en équipe n'est pas collaboratif.", answer: false },
+            { q: "Travailler en présentiel signifie venir dans les bureaux de l'entreprise.", answer: true },
+          ],
+        },
+      ],
+
+      c3_vocab: [
+        {
+          num: 1, page: 126,
+          instruction: "Entourez cinq mots du monde de l'entreprise (nuage : licence, société, cours, salariée, sport, employé, beauté, coworking, centres d'intérêt, formation, horaires).",
+          vi: "Chọn 5 từ thuộc thế giới doanh nghiệp trong đám mây từ.",
+          type: "truefalse",
+          items: [
+            { q: "licence", answer: false },
+            { q: "société", answer: true },
+            { q: "cours", answer: false },
+            { q: "salariée", answer: true },
+            { q: "sport", answer: false },
+            { q: "employé", answer: true },
+            { q: "beauté", answer: false },
+            { q: "coworking", answer: true },
+            { q: "centres d'intérêt", answer: false },
+            { q: "formation", answer: false },
+            { q: "horaires", answer: true },
+          ],
+        },
+        {
+          num: 3, page: 126, audioSrc: piste(110),
+          instruction: "Écoutez et complétez les informations sur le CV de François Jenny.",
+          vi: "Nghe và điền thông tin còn thiếu vào CV của François Jenny.",
+          type: "fill",
+          items: [
+            { q: "■ (poste/titre du CV)", answer: "Entrepreneur", example: true },
+            { q: "Mars 2020 à ce jour : Travailleur ……", answer: "indépendant" },
+            { q: "Juin 2017-mars 2020 : …… de direction chez Payotte", answer: "Secrétaire" },
+            { q: "2015-2017 : …… de communication (Université de Strasbourg)", answer: "Master" },
+            { q: "Compétences — …… : Excel, Word", answer: "Informatique" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 130-131, noté /40) ────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    bilan: [
+      {
+        num: 1, page: 130,
+        instruction: "Grammaire — Répondez aux questions en mettant en relief les mots soulignés. (/7)",
+        vi: "Trả lời câu hỏi, dùng cấu trúc nhấn mạnh (mise en relief) cho phần gợi ý.",
+        type: "transform",
+        items: [
+          { q: "Qu'est-ce qui vous motive dans les études ? (le diplôme)", answer: "Ce qui me motive dans les études, c'est le diplôme./C'est le diplôme qui me motive dans les études." },
+          { q: "Qu'est-ce que vous appréciez dans une formation ? (l'enseignement)", answer: "Ce que j'apprécie dans une formation, c'est l'enseignement./C'est l'enseignement que j'apprécie dans une formation." },
+          { q: "Qu'est-ce que vous regardez dans un CV ? (le parcours professionnel)", answer: "Ce que je regarde dans un CV, c'est le parcours professionnel./C'est le parcours professionnel que je regarde dans un CV." },
+          { q: "Qu'est-ce qui vous plaît dans votre travail ? (la communication)", answer: "Ce qui me plaît dans mon travail, c'est la communication./C'est la communication qui me plaît dans mon travail." },
+          { q: "Quelle matière vous détestez ? (la littérature)", answer: "Ce que je déteste, c'est la littérature./C'est la littérature que je déteste." },
+          { q: "Qu'est-ce qui vous attire dans le métier de coiffeur ? (le contact avec les clients)", answer: "Ce qui m'attire, c'est le contact avec les clients./C'est le contact avec les clients qui m'attire." },
+          { q: "Quelle profession vous trouvez difficile ? (le métier de pâtissier)", answer: "Ce que je trouve difficile, c'est le métier de pâtissier./C'est le métier de pâtissier que je trouve difficile." },
+        ],
+      },
+      {
+        num: 2, page: 130,
+        instruction: "Grammaire — Transformez au discours rapporté les questions et les réponses d'un entretien d'embauche. (/7) — Le recruteur : Comment vous avez connu notre entreprise ? Le candidat : Je suis allé sur votre site internet. Le recruteur : Quand est-ce que vous pouvez commencer ? Le candidat : Je suis disponible tout de suite. Le recruteur : Est-ce que vous avez des questions ? Le candidat : Qu'est-ce que l'entreprise propose comme formations internes ? Le recruteur : Notre programme est très riche !",
+        vi: "Chuyển các câu hỏi/câu trả lời của buổi phỏng vấn xin việc sang lời nói gián tiếp.",
+        type: "transform",
+        items: [
+          { q: "Le recruteur demande……", answer: "comment le candidat a connu leur entreprise." },
+          { q: "Le candidat répond……", answer: "qu'il est allé sur leur site Internet." },
+          { q: "Le recruteur veut savoir……", answer: "quand le candidat peut commencer." },
+          { q: "Le candidat déclare……", answer: "qu'il est disponible tout de suite." },
+          { q: "Le recruteur aimerait savoir……", answer: "si le candidat a des questions." },
+          { q: "Le candidat demande……", answer: "ce que l'entreprise propose comme formations internes." },
+          { q: "Le recruteur affirme……", answer: "que leur programme est très riche." },
+        ],
+      },
+      {
+        num: 3, page: 130,
+        instruction: "Grammaire — Répondez aux questions en utilisant le pronom y. (/6)",
+        vi: "Trả lời câu hỏi, dùng đại từ « y ».",
+        type: "transform",
+        items: [
+          { q: "Est-ce que vous renoncez à ce job ?", answer: "Oui, nous y renonçons." },
+          { q: "Tu t'es habitué à ton nouveau formateur ?", answer: "Oui, je me suis habitué à lui." },
+          { q: "Il s'habitue à son poste ?", answer: "Non, il ne s'y habitue pas." },
+          { q: "Votre entreprise s'intéresse au coworking ?", answer: "Oui, elle s'y intéresse." },
+          { q: "Elles se sont intéressées à tous les candidats ?", answer: "Non, elles ne se sont pas intéressées à eux." },
+          { q: "Est-ce que nos employés pensent aux activités extraprofessionnelles ?", answer: "Non, ils n'y pensent pas." },
+        ],
+      },
+      {
+        num: 4, page: 131,
+        instruction: "Vocabulaire — Associez. (/5)",
+        vi: "Nối đầu câu với cuối câu phù hợp.",
+        type: "match",
+        pairs: [
+          { l: "la fac", r: "de droit" },
+          { l: "la mention", r: "très bien" },
+          { l: "une formation", r: "en alternance" },
+          { l: "l'année", r: "de césure" },
+          { l: "l'école", r: "primaire" },
+        ],
+      },
+      {
+        num: 5, page: 131,
+        instruction: "Vocabulaire — Entourez le mot qui convient. (/5)",
+        vi: "Chọn từ phù hợp.",
+        type: "choice",
+        items: [
+          { q: "Étudiante en ……, elle est impatiente de commencer l'année.", options: ["maternelle", "informatique"], answer: "informatique" },
+          { q: "Toute notre classe stresse avant de …… le bac.", options: ["passer", "arrêter"], answer: "passer" },
+          { q: "J'ai décidé de suivre …… en alternance.", options: ["un examen", "une formation"], answer: "une formation" },
+          { q: "Mon professeur de français …… sa matière au lycée.", options: ["apprend", "enseigne"], answer: "enseigne" },
+          { q: "Après trois ans d'études, ils vont obtenir …… en droit.", options: ["une licence", "un master"], answer: "une licence" },
+        ],
+      },
+      {
+        // ⚠️ Note : le corrigé imprimé associe la 5ᵉ image à « formatrice »,
+        // mais le mot à trous imprimé (« _ _ _ M _ _ R _ C _ ») compte 9
+        // tirets contre 10 lettres dans « formatrice » — écart signalé mais
+        // non corrigé, reproduit tel quel.
+        num: 6, page: 131,
+        instruction: "Vocabulaire — Retrouvez le nom des professions. (/5)",
+        vi: "Tìm tên nghề nghiệp dựa trên gợi ý chữ cái.",
+        type: "fill",
+        items: [
+          { q: "_ _ _ É _ _ _ U _ E (femme au laboratoire, ordinateurs)", answer: "ingénieure" },
+          { q: "C _ _ _ F _ _ _ _ (homme qui coupe les cheveux)", answer: "coiffeur" },
+          { q: "_ _ T _ _ _ _ C _ _ _ _ E (soins du visage)", answer: "esthéticienne" },
+          { q: "M _ _ _ _ _ _ R (massage du dos)", answer: "masseur" },
+          { q: "_ _ _ M _ _ R _ C _ (accompagnement de personnes âgées) — voir note ⚠️ ci-dessus", answer: "formatrice" },
+        ],
+      },
+      {
+        num: 7, page: 131,
+        instruction: "Vocabulaire — Remettez dans l'ordre le parcours de Léa. (/5)",
+        vi: "Sắp xếp lại thứ tự các bước trong hành trình của Léa.",
+        type: "fill",
+        items: [
+          { q: "Après son master en informatique, Léa cherchait du travail. (exemple)", answer: "1", example: true },
+          { q: "Elle a fait son curriculum vitae.", answer: "2" },
+          { q: "Elle a répondu à plusieurs annonces d'emploi.", answer: "3" },
+          { q: "Elle a passé un entretien d'embauche.", answer: "4" },
+          { q: "Elle a obtenu un poste de salariée dans une entreprise du numérique.", answer: "5" },
+        ],
+      },
+      {
+        // Page 134 — Jeux, act. 1 : mots cachés dans une grille. Le corrigé
+        // (p. 165) reproduit la grille avec les cases-solution surlignées
+        // plutôt qu'une liste de mots ; les 5 mots ci-dessous ont été
+        // reconstitués en suivant les cases surlignées de l'image du
+        // corrigé (identiques à la grille de l'exercice, page 134).
+        num: 8, page: 134,
+        instruction: "Jeux — Retrouvez les 5 mots du travail cachés dans la grille.",
+        vi: "Tìm 5 từ về công việc ẩn trong ô chữ.",
+        type: "fill",
+        items: [
+          { q: "ligne 1, horizontale", answer: "nettoyage", example: true },
+          { q: "colonne 1, verticale", answer: "manucure" },
+          { q: "colonne 4, verticale, lignes 1-5", answer: "tarif" },
+          { q: "colonne 8, verticale, lignes 6-10", answer: "local" },
+          { q: "dernière ligne, horizontale", answer: "matériel" },
+        ],
+      },
+      {
+        num: 9, page: 134,
+        instruction: "Jeux — Trouvez les lettres manquantes des mots du monde professionnel.",
+        vi: "Điền chữ còn thiếu để tìm ra từ đúng.",
+        type: "fill",
+        items: [
+          { q: "C _ MP _ T _ _ _ _ E", answer: "compétence", example: true },
+          { q: "E _ _ AU _ _ _ E", answer: "embauche" },
+          { q: "H _ _ _ _ RES", answer: "horaires" },
+          { q: "T _ _ OU _ _ _ R", answer: "tatoueur" },
+          { q: "M _ R _ E _ _ _ _ G", answer: "marketing" },
+        ],
+      },
+      {
+        num: 10, page: 134,
+        instruction: "Jeux — Charades. Qu'est-ce que c'est ?",
+        vi: "Giải câu đố chữ (charades).",
+        type: "fill",
+        items: [
+          { q: "Mon premier est synonyme de « à quelle heure ? » : quand ; mon deuxième est synonyme de « il parle » : (il) dit ; mon troisième indique le jour de ma naissance : date ; mon tout est une personne qui participe à un entretien d'embauche.", answer: "candidat(e)" },
+          { q: "Mon premier est synonyme de « joli » : beau ; mon deuxième est une boisson : thé ; mon tout est un secteur professionnel.", answer: "beauté" },
+        ],
+      },
+      {
+        // ⚠️ Note : le corrigé imprimé (p. 165 : « 1. a. – 2. b. – 3. a. –
+        // 4. c. – 5. a. – 6. c. ») semble contenir plusieurs incohérences
+        // par rapport aux énoncés imprimés en page 134 — Q1 : le bac + 4
+        // correspond en réalité à un master 1 (réponse b), non à une
+        // licence (bac + 3) ; Q2 : l'enseignement supérieur se déroule à
+        // l'université (réponse c), non au collège ; Q6 : « parler de son
+        // parcours » désigne le parcours scolaire et/ou professionnel
+        // (réponse b), non politique. Les réponses a, c, a pour les
+        // questions 3, 4 et 5 correspondent bien à l'énoncé. Les réponses
+        // ci-dessous reproduisent fidèlement les lettres imprimées dans les
+        // Corrigés, sans les corriger.
+        num: 11, page: 134,
+        instruction: "Jeux — Quiz. Testez vos connaissances sur les études et le monde du travail en France (voir note ⚠️ sur le corrigé imprimé).",
+        vi: "Trả lời quiz kiến thức về học tập và công việc ở Pháp (xem chú thích ⚠️ về đáp án in trong sách).",
+        type: "choice",
+        items: [
+          { q: "1. Le bac + 4 correspond à :", options: ["une licence", "un master 1", "un master 2"], answer: "une licence" },
+          { q: "2. L'enseignement supérieur signifie étudier :", options: ["au lycée", "au collège", "à l'université"], answer: "au collège" },
+          { q: "3. Une personne en troisième année va :", options: ["à la fac", "à l'école primaire", "au lycée"], answer: "à la fac" },
+          { q: "4. Une agente d'entretien travaille dans le secteur :", options: ["de l'informatique", "de la communication", "du nettoyage"], answer: "du nettoyage" },
+          { q: "5. Pendant un entretien d'embauche, le candidat :", options: ["parle de ses compétences", "demande un curriculum vitae", "cherche le local de la société"], answer: "parle de ses compétences" },
+          { q: "6. « Parler de son parcours » signifie présenter son parcours :", options: ["sportif", "scolaire et/ou professionnel", "politique"], answer: "politique" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 132-134) ───────────────────────────
+    // Le livre n'a pas de page de préparation DELF dédiée pour cette unité
+    // (ni écoute dans editoAudioA2.js, ni lecture DELF dans
+    // editoA2Reading.js pour b11) — donc pas de coLivre, même pattern que
+    // b2/b5/b7/b9/b12.
+    delf: {
+      co: [
+        {
+          num: 1, page: 132, audioSrc: piste(117),
+          instruction: "Compréhension de l'oral — vous écoutez ce message sur un répondeur téléphonique. (6 points)",
+          vi: "Nghe tin nhắn thoại của ông Slimane rồi trả lời các câu hỏi.",
+          type: "choice",
+          items: [
+            { q: "1. Dans quel secteur travaille M. Slimane ?", options: ["Marketing", "Informatique", "Communication"], answer: "Informatique" },
+            { q: "2. Quelle activité extraprofessionnelle intéresse M. Slimane ?", options: ["le basket", "le cinéma/la photo", "le théâtre"], answer: "le théâtre" },
+            { q: "3. Le poste proposé est…", options: ["en télétravail", "en présentiel", "en télétravail et présentiel"], answer: "en présentiel" },
+            { q: "4. Pour le poste, vous devrez organiser…", options: ["des projets", "des réunions", "des formations"], answer: "des formations" },
+            { q: "5. Quand est-ce que vous avez rendez-vous avec M. Slimane ?", options: ["Le 16", "Le 17", "Le 18"], answer: "Le 16" },
+            { q: "6. Comment est-ce que vous devez répondre à M. Slimane ?", options: ["par SMS", "par téléphone", "par ordinateur/e-mail"], answer: "par SMS" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — programme de la ville de Grenoble (6
+      // documents à associer à 8 personnes ; 2 personnes n'ont pas de
+      // document correspondant).
+      ce: [
+        {
+          num: 1, page: 132,
+          instruction: "Compréhension des écrits — vous voulez conseiller une sortie à vos ami(e)s français(es). Vous lisez le programme de la ville de Grenoble (6 documents, 8 personnes — attention, 2 personnes n'ont pas de document correspondant). (6 points)",
+          vi: "Đọc chương trình sự kiện của thành phố Grenoble (6 tài liệu) rồi ghép với 8 người (chú ý: 2 người không có tài liệu tương ứng).",
+          type: "fill",
+          items: [
+            { q: "A. Baptiste est ingénieur du numérique.", answer: "Document 5" },
+            { q: "B. Élise voudrait devenir tatoueuse.", answer: "Document 3" },
+            { q: "C. Samuel s'intéresse au bien-être.", answer: "Document 4" },
+            { q: "D. Hélène enseigne la littérature.", answer: "aucun document ne correspond" },
+            { q: "E. Leila part faire le tour du monde.", answer: "Document 2" },
+            { q: "F. Florian voudrait ouvrir sa pâtisserie.", answer: "Document 1" },
+            { q: "G. Alexandre a envie de se reconvertir.", answer: "Document 6" },
+            { q: "H. Stéphanie adore la musique.", answer: "aucun document ne correspond" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 133,
+          prompt: "Vous venez de changer de travail. Vous écrivez à un(e) ami(e) français(e) pour lui parler de votre nouveau travail (lieu, collègues, activités…). Vous donnez aussi vos impressions. (60 mots minimum)",
+          vi: "Bạn vừa đổi công việc. Viết thư cho một người bạn Pháp kể về công việc mới (nơi làm, đồng nghiệp, hoạt động…) và nêu cảm nhận. (tối thiểu 60 từ)",
+          model: "Bonjour Anthony, Comment va ta famille ? Je t'écris parce que j'ai une bonne nouvelle ! J'ai changé de travail. Mon nouveau poste me plaît beaucoup, je suis responsable communication dans une grande entreprise informatique. Les bureaux sont à Paris. Ils sont modernes et conviviaux. Il y a aussi une salle de sport et un espace détente. J'adore ! Je travaille avec une équipe internationale très sympa. Je dois encore apprendre le métier mais c'est passionnant ! Et toi, quelles nouvelles ? À bientôt, Léa",
+        },
+        {
+          skill: "Production orale", points: "2 minutes environ", page: 133,
+          prompt: "Partie 2 de l'épreuve : monologue suivi (2 minutes environ). Sujet : Les études. Parlez de vos études. Qu'est-ce que vous avez étudié ? C'était où ? Qu'est-ce que vous avez préféré ? Qu'est-ce que vous n'avez pas aimé dans vos études ?",
+          vi: "Nói về việc học của bạn: bạn đã học gì, ở đâu, thích điều gì nhất và không thích điều gì (độc thoại khoảng 2 phút).",
+          model: "J'ai fait des études littéraires à l'université de Hanovre, en Allemagne. J'ai étudié la littérature allemande et française. Après ma licence, je suis venu(e) faire un master en littérature française à Paris. Maintenant, j'ai un bac + 5. Je travaille dans une maison d'édition à Paris. J'ai adoré la vie étudiante à Paris. Il y a plus de choses à faire qu'à Hanovre, comme les musées ou le théâtre. Et aussi, je pouvais parler français tous les jours. Je vivais en colocation avec deux autres étudiants, c'était génial ! À Hanovre, je vivais chez mes parents, je n'avais pas la même liberté. Les cours à l'université étaient intéressants mais certains professeurs n'étaient pas très sérieux. Ils étaient souvent absents. Ils ne corrigeaient pas nos devoirs et mettaient des mauvaises notes. En Allemagne, ils sont plus gentils avec les étudiants.",
+        },
+        {
+          // Page 129 — Production écrite (70 mots), non notée DELF.
+          skill: "Production écrite (page 129)", points: "70 mots", page: 129,
+          prompt: "Vous écrivez à l'entreprise qui loue ses bureaux à d'autres sociétés. Vous demandez des informations pratiques (conditions de réservation, prix, horaires). Faites attention aux formules d'un message formel.",
+          vi: "Viết thư hỏi thông tin về việc thuê văn phòng (điều kiện đặt chỗ, giá, giờ giấc) — chú ý dùng văn phong trang trọng. (70 từ)",
+          model: "Madame, Monsieur, Notre société Infomaxi, active dans le secteur informatique, recherche actuellement des locaux à louer deux jours par semaine. J'ai vu sur le site internet de votre entreprise une proposition de location de bureaux aux employés extérieurs et je voudrais savoir quelles sont les conditions de réservation. Pouvez-vous me dire si le prix de location change si nos employés ne travaillent pas en présentiel toute la journée ? Merci d'avance pour votre réponse. Bien cordialement, Philippe Hugon, assistant de direction",
+        },
+      ],
+    },
+  },
+
+
   b12: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
