@@ -3715,6 +3715,611 @@ export const CAHIER_A2 = {
     },
   },
 
+  b8: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    // points[0]=la cause et la conséquence, [1]=le subjonctif présent
+    // (nécessité, opinion), [2]=la place des pronoms COD et COI — voir
+    // editoGrammarA2.js b8.points.
+    grammar: {
+
+      // p0 — La cause et la conséquence (cahier p. 87)
+      p0: [
+        {
+          num: 1, page: 87,
+          instruction: "Reliez les phrases pour exprimer une conséquence.",
+          vi: "Nối các câu để diễn đạt kết quả (conséquence).",
+          type: "match",
+          pairs: [
+            { l: "Les jeunes préfèrent le smartphone pour s'informer…", r: "donc ils ne regardent plus la télé." },
+            { l: "Mon grand-père ne sait pas utiliser Internet…", r: "c'est pourquoi il ne suit pas l'actualité en ligne." },
+            { l: "La Revue Dessinée propose des sujets passionnants…", r: "c'est pour ça que je reçois ce magazine tous les trois mois." },
+            // ⚠️ Note du corrigé source : le corrigé imprimé de cet item dit
+            // « J'ai aimé le titre donc j'ai acheté cette revue. » (1ʳᵉ
+            // personne), alors que l'énoncé est à la 3ᵉ personne (« Il a aimé
+            // le titre… »). La réponse ci-dessous est reformulée à la 3ᵉ
+            // personne pour rester cohérente avec l'énoncé — voir le .md
+            // source pour le détail.
+            { l: "Il a aimé le titre…", r: "donc il a acheté cette revue." },
+            { l: "Elle s'intéresse à l'écologie…", r: "alors elle passe son temps à regarder des documentaires." },
+            { l: "Je déteste la rubrique sport…", r: "c'est pour cela que je n'achète plus ce journal." },
+          ],
+        },
+        {
+          num: 2, page: 87,
+          instruction: "Complétez les phrases en utilisant les expressions suivantes : grâce à/aux, car, à cause de.",
+          vi: "Điền các từ nối cho sẵn: grâce à/aux, car, à cause de.",
+          type: "fill",
+          bank: ["grâce à/aux", "car", "à cause de"],
+          items: [
+            { q: "Je n'ai pas pu regarder ce documentaire ___ ma télé ne fonctionne plus.", answer: "car", example: true },
+            { q: "___ cet article, j'ai appris beaucoup de choses.", answer: "Grâce à" },
+            { q: "Le présentateur doit être malade ___ le journal est présenté par quelqu'un d'autre.", answer: "car" },
+            { q: "Je ne lis plus ce magazine ___ son point de vue politique.", answer: "à cause de" },
+            { q: "Le reportage est intéressant ___ il parle des réseaux sociaux.", answer: "car" },
+            { q: "La chaîne a beaucoup de succès ___ reportages sur l'actualité régionale.", answer: "grâce aux" },
+          ],
+        },
+        {
+          num: 3, page: 87, audioSrc: piste(76),
+          instruction: "Écoutez et cochez les phrases qui expriment la cause ou la conséquence.",
+          vi: "Nghe từng câu (a→g) và cho biết đó là nguyên nhân (cause) hay kết quả (conséquence).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["Cause", "Conséquence"], answer: "Cause", example: true },
+            { q: "b.", options: ["Cause", "Conséquence"], answer: "Cause" },
+            { q: "c.", options: ["Cause", "Conséquence"], answer: "Conséquence" },
+            { q: "d.", options: ["Cause", "Conséquence"], answer: "Conséquence" },
+            { q: "e.", options: ["Cause", "Conséquence"], answer: "Cause" },
+            { q: "f.", options: ["Cause", "Conséquence"], answer: "Conséquence" },
+            { q: "g.", options: ["Cause", "Conséquence"], answer: "Cause" },
+          ],
+        },
+        {
+          num: 4, page: 87,
+          instruction: "Entourez l'élément qui convient.",
+          vi: "Chọn từ nối phù hợp.",
+          type: "choice",
+          items: [
+            { q: "La nouvelle génération adore le journalisme numérique ___ tous les grands journaux ont une version en ligne.", options: ["c'est pourquoi", "grâce à"], answer: "c'est pourquoi", example: true },
+            { q: "Tu peux regarder France 2 ___ cette chaîne parle d'économie.", options: ["parce que", "à cause de"], answer: "parce que" },
+            { q: "Je m'intéresse aux sujets d'actualité ___ je suis abonnée à de nombreux médias.", options: ["parce que", "c'est pourquoi"], answer: "c'est pourquoi" },
+            { q: "J'aime beaucoup cette présentatrice ___ je regarde tout le temps son émission.", options: ["alors", "parce que", "c'est pourquoi"], answer: "c'est pourquoi" },
+            { q: "Ce journal est gratuit ___ il est donné dans le métro.", options: ["grâce à", "c'est pourquoi"], answer: "c'est pourquoi" },
+          ],
+        },
+      ],
+
+      // p1 — Le subjonctif présent (nécessité, opinion) (cahier p. 89)
+      p1: [
+        {
+          num: 1, page: 89,
+          instruction: "Associez les éléments.",
+          vi: "Nối các thành phần để tạo thành câu đúng.",
+          type: "match",
+          pairs: [
+            { l: "que je", r: "poste une photo." },
+            { l: "que tu", r: "écoutes la radio tous les matins." },
+            { l: "qu'il", r: "aille sur Internet." },
+            { l: "que nous", r: "soyons en contact avec elle." },
+            { l: "que vous", r: "suiviez les réseaux sociaux." },
+            { l: "qu'elles", r: "se connectent plus souvent." },
+          ],
+        },
+        {
+          num: 2, page: 89,
+          instruction: "Entourez la forme verbale qui convient.",
+          vi: "Chọn dạng động từ đúng.",
+          type: "choice",
+          items: [
+            { q: "C'est bien que vous ___ au courant de l'actualité.", options: ["soyez", "êtes"], answer: "soyez", example: true },
+            { q: "Il faut que les personnes âgées ___ de plus en plus connectées.", options: ["soient", "sont"], answer: "soient" },
+            { q: "Il est important que nous ___ jusqu'à la fin de cet épisode.", options: ["allons", "allions"], answer: "allions" },
+            { q: "C'est normal que cette émission ___ une forte audience.", options: ["ait", "a"], answer: "ait" },
+            { q: "Il ne faut pas que cette radio ___ de la politique.", options: ["fait", "fasse"], answer: "fasse" },
+            { q: "Il est indispensable que les gens ___ se renseigner sur différents médias.", options: ["aillent", "vont"], answer: "aillent" },
+            { q: "Il n'est pas important que nous ___ toutes les vidéos.", options: ["regardons", "regardions"], answer: "regardions" },
+          ],
+        },
+        {
+          num: 3, page: 89, audioSrc: piste(78),
+          instruction: "Écoutez et cochez si les phrases expriment une opinion ou une nécessité.",
+          vi: "Nghe từng câu (a→f) và cho biết đó là ý kiến (opinion) hay sự cần thiết (nécessité).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["Nécessité", "Opinion"], answer: "Nécessité", example: true },
+            { q: "b.", options: ["Nécessité", "Opinion"], answer: "Opinion" },
+            { q: "c.", options: ["Nécessité", "Opinion"], answer: "Opinion" },
+            { q: "d.", options: ["Nécessité", "Opinion"], answer: "Nécessité" },
+            { q: "e.", options: ["Nécessité", "Opinion"], answer: "Nécessité" },
+            { q: "f.", options: ["Nécessité", "Opinion"], answer: "Nécessité" },
+          ],
+        },
+        {
+          num: 4, page: 89,
+          instruction: "Conjuguez les verbes entre parenthèses au subjonctif présent.",
+          vi: "Chia động từ trong ngoặc ở thức subjonctif présent.",
+          type: "fill",
+          items: [
+            { q: "Il ne faut pas que je (commenter) ___ son message.", answer: "commente", example: true },
+            { q: "Il est important que tu (avoir) ___ Instagram, c'est à la mode.", answer: "aies" },
+            { q: "C'est normal que Sophie (surveiller) ___ les informations partagées sur Facebook.", answer: "surveille" },
+            { q: "C'est bien que tes parents (utiliser) ___ les livres audios.", answer: "utilisent" },
+            { q: "Il faut que nous (arrêter) ___ de poster des vidéos.", answer: "arrêtions" },
+            { q: "Il est indispensable que vous (garder) ___ votre téléphone portable avec vous.", answer: "gardiez" },
+            { q: "Il ne faut pas que j'(aller) ___ sur Internet avant de dormir.", answer: "aille" },
+          ],
+        },
+      ],
+
+      // p2 — La place des pronoms COD et COI (cahier p. 91)
+      p2: [
+        {
+          num: 1, page: 91,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["souvent.", "le", "j'", "ce film,", "adore", "je", "regarde"], answer: "J'adore ce film, je le regarde souvent." },
+            { tokens: ["payons", "leur", "Nous", "un abonnement."], answer: "Nous leur payons un abonnement." },
+            { tokens: ["souvent,", "c'est", "l'", "Je", "passionnant.", "écoute"], answer: "Je l'écoute souvent, c'est passionnant." },
+            { tokens: ["répondu.", "a", "ne", "lui", "pas", "L'auditeur"], answer: "L'auditeur ne lui a pas répondu." },
+            { tokens: ["vus.", "les", "ai", "pas", "ne", "Je"], answer: "Je ne les ai pas vus." },
+            { tokens: ["Instagram.", "suivons", "vous", "Nous", "sur"], answer: "Nous vous suivons sur Instagram." },
+          ],
+        },
+        {
+          num: 2, page: 91, audioSrc: piste(80),
+          instruction: "Écoutez et cochez si vous entendez un pronom COD ou COI.",
+          vi: "Nghe từng câu (a→g) và cho biết đó là đại từ COD hay COI.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["COD", "COI"], answer: "COD", example: true },
+            { q: "b.", options: ["COD", "COI"], answer: "COD" },
+            { q: "c.", options: ["COD", "COI"], answer: "COD" },
+            { q: "d.", options: ["COD", "COI"], answer: "COI" },
+            { q: "e.", options: ["COD", "COI"], answer: "COI" },
+            { q: "f.", options: ["COD", "COI"], answer: "COD" },
+            { q: "g.", options: ["COD", "COI"], answer: "COI" },
+          ],
+        },
+        {
+          num: 3, page: 91,
+          instruction: "Répondez aux questions. Remplacez les mots soulignés par un pronom COD ou COI.",
+          vi: "Trả lời câu hỏi, thay từ được gạch chân bằng đại từ COD hoặc COI.",
+          type: "fill",
+          items: [
+            { q: "Vous avez aimé le dernier film avec Romain Duris ?", answer: "Non, nous ne l'avons pas aimé.", example: true },
+            { q: "Ce présentateur accepte les critiques ?", answer: "Non, il ne les accepte pas." },
+            { q: "Est-ce que tu as parlé à ce journaliste ?", answer: "Non, je ne lui ai pas parlé." },
+            { q: "Cette vidéo intéresse ton frère ?", answer: "Non, elle ne l'intéresse pas." },
+            { q: "Tu connais la dessinatrice Pénélope Bagieu ?", answer: "Non, je ne la connais pas." },
+            { q: "Vous allez voir le film Eiffel ?", answer: "Non, nous n'allons pas le voir." },
+            { q: "Est-ce que tu as conseillé l'émission à tes parents ?", answer: "Non, je ne leur ai pas conseillé." },
+          ],
+        },
+        {
+          num: 4, page: 91,
+          instruction: "Complétez le texte avec les pronoms COD ou COI suivants : le, les, l', la, lui ou leur.",
+          vi: "Điền đại từ COD/COI cho sẵn vào đoạn văn về nhà báo truyền hình.",
+          type: "fill",
+          bank: ["le", "les", "l'", "la", "lui", "leur"],
+          items: [
+            { q: "Ce journaliste travaille sur TF1. Je ___ connais bien, il présente le JT tous les soirs.", answer: "le", example: true },
+            { q: "Les gens ___ aiment bien car il parle de sujets passionnants.", answer: "l'" },
+            { q: "Il reçoit souvent des célébrités. Il ___ pose de bonnes questions et il ___ écoute.", answer: "leur … les" },
+            { q: "Les invités ___ répondent facilement.", answer: "lui" },
+            { q: "C'est le seul programme que je regarde sur cette chaîne. Je ne ___ trouve pas intéressante pour les documentaires.", answer: "la" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 92) — wired into the Phono step ─────
+    // Seule la Discrimination (act. 1) a une réponse vérifiable. Les act. 2
+    // (Articulation : barrer les lettres muettes et répéter), 3 (Graphies :
+    // barrer les lettres muettes d'un texte) et 4 (Interprétation : lire à
+    // voix haute) restent des exercices oraux sans réponse unique digitalisée
+    // — même choix que pour les autres unités (voir p. ex. b7).
+    phono: [
+      {
+        num: 1, page: 92, audioSrc: piste(81),
+        instruction: "Discrimination — écoutez et cochez le groupe de mots que vous entendez.",
+        vi: "Nghe và chọn nhóm từ có phụ âm cuối được phát âm hay không.",
+        type: "choice",
+        items: [
+          { q: "a. une petite histoire en ligne", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne prononcée", example: true },
+          { q: "b. une recherche importante", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne non prononcée" },
+          { q: "c. un bon jugement", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne non prononcée" },
+          { q: "d. un gros budget", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne non prononcée" },
+          { q: "e. une enquête intéressante", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne non prononcée" },
+          { q: "f. un dernier numéro", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne non prononcée" },
+          { q: "g. une mémoire étonnante", options: ["consonne prononcée", "consonne non prononcée"], answer: "consonne non prononcée" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 88) couvre b8g1-b8g4 (l'info, la presse écrite,
+    // la télévision, les rubriques de l'info) ; c2_vocab (cahier p. 90)
+    // couvre b8g5-b8g7 (radio/podcasts, réseaux sociaux, communication) —
+    // voir parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 88,
+          instruction: "Presse écrite ou télévision ? Classez les mots suivants : l'article, le magazine, le JT, la dessinatrice, la chaîne, le titre, l'émission.",
+          vi: "Phân loại các từ cho sẵn thành báo giấy hoặc truyền hình.",
+          type: "fill",
+          bank: ["l'article", "le magazine", "le JT", "la dessinatrice", "la chaîne", "le titre", "l'émission"],
+          items: [
+            { q: "La presse écrite (4 mots, cách nhau bởi dấu phẩy)", answer: "l'article, le magazine, la dessinatrice, le titre", example: true },
+            { q: "La télévision (3 mots, cách nhau bởi dấu phẩy)", answer: "le JT, la chaîne, l'émission" },
+          ],
+        },
+        {
+          num: 2, page: 88,
+          instruction: "Séparez et remettez les mots dans l'ordre.",
+          vi: "Tách các từ dính liền và sắp xếp lại theo đúng thứ tự.",
+          type: "fill",
+          items: [
+            { q: "articleunpublier", answer: "publier un article", example: true },
+            { q: "vueledepoint", answer: "le point de vue" },
+            { q: "numériquejournalismele", answer: "le journalisme numérique" },
+            { q: "laenlignepresse", answer: "la presse en ligne" },
+            { q: "l'suivreactualité", answer: "suivre l'actualité" },
+            { q: "revuelapressede", answer: "la revue de presse" },
+          ],
+        },
+        {
+          num: 3, page: 88,
+          instruction: "Entourez la réponse correcte.",
+          vi: "Chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "___ est passionnant. Il parle des jeunes et de leur utilisation des réseaux sociaux.", options: ["Le documentaire", "Le dessinateur"], answer: "Le documentaire", example: true },
+            { q: "As-tu lu la dernière ___ de Martina Lafeuille ?", options: ["revue de presse", "chaîne"], answer: "revue de presse" },
+            { q: "___ ce journal en ligne.", options: ["J'ai écouté", "Je me suis abonné à"], answer: "Je me suis abonné à" },
+            { q: "Les journalistes ont tous un ___ politique différent.", options: ["point de vue", "numéro"], answer: "point de vue" },
+            { q: "___ la situation en France ?", options: ["Tu publies un article", "Tu es au courant de"], answer: "Tu es au courant de" },
+            { q: "Ce soir, à la télé, il y a un match de handball ___.", options: ["en direct", "dans la presse écrite"], answer: "en direct" },
+          ],
+        },
+        {
+          num: 4, page: 88, audioSrc: piste(77),
+          instruction: "Écoutez et placez les mots suivants sous les images correspondantes : écologie, culture, sport, météo.",
+          vi: "Nghe và ghép từ (écologie, culture, sport, météo) với hình ảnh tương ứng.",
+          type: "fill",
+          bank: ["écologie", "culture", "sport", "météo"],
+          items: [
+            { q: "a. photo des pièces de monnaie", answer: "économie", example: true },
+            { q: "b. photo du ciel/parapluies", answer: "météo" },
+            { q: "c. photo des ballons de sport", answer: "sport" },
+            { q: "d. photo de la forêt (cœur formé par les branches)", answer: "écologie" },
+            { q: "e. photo de la galerie d'art", answer: "culture" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 90,
+          instruction: "Remettez les différentes étapes dans l'ordre.",
+          vi: "Sắp xếp các bước theo đúng thứ tự sử dụng mạng xã hội.",
+          type: "fill",
+          items: [
+            { q: "Étape 1", answer: "ouvrir un compte sur un réseau social", example: true },
+            { q: "Étape 2", answer: "suivre une personne sur un réseau" },
+            { q: "Étape 3", answer: "être en contact avec cette personne" },
+            { q: "Étape 4", answer: "commenter ses vidéos" },
+            { q: "Étape 5", answer: "fermer son compte" },
+          ],
+        },
+        {
+          num: 2, page: 90, audioSrc: piste(79),
+          instruction: "Écoutez et associez les phrases au média qui convient (podcast/radio ou réseau social).",
+          vi: "Nghe từng câu (a→f) và cho biết đó là podcast/radio hay mạng xã hội.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["podcast/radio", "réseau social"], answer: "podcast/radio", example: true },
+            { q: "b.", options: ["podcast/radio", "réseau social"], answer: "réseau social" },
+            { q: "c.", options: ["podcast/radio", "réseau social"], answer: "podcast/radio" },
+            { q: "d.", options: ["podcast/radio", "réseau social"], answer: "réseau social" },
+            { q: "e.", options: ["podcast/radio", "réseau social"], answer: "podcast/radio" },
+            { q: "f.", options: ["podcast/radio", "réseau social"], answer: "réseau social" },
+          ],
+        },
+        {
+          num: 3, page: 90,
+          instruction: "Barrez l'intrus.",
+          vi: "Tìm từ lạc loài trong mỗi nhóm.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["être connecté", "être en contact", "suivre quelqu'un", "écouter de la musique"], answer: "écouter de la musique", example: true },
+            { q: "b.", options: ["la radio", "le podcast", "le réseau social", "l'émission"], answer: "le réseau social" },
+            { q: "c.", options: ["l'auditeur", "le contenu sonore", "l'internaute", "l'écoute"], answer: "l'internaute" },
+            { q: "d.", options: ["raconter", "commenter", "poster", "regarder"], answer: "regarder" },
+            { q: "e.", options: ["sensibiliser un public", "diffuser une information", "quitter un réseau social", "transmettre des connaissances"], answer: "quitter un réseau social" },
+          ],
+        },
+        {
+          num: 4, page: 90,
+          instruction: "Complétez le dialogue avec les mots suivants : outil de communication, auditeurs, podcast, épisode, sensibiliser le public.",
+          vi: "Điền từ cho sẵn vào đoạn hội thoại về chương trình radio.",
+          type: "fill",
+          bank: ["outil de communication", "auditeurs", "podcast", "épisode", "sensibiliser le public"],
+          items: [
+            { q: "Beaucoup d'___ ont réagi en direct.", answer: "auditeurs", example: true },
+            { q: "France Inter essaie de ___.", answer: "sensibiliser le public" },
+            { q: "J'écoute le ___ ce soir.", answer: "podcast" },
+            { q: "Demain, écoute la radio à 13 heures, il y a un deuxième ___.", answer: "épisode" },
+            { q: "La radio est vraiment un formidable ___.", answer: "outil de communication" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 94-95, noté /40) ────────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // La Compréhension écrite & Production orale de la page 93 (« Les
+    // Français et l'information ») n'a pas de piste audio — elle est reprise
+    // ici (items 8-12), après le /40 linguistique, même pattern que la CE
+    // p.69 ajoutée à la suite du bilan de b6. Sa Production orale (jeu de
+    // rôle, réponses libres) est rangée dans delf.production. Les Jeux
+    // p.98 (items 13-15) suivent, même pattern que b4/b6/b9/b12.
+    bilan: [
+      {
+        num: 1, page: 94,
+        instruction: "Cause ou conséquence ? Entourez l'expression qui convient. (/7)",
+        vi: "Chọn từ nối lý do/kết quả phù hợp.",
+        type: "choice",
+        items: [
+          { q: "___ Twitch, tout le monde peut faire des vidéos.", options: ["Grâce à", "Alors"], answer: "Grâce à" },
+          { q: "Marie déteste ce JT ___ la voix du présentateur.", options: ["à cause de", "donc"], answer: "à cause de" },
+          { q: "Ce film est une bonne surprise ___ le scénario est original.", options: ["parce que", "alors"], answer: "parce que" },
+          { q: "Ils ont lu un article très intéressant dans La Revue Dessinée, ___ ils vont s'abonner.", options: ["donc", "grâce à"], answer: "donc" },
+          { q: "La rubrique « Culture » de ce magazine me passionne ___ elle parle des événements de la région.", options: ["car", "c'est pourquoi"], answer: "car" },
+          { q: "L'auditeur voulait partager son point de vue, ___ il a pris la parole.", options: ["alors", "à cause de"], answer: "alors" },
+          { q: "Ce podcast est ennuyeux ___ je ne l'ai pas écouté en entier.", options: ["parce que", "c'est pourquoi"], answer: "c'est pourquoi" },
+        ],
+      },
+      {
+        num: 2, page: 94,
+        instruction: "Conjuguez les verbes entre parenthèses au subjonctif présent. (/7)",
+        vi: "Chia động từ ở thức subjonctif présent.",
+        type: "fill",
+        items: [
+          { q: "Il est important que le journaliste (parler) ___ correctement.", answer: "parle" },
+          { q: "Il est indispensable que vous (s'abonner) ___ à cette revue.", answer: "vous abonniez" },
+          { q: "C'est bien que nous (écouter) ___ cette radio.", answer: "écoutions" },
+          { q: "Il ne faut pas que tu (avoir) ___ plusieurs comptes sur Internet.", answer: "aies" },
+          { q: "C'est normal qu'ils (aller) ___ voir ce très bon film.", answer: "aillent" },
+          { q: "Il faut que ma sœur (arrêter) ___ de poster des photos.", answer: "arrête" },
+          { q: "C'est très bien que tu (limiter) ___ ton temps sur Internet.", answer: "limites" },
+        ],
+      },
+      {
+        num: 3, page: 94,
+        instruction: "Remplacez les mots soulignés par un pronom COD ou COI. (/6)",
+        vi: "Thay từ được gạch chân bằng đại từ COD hoặc COI.",
+        type: "transform",
+        items: [
+          { q: "Christelle aime particulièrement ce dessinateur.", answer: "Christelle l'aime particulièrement." },
+          { q: "Le présentateur répond à ses auditeurs.", answer: "Le présentateur leur répond." },
+          { q: "Elles regardent ce programme à la télévision.", answer: "Elles le regardent à la télévision." },
+          { q: "J'ai offert un abonnement de cinéma à mon frère.", answer: "Je lui ai offert un abonnement de cinéma." },
+          { q: "Je lis la rubrique « Économie » dans cette revue spécialisée.", answer: "Je la lis dans cette revue spécialisée." },
+          { q: "Philippe commente les vidéos.", answer: "Philippe les commente." },
+        ],
+      },
+      {
+        // Page 94 — Vocabulaire, act. 1 : mots à placer autour d'une image
+        // d'article de presse. Le corrigé source n'identifie pas les zones
+        // de l'image par une lettre imprimée ; l'ordre a-e ci-dessous suit
+        // l'ordre de la liste de mots donnée dans l'énoncé et celui du
+        // corrigé imprimé — voir le .md source pour le détail.
+        num: 4, page: 94,
+        instruction: "Vocabulaire — Placez autour de l'image les mots suivants : la journaliste, la rubrique, papier, le titre, l'article. (/5)",
+        vi: "Điền các từ cho sẵn xung quanh hình ảnh bài báo.",
+        type: "fill",
+        bank: ["la journaliste", "la rubrique", "papier", "le titre", "l'article"],
+        items: [
+          { q: "a. (« La presse …… »)", answer: "papier" },
+          { q: "b.", answer: "la rubrique" },
+          { q: "c.", answer: "le titre" },
+          { q: "d.", answer: "l'article" },
+          { q: "e.", answer: "la journaliste" },
+        ],
+      },
+      {
+        num: 5, page: 95,
+        instruction: "Vocabulaire — Retrouvez le nom des rubriques de l'info. (/5)",
+        vi: "Tìm tên các mục thông tin từ các chữ cái cho sẵn.",
+        type: "fill",
+        items: [
+          { q: "_ _ _ N _ M _ E", answer: "économie" },
+          { q: "_ O _ I _ T _", answer: "société" },
+          { q: "_ _ L _ T _ Q _ _", answer: "politique" },
+          { q: "_ _ T _ O", answer: "météo" },
+          { q: "_ _ L _ U _ E", answer: "culture" },
+        ],
+      },
+      {
+        num: 6, page: 95,
+        instruction: "Vocabulaire — Trouvez des expressions qui ont le même sens. (/5)",
+        vi: "Tìm từ/cụm từ đồng nghĩa.",
+        type: "fill",
+        items: [
+          { q: "les fausses nouvelles", answer: "les infox" },
+          { q: "un outil de communication", answer: "un moyen de communication" },
+          { q: "écrire un commentaire", answer: "commenter" },
+          { q: "ouvrir un compte sur un réseau social", answer: "s'inscrire sur un réseau social" },
+          { q: "une émission de radio enregistrée", answer: "un podcast" },
+        ],
+      },
+      {
+        num: 7, page: 95,
+        instruction: "Vocabulaire — Vrai ou faux ? (/5)",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "L'auditeur utilise sa voix.", answer: false },
+          { q: "L'écoute est importante pour poster une photo.", answer: false },
+          { q: "La radio diffuse des informations.", answer: true },
+          { q: "Certains journalistes racontent leur expérience à la radio.", answer: true },
+          { q: "La musique, les podcasts, les émissions : ce sont des contenus sonores.", answer: true },
+        ],
+      },
+      {
+        // Page 93 — Compréhension écrite, « Les Français et l'information »
+        // (infographie « Les Français, très informés ! », source :
+        // © 1jour1actu). Pas de piste audio.
+        num: 8, page: 93,
+        instruction: "Compréhension écrite — « Les Français et l'information ». Ce document est :",
+        vi: "Đọc infographie « Les Français, très informés ! » rồi chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Ce document est :", options: ["une infographie", "un témoignage", "une publicité"], answer: "une infographie", example: true },
+        ],
+      },
+      {
+        num: 9, page: 93,
+        instruction: "Compréhension écrite — Combien de fois par jour les Français s'intéressent à l'actualité ?",
+        vi: "Người Pháp quan tâm đến thời sự bao nhiêu lần một ngày?",
+        type: "fill",
+        items: [
+          { q: "Combien de fois par jour les Français s'intéressent à l'actualité ?", answer: "Au moins une fois par jour." },
+        ],
+      },
+      {
+        num: 10, page: 93,
+        instruction: "Compréhension écrite — Vrai ou faux ?",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "Les Français préfèrent Internet à la télévision.", answer: false },
+          { q: "6 Français sur 10 n'écoutent pas la radio.", answer: true },
+          { q: "Les gens aiment lire la presse écrite.", answer: false },
+        ],
+      },
+      {
+        num: 11, page: 93,
+        instruction: "Compréhension écrite — Entre 6 heures et 9 heures, les Français :",
+        vi: "Từ 6 giờ đến 9 giờ, người Pháp làm gì?",
+        type: "choice",
+        items: [
+          { q: "Entre 6 heures et 9 heures, les Français :", options: ["ne s'intéressent pas à l'actualité", "écoutent la radio", "regardent les informations à la télé"], answer: "écoutent la radio" },
+        ],
+      },
+      {
+        num: 12, page: 93,
+        instruction: "Compréhension écrite — À quelle heure les chaînes diffusent-elles le journal télévisé en France ? (2 réponses)",
+        vi: "Đài truyền hình phát bản tin thời sự lúc mấy giờ ở Pháp? (2 câu trả lời)",
+        type: "fill",
+        items: [
+          { q: "À quelle heure les chaînes diffusent-elles le journal télévisé en France ? (2 réponses)", answer: "À 13 h et à 20 h." },
+        ],
+      },
+      {
+        // Page 98 — Jeux, act. 1 : mots mêlés — 6 réseaux sociaux cachés dans
+        // la grille. Les 6 mots et leur position sont donnés avec certitude
+        // dans le corrigé source.
+        num: 13, page: 98,
+        instruction: "Jeux — Retrouvez 6 réseaux sociaux cachés dans cette grille (mots mêlés).",
+        vi: "Tìm 6 mạng xã hội trong bảng chữ.",
+        type: "fill",
+        items: [
+          { q: "ligne 1, colonnes 3-8 (horizontal)", answer: "TWITCH", example: true },
+          { q: "ligne 4, colonnes 3-8 (horizontal)", answer: "TIKTOK" },
+          { q: "ligne 8, colonnes 2-9 (horizontal)", answer: "SNAPCHAT" },
+          { q: "ligne 10, colonnes 2-9 (horizontal)", answer: "FACEBOOK" },
+          { q: "colonne 1, lignes 1-9 (vertical)", answer: "INSTAGRAM" },
+          { q: "colonne 3, lignes 1-7 (vertical)", answer: "TWITTER" },
+        ],
+      },
+      {
+        num: 14, page: 98,
+        instruction: "Jeux — Charade a. Qu'est-ce que c'est ?",
+        vi: "Giải câu đố chữ (charade) a.",
+        type: "fill",
+        items: [
+          { q: "Mon premier est le contraire de « nuit » (jour). Mon deuxième est la première syllabe de « nager » (na). Mon troisième est une suite de mots ou de chiffres (liste). Mon tout est un métier.", answer: "journaliste" },
+        ],
+      },
+      {
+        num: 15, page: 98,
+        instruction: "Jeux — Charade b. Qu'est-ce que c'est ?",
+        vi: "Giải câu đố chữ (charade) b.",
+        type: "fill",
+        items: [
+          { q: "Mon premier est la première lettre de l'alphabet (a). Mon deuxième est le féminin de « bon » (bonne). Mon troisième est le verbe « mentir » conjugué au présent, 3ᵉ pers. du sing. (ment). Mon tout est quelque chose qu'on paie tous les mois.", answer: "abonnement" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 96-97) ────────────────────────────
+    // Le livre n'a pas de page « Préparation au DELF » propre à l'Unité 8
+    // routée vers DelfA2Panel (pas de step "delf-a2" dans STEP_GROUPS_B8) —
+    // donc pas de coLivre, même pattern que b4/b6/b9/b12.
+    delf: {
+      co: [
+        {
+          num: 1, page: 96, audioSrc: piste(85),
+          instruction: "Compréhension de l'oral — vous écoutez 4 dialogues. Associez chaque dialogue à la situation correspondante. Attention : il y a 6 situations mais seulement 4 dialogues. (7 points)",
+          vi: "Nghe 4 đoạn hội thoại rồi nối mỗi đoạn với tình huống phù hợp — có 6 tình huống nhưng chỉ 4 đoạn hội thoại.",
+          type: "match",
+          pairs: [
+            { l: "Dialogue 1", r: "E. S'excuser" },
+            { l: "Dialogue 2", r: "C. Proposer de l'aide" },
+            { l: "Dialogue 3", r: "B. Inviter" },
+            { l: "Dialogue 4", r: "A. Féliciter" },
+          ],
+          // Distractors the book includes on purpose — situations sans dialogue correspondant.
+          extraOptions: ["D. Raconter un événement", "F. Remercier"],
+        },
+      ],
+      ce: [
+        {
+          num: 2, page: 96,
+          instruction: "Compréhension des écrits — vous lisez ces documents sur votre lieu de travail (création d'un compte « Info'monde », courriel de Daniel, conseils pour rédiger une critique de film). Cochez la bonne réponse. (6 points)",
+          vi: "Đọc 3 tài liệu ở nơi làm việc (tạo tài khoản Info'monde, email của Daniel, mẹo viết bài phê bình phim) rồi chọn đáp án đúng.",
+          type: "choice",
+          items: [
+            { q: "1. Avec votre adresse de travail, vous aurez…", options: ["une inscription sans frais", "un abonnement mensuel", "accès illimité aux ressources"], answer: "une inscription sans frais.", example: true },
+            { q: "2. Vous devez indiquer…", options: ["votre vrai nom", "votre adresse personnelle", "vos préférences de magasines"], answer: "votre vrai nom." },
+            { q: "3. Vous devez…", options: ["regarder une interview", "lire un journal quotidien", "écrire un article de presse"], answer: "lire un journal quotidien." },
+            { q: "4. Vous allez participer à une réunion avec…", options: ["un collègue", "un journaliste", "un responsable"], answer: "un collègue." },
+            { q: "5. Avant de donner votre avis, vous devez…", options: ["raconter le début du film", "partager une histoire drôle", "parler de votre moment préféré"], answer: "raconter le début du film." },
+            { q: "6. À la fin, vous devez…", options: ["donner votre avis", "écrire une conclusion", "indiquer d'autres sources"], answer: "indiquer d'autres sources." },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 97,
+          prompt: "Vous avez reçu un courriel de votre amie Emma : « Salut, Le mois prochain je vais au Festival du film francophone dans la ville d'Angoulême, en France. Tu viens ? Le Festival dure 5 jours et il y a des films de mes réalisateurs préférés ! Ça va être super ! Réponds-moi vite ! Emma » Vous répondez à Emma. Vous acceptez son invitation. Vous demandez des informations sur le festival et les films au programme. (60 mots minimum)",
+          vi: "Trả lời email của bạn Emma: chấp nhận lời mời đi Festival phim Pháp ngữ, hỏi thêm thông tin về lễ hội và các phim trong chương trình. (tối thiểu 60 từ)",
+          model: "Bonjour Emma, Merci pour l'invitation ! Je veux venir avec toi car j'adore le cinéma. En plus les films sont en français, ça va être super ! C'est mon genre préféré ! Il y aura des films fantastiques ? Les acteurs et les réalisateurs seront présents ? J'aimerais bien aller à une rencontre avec les artistes. Salut, Sophie",
+        },
+        {
+          // Page 93 — Production orale (jeu de rôle à deux, pas notée DELF) :
+          // pas de corrigé unique dans le cahier ("Réponses libres").
+          skill: "Production orale — jeu de rôle (page 93)", points: "réponses libres", page: 93,
+          prompt: "À deux. Choisissez la fiche A ou B. Apprenant A : Vous discutez avec un(e) ami(e) des réseaux sociaux. Vous êtes contre l'utilisation des réseaux sociaux pour s'informer. Pour vous, ils peuvent diffuser des infox et être dangereux. Vous exprimez votre préférence pour les médias traditionnels. Votre ami(e) n'est pas d'accord avec vous. Apprenant B : Vous discutez avec un(e) ami(e) des réseaux sociaux. Vous êtes tout le temps connecté(e) pour vous informer. Vous exprimez votre préférence pour les réseaux sociaux. Vous expliquez les avantages de suivre l'actualité en direct et de pouvoir commenter l'actualité. Votre ami(e) n'est pas d'accord avec vous.",
+          vi: "Đóng vai theo cặp: người A phản đối dùng mạng xã hội để cập nhật tin tức (sợ tin giả, nguy hiểm) và thích media truyền thống hơn; người B luôn kết nối mạng để cập nhật tin tức và thích mạng xã hội hơn. (Réponses libres — không có đáp án mẫu duy nhất trong cahier.)",
+          model: "Réponses libres — le cahier ne donne pas de corrigé unique pour ce jeu de rôle.",
+        },
+        {
+          skill: "Production orale — DELF, exercice en interaction", points: "3 à 4 minutes", page: 97,
+          prompt: "Partie 3 de l'épreuve : exercice en interaction (3 à 4 minutes). Vous êtes en vacances en France. Vous voulez acheter des magazines et des journaux pour vos ami(e)s et votre famille. Vous êtes dans un magasin, vous demandez des conseils au vendeur et vous vous renseignez sur les prix. L'examinateur joue le rôle du vendeur.",
+          vi: "Đóng vai trong cửa hàng ở Pháp: mua tạp chí/báo cho bạn bè và gia đình, hỏi tư vấn của người bán và hỏi giá.",
+          model: "– Bonjour monsieur. – Bonjour. – Je voudrais acheter un magazine pour ma sœur. Elle adore le foot. Vous avez des magazines sportifs ? – Oui, nous avons beaucoup de choix ! Il y a des magazines seulement sur le foot ou alors sur plusieurs sports. Vous préférez quoi ? – Je préfère un magazine spécialisé sur le foot. – D'accord. Vous avez ce mensuel à 2,50 euros ou ce numéro spécial foot à 12 euros. – Je vais prendre le numéro spécial s'il vous plaît. Je cherche aussi un journal en allemand pour mon frère. Il va partir vivre en Allemagne dans un mois. – Ah, désolée, nous n'avons pas de journaux en allemand. Nous avons des journaux en français, en anglais ou en espagnol. – C'est dommage ! Vous avez un magazine spécialisé dans la mode ? Mon meilleur ami adore les vêtements et il veut connaître les nouvelles tendances. – Oui, nous avons ce magazine, pour apprendre à créer ses habits. Il y a aussi ce magazine avec un test pour connaître son style. – Combien ils coûtent ? – Le premier est à 3,70 euros et le deuxième à 4,10 euros. – Je vais prendre les deux alors ! Pour finir, je vais prendre le journal d'aujourd'hui ! – Très bien, vous voulez lequel ? Il y a Le Monde, Libération, L'Équipe… – Je voudrais Le Monde s'il vous plaît. – D'accord, ça fera 12,85 euros s'il vous plaît. – Je peux régler par carte ? Je n'ai plus de monnaie. – Oui, bien sûr. – Merci. Au revoir. – Au revoir, bonne journée.",
+        },
+      ],
+    },
+  },
+
   b9: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
