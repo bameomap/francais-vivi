@@ -2485,6 +2485,622 @@ export const CAHIER_A2 = {
     },
   },
 
+  b6: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    // points[0]=les quantités et le pronom en, [1]=l'obligation et
+    // l'interdiction, [2]=la restriction ne… que — voir editoGrammarA2.js
+    // b6.points.
+    grammar: {
+
+      // p0 — Les quantités et le pronom en (cahier p. 63)
+      p0: [
+        {
+          num: 1, page: 63,
+          instruction: "Répondez aux questions en utilisant le pronom en.",
+          vi: "Trả lời câu hỏi bằng đại từ en.",
+          type: "fill",
+          items: [
+            { q: "Tu as acheté de la semoule ?", answer: "Oui, j'en ai acheté.", example: true },
+            { q: "Est-ce qu'elle a du chocolat ?", answer: "Non, elle n'en a pas." },
+            { q: "Tu voudrais du saumon à midi ?", answer: "Oui, j'en voudrais." },
+            { q: "Vous avez cuisiné des lentilles ?", answer: "Oui, nous en avons cuisiné." },
+            { q: "Ils font des recettes avec les produits de saison ?", answer: "Non, ils n'en font pas." },
+            { q: "Est-ce que ton jardin produit aussi des fruits ?", answer: "Non, il n'en produit pas." },
+          ],
+        },
+        {
+          num: 2, page: 63,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["ce poulet,", "il faut", "Pour cuisiner", "n'en", "du cumin,", "je", "mais", "ai", "pas."], answer: "Pour cuisiner ce poulet, il faut du cumin, mais je n'en ai pas." },
+            { tokens: ["des salades", "cultive", "en", "Émilie", "et", "elle", "vend", "sur le marché.", "dans son jardin,"], answer: "Émilie cultive des salades dans son jardin, et elle en vend sur le marché." },
+            { tokens: ["Antoine", "mis", "car", "a", "il", "en", "beaucoup.", "des betteraves,", "consomme"], answer: "Antoine a mis des betteraves, car il en consomme beaucoup." },
+            { tokens: ["de beurre", "il faut", "250 grammes", "et", "je", "n'en", "que 100 grammes.", "Pour ma recette", "ai."], answer: "Pour ma recette, il faut 250 grammes de beurre et je n'en ai que 100 grammes." },
+            { tokens: ["deux entrées", "le menu", "propose", "En semaine,", "en", "le dimanche", "mais", "il propose", "trois."], answer: "En semaine, le menu propose deux entrées, mais le dimanche il en propose trois." },
+          ],
+        },
+        {
+          num: 3, page: 63, audioSrc: piste(56),
+          instruction: "Écoutez les phrases et dites si vous entendez n'en… pas ou en… pas.",
+          vi: "Nghe từng câu (a→f) và cho biết đó là « n'en… pas » hay « en… pas ».",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["n'en… pas", "en… pas"], answer: "n'en… pas", example: true },
+            { q: "b.", options: ["n'en… pas", "en… pas"], answer: "n'en… pas" },
+            { q: "c.", options: ["n'en… pas", "en… pas"], answer: "en… pas" },
+            { q: "d.", options: ["n'en… pas", "en… pas"], answer: "en… pas" },
+            { q: "e.", options: ["n'en… pas", "en… pas"], answer: "n'en… pas" },
+            { q: "f.", options: ["n'en… pas", "en… pas"], answer: "n'en… pas" },
+          ],
+        },
+        {
+          num: 4, page: 63,
+          instruction: "Répondez librement aux questions en utilisant le pronom en (plusieurs réponses possibles).",
+          vi: "Trả lời tự do bằng đại từ en (có thể có nhiều đáp án đúng).",
+          type: "fill",
+          items: [
+            { q: "Est-ce que vous achetez beaucoup de glace ?", answer: "Oui, j'en achète beaucoup.", example: true },
+            { q: "Est-ce que vos parents mangent de la viande ?", answer: "Oui, ils en mangent. / Non, ils n'en mangent pas." },
+            { q: "Avez-vous mis du lait dans votre thé ce matin ?", answer: "Oui, j'en ai mis. / Non, je n'en ai pas mis." },
+            { q: "Est-ce que vos amis aiment faire des gâteaux ?", answer: "Oui, ils aiment en faire. / Non, ils n'aiment pas en faire." },
+            { q: "Est-ce qu'il y a des fruits rouges dans votre pays ?", answer: "Oui, il y en a. / Non, il n'y en a pas." },
+          ],
+        },
+      ],
+
+      // p1 — L'obligation et l'interdiction (cahier p. 65)
+      p1: [
+        {
+          // ⚠️ Note du corrigé source : le corrigé imprimé commence directement
+          // à b — l'item a n'a aucune réponse imprimée (contrairement à
+          // l'usage habituel où a est un exemple déjà résolu). La phrase
+          // reconstituée pour a est déduite : c'est le seul ordre
+          // grammaticalement correct des mots donnés.
+          num: 1, page: 65,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+          type: "order",
+          items: [
+            { tokens: ["respecter", "de", "est nécessaire", "la charte Locmiam.", "Il"], answer: "Il est nécessaire de respecter la charte Locmiam." },
+            { tokens: ["Il", "respecter", "les règles", "d'hygiène.", "faut"], answer: "Il faut respecter les règles d'hygiène." },
+            { tokens: ["ne", "Vous", "pas", "être", "cuisinier de métier.", "devez"], answer: "Vous ne devez pas être cuisinier de métier." },
+            { tokens: ["pas", "oubliez", "de", "décrire", "les plats.", "N'"], answer: "N'oubliez pas de décrire les plats." },
+            { tokens: ["Il", "laisser", "entrer", "de", "les animaux", "dans la cuisine.", "est défendu."], answer: "Il est défendu de laisser entrer les animaux dans la cuisine." },
+            { tokens: ["de", "est indispensable", "se laver", "Il", "souvent", "les mains."], answer: "Il est indispensable de se laver souvent les mains." },
+          ],
+        },
+        {
+          // Proposition de corrigé — plusieurs formulations sont possibles ;
+          // celle du cahier est reproduite ici comme réponse de référence.
+          num: 2, page: 65,
+          instruction: "Exprimez une obligation à partir des éléments donnés. Variez les expressions.",
+          vi: "Diễn đạt một sự bắt buộc từ dữ kiện cho sẵn — đa dạng cách diễn đạt.",
+          type: "fill",
+          items: [
+            { q: "Lire et signer la charte.", answer: "Il faut lire et signer la charte.", example: true },
+            { q: "Cuisiner des produits frais.", answer: "Il est indispensable de cuisiner des produits frais." },
+            { q: "Porter un tablier propre.", answer: "Il est nécessaire de porter un tablier propre." },
+            { q: "Se laver les mains.", answer: "Vous avez l'obligation de vous laver les mains." },
+            { q: "Ranger son espace de travail.", answer: "Vous devez ranger votre espace de travail !" },
+            { q: "Donner des informations sur les plats.", answer: "Il faut donner des informations sur les plats." },
+          ],
+        },
+        {
+          // Pictogrammes de la cuisine — correspondance logique rétablie par
+          // le .md source (le corrigé imprimé contient une coquille : la
+          // lettre e utilisée deux fois, aucune lettre c). Voir la note du
+          // .md pour le détail.
+          num: 3, page: 65,
+          instruction: "Observez les pictogrammes et dites quelles sont les obligations et les interdictions.",
+          vi: "Quan sát các biểu tượng trong bếp và nêu quy định bắt buộc / cấm đoán tương ứng.",
+          type: "fill",
+          items: [
+            { q: "a. pictogramme : se laver les mains", answer: "Il faut se laver les mains.", example: true },
+            { q: "b. pictogramme : porter une charlotte/toque", answer: "Attachez vos cheveux !" },
+            { q: "c. pictogramme : interdiction de fumer", answer: "Il est interdit de fumer." },
+            { q: "d. pictogramme : afficher le menu", answer: "Il est indispensable d'afficher le menu." },
+            { q: "e. pictogramme : animaux interdits", answer: "Les animaux sont interdits." },
+          ],
+        },
+        {
+          num: 4, page: 65, audioSrc: piste(58),
+          instruction: "Interdiction ou obligation ? Écoutez et cochez.",
+          vi: "Nghe từng câu (a→f) và cho biết đó là cấm đoán hay bắt buộc.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["Obligation", "Interdiction"], answer: "Obligation", example: true },
+            { q: "b.", options: ["Obligation", "Interdiction"], answer: "Interdiction" },
+            { q: "c.", options: ["Obligation", "Interdiction"], answer: "Interdiction" },
+            { q: "d.", options: ["Obligation", "Interdiction"], answer: "Obligation" },
+            { q: "e.", options: ["Obligation", "Interdiction"], answer: "Obligation" },
+            { q: "f.", options: ["Obligation", "Interdiction"], answer: "Obligation" },
+          ],
+        },
+      ],
+
+      // p2 — La restriction : ne… que (cahier p. 67)
+      p2: [
+        {
+          num: 1, page: 67,
+          instruction: "Transformez les phrases suivantes. Utilisez ne… que comme dans l'exemple.",
+          vi: "Chuyển câu sang cấu trúc ne… que.",
+          type: "transform",
+          items: [
+            { q: "Dans mon village, il y a seulement un restaurant.", answer: "Dans mon village, il n'y a qu'un restaurant.", example: true },
+            { q: "Les bistrots parisiens ne plaisent pas uniquement aux touristes.", answer: "Les bistrots parisiens ne plaisent pas qu'aux touristes." },
+            { q: "Ils prennent juste un dessert pour deux.", answer: "Ils ne prennent qu'un dessert pour deux." },
+            { q: "Elle recommande seulement le plat du jour.", answer: "Elle ne recommande que le plat du jour." },
+            { q: "Ce restaurant gastronomique a juste une étoile.", answer: "Ce restaurant gastronomique n'a qu'une étoile." },
+            { q: "Les clients ont commandé seulement des pizzas.", answer: "Les clients n'ont commandé que des pizzas." },
+          ],
+        },
+        {
+          num: 2, page: 67, audioSrc: piste(60),
+          instruction: "Écoutez et cochez quand vous entendez une restriction.",
+          vi: "Nghe từng câu (a→f) và cho biết có phải câu hạn định (ne… que) không.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["restriction", "pas de restriction"], answer: "restriction", example: true },
+            { q: "b.", options: ["restriction", "pas de restriction"], answer: "pas de restriction" },
+            { q: "c.", options: ["restriction", "pas de restriction"], answer: "restriction" },
+            { q: "d.", options: ["restriction", "pas de restriction"], answer: "restriction" },
+            { q: "e.", options: ["restriction", "pas de restriction"], answer: "pas de restriction" },
+            { q: "f.", options: ["restriction", "pas de restriction"], answer: "restriction" },
+          ],
+        },
+        {
+          // ⚠️ Note du corrigé source : le corrigé imprimé donne 4 réponses
+          // (« je ne prends que le plat du jour. / je n'ai que du saumon/du
+          // colin. / je ne vais que chez le traiteur/le boulanger. / il n'en
+          // a fait qu'un. ») qui correspondent en réalité aux questions c, d,
+          // e, f (décalage d'une lettre) ; aucune réponse n'est fournie pour
+          // la question b. Voir le .md pour le détail du raisonnement.
+          num: 3, page: 67,
+          instruction: "Répondez aux questions.",
+          vi: "Trả lời câu hỏi.",
+          type: "fill",
+          items: [
+            { q: "Elle a commandé deux plats ?", answer: "Non, elle n'a commandé qu'un seul plat !", example: true },
+            { q: "Aujourd'hui, tu prends le plat du jour et un dessert ?", answer: "Non, je ne prends que le plat du jour." },
+            { q: "Comme poisson, vous avez du saumon et du colin ?", answer: "Non, je n'ai que du saumon (ou que du colin)." },
+            { q: "Tu vas chez le traiteur et le boulanger ?", answer: "Non, je ne vais que chez le traiteur (ou que chez le boulanger)." },
+            { q: "Le chef a fait trois desserts ?", answer: "Non, il n'en a fait qu'un." },
+          ],
+        },
+        {
+          num: 4, page: 67,
+          instruction: "Mettez les phrases à la forme négative.",
+          vi: "Chuyển câu sang thể phủ định.",
+          type: "transform",
+          items: [
+            { q: "Elle ne choisit que des produits frais.", answer: "Elle ne choisit pas que des produits frais.", example: true },
+            { q: "Avant, il ne mangeait que du bœuf.", answer: "Avant, il ne mangeait pas que du bœuf." },
+            { q: "Nous n'avons qu'un restaurant gastronomique dans notre rue.", answer: "Nous n'avons pas qu'un restaurant gastronomique dans notre rue." },
+            { q: "Le poulet rôti n'est servi qu'avec de la purée.", answer: "Le poulet rôti n'est pas servi qu'avec de la purée." },
+            { q: "En Bretagne, il n'a mangé que des crêpes !", answer: "En Bretagne, il n'a pas mangé que des crêpes !" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 68) — wired into the Phono step ─────
+    // Seules Identification (act. 1) et Dictée (act. 3) ont une réponse
+    // vérifiable. Articulation (act. 2, phrases à répéter avec émotions
+    // différentes) et Interprétation (act. 4, texte à lire à voix haute)
+    // restent des exercices oraux sans réponse unique — même choix que pour
+    // les autres unités.
+    phono: [
+      {
+        num: 1, page: 68, audioSrc: piste(61),
+        instruction: "Identification — écoutez les expressions et cochez l'émotion que vous entendez.",
+        vi: "Nghe từng câu (a→h) và chọn cảm xúc nghe được.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la joie", example: true },
+          { q: "b.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la déception" },
+          { q: "c.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la joie" },
+          { q: "d.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la colère" },
+          { q: "e.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la déception" },
+          { q: "f.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la surprise" },
+          { q: "g.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la colère" },
+          { q: "h.", options: ["la joie", "la surprise", "la colère", "la déception"], answer: "la déception" },
+        ],
+      },
+      {
+        num: 3, page: 68, audioSrc: piste(63),
+        instruction: "Dictée — écoutez et complétez le texte avec « . » « , » « ? » ou « ! ».",
+        vi: "Nghe và điền dấu câu còn thiếu (. , ? !).",
+        type: "fill",
+        items: [
+          { q: "Connaissez-vous le mot « bistrot » ___", answer: "?", example: true },
+          { q: "Ce mot peut être associé à quelle grande ville française ___", answer: "?" },
+          { q: "Êtes-vous déjà allés dans un bistrot ___", answer: "?" },
+          { q: "Dans cette brasserie___ on peut boire un verre___ ou manger quelque chose___ dans une ambiance agréable___ (4 dấu, cách nhau bởi dấu cách)", answer: ", , , ." },
+          { q: "Voilà pourquoi les bistrots parisiens ont beaucoup de succès ___", answer: "!" },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 64) couvre b6g1-b6g3 (légumes, céréales/fruits/
+    // protéines, épices/quantités/gestes) ; c2_vocab (cahier p. 66) couvre
+    // b6g4-b6g5 (lieux et service, plats/goûts/personnes) — voir
+    // parcoursDataA2.js.
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 64,
+          instruction: "Classez les fruits, les légumes et les épices suivants : amande – avocat – betterave – cannelle – cumin – lentilles – mûre – muscade – navet – poire – prune – safran.",
+          vi: "Phân loại các từ cho sẵn thành trái cây, rau củ hoặc gia vị.",
+          type: "fill",
+          bank: ["amande", "avocat", "betterave", "cannelle", "cumin", "lentilles", "mûre", "muscade", "navet", "poire", "prune", "safran"],
+          items: [
+            { q: "Fruits et fruits secs (4 mots, cách nhau bởi dấu phẩy)", answer: "amande, mûre, poire, prune", example: true },
+            { q: "Légumes et légumes secs (4 mots, cách nhau bởi dấu phẩy)", answer: "avocat, betterave, lentilles, navet" },
+            { q: "Épices (4 mots, cách nhau bởi dấu phẩy)", answer: "cannelle, cumin, muscade, safran" },
+          ],
+        },
+        {
+          num: 2, page: 64,
+          instruction: "Associez le contenant à l'aliment qu'il contient.",
+          vi: "Nối vật đựng với thực phẩm tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "une barquette", r: "de framboises" },
+            { l: "une botte",     r: "d'oignons" },
+            { l: "une tablette",  r: "de chocolat" },
+            { l: "une boule",     r: "de glace" },
+            { l: "un bouquet",    r: "de menthe" },
+            { l: "une pincée",    r: "de sel" },
+          ],
+        },
+        {
+          num: 3, page: 64, audioSrc: piste(57),
+          instruction: "Écoutez et numérotez les images dans l'ordre de la recette (cake aux légumes).",
+          vi: "Nghe và sắp xếp các bước làm bánh cake rau củ theo đúng thứ tự (viết số thứ tự).",
+          type: "fill",
+          transcript: "Pour faire un cake aux légumes… D'abord préchauffez le four à 210 degrés. Après, dans un saladier, mélangez le lait avec la farine et les œufs. Puis, ajoutez les légumes cuits. Ah, j'ai oublié… Mettez un peu de beurre ou d'huile dans le plat. Versez le mélange dans le plat et enfournez !",
+          items: [
+            { q: "c. préchauffer le four", answer: "1", example: true },
+            { q: "a. mélanger le lait, la farine et les œufs", answer: "3" },
+            { q: "b. ajouter les légumes cuits", answer: "2" },
+            { q: "d. mettre du beurre ou de l'huile dans le plat", answer: "4" },
+            { q: "e. verser le mélange dans le plat", answer: "6" },
+            { q: "f. enfourner", answer: "5" },
+          ],
+        },
+        {
+          num: 4, page: 64,
+          instruction: "Barrez l'intrus.",
+          vi: "Tìm từ lạc loài trong mỗi nhóm.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["saumon", "colin", "menthe"], answer: "menthe", example: true },
+            { q: "b.", options: ["muscade", "radis", "gingembre"], answer: "radis" },
+            { q: "c.", options: ["endive", "barquette", "pincée"], answer: "endive" },
+            { q: "d.", options: ["semoule", "groseille", "riz"], answer: "groseille" },
+            { q: "e.", options: ["crevettes", "bœuf", "mouton"], answer: "crevettes" },
+            { q: "f.", options: ["vanille", "poireau", "crème"], answer: "poireau" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 66,
+          instruction: "Complétez les mots avec les éléments suivants : claf – fl – tare – tarti – touille.",
+          vi: "Điền phần từ cho sẵn để hoàn thành tên món ăn.",
+          type: "fill",
+          bank: ["claf", "fl", "tare", "tarti", "touille"],
+          items: [
+            { q: "CHOUcroute", answer: "choucroute", example: true },
+            { q: "___AN", answer: "flan" },
+            { q: "RATA___", answer: "ratatouille" },
+            { q: "___OUTIS", answer: "clafoutis" },
+            { q: "___FLETTE", answer: "tartiflette" },
+            { q: "TAR___", answer: "tartare" },
+          ],
+        },
+        {
+          num: 2, page: 66,
+          instruction: "Lisez la définition et écrivez le mot qui correspond.",
+          vi: "Đọc định nghĩa và viết từ tương ứng.",
+          type: "fill",
+          items: [
+            { q: "C'est un gâteau que l'on peut faire avec des fruits rouges.", answer: "le clafoutis", example: true },
+            { q: "C'est un plat avec de la semoule et les Français l'adorent.", answer: "le couscous" },
+            { q: "C'est une personne qui aime manger de bonnes choses.", answer: "un gourmet" },
+            { q: "Dans un restaurant, c'est le premier plat dans le menu.", answer: "une entrée" },
+            { q: "On le laisse au serveur à la fin du repas.", answer: "le pourboire" },
+            { q: "Un plat fait avec de la viande ou du poisson cru.", answer: "le tartare" },
+          ],
+        },
+        {
+          num: 4, page: 66,
+          instruction: "Complétez les phrases avec les mots de la liste : acide – épicé – gras – sucré.",
+          vi: "Điền tính từ chỉ khẩu vị phù hợp.",
+          type: "fill",
+          bank: ["acide", "épicé", "gras", "sucré"],
+          items: [
+            { q: "J'adore le poivre et j'adore manger ……", answer: "épicé", example: true },
+            { q: "Je déteste les plats pleins de beurre, c'est trop …… !", answer: "gras" },
+            { q: "Ma sœur aime les biscuits, les bonbons et tout ce qui est ……", answer: "sucré" },
+            { q: "Tu veux de la salade d'oranges ? Non, merci c'est trop ……", answer: "acide" },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 70-71, noté /40) ────────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // La Compréhension écrite & Production orale de la page 69 (« Bien
+    // choisir son restaurant ») n'a pas de piste audio — elle est reprise
+    // ici (items 8-10), après le /40 linguistique, même pattern que la CE
+    // p.45 ajoutée à la suite du bilan de b4. Sa Production orale (jeu de
+    // rôle, réponses libres) est rangée dans delf.production. Les Jeux
+    // p.74 (items 11-14) suivent, même pattern que b4/b9/b12.
+    bilan: [
+      {
+        num: 1, page: 70,
+        instruction: "Répondez aux questions en utilisant le pronom en. (/7)",
+        vi: "Trả lời câu hỏi bằng đại từ en.",
+        type: "fill",
+        items: [
+          { q: "Manges-tu du chocolat ? → Oui, ……", answer: "j'en mange." },
+          { q: "Achètes-tu du lait ? → Non, ……", answer: "je n'en achète pas." },
+          { q: "Mange-t-il des céréales ? → Avant oui, ……", answer: "il en mangeait." },
+          { q: "Consomme-t-elle du poisson ? → Non, …… jamais.", answer: "elle n'en consomme jamais." },
+          { q: "Est-ce qu'il veut des bananes ? → Non, ……", answer: "il n'en veut pas." },
+          { q: "Tu as pris de la viande hier au restaurant ? → Oui, …… . Elle était très bonne.", answer: "j'en ai pris." },
+          { q: "Est-ce que tu coupes le beurre en morceaux ? → Oui, …… coupe 150 grammes.", answer: "j'en coupe 150 grammes." },
+        ],
+      },
+      {
+        num: 2, page: 70,
+        instruction: "Entourez la forme correcte. (/5)",
+        vi: "Chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Dans la cuisine, ___ de fumer.", options: ["il faut", "il est interdit"], answer: "il est interdit" },
+          { q: "___ venir avec son chien.", options: ["Il est défendu de", "Vous devez"], answer: "Il est défendu de" },
+          { q: "___ attention : les plats ne doivent pas être trop chauds !", options: ["Faites", "Ne faites pas"], answer: "Faites" },
+          { q: "___ respecter les horaires.", options: ["Vous avez l'obligation de", "Vous ne devez pas"], answer: "Vous avez l'obligation de" },
+          { q: "___ téléphoner à table.", options: ["Il ne faut pas", "Il est nécessaire de"], answer: "Il ne faut pas" },
+        ],
+      },
+      {
+        num: 3, page: 70,
+        instruction: "Remettez les mots dans l'ordre pour former des phrases. (/6)",
+        vi: "Sắp xếp lại từ để tạo thành câu đúng.",
+        type: "order",
+        items: [
+          { tokens: ["n'a", "Ce restaurant", "au Guide Michelin.", "que", "deux étoiles"], answer: "Ce restaurant n'a que deux étoiles au Guide Michelin." },
+          { tokens: ["aux pommes.", "reste", "ne", "que", "me", "des gâteaux", "Il"], answer: "Il ne me reste que des gâteaux aux pommes." },
+          { tokens: ["pas", "Elle", "consomme", "des produits de saison.", "que", "ne"], answer: "Elle ne consomme pas que des produits de saison." },
+          { tokens: ["achète", "les fruits et légumes", "que", "n'", "au marché.", "Je"], answer: "Je n'achète que les fruits et légumes au marché." },
+          { tokens: ["pas", "Cet enfant", "mange", "que", "ne", "du poisson !"], answer: "Cet enfant ne mange pas que du poisson !" },
+          { tokens: ["cette recette.", "Il", "faut", "que", "ne", "pour faire", "150 cl de lait"], answer: "Il ne faut que 150 cl de lait pour faire cette recette." },
+        ],
+      },
+      {
+        num: 4, page: 71,
+        instruction: "Vocabulaire — Choisissez 5 légumes pour faire une soupe. (/5)",
+        vi: "Chọn 5 loại rau để nấu súp.",
+        type: "fill",
+        items: [
+          { q: "Écrivez le nom de 5 légumes pour une soupe (cách nhau bởi dấu phẩy)", answer: "une aubergine, des poireaux, des carottes, un fenouil, des oignons" },
+        ],
+      },
+      {
+        num: 5, page: 71,
+        instruction: "Vocabulaire — Retrouvez les ingrédients de chaque plat. (/5)",
+        vi: "Tìm nguyên liệu của mỗi món ăn.",
+        type: "fill",
+        items: [
+          { q: "le couscous", answer: "semoule, pois chiches" },
+          { q: "le gâteau", answer: "farine, sucre" },
+          { q: "la ratatouille", answer: "aubergines, oignons" },
+          { q: "le croque-monsieur", answer: "pain, fromage" },
+          { q: "le pot-au-feu", answer: "bœuf, navets" },
+        ],
+      },
+      {
+        num: 6, page: 71,
+        instruction: "Vocabulaire — Lisez les phrases et répondez par vrai ou faux. (/5)",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "Dans les bistrots, on ne mange que de la cuisine traditionnelle.", answer: true },
+          { q: "Le croque-monsieur est fait avec de la semoule.", answer: false },
+          { q: "Le bœuf bourguignon est un plat végétarien.", answer: false },
+          { q: "Le Guide Michelin donne des étoiles aux très bons restaurants.", answer: true },
+          { q: "« C'est un régal ! », veut dire que c'est très bon.", answer: true },
+        ],
+      },
+      {
+        num: 7, page: 71,
+        instruction: "Vocabulaire — Complétez le texte avec les mots suivants : difficile – végétarienne – gourmet – allergique – gourmande. (/5)",
+        vi: "Điền từ cho sẵn vào đoạn văn về bữa tối của Guillaume và bạn bè.",
+        type: "fill",
+        bank: ["difficile", "végétarienne", "gourmet", "allergique", "gourmande"],
+        items: [
+          { q: "Camille est ___ à la coriandre,", answer: "allergique", example: true },
+          { q: "Théo ne mange pas beaucoup, il est très ___ avec la nourriture.", answer: "difficile" },
+          { q: "Alexandra adore les desserts, elle est très ___ !", answer: "gourmande" },
+          { q: "Son ami Paul, lui, apprécie la bonne cuisine, c'est un vrai ___ !", answer: "gourmet" },
+          { q: "Et pour finir, Émilie est ___ !", answer: "végétarienne" },
+        ],
+      },
+      {
+        // Page 69 — Compréhension écrite, « Bien choisir son restaurant »
+        // (source : www.finedininglovers.fr). Pas de piste audio. Le corrigé
+        // imprimé ne donne que a et b ; c, d, e sont déduites directement du
+        // texte de la page 69 (voir la note du .md source).
+        num: 8, page: 69,
+        instruction: "Compréhension écrite — « Bien choisir son restaurant ». Cochez la bonne réponse.",
+        vi: "Đọc bài « Bien choisir son restaurant » rồi chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Le texte :", options: ["fait de la publicité", "donne des conseils"], answer: "donne des conseils.", example: true },
+          { q: "Un restaurant est bon quand le chef est dans la cuisine :", options: ["le soir", "le matin"], answer: "le matin." },
+          { q: "Les signes de qualité sont affichés :", options: ["sur la porte du restaurant", "dans la cuisine"], answer: "sur la porte du restaurant." },
+          { q: "Utiliser les réseaux sociaux est utile pour…", options: ["lire des avis", "prendre des photos"], answer: "lire des avis." },
+          { q: "Les clients apprécient une ambiance…", options: ["industrielle", "décontractée"], answer: "décontractée." },
+        ],
+      },
+      {
+        num: 9, page: 69,
+        instruction: "Compréhension écrite — Vrai ou faux ?",
+        vi: "Đúng hay sai?",
+        type: "truefalse",
+        items: [
+          { q: "Des verres brillants sont un signe de propreté.", answer: true },
+          { q: "Un menu avec beaucoup de plats est un signe de qualité.", answer: false },
+          { q: "Les serveurs souriants sont appréciés.", answer: true },
+        ],
+      },
+      {
+        num: 10, page: 69,
+        instruction: "Vocabulaire — « Il y a du mouvement en cuisine. » veut dire :",
+        vi: "« Il y a du mouvement en cuisine. » có nghĩa là gì?",
+        type: "choice",
+        items: [
+          {
+            q: "« Il y a du mouvement en cuisine. » veut dire :",
+            options: [
+              "Il y a des gens qui travaillent dans la cuisine.",
+              "La cuisine est en mouvement.",
+              "Il y a des gens qui mangent dans la cuisine.",
+            ],
+            answer: "Il y a des gens qui travaillent dans la cuisine.",
+          },
+        ],
+      },
+      {
+        // Page 74 — Jeux, act. 1 : mots mêlés de la restauration. Les 6 mots
+        // et leur position sont donnés avec certitude dans le corrigé source.
+        num: 11, page: 74,
+        instruction: "Jeux — Retrouvez les 6 mots de la restauration cachés dans la grille (mots mêlés).",
+        vi: "Tìm 6 từ liên quan đến nhà hàng trong bảng chữ.",
+        type: "fill",
+        items: [
+          { q: "colonne 1, lignes 4-8 (vertical)", answer: "NAPPE" },
+          { q: "colonne 3, lignes 1-9 (vertical)", answer: "POURBOIRE" },
+          { q: "colonne 4, lignes 1-7 (vertical)", answer: "SERVICE" },
+          { q: "colonne 5, lignes 3-7 (vertical)", answer: "PLATS" },
+          { q: "ligne 5, colonnes 1-8 (horizontal)", answer: "AMBIANCE" },
+          { q: "ligne 9, colonnes 2-8 (horizontal)", answer: "SERVEUR" },
+        ],
+      },
+      {
+        num: 12, page: 74,
+        instruction: "Jeux — Anagrammes : retrouvez les fruits et légumes qui se cachent derrière ces mots.",
+        vi: "Sắp xếp lại chữ cái để tìm ra tên rau củ quả.",
+        type: "fill",
+        items: [
+          { q: "Légume — DEVINE", answer: "endive", example: true },
+          { q: "Légume — DIRAS", answer: "radis" },
+          { q: "Légume — CHARIOT", answer: "haricot" },
+          { q: "Fruit — PEUNR", answer: "prune" },
+          { q: "Fruit — PROIE", answer: "poire" },
+        ],
+      },
+      {
+        num: 13, page: 74,
+        instruction: "Jeux — Retrouvez les phrases (les mots sont collés).",
+        vi: "Tách các từ dính liền để tạo thành câu đúng.",
+        type: "fill",
+        items: [
+          { q: "Ellenemangequeleslégumesdesonpotager.", answer: "Elle ne mange que les légumes de son potager." },
+          { q: "Léaestallergiqueaulaitdevache.", answer: "Léa est allergique au lait de vache." },
+          { q: "Iladorelesdessertsetilenscommandetoujoursaurestaurant.", answer: "Il adore les desserts et il en commande toujours au restaurant." },
+        ],
+      },
+      {
+        num: 14, page: 74,
+        instruction: "Jeux — La disparition : retrouvez la bonne lettre pour compléter les mots.",
+        vi: "Điền chữ cái còn thiếu để hoàn thành từ.",
+        type: "fill",
+        items: [
+          { q: "Le service était trop l__nt !", answer: "lent", example: true },
+          { q: "Au restaurant, je prends toujours un bo__uf bourguignon.", answer: "bœuf" },
+          { q: "Les plats étaient goût__ux.", answer: "goûteux" },
+          { q: "Ce dessert n'est pas au m__nu !", answer: "menu" },
+          { q: "C'est scandaleux de payer aussi ch__r !", answer: "cher" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 72-73) ────────────────────────────
+    // Le livre n'a pas de page « Préparation au DELF » propre à l'Unité 6
+    // routée vers DelfA2Panel (pas de step "delf-a2" dans STEP_GROUPS_B6) —
+    // donc pas de coLivre, même pattern que b4/b9/b12.
+    delf: {
+      co: [
+        {
+          num: 1, page: 72, audioSrc: piste(65),
+          instruction: "Compréhension de l'oral — vous écoutez ce message sur un répondeur téléphonique. Vous travaillez dans un restaurant. (6 points)",
+          vi: "Nghe tin nhắn thoại của khách đặt bàn nhà hàng rồi trả lời.",
+          type: "choice",
+          items: [
+            { q: "1. C'est un dîner…", options: ["amical", "familial", "professionnel"], answer: "professionnel." },
+            { q: "2. M. Mahou veut réserver une table…", options: ["lundi", "mardi", "jeudi"], answer: "jeudi." },
+            { q: "3. Pour le dîner, il y aura…", options: ["19 personnes", "20 personnes", "21 personnes"], answer: "21 personnes." },
+            { q: "4. M. Mahou veut commander…", options: ["rouleaux de printemps", "plat asiatique", "couscous"], answer: "couscous." },
+            { q: "5. Pour le dessert, il y aura…", options: ["glace", "tarte aux fruits rouges", "salade de fruits"], answer: "glace." },
+            { q: "6. M. Mahou veut…", options: ["écouter de la musique", "chanter avec un professionnel", "danser sur des airs traditionnels"], answer: "écouter de la musique." },
+          ],
+        },
+      ],
+      // Compréhension des écrits — 6 documents (programme d'activités de la
+      // ville de Paris), 8 personnes candidates, 6 correspondances possibles.
+      ce: [
+        {
+          num: 1, page: 72,
+          instruction: "Compréhension des écrits — associez chaque document à la personne correspondante. (6 points)",
+          vi: "Bạn muốn rủ bạn bè đi chơi và đọc chương trình hoạt động của thành phố Paris. Nối mỗi tài liệu với người phù hợp — có 8 người nhưng chỉ 6 tài liệu.",
+          type: "match",
+          pairs: [
+            { l: "Document 1 — Atelier pâtisserie.", r: "G. Naema adore les desserts." },
+            { l: "Document 2 — Jardin d'herbes aromatiques.", r: "H. Line veut apprendre à jardiner." },
+            { l: "Document 3 — Visite du Jardin des Plantes.", r: "D. Jean apprécie les fleurs." },
+            { l: "Document 4 — Vente de légumes de saison.", r: "F. Diane adore les produits bios." },
+            { l: "Document 5 — Atelier cuisine sans viande.", r: "B. Wanpen est végétarienne." },
+            { l: "Document 6 — Exposition « Nourriture d'autrefois ».", r: "C. Tristan s'intéresse à l'histoire." },
+          ],
+          // Distractors the book includes on purpose — offered in the dropdowns.
+          extraOptions: ["A. Héloïse a envie de faire du vélo.", "E. Jugurta aime les animaux."],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 73,
+          prompt: "Vous habitez en France. Vous êtes allé(e) dans un restaurant gastronomique, vendredi dernier. Vous écrivez à un(e) ami(e) français(e) pour lui raconter votre repas. Vous lui donnez aussi vos impressions. (60 mots minimum)",
+          vi: "Viết thư kể cho bạn Pháp nghe về bữa ăn tại nhà hàng cao cấp và cảm nghĩ của bạn. (tối thiểu 60 từ)",
+          model: "Coucou Yaëlle, Tu as passé un bon week-end ? Je suis allé dîner vendredi soir avec Robin dans un restaurant gastronomique. C'était délicieux ! J'ai mangé du saumon avec une sauce au cumin. J'ai adoré ! En dessert, j'ai commandé une mousse à la groseille. C'était bon mais trop sucré. La prochaine fois, tu peux venir avec moi ! À bientôt, Fred",
+        },
+        {
+          // Page 69 — Production orale (jeu de rôle à deux, pas notée DELF) :
+          // pas de corrigé unique dans le cahier ("Réponses libres").
+          skill: "Production orale — jeu de rôle (page 69)", points: "réponses libres", page: 69,
+          prompt: "À deux. Choisissez la fiche A ou B. Apprenant A : Vous êtes serveur/serveuse dans un restaurant et vous demandez à un(e) client(e) s'il/elle a été satisfait(e) de son repas. Il/Elle a mangé du pâté en entrée, un poulet rôti avec des haricots et un fondant au chocolat en dessert. Apprenant B : Vous êtes au restaurant et le serveur/la serveuse vous demande si vous avez été satisfait(e) de votre repas.",
+          vi: "Đóng vai theo cặp: người A đóng vai nhân viên phục vụ hỏi khách có hài lòng với bữa ăn không; người B đóng vai khách trả lời. (Réponses libres — không có đáp án mẫu duy nhất trong cahier.)",
+          model: "Réponses libres — le cahier ne donne pas de corrigé unique pour ce jeu de rôle.",
+        },
+        {
+          skill: "Production orale — DELF, monologue suivi", points: "2 minutes environ", page: 73,
+          prompt: "Partie 2 de l'épreuve : monologue suivi (2 minutes environ). Sujet : Restaurant préféré. Parlez de votre restaurant préféré. Quel est le type de nourriture servie ? Qu'est-ce que vous aimez manger ? Pourquoi est-ce que vous avez aimé ce restaurant ?",
+          vi: "Nói 2 phút về nhà hàng bạn thích nhất: loại món ăn, món bạn thích, vì sao thích nhà hàng đó.",
+          model: "Mon restaurant préféré s'appelle Mish Massala. C'est un restaurant indien, à côté de chez moi. J'adore ce restaurant car la cuisine est délicieuse et pas trop épicée ! C'est une cuisine du nord de l'Inde, avec des plats végétariens. Mon plat préféré, c'est le curry de légumes. J'adore aussi les beignets d'aubergine et la purée d'épinards. Il y a aussi de très bons desserts, cuisinés avec de la semoule et de la cannelle. J'aime beaucoup la décoration : il y a des affiches de films Bollywood célèbres. Je regarde souvent des films indiens alors j'apprécie cette ambiance. En plus, le cuisinier est très sympa, il offre toujours un thé à la cardamome.",
+        },
+      ],
+    },
+  },
+
   b7: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
