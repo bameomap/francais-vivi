@@ -3040,6 +3040,639 @@ export const CAHIER_A2 = {
     },
   },
 
+  b12: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammarA2.js ──
+    grammar: {
+
+      // p0 — L'impératif et les pronoms (cahier p. 135)
+      p0: [
+        {
+          num: 1, page: 135,
+          instruction: "Les pronoms en gras remplacent des mots. Lesquels ?",
+          vi: "Đại từ in đậm trong câu thay thế cho từ/cụm từ nào? Viết câu trả lời.",
+          type: "fill",
+          items: [
+            { q: "Prends-le à la place de la voiture.", answer: "le vélo", example: true },
+            { q: "N'en achetez pas !", answer: "des produits polluants" },
+            { q: "Réparez-le !", answer: "le lave-vaisselle" },
+            { q: "Sauve-la !", answer: "la planète" },
+            { q: "Protégeons-la !", answer: "la biodiversité" },
+            { q: "Ne les jette pas par terre !", answer: "les déchets" },
+          ],
+        },
+        {
+          num: 2, page: 135,
+          instruction: "Remplacez les mots soulignés par un pronom. Faites les transformations nécessaires.",
+          vi: "Thay từ được gạch chân bằng đại từ, viết lại cả câu ở thể mệnh lệnh.",
+          type: "transform",
+          items: [
+            { q: "Respectez la faune !", answer: "Respectez-la !", example: true },
+            { q: "Trions les déchets !", answer: "Trions-les !" },
+            { q: "Protégeons l'environnement !", answer: "Protégeons-le !" },
+            { q: "Ne gaspille pas l'eau !", answer: "Ne la gaspille pas !" },
+            { q: "N'utilisez pas de pesticides !", answer: "N'en utilisez pas !" },
+            { q: "Donnons de l'argent aux associations !", answer: "Donnons-leur de l'argent !" },
+          ],
+        },
+        {
+          num: 3, page: 135,
+          instruction: "Transformez les phrases à l'impératif. Remplacez les mots soulignés par un pronom.",
+          vi: "Chuyển câu sang thể mệnh lệnh và thay từ gạch chân bằng đại từ.",
+          type: "transform",
+          items: [
+            { q: "Il faut jeter nos déchets à la poubelle.", answer: "Jetons-les à la poubelle !", example: true },
+            { q: "Il est nécessaire de nous mobiliser pour l'environnement.", answer: "Mobilisons-nous pour l'environnement !" },
+            { q: "Il ne faut pas prendre l'avion.", answer: "Ne le prenons pas !" },
+            { q: "Il est important de penser à nos gestes quotidiens.", answer: "Pensons-y !" },
+            { q: "Il est nécessaire de limiter la pollution.", answer: "Limitons-la !" },
+            { q: "Il ne faut pas utiliser de produits polluants.", answer: "N'en utilisons pas !" },
+          ],
+        },
+        {
+          num: 4, page: 135, audioSrc: piste(118),
+          instruction: "Écoutez et associez une recommandation à chaque personne.",
+          vi: "Nghe và nối mỗi người với lời khuyên phù hợp dành cho họ.",
+          type: "match",
+          pairs: [
+            { l: "a. Nadia",  r: "Ne la prends pas !" },
+            { l: "b. Sandra", r: "Recycle-les !" },
+            { l: "c. David",  r: "Ne leur donne pas à manger !" },
+            { l: "d. Malik",  r: "Éteins-la avant de sortir !" },
+            { l: "e. Anne",   r: "Explique-leur !" },
+            { l: "f. Arnaud", r: "Fabrique-les !" },
+          ],
+        },
+      ],
+
+      // p1 — L'expression du but (cahier p. 137)
+      p1: [
+        {
+          num: 1, page: 137,
+          instruction: "Associez chaque action au but qui correspond.",
+          vi: "Nối mỗi hành động với mục đích tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "L'hippopotame remonte à la surface…", r: "pour respirer.", example: true },
+            { l: "Le caméléon change de couleur…",       r: "pour se cacher." },
+            { l: "Les animaux font des cris différents…", r: "pour communiquer." },
+            { l: "Cette association a besoin d'argent…",  r: "pour que ses projets continuent." },
+            { l: "Le rat cherche le contact avec les humains…", r: "pour qu'ils jouent avec lui." },
+            { l: "Dans certains pays, on limite la pêche…", r: "pour protéger les animaux marins." },
+          ],
+        },
+        {
+          num: 2, page: 137,
+          instruction: "Soulignez l'expression du but qui convient.",
+          vi: "Chọn « pour » hoặc « pour que » phù hợp.",
+          type: "choice",
+          items: [
+            { q: "Mon chat miaule ___ je lui donne à manger.", options: ["pour", "pour que"], answer: "pour que", example: true },
+            { q: "Avant l'été, on diffuse des publicités ___ les propriétaires ne laissent pas leur animal de compagnie pendant les vacances.", options: ["pour", "pour que"], answer: "pour que" },
+            { q: "Les abeilles dansent ___ indiquer aux autres un lieu intéressant.", options: ["pour", "pour que"], answer: "pour" },
+            { q: "Cette application a été créée ___ reconnaître les plantes.", options: ["pour", "pour que"], answer: "pour" },
+            { q: "Nous faisons de longues promenades avec notre chien ___ il soit heureux.", options: ["pour", "pour qu'"], answer: "pour qu'" },
+            { q: "___ ne pas menacer la biodiversité, il faut respecter toutes les espèces.", options: ["Pour", "Pour que"], answer: "Pour" },
+          ],
+        },
+        {
+          // Les 6 témoignages audio (dans l'ordre du corrigé) : 1. « Il a
+          // acheté des livres pour que ses enfants puissent découvrir les
+          // animaux » — 2. « Son chat miaule pour qu'elle lui donne à
+          // manger » — 3. « Il organise une conférence pour informer de la
+          // disparition de certains reptiles » — 4. « Il garde des animaux
+          // pour passer du temps avec eux » — 5. « Il a quitté la ville
+          // pour que ses chiens soient dehors » — 6. (numéro manquant dans
+          // la liste imprimée). L'exemple (bulle c) est « Pour avoir des
+          // œufs frais, elle a des poules ».
+          // ⚠️ D'après la note du cahier source, le repérage exact bulle
+          // ↔ témoignage (quel numéro va avec quelle bulle imprimée a-f)
+          // n'est pas garanti à 100 % ; les chiffres ci-dessous reproduisent
+          // fidèlement le corrigé imprimé (a.5 – b.3 – d.2 – e.4 – f.6,
+          // c en exemple) sans certitude visuelle absolue sur la mise en
+          // page.
+          num: 3, page: 137, audioSrc: piste(120),
+          instruction: "Écoutez et associez le témoignage de chaque personne à la phrase correcte (indiquez le numéro du témoignage, 1 à 6).",
+          vi: "Nghe rồi ghi số thứ tự (1-6) của lời chứng phù hợp với mỗi bulle. (Xem ghi chú: thứ tự khớp bulle-lời chứng không chắc chắn tuyệt đối theo chính cahier gốc.)",
+          type: "fill",
+          items: [
+            { q: "c. (exemple) « Pour avoir des œufs frais, elle a des poules »", answer: "exemple", example: true },
+            { q: "a.", answer: "5" },
+            { q: "b.", answer: "3" },
+            { q: "d.", answer: "2" },
+            { q: "e.", answer: "4" },
+            { q: "f.", answer: "6" },
+          ],
+        },
+        {
+          num: 4, page: 137,
+          instruction: "Entourez la bonne réponse.",
+          vi: "Chọn dạng động từ đúng.",
+          type: "choice",
+          items: [
+            { q: "Mon chien aboie pour que nous (jouons / jouions) avec lui.", options: ["jouons", "jouions"], answer: "jouions", example: true },
+            { q: "Notre voisin organise une réunion pour que tous les habitants de l'immeuble (font / fassent) le tri des déchets.", options: ["font", "fassent"], answer: "fassent" },
+            { q: "Il insiste pour que nous (regardons / regardions) la danse des abeilles.", options: ["regardons", "regardions"], answer: "regardions" },
+            { q: "J'ai déplacé la gamelle pour que mon chat (se sent / se sente) bien.", options: ["se sent", "se sente"], answer: "se sente" },
+            { q: "Le rôle des parents est essentiel pour que les enfants (savent / sachent) respecter l'environnement.", options: ["savent", "sachent"], answer: "sachent" },
+            { q: "On peut fabriquer ses produits ménagers pour qu'ils ne (sont / soient) pas polluants.", options: ["sont", "soient"], answer: "soient" },
+          ],
+        },
+      ],
+
+      // p2 — La forme passive (cahier p. 139)
+      p2: [
+        {
+          num: 1, page: 139, audioSrc: piste(122),
+          instruction: "Écoutez et dites si les phrases sont à la forme active ou passive.",
+          vi: "Nghe từng câu (a→f) và cho biết đó là thể chủ động hay bị động.",
+          type: "choice",
+          items: [
+            { q: "a. (exemple)", options: ["forme active", "forme passive"], answer: "forme passive", example: true },
+            { q: "b.", options: ["forme active", "forme passive"], answer: "forme passive" },
+            { q: "c.", options: ["forme active", "forme passive"], answer: "forme active" },
+            { q: "d.", options: ["forme active", "forme passive"], answer: "forme active" },
+            { q: "e.", options: ["forme active", "forme passive"], answer: "forme passive" },
+            { q: "f.", options: ["forme active", "forme passive"], answer: "forme active" },
+          ],
+        },
+        {
+          // Le corrigé du cahier source ne donne que la phrase finale (pas
+          // le tirage au sort des mots à réordonner) — les jetons ci-dessous
+          // sont donc redécoupés par blocs à partir de la réponse imprimée,
+          // pas recopiés d'un ordre imprimé (qui n'existe pas dans le .md
+          // source). La phrase corrigée reste identique au cahier.
+          num: 2, page: 139,
+          instruction: "Remettez les mots dans l'ordre pour faire des phrases.",
+          vi: "Ghép các mảnh câu theo đúng thứ tự.",
+          type: "order",
+          items: [
+            { tokens: ["par l'école.", "Des ateliers d'écologie", "sont organisés"], answer: ["Des ateliers d'écologie", "sont organisés", "par l'école."], example: true },
+            { tokens: ["sont protégées.", "Dans ce parc naturel,", "toutes les espèces"], answer: ["Dans ce parc naturel,", "toutes les espèces", "sont protégées."] },
+            { tokens: ["par notre association.", "Ce projet écologique", "sera financé"], answer: ["Ce projet écologique", "sera financé", "par notre association."] },
+            { tokens: ["ont été plantées", "par la mairie.", "Des centaines d'arbres"], answer: ["Des centaines d'arbres", "ont été plantées", "par la mairie."] },
+            { tokens: ["par ces constructions.", "La biodiversité", "est menacée"], answer: ["La biodiversité", "est menacée", "par ces constructions."] },
+            { tokens: ["par le chant du coq.", "Elles sont réveillées", "tous les matins"], answer: ["Elles sont réveillées", "tous les matins", "par le chant du coq."] },
+          ],
+        },
+        {
+          num: 3, page: 139,
+          instruction: "Entourez la forme correcte du participe passé.",
+          vi: "Chọn dạng đúng của participe passé (hợp giống-số với chủ ngữ).",
+          type: "choice",
+          items: [
+            { q: "Les légumes sont (cultivé / cultivés) par des professionnels.", options: ["cultivé", "cultivés"], answer: "cultivés", example: true },
+            { q: "Des actions écologiques sont (financés / financées) par ces associations.", options: ["financés", "financées"], answer: "financées" },
+            { q: "Les arbres doivent être (respecté / respectés).", options: ["respecté", "respectés"], answer: "respectés" },
+            { q: "Le festival du film animalier sera (organisé / organisée) l'été prochain.", options: ["organisé", "organisée"], answer: "organisé" },
+            { q: "Un article sur notre association a été (publié / publiés) dans une revue spécialisée.", options: ["publié", "publiés"], answer: "publié" },
+            { q: "Une nouvelle espèce d'oiseau a été (découvert / découverte).", options: ["découvert", "découverte"], answer: "découverte" },
+          ],
+        },
+        {
+          num: 4, page: 139,
+          instruction: "Transformez les phrases à la forme passive.",
+          vi: "Chuyển câu sang thể bị động.",
+          type: "transform",
+          items: [
+            { q: "Les associations protègent la faune et la flore.", answer: "La faune et la flore sont protégées par les associations.", example: true },
+            { q: "La mairie organise une campagne de sensibilisation.", answer: "Une campagne de sensibilisation est organisée par la mairie." },
+            { q: "Le changement climatique menace la planète.", answer: "La planète est menacée par le changement climatique." },
+            { q: "Les bateaux polluent les océans.", answer: "Les océans sont pollués par les bateaux." },
+            { q: "Les biologistes feront de nouvelles recherches.", answer: "De nouvelles recherches seront faites par les biologistes." },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 140) — wired into the Phono step ─────
+    // Seule la Discrimination (act. 1) a une réponse vérifiable. Articulation
+    // (act. 2, phrases à répéter) et Interprétation (act. 4, lecture à voix
+    // haute) restent des exercices oraux sans réponse unique — même choix
+    // que pour les autres unités. Graphies (act. 3, piste 125, « barrez les
+    // e muets ») est ignorée : le corrigé source reproduit le texte intégral
+    // sans aucun marquage typographique des « e » barrés — la réponse n'est
+    // donc pas reconstructible depuis le .md (les « e » muets se déterminent
+    // seulement à l'oral, en écoutant la piste).
+    phono: [
+      {
+        num: 1, page: 140, audioSrc: piste(123),
+        instruction: "Discrimination — écoutez et dites si vous entendez le son [ə].",
+        vi: "Nghe và cho biết có nghe thấy âm [ə] (e câm) hay không.",
+        type: "truefalse",
+        items: [
+          { q: "a. (exemple)", answer: false, example: true },
+          { q: "b.", answer: false },
+          { q: "c.", answer: true },
+          { q: "d.", answer: false },
+          { q: "e.", answer: true },
+          { q: "f.", answer: false },
+        ],
+      },
+    ],
+
+    // ── Vocabulaire, keyed to match the Parcours vocab steps ──────────
+    // c1_vocab (cahier p. 136, moitié 1) couvre b12g1-b12g2 (milieux
+    // naturels, environnement) ; c1_vocab2 (p. 136, moitié 2) couvre
+    // b12g3-b12g4 (agir pour l'environnement, pollution) — la page 136 du
+    // cahier n'est pas elle-même scindée en deux dans le corrigé source, la
+    // coupure exercice 2 / exercice 3 est un choix pratique pour coller aux
+    // deux étapes vocab du Parcours (voir parcoursDataA2.js c1_vocab /
+    // c1_vocab2). Même logique pour c2_vocab / c3_vocab avec la page 138
+    // (b12g5-b12g6 puis b12g7-b12g8).
+    vocab: {
+      c1_vocab: [
+        {
+          num: 1, page: 136,
+          instruction: "Placez les verbes suivants dans les phrases : valoriser – protéger – se mobiliser – disparaître – trier – polluer.",
+          vi: "Điền động từ phù hợp vào chỗ trống.",
+          type: "fill",
+          bank: ["valoriser", "protéger", "se mobiliser", "disparaître", "trier", "polluer"],
+          items: [
+            { q: "Dans ce parc, on nous demande de …… la biodiversité.", answer: "valoriser", example: true },
+            { q: "On encourage les citoyens à …… leurs déchets.", answer: "trier" },
+            { q: "Pour ne pas ……, il est conseillé de prendre le vélo ou les transports en commun.", answer: "polluer" },
+            { q: "Il est essentiel de …… ensemble pour sauver la planète.", answer: "se mobiliser" },
+            { q: "À cause du réchauffement climatique, certaines espèces vont ……", answer: "disparaître" },
+            { q: "Pour …… l'environnement, chaque action compte.", answer: "protéger" },
+          ],
+        },
+        {
+          num: 2, page: 136,
+          instruction: "Associez chaque mot à leur définition.",
+          vi: "Nối từ với định nghĩa tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "le lagon",        r: "un petit lac d'eau salé", example: true },
+            { l: "le parc naturel", r: "un espace vert protégé" },
+            { l: "l'archipel",      r: "un groupe d'îles" },
+            { l: "le désert",       r: "un grand espace de sable" },
+            { l: "la forêt",        r: "un ensemble d'arbres" },
+            { l: "l'océan",         r: "une grande étendue d'eau salée" },
+          ],
+        },
+      ],
+
+      c1_vocab2: [
+        {
+          num: 3, page: 136,
+          instruction: "Remettez les lettres dans l'ordre pour former des mots.",
+          vi: "Sắp xếp lại các chữ cái để tạo thành từ đúng.",
+          type: "fill",
+          items: [
+            { q: "Le (TCNAGHMNEE) …… climatique est une préoccupation mondiale.", answer: "changement", example: true },
+            { q: "Les (SEPISITEDC) …… sont des produits chimiques utilisés en agriculture.", answer: "pesticides" },
+            { q: "La diversité des espèces vivantes dans un milieu naturel est la (ÉDOIREISTBVI) ……", answer: "biodiversité" },
+            { q: "La Terre est une (TÈALPNE) ……", answer: "planète" },
+            { q: "Il faut éviter le (GIPAGESLAL) …… alimentaire.", answer: "gaspillage" },
+            { q: "Il est essentiel de lutter contre la surexploitation des (SUCRSEORSE) ……", answer: "ressources" },
+          ],
+        },
+        {
+          num: 4, page: 136, audioSrc: piste(119),
+          instruction: "Écoutez et associez les phrases aux images correspondantes (bénévoles ramassant des déchets ; jeune pousse dans des mains ; homme buvant à une gourde réutilisable ; randonneur en montagne ; forêt déboisée avec fumée).",
+          vi: "Nghe và nối mỗi câu với hình ảnh tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Je fais partie d'une association de défense de l'écologie. (exemple)", answer: "image 1", example: true },
+            { q: "J'adore me promener dans la nature.", answer: "image 4" },
+            { q: "Je suis inquiète de voir la destruction des forêts.", answer: "image 5" },
+            { q: "Je respecte les animaux et les plantes pour préserver la biodiversité.", answer: "image 2" },
+            { q: "Je n'achète pas de bouteilles en plastique.", answer: "image 3" },
+          ],
+        },
+      ],
+
+      c2_vocab: [
+        {
+          num: 1, page: 138,
+          instruction: "Identifiez les animaux sur les photos.",
+          vi: "Gọi tên các con vật trong ảnh.",
+          type: "fill",
+          items: [
+            { q: "a. (exemple)", answer: "un chien", example: true },
+            { q: "b.", answer: "un coq" },
+            { q: "c.", answer: "une libellule" },
+            { q: "d.", answer: "une panthère" },
+            { q: "e.", answer: "une chèvre" },
+          ],
+        },
+        {
+          num: 2, page: 138,
+          instruction: "Complétez les mots pour trouver l'animal.",
+          vi: "Điền chữ còn thiếu để tìm ra tên con vật.",
+          type: "fill",
+          items: [
+            { q: "La T _ _ _ _ _ est un animal qui peut vivre sur la terre ou dans l'eau.", answer: "tortue", example: true },
+            { q: "Le C _ _ L _ _ _ est un reptile qui change de couleur avec son milieu.", answer: "caméléon" },
+            { q: "Le D _ _ P _ _ _ est un mammifère qui vit dans l'eau.", answer: "dauphin" },
+            { q: "La C _ _ _ _ T _ est un oiseau qui vit la nuit.", answer: "chouette" },
+            { q: "L'A _ _ I _ _ _ est un animal qui vole et fait du miel.", answer: "abeille" },
+            { q: "Le S _ _ G _ est un mammifère qui ressemble beaucoup à l'homme.", answer: "singe" },
+          ],
+        },
+      ],
+
+      c3_vocab: [
+        {
+          num: 3, page: 138, audioSrc: piste(121),
+          instruction: "Écoutez les phrases et cochez l'animal correspondant.",
+          vi: "Nghe từng câu và chọn con vật được nhắc đến.",
+          type: "fill",
+          items: [
+            { q: "a. (exemple)", answer: "l'escargot", example: true },
+            { q: "b.", answer: "le tigre" },
+            { q: "c.", answer: "l'aigle" },
+            { q: "d.", answer: "la poule" },
+            { q: "e.", answer: "l'araignée" },
+            { q: "f.", answer: "le cheval" },
+          ],
+        },
+        {
+          num: 4, page: 138,
+          instruction: "Vrai ou faux ?",
+          vi: "Đúng hay sai?",
+          type: "truefalse",
+          items: [
+            { q: "Le chat a plus de quatre pattes.", answer: false, example: true },
+            { q: "Le coq chante tôt le matin.", answer: true },
+            { q: "L'escargot est un mammifère très rapide.", answer: false },
+            { q: "Le serpent est un animal à plumes.", answer: false },
+            { q: "L'hippopotame est un animal de jardin.", answer: false },
+            { q: "Le canard a deux pattes et des plumes.", answer: true },
+          ],
+        },
+      ],
+    },
+
+    // ── Bilan linguistique (cahier p. 142-143, noté /40) ────────────
+    // Wired into the "L'essentiel" step, alongside the AI-generated quiz.
+    // La page 141 (Compréhension écrite & Production orale, « Le changement
+    // climatique : infos ou infox ? ») n'a pas de piste audio — elle est
+    // reprise ici (items 8-11), après le /40 linguistique, même pattern que
+    // la CO p.105 ajoutée à la suite du bilan de b9. Sa Production orale
+    // (jeu de rôle, réponses libres) est rangée dans delf.production. Les
+    // Jeux p.146 (items 12-14) suivent, comme le précédent de b9 (p.110).
+    bilan: [
+      {
+        num: 1, page: 142,
+        instruction: "Lisez ces recommandations et transformez-les avec un impératif et un pronom. (/7) — Pour sauver la planète, nous devons : recycler nos déchets, éviter le gaspillage, limiter la pollution, planter des arbres, aider les associations, préserver la biodiversité, protéger les animaux.",
+        vi: "Chuyển mỗi khuyến nghị sang thể mệnh lệnh + đại từ.",
+        type: "transform",
+        items: [
+          { q: "recycler nos déchets", answer: "Recyclons-les !" },
+          { q: "éviter le gaspillage", answer: "Évitons-le !" },
+          { q: "limiter la pollution", answer: "Limitons-la !" },
+          { q: "planter des arbres", answer: "Plantons-en !" },
+          { q: "aider les associations", answer: "Aidons-les !" },
+          { q: "préserver la biodiversité", answer: "Préservons-la !" },
+          { q: "protéger les animaux", answer: "Protégeons-les !" },
+        ],
+      },
+      {
+        num: 2, page: 142,
+        instruction: "Conjuguez les verbes entre parenthèses si nécessaire. (/7)",
+        vi: "Chia động từ trong ngoặc nếu cần thiết.",
+        type: "fill",
+        items: [
+          { q: "Pour que les enfants (adopter) …… des gestes écologiques, montrons-leur !", answer: "adoptent" },
+          { q: "Pour (polluer) …… moins, fabriquons nos produits ménagers !", answer: "polluer" },
+          { q: "Pour (protéger) …… les animaux sauvages, ne leur donnons pas à manger !", answer: "protéger" },
+          { q: "Pour que les citoyens (se mobiliser) ……, expliquons-leur !", answer: "se mobilisent" },
+          { q: "Pour (comprendre) …… le réchauffement climatique, regardons ce documentaire !", answer: "comprendre" },
+          { q: "Pour que les villes (être) …… plus vertes, plantons des arbres !", answer: "soient" },
+          { q: "Pour que nous (respecter) …… la biodiversité, il y a des règles à suivre dans ce parc naturel.", answer: "respections" },
+        ],
+      },
+      {
+        num: 3, page: 142,
+        instruction: "Complétez le tableau (forme active ↔ forme passive). (/6)",
+        vi: "Hoàn thành bảng: chuyển câu sang thể chủ động/bị động còn thiếu.",
+        type: "transform",
+        items: [
+          { q: "Les associations protègent les espèces menacées. (→ forme passive)", answer: "Les espèces menacées sont protégées par les associations." },
+          { q: "Le tri des déchets n'est pas fait par tous les habitants. (→ forme active)", answer: "Tous les habitants ne font pas le tri des déchets." },
+          { q: "Les écoles du quartier commenceront bientôt ce projet écocitoyen. (→ forme passive)", answer: "Ce projet écocitoyen sera bientôt commencé par les écoles du quartier." },
+          { q: "Les meilleures initiatives vertes seront récompensées par le jury. (→ forme active)", answer: "Le jury récompensera les meilleures initiatives vertes." },
+          { q: "La mairie a organisé des conférences sur le climat. (→ forme passive)", answer: "Des conférences sur le climat ont été organisées par la mairie." },
+          { q: "Les pesticides ne sont pas utilisés par ces agriculteurs. (→ forme active)", answer: "Ces agriculteurs n'utilisent pas les pesticides." },
+        ],
+      },
+      {
+        num: 4, page: 143,
+        instruction: "Vocabulaire — Complétez les phrases avec les mots de la liste : danger – disparaître – ressources – archipels – protégé. (/5)",
+        vi: "Điền từ vào chỗ trống.",
+        type: "fill",
+        bank: ["danger", "disparaître", "ressources", "archipels", "protégé"],
+        items: [
+          { q: "Ce parc naturel est un espace ……", answer: "protégé" },
+          { q: "Il est essentiel de s'engager contre la surexploitation des ……", answer: "ressources" },
+          { q: "La Nouvelle-Calédonie est un ensemble d'îles et d'……", answer: "archipels" },
+          { q: "Les pesticides sont un …… pour notre santé.", answer: "danger" },
+          { q: "À cause du réchauffement climatique, des espèces animales vont ……", answer: "disparaître" },
+        ],
+      },
+      {
+        num: 5, page: 143,
+        instruction: "Vocabulaire — Trouvez le mot correspondant à la définition. (/5)",
+        vi: "Tìm từ tương ứng với định nghĩa.",
+        type: "fill",
+        items: [
+          { q: "C'est une matière qu'on utilise pour les bouteilles d'eau par exemple.", answer: "le plastique" },
+          { q: "Un produit qui crée de la pollution est un produit ……", answer: "polluant" },
+          { q: "C'est la transformation d'un déchet.", answer: "le recyclage" },
+          { q: "C'est la science de l'environnement.", answer: "l'écologie" },
+          { q: "Il s'agit d'un type d'animal ou de végétal.", answer: "une espèce" },
+        ],
+      },
+      {
+        num: 6, page: 143,
+        instruction: "Vocabulaire — Barrez l'intrus. (/5)",
+        vi: "Tìm từ lạc loài trong mỗi nhóm.",
+        type: "choice",
+        items: [
+          { q: "a.", options: ["le mouton", "l'abeille", "la vache", "le lapin"], answer: "l'abeille" },
+          { q: "b.", options: ["l'aigle", "le canard", "le rat", "la chouette"], answer: "le rat" },
+          { q: "c.", options: ["le cheval", "le dauphin", "le poney", "l'âne"], answer: "le dauphin" },
+          { q: "d.", options: ["le chien", "la panthère", "le chat", "le cheval"], answer: "la panthère" },
+          { q: "e.", options: ["le coq", "le caméléon", "la poule", "le canard"], answer: "le caméléon" },
+        ],
+      },
+      {
+        num: 7, page: 143,
+        instruction: "Vocabulaire — Associez les images aux descriptions.",
+        vi: "Nối hình ảnh với mô tả tương ứng.",
+        type: "match",
+        pairs: [
+          { l: "1. hippopotame", r: "C'est un mammifère qui vit principalement dans l'eau." },
+          { l: "2. araignée",    r: "C'est un insecte qui a de nombreuses pattes." },
+          { l: "3. aigle",       r: "C'est un animal à plumes qui a une excellente vue." },
+          { l: "4. serpent",     r: "C'est un reptile long et mince." },
+          { l: "5. lapin",       r: "C'est un animal de la ferme qui court très vite." },
+        ],
+      },
+      {
+        // Page 141 — Compréhension écrite : « Le changement climatique :
+        // infos ou infox ? »
+        num: 8, page: 141,
+        instruction: "Compréhension écrite — « Le changement climatique : infos ou infox ? ». Vrai ou faux ?",
+        vi: "Đọc bài về biến đổi khí hậu (đúng/sai hay tin đồn) rồi trả lời.",
+        type: "truefalse",
+        items: [
+          { q: "Le progrès scientifique est la solution au changement climatique.", answer: false },
+          { q: "Avec le changement climatique, les températures baissent.", answer: false },
+          { q: "Le climat change seulement en France.", answer: false },
+          { q: "Certaines populations doivent quitter leur pays.", answer: true },
+          { q: "Tous les humains doivent se mobiliser pour le climat.", answer: true },
+        ],
+      },
+      {
+        num: 9, page: 141,
+        instruction: "D'après le texte, le changement climatique a des conséquences sur… (plusieurs réponses possibles — les trois sont correctes)",
+        vi: "Biến đổi khí hậu có ảnh hưởng tới nhóm nào? (cả 3 đều đúng)",
+        type: "truefalse",
+        items: [
+          { q: "les humains", answer: true },
+          { q: "les animaux", answer: true },
+          { q: "les végétaux", answer: true },
+        ],
+      },
+      {
+        num: 10, page: 141,
+        instruction: "Selon les scientifiques, les pays doivent :",
+        vi: "Theo các nhà khoa học, các nước phải làm gì?",
+        type: "fill",
+        items: [
+          { q: "Selon les scientifiques, les pays doivent…", answer: "polluer moins" },
+        ],
+      },
+      {
+        num: 11, page: 141,
+        instruction: "VOCABULAIRE : « Changer nos modes de vie » signifie :",
+        vi: "« Changer nos modes de vie » nghĩa là gì?",
+        type: "fill",
+        items: [
+          { q: "« Changer nos modes de vie » signifie…", answer: "vivre de façon plus écologique" },
+        ],
+      },
+      {
+        // Page 146 — Jeux, act. 1 : mots croisés (6 verbes d'action pour
+        // l'environnement).
+        num: 12, page: 146,
+        instruction: "Jeux — Trouvez 6 actions pour l'environnement (mots croisés).",
+        vi: "Điền động từ đúng cho ô chữ (6 hành động vì môi trường).",
+        type: "fill",
+        items: [
+          { q: "Verticalement 1 : …… la biodiversité", answer: "valoriser" },
+          { q: "Verticalement 2 : …… le papier", answer: "recycler" },
+          { q: "Verticalement 3 : …… l'environnement", answer: "préserver" },
+          { q: "Horizontalement a : …… ensemble", answer: "agir" },
+          { q: "Horizontalement b : …… la planète", answer: "sauver" },
+          { q: "Horizontalement c : …… ses déchets", answer: "trier" },
+        ],
+      },
+      {
+        // Page 146 — Jeux, act. 2 : « décollez » les mots collés.
+        num: 13, page: 146,
+        instruction: "Jeux — Retrouvez les phrases (les mots sont collés).",
+        vi: "Tách các từ dính liền nhau để tìm ra câu đúng.",
+        type: "fill",
+        items: [
+          { q: "Cetteassociationfinancelaprotectiondesmilieuxnaturels.", answer: "Cette association finance la protection des milieux naturels." },
+          { q: "Unsitedecojardinageaétécréeilyaquelquesannées.", answer: "Un site de co-jardinage a été créé il y a quelques années." },
+          { q: "Nousdevonstousnousmobiliserpoursauverlaplanète.", answer: "Nous devons tous nous mobiliser pour sauver la planète." },
+        ],
+      },
+      {
+        // Page 146 — Jeux, act. 3 : devinette.
+        num: 14, page: 146,
+        instruction: "Jeux — Devinette : Je suis menacée par le réchauffement climatique. De nombreuses espèces animales et végétales m'habitent. Les citoyens se mobilisent pour me sauver. Je suis une planète. Qui suis-je ?",
+        vi: "Giải câu đố: tôi bị đe dọa bởi hiện tượng nóng lên toàn cầu, nhiều loài sống trên tôi, con người đấu tranh để cứu tôi, tôi là một hành tinh. Tôi là ai?",
+        type: "fill",
+        items: [
+          { q: "Qui suis-je ?", answer: "La Terre" },
+        ],
+      },
+    ],
+
+    // ── DELF A2 blanc (cahier p. 144-145) ───────────────────────────
+    // Le livre n'a pas de page de préparation DELF dédiée pour cette unité
+    // (ni écoute dans editoAudioA2.js, ni lecture DELF dans
+    // editoA2Reading.js pour b12) — donc pas de coLivre, même pattern que
+    // b2/b5/b7/b9.
+    delf: {
+      co: [
+        {
+          // Le corrigé source ne donne les énoncés complets que pour une
+          // partie des questions (doc.1 → Q1 ; doc.2 → Q2-Q3 ; doc.3 →
+          // Q4-Q5) ; Q6 n'a pas d'énoncé imprimé retrouvé dans le .md.
+          // ⚠️ Pour Q6, le corrigé source signale lui-même une incertitude
+          // OCR sur le chiffre imprimé (caractères « BA » superposés) : la
+          // réponse B (panier de légumes) est déduite du contexte du
+          // document 3 (jeu-concours pour un abonnement à des paniers de
+          // légumes bio) mais n'a pas été vérifiée pixel par pixel.
+          num: 1, page: 144, audioSrc: piste(127),
+          instruction: "Compréhension de l'oral — vous écoutez la radio (3 documents). (6 points)",
+          vi: "Nghe 3 tài liệu radio rồi trả lời từng câu hỏi (chọn A/B/C).",
+          type: "fill",
+          items: [
+            { q: "1. Document 1 — Que vous propose l'équipe de la librairie ?", answer: "C" },
+            { q: "2. Document 2 — Les enfants vont dessiner…", answer: "C" },
+            { q: "3. Document 2 — L'atelier est…", answer: "B" },
+            { q: "4. Document 3 — Cette émission porte sur…", answer: "B" },
+            { q: "5. Document 3 — Vous pouvez gagner…", answer: "A" },
+            { q: "6. Document 3 — (question complémentaire, énoncé non retrouvé dans le corrigé source — voir la note ⚠️ ci-dessus)", answer: "B" },
+          ],
+        },
+      ],
+      // Compréhension des écrits — courriel de Magali : « Mobilise-toi avec
+      // nous ! » (Marche pour le Climat du 9 avril). Le corrigé source ne
+      // donne que les lettres des réponses, pas l'énoncé complet de chaque
+      // question — les items ci-dessous restent donc génériques (numérotés
+      // comme dans le corrigé) ; l'apprenant doit lire le courriel dans le
+      // cahier p. 144-145 pour répondre.
+      ce: [
+        {
+          num: 1, page: 144,
+          instruction: "Compréhension des écrits — courriel de Magali : « Mobilise-toi avec nous ! ». (6 points)",
+          vi: "Đọc email của Magali mời tham gia Marche pour le Climat rồi trả lời 6 câu hỏi (chọn A/B/C).",
+          type: "fill",
+          items: [
+            { q: "1.", answer: "A" },
+            { q: "2.", answer: "A" },
+            { q: "3.", answer: "A" },
+            { q: "4.", answer: "A" },
+            { q: "5.", answer: "C" },
+            { q: "6.", answer: "A" },
+          ],
+        },
+      ],
+      // Production — no auto-grading; the cahier's model answer is the yardstick.
+      production: [
+        {
+          skill: "Production écrite", points: "12,5 points", page: 145,
+          prompt: "Vous avez reçu un courriel de votre ami Zahi qui vous propose de visiter le Parc animalier Planète Sauvage samedi prochain. Vous répondez à Zahi. Vous acceptez son invitation et vous posez des questions sur l'organisation. (60 mots minimum)",
+          vi: "Bạn nhận được email của bạn Zahi rủ đi thăm công viên động vật Planète Sauvage thứ Bảy tới. Viết thư trả lời: chấp nhận lời mời và hỏi thêm về việc tổ chức chuyến đi. (tối thiểu 60 từ)",
+          model: "Salut Zahi, Merci de proposer cette visite car j'adore les animaux ! Est-ce que je peux venir avec mon ami Titouan ? Il aime beaucoup les animaux et il est très sympa. Tu veux que je prépare une salade pour le déjeuner ? Je peux aussi préparer des sandwichs. Si tu veux, nous pouvons prendre ma voiture pour aller au parc. À samedi, Davy",
+        },
+        {
+          skill: "Production orale", points: "3 à 4 minutes", page: 145,
+          prompt: "Partie 3 de l'épreuve : exercice en interaction. Sujet : Animal de compagnie. Vous êtes en France. Vous voulez offrir un animal de compagnie à votre meilleur(e) ami(e). Vous êtes dans un magasin, vous demandez des conseils au vendeur et vous vous renseignez sur les animaux. L'examinateur joue le rôle du vendeur.",
+          vi: "Đóng vai muốn tặng một con vật cưng cho bạn thân, hỏi ý kiến người bán hàng trong cửa hàng thú cưng (giám khảo đóng vai người bán hàng).",
+          model: "– Bonjour madame. – Bonjour. – Je voudrais offrir un animal de compagnie à mon frère. Il a un grand jardin et il adore tous les animaux. – D'accord. Est-ce qu'il aime les chats ? – Oui, il adore les chats. – Nous avons quatre chatons en ce moment. Ils doivent encore recevoir un vaccin mais ils seront prêts dans une semaine. – Très bien. Quel est leur caractère ? – Ils sont très joueurs et ils n'aiment pas rester seuls. – Ah, c'est dommage car mon frère part souvent en vacances. Vous avez un animal plus indépendant ? – Nous avons aussi des poissons. Il y a plein d'espèces différentes. Ils peuvent rester seuls au maximum une semaine. – Très bien ! Quel est le prix de ce poisson rouge par exemple ? Il est très mignon. – Il est à 3 euros. Mais je vous conseille d'en acheter au moins deux. Il ne faut pas qu'il s'ennuie ! – Ah, d'accord. Est-ce que je peux mettre des espèces différentes dans le même bocal ? – Ce n'est pas conseillé. Le mieux est de prendre plusieurs poissons rouges. – D'accord, alors je vais en prendre dix. – Très bien. Il faut aussi leur donner un aquarium assez grand. Il est conseillé d'acheter aussi des pierres et des plantes pour mettre à l'intérieur. – Ah oui, pour que cela ressemble à leur espace naturel ! – Oui, vous avez raison. – D'accord. Alors je vais prendre un grand aquarium de 100 x 50 cm. Quel est le prix ? – Il est à 45,30 euros. – Très bien. Vous avez quoi pour décorer ? – Nous avons ce lot à 16,50 euros pour ce type d'aquarium. – Très bien, je le prends. – Avec les 10 poissons, cela fait 91,80 euros s'il vous plaît. – Je vais payer en espèces s'il vous plaît. – D'accord, merci. – Merci, au revoir. – Au revoir, bonne journée.",
+        },
+        {
+          // Page 141 — Production orale (jeu de rôle à deux, pas notée
+          // DELF) : pas de corrigé unique dans le cahier ("Réponses libres").
+          skill: "Production orale — jeu de rôle (page 141)", points: "réponses libres", page: 141,
+          prompt: "À deux. Choisissez la fiche A ou B. Apprenant A : Votre université/entreprise n'a pas un comportement écologique (bouteilles en plastique, gaspillage d'électricité, consommation de papier, aucun tri des déchets, etc.). Vous parlez avec le directeur/la directrice pour signaler les problèmes et protester. Apprenant B : Un(e) étudiant(e)/salarié(e) vous parle des problèmes écologiques de l'université/entreprise et proteste. Vous le/la rassurez et lui proposez des solutions.",
+          vi: "Đóng vai theo cặp: người A phản ánh vấn đề môi trường của trường/công ty với ban giám đốc; người B (giám đốc) trấn an và đề xuất giải pháp. (Réponses libres — không có đáp án mẫu duy nhất trong cahier.)",
+          model: "Réponses libres — le cahier ne donne pas de corrigé unique pour ce jeu de rôle.",
+        },
+      ],
+    },
+  },
+
 };
 
 // Answers are compared loosely: case, accents on the apostrophe, doubled
