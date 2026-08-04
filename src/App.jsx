@@ -48,6 +48,7 @@ import { EDITO_POUR_NOTES } from "./data/editoAudioNotes.js";
 import editoA2ReadingComprehension from "./data/editoA2Reading.js";
 import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
 import { EDITO_TIMINGS_A2 } from "./data/editoTimingsA2.js";
+import { EDITO_TIMINGS_A1 } from "./data/editoTimingsA1.js";
 import { CAHIER_A2 } from "./data/editoCahierA2.js";
 
 // Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
@@ -1223,7 +1224,7 @@ function AppInner() {
                   cefr="A2"
                 />)}
             {(view==="ecouter" || view==="dictee" || view==="listening") && (level==="a1"
-              ? <EcouterPanel key={section} section={section} onBackToParcours={backToParcours} />
+              ? <EcouterPanel key={section} section={section} onBackToParcours={backToParcours} timings={EDITO_TIMINGS_A1} />
               : <EcouterPanel
                   key={section}
                   section={section}
