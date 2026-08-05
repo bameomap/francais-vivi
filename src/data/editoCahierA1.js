@@ -705,4 +705,692 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u2: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g2" ──
+    // g2 has 5 points; p1 "IL Y A" has no dedicated "Grammaire" page in the
+    // cahier (the cahier only covers articles p.19, verbes -ER p.20, adjectifs
+    // possessifs p.22, professions p.23 — il y a is not drilled on its own
+    // cahier page), so p1 is intentionally absent below.
+    grammar: {
+
+      // p0 — Mạo từ xác định và bất định (cahier p. 19)
+      p0: [
+        {
+          num: 1, page: 19, audioSrc: piste(17),
+          instruction: "Écoutez et cochez la bonne réponse (un / une / des / le / la / l' / les).",
+          vi: "Nghe và đánh dấu mạo từ đúng (xác định hoặc bất định) cho mỗi từ.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "un" },
+            { q: "b.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "le" },
+            { q: "c.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "la" },
+            { q: "d.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "les" },
+            { q: "e.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "des" },
+            { q: "f.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "l'" },
+            { q: "g.", options: ["un", "une", "des", "le", "la", "l'", "les"], answer: "une" },
+          ],
+        },
+        {
+          num: 2, page: 19,
+          instruction: "Soulignez le bon article.",
+          vi: "Gạch chân mạo từ đúng (xác định hoặc bất định).",
+          type: "choice",
+          items: [
+            { q: "Exemple : C'est la / une rue de la Liberté.", options: ["la", "une"], answer: "la", example: true },
+            { q: "Tu as un / le piano ?", options: ["un", "le"], answer: "un" },
+            { q: "Pauline adore les / des langues.", options: ["les", "des"], answer: "les" },
+            { q: "J'aime la / l' histoire de la France.", options: ["la", "l'"], answer: "l'" },
+            { q: "Un / Le quartier Saint-Laurent est super !", options: ["Un", "Le"], answer: "Le" },
+          ],
+        },
+        {
+          num: 3, page: 19,
+          instruction: "Complétez avec un, une, des, le, la, l' ou les.",
+          vi: "Điền mạo từ phù hợp vào đoạn văn kể về nơi ở của Jeanine.",
+          type: "fill",
+          items: [
+            { q: "Jeanine habite …… quartier calme.", answer: "un" },
+            { q: "C'est …… quartier de Vizille.", answer: "le" },
+            { q: "Elle est dans …… appartement avec …… amie. (2 từ)", answer: "un une" },
+            { q: "…… appartement de Jeanine et de Mireille est très sympa.", answer: "L'" },
+            { q: "Elles aiment …… musique.", answer: "la" },
+            { q: "Elles ont …… instruments de musique.", answer: "des" },
+            { q: "Mireille a …… piano et Jeanine a …… guitare ! (2 từ)", answer: "un une" },
+          ],
+        },
+        {
+          num: 4, page: 19,
+          instruction: "Complétez les terminaisons du verbe habiter.",
+          vi: "Chia động từ \"habiter\" ở thì hiện tại theo chủ ngữ.",
+          type: "fill",
+          items: [
+            { q: "Marie et Frédéric habit…… à Bruxelles.", answer: "habitent" },
+            { q: "Stéphane habit…… à Genève.", answer: "habite" },
+            { q: "J'habit…… à Dakar.", answer: "habite" },
+            { q: "Rio et moi, nous habit…… à Montréal.", answer: "habitons" },
+            { q: "Vous habit…… où ?", answer: "habitez" },
+            { q: "Tu habit…… avec Jacques ?", answer: "habites" },
+          ],
+        },
+      ],
+
+      // p2 — Les verbes en -er au présent (cahier p. 20)
+      p2: [
+        {
+          num: 1, page: 20,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn dạng đúng \"je/j'\" hoặc \"ne/n'\" trước nguyên âm hay phụ âm.",
+          type: "choice",
+          items: [
+            { q: "Je / J' déteste le sport.", options: ["Je", "J'"], answer: "Je" },
+            { q: "Je / J' adore la montagne.", options: ["Je", "J'"], answer: "J'" },
+            { q: "Il ne / n' aime pas la ville.", options: ["ne", "n'"], answer: "n'" },
+            { q: "Nous ne / n' habitons pas à Paris.", options: ["ne", "n'"], answer: "n'" },
+            { q: "Tu ne / n' parles pas espagnol ?", options: ["ne", "n'"], answer: "ne" },
+            { q: "Je / J' habite à Lyon.", options: ["Je", "J'"], answer: "J'" },
+          ],
+        },
+        {
+          num: 2, page: 20,
+          instruction: "Associez pour former des phrases.",
+          vi: "Nối chủ ngữ với động từ chia đúng ở thì hiện tại.",
+          type: "match",
+          pairs: [
+            { l: "Mike et moi, nous", r: "parlons suédois." },
+            { l: "Je n'", r: "aime pas l'histoire." },
+            { l: "Jacqueline", r: "écoute la radio." },
+            { l: "Vous", r: "regardez des films français ?" },
+            { l: "Tu", r: "marches le dimanche ?" },
+            { l: "Les amis de Rick", r: "détestent le ski." },
+          ],
+        },
+        {
+          num: 3, page: 20,
+          instruction: "Complétez les phrases avec les verbes proposés.",
+          vi: "Điền động từ -er đúng chia theo chủ ngữ.",
+          type: "fill",
+          bank: ["détestes", "aime", "adorent", "dansez", "parle", "aimons"],
+          items: [
+            { q: "Elle ……………….. l'appartement de Julie ! Il est super !", answer: "aime" },
+            { q: "Ils ……………….. la danse.", answer: "adorent" },
+            { q: "Je ne ……………….. pas bien anglais.", answer: "parle" },
+            { q: "Tu ……………….. le quartier Saint-Jean ? Il n'est pas bien ?", answer: "détestes" },
+            { q: "Nous ……………….. les films argentins.", answer: "aimons" },
+            { q: "Vous ……………….. avec nous ?", answer: "dansez" },
+          ],
+        },
+        {
+          num: 4, page: 20,
+          instruction: "Complétez les terminaisons des verbes.",
+          vi: "Điền đúng đuôi động từ -er theo chủ ngữ.",
+          type: "fill",
+          items: [
+            { q: "Je détest…… le sport.", answer: "déteste" },
+            { q: "Léo march…… à la montagne.", answer: "marche" },
+            { q: "Lou et Vadim ador…… danser.", answer: "adorent" },
+            { q: "Vous habit…… où ?", answer: "habitez" },
+            { q: "Tu dans…… avec moi ?", answer: "danses" },
+            { q: "Jorma et moi, nous ne ski…… pas.", answer: "skions" },
+          ],
+        },
+        {
+          num: 5, page: 20, audioSrc: piste(18),
+          instruction: "Écoutez et écrivez les verbes à la forme négative.",
+          vi: "Nghe và viết lại động từ ở thể phủ định (ne...pas).",
+          type: "fill",
+          items: [
+            { q: "Nous ……………….………………. le dimanche.", answer: "ne marchons pas" },
+            { q: "Je ……………….………………. nager.", answer: "n'aime pas" },
+            { q: "Gaël ……………….………………. italien.", answer: "ne parle pas" },
+            { q: "Ils ……………….………………. danser.", answer: "n'aiment pas" },
+            { q: "Vous ……………….………………. à Montpellier ?", answer: "n'habitez pas" },
+            { q: "Tu ……………….………………. le rock ?", answer: "ne danses pas" },
+          ],
+        },
+      ],
+
+      // p3 — Les adjectifs possessifs (cahier p. 22)
+      p3: [
+        {
+          num: 1, page: 22,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Gạch chân tính từ sở hữu đúng theo giống/số của danh từ.",
+          type: "choice",
+          items: [
+            { q: "Ma / Mon cousine est fille unique.", options: ["Ma", "Mon"], answer: "Ma" },
+            { q: "Ta / Ton père est fleuriste ?", options: ["Ta", "Ton"], answer: "Ton" },
+            { q: "Sa / Son rue est calme.", options: ["Sa", "Son"], answer: "Sa" },
+            { q: "Ma / Mes parents habitent à Paris.", options: ["Ma", "Mes"], answer: "Mes" },
+            { q: "Ton / Tes frères ont quel âge ?", options: ["Ton", "Tes"], answer: "Tes" },
+            { q: "Sa / Ses tante est informaticienne ?", options: ["Sa", "Ses"], answer: "Sa" },
+          ],
+        },
+        {
+          num: 2, page: 22,
+          instruction: "Cochez la réponse correcte.",
+          vi: "Chọn tính từ sở hữu đúng dựa vào chủ ngữ và số lượng.",
+          type: "choice",
+          items: [
+            { q: "Il a deux frères. Ce sont…", options: ["ses frères", "leurs frères"], answer: "ses frères" },
+            { q: "Nous avons trois enfants. Ce sont…", options: ["nos enfants", "leurs enfants"], answer: "nos enfants" },
+            { q: "Elles ont des amis à l'université. Ce sont…", options: ["leurs amis", "ses amis"], answer: "leurs amis" },
+            { q: "Vous avez deux filles. Ce sont…", options: ["vos filles", "leurs filles"], answer: "vos filles" },
+            { q: "Ils ont deux fils. Ce sont…", options: ["ses fils", "leurs fils"], answer: "leurs fils" },
+            { q: "Nous avons huit cousins. Ce sont…", options: ["notre cousin", "nos cousins"], answer: "nos cousins" },
+          ],
+        },
+        {
+          num: 3, page: 22, audioSrc: piste(22),
+          instruction: "Écoutez et cochez (à moi / à toi / à lui-à elle / à nous / à vous / à eux-à elles).",
+          vi: "Nghe và xác định người sở hữu tương ứng (à moi/à toi/...).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à moi" },
+            { q: "b.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à moi" },
+            { q: "c.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à vous" },
+            { q: "d.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à toi" },
+            { q: "e.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à lui/à elle" },
+            { q: "f.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à vous" },
+            { q: "g.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à eux/à elles" },
+            { q: "h.", options: ["à moi", "à toi", "à lui/à elle", "à nous", "à vous", "à eux/à elles"], answer: "à nous" },
+          ],
+        },
+        {
+          num: 4, page: 22,
+          instruction: "Transformez les phrases comme dans l'exemple (Exemple : L'appartement est à vous ? → C'est votre appartement ?).",
+          vi: "Chuyển câu sở hữu \"être à...\" thành tính từ sở hữu.",
+          type: "fill",
+          items: [
+            { q: "Le piano est à toi ? → C'est …..……... piano ?", answer: "ton" },
+            { q: "La guitare est à moi ! → C'est …..……... guitare !", answer: "ma" },
+            { q: "C'est la famille de Nicolas. → C'est …..……... famille.", answer: "sa" },
+            { q: "C'est l'adresse de madame Pinot. → C'est …..……... adresse.", answer: "son" },
+            { q: "Les instruments de musique sont à moi. → Ce sont …..……... instruments de musique.", answer: "mes" },
+            { q: "Ce sont les parents de Pia et Kelly. → Ce sont …..……... parents.", answer: "leurs" },
+          ],
+        },
+      ],
+
+      // p4 — Le masculin et le féminin des professions (cahier p. 23)
+      p4: [
+        {
+          num: 1, page: 23,
+          instruction: "Classez les mots dans le tableau (masculin ou féminin).",
+          vi: "Xếp tên nghề nghiệp vào bảng theo giống đực/giống cái.",
+          type: "choice",
+          items: [
+            { q: "infirmier", options: ["masculin", "féminin"], answer: "masculin", example: true },
+            { q: "professeure", options: ["masculin", "féminin"], answer: "féminin" },
+            { q: "actrice", options: ["masculin", "féminin"], answer: "féminin" },
+            { q: "coiffeuse", options: ["masculin", "féminin"], answer: "féminin" },
+            { q: "informaticien", options: ["masculin", "féminin"], answer: "masculin" },
+            { q: "étudiant", options: ["masculin", "féminin"], answer: "masculin" },
+          ],
+        },
+        {
+          num: 2, page: 23,
+          instruction: "Lisez le texte et soulignez la bonne réponse.",
+          vi: "Đọc đoạn văn và gạch chân đúng dạng nghề nghiệp theo giới tính của người được nói tới.",
+          type: "choice",
+          items: [
+            { q: "Je m'appelle Sophie, je suis professeur / professeure.", options: ["professeur", "professeure"], answer: "professeure" },
+            { q: "Mon mari Younès est informaticien / informaticienne.", options: ["informaticien", "informaticienne"], answer: "informaticien" },
+            { q: "Notre fils Florent est étudiant / étudiante à l'université.", options: ["étudiant", "étudiante"], answer: "étudiant" },
+            { q: "Notre fille Rose est coiffeur / coiffeuse.", options: ["coiffeur", "coiffeuse"], answer: "coiffeuse" },
+            { q: "La petite amie de Florent est acteur / actrice.", options: ["acteur", "actrice"], answer: "actrice" },
+            { q: "Le mari de Rose est infirmier / infirmière.", options: ["infirmier", "infirmière"], answer: "infirmier" },
+          ],
+        },
+        {
+          num: 3, page: 23, audioSrc: piste(23),
+          instruction: "Écoutez et cochez (infirmier/infirmière, coiffeur/coiffeuse, informaticien/informaticienne, étudiant/étudiante, acteur/actrice).",
+          vi: "Nghe và đánh dấu đúng dạng giống đực hay giống cái của nghề nghiệp.",
+          type: "choice",
+          items: [
+            { q: "infirmier / infirmière ?", options: ["infirmier", "infirmière"], answer: "infirmier" },
+            { q: "coiffeur / coiffeuse ?", options: ["coiffeur", "coiffeuse"], answer: "coiffeuse" },
+            { q: "informaticien / informaticienne ?", options: ["informaticien", "informaticienne"], answer: "informaticienne" },
+            { q: "étudiant / étudiante ?", options: ["étudiant", "étudiante"], answer: "étudiant" },
+            { q: "acteur / actrice ?", options: ["acteur", "actrice"], answer: "actrice" },
+          ],
+        },
+        {
+          num: 4, page: 23,
+          instruction: "Soulignez la bonne forme des verbes travailler et étudier.",
+          vi: "Chọn dạng chia đúng của \"travailler\" và \"étudier\".",
+          type: "choice",
+          items: [
+            { q: "J'étudie / étudies la littérature.", options: ["étudie", "étudies"], answer: "étudie" },
+            { q: "Mon mari et moi, nous travaillent / travaillons à l'hôpital.", options: ["travaillent", "travaillons"], answer: "travaillons" },
+            { q: "Mes parents travaille / travaillent à l'université, ils sont professeurs.", options: ["travaille", "travaillent"], answer: "travaillent" },
+            { q: "Tes amies étudient / étudions l'histoire aussi ?", options: ["étudient", "étudions"], answer: "étudient" },
+            { q: "Vous travaillons / travaillez dans quelle ville ?", options: ["travaillons", "travaillez"], answer: "travaillez" },
+            { q: "Tu étudies / étudie le cinéma à l'université ?", options: ["étudies", "étudie"], answer: "étudies" },
+          ],
+        },
+        {
+          num: 5, page: 23,
+          instruction: "Complétez les phrases avec les verbes proposés (travailler ou étudier).",
+          vi: "Chia động từ \"travailler\" hoặc \"étudier\" theo chủ ngữ.",
+          type: "fill",
+          items: [
+            { q: "Je …..……...…..……... à Bruxelles. (travailler)", answer: "travaille" },
+            { q: "Mon père et ma mère …..……...…..……... à Paris. (travailler)", answer: "travaillent" },
+            { q: "Mon frère Stan …..……...…..……... à Lyon. (étudier)", answer: "étudie" },
+            { q: "Ma sœur et ma cousine, elles …..……...…..……... à l'université de Grenoble. (étudier)", answer: "étudient" },
+            { q: "Mon oncle …..……...…..……... beaucoup, il est professeur. (travailler)", answer: "travaille" },
+            { q: "Tu …..……...…..……... où ? (étudier)", answer: "étudies" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 21 "Les lieux, les loisirs (2)" + p. 24 ──
+    // "La famille, les professions"). Custom STEP_GROUPS_U2 narrows vocab per
+    // cycle: v1_vocab (subIds u2g1 "Les lieux"), v2_vocab (subIds u2g2/u2g3/
+    // u2g4 "La musique/Le cinéma/Le sport"), v3_vocab (subIds u2g5/u2g6/u2g7
+    // "La famille/La situation familiale/Les professions"). Page 21 mixes
+    // lieux and loisirs vocabulary under one header — exercises were split
+    // between v1_vocab and v2_vocab by their actual subject, not by page.
+    vocab: {
+      v1_vocab: [
+        {
+          num: 2, page: 21,
+          instruction: "Complétez les mots dans les phrases.",
+          vi: "Điền các chữ cái còn thiếu để hoàn thành từ vựng về nơi ở.",
+          type: "fill",
+          items: [
+            { q: "L'_ _ _ _ _ _ _ _ _ _ _ de Thierry est dans une r_ _ sympa ? (2 từ)", answer: "appartement rue" },
+            { q: "À Nice, il y a la m_ _ et les p_ _ _ _ _ sont grandes. (2 từ)", answer: "mer plages" },
+            { q: "L'université de Carl est dans un q_ _ _ _ _ _ _ calme.", answer: "quartier" },
+            { q: "Tu as un i_ _ _ _ _ _ _ _ _ de musique ?", answer: "instrument" },
+          ],
+        },
+      ],
+
+      v2_vocab: [
+        {
+          num: 1, page: 21,
+          instruction: "Complétez les phrases comme dans l'exemple (Exemple : Naoki aime le ski. Elle aime skier.).",
+          vi: "Chuyển giữa danh từ chỉ hoạt động và động từ tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Bertille adore la ……………….… Elle adore nager.", answer: "natation" },
+            { q: "Zaza déteste la ……………….… Elle déteste marcher.", answer: "marche" },
+            { q: "Albert n'aime pas la danse. Il n'aime pas ……………….… .", answer: "danser" },
+          ],
+        },
+        {
+          num: 3, page: 21, audioSrc: piste(19),
+          instruction: "Écoutez et associez les phrases entendues aux images.",
+          vi: "Nghe các câu và nối với hình ảnh tương ứng (marche, piano, guitare, danse, natation, ski, cinéma).",
+          type: "match",
+          pairs: [
+            { l: "a. Il adore la marche.", r: "image 3 · marche/randonnée" },
+            { l: "b. Vous avez un piano ?", r: "image 6 · piano" },
+            { l: "c. J'ai une guitare.", r: "image 7 · guitare" },
+            { l: "d. Nous aimons danser.", r: "image 4 · danse" },
+            { l: "e. Elle adore la natation.", r: "image 5 · natation" },
+            { l: "f. Vous aimez le ski ?", r: "image 1 · ski" },
+            { l: "g. J'adore les films français !", r: "image 2 · cinéma" },
+          ],
+        },
+        {
+          num: 4, page: 21,
+          instruction: "Complétez les phrases avec les mots proposés.",
+          vi: "Điền từ vựng phù hợp về sở thích và nơi chốn.",
+          type: "fill",
+          bank: ["films", "marche", "festival", "université", "guitare"],
+          items: [
+            { q: "J'adore les ……………….. des frères Podalydès.", answer: "films" },
+            { q: "Deux places pour le ……………….. de danse, s'il vous plaît.", answer: "festival" },
+            { q: "Tu préfères le piano ou la ……………….. ?", answer: "guitare" },
+            { q: "Le dimanche, je ……………….. à la montagne.", answer: "marche" },
+            { q: "Armelle est à l'……………….. de Lyon.", answer: "université" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 1, page: 24,
+          instruction: "Lisez le texte et complétez les prénoms des personnes de l'arbre généalogique.",
+          vi: "Đọc đoạn văn và điền tên các thành viên vào cây gia phả.",
+          type: "fill",
+          items: [
+            { q: "Comment s'appellent les grands-parents de Cécilia ?", answer: "Monique et Albert" },
+            { q: "Comment s'appelle le père de Cécilia ?", answer: "Richard" },
+            { q: "Comment s'appelle la tante de Cécilia ?", answer: "Isabelle" },
+            { q: "Comment s'appelle le mari d'Isabelle ?", answer: "Karim" },
+            { q: "Comment s'appelle la mère de Cécilia ?", answer: "Diane" },
+            { q: "Comment s'appelle la cousine de Cécilia ?", answer: "Sarah" },
+          ],
+        },
+        {
+          num: 2, page: 24,
+          instruction: "Choisissez la bonne réponse.",
+          vi: "Chọn từ đúng để mô tả quan hệ họ hàng.",
+          type: "choice",
+          items: [
+            { q: "Le frère de mon père, c'est mon oncle / neveu.", options: ["oncle", "neveu"], answer: "oncle" },
+            { q: "Mon père, c'est le fils de mes parents / grands-parents.", options: ["parents", "grands-parents"], answer: "grands-parents" },
+            { q: "Le fils de mon oncle et de ma tante, c'est mon frère / cousin.", options: ["frère", "cousin"], answer: "cousin" },
+            { q: "Je suis la fille / petite-fille de mes grands-parents.", options: ["fille", "petite-fille"], answer: "petite-fille" },
+            { q: "La sœur de ma mère, c'est ma tante / grand-mère.", options: ["tante", "grand-mère"], answer: "tante" },
+          ],
+        },
+        {
+          num: 3, page: 24, audioSrc: piste(24),
+          instruction: "Écoutez et complétez les phrases.",
+          vi: "Nghe và điền từ vựng gia đình còn thiếu.",
+          type: "fill",
+          items: [
+            { q: "Mon …………………… s'appelle Frédéric.", answer: "grand-père" },
+            { q: "Comment s'appelle ton …………………… ?", answer: "mari" },
+            { q: "Ma nièce est …………………… .", answer: "célibataire" },
+            { q: "Monsieur Truffaut a neuf …………………… .", answer: "petits-enfants" },
+            { q: "Mon …………………… est fleuriste.", answer: "petit ami" },
+            { q: "Luc et May organisent leur …………………… .", answer: "mariage" },
+          ],
+        },
+        {
+          num: 4, page: 24,
+          instruction: "Regardez les images et complétez les phrases avec les professions.",
+          vi: "Nhìn hình và điền tên nghề nghiệp phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Suzanne est ………………", answer: "professeure" },
+            { q: "Hortense est ………………", answer: "fleuriste" },
+            { q: "Benoît est ………………", answer: "coiffeur" },
+            { q: "Joseph est ………………", answer: "informaticien" },
+            { q: "Barbara est ………………", answer: "étudiante" },
+            { q: "Milan est ………………", answer: "acteur" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 21 verbes -er + p. 24 liaisons) ──
+    // Two "écoutez et répétez" audio exercises (p.21 piste 20, p.24 piste 26)
+    // have no checkable right/wrong content — they're pure pronunciation
+    // drills with no corrigé to grade against — so they're intentionally
+    // left out here; only the two exercises with an actual written answer
+    // are represented.
+    phono: [
+      {
+        num: 2, page: 21, audioSrc: piste(21),
+        instruction: "Phonie-graphie : la prononciation des verbes en -er. Écoutez et complétez le texte avec la terminaison des verbes.",
+        vi: "Nghe và điền đúng đuôi động từ -er còn thiếu trong đoạn văn.",
+        type: "fill",
+        items: [
+          { q: "J'habit……… à Grenoble.", answer: "habite" },
+          { q: "Je travaill……… à l'université.", answer: "travaille" },
+          { q: "Mon collègue Mathieu jou……… de la guitare.", answer: "joue" },
+          { q: "Ma collègue Manon jou……… du piano.", answer: "joue" },
+          { q: "Ils ador……… la musique classique.", answer: "adorent" },
+          { q: "Avec mon amie Pauline, nous aim……… le cinéma.", answer: "aimons" },
+        ],
+      },
+      {
+        num: 1, page: 24, audioSrc: piste(25),
+        instruction: "Phonie-graphie : les liaisons avec les déterminants. Écoutez les phrases et indiquez la liaison ([n], [z] ou aucune [-]).",
+        vi: "Nghe các câu và xác định loại liên âm (liaison) sau mạo từ/tính từ sở hữu.",
+        type: "choice",
+        items: [
+          { q: "un ami", options: ["[n]", "[z]", "[-]"], answer: "[n]" },
+          { q: "les parents", options: ["[n]", "[z]", "[-]"], answer: "[-]" },
+          { q: "mes enfants", options: ["[n]", "[z]", "[-]"], answer: "[z]" },
+          { q: "des hommes", options: ["[n]", "[z]", "[-]"], answer: "[z]" },
+          { q: "mon oncle", options: ["[n]", "[z]", "[-]"], answer: "[n]" },
+          { q: "des cousins", options: ["[n]", "[z]", "[-]"], answer: "[-]" },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 25 CE+PO, p. 26-27 Bilan linguistique /40, ──
+    // p. 28-29 DELF A1, p. 30 Jeux). The "Production orale — Jeu de rôle"
+    // (p. 25) and "Devinettes" (Jeux, p. 30 activité 4) are free-answer
+    // ("Réponses libres" in the corrigé) and are intentionally not
+    // represented — there is no fixed answer to check against.
+    bilan: [
+      {
+        num: 1, page: 25,
+        instruction: "Compréhension écrite — « Comment tu vas ? » Lisez le mail de Fiona et répondez aux questions (choix).",
+        vi: "Đọc email của Fiona và chọn đáp án đúng cho các câu hỏi 1a-1c.",
+        type: "choice",
+        items: [
+          { q: "1a. Marius est…", options: ["le mari de Fiona", "le petit ami de Fiona"], answer: "le petit ami de Fiona" },
+          { q: "1b. Marius est…", options: ["professeur", "fleuriste"], answer: "professeur" },
+          { q: "1c. Marius…", options: ["a des frères et sœurs", "n'a pas de frères et sœurs"], answer: "n'a pas de frères et sœurs" },
+        ],
+      },
+      {
+        num: 2, page: 25,
+        instruction: "Compréhension écrite — « Comment tu vas ? » Vrai ou faux ?",
+        vi: "Đọc email của Fiona và xác định đúng/sai cho các câu 2a-2c.",
+        type: "truefalse",
+        items: [
+          { q: "2a. Les parents de Marius travaillent.", answer: true },
+          { q: "2b. Fiona et Marius habitent dans un appartement.", answer: true },
+          { q: "2c. Fiona n'aime pas son quartier.", answer: false },
+        ],
+      },
+      {
+        num: 3, page: 25,
+        instruction: "Compréhension écrite — « Comment tu vas ? » Répondez aux questions.",
+        vi: "Đọc email của Fiona và trả lời câu hỏi 3-4.",
+        type: "fill",
+        items: [
+          { q: "3. Quels sont les deux loisirs de Fiona et Marius ?", answer: "La danse et la musique." },
+          { q: "4. Quel instrument de musique ils ont ?", answer: "Ils ont un piano." },
+        ],
+      },
+      {
+        num: 4, page: 26,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases avec les articles définis ou indéfinis. (/5)",
+        vi: "Điền mạo từ xác định hoặc bất định.",
+        type: "fill",
+        items: [
+          { q: "C'est ............. rue calme.", answer: "une" },
+          { q: "Ce sont ............. instruments de Martin.", answer: "les" },
+          { q: "C'est ............. appartement de Marilou.", answer: "l'" },
+          { q: "Vous travaillez dans ............. quartier sympa.", answer: "un" },
+          { q: "C'est ............. ville de naissance d'Abel.", answer: "la" },
+        ],
+      },
+      {
+        num: 5, page: 26,
+        instruction: "Bilan linguistique — Grammaire : Conjuguez les verbes au présent. (/5)",
+        vi: "Chia động từ ở thì hiện tại.",
+        type: "fill",
+        items: [
+          { q: "Je ....................................... anglais. (parler)", answer: "parle" },
+          { q: "Nous ....................................... un quartier sympa. (habiter)", answer: "habitons" },
+          { q: "Il ne ....................................... pas. (skier)", answer: "skie" },
+          { q: "Vous ....................................... la natation ? (aimer)", answer: "aimez" },
+          { q: "Magali et Léo ....................................... la marche. (adorer)", answer: "adorent" },
+        ],
+      },
+      {
+        num: 6, page: 26,
+        instruction: "Bilan linguistique — Grammaire : Complétez les réponses avec les adjectifs possessifs. (/5)",
+        vi: "Điền tính từ sở hữu đúng.",
+        type: "fill",
+        items: [
+          { q: "– C'est l'appartement de Sofia ? – Oui, c'est ............. appartement.", answer: "son" },
+          { q: "– Comment s'appelle ta fille ? – ............. fille s'appelle Dita.", answer: "Ma" },
+          { q: "– Les parents de Joe travaillent ? – Oui, ............. parents travaillent.", answer: "ses" },
+          { q: "– Le fils de Marie et Antoine est à l'université ? – Oui, ............. fils est à l'université.", answer: "son" },
+          { q: "– Les amis de Matyas et Jacob sont sympas ? – Oui, ............. amis sont très sympas !", answer: "leurs" },
+        ],
+      },
+      {
+        num: 7, page: 27,
+        instruction: "Bilan linguistique — Grammaire : Transformez l'adjectif si nécessaire. (/5)",
+        vi: "Chuyển tính từ nghề nghiệp sang đúng giống.",
+        type: "fill",
+        items: [
+          { q: "Ma fille est ....................................... (coiffeur).", answer: "coiffeuse" },
+          { q: "Mon frère est ....................................... (fleuriste).", answer: "fleuriste" },
+          { q: "Ma cousine est ....................................... (acteur).", answer: "actrice" },
+          { q: "Mon oncle est ....................................... (infirmier).", answer: "infirmier" },
+          { q: "Ma sœur est ....................................... (informaticien).", answer: "informaticienne" },
+        ],
+      },
+      {
+        num: 8, page: 27,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez le texte avec les mots de vocabulaire. (/5)",
+        vi: "Điền từ vựng vào đoạn văn.",
+        type: "fill",
+        items: [
+          { q: "Notre rue est dans un ................................... très sympa.", answer: "quartier" },
+          { q: "Nous avons deux instruments de musique : un piano et une ................................... .", answer: "guitare" },
+          { q: "On adore le ................................... international de Cannes !", answer: "festival" },
+          { q: "Le week-end, on adore marcher sur la ................................... ", answer: "plage" },
+          { q: "…et nager dans la ................................... .", answer: "mer" },
+        ],
+      },
+      {
+        num: 9, page: 27,
+        instruction: "Bilan linguistique — Vocabulaire : Associez les phrases et les images. (/5)",
+        vi: "Nối câu với hình ảnh tương ứng.",
+        type: "match",
+        pairs: [
+          { l: "Ta rue est très calme.", r: "image 5" },
+          { l: "Marcella adore la danse.", r: "image 4" },
+          { l: "Vous aimez le ski ?", r: "image 1" },
+          { l: "Avec mes amies, on aime la marche.", r: "image 2" },
+          { l: "Akim nage bien.", r: "image 3" },
+        ],
+      },
+      {
+        num: 10, page: 27,
+        instruction: "Bilan linguistique — Vocabulaire : Vrai ou faux ? (/5)",
+        vi: "Xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "La sœur de ma mère est ma tante.", answer: true },
+          { q: "Mon père est le fils de mes grands-parents.", answer: true },
+          { q: "Elle étudie à l'université. Elle est étudiante.", answer: true },
+          { q: "J'ai deux frères. Je suis fille unique.", answer: false },
+          { q: "Le neveu de ma mère est mon cousin.", answer: true },
+        ],
+      },
+      {
+        num: 11, page: 27,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases avec les mots proposés. (/5)",
+        vi: "Điền từ vựng phù hợp.",
+        type: "fill",
+        bank: ["petits-enfants", "petit ami", "infirmier", "professeure", "actrice"],
+        items: [
+          { q: "Mon frère travaille à l'hôpital. Il est ................................... .", answer: "infirmier" },
+          { q: "Ma sœur n'est pas mariée. Son ................................... s'appelle Marc.", answer: "petit ami" },
+          { q: "Mes grands-parents ont 13 ................................... .", answer: "petits-enfants" },
+          { q: "Ma mère est ................................... de cinéma.", answer: "actrice" },
+          { q: "Ma tante travaille à l'université, elle est ................................... .", answer: "professeure" },
+        ],
+      },
+      {
+        // Page 28 — DELF A1, CO. Le corrigé imprimé ne donne pas le texte des
+        // 6 images A-F, seulement leur correspondance avec les 4 situations
+        // (2 images sans correspondance) — reproduit tel quel.
+        num: 12, page: 28, audioSrc: piste(27),
+        instruction: "DELF A1 — Compréhension de l'oral (8 points). Quatre dialogues correspondant à quatre situations, sur six images A-F (deux images ne correspondent à aucune situation).",
+        vi: "Nghe 4 đoạn hội thoại ngắn và ghép mỗi đoạn với hình ảnh tương ứng (2 hình dư không tương ứng).",
+        type: "fill",
+        items: [
+          { q: "Image A", answer: "situation n°4" },
+          { q: "Image B", answer: "ne correspond à aucune situation" },
+          { q: "Image C", answer: "situation n°2" },
+          { q: "Image D", answer: "ne correspond à aucune situation" },
+          { q: "Image E", answer: "situation n°3" },
+          { q: "Image F", answer: "situation n°1" },
+        ],
+      },
+      {
+        // Page 28-29 — DELF A1, CE. Le corrigé imprimé ne donne que les lettres
+        // de réponse (avec un bref indice entre parenthèses pour 3, 4, 5), pas
+        // le texte complet des questions à choix multiples — reproduit tel quel.
+        num: 13, page: 28,
+        instruction: "DELF A1 — Compréhension des écrits (6 points). Vous recevez un message de votre amie Blanche.",
+        vi: "Đọc tin nhắn của bạn Blanche và trả lời câu hỏi trắc nghiệm (nơi đến, giờ hẹn, nghề nghiệp…).",
+        type: "fill",
+        items: [
+          { q: "Question 1", answer: "C." },
+          { q: "Question 2", answer: "A." },
+          { q: "Question 3 (indice : marcher)", answer: "C." },
+          { q: "Question 4 (indice : à 10 h)", answer: "B." },
+          { q: "Question 5 (indice : à l'hôpital)", answer: "B." },
+        ],
+      },
+      {
+        num: 14, page: 29,
+        instruction: "DELF A1 — Production écrite (15 points). Vous étudiez en France. Vous vous présentez sur le forum de l'université (famille, loisirs, 40 mots minimum).",
+        vi: "Viết bài giới thiệu bản thân trên diễn đàn của trường đại học (gia đình, sở thích).",
+        type: "fill",
+        items: [
+          { q: "Exemple de production complet (modèle du corrigé) :", answer: "Bonjour, Je m'appelle Atsuko. Je suis japonaise, j'ai 22 ans. J'étudie les langues à l'université de Rouen. Mes parents habitent au Japon, à Osaka. Je n'ai pas de frères et sœurs. J'adore la musique française et le café italien. Le week-end, je vais au cinéma ou au restaurant avec mes amis. À bientôt !" },
+        ],
+      },
+      {
+        num: 15, page: 29,
+        instruction: "DELF A1 — Production orale. Échange d'informations à partir des mots : Profession ? Quartier ? Adresse ? Sport ? Famille ? Détester ?",
+        vi: "Dựa vào các từ khoá trên thẻ, đặt câu hỏi phỏng vấn giám khảo.",
+        type: "fill",
+        items: [
+          { q: "Profession", answer: "Quelle est votre profession ?" },
+          { q: "Quartier", answer: "Votre quartier est calme ?" },
+          { q: "Adresse", answer: "Vous habitez où ?" },
+          { q: "Sport", answer: "Vous aimez le sport ?" },
+          { q: "Famille", answer: "Combien vous avez de frères et sœurs ?" },
+          { q: "Détester", answer: "Quelle ville vous détestez ?" },
+        ],
+      },
+      {
+        num: 16, page: 30,
+        instruction: "Jeux — Recomposez les mots.",
+        vi: "Sắp xếp lại các âm tiết để tạo thành từ vựng về gia đình/tình trạng hôn nhân.",
+        type: "fill",
+        items: [
+          { q: "ba – li – cé – taire", answer: "célibataire" },
+          { q: "é – ma – ri", answer: "marié" },
+          { q: "ri – age – ma", answer: "mariage" },
+          { q: "tit – pe – mi – a", answer: "petit ami" },
+          { q: "tu – di – ant – é", answer: "étudiant" },
+          { q: "ts – fan – en", answer: "enfants" },
+        ],
+      },
+      {
+        // Page 30 — Jeux, activité 2. ⚠️ Note : le corrigé imprimé indique
+        // seulement « Six professions au masculin » sans lister explicitement
+        // les 6 noms — seuls infirmier, informaticien et professeur sont
+        // récupérables depuis le texte du corrigé (voir cahier_unite_2.md).
+        num: 17, page: 30,
+        instruction: "Jeux — Trouvez dans la grille 6 noms de professions au masculin.",
+        vi: "Tìm 6 tên nghề nghiệp (giống đực) trong ô chữ — chỉ 3/6 từ được ghi rõ trong đáp án in.",
+        type: "fill",
+        items: [
+          { q: "3 des 6 professions identifiables dans le corrigé imprimé :", answer: "infirmier, informaticien, professeur" },
+        ],
+      },
+      {
+        num: 18, page: 30,
+        instruction: "Jeux — Conjuguez et écrivez les verbes dans la grille (mots croisés).",
+        vi: "Chia động từ và điền vào ô chữ.",
+        type: "fill",
+        items: [
+          { q: "a. (horizontal)", answer: "travaillent" },
+          { q: "b. (horizontal)", answer: "nage" },
+          { q: "c. (horizontal)", answer: "danse" },
+          { q: "d. (horizontal)", answer: "étudies" },
+          { q: "1. (vertical)", answer: "adore" },
+          { q: "2. (vertical)", answer: "parlons" },
+          { q: "3. (vertical)", answer: "aiment" },
+          { q: "4. (vertical)", answer: "détestez" },
+        ],
+      },
+    ],
+  },
 };
