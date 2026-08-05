@@ -2665,4 +2665,644 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u5: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g5" ──
+    // g5 has 5 points. p4 "Verbes — Vendre, Mettre, Venir" has no dedicated
+    // cahier Grammaire page of its own — its only drill (conjugating mettre/
+    // vendre/venir) is exercise 4 embedded in the "genre et nombre des
+    // adjectifs" page (p.55), and is filed under p4 here by verb content,
+    // not under p0 by page header — see cahier_unite_5.md.
+    grammar: {
+
+      // p0 — Le genre et le nombre des adjectifs (cahier p. 55)
+      p0: [
+        {
+          // ⚠️ Note (cahier_unite_5.md) : le corrigé imprimé pour cet
+          // exercice contient une contradiction interne entre l'exemple
+          // annoncé (case "a" = masculin) et la répartition détaillée qui
+          // suit (case "a" = féminin). Reproduit tel qu'imprimé dans le
+          // corrigé détaillé : Féminin = a(exemple), c, d, f, h ;
+          // Masculin = b, e, g.
+          num: 1, page: 55, audioSrc: piste(48),
+          instruction: "Écoutez et cochez le genre masculin ou féminin.",
+          vi: "Nghe và đánh dấu giống đực/giống cái của tính từ nghe được — ⚠️ corrigé imprimé incohérent avec l'exemple annoncé, voir note dans cahier_unite_5.md.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["masculin", "féminin"], answer: "féminin", example: true },
+            { q: "b.", options: ["masculin", "féminin"], answer: "masculin" },
+            { q: "c.", options: ["masculin", "féminin"], answer: "féminin" },
+            { q: "d.", options: ["masculin", "féminin"], answer: "féminin" },
+            { q: "e.", options: ["masculin", "féminin"], answer: "masculin" },
+            { q: "f.", options: ["masculin", "féminin"], answer: "féminin" },
+            { q: "g.", options: ["masculin", "féminin"], answer: "masculin" },
+            { q: "h.", options: ["masculin", "féminin"], answer: "féminin" },
+          ],
+        },
+        {
+          // ⚠️ Note : l'énoncé imprimé de la phrase "d" contient une coquille
+          // ("un beau / belle chemise" — "chemise" est féminin, donc devrait
+          // être "une belle / beau chemise"), mais le corrigé donne
+          // littéralement "d. belle" — reproduit tel quel.
+          num: 2, page: 55,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Gạch chân tính từ đúng theo giống của danh từ — câu d có lỗi in ấn trong đề (⚠️ voir note).",
+          type: "choice",
+          items: [
+            { q: "Tu portes une robe élégant / élégante.", options: ["élégant", "élégante"], answer: "élégante" },
+            { q: "Vous vendez des chaussures noires / noirs.", options: ["noires", "noirs"], answer: "noires" },
+            { q: "Je vends une veste bleu / bleue sur internet.", options: ["bleu", "bleue"], answer: "bleue" },
+            { q: "Vous avez un beau / belle chemise.", options: ["beau", "belle"], answer: "belle" },
+            { q: "Pierre vend son costume grise / gris.", options: ["grise", "gris"], answer: "gris" },
+          ],
+        },
+        {
+          num: 3, page: 55,
+          instruction: "Accordez les adjectifs.",
+          vi: "Chia tính từ trong ngoặc đúng giống/số theo danh từ.",
+          type: "fill",
+          items: [
+            { q: "En été, elle porte des jupes (court) …………………… et des tee-shirts (simple) …………………… . (2 từ)", answer: "courtes simples" },
+            { q: "Sur Vinted, Olivia vend des robes (long) ………………… et ses chaussures (gris) …………………… . (2 từ)", answer: "longues grises" },
+            { q: "Tu prends tes vestes (élégant) …………………… ?", answer: "élégantes" },
+            { q: "Elle porte des (beau) …………………… robes.", answer: "belles" },
+            { q: "En hiver, je mets souvent des manteaux (gris) …………………… et des bottes (noir) …………………… . (2 từ)", answer: "gris noires" },
+          ],
+        },
+      ],
+
+      // p1 — Le futur proche (cahier p. 56)
+      p1: [
+        {
+          num: 1, page: 56, audioSrc: piste(49),
+          instruction: "Écoutez et cochez le présent ou le futur proche.",
+          vi: "Nghe và đánh dấu thì hiện tại hay tương lai gần.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["présent", "futur proche"], answer: "présent" },
+            { q: "b.", options: ["présent", "futur proche"], answer: "futur proche" },
+            { q: "c.", options: ["présent", "futur proche"], answer: "futur proche" },
+            { q: "d.", options: ["présent", "futur proche"], answer: "présent" },
+            { q: "e.", options: ["présent", "futur proche"], answer: "futur proche" },
+            { q: "f.", options: ["présent", "futur proche"], answer: "présent" },
+            { q: "g.", options: ["présent", "futur proche"], answer: "futur proche" },
+            { q: "h.", options: ["présent", "futur proche"], answer: "présent" },
+          ],
+        },
+        {
+          num: 2, page: 56,
+          instruction: "Transformez ces phrases au futur proche (Exemple : Il fait chaud aujourd'hui ! → Il va faire chaud aujourd'hui.).",
+          vi: "Chuyển câu từ thì hiện tại sang tương lai gần (futur proche).",
+          type: "fill",
+          items: [
+            { q: "Je porte une robe longue pour son mariage.", answer: "Je vais porter une robe longue pour son mariage." },
+            { q: "Léa est élégante avec sa veste.", answer: "Léa va être élégante avec sa veste." },
+            { q: "Ils achètent une tablette.", answer: "Ils vont acheter une tablette." },
+            { q: "Malik met un costume gris et une chemise blanche.", answer: "Malik va mettre un costume gris et une chemise blanche." },
+          ],
+        },
+        {
+          num: 3, page: 56,
+          instruction: "Qu'est-ce qu'ils vont faire ? Écrivez une phrase au futur proche (Exemple : acheter un téléphone / il / demain → Il va acheter un téléphone demain.).",
+          vi: "Viết câu ở thì tương lai gần dựa vào các từ gợi ý.",
+          type: "fill",
+          items: [
+            { q: "tricoter un pull / elle / cet hiver", answer: "Elle va tricoter un pull cet hiver." },
+            { q: "créer des vêtements / tu / ce week-end", answer: "Tu vas créer des vêtements ce week-end." },
+            { q: "vendre des vêtements / je / ce soir", answer: "Je vais vendre des vêtements ce soir." },
+            { q: "acheter des chaussures / elle / samedi", answer: "Elle va acheter des chaussures samedi." },
+            { q: "prendre des cours de couture / vous / en avril", answer: "Vous allez prendre des cours de couture en avril." },
+          ],
+        },
+        {
+          num: 4, page: 56,
+          instruction: "Remettez les phrases dans l'ordre.",
+          vi: "Sắp xếp lại từ để tạo câu ở thì tương lai gần.",
+          type: "order",
+          items: [
+            { tokens: ["Ce", "matin,", "ils", "vont", "acheter", "des", "vêtements."],
+              answer: ["Ce", "matin,", "ils", "vont", "acheter", "des", "vêtements."] },
+            { tokens: ["Demain,", "Marine", "va", "offrir", "un", "pull", "à", "son", "mari."],
+              answer: ["Demain,", "Marine", "va", "offrir", "un", "pull", "à", "son", "mari."] },
+            { tokens: ["En", "été,", "vous", "allez", "porter", "des", "robes", "légères."],
+              answer: ["En", "été,", "vous", "allez", "porter", "des", "robes", "légères."] },
+            { tokens: ["Jeudi,", "je", "vais", "prendre", "des", "cours", "de", "couture."],
+              answer: ["Jeudi,", "je", "vais", "prendre", "des", "cours", "de", "couture."] },
+          ],
+        },
+      ],
+
+      // p2 — La place des adjectifs (cahier p. 58)
+      p2: [
+        {
+          num: 1, page: 58, audioSrc: piste(52),
+          instruction: "Écoutez et soulignez la bonne réponse.",
+          vi: "Nghe và xác định vị trí đúng của tính từ (trước hay sau danh từ).",
+          type: "choice",
+          items: [
+            { q: "Maurice porte un (élégant) costume (élégant).", options: ["un élégant costume", "un costume élégant"], answer: "un costume élégant" },
+            { q: "Élise met une (rouge) robe (rouge).", options: ["une rouge robe", "une robe rouge"], answer: "une robe rouge" },
+            { q: "Les enfants portent un (blanc) chapeau (blanc).", options: ["un blanc chapeau", "un chapeau blanc"], answer: "un chapeau blanc" },
+            { q: "Tu prends ton (bleu) sac à dos (bleu).", options: ["ton bleu sac à dos", "ton sac à dos bleu"], answer: "ton sac à dos bleu" },
+            { q: "Je préfère les (grandes) valises (grandes).", options: ["les grandes valises", "les valises grandes"], answer: "les grandes valises" },
+          ],
+        },
+        {
+          num: 2, page: 58,
+          instruction: "Écrivez l'adjectif au bon endroit : avant ou après le nom.",
+          vi: "Đặt tính từ đúng vị trí (trước hoặc sau danh từ).",
+          type: "fill",
+          items: [
+            { q: "Il vend des ………………………. baskets ………………………. (bleues)", answer: "des baskets bleues" },
+            { q: "Ma sœur aime les ………………………. tenues ………………………. (élégantes)", answer: "les tenues élégantes" },
+            { q: "Les ………………………. jupes ………………………. sont à la mode. (courtes)", answer: "les jupes courtes" },
+            { q: "C'est une ………………………. robe ………………………. ! (jolie)", answer: "une jolie robe" },
+            { q: "Vous avez un ………………………. appareil photo ………………………. . (bon)", answer: "un bon appareil photo" },
+          ],
+        },
+        {
+          num: 3, page: 58,
+          instruction: "Écrivez les phrases avec les adjectifs (Exemple : Il achète un sac à dos. (grand) → Il achète un grand sac à dos.).",
+          vi: "Viết lại câu, đặt tính từ vào đúng vị trí.",
+          type: "fill",
+          items: [
+            { q: "Elena cherche une enceinte (petite).", answer: "Elena cherche une petite enceinte." },
+            { q: "Vous avez une montre (connectée) !", answer: "Vous avez une montre connectée !" },
+            { q: "C'est une idée (bonne) !", answer: "C'est une bonne idée !" },
+            { q: "Pour son anniversaire, nous voulons un cadeau (beau).", answer: "Pour son anniversaire, nous voulons un beau cadeau." },
+            { q: "Il achète un sac à dos (vert).", answer: "Il achète un sac à dos vert." },
+          ],
+        },
+      ],
+
+      // p3 — L'adjectif démonstratif : ce, cet, cette, ces (cahier p. 59)
+      p3: [
+        {
+          num: 1, page: 59, audioSrc: piste(53),
+          instruction: "Écoutez et indiquez si l'adjectif démonstratif est masculin, féminin ou pluriel.",
+          vi: "Nghe và xác định tính từ chỉ định là giống đực, giống cái hay số nhiều.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["masculin", "féminin", "pluriel"], answer: "masculin", example: true },
+            { q: "b.", options: ["masculin", "féminin", "pluriel"], answer: "pluriel" },
+            { q: "c.", options: ["masculin", "féminin", "pluriel"], answer: "féminin" },
+            { q: "d.", options: ["masculin", "féminin", "pluriel"], answer: "pluriel" },
+            { q: "e.", options: ["masculin", "féminin", "pluriel"], answer: "masculin" },
+            { q: "f.", options: ["masculin", "féminin", "pluriel"], answer: "féminin" },
+          ],
+        },
+        {
+          num: 2, page: 59,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Gạch chân tính từ chỉ định đúng.",
+          type: "choice",
+          items: [
+            { q: "Ce / cet / cette étui est rouge.", options: ["Ce", "cet", "cette"], answer: "cet" },
+            { q: "Cette / ce / ces chapeau est joli.", options: ["Cette", "ce", "ces"], answer: "ce" },
+            { q: "Cette / ce / cet valise est très lourde !", options: ["Cette", "ce", "cet"], answer: "Cette" },
+            { q: "Ce / cet / ces lunettes sont à vendre.", options: ["Ce", "cet", "ces"], answer: "ces" },
+            { q: "Ce / cet / cette / ces veste est grande.", options: ["Ce", "cet", "cette", "ces"], answer: "cette" },
+          ],
+        },
+        {
+          num: 3, page: 59,
+          instruction: "Remplacez les articles par ce, cet, cette, ces (Exemple : Le téléphone est noir. → Ce téléphone est noir.).",
+          vi: "Thay mạo từ bằng tính từ chỉ định phù hợp.",
+          type: "fill",
+          items: [
+            { q: "La coque de téléphone est rectangulaire.", answer: "Cette coque de téléphone est rectangulaire." },
+            { q: "Le sac à dos est lourd.", answer: "Ce sac à dos est lourd." },
+            { q: "Les objets connectés sont chers.", answer: "Ces objets connectés sont chers." },
+            { q: "L'étui est bleu.", answer: "Cet étui est bleu." },
+            { q: "L'enceinte est petite.", answer: "Cette enceinte est petite." },
+          ],
+        },
+        {
+          num: 4, page: 59,
+          instruction: "Complétez avec ce, cet, cette, ces.",
+          vi: "Điền tính từ chỉ định đúng.",
+          type: "fill",
+          items: [
+            { q: "Dany aime ………………………. valise bleue.", answer: "cette" },
+            { q: "Vous voulez ………………………. batteries externes ?", answer: "ces" },
+            { q: "Je préfère ………………………. ordinateur portable.", answer: "cet" },
+            { q: "Tu prends ………………………. écouteurs.", answer: "ces" },
+            { q: "Il va aimer ………………………. cadeau.", answer: "ce" },
+          ],
+        },
+      ],
+
+      // p4 — Verbes vendre, mettre, venir (see note above — no dedicated
+      // cahier page; the only drill is p.55 ex.4, under the adjectifs page)
+      p4: [
+        {
+          num: 4, page: 55,
+          instruction: "Conjuguez les verbes au présent (mettre, vendre, venir).",
+          vi: "Chia động từ \"mettre\", \"vendre\" và \"venir\" ở thì hiện tại.",
+          type: "fill",
+          items: [
+            { q: "Ils (mettre) ……………………………… des lunettes de soleil en été.", answer: "mettent" },
+            { q: "Qu'est-ce tu (vendre) ……………………………… sur Vinted ?", answer: "vends" },
+            { q: "Je (venir) ……………………………… avec toi au cours de couture.", answer: "viens" },
+            { q: "Nous (vendre) ……………………………… des vêtements de sport.", answer: "vendons" },
+            { q: "Vous (mettre) ……………………………… une veste ou un gilet avec cette robe ?", answer: "mettez" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 57 "Les vêtements, les accessoires, la ──
+    // météo" + p. 60 "Les objets technologiques, les objets du quotidien").
+    // Custom STEP_GROUPS_U5: v1_vocab (u5g1/u5g3, "Les vêtements · les
+    // couleurs"), v2_vocab (u5g5/u5g4, "La météo · les matières"), v3_vocab
+    // (u5g2/u5g6/u5g7/u5g8, "Accessoires · objets techno · objets du
+    // quotidien"). Page 57's exercise 3 (matching clothing to weather) was
+    // filed under v2_vocab, matching its météo content, not under v1_vocab.
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 57,
+          instruction: "Complétez la description des vêtements à vendre (Exemple : Je vends une jupe bleue, courte, en coton.).",
+          vi: "Mô tả các món đồ đăng bán (màu sắc, độ dài, chất liệu) theo mẫu.",
+          type: "fill",
+          items: [
+            { q: "a. (robe / longue / noire / coton)", answer: "Je vends une robe longue, noire, en coton." },
+            { q: "b. (manteau / gris / laine)", answer: "Je vends un manteau gris, en laine." },
+            { q: "c. (bottes / marron / cuir)", answer: "Je vends des bottes marron, en cuir." },
+            { q: "d. (gilet / rose / laine)", answer: "Je vends un gilet rose, en laine." },
+            { q: "e. (pantalon / vert / coton)", answer: "Je vends un pantalon vert, en coton." },
+          ],
+        },
+        {
+          num: 2, page: 57, audioSrc: piste(50),
+          instruction: "Écoutez les phrases et choisissez la bonne personne (Lucile, Sarah, Noé, Philippe).",
+          vi: "Nghe mô tả trang phục và chọn đúng người trong hình (Lucile, Sarah, Noé, Philippe).",
+          type: "fill",
+          items: [
+            { q: "Lucile", answer: "a." },
+            { q: "Sarah", answer: "b." },
+            { q: "Noé", answer: "c." },
+            { q: "Philippe", answer: "d." },
+          ],
+        },
+      ],
+
+      v2_vocab: [
+        {
+          num: 3, page: 57,
+          instruction: "Associez les vêtements et les accessoires à la météo (plusieurs réponses possibles).",
+          vi: "Nối trang phục/phụ kiện với thời tiết phù hợp (có nhiều đáp án đúng).",
+          type: "fill",
+          items: [
+            { q: "Il pleut → (2 vêtements/accessoires)", answer: "un imperméable, des bottes" },
+            { q: "Il fait chaud → (2 vêtements/accessoires)", answer: "un tee-shirt, une robe" },
+            { q: "Il neige → (2 vêtements/accessoires)", answer: "un chapeau, un pull" },
+            { q: "Il fait beau → (1 accessoire)", answer: "des lunettes de soleil" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 1, page: 60,
+          instruction: "Complétez le dialogue avec les mots proposés.",
+          vi: "Điền từ vựng đồ vật vào đoạn hội thoại giữa người bán và khách hàng.",
+          type: "fill",
+          bank: ["en cuir", "légers", "mode", "pratiques", "porte-monnaie", "noirs", "écouteurs sans fils", "rectangulaire"],
+          items: [
+            { q: "1. (dans l'ordre du dialogue)", answer: "écouteurs sans fil" },
+            { q: "2.", answer: "mode" },
+            { q: "3.", answer: "légers" },
+            { q: "4.", answer: "pratiques" },
+            { q: "5.", answer: "noirs" },
+            { q: "6.", answer: "en cuir" },
+            { q: "7.", answer: "rectangulaire" },
+          ],
+        },
+        {
+          num: 2, page: 60,
+          instruction: "Associez l'objet à sa fonction.",
+          vi: "Nối tên đồ vật với công dụng của nó.",
+          type: "match",
+          pairs: [
+            { l: "Un portefeuille", r: "mettre ses billets de banque, ses papiers d'identité." },
+            { l: "Un porte-monnaie", r: "mettre ses pièces de 1€, 2€." },
+            { l: "Une enceinte Bluetooth", r: "écouter seul ou avec ses amis de la musique." },
+            { l: "Un sac à dos", r: "transporter ses documents, un vêtement, des stylos." },
+            { l: "Une valise", r: "transporter ses vêtements, ses chaussures." },
+            { l: "Une liseuse", r: "lire un livre et stocker beaucoup de livres." },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_5.md) : le corrigé imprimé associe Manon à
+          // "montre connectée" et Valentin à "portefeuille" — un ordre
+          // légèrement différent de celui suggéré par la description directe
+          // des besoins de chaque personne dans la transcription. Reproduit
+          // tel qu'imprimé dans le corrigé.
+          num: 3, page: 60, audioSrc: piste(54),
+          instruction: "Écoutez et indiquez quel cadeau on cherche pour Paul, Karim, Isabelle, Noémie, Valentin, Manon.",
+          vi: "Nghe mô tả nhu cầu của từng người và xác định món quà phù hợp — ⚠️ thứ tự Manon/Valentin trong đáp án in khác với suy luận trực tiếp, xem note.",
+          type: "fill",
+          items: [
+            { q: "Paul", answer: "des écouteurs sans fil" },
+            { q: "Karim", answer: "une valise" },
+            { q: "Isabelle", answer: "une tablette" },
+            { q: "Noémie", answer: "une batterie externe" },
+            { q: "Manon", answer: "une montre connectée" },
+            { q: "Valentin", answer: "un portefeuille" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 57 consonnes [ʃ]/[ʒ] + p. 60 liaisons ──
+    // obligatoires avec l'adjectif)
+    phono: [
+      {
+        num: 1, page: 57, audioSrc: piste(51),
+        instruction: "Phonie-graphie : les consonnes [ʃ] et [ʒ]. Écoutez les phrases et indiquez combien de fois vous entendez [ʃ] et [ʒ] (format : ʃ/ʒ). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện phụ âm [ʃ] và [ʒ] trong câu (định dạng ʃ/ʒ), sau đó lặp lại.",
+        type: "fill",
+        items: [
+          { q: "a. J'achète des vêtements pas chers et de jolis bijoux sur Vinted.", answer: "2/3", example: true },
+          { q: "b. Il porte un short beige, un tee-shirt jaune et des chaussures rouges.", answer: "3/3" },
+          { q: "c. Dimanche, je ne fais pas de shopping, je marche avec mon chien.", answer: "4/2" },
+          { q: "d. En juin, c'est l'été, il fait chaud !", answer: "1/1" },
+          { q: "e. J'aime acheter des chemises blanches et des jupes rouges.", answer: "3/3" },
+        ],
+      },
+      {
+        num: 1, page: 60, audioSrc: piste(55),
+        instruction: "Phonie-graphie : les liaisons obligatoires avec l'adjectif. Écoutez et complétez les phrases. Puis jouez les mini-dialogues à deux.",
+        vi: "Nghe và điền tính từ đúng, chú ý liên âm bắt buộc trước danh từ bắt đầu bằng nguyên âm.",
+        type: "fill",
+        items: [
+          { q: "– Nous te souhaitons un ……………………… anniversaire ! – Merci ! C'est très gentil !", answer: "joyeux" },
+          { q: "– Vous avez des ……………………… enfants ? – Oui, deux. Ils ont six ans et dix ans.", answer: "petits" },
+          { q: "– Tu as des ……………………… idées de cadeau pour Noël ? – Oui, je voudrais un ……………………… ordinateur et des ……………………… écouteurs. (3 từ)", answer: "nouvelles petit bons" },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 61 CO+PE, p. 62 Bilan linguistique /40, p. 64-65 ──
+    // DELF A1, p. 66 Jeux). Production orale jeux de rôle is not separately
+    // printed for this unit's p.61 (only CO+PE); DELF PO (p.65) and CE image
+    // items are preserved with their model answers/notes as printed.
+    bilan: [
+      {
+        num: 1, page: 61, audioSrc: piste(56),
+        instruction: "Compréhension orale — « Week-end à Nice ». Écoutez le dialogue et répondez aux questions.",
+        vi: "Nghe hội thoại về việc chuẩn bị vali đi Nice cuối tuần và trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "1. Laure et Jérémy vont passer le week-end :", answer: "chez la sœur de Laure à Nice." },
+          { q: "3. À quelle saison se passe la scène ?", answer: "Au printemps." },
+          { q: "4. Ce week-end, à Nice :", answer: "il va faire chaud." },
+          { q: "5. Quel temps il fait à Lyon ?", answer: "Il pleut." },
+          { q: "6. Quels vêtements va prendre Jérémy ?", answer: "Son short rouge, des tee-shirts et un pantalon (pour aller au restaurant le soir)." },
+          { q: "7. Laure prend :", answer: "ses baskets." },
+          { q: "8. Pourquoi Laure et Jérémy ne prennent pas leur ordinateur ?", answer: "Parce qu'il est lourd (ils prennent la tablette, plus légère)." },
+          { q: "9. Laure prend aussi :", answer: "ses lunettes de soleil et son chapeau." },
+        ],
+      },
+      {
+        num: 1, page: 61,
+        instruction: "Compréhension orale — Jérémy veut prendre un jean bleu pour aller à Nice.",
+        vi: "Nghe hội thoại và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "2. Jérémy veut prendre un jean bleu pour aller à Nice.", answer: false },
+        ],
+      },
+      {
+        num: 2, page: 61,
+        instruction: "Production écrite — Vous êtes Laure, vous écrivez un mail à votre sœur Emma qui vient à Lyon en janvier (météo, vêtements, accessoires à prendre).",
+        vi: "Viết email cho em gái Emma, tư vấn trang phục mang theo khi đến Lyon vào mùa đông.",
+        type: "fill",
+        items: [
+          { q: "Rédigez le mail complet.", answer: "Salut Emma, Comment vas-tu ? Tu vas venir samedi et je suis très contente. À Lyon, en hiver, il fait froid et il y a du vent. Tu peux prendre des pulls, des pantalons, un gros manteau. Samedi, nous allons visiter le centre-ville et nous allons beaucoup marcher. Tu peux mettre tes baskets dans ta valise ! À samedi ! Laure." },
+        ],
+      },
+      {
+        num: 3, page: 62,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases et accordez l'adjectif. (/5)",
+        vi: "Chia tính từ đúng giống.",
+        type: "fill",
+        items: [
+          { q: "Un pantalon élégant. Une jupe ...................................................................", answer: "élégante" },
+          { q: "Un manteau chaud. Des robes ...................................................................", answer: "chaudes" },
+          { q: "Un pantalon gris. Une ceinture ...................................................................", answer: "grise" },
+          { q: "Un gilet vert. Des vestes .........................................................................", answer: "vertes" },
+          { q: "Un costume blanc. Une tenue ...................................................................", answer: "blanche" },
+        ],
+      },
+      {
+        num: 4, page: 62,
+        instruction: "Bilan linguistique — Grammaire : Soulignez la bonne réponse (place de l'adjectif). (/5)",
+        vi: "Chọn đúng vị trí tính từ.",
+        type: "choice",
+        items: [
+          { q: "Léo vend son (gris) pull (gris).", options: ["son gris pull", "son pull gris"], answer: "son pull gris" },
+          { q: "Tu n'aimes pas les (noirs) vêtements (noirs).", options: ["les noirs vêtements", "les vêtements noirs"], answer: "les vêtements noirs" },
+          { q: "Il achète une (connectée) montre (connectée).", options: ["une connectée montre", "une montre connectée"], answer: "une montre connectée" },
+          { q: "Yann et son frère aiment les (élégantes) chaussures (élégantes).", options: ["les élégantes chaussures", "les chaussures élégantes"], answer: "les chaussures élégantes" },
+          { q: "Sur ce site, on trouve des (chers) vêtements (chers).", options: ["des chers vêtements", "des vêtements chers"], answer: "des vêtements chers" },
+        ],
+      },
+      {
+        num: 5, page: 62,
+        instruction: "Bilan linguistique — Grammaire : Répondez aux questions au futur proche. (/5)",
+        vi: "Trả lời câu hỏi ở thì tương lai gần.",
+        type: "fill",
+        items: [
+          { q: "– Il fait beau cet après-midi ? – Oui, il .............................................................", answer: "va faire beau" },
+          { q: "– Tu viens à l'anniversaire de Lucas ? – Oui, je ............................................................", answer: "vais venir" },
+          { q: "– Vous mettez un manteau ? – Oui, nous .......................................................................", answer: "allons mettre un manteau" },
+          { q: "– Ils prennent leur ordinateur ? – Oui, ils ...........................................................................", answer: "vont prendre leur ordinateur" },
+          { q: "– Tu vends tes écouteurs ? – Oui, je .............................................................................", answer: "vais vendre mes écouteurs" },
+        ],
+      },
+      {
+        num: 6, page: 62,
+        instruction: "Bilan linguistique — Grammaire : Soulignez la bonne réponse (adjectif démonstratif). (/5)",
+        vi: "Chọn tính từ chỉ định đúng.",
+        type: "choice",
+        items: [
+          { q: "Je voudrais essayer cette /cet /ces bottes.", options: ["cette", "cet", "ces"], answer: "ces" },
+          { q: "Ces / Cette / Cet étui est très beau !", options: ["Ces", "Cette", "Cet"], answer: "Cet" },
+          { q: "Il va acheter ces / cette /ce costume.", options: ["ces", "cette", "ce"], answer: "ce" },
+          { q: "Vous aimez ce / cet / cette style ?", options: ["ce", "cet", "cette"], answer: "ce" },
+          { q: "Cet / Cette / Ces écouteurs sont à la mode.", options: ["Cet", "Cette", "Ces"], answer: "Ces" },
+        ],
+      },
+      {
+        num: 7, page: 63,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases avec les mots proposés. (/5)",
+        vi: "Điền từ vựng về quần áo.",
+        type: "fill",
+        bank: ["robe", "costume", "imperméable", "taille", "bottes"],
+        items: [
+          { q: "Il pleut ! Je ne prends pas ma veste, je mets mon ……………………………………….. .", answer: "imperméable" },
+          { q: "Je voudrais essayer cette jupe. Quelle ……………………………………….. vous avez ?", answer: "taille" },
+          { q: "J'aime beaucoup cette ……………………………………….., elle est très élégante.", answer: "robe" },
+          { q: "Boris va acheter un beau ……………………………………….. pour le mariage de son frère.", answer: "costume" },
+          { q: "Il fait froid aujourd'hui ! Je vais mettre mes ……………………………………….. .", answer: "bottes" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_5.md) : les 5 images (pictogrammes météo) de
+        // cet exercice n'ont pas pu être décrites individuellement à partir
+        // du texte extrait ; seule la liste des 5 conditions possibles est
+        // certaine.
+        num: 8, page: 63,
+        instruction: "Bilan linguistique — Vocabulaire : Quel temps il fait ? Associez la phrase à l'image. (/5)",
+        vi: "Nối câu mô tả thời tiết với hình ảnh tương ứng — ⚠️ không trích xuất được nội dung hình ảnh cụ thể, xem note.",
+        type: "fill",
+        items: [
+          { q: "Les 5 conditions météo de l'exercice (images non identifiables individuellement) :", answer: "Il fait froid, Il neige, Il fait beau, Il pleut, Il fait chaud" },
+        ],
+      },
+      {
+        num: 9, page: 63,
+        instruction: "Bilan linguistique — Vocabulaire : Qu'est-ce qu'ils achètent ? Écrivez le nom de l'objet. (/5)",
+        vi: "Đọc câu đố và điền tên đồ vật tương ứng.",
+        type: "fill",
+        bank: ["des chaussures", "un cadre photo", "des écouteurs sans fil", "un sac à dos", "une enceinte Bluetooth"],
+        items: [
+          { q: "Sans fil, ils sont pratiques, c'est bien pour écouter de la musique quand je me promène !", answer: "des écouteurs sans fil" },
+          { q: "Je cherche un grand modèle pour cette photo de vacances.", answer: "un cadre photo" },
+          { q: "Ma pointure ? Du 38.", answer: "des chaussures" },
+          { q: "Ah oui ! Il est pratique pour mettre ses affaires de sport ou faire de la randonnée.", answer: "un sac à dos" },
+          { q: "Elle est parfaite pour écouter de la musique avec vos amis. Elle est facile à transporter !", answer: "une enceinte Bluetooth" },
+        ],
+      },
+      {
+        num: 10, page: 63,
+        instruction: "Bilan linguistique — Vocabulaire : Choisissez les réponses possibles. (/5)",
+        vi: "Chọn các đáp án phù hợp để mô tả đồ vật.",
+        type: "fill",
+        items: [
+          { q: "Un smartphone est", answer: "rectangulaire" },
+          { q: "Ton cadre photo est", answer: "rond ; rectangulaire" },
+          { q: "Cette valise est", answer: "lourde ; légère" },
+          { q: "Le porte-monnaie est", answer: "léger ; en cuir" },
+          { q: "Cette tablette est", answer: "grande ; rectangulaire" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_5.md) : la correspondance objets↔réponses de
+        // cet exercice n'a pas pu être localisée explicitement dans le
+        // corrigé imprimé — seule la structure "Oui/Non" de la grille est
+        // visible ; les réponses ci-dessous sont la reconstitution documentée
+        // dans cahier_unite_5.md, non confirmée contre le livre original.
+        num: 11, page: 64, audioSrc: piste(57),
+        instruction: "DELF A1 — Compréhension de l'oral (5 points). Vous entendez un message. Quels objets sont donnés dans le message ?",
+        vi: "Nghe tin nhắn và xác định các đồ vật được tặng (Có/Không) — ⚠️ đáp án chưa được xác nhận với sách gốc, xem note.",
+        type: "truefalse",
+        items: [
+          { q: "Objet 1 : donné ?", answer: true },
+          { q: "Objet 2 : donné ?", answer: true },
+          { q: "Objet 3 : donné ?", answer: false },
+          { q: "Objet 4 : donné ?", answer: false },
+          { q: "Objet 5 : donné ?", answer: true },
+        ],
+      },
+      {
+        num: 12, page: 64,
+        instruction: "DELF A1 — Compréhension des écrits (6 points). Message de votre amie suisse Yasmine sur l'anniversaire de sa sœur Elsa.",
+        vi: "Đọc tin nhắn của bạn Yasmine và trả lời câu hỏi hiểu văn bản.",
+        type: "fill",
+        items: [
+          { q: "1. Que propose Yasmine ? (image)", answer: "image « faire du shopping ensemble »" },
+          { q: "2. Elsa adore…", answer: "A. le rouge." },
+          { q: "3. Vous avez rendez-vous où ?", answer: "C. Chez Yasmine." },
+          { q: "4. Vous pouvez faire du shopping à quelle heure ?", answer: "C. À 14 h." },
+          { q: "5. Qu'est-ce que vous devez prendre ? (image)", answer: "image « un parapluie »" },
+        ],
+      },
+      {
+        num: 13, page: 65,
+        instruction: "DELF A1 — Production écrite (10 points). Vous complétez ce formulaire pour vous présenter à votre professeur de français (incluant couleurs préférées).",
+        vi: "Điền mẫu tự giới thiệu bản thân (bao gồm màu sắc yêu thích).",
+        type: "fill",
+        items: [
+          { q: "Exemple de production complet (modèle du corrigé) :", answer: "Nom : XXXXXXXXXXXXXXXX — Prénom : Jugurta — Date de naissance : 11/05/2001 — Nationalité : suisse — Courriel : jugurta07@gmail.com — Adresse postale (numéro et rue) : 17 rue de la Victoire — Pays : France — Téléphone : 07 56 43 12 40 — Profession : ingénieur informatique — Couleurs préférées : jaune, vert" },
+        ],
+      },
+      {
+        num: 14, page: 65,
+        instruction: "DELF A1 — Production orale. Partie 3 de l'épreuve : jeu de rôle « Au magasin de vêtements » (prix, tailles, couleurs, acheter au moins 3 articles).",
+        vi: "Đóng vai hội thoại tại cửa hàng quần áo — hỏi giá, kích cỡ, màu sắc và mua ít nhất 3 món đồ.",
+        type: "fill",
+        items: [
+          { q: "Exemple de dialogue complet (modèle du corrigé) :", answer: "Vous : Bonjour monsieur ! Je voudrais acheter une robe pour ma sœur, c'est son anniversaire. Je pense que sa taille est M. Elle aime bien le vert. Quel est le prix de cette robe ? Je vais la prendre, merci. Et pour moi, je voudrais cette chemise rouge. Combien elle coûte ? Est-ce que vous avez un modèle moins cher ? Je vais prendre la chemise blanche. Et pour la cravate, vous avez du rouge ? Je vais prendre la cravate rouge à 8 euros. Je peux payer par carte ? Voilà, merci, au revoir." },
+        ],
+      },
+      {
+        num: 15, page: 66,
+        instruction: "Jeux — Mots croisés des vêtements.",
+        vi: "Giải ô chữ về trang phục và phụ kiện.",
+        type: "fill",
+        items: [
+          { q: "Verticalement 1.", answer: "PANTALON" },
+          { q: "Verticalement 2.", answer: "MANTEAU" },
+          { q: "Verticalement 3.", answer: "CHAPEAU" },
+          { q: "Verticalement 4.", answer: "COSTUME" },
+          { q: "Horizontalement a.", answer: "PULL" },
+          { q: "Horizontalement b.", answer: "SAC" },
+          { q: "Horizontalement c.", answer: "BASKETS" },
+          { q: "Horizontalement d.", answer: "PARAPLUIE" },
+          { q: "Horizontalement e.", answer: "POINTURE" },
+        ],
+      },
+      {
+        num: 16, page: 66,
+        instruction: "Jeux — Barrez l'intrus.",
+        vi: "Tìm từ không cùng nhóm.",
+        type: "fill",
+        items: [
+          { q: "chemise – pantalon – sac – cravate", answer: "sac" },
+          { q: "baskets – bottes – parapluie – chaussures", answer: "parapluie" },
+          { q: "orange – rose – couleur – rouge", answer: "couleur" },
+          { q: "long – court – petit – cuir", answer: "cuir" },
+        ],
+      },
+      {
+        num: 17, page: 66,
+        instruction: "Jeux — Remettez les lettres dans l'ordre pour trouver les mots.",
+        vi: "Sắp xếp lại các chữ cái để tạo thành từ vựng công nghệ.",
+        type: "fill",
+        items: [
+          { q: "TETABLET", answer: "tablette" },
+          { q: "NOMTER", answer: "montre" },
+          { q: "RUTEOIDANR", answer: "ordinateur" },
+          { q: "DONR", answer: "rond" },
+          { q: "SUECOTUER", answer: "écouteurs" },
+        ],
+      },
+      {
+        num: 18, page: 66,
+        instruction: "Jeux — Associez les étiquettes pour former des mots (thème météo).",
+        vi: "Ghép các mảnh chữ để tạo thành 5 từ vựng về thời tiết.",
+        type: "fill",
+        items: [
+          { q: "5 mots de météo à retrouver :", answer: "pluie, soleil, vent, nuage, degré" },
+        ],
+      },
+      {
+        num: 19, page: 66,
+        instruction: "Jeux — Devinettes (objets technologiques).",
+        vi: "Đọc câu đố và đoán tên đồ vật công nghệ tương ứng.",
+        type: "fill",
+        items: [
+          { q: "C'est un objet rectangulaire, ça sert à mettre des vêtements pour partir en voyage.", answer: "une valise" },
+          { q: "C'est un objet carré ou rectangulaire, en cuir, ça sert à mettre des billets de banque, des papiers d'identité.", answer: "un portefeuille" },
+          { q: "C'est un objet rectangulaire, léger. Ça sert à se connecter à Internet, à regarder des films, à jouer.", answer: "une tablette" },
+          { q: "C'est un objet rond ou rectangulaire, léger. Ça sert à lire l'heure et à donner des informations avec un téléphone.", answer: "une montre (connectée)" },
+          { q: "C'est un objet rectangulaire. Ça sert à charger son téléphone quand on n'a pas d'électricité.", answer: "une batterie externe" },
+        ],
+      },
+    ],
+  },
 };
