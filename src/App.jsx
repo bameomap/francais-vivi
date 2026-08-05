@@ -39,6 +39,7 @@ import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./ut
 import { computeUnitStatuses, computeOverallProgress, getUnitStepProgress } from "./utils/parcours.js";
 import { PARCOURS_UNITS, STEP_DEFS } from "./data/parcoursData.js";
 import { schedulePush, initAutoSync } from "./utils/cloudSync.js";
+import { prefetchPanels } from "./utils/prefetchPanels.js";
 import { PARCOURS_UNITS_A2, STEP_GROUPS_A2, STEP_DEFS_A2 } from "./data/parcoursDataA2.js";
 import { EDITO_A2_UNITS } from "./data/editoA2Units.js";
 import { EDITO_A2_PHONO } from "./data/editoPhonoA2.js";
@@ -231,6 +232,10 @@ function AppInner() {
     loadCahier(level).then(c => { if (alive) setCahier(c); });
     return () => { alive = false; };
   }, [level]);
+
+  // Pull the remaining panel chunks in the background so the service worker
+  // has them cached before the learner is offline. Runs once, after idle.
+  useEffect(() => { prefetchPanels(); }, []);
   // Switching level resets the in-panel navigation so we never land on a view
   // that belongs to the level we just left (e.g. A1's Fiche while on A2).
   const changeLevel = (id) => {

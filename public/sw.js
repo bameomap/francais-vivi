@@ -83,7 +83,10 @@ self.addEventListener("fetch", e => {
   if (url.pathname.endsWith(".mp3") && !e.request.headers.get("range")) {
     e.respondWith(
       caches.open(AUDIO_CACHE).then(cache =>
-        cache.match(e.request).then(cached =>
+        // ignoreVary: a piste is identified entirely by its URL, so a stored
+        // `Vary` (Vite preview sends `Vary: Origin`, and CDNs add their own)
+        // must not decide whether we get a cache hit offline.
+        cache.match(e.request, { ignoreVary: true }).then(cached =>
           cached || fetch(e.request).then(res => {
             // `res.ok` is the CORS case; an opaque response (status 0) is what
             // a no-cors cross-origin fetch yields and is still cacheable.
@@ -100,8 +103,11 @@ self.addEventListener("fetch", e => {
   }
 
   // Cache-first for hashed static assets (immutable → safe to serve from cache).
+  // ignoreVary for the same reason as audio above: the content hash in the
+  // filename already identifies the response, so a `Vary` header from whoever
+  // served it must not turn an offline hit into a miss.
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
+    caches.match(e.request, { ignoreVary: true }).then(cached => cached || fetch(e.request).then(res => {
       if (res.ok && url.pathname.match(/\.(js|css|svg|png|woff2?)$/)) {
         const clone = res.clone();
         caches.open(CACHE).then(c => c.put(e.request, clone));
