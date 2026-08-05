@@ -3,7 +3,10 @@ import { STEP_DEFS_A2 } from "../data/parcoursDataA2.js";
 import { getStepSubIds, isA2Unit } from "./parcoursSteps.js";
 import { schedulePush } from "./cloudSync.js";
 
-const KEY = "parcours_progress";
+// Exported so cloudSync's test can assert this key is actually synced —
+// it silently was not, and the whole completion history went un-backed-up.
+export const PROGRESS_KEY = "parcours_progress";
+const KEY = PROGRESS_KEY;
 
 // Most A1 units have one card per skill; a unit can instead split each skill
 // across the book's document→grammar→vocabulary cycles (see STEP_GROUPS_U10

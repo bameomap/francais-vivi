@@ -9,10 +9,20 @@
  */
 
 // ── Keys to sync ─────────────────────────────────────────────────
-const SYNC_KEYS = [
+// Anything the learner can't recreate by using the app again belongs here.
+// Course content is reproducible from the books; their history of working
+// through it is not.
+export const SYNC_KEYS = [
   "srs_data", "module_progress", "streak_data", "xp_data", "badges_earned",
   "vocab_sets", "mistake_log", "weak_spots_log", "study_history",
-  "writing_history", "defi_history", "analyse_history", "parcours_last_unit",
+  "writing_history", "defi_history", "analyse_history",
+  // parcours_progress is the whole Parcours completion history (see
+  // parcours.js). It was missing here while parcours_last_unit — merely which
+  // unit was open last — was present, so parcours.js scheduled a push after
+  // every save that then uploaded everything except the thing that changed.
+  // Clearing site data or moving to a new phone restored SRS, XP, streak and
+  // badges, and brought the parcours back empty.
+  "parcours_progress", "parcours_last_unit", "parcours_last_unit_a2",
   "pour_note_expansions_v2", "grammar_last_unit", "onboarded",
   // lecture caches collected dynamically below
 ];
