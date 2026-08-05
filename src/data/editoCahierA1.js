@@ -5769,4 +5769,616 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u10: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's ──
+    // "g10". g10 has 4 points, all with a matching cahier "Grammaire" page:
+    // p0 Pronoms COD (2) (p.115), p1 Pronoms relatifs qui/que (p.118), p2
+    // L'intensité (p.119), p3 La durée, la continuation (p.116). No skips
+    // this unit — Unité 10 is the last unit of the cahier.
+    grammar: {
+
+      // p0 — Les pronoms COD (2) : me, te, nous, vous (cahier p. 115)
+      p0: [
+        {
+          num: 1, page: 115,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn đại từ bổ ngữ trực tiếp/gián tiếp ngôi 1 và 2 phù hợp (me, te, nous, vous).",
+          type: "choice",
+          items: [
+            { q: "Viens, je te / t'/ nous montre où se trouve le resto U.", options: ["te", "t'", "nous"], answer: "te" },
+            { q: "Les professeurs m'/ nous / te aident beaucoup et répondent à nos questions.", options: ["m'", "nous", "te"], answer: "nous" },
+            { q: "Maman, je nous / te / t' appelle ce soir après mes cours pour me / te / nous donner des nouvelles !", options: ["t' … te", "nous … me", "te … nous"], answer: "t' … te" },
+            { q: "Monsieur, je vous / te / t' ai envoyé mes documents d'inscription en avril dernier.", options: ["vous", "te", "t'"], answer: "vous" },
+            { q: "Je suis très contente. Des étudiantes me / m'/ vous ont invité chez elles ! Je vais y aller ce soir.", options: ["me", "m'", "vous"], answer: "m'" },
+          ],
+        },
+        {
+          num: 2, page: 115,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo câu có đại từ me, te, nous, vous.",
+          type: "order",
+          items: [
+            { tokens: ["Il", "nous", "a", "envoyé", "une", "candidature."],
+              answer: ["Il", "nous", "a", "envoyé", "une", "candidature."] },
+            { tokens: ["L'économie", "m'intéresse", "beaucoup."],
+              answer: ["L'économie", "m'intéresse", "beaucoup."] },
+            { tokens: ["Le", "secrétariat", "vous", "informe", "sur", "les", "masters."],
+              answer: ["Le", "secrétariat", "vous", "informe", "sur", "les", "masters."] },
+            { tokens: ["Ton", "chef", "t'a", "posé", "beaucoup", "de", "questions."],
+              answer: ["Ton", "chef", "t'a", "posé", "beaucoup", "de", "questions."] },
+          ],
+        },
+        {
+          num: 3, page: 115,
+          instruction: "Complétez les phrases avec me, te, nous, vous. Faites l'élision si nécessaire.",
+          vi: "Điền đại từ me, te, nous, vous phù hợp (chú ý lược âm khi cần).",
+          type: "fill",
+          items: [
+            { q: "Nous sommes les étudiants ambassadeurs. Vous pouvez ……… interroger sur les diplômes, les cours et le campus.", answer: "nous" },
+            { q: "Bonjour à tous les nouveaux étudiants ! N'hésitez pas à ……… poser des questions. Notre mission est de ……… renseigner !", answer: "nous … vous" },
+            { q: "Tes parents ……… téléphonent souvent depuis ton arrivée sur le campus ?", answer: "te" },
+            { q: "Johan, je ……… ai vu hier à la bibliothèque ! Mais toi, tu ne ……… as pas dit bonjour !", answer: "t'… m'" },
+            { q: "Antoine, tu peux ……… dire où se trouve la bibliothèque, s'il te plaît ?", answer: "me" },
+          ],
+        },
+        {
+          num: 4, page: 115, audioSrc: piste(101),
+          instruction: "Écoutez les questions et complétez les réponses.",
+          vi: "Nghe câu hỏi và hoàn thành câu trả lời có đại từ bổ ngữ phù hợp.",
+          type: "fill",
+          items: [
+            { q: "a. Est-ce que vous pouvez nous montrer où sont les logements étudiants ?", answer: "Oui, on peut vous montrer où se trouvent les logements étudiants." },
+            { q: "b. Le secrétariat de l'université vous explique comment s'inscrire ?", answer: "Oui, il nous explique comment s'inscrire en licence." },
+            { q: "c. Le resto U te plaît ?", answer: "Oui, le resto U me plaît." },
+            { q: "d. Tu peux me conseiller pour ma recherche de stage ?", answer: "Oui, je peux te conseiller pour ta recherche de stage." },
+          ],
+        },
+      ],
+
+      // p1 — Les pronoms relatifs qui et que (cahier p. 118)
+      p1: [
+        {
+          num: 1, page: 118,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn đại từ quan hệ qui hoặc que/qu' phù hợp.",
+          type: "choice",
+          items: [
+            { q: "J'ai créé une entreprise qui / qu' est basée à Toronto.", options: ["qui", "qu'"], answer: "qui" },
+            { q: "Elle a un travail qui / qu' elle adore.", options: ["qui", "qu'"], answer: "qu'" },
+            { q: "J'ai vu une exposition qui / que présente des photos de différents métiers.", options: ["qui", "que"], answer: "qui" },
+            { q: "C'est une école que / qui forme aux métiers artistiques.", options: ["que", "qui"], answer: "qui" },
+            { q: "C'est un métier que / qui les étudiants ne connaissent pas bien.", options: ["que", "qui"], answer: "que" },
+          ],
+        },
+        {
+          num: 2, page: 118,
+          instruction: "Complétez avec qui ou que / qu'.",
+          vi: "Điền đại từ quan hệ qui hoặc que/qu' phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Le chauffeur de taxi ……… m'a emmené à l'aéroport m'a parlé de son travail. C'est un métier ……… il adore mais ……… se termine tard le soir.", answer: "qui … qu'… qui" },
+            { q: "La boulangerie ……… se trouve devant la gare est très bonne. Le boulanger y vend des pâtisseries ……… mes enfants aiment beaucoup.", answer: "qui … que" },
+          ],
+        },
+        {
+          num: 3, page: 118,
+          instruction: "Associez les phrases comme dans l'exemple (Exemple : L'entreprise que … est présentée dans cet article m'intéresse. / L'entreprise qui … j'ai créée est devenue célèbre.).",
+          vi: "Nối vế câu để tạo câu hoàn chỉnh với qui/que (nghề nghiệp, bằng cấp, quốc gia).",
+          type: "match",
+          pairs: [
+            { l: "C'est un métier qui", r: "laisse beaucoup de temps libre." },
+            { l: "C'est un métier que", r: "j'ai découvert pendant mon stage." },
+            { l: "C'est un diplôme qui", r: "est très difficile à obtenir." },
+            { l: "C'est un diplôme que", r: "les employeurs recherchent." },
+            { l: "C'est un pays qui", r: "est très touristique." },
+            { l: "C'est un pays que", r: "les touristes adorent." },
+          ],
+        },
+        {
+          num: 4, page: 118,
+          instruction: "Regardez les images et complétez les textes avec qui ou que. Puis écrivez la profession de ces personnes.",
+          vi: "Điền qui/que và đoán nghề nghiệp qua mô tả (nông dân, vũ công, giáo viên).",
+          type: "fill",
+          items: [
+            { q: "a. C'est une personne ……… travaille dans les champs et ……… cultive des légumes ou des céréales. C'est ……… .", answer: "qui … qui … un agriculteur" },
+            { q: "b. C'est une personne ……… le public aime voir en spectacle et ……… est sportive et créative. C'est ……… .", answer: "que … qui … une danseuse" },
+            { q: "c. C'est la personne ……… les étudiants interrogent et ……… les aide à progresser. C'est ……… .", answer: "que … qui … un professeur" },
+          ],
+        },
+        // ⚠️ Exercice 5 (p.118, discrimination auditive qui/que/qu',
+        // piste 106) exclu : le corrigé imprimé n'a pas pu être isolé dans
+        // le texte extrait des Corrigés (voir note dans
+        // cahier_unite_10.md) — aucune réponse fiable à afficher, à
+        // compléter depuis la page imprimée.
+      ],
+
+      // p2 — L'intensité (cahier p. 119)
+      p2: [
+        {
+          num: 1, page: 119,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn trạng từ chỉ mức độ đúng (très, trop, un peu, assez, beaucoup).",
+          type: "choice",
+          items: [
+            { q: "La réunion de travail était très / beaucoup longue !", options: ["très", "beaucoup"], answer: "très" },
+            { q: "J'ai trop / un peu travaillé aujourd'hui. Je suis fatigué.", options: ["trop", "un peu"], answer: "trop" },
+            { q: "J'ai fini de lire le rapport. Il est un peu / beaucoup long.", options: ["un peu", "beaucoup"], answer: "un peu (hoặc très, tùy ngữ cảnh)" },
+            { q: "C'est un travail assez / trop intéressant mais je pense changer bientôt.", options: ["assez", "trop"], answer: "assez" },
+            { q: "J'aime beaucoup / très mon métier.", options: ["beaucoup", "très"], answer: "beaucoup" },
+          ],
+        },
+        {
+          num: 2, page: 119, audioSrc: piste(107),
+          instruction: "Lisez la fiche de poste et complétez avec des adverbes d'intensité. Écoutez pour vérifier.",
+          vi: "Đọc bảng mô tả công việc (số dấu + thể hiện mức độ) và điền trạng từ chỉ mức độ phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Fiche de poste : Horaires ++++ / Études ++++ / Intérêt +++ / Salaire ++ / Travail en équipe + / Autonomie +++. — C'est un poste ……… intéressant mais les études sont un peu ……… longues. On travaille ……… mais on est ……… bien payé. On travaille ……… en équipe mais en général, on est ……… autonome dans nos tâches.",
+              answer: "très – trop – beaucoup – assez – peu – très" },
+          ],
+        },
+        {
+          num: 3, page: 119,
+          instruction: "Reformulez avec beaucoup, trop, très, un peu, assez (Exemple : Il reste longtemps à la bibliothèque. → Il étudie beaucoup.).",
+          vi: "Diễn đạt lại câu bằng trạng từ chỉ mức độ phù hợp.",
+          type: "transform",
+          items: [
+            { q: "La quantité de travail est énorme. → On travaille ……… .", answer: "trop" },
+            { q: "C'est un poste avec une créativité importante. → C'est un poste ……… créatif.", answer: "très" },
+            { q: "La visioconférence a duré 6 heures ! → La visioconférence était ……… longue.", answer: "trop (hoặc très)" },
+            { q: "On peut travailler à deux sur mon bureau. → Mon bureau est ……… grand.", answer: "assez" },
+            { q: "Mon ordinateur ne va pas très vite. → Mon ordinateur est ……… lent.", answer: "un peu" },
+          ],
+        },
+        {
+          num: 4, page: 119,
+          instruction: "Remettez les éléments dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo câu có trạng từ chỉ mức độ.",
+          type: "order",
+          items: [
+            { tokens: ["Annah", "travaille", "beaucoup", "mais", "elle", "finit", "assez", "tôt."],
+              answer: ["Annah", "travaille", "beaucoup", "mais", "elle", "finit", "assez", "tôt."] },
+            { tokens: ["Les", "réunions", "durent", "très", "longtemps", ":", "mon", "responsable", "parle", "trop."],
+              answer: ["Les", "réunions", "durent", "très", "longtemps", ":", "mon", "responsable", "parle", "trop."] },
+            { tokens: ["Mon", "collègue", "est", "très", "sympathique.", "Mais", "il", "est", "un", "peu", "bavard."],
+              answer: ["Mon", "collègue", "est", "très", "sympathique.", "Mais", "il", "est", "un", "peu", "bavard."] },
+            { tokens: ["Il", "y", "a", "trop", "de", "réunions", "et", "elles", "sont", "très", "longues."],
+              answer: ["Il", "y", "a", "trop", "de", "réunions", "et", "elles", "sont", "très", "longues."] },
+            { tokens: ["Je", "télétravaille", "beaucoup", "parce", "que", "mon", "bureau", "est", "très", "loin."],
+              answer: ["Je", "télétravaille", "beaucoup", "parce", "que", "mon", "bureau", "est", "très", "loin."] },
+          ],
+        },
+      ],
+
+      // p3 — La durée, la continuation (cahier p. 116)
+      p3: [
+        {
+          num: 1, page: 116,
+          instruction: "Associez les phrases qui ont le même sens.",
+          vi: "Nối các câu có cùng ý nghĩa (thời lượng, tính liên tục).",
+          type: "match",
+          pairs: [
+            { l: "Elle a étudié la médecine de 2015 à 2021.", r: "Elle a étudié la médecine pendant 6 ans." },
+            { l: "Elle n'a pas encore fini ses études de médecine.", r: "Elle est toujours étudiante en médecine." },
+            { l: "Les études de médecine prennent de nombreuses années.", r: "Les études de médecine durent longtemps." },
+            { l: "Quand elle était étudiante en médecine, il y avait beaucoup de travail.", r: "Pendant ses études de médecine, elle travaillait beaucoup." },
+          ],
+        },
+        {
+          num: 2, page: 116,
+          instruction: "Complétez avec longtemps, pendant, toujours.",
+          vi: "Điền longtemps, pendant, toujours phù hợp vào câu.",
+          type: "fill",
+          items: [
+            { q: "De nombreux étudiants font un stage ……… les vacances d'été.", answer: "pendant" },
+            { q: "Je suis ……… à la bibliothèque. Je n'ai pas fini mes recherches.", answer: "toujours" },
+            { q: "J'ai étudié à l'étranger de septembre à janvier, ……… 5 mois.", answer: "pendant" },
+            { q: "Josepha est ……… étudiante, elle fait un doctorat. Ça dure ……… . Il faut faire des recherches. ……… au moins 3 ans.", answer: "toujours … longtemps … pendant" },
+            { q: "Je vais venir à la réunion des étudiants de master mais je ne peux pas rester ……… .", answer: "longtemps" },
+          ],
+        },
+        {
+          num: 3, page: 116,
+          instruction: "Conjuguez les verbes entre parenthèses au temps indiqué.",
+          vi: "Chia động từ theo thì được yêu cầu (passé composé hoặc hiện tại).",
+          type: "fill",
+          items: [
+            { q: "Maria ……… (étudier) l'économie pendant 3 ans. (passé composé)", answer: "a étudié" },
+            { q: "Tous les étudiants de master ……… (faire un stage) en entreprise de 6 mois. (présent)", answer: "font un stage" },
+            { q: "Je ……… (s'inscrire) à l'université. (passé composé)", answer: "me suis inscrit(e)" },
+            { q: "Vous ……… (apprendre) beaucoup de choses pendant le stage. (présent)", answer: "apprenez" },
+            { q: "On ……… (travailler) toujours sur le dossier, mais on a bientôt fini. (présent)", answer: "travaille" },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_10.md) : les dates de scolarité
+          // imprimées dans le profil de Malik (1994-2012 = 18 ans de
+          // scolarité) sont longues pour un cursus normal, mais on
+          // reproduit les données telles qu'imprimées dans le profil sans
+          // les corriger.
+          num: 4, page: 116, audioSrc: piste(102),
+          instruction: "Lisez le profil de Malik. Répondez aux questions puis écoutez pour vérifier. Profil : Malik ELHARK, journaliste, 23 ans. De 2017 à aujourd'hui : journaliste pour l'Étudiant. De 2015 à 2017 : journaliste chez Métro. De 2012 à 2015 : école de journalisme de Lille. De 1994 à 2012 : scolarité au Maroc (Casablanca).",
+          vi: "Đọc hồ sơ của Malik và trả lời câu hỏi về thời gian học tập, làm việc — ⚠️ xem note về số năm học có vẻ dài bất thường trong hồ sơ gốc.",
+          type: "fill",
+          items: [
+            { q: "a. Malik a vécu longtemps au Maroc ?", answer: "Oui, il a vécu longtemps au Maroc." },
+            { q: "b. Il a étudié le journalisme pendant combien de temps ?", answer: "Il a étudié le journalisme pendant 3 ans." },
+            { q: "c. Pendant combien de temps il a travaillé chez Métro ?", answer: "Il a travaillé chez Métro pendant 2 ans." },
+            { q: "d. Est-ce que Malik est toujours étudiant ?", answer: "Non, il travaille comme journaliste." },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 117 "L'université, les études" + p. 120 ──
+    // "L'entreprise, la vie professionnelle"). Custom STEP_GROUPS_U10:
+    // v1_vocab (u10g1, "Le campus") gets p.117's audio exercise (purely
+    // campus places); v2_vocab (u10g2/g3, "Les études et les personnes ·
+    // les disciplines") gets p.117's other two exercises (study/diploma
+    // vocab); v3_vocab (u10g5, "Les professions") gets p.120's profession
+    // definitions; v4_vocab (u10g4/g6/g7/g8/g9, "L'entreprise · tâches ·
+    // outils · intensité") gets p.120's poste/horaires/salaire matching.
+    vocab: {
+      v1_vocab: [
+        {
+          // ⚠️ Note (cahier_unite_10.md) : le corrigé imprimé donne
+          // uniquement « a. b. c. d. 2 – 3 – 4 – 1 » (numérotation des
+          // photos), sans réimprimer les noms des lieux — association
+          // déduite du contenu de la transcription (a→bibliothèque,
+          // b→secrétariat, c→amphi, d→resto U).
+          num: 3, page: 117, audioSrc: piste(103),
+          instruction: "Écoutez et associez un enregistrement à une photo (bibliothèque, secrétariat, amphi, resto U).",
+          vi: "Nghe và nối đoạn ghi âm với hình ảnh (thư viện, phòng hành chính, giảng đường, nhà ăn sinh viên) — ⚠️ xem note về sự suy luận từ đáp án gốc.",
+          type: "fill",
+          items: [
+            { q: "a.", answer: "bibliothèque" },
+            { q: "b.", answer: "secrétariat" },
+            { q: "c.", answer: "amphi" },
+            { q: "d.", answer: "resto U" },
+          ],
+        },
+      ],
+
+      v2_vocab: [
+        {
+          num: 1, page: 117,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn từ đúng liên quan đến đại học và học tập.",
+          type: "choice",
+          items: [
+            { q: "Paul aime les ordinateurs. Il a décidé d'étudier les lettres / l'informatique.", options: ["les lettres", "l'informatique"], answer: "l'informatique" },
+            { q: "Voici le secrétariat / le resto U. On y mange très bien !", options: ["le secrétariat", "le resto U"], answer: "le resto U" },
+            { q: "N'oublie pas de t'inscrire à la bibliothèque / l'amphi pour pouvoir prendre des livres.", options: ["la bibliothèque", "l'amphi"], answer: "la bibliothèque" },
+            { q: "Tous les étudiants de master doivent faire un stage / des études en entreprise.", options: ["un stage", "des études"], answer: "un stage" },
+            { q: "Ce professeur / Cet étudiant donne généralement de bonnes notes.", options: ["Ce professeur", "Cet étudiant"], answer: "Ce professeur" },
+          ],
+        },
+        {
+          num: 2, page: 117,
+          instruction: "Lisez et cochez vrai ou faux.",
+          vi: "Đọc và xác định đúng/sai về đại học và bằng cấp.",
+          type: "truefalse",
+          items: [
+            { q: "On étudie le droit pour devenir médecin.", answer: false },
+            { q: "La licence est un diplôme bac + 3.", answer: true },
+            { q: "On est en petits groupes pour les cours en amphi.", answer: false },
+            { q: "Quand on fait un stage, on est toujours étudiant.", answer: true },
+            { q: "Le master est une note.", answer: false },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 2, page: 120,
+          instruction: "Lisez les définitions et écrivez la profession (Exemple : Elle joue dans des films : la comédienne.).",
+          vi: "Đọc định nghĩa và viết tên nghề nghiệp tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Il fait de la peinture et organise des expositions.", answer: "le peintre" },
+            { q: "Elle écrit des articles dans les médias.", answer: "la journaliste" },
+            { q: "Il conduit les gens en voiture.", answer: "le chauffeur" },
+            { q: "Elle prépare et vend la viande.", answer: "la bouchère" },
+            { q: "Il vend des livres.", answer: "le libraire" },
+          ],
+        },
+      ],
+
+      v4_vocab: [
+        {
+          num: 1, page: 120,
+          instruction: "Associez.",
+          vi: "Nối từ vựng nghề nghiệp với thông tin tương ứng (chức vụ, giờ làm, lương, nghề).",
+          type: "match",
+          pairs: [
+            { l: "le poste :", r: "la responsable" },
+            { l: "les horaires :", r: "de 14 h à 22 h" },
+            { l: "le salaire :", r: "1 800 euros" },
+            { l: "la profession :", r: "policier" },
+          ],
+        },
+        // ⚠️ Exercice 3 (p.120, dialogues au bureau ↔ images, piste 108)
+        // exclu : le corrigé pour cette association n'a pas pu être isolé
+        // clairement dans le texte extrait des Corrigés (voir note dans
+        // cahier_unite_10.md) — aucune réponse fiable à afficher.
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 117 consonnes [t]/[d] + p. 120 ──
+    // consonnes [p]/[b]).
+    phono: [
+      {
+        num: 1, page: 117, audioSrc: piste(104),
+        instruction: "Phonie-graphie : les consonnes [t] et [d]. Discrimination : combien de fois entendez-vous [t] et [d] ? (format : t/d)",
+        vi: "Nghe và đếm số lần xuất hiện âm [t] và [d].",
+        type: "fill",
+        items: [
+          { q: "a. Ton frère a étudié l'informatique pendant trois ans.", answer: "4/2" },
+          { q: "b. Danielle est restée deux ans au Danemark pour son master.", answer: "2/3" },
+          { q: "c. Thomas étudie toujours le droit à Toulouse.", answer: "4/2" },
+          { q: "d. Tous les jours nous déjeunons au restaurant universitaire.", answer: "3/1" },
+          { q: "e. Vous êtes en troisième année de lettres et vous allez obtenir votre diplôme bientôt.", answer: "5/2" },
+        ],
+      },
+      {
+        num: 2, page: 117, audioSrc: piste(105),
+        instruction: "Phonie-graphie : les consonnes [t] et [d]. Dictée : complétez le texte.",
+        vi: "Nghe và điền từ còn thiếu (chính tả) trong đoạn văn ngắn.",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Nous sommes étudiants. À l'université, nous étudions les lettres et nous allons à la bibliothèque. Le week-end, nous travaillons dans un grand restaurant." },
+        ],
+      },
+      {
+        num: 1, page: 120, audioSrc: piste(109),
+        instruction: "Phonie-graphie : les consonnes [p] et [b]. Discrimination : combien de fois entendez-vous [p] et [b] ? (format : p/b)",
+        vi: "Nghe và đếm số lần xuất hiện âm [p] và [b].",
+        type: "fill",
+        items: [
+          { q: "a.", answer: "4/0" },
+          { q: "b.", answer: "3/1" },
+          { q: "c.", answer: "2/1" },
+          { q: "d.", answer: "4/1" },
+          { q: "e.", answer: "3/0" },
+        ],
+      },
+      {
+        num: 2, page: 120, audioSrc: piste(110),
+        instruction: "Phonie-graphie : les consonnes [p] et [b]. Dictée : complétez le texte.",
+        vi: "Nghe và điền từ còn thiếu (chính tả) trong đoạn văn về Paul.",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Paul n'aime pas sa profession, employé de banque. Il a bientôt terminé une formation pour devenir libraire. Il a développé des nouvelles compétences. Il lit beaucoup et prend du temps pour ses clients sympathiques." },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 121 CE/PO, p. 122-123 Bilan linguistique /40, ──
+    // p. 124-125 DELF A1, p. 126 Jeux, dernière page d'exercices du
+    // cahier). Production orale p.121 (jeu de rôle) and Jeux activité 5
+    // (quiz des métiers, réponses libres) are free-answer and
+    // intentionally excluded.
+    bilan: [
+      {
+        num: 1, page: 121,
+        instruction: "Compréhension écrite — Travail d'équipe ! Deux fiches de films (Taxi, Médecin de campagne).",
+        vi: "Đọc giới thiệu hai bộ phim và trả lời câu hỏi về nghề nghiệp nhân vật.",
+        type: "fill",
+        items: [
+          { q: "1. Cochez les professions présentées dans les deux films (3 réponses).", answer: "policier, médecin, chauffeur" },
+          { q: "5. En général, Jean-Pierre travaille :", answer: "trop" },
+        ],
+      },
+      {
+        num: 2, page: 121,
+        instruction: "Compréhension écrite — Vrai ou faux ?",
+        vi: "Đọc và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "2. Daniel est toujours livreur de pizza.", answer: false },
+          { q: "3. Émilien a son permis de conduire.", answer: false },
+          { q: "4. Nathalie a travaillé longtemps comme médecin.", answer: false },
+        ],
+      },
+      {
+        num: 3, page: 122,
+        instruction: "Bilan linguistique — Grammaire : Répondez aux questions. Utilisez me, te, nous, vous. (/5)",
+        vi: "Trả lời câu hỏi dùng đại từ me, te, nous, vous.",
+        type: "fill",
+        items: [
+          { q: "Vous m'envoyez le rapport à quelle heure ? (14 h)", answer: "Je vous envoie le rapport à 14 heures." },
+          { q: "Tu me montres le restaurant d'entreprise ? (oui / ce midi)", answer: "Oui, je te montre le restaurant d'entreprise ce midi." },
+          { q: "Votre collègue vous a fait visiter les bureaux ? (oui / hier)", answer: "Oui, elle m'a fait visiter les bureaux hier." },
+          { q: "Qu'est-ce que le responsable vous a demandé ? (de préparer la réunion)", answer: "Le responsable nous a demandé de préparer la réunion." },
+          { q: "Qu'est-ce que ta collègue t'a dit ? (de participer à la visioconférence)", answer: "Elle m'a dit de participer à la visioconférence." },
+        ],
+      },
+      {
+        num: 4, page: 122,
+        instruction: "Bilan linguistique — Grammaire : Soulignez la bonne réponse. (/5)",
+        vi: "Chọn longtemps/pendant/toujours phù hợp.",
+        type: "choice",
+        items: [
+          { q: "Antonia est longtemps / toujours en réunion d'équipe, mais elle va bientôt revenir.", options: ["longtemps", "toujours"], answer: "toujours" },
+          { q: "J'ai beaucoup appris pendant / longtemps mon stage.", options: ["pendant", "longtemps"], answer: "pendant" },
+          { q: "Mathis a 28 ans mais il est toujours / pendant étudiant. C'est long le doctorat !", options: ["toujours", "pendant"], answer: "toujours" },
+          { q: "Le stage de fin d'études dure toujours / longtemps ?", options: ["toujours", "longtemps"], answer: "longtemps" },
+          { q: "Je vais présenter le rapport pendant / longtemps la visioconférence.", options: ["pendant", "longtemps"], answer: "pendant" },
+        ],
+      },
+      {
+        num: 5, page: 122,
+        instruction: "Bilan linguistique — Grammaire : Reliez les phrases avec qui ou que/qu' pour former une seule phrase. (/5)",
+        vi: "Nối hai câu thành một câu bằng qui hoặc que/qu'.",
+        type: "transform",
+        items: [
+          { q: "J'ai une responsable. Elle est très patiente.", answer: "J'ai une responsable qui est très patiente." },
+          { q: "Il fait un stage. Il adore ce stage.", answer: "Il fait un stage qu'il adore." },
+          { q: "Nous travaillons sur un dossier. Ce dossier est très compliqué.", answer: "Nous travaillons sur un dossier qui est très compliqué." },
+          { q: "J'ai une profession. J'aime beaucoup ma profession.", answer: "J'ai une profession que j'aime beaucoup." },
+          { q: "C'est un bureau. On peut partager ce bureau à plusieurs collègues.", answer: "C'est un bureau qu'on peut partager à plusieurs collègues." },
+        ],
+      },
+      {
+        num: 6, page: 122,
+        instruction: "Bilan linguistique — Grammaire : Soulignez la bonne réponse. (/5)",
+        vi: "Chọn trạng từ chỉ mức độ đúng.",
+        type: "choice",
+        items: [
+          { q: "Le temps de transport est très / beaucoup long !", options: ["très", "beaucoup"], answer: "très" },
+          { q: "Tu as fini à minuit ? Tu travailles un peu / beaucoup !", options: ["un peu", "beaucoup"], answer: "beaucoup" },
+          { q: "Mon bureau est trop / beaucoup petit. Je peux mettre mon ordinateur et c'est tout !", options: ["trop", "beaucoup"], answer: "trop" },
+          { q: "Mon travail est un peu / très intéressant ! Il me passionne !", options: ["un peu", "très"], answer: "très" },
+          { q: "Mes collègues sont assez / beaucoup sympas.", options: ["assez", "beaucoup"], answer: "assez" },
+        ],
+      },
+      {
+        num: 7, page: 123,
+        instruction: "Bilan linguistique — Vocabulaire : Barrez l'intrus. (/5)",
+        vi: "Gạch bỏ từ không cùng nhóm nghĩa.",
+        type: "fill",
+        items: [
+          { q: "la licence – le doctorat – le master – l'amphithéâtre", answer: "l'amphithéâtre" },
+          { q: "le resto U – l'enseignant(e) – la bibliothèque – la salle de cours", answer: "l'enseignant(e)" },
+          { q: "la note – le commerce – le droit – l'économie", answer: "la note" },
+          { q: "le campus – l'université – les mathématiques – le logement étudiant", answer: "les mathématiques" },
+          { q: "les études – une formation – les langues – un cours", answer: "les langues" },
+        ],
+      },
+      {
+        num: 8, page: 123,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez le texte avec les mots proposés (resto U – bibliothèque – secrétariat – inscrire – les étudiants – campus). (/5)",
+        vi: "Điền từ vựng vào đoạn văn giới thiệu khuôn viên trường.",
+        type: "fill",
+        bank: ["resto U", "bibliothèque", "secrétariat", "inscrire", "les étudiants", "campus"],
+        items: [
+          { q: "Bonjour à tous ……… ! Je suis ravi de vous faire visiter le ……… aujourd'hui. À votre droite, vous pouvez voir le ……… . On y mange très bien pour pas cher. Pour pouvoir y aller, il faut vous ……… au ……… pour recevoir votre carte d'étudiant. Et à gauche, c'est la ……… qui est ouverte jusqu'à 22 h.",
+            answer: "les étudiants – campus – resto U – inscrire – secrétariat – bibliothèque" },
+        ],
+      },
+      {
+        num: 9, page: 123,
+        instruction: "Bilan linguistique — Vocabulaire : Lisez et cochez vrai ou faux. (/5)",
+        vi: "Đọc và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "Le salaire est une tâche professionnelle.", answer: false },
+          { q: "Quand on fait du télétravail, on n'est pas au bureau.", answer: true },
+          { q: "Pour faire une visioconférence, on utilise un ordinateur.", answer: true },
+          { q: "Les horaires de travail dépendent des postes et des professions.", answer: true },
+          { q: "Tout le monde peut manger au restaurant d'entreprise.", answer: false },
+        ],
+      },
+      {
+        num: 10, page: 123,
+        instruction: "Bilan linguistique — Vocabulaire : Soulignez la bonne réponse. (/5)",
+        vi: "Chọn từ đúng.",
+        type: "choice",
+        items: [
+          { q: "Je vais signer mon salaire / contrat demain.", options: ["salaire", "contrat"], answer: "contrat" },
+          { q: "J'ai changé de poste / télétravail. Je suis devenue responsable.", options: ["poste", "télétravail"], answer: "poste" },
+          { q: "Quels sont les horaires de la pause-déjeuner / machine à café ?", options: ["pause-déjeuner", "machine à café"], answer: "pause-déjeuner" },
+          { q: "Envoie un courriel / ordinateur à la cheffe pour ta présentation aux équipes.", options: ["courriel", "ordinateur"], answer: "courriel" },
+          { q: "Je partage mon bureau avec la directrice / une collègue.", options: ["directrice", "une collègue"], answer: "une collègue" },
+        ],
+      },
+      {
+        num: 11, page: 124, audioSrc: piste(111),
+        instruction: "DELF A1 — Compréhension de l'oral (4 points). Message vocal de M. Guibert.",
+        vi: "Nghe tin nhắn thoại của ông Guibert về thực tập sinh mới và trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "1. Qui arrive demain ?", answer: "B. Une stagiaire." },
+          { q: "2. Ryoko va finir son travail à quelle heure ?", answer: "B. À 17 h 30." },
+          { q: "3. Quel est le jour de télétravail de Ryoko ?", answer: "C. Vendredi." },
+          { q: "4. Qu'est-ce que monsieur Guibert vous demande de faire ?", answer: "A. Écrire un message." },
+        ],
+      },
+      {
+        num: 12, page: 124,
+        instruction: "DELF A1 — Compréhension des écrits. Annonces sur le panneau de l'université.",
+        vi: "Đọc các thông báo tuyển dụng trên bảng tin trường đại học và trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "1. Pour apprendre les mathématiques, vous pouvez téléphoner quand ?", answer: "C. Le soir." },
+          { q: "2. Vous devez envoyer un e-mail pour avoir...", answer: "A. un stage." },
+          { q: "3. Pour être serveur ou serveuse, vous devez appeler quel numéro ?", answer: "B. 06 26 25 31 87." },
+          { q: "4. Le travail dans le magasin de vêtements dure...", answer: "C. six mois." },
+          { q: "5. Pour être journaliste, vous devez venir quel jour ?", answer: "A. Mardi." },
+        ],
+      },
+      {
+        num: 13, page: 125,
+        instruction: "DELF A1 — Production écrite (15 points). Racontez vos journées de stage à votre ami(e) français(e) (40 mots minimum).",
+        vi: "Viết thư kể về những ngày thực tập (giờ làm, hoạt động, đồng nghiệp) — bài mẫu tham khảo.",
+        type: "fill",
+        items: [
+          { q: "Exemple de production (corrigé) :", answer: "Bonjour Liam, je suis en stage chez Infracomm, une entreprise d'informatique. J'ai commencé lundi dernier. Je commence à 9 h et je finis à 18 h. Je travaille sur un dossier intéressant. Je réponds aussi à des mails et je prépare des réunions. J'aime beaucoup ma responsable, elle est drôle et dynamique. Et toi ? Tes études, ça va ? À bientôt ! F." },
+        ],
+      },
+      {
+        num: 14, page: 125,
+        instruction: "DELF A1 — Production orale. Échange d'informations à partir de cartes-mots : Études ? Télétravail ? Préférer ? Professeur ? Bibliothèque ? Horaires ?",
+        vi: "Đặt câu hỏi trao đổi thông tin về học tập và công việc — bài mẫu tham khảo.",
+        type: "fill",
+        items: [
+          { q: "Exemples de questions (corrigé) :", answer: "Études : Vous avez fait quelles études ? — Télétravail : Vous aimez le télétravail ? — Préférer : Vous préférez écrire un mail ou téléphoner ? — Professeur : Qui est votre professeur préféré ? — Bibliothèque : Est-ce qu'il y a une bibliothèque dans votre quartier ? — Horaires : Vous commencez votre travail à quelle heure ?" },
+        ],
+      },
+      {
+        num: 15, page: 126,
+        instruction: "Jeux — Devinettes.",
+        vi: "Đoán từ vựng chủ đề đại học qua các câu đố.",
+        type: "fill",
+        items: [
+          { q: "C'est un diplôme qui demande 5 ans d'études après le bac.", answer: "le master" },
+          { q: "C'est une discipline pour les étudiants qui aiment faire des calculs.", answer: "les mathématiques" },
+          { q: "C'est là que les étudiants vont pour étudier et lire.", answer: "la bibliothèque" },
+          { q: "C'est un lieu qui regroupe les bâtiments de l'université.", answer: "le campus" },
+          { q: "C'est un document que les étudiants veulent obtenir à la fin de leurs études.", answer: "le diplôme" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_10.md) : le corrigé de cette grille de
+        // mots cachés (5 outils de communication) n'a pas été retrouvé
+        // sous forme de liste textuelle explicite ; seul le mot
+        // ORDINATEUR est clairement lisible en diagonale dans la grille de
+        // lettres reproduite en texte brut. Les 4 autres outils
+        // (probablement mail, téléphone, smartphone, visioconférence —
+        // vocabulaire p.153) doivent être vérifiés visuellement contre la
+        // grille imprimée.
+        num: 16, page: 126,
+        instruction: "Jeux — Trouvez dans la grille 5 outils de communication.",
+        vi: "Tìm 5 công cụ liên lạc trong ô chữ — ⚠️ chỉ có từ ORDINATEUR được xác nhận rõ, xem note.",
+        type: "fill",
+        items: [
+          { q: "Outil identifié avec certitude dans la grille :", answer: "ORDINATEUR (les 4 autres outils restent à vérifier contre la grille imprimée)" },
+        ],
+      },
+      {
+        num: 17, page: 126,
+        instruction: "Jeux — Associez 2 étiquettes pour retrouver les 5 professions.",
+        vi: "Ghép 2 mảnh chữ để tìm 5 nghề nghiệp.",
+        type: "fill",
+        items: [
+          { q: "5 professions à retrouver :", answer: "artiste – bouchère – chauffeur – danseur – libraire" },
+        ],
+      },
+      {
+        num: 18, page: 126,
+        instruction: "Jeux — Remettez les lettres dans l'ordre pour trouver des disciplines.",
+        vi: "Xếp lại chữ cái để tìm tên môn học.",
+        type: "fill",
+        items: [
+          { q: "MCERCMOE", answer: "commerce" },
+          { q: "ESTRTEL", answer: "lettres" },
+          { q: "EMICONEO", answer: "économie" },
+          { q: "SISNECEC", answer: "sciences" },
+          { q: "TIODR", answer: "droit" },
+        ],
+      },
+    ],
+  },
 };
