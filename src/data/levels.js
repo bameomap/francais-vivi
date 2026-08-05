@@ -15,6 +15,14 @@ export const LEVELS = [
     color: "#4A90D9",
     status: "ready",
     unitCount: 11,
+    goals: [
+      "Chào hỏi, tự giới thiệu (tên, quốc tịch, nghề nghiệp) và nói về gia đình",
+      "Mua sắm, gọi món, hỏi giá và nói về số lượng",
+      "Hỏi đường, mô tả vị trí và nơi ở",
+      "Kể hoạt động hàng ngày và lên kế hoạch với thì tương lai gần",
+      "Nói về sức khỏe, đưa lời khuyên bằng thức mệnh lệnh",
+      "Kể lại chuyện đã xảy ra với thì quá khứ kép (passé composé)",
+    ],
   },
   {
     id: "a2",
@@ -27,6 +35,14 @@ export const LEVELS = [
     color: "#10B981",
     status: "ready",
     unitCount: 12,
+    goals: [
+      "Kể chuyện quá khứ mạch lạc, phối hợp passé composé và imparfait",
+      "Miêu tả người, nơi chốn và hồi tưởng kỷ niệm",
+      "So sánh, bày tỏ sở thích, ý kiến và mong muốn (conditionnel)",
+      "Nói về dự định, tương lai và các giả định (futur simple, si/quand)",
+      "Bàn luận về ẩm thực, sức khỏe, tiêu dùng và môi trường",
+      "Đọc hiểu tin tức, viết thư và chuẩn bị cho kỳ thi DELF A2",
+    ],
   },
   {
     id: "b1",

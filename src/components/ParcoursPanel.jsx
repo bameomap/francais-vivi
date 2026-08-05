@@ -3,6 +3,7 @@ import { C } from "../constants.js";
 import { PARCOURS_UNITS, STEP_GROUPS, STEP_DEFS, getStepGroupsFor, getStepDefsFor } from "../data/parcoursData.js";
 import { getStepGroupsForA2, getStepDefsForA2 } from "../data/parcoursDataA2.js";
 import { isA2Unit } from "../utils/parcoursSteps.js";
+import { getLevel } from "../data/levels.js";
 import { setParcoursFocus } from "../utils/parcoursFocus.js";
 import {
   computeUnitStatuses,
@@ -20,7 +21,7 @@ function statusColor(status) {
 
 // ── Unit List ──────────────────────────────────────────────────
 
-function UnitList({ onSelect, units, levelTitle, book, lastUnitKey }) {
+function UnitList({ onSelect, units, levelTitle, book, lastUnitKey, levelGoals }) {
   const statuses = computeUnitStatuses(units);
   const overall  = computeOverallProgress(units);
 
@@ -69,6 +70,26 @@ function UnitList({ onSelect, units, levelTitle, book, lastUnitKey }) {
           <span><b style={{ color: C.gray2 }}>{units.length - doneCount - currentCount}</b> <span style={{ color: C.gray }}>chưa học</span></span>
         </div>
       </div>
+
+      {/* ── Level goals ── */}
+      {levelGoals?.length > 0 && (
+        <div style={{
+          background: C.white, border: `1.5px solid ${C.border}`,
+          borderRadius: 16, padding: "13px 16px", marginBottom: 20,
+        }}>
+          <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+            🎯 Mục tiêu trình độ
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {levelGoals.map((g, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 12.5, color: C.ink, lineHeight: 1.5 }}>
+                <span style={{ color: C.blue, flexShrink: 0 }}>✓</span>
+                <span>{g}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ── Units timeline ── */}
       <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, fontWeight: 600, color: C.gray, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10 }}>
@@ -378,6 +399,20 @@ function UnitDetail({ unitId, onBack, onNavigate, units, stepGroups, stepDefs, l
         </div>
       </div>
 
+      {/* ── Unit intro ── */}
+      {unit.intro && (
+        <div style={{ padding: "0.85rem 1rem 0" }}>
+          <div style={{
+            background: C.accentL, border: `1px solid ${C.accent}33`,
+            borderRadius: 12, padding: "10px 13px",
+            display: "flex", alignItems: "flex-start", gap: 8,
+          }}>
+            <span style={{ fontSize: 15, flexShrink: 0 }}>📝</span>
+            <div style={{ fontSize: 12, color: C.ink, lineHeight: 1.55 }}>{unit.intro}</div>
+          </div>
+        </div>
+      )}
+
       {/* ── Step groups ── */}
       <div style={{ padding: "0.85rem 1rem 1rem" }}>
         {groups.map(group => {
@@ -467,6 +502,7 @@ export default function ParcoursPanel({
   levelLabel  = "A1 ÉDITO",
   levelTitle  = "A1 · Débutant",
   book        = "Édito A1 · Didier FLE",
+  levelGoals  = getLevel("a1").goals,
   // Per-level key: otherwise opening A2 would try to restore an A1 unit id
   // that isn't in `units`, and UnitDetail would render nothing.
   lastUnitKey = "parcours_last_unit",
@@ -496,6 +532,7 @@ export default function ParcoursPanel({
       levelTitle={levelTitle}
       book={book}
       lastUnitKey={lastUnitKey}
+      levelGoals={levelGoals}
     />
   );
 }

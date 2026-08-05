@@ -1171,6 +1171,7 @@ function AppInner() {
                   levelLabel="A2 ÉDITO"
                   levelTitle="A2 · Élémentaire"
                   book="Édito A2 · Didier FLE"
+                  levelGoals={getLevelInfo("a2").goals}
                   lastUnitKey="parcours_last_unit_a2"
                 />)}
             {view==="grammar"       && (level==="a1"
