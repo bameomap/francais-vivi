@@ -3937,4 +3937,618 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u7: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g7" ──
+    // g7 has 5 points, all with a matching cahier "Grammaire" page — except
+    // p4 "Verbe connaître" which has no dedicated page and no embedded drill
+    // anywhere else in this unit's cahier (unlike u5/u6's embedded verb
+    // points) — see cahier_unite_7.md.
+    grammar: {
+
+      // p0 — Le passé composé (1) avec AVOIR (cahier p. 79)
+      p0: [
+        {
+          // ⚠️ Note (cahier_unite_7.md) : le corrigé imprimé donne la
+          // séquence « a. passé composé – b. présent – c. passé composé –
+          // d. présent – e. présent – f. passé composé – g. passé composé –
+          // h. présent », reproduite telle quelle.
+          num: 1, page: 79, audioSrc: piste(70),
+          instruction: "Présent ou passé composé ? Écoutez et cochez.",
+          vi: "Nghe và xác định câu ở thì hiện tại hay thì quá khứ kép (passé composé).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "b.", options: ["présent", "passé composé"], answer: "présent" },
+            { q: "c.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "d.", options: ["présent", "passé composé"], answer: "présent" },
+            { q: "e.", options: ["présent", "passé composé"], answer: "présent" },
+            { q: "f.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "g.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "h.", options: ["présent", "passé composé"], answer: "présent" },
+          ],
+        },
+        {
+          num: 2, page: 79,
+          instruction: "Associez le sujet et le verbe conjugué.",
+          vi: "Nối chủ ngữ với động từ chia đúng ở thì passé composé.",
+          type: "match",
+          pairs: [
+            { l: "J'", r: "ai déménagé à Paris." },
+            { l: "Ils", r: "ont visité un studio." },
+            { l: "Tu", r: "as trouvé un canapé et deux fauteuils." },
+            { l: "Elle", r: "a cherché une table." },
+            { l: "Vous", r: "avez décoré votre salon." },
+          ],
+        },
+        {
+          num: 3, page: 79,
+          instruction: "Mettez les verbes au passé composé.",
+          vi: "Chuyển câu ở thì hiện tại sang thì passé composé (thời gian trong quá khứ).",
+          type: "fill",
+          items: [
+            { q: "Maintenant, tu cherches un logement. (L'année dernière, …)", answer: "Tu as cherché un logement." },
+            { q: "Cet après-midi, vous trouvez un appartement. (La semaine dernière, …)", answer: "Vous avez trouvé un appartement." },
+            { q: "Aujourd'hui, ils achètent un lave-linge. (Il y a trois mois, …)", answer: "Ils ont acheté un lave-linge." },
+            { q: "Ce soir, je visite une maison. (Hier soir, …)", answer: "J'ai visité une maison." },
+            { q: "En septembre, elle ne déménage pas à Lyon. (Le mois dernier, …)", answer: "Elle n'a pas déménagé." },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_7.md) : l'énoncé imprimé de cet exercice
+          // saute la lettre « d » (numérotation a, b, c, e, f dans le cahier
+          // source) ; reproduit fidèlement sans inventer d'énoncé.
+          num: 4, page: 79,
+          instruction: "Conjuguez les verbes au passé composé.",
+          vi: "Chia động từ ở thì passé composé để hoàn thành câu — câu « d » manquante dans l'énoncé imprimé, voir note.",
+          type: "fill",
+          items: [
+            { q: "a. Ma sœur (trouver) ……… un frigo.", answer: "a trouvé" },
+            { q: "b. Vous (déménager) ……… la semaine dernière ?", answer: "avez déménagé" },
+            { q: "c. Nous (habiter) ……… dix ans dans cette maison.", answer: "avons habité" },
+            { q: "e. Tu (chercher) ……… un logement ?", answer: "as cherché" },
+            { q: "f. J'(visiter) ……… un beau studio.", answer: "ai visité" },
+          ],
+        },
+      ],
+
+      // p1 — Les prépositions de lieu (2) (cahier p. 80)
+      p1: [
+        {
+          num: 2, page: 80, audioSrc: piste(71),
+          instruction: "Écoutez et complétez les phrases avec les prépositions de lieu.",
+          vi: "Nghe và điền giới từ chỉ vị trí phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Le fauteuil est ……… du canapé.", answer: "à gauche" },
+            { q: "Le tapis est ……… la table.", answer: "sous" },
+            { q: "Il y a une petite table ronde ……… le fauteuil et le canapé.", answer: "derrière" },
+            { q: "La petite table ronde est ……… de la grande plante.", answer: "à droite" },
+            { q: "……… la table carrée, il y a une plante et des objets.", answer: "Sur" },
+            { q: "Les fenêtres sont ……… le canapé.", answer: "derrière" },
+          ],
+        },
+        {
+          num: 3, page: 80,
+          instruction: "Observez les dessins et écrivez les 4 différences (Exemple : L'armoire est à gauche de la fenêtre. (image A) / L'armoire est à droite de la fenêtre. (image B)).",
+          vi: "So sánh hai hình vẽ và tìm 4 điểm khác nhau, diễn đạt bằng giới từ chỉ vị trí.",
+          type: "fill",
+          items: [
+            { q: "a. Image A : Le tapis est à côté du lit → Image B :", answer: "Le tapis est sous le lit" },
+            { q: "b. Image A : L'ordinateur est à gauche de la plante → Image B :", answer: "L'ordinateur est à droite de la plante" },
+            { q: "c. Image A : La chaise est devant le bureau → Image B :", answer: "La chaise est sous le bureau" },
+            { q: "d. Image A : Il y a une télévision → Image B :", answer: "Il n'y a pas de télévision" },
+          ],
+        },
+      ],
+
+      // p2 — L'obligation et l'interdiction (1) (cahier p. 82)
+      p2: [
+        {
+          num: 1, page: 82, audioSrc: piste(74),
+          instruction: "Écoutez les phrases et cochez la bonne réponse.",
+          vi: "Nghe và xác định câu diễn đạt sự bắt buộc, yêu cầu lịch sự hay cấm đoán.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["obligation", "demande", "interdiction"], answer: "obligation" },
+            { q: "b.", options: ["obligation", "demande", "interdiction"], answer: "interdiction" },
+            { q: "c.", options: ["obligation", "demande", "interdiction"], answer: "demande" },
+            { q: "d.", options: ["obligation", "demande", "interdiction"], answer: "interdiction" },
+            { q: "e.", options: ["obligation", "demande", "interdiction"], answer: "interdiction" },
+            { q: "f.", options: ["obligation", "demande", "interdiction"], answer: "obligation" },
+          ],
+        },
+        {
+          num: 2, page: 82,
+          instruction: "Lisez le règlement de l'immeuble et cochez les phrases correctes (Merci de fermer la porte d'entrée. / Défense de fumer dans l'ascenseur. / Prière de jeter vos poubelles dans le local à poubelles. / Interdiction de faire du bruit après 22h. / Défense de laisser votre vélo dans l'entrée.).",
+          vi: "Đọc nội quy tòa nhà và xác định câu nào diễn đạt đúng nội dung nội quy.",
+          type: "truefalse",
+          items: [
+            { q: "a. Il faut fermer la porte d'entrée.", answer: false },
+            { q: "b. Il est possible de fumer dans l'ascenseur.", answer: false },
+            { q: "c. Il est interdit de jeter les poubelles dans le local à poubelles.", answer: false },
+            { q: "d. Il n'est pas possible de faire du bruit après 22h.", answer: true },
+            { q: "e. Il est interdit de laisser son vélo dans l'entrée.", answer: true },
+          ],
+        },
+        {
+          num: 3, page: 82,
+          instruction: "Remettez les phrases dans l'ordre.",
+          vi: "Sắp xếp lại từ để tạo câu diễn đạt yêu cầu/cấm đoán trong khu chung cư.",
+          type: "order",
+          items: [
+            { tokens: ["Prière", "de", "trier", "vos", "déchets."],
+              answer: ["Prière", "de", "trier", "vos", "déchets."] },
+            { tokens: ["Merci", "de", "tenir", "votre", "chien", "en", "laisse."],
+              answer: ["Merci", "de", "tenir", "votre", "chien", "en", "laisse."] },
+            { tokens: ["Il", "est", "interdit", "de", "fumer", "dans", "les", "parties", "communes."],
+              answer: ["Il", "est", "interdit", "de", "fumer", "dans", "les", "parties", "communes."] },
+            { tokens: ["Ne", "laissez", "pas", "la", "porte", "d'entrée", "ouverte."],
+              answer: ["Ne", "laissez", "pas", "la", "porte", "d'entrée", "ouverte."] },
+            { tokens: ["Défense", "de", "jouer", "au", "ballon", "dans", "le", "hall."],
+              answer: ["Défense", "de", "jouer", "au", "ballon", "dans", "le", "hall."] },
+          ],
+        },
+        {
+          num: 4, page: 82,
+          instruction: "Regardez les panneaux et soulignez la phrase correcte du règlement de l'immeuble (Exemple : (panneau vélo interdit) → Interdiction de laisser votre vélo dans le local.).",
+          vi: "Nhìn biển báo và chọn câu nội quy đúng nghĩa với biển báo.",
+          type: "choice",
+          items: [
+            { q: "a. (fumer barré)", options: ["Il est interdit de fumer.", "Prière de fumer."], answer: "Il est interdit de fumer." },
+            { q: "b. (fête barrée)", options: ["Merci de respecter les fêtes des voisins.", "Interdiction de faire du bruit après 22h."], answer: "Interdiction de faire du bruit après 22h." },
+            { q: "c. (déchets)", options: ["Ne pas trier les déchets.", "Merci de trier les déchets."], answer: "Merci de trier les déchets." },
+            { q: "d. (pelouse barrée)", options: ["Prière de marcher sur la pelouse.", "Défense de marcher sur la pelouse."], answer: "Défense de marcher sur la pelouse." },
+            { q: "e. (chien en laisse)", options: ["Prière de tenir les chiens en laisse.", "Il est interdit de tenir les chiens en laisse."], answer: "Prière de tenir les chiens en laisse." },
+          ],
+        },
+      ],
+
+      // p3 — Les pronoms COD (1) : le, la, l', les (cahier p. 83)
+      p3: [
+        {
+          num: 1, page: 83,
+          instruction: "Associez les phrases.",
+          vi: "Thay danh từ bổ ngữ trực tiếp bằng đại từ le, la, les phù hợp.",
+          type: "match",
+          pairs: [
+            { l: "Il contacte ses voisins.", r: "Il les contacte." },
+            { l: "Il contacte Alice.", r: "Il la contacte." },
+            { l: "Il contacte le peintre.", r: "Il le contacte." },
+            { l: "Il contacte le plombier et le serrurier.", r: "Il les contacte." },
+            { l: "Il contacte l'informaticien.", r: "Il le contacte." },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_7.md) : le corrigé imprimé donne la
+          // séquence brute « a. l' – b. les – c. l' – d. les – e. le – f. la
+          // – g. les – h. le » ; cette séquence est retenue telle quelle
+          // (elle correspond bien à la transcription audio complète).
+          num: 2, page: 83, audioSrc: piste(75),
+          instruction: "Cochez quand vous entendez le pronom le, la, l' ou les.",
+          vi: "Nghe và đánh dấu đại từ bổ ngữ trực tiếp nghe được (le, la, l', les).",
+          type: "fill",
+          items: [
+            { q: "a.", answer: "l'" },
+            { q: "b.", answer: "les" },
+            { q: "c.", answer: "l'" },
+            { q: "d.", answer: "les" },
+            { q: "e.", answer: "le" },
+            { q: "f.", answer: "la" },
+            { q: "g.", answer: "les" },
+            { q: "h.", answer: "le" },
+          ],
+        },
+        {
+          num: 3, page: 83,
+          instruction: "Répondez aux questions avec les pronoms le, la, l', les (Exemple : Tu appelles l'informaticien ? → Oui, je l'appelle.).",
+          vi: "Trả lời câu hỏi bằng đại từ bổ ngữ trực tiếp thay cho danh từ.",
+          type: "fill",
+          items: [
+            { q: "Vous contactez l'électricien ?", answer: "Oui, je le contacte." },
+            { q: "Vous aidez votre voisine ?", answer: "Oui, je l'aide." },
+            { q: "Le plombier répare la fuite d'eau ?", answer: "Oui, il la répare." },
+            { q: "Marie connaît ses voisins ?", answer: "Non, elle ne les connaît pas." },
+            { q: "Tu rencontres Paul et sa femme dans la résidence ?", answer: "Oui, je les rencontre." },
+          ],
+        },
+        {
+          num: 4, page: 83,
+          instruction: "Devinettes. Que remplacent les pronoms le, la, les ? (Exemple : Je l'ouvre quand je rentre chez moi → la porte)",
+          vi: "Đoán từ mà đại từ le/la/les thay thế trong mỗi câu đố.",
+          type: "fill",
+          items: [
+            { q: "Je l'appelle pour réparer ma serrure ou ouvrir ma porte.", answer: "le serrurier" },
+            { q: "Nous les trions avant de les jeter.", answer: "les déchets" },
+            { q: "Vous le prenez pour monter à votre appartement.", answer: "l'ascenseur" },
+            { q: "Je les vois tous les jours parce qu'ils habitent dans mon immeuble.", answer: "les voisins" },
+            { q: "Tu le contactes pour réparer ton ordinateur.", answer: "l'informaticien" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 81 "Le logement, l'équipement" + p. 84 ──
+    // "L'immeuble, les réparations"). Custom STEP_GROUPS_U7: v1_vocab
+    // (u7g1/u7g2/u7g4, "Nhà ở · các phòng · đồ điện gia dụng"), v2_vocab
+    // (u7g3/u7g5/u7g9, "Đồ nội thất · trang trí · giới từ chỉ vị trí"),
+    // v3_vocab (u7g6/u7g7/u7g8, "Toà nhà · sự cố · thợ sửa chữa"). The
+    // cahier's p.81 vocabulaire page maps to v1_vocab (logement, meubles par
+    // pièce, équipement) and p.84 maps to v3_vocab (immeuble, réparations,
+    // professionnels). v2_vocab has no dedicated cahier vocab exercise for
+    // this unit — its "prépositions de lieu" theme is already drilled under
+    // grammar p1 (cahier p.80), and its meubles/décoration words appear
+    // only within p.81's exercises, filed under v1_vocab there.
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 81,
+          instruction: "Complétez les phrases avec les mots suivants (rez-de-chaussée – déménager – étage – jardin – surface).",
+          vi: "Điền từ vựng về nhà ở (chuyển nhà, tầng, tầng trệt, diện tích, vườn).",
+          type: "fill",
+          bank: ["rez-de-chaussée", "déménager", "étage", "jardin", "surface"],
+          items: [
+            { q: "Paul habite à Lyon mais il va travailler à Grenoble. Il va ……… demain.", answer: "déménager" },
+            { q: "Dans notre maison, au ……… il y a une cuisine, un salon, une chambre et une salle de bains. À l'……… il y a deux chambres et des toilettes. (2 từ)", answer: "rez-de-chaussée étage" },
+            { q: "Notre appartement a une grande ……… : environ 120 m².", answer: "surface" },
+            { q: "Nous recherchons une maison avec un ……… pour nos enfants. Ils aiment jouer dehors !", answer: "jardin" },
+          ],
+        },
+        {
+          num: 2, page: 81,
+          instruction: "Regardez les images et écrivez les meubles et les objets dans chaque pièce (un fauteuil – un four – un réfrigérateur – un lit – une armoire – une plante – une table basse – un canapé – un bureau – une cuisinière – un tableau – une chaise).",
+          vi: "Xếp đồ nội thất vào đúng phòng (bếp, phòng khách, phòng ngủ).",
+          type: "fill",
+          items: [
+            { q: "Cuisine :", answer: "un réfrigérateur, un four, une cuisinière" },
+            { q: "Salon :", answer: "un fauteuil, une table basse, un canapé, une plante, un tableau" },
+            { q: "Chambre :", answer: "une armoire, un bureau, un lit (+ une chaise, donnée en exemple dans l'énoncé)" },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_7.md) : la liste de mots proposée contient
+          // « lave-linge », qui n'apparaît finalement dans aucun blanc du
+          // corrigé (c'est un intrus — l'appartement décrit n'a pas de
+          // lave-linge, confirmé aussi par la compréhension orale p.85).
+          num: 3, page: 81, audioSrc: piste(72),
+          instruction: "Écoutez le message et complétez les phrases avec les mots suivants (chaises – four – lave-linge – frigo – canapé – équipée – cuisinière – table – loyer – douche – surface). Attention, un mot est un intrus.",
+          vi: "Nghe tin nhắn rao cho thuê studio và điền từ vựng về nội thất, tiện nghi — chú ý có 1 từ dư (lave-linge), xem note.",
+          type: "fill",
+          bank: ["chaises", "four", "lave-linge", "frigo", "canapé", "équipée", "cuisinière", "table", "loyer", "douche", "surface"],
+          items: [
+            { q: "LOUE STUDIO — ……… : 456 €", answer: "Loyer" },
+            { q: "……… : 22 m²", answer: "Surface" },
+            { q: "Meublé avec un ………, une ………, des ……… . (3 từ)", answer: "canapé table chaises" },
+            { q: "Cuisine ……… avec un ………, une ………, un ……… . (4 từ)", answer: "équipée four cuisinière frigo" },
+            { q: "Salle de bains avec ……… .", answer: "douche" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 1, page: 84, audioSrc: piste(76),
+          instruction: "Écoutez les problèmes de ces personnes. Elles contactent quel professionnel ?",
+          vi: "Nghe các vấn đề và xác định cần liên hệ thợ chuyên môn nào.",
+          type: "fill",
+          items: [
+            { q: "a. (ordinateur en panne)", answer: "un informaticien" },
+            { q: "b. (clés perdues)", answer: "un serrurier" },
+            { q: "c. (murs à repeindre)", answer: "un peintre" },
+            { q: "d. (électricité coupée)", answer: "un électricien" },
+            { q: "e. (fuite d'eau)", answer: "un plombier" },
+          ],
+        },
+        {
+          num: 2, page: 84,
+          instruction: "Complétez le dialogue avec les mots suivants (porte d'entrée – plombier – voisin – réparer – résidence – appartement).",
+          vi: "Điền từ vào hội thoại giữa hàng xóm mới về sự cố rò rỉ nước.",
+          type: "fill",
+          bank: ["porte d'entrée", "plombier", "voisin", "réparer", "résidence", "appartement"],
+          items: [
+            { q: "1. (dans l'ordre du dialogue)", answer: "voisin" },
+            { q: "2.", answer: "appartement" },
+            { q: "3.", answer: "résidence" },
+            { q: "4.", answer: "plombier" },
+            { q: "5.", answer: "réparer" },
+            { q: "6.", answer: "porte d'entrée" },
+          ],
+        },
+        {
+          num: 3, page: 84,
+          instruction: "Associez les débuts et fins de phrases.",
+          vi: "Nối đầu câu và cuối câu để tạo câu hoàn chỉnh về nhà ở, sửa chữa.",
+          type: "match",
+          pairs: [
+            { l: "Merci de trier vos déchets avant", r: "de les jeter à la poubelle." },
+            { l: "J'ai visité un appartement dans le centre mais", r: "j'ai préféré le studio à côté de la gare." },
+            { l: "Tu as téléphoné au plombier pour", r: "réparer la fuite d'eau dans la salle de bains." },
+            { l: "Il a visité l'appartement de mon voisin et", r: "il a décidé de déménager en décembre." },
+            { l: "Pour décorer notre salon", r: "nous allons mettre des tableaux." },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 81 voyelles [e]/[ɛ]). The p.84 phonie- ──
+    // graphie ("le « e » final non prononcé", piste 77) is a "listen and
+    // repeat" dialogue exercise with no fill-in blanks or printed corrigé to
+    // check against — like the free-answer Jeux items, it is intentionally
+    // excluded here. The p.81 page also has no second (dictée) activity
+    // printed, unlike most other units' phono pages — see cahier_unite_7.md.
+    phono: [
+      {
+        num: 1, page: 81, audioSrc: piste(73),
+        instruction: "Phonie-graphie : les voyelles [e] et [ɛ]. Écoutez les phrases et indiquez combien de fois vous entendez [e] et [ɛ] (format : e/ɛ). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện âm [e] (như trong été) và [ɛ] (như trong fenêtre).",
+        type: "fill",
+        items: [
+          { q: "a. La semaine prochaine, je vais déménager.", answer: "3/3" },
+          { q: "b. Dans cette pièce, il y a deux fenêtres avec une belle vue.", answer: "0/5" },
+          { q: "c. Au vide-grenier, nous avons acheté des vêtements pas chers.", answer: "3/2" },
+          { q: "d. La semaine dernière, elles ont trouvé des objets de décoration.", answer: "3/5" },
+          { q: "e. Cet été, vous allez être en vacances et voyager à bicyclette.", answer: "5/3" },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 85 CO+PE, p. 86-87 Bilan linguistique /40, ──
+    // p. 88-89 DELF A1, p. 90 Jeux). Jeux activité 2 ("grille de mots
+    // cachés" — positions not reproducible, but the target word list is
+    // known, kept as a single item) and activité 3 ("le petit bac", a
+    // free-answer group game) are handled per their own notes below;
+    // Production orale p.89 (jeu de cartes-mots) is kept as a single fill
+    // item with the corrigé's example questions.
+    bilan: [
+      {
+        // ⚠️ Note (cahier_unite_7.md) : dans le dialogue transcrit, c'est
+        // Mona (pas Clarisse) qui a le problème d'ordinateur, et c'est
+        // Clarisse qui recommande son collègue informaticien à Mona — la
+        // numérotation imprimée des questions 8/9 semble inverser les deux
+        // personnages. Reproduit tel quel, sans correction.
+        num: 1, page: 85, audioSrc: piste(78),
+        instruction: "Compréhension orale — « Nouveau logement ». Écoutez le dialogue et répondez aux questions.",
+        vi: "Nghe hội thoại về căn hộ mới và trả lời câu hỏi — có khả năng nhầm lẫn tên nhân vật trong đề gốc ở câu 8/9, xem note.",
+        type: "fill",
+        items: [
+          { q: "1. Pourquoi Mona est-elle fatiguée ?", answer: "Elle est fatiguée parce qu'elle ne peut pas dormir : ses voisins font du bruit." },
+          { q: "2. Mona : a déménagé / va déménager.", answer: "va déménager" },
+          { q: "4. L'appartement fait ……… mètres carrés.", answer: "45" },
+          { q: "6. Que peut voir Mona derrière son appartement ?", answer: "Un joli jardin." },
+          { q: "7. Dans le salon, il y a :", answer: "un canapé et deux fauteuils." },
+          { q: "8. Quel est le problème de Clarisse ? (⚠️ voir note — c'est en réalité Mona qui a ce problème)", answer: "un problème avec son ordinateur" },
+          { q: "9. Le collègue de Mona peut aider Clarisse parce qu'il est :", answer: "informaticien." },
+        ],
+      },
+      {
+        num: 2, page: 85,
+        instruction: "Compréhension orale — Vrai ou faux ?",
+        vi: "Nghe hội thoại và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "3. L'appartement est devant la bibliothèque.", answer: true },
+          { q: "5. Dans la cuisine, il y a un four, un lave-linge, un frigo et une cuisinière.", answer: false },
+        ],
+      },
+      {
+        num: 3, page: 85,
+        instruction: "Production écrite — Vous partez en vacances et vous souhaitez louer votre studio. Vous écrivez une annonce pour décrire votre studio meublé et expliquer pourquoi il est agréable.",
+        vi: "Viết một mẩu quảng cáo cho thuê studio, mô tả nội thất và lý do căn hộ dễ chịu.",
+        type: "fill",
+        items: [
+          { q: "Rédigez l'annonce complète.", answer: "Location dans le centre de Lyon. C'est un studio très agréable et confortable. Il a une grande pièce avec un coin cuisine, une cuisinière et un frigo. La salle de bain est totalement neuve. L'appartement est meublé. Dans le salon, il y a un canapé, un meuble avec la télévision et une table basse. Le lit est très confortable et l'appartement est très calme. Les voisins ne font pas de bruit. Vous allez l'adorer." },
+        ],
+      },
+      {
+        num: 4, page: 86,
+        instruction: "Bilan linguistique — Grammaire : Conjuguez les verbes au passé composé. (/5)",
+        vi: "Chia động từ ở thì passé composé.",
+        type: "fill",
+        items: [
+          { q: "Mes voisins (déménager) ……… hier.", answer: "ont déménagé" },
+          { q: "Vous (trouver) ……… une belle maison !", answer: "avez trouvé" },
+          { q: "J'(décorer) ……… ma chambre.", answer: "ai décoré" },
+          { q: "Tu (visiter) ……… combien d'appartements ?", answer: "as visité" },
+          { q: "Paul (acheter) ……… un réfrigérateur et une machine à laver.", answer: "a acheté" },
+        ],
+      },
+      {
+        num: 5, page: 86,
+        instruction: "Bilan linguistique — Grammaire : Remettez les phrases dans l'ordre. (/5)",
+        vi: "Sắp xếp lại từ để tạo câu.",
+        type: "fill",
+        items: [
+          { q: "du / canapé / La lampe / est / à côté", answer: "La lampe est à côté du canapé." },
+          { q: "ai / un appartement / à gauche / J'/ du / cinéma / trouvé", answer: "J'ai trouvé un appartement à gauche du cinéma." },
+          { q: "Mon /dormir / le fauteuil / aime / sous / chat", answer: "Mon chat aime dormir sous le fauteuil." },
+          { q: "sur / oublié / as / clés / tes / Tu / la table", answer: "Tu as oublié tes clés sur la table." },
+          { q: "est / du frigo / La machine à laver / à droite", answer: "La machine à laver est à droite du frigo." },
+        ],
+      },
+      {
+        num: 6, page: 86,
+        instruction: "Bilan linguistique — Grammaire : Cochez la phrase de même sens. (/5)",
+        vi: "Chọn câu có nghĩa tương đương.",
+        type: "fill",
+        items: [
+          { q: "Défense de fumer !", answer: "Je ne dois pas fumer." },
+          { q: "Prière de respecter les voisins après 22 h.", answer: "Vous ne devez pas déranger les voisins le soir." },
+          { q: "Interdiction de manger dans la classe.", answer: "Vous ne pouvez pas manger dans la classe." },
+          { q: "Merci de trier les déchets.", answer: "Il est nécessaire de trier les déchets." },
+          { q: "Fermez la porte à clé.", answer: "Vous devez fermer la porte à clé." },
+        ],
+      },
+      {
+        num: 7, page: 86,
+        instruction: "Bilan linguistique — Grammaire : Quel pronom remplace les mots soulignés ? (/5)",
+        vi: "Xác định đại từ thay thế cho danh từ được gạch chân.",
+        type: "fill",
+        items: [
+          { q: "Il visite l'appartement ce soir.", answer: "le" },
+          { q: "Elle connaît son voisin.", answer: "le" },
+          { q: "Vous mettez la télévision en face du canapé.", answer: "la" },
+          { q: "Il répare le lave-linge et la cuisinière.", answer: "les" },
+          { q: "Notre chat adore cet endroit de l'appartement.", answer: "l'" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_7.md) : le corrigé disponible pour cette
+        // page semble en réalité provenir de l'exercice 4 des Jeux p.90
+        // (mots croisés), pas de cet exercice 1 basé sur des images de
+        // meubles. Les réponses ci-dessous sont une estimation prudente
+        // basée sur le vocabulaire de l'unité (meubles cités p.81), à
+        // vérifier visuellement contre les images imprimées.
+        num: 8, page: 87,
+        instruction: "Bilan linguistique — Vocabulaire : Écrivez le nom des meubles et des objets (exercice basé sur 5 images). (/5)",
+        vi: "Viết tên đồ nội thất theo hình minh hoạ — đáp án là ước tính thận trọng, xem note.",
+        type: "fill",
+        items: [
+          { q: "a. (meuble illustré)", answer: "FAUTEUIL" },
+          { q: "b. (meuble illustré)", answer: "RÉFRIGÉRATEUR" },
+          { q: "c. (meuble illustré)", answer: "CANAPÉ" },
+          { q: "d. (meuble illustré)", answer: "LIT" },
+          { q: "e. (meuble illustré)", answer: "TABLEAU" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_7.md) : l'énoncé propose 6 activités (a-f)
+        // mais le corrigé imprimé ne donne que 5 correspondances (a-e) ;
+        // f → 2 est une déduction logique (prendre une douche → salle de
+        // bains), non confirmée par le corrigé imprimé.
+        num: 9, page: 87,
+        instruction: "Bilan linguistique — Vocabulaire : Lisez les phrases et associez une activité à une pièce de la maison. (/5)",
+        vi: "Nối hoạt động với phòng tương ứng trong nhà — mục f là suy luận, chưa xác nhận với đáp án in, xem note.",
+        type: "match",
+        pairs: [
+          { l: "Gabrielle prépare le dîner.", r: "dans la cuisine." },
+          { l: "Je me brosse les dents.", r: "dans la salle de bains." },
+          { l: "Juliette dort.", r: "dans la chambre." },
+          { l: "Les enfants jouent au ballon.", r: "dans le jardin." },
+          { l: "On regarde la télévision.", r: "dans le salon." },
+        ],
+      },
+      {
+        num: 10, page: 87,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases avec les mots suivants (la pelouse – appartements – voisins – la porte d'entrée – l'escalier). (/5)",
+        vi: "Điền từ vựng về toà nhà.",
+        type: "fill",
+        bank: ["la pelouse", "appartements", "voisins", "la porte d'entrée", "l'escalier"],
+        items: [
+          { q: "L'ascenseur ne fonctionne plus, je vais monter par ……… .", answer: "l'escalier" },
+          { q: "Dans notre résidence, il est interdit de marcher sur ……… .", answer: "la pelouse" },
+          { q: "Mes ……… sont très gentils, je les rencontre souvent dans l'ascenseur.", answer: "voisins" },
+          { q: "Il est nécessaire de fermer ……… de l'immeuble.", answer: "la porte d'entrée" },
+          { q: "Dans notre immeuble, il y a 10 ……… .", answer: "appartements" },
+        ],
+      },
+      {
+        num: 11, page: 87,
+        instruction: "Bilan linguistique — Vocabulaire : Cochez la bonne réponse. (/5)",
+        vi: "Chọn đáp án đúng về nghề nghiệp thợ sửa chữa.",
+        type: "fill",
+        items: [
+          { q: "Le plombier", answer: "répare les fuites d'eau." },
+          { q: "Le peintre", answer: "change la couleur des murs." },
+          { q: "Le serrurier", answer: "répare des serrures." },
+          { q: "L'informaticien", answer: "répare des ordinateurs." },
+          { q: "L'électricien", answer: "répare une lampe." },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_7.md) : la transcription mentionne un
+        // problème de fuite d'eau (pas d'électricité), mais la réponse
+        // imprimée à la question 1 est pourtant B (l'électricité) —
+        // contradiction reproduite fidèlement sans harmonisation.
+        num: 12, page: 88, audioSrc: piste(79),
+        instruction: "DELF A1 — Compréhension de l'oral (4 points). Message vocal (répondeur du bureau).",
+        vi: "Nghe tin nhắn thoại về sự cố ở văn phòng và trả lời câu hỏi — lưu ý mâu thuẫn giữa lời thoại và đáp án in sẵn ở câu 1, xem note.",
+        type: "choice",
+        items: [
+          { q: "1. Au bureau, il y a un problème avec… (⚠️ voir note)", options: ["A. la fuite d'eau", "B. l'électricité", "C. l'ascenseur"], answer: "B. l'électricité" },
+          { q: "2. Où sont rangés les livres ?", options: ["A. Dans le salon", "B. Dans le couloir", "C. Dans la chambre"], answer: "B. Dans le couloir" },
+          { q: "3. Où est l'ordinateur ?", options: ["A. À droite de l'armoire", "B. À gauche de l'armoire", "C. Sur l'armoire"], answer: "B. À gauche de l'armoire" },
+          { q: "4. À quelle heure est la réunion mardi ?", options: ["A. À 13 h 30", "B. À 15 h 30", "C. À 17 h 30"], answer: "B. À 15 h 30" },
+        ],
+      },
+      {
+        num: 13, page: 88,
+        instruction: "DELF A1 — Compréhension des écrits. Email de Karim, ami belge.",
+        vi: "Đọc email của Karim và trả lời câu hỏi (nội dung: chuyển nhà, tầng, đồ đạc).",
+        type: "choice",
+        items: [
+          { q: "1. Pourquoi Karim déménage ?", options: ["A. Il a acheté une maison.", "B. Il va avoir un enfant.", "C. Il a un nouveau travail."], answer: "B. Il va avoir un enfant." },
+          { q: "2. Qu'est-ce que Karim a acheté ? (image)", options: ["A", "B", "C"], answer: "A" },
+          { q: "3. À quel étage est l'appartement ?", options: ["A. Au 3e.", "B. Au 5e.", "C. Au 2e."], answer: "B. Au 5e." },
+          { q: "4. Dans l'immeuble, il n'y a pas…", options: ["A. de local à vélos.", "B. d'ascenseur.", "C. de balcon."], answer: "B. d'ascenseur." },
+          { q: "5. Qu'est-ce que Karim prépare ? (image)", options: ["A", "B", "C"], answer: "C" },
+        ],
+      },
+      {
+        num: 14, page: 89,
+        instruction: "DELF A1 — Production écrite (10 points). Formulaire d'inscription au vide-grenier.",
+        vi: "Điền mẫu đơn đăng ký tham gia chợ đồ cũ (vide-grenier).",
+        type: "fill",
+        items: [
+          { q: "Exemple de production complet (modèle du corrigé) :", answer: "Prénom : Anchali — Date de naissance : 01/12/2002 — Nationalité : thaïlandaise — Courriel : anchalitipa@gmail.com — Adresse (numéro et rue) : 32 rue Palatine — Pays : Belgique — Téléphone : 07 68 56 90 81 — Profession : comédienne — Meubles à vendre : une armoire et un fauteuil" },
+        ],
+      },
+      {
+        num: 15, page: 89,
+        instruction: "DELF A1 — Production orale. Échange d'informations à partir de cartes-mots : Canapé ? Maison ? Adresse ? Jardin ? Chien ? Appartement ?",
+        vi: "Đặt câu hỏi trao đổi thông tin dựa trên các từ khóa cho sẵn (nhà ở).",
+        type: "fill",
+        items: [
+          { q: "Exemples de questions (modèle du corrigé) :", answer: "Canapé : Vous avez un canapé dans votre salon ? — Maison : Vous habitez dans une maison ou un appartement ? — Adresse : Quelle est votre adresse ? — Jardin : Vous avez un jardin ? — Chien : Vous préférez les chiens ou les chats ? — Appartement : Vous habitez quel appartement ?" },
+        ],
+      },
+      {
+        num: 16, page: 90,
+        instruction: "Jeux — Devinettes.",
+        vi: "Đoán từ vựng đồ nội thất qua các câu đố.",
+        type: "fill",
+        items: [
+          { q: "Je suis confortable, je suis dans le salon.", answer: "canapé" },
+          { q: "Je suis un meuble de la chambre pour dormir.", answer: "lit" },
+          { q: "Je sers à ranger les vêtements, je suis dans la chambre.", answer: "armoire" },
+          { q: "Je suis un objet utile dans la cuisine pour réchauffer un plat, une boisson.", answer: "micro-ondes" },
+        ],
+      },
+      {
+        num: 17, page: 90,
+        instruction: "Jeux — Trouvez les mots dans la grille (positions non reproductibles — liste des mots à retrouver ci-dessous).",
+        vi: "Tìm các từ trong ô chữ — vị trí trong bảng không trích xuất được, chỉ có danh sách từ cần tìm.",
+        type: "fill",
+        items: [
+          { q: "10 mots à retrouver dans la grille :", answer: "appartement, escalier, réfrigérateur, tableau, lit, cuisine, chambre, fauteuil, canapé, four" },
+        ],
+      },
+      {
+        num: 18, page: 90,
+        instruction: "Jeux — Trouvez les lettres pour compléter le mot.",
+        vi: "Điền chữ cái còn thiếu để hoàn thành từ.",
+        type: "fill",
+        items: [
+          { q: "F – – T – – I L", answer: "FAUTEUIL" },
+          { q: "R – – R I – E R – T – U R", answer: "RÉFRIGÉRATEUR" },
+          { q: "– M – E U – L E", answer: "IMMEUBLE" },
+          { q: "D – – E N – G – R", answer: "DÉMÉNAGER" },
+          { q: "– U I – I N – E R E", answer: "CUISINIÈRE" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_7.md) : le corrigé imprimé confirme
+        // seulement les mots-clés de chaque étape de la charade (jeu de
+        // sons oral), sans détailler le rapprochement phonétique complet.
+        num: 19, page: 90,
+        instruction: "Jeux — Charades. Qu'est-ce que c'est ?",
+        vi: "Giải câu đố chữ (charade) — ghép các âm tiết để tạo thành từ vựng về nhà ở, xem note.",
+        type: "fill",
+        items: [
+          { q: "Mon premier est un adjectif possessif féminin (ta) ; mon deuxième est une couleur (bleu) ; mon tout est un meuble de la cuisine ou du salon.", answer: "table" },
+          { q: "Mon premier est une voyelle (a) ; mon deuxième est le contraire de « avec » (sans) ; mon troisième est le féminin de « frère » (sœur) ; mon tout monte et descend dans un immeuble.", answer: "ascenseur" },
+        ],
+      },
+    ],
+  },
 };
