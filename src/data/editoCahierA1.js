@@ -1393,4 +1393,650 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u3: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g3" ──
+    // g3 has 5 points. p4 "Verbes irréguliers — Acheter, Payer, Aller, Faire"
+    // has no dedicated cahier Grammaire page of its own — the cahier drills
+    // these verbs as a single extra exercise embedded in two OTHER grammar
+    // pages instead (p.32 ex.5 "payer/acheter/aller", under the prépositions
+    // page; p.34 ex.4 "faire/manger", under the quantité page). Those two
+    // exercises are filed under p4 here (matching their actual verb content),
+    // not under p1/p2 (matching their page header) — see cahier_unite_3.md.
+    grammar: {
+
+      // p0 — Le singulier et le pluriel des noms (cahier p. 31)
+      p0: [
+        {
+          num: 1, page: 31,
+          instruction: "Lisez et classez les noms dans le tableau (singulier ou pluriel).",
+          vi: "Xếp danh từ vào bảng theo số ít / số nhiều.",
+          type: "choice",
+          items: [
+            { q: "baguette", options: ["singulier", "pluriel"], answer: "singulier" },
+            { q: "abricots", options: ["singulier", "pluriel"], answer: "pluriel" },
+            { q: "tomates", options: ["singulier", "pluriel"], answer: "pluriel" },
+            { q: "courgette", options: ["singulier", "pluriel"], answer: "singulier" },
+            { q: "pâtes", options: ["singulier", "pluriel"], answer: "pluriel" },
+            { q: "panier", options: ["singulier", "pluriel"], answer: "singulier" },
+            { q: "poulet", options: ["singulier", "pluriel"], answer: "singulier" },
+          ],
+        },
+        {
+          num: 2, page: 31, audioSrc: piste(28),
+          instruction: "Écoutez et soulignez la bonne réponse (singulier ou pluriel).",
+          vi: "Nghe và gạch chân dạng số ít hay số nhiều đúng.",
+          type: "choice",
+          items: [
+            { q: "Quatre …… (yaourt/yaourts)", options: ["yaourt", "yaourts"], answer: "yaourts" },
+            { q: "Le …… (panier/paniers)", options: ["panier", "paniers"], answer: "panier" },
+            { q: "Les …… (œuf/œufs)", options: ["œuf", "œufs"], answer: "œufs" },
+            { q: "Trois …… (poivron/poivrons)", options: ["poivron", "poivrons"], answer: "poivrons" },
+            { q: "Des …… de saison. (produit/produits)", options: ["produit", "produits"], answer: "produits" },
+            { q: "Une …… (formule/formules)", options: ["formule", "formules"], answer: "formule" },
+          ],
+        },
+        {
+          num: 3, page: 31,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn dạng số ít/số nhiều đúng của danh từ.",
+          type: "choice",
+          items: [
+            { q: "J'aime les fruit / fruits de saison.", options: ["fruit", "fruits"], answer: "fruits" },
+            { q: "Il y a une boulangerie / boulangeries ici ?", options: ["boulangerie", "boulangeries"], answer: "boulangerie" },
+            { q: "Le poissonnier / poissonniers est très sympa.", options: ["poissonnier", "poissonniers"], answer: "poissonnier" },
+            { q: "J'achète mes légume / légumes au marché.", options: ["légume", "légumes"], answer: "légumes" },
+            { q: "Deux fromage / fromages de chèvre, s'il vous plaît.", options: ["fromage", "fromages"], answer: "fromages" },
+          ],
+        },
+        {
+          num: 4, page: 31,
+          instruction: "Complétez avec les noms au singulier ou au pluriel (Exemple : J'achète un croissant. → Tu achètes trois croissants.).",
+          vi: "Điền danh từ ở số ít hoặc số nhiều theo mẫu cho sẵn.",
+          type: "fill",
+          items: [
+            { q: "Je mange une ……………….. Tu manges deux pêches.", answer: "pêche" },
+            { q: "Lydia achète un kilo de pommes. Son ami achète trois ……………….. de pommes.", answer: "kilos" },
+            { q: "Marie a une ……………….. bleue. Claude a deux cartes bleues.", answer: "carte" },
+            { q: "Dans mon quartier, il y a une épicerie. Dans ton quartier, il y a trois ……………….. .", answer: "épiceries" },
+            { q: "Je paie un ……………….. de riz. Tu paies deux paquets de riz.", answer: "paquet" },
+          ],
+        },
+      ],
+
+      // p1 — Les prépositions de lieu (1) : à la/au/à l'/aux/chez (cahier p. 32)
+      p1: [
+        {
+          // ⚠️ Note (cahier_unite_3.md) : le corrigé imprimé ne détaille que
+          // la réponse "a" ; les 5 autres se déduisent directement de la
+          // transcription des phrases entendues (reproduite dans le corrigé).
+          num: 1, page: 32, audioSrc: piste(29),
+          instruction: "Écoutez et cochez (chez le / chez l' / au / à la / à l' / aux).",
+          vi: "Nghe và chọn giới từ đúng — 5/6 đáp án suy ra từ lời thoại (⚠️ voir note dans cahier_unite_3.md), không phải bảng đáp án trực tiếp.",
+          type: "choice",
+          items: [
+            { q: "a. Tu vas …… boulanger ?", options: ["chez le", "au", "à la", "chez l'", "à l'", "aux"], answer: "chez le" },
+            { q: "b. J'aime aller …… marché.", options: ["chez le", "au", "à la", "chez l'", "à l'", "aux"], answer: "au" },
+            { q: "c. Pour le poisson, on va …… poissonnerie.", options: ["chez le", "au", "à la", "chez l'", "à l'", "aux"], answer: "à la" },
+            { q: "d. Tu achètes les yaourts …… épicier, s'il te plaît ?", options: ["chez le", "au", "à la", "chez l'", "à l'", "aux"], answer: "chez l'" },
+            { q: "e. Les paniers sont disponibles …… épicerie.", options: ["chez le", "au", "à la", "chez l'", "à l'", "aux"], answer: "à l'" },
+            { q: "f. Je déteste payer …… caisses automatiques.", options: ["chez le", "au", "à la", "chez l'", "à l'", "aux"], answer: "aux" },
+          ],
+        },
+        {
+          num: 2, page: 32,
+          instruction: "Associez.",
+          vi: "Nối giới từ với địa điểm/nghề đúng.",
+          type: "match",
+          pairs: [
+            { l: "On va chez l'", r: "épicière." },
+            { l: "On va chez la", r: "boulangère." },
+            { l: "On va à la", r: "fromagerie." },
+            { l: "On va à l'", r: "épicerie." },
+            { l: "On va au", r: "marché." },
+            { l: "On va aux", r: "caisses." },
+          ],
+        },
+        {
+          num: 3, page: 32,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn giới từ đúng: \"à la/à l'/au/aux\" (nơi chốn) hay \"chez\" (người bán hàng).",
+          type: "choice",
+          items: [
+            { q: "Pour le fromage, je vais à la / chez la fromagère.", options: ["à la", "chez la"], answer: "chez la" },
+            { q: "J'achète ma viande à la / chez la boucherie.", options: ["à la", "chez la"], answer: "à la" },
+            { q: "Avec mon mari, on va au / chez le marché le dimanche.", options: ["au", "chez le"], answer: "au" },
+            { q: "Il y a beaucoup de monde à l' / chez l'épicier.", options: ["à l'", "chez l'"], answer: "chez l'" },
+            { q: "J'aime payer aux / chez les caisses automatiques.", options: ["aux", "chez les"], answer: "aux" },
+            { q: "Le dimanche, on achète les croissants à la / chez la boulangerie.", options: ["à la", "chez la"], answer: "à la" },
+          ],
+        },
+        {
+          num: 4, page: 32,
+          instruction: "Complétez les dialogues avec à, au, chez.",
+          vi: "Điền giới từ vào các đoạn hội thoại ngắn.",
+          type: "fill",
+          items: [
+            { q: "– Salut. Je suis ...................... la fromagère.", answer: "chez" },
+            { q: "– Nous allons ...................... marché samedi ?", answer: "au" },
+            { q: "– Vous payez comment ...................... supermarché ?", answer: "au" },
+            { q: "– Non, c'est bon, je vais ...................... la boulangerie.", answer: "à" },
+            { q: "– On va ...................... le boucher.", answer: "chez" },
+          ],
+        },
+      ],
+
+      // p2 — La quantité non définie : du/de la/de l'/des (cahier p. 34)
+      p2: [
+        {
+          num: 1, page: 34, audioSrc: piste(33),
+          instruction: "Écoutez et cochez (du / de la / de l' / des / un peu de / beaucoup de / pas de).",
+          vi: "Nghe và đánh dấu lượng từ đúng cho từng loại thực phẩm.",
+          type: "choice",
+          items: [
+            { q: "pâtes", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "des" },
+            { q: "beurre", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "du" },
+            { q: "légumes", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "beaucoup de" },
+            { q: "huile d'olive", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "de l'" },
+            { q: "fruits", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "un peu de" },
+            { q: "crème", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "de la" },
+            { q: "viande", options: ["du", "de la", "de l'", "des", "un peu de", "beaucoup de", "pas de"], answer: "pas de" },
+          ],
+        },
+        {
+          num: 2, page: 34,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn lượng từ đúng theo danh từ.",
+          type: "choice",
+          items: [
+            { q: "Nous mangeons de la / de l' viande au restaurant.", options: ["de la", "de l'"], answer: "de la" },
+            { q: "Je voudrais de la / du café.", options: ["de la", "du"], answer: "du" },
+            { q: "Il y a de la / de glace ?", options: ["de la", "de"], answer: "de la" },
+            { q: "Dans ma quiche, il y a un peu de / du sel.", options: ["un peu de", "du"], answer: "un peu de" },
+            { q: "Tu commandes de l' / d' eau, s'il te plaît ?", options: ["de l'", "d'"], answer: "de l'" },
+          ],
+        },
+        {
+          num: 3, page: 34,
+          instruction: "Complétez les phrases avec de la, de l', du, des, de, d'.",
+          vi: "Điền lượng từ/mạo từ partitif đúng.",
+          type: "fill",
+          items: [
+            { q: "Isa adore le poisson, elle mange ................ poisson à la maison et au restaurant.", answer: "du" },
+            { q: "Jean-Pierre aime les pâtes, il mange beaucoup ................ pâtes.", answer: "de" },
+            { q: "Je suis végétarienne, je ne mange pas ................ viande.", answer: "de" },
+            { q: "Mes enfants mangent ................ glace après le repas.", answer: "de la" },
+            { q: "Alexandra achète ................ huile bio.", answer: "de l'" },
+          ],
+        },
+      ],
+
+      // p3 — Les verbes en -ir (2e groupe) au présent : choisir, finir (cahier p. 35)
+      p3: [
+        {
+          num: 1, page: 35,
+          instruction: "Complétez les phrases avec Je, Tu, Elle, Nous, Vous, Ils.",
+          vi: "Điền chủ ngữ phù hợp với động từ chia sẵn.",
+          type: "fill",
+          items: [
+            { q: "................ choisissons le plat.", answer: "Nous" },
+            { q: "................ finit le café.", answer: "Elle" },
+            { q: "................ ne finis pas mon assiette.", answer: "Je" },
+            { q: "................ choisis ton dessert ?", answer: "Tu" },
+            { q: "................ choisissent l'entrée.", answer: "Ils" },
+            { q: "................ finissez la salade ?", answer: "Vous" },
+          ],
+        },
+        {
+          num: 2, page: 35,
+          instruction: "Complétez les phrases avec les verbes proposés.",
+          vi: "Điền động từ \"choisir\"/\"finir\" chia đúng.",
+          type: "fill",
+          bank: ["choisit", "finissent", "finis", "choisissez", "choisissent"],
+          items: [
+            { q: "Les enfants, vous ……………….……… : on mange à la maison ou au restaurant ?", answer: "choisissez" },
+            { q: "Pourquoi les enfants ne ……………….……… pas leur assiette ?", answer: "finissent" },
+            { q: "Mes parents ……………….……… le restaurant pour mon anniversaire !", answer: "choisissent" },
+            { q: "Je ……………….……… le dessert et on commande un café ?", answer: "finis" },
+            { q: "Mon mari ……………….……… le plat du jour et moi, le magret de canard.", answer: "choisit" },
+          ],
+        },
+        {
+          num: 3, page: 35,
+          instruction: "Complétez les terminaisons des verbes.",
+          vi: "Điền đúng đuôi động từ nhóm -ir (choisir/finir).",
+          type: "fill",
+          items: [
+            { q: "Mes amis et moi, nous choisiss…… nos plats en ligne.", answer: "choisissons" },
+            { q: "Tu chois…… quel plat ?", answer: "choisis" },
+            { q: "Je ne fin…… pas mon assiette, désolée.", answer: "finis" },
+            { q: "Vous finiss…… la mousse au chocolat ?", answer: "finissez" },
+            { q: "Mes enfants choisiss…… toujours le steak-frites au restaurant.", answer: "choisissent" },
+          ],
+        },
+        {
+          num: 4, page: 35, audioSrc: piste(34),
+          instruction: "Écoutez et complétez les phrases avec les verbes choisir ou finir.",
+          vi: "Nghe và điền đúng động từ \"choisir\" hoặc \"finir\".",
+          type: "fill",
+          items: [
+            { q: "On ……………….……… les courses et on va à la maison !", answer: "finit" },
+            { q: "Mon fils ……………….……… le plat du jour et moi la blanquette de veau.", answer: "choisit" },
+            { q: "Vous ne ……………….……… pas votre omelette ?", answer: "finissez" },
+            { q: "Nous ……………….……… le croque-monsieur végétarien en entrée, s'il vous plaît.", answer: "choisissons" },
+            { q: "Je ……………….……… ma salade et je mange le riz au lait en dessert.", answer: "finis" },
+          ],
+        },
+      ],
+
+      // p4 — Verbes irréguliers : acheter, payer, aller, faire (see note above —
+      // no dedicated cahier page; exercises pulled from p.32 and p.34)
+      p4: [
+        {
+          num: 5, page: 32,
+          instruction: "Conjuguez les verbes au présent (payer, acheter, aller).",
+          vi: "Chia động từ \"payer\" và \"acheter\"/\"aller\" theo chủ ngữ.",
+          type: "fill",
+          items: [
+            { q: "Tu ……………….……… (payer) ton panier en ligne ?", answer: "payes" },
+            { q: "Elles ……………….……… (acheter) le fromage chez le fromager.", answer: "achètent" },
+            { q: "Je ……………….……… (aller) à la boulangerie et j'achète le pain.", answer: "vais" },
+            { q: "Vous ……………….……… (payer) comment, Monsieur ?", answer: "payez" },
+            { q: "Mon fils ……………….……… (acheter) le pain au marché.", answer: "achète" },
+            { q: "Vous ……………….……… (aller) où pour faire vos courses ?", answer: "allez" },
+          ],
+        },
+        {
+          num: 4, page: 34,
+          instruction: "Transformez les verbes avec les sujets proposés (faire, manger — Exemple : Je mange beaucoup de fruits. → Ils mangent beaucoup de fruits.).",
+          vi: "Chia lại động từ \"faire\"/\"manger\" theo chủ ngữ mới.",
+          type: "fill",
+          items: [
+            { q: "Vous faites les courses au marché. → Nous ……………….. les courses au marché.", answer: "faisons" },
+            { q: "Tu manges avec nous ? → Vous ……………….. avec nous ?", answer: "mangez" },
+            { q: "Je fais la cuisine aujourd'hui ! → Nous ……………….. la cuisine aujourd'hui !", answer: "faisons" },
+            { q: "Elle ne mange pas au restaurant. → Elles ne ……………….. pas au restaurant.", answer: "mangent" },
+            { q: "Je ne mange pas le soir. → Nous ne ……………….. pas le soir.", answer: "mangeons" },
+            { q: "Il fait les courses chez l'épicier. → Ils ……………….. les courses chez l'épicier.", answer: "font" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 33 "Les commerces, la nourriture" + p. 36 ──
+    // "Les repas"). Custom STEP_GROUPS_U3: v1_vocab (u3g1-u3g4, "Cửa hàng ·
+    // trái cây · rau củ · thực phẩm"), v2_vocab (u3g5-u3g6, "Số lượng ·
+    // phương thức thanh toán"), v3_vocab (u3g7-u3g11, "Ở nhà hàng · đồ uống
+    // · món ăn · tráng miệng · bát đĩa"). Page 33's audio exercise (ex.3,
+    // quantities/payment vocabulary) was filed under v2_vocab, not v1_vocab,
+    // to match its actual content rather than its page.
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 33,
+          instruction: "Complétez les deux listes avec les mots proposés.",
+          vi: "Xếp từ vào 2 danh sách: tên cửa hàng và tên người bán hàng.",
+          type: "choice",
+          items: [
+            { q: "la poissonnerie", options: ["un commerce", "un(e) commerçant(e)"], answer: "un commerce", example: true },
+            { q: "la fromagerie", options: ["un commerce", "un(e) commerçant(e)"], answer: "un commerce" },
+            { q: "la boucherie", options: ["un commerce", "un(e) commerçant(e)"], answer: "un commerce" },
+            { q: "la poissonnière", options: ["un commerce", "un(e) commerçant(e)"], answer: "un(e) commerçant(e)" },
+            { q: "la fromagère", options: ["un commerce", "un(e) commerçant(e)"], answer: "un(e) commerçant(e)" },
+            { q: "la bouchère", options: ["un commerce", "un(e) commerçant(e)"], answer: "un(e) commerçant(e)" },
+          ],
+        },
+        {
+          num: 2, page: 33,
+          instruction: "Complétez les phrases avec les aliments sur les images.",
+          vi: "Nhìn hình và điền tên thực phẩm phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Le matin, je mange deux ………………...", answer: "croissants" },
+            { q: "Je n'aime pas les ………………...", answer: "haricots verts" },
+            { q: "Je voudrais deux kilos de ……………….., s'il vous plaît.", answer: "pommes de terre" },
+            { q: "Je vais au marché pour acheter des ……………….. et des ……………….. (2 từ)", answer: "fraises pêches" },
+            { q: "J'adore le ……………….. mais je n'aime pas la ……………….. (2 từ)", answer: "poisson viande" },
+          ],
+        },
+      ],
+
+      v2_vocab: [
+        {
+          num: 3, page: 33, audioSrc: piste(30),
+          instruction: "Écoutez et complétez les phrases.",
+          vi: "Nghe và điền từ chỉ đơn vị đo lường hoặc thực phẩm.",
+          type: "fill",
+          items: [
+            { q: "Je voudrais une ……………. de thon, s'il vous plaît !", answer: "boîte" },
+            { q: "Vous payez par ……………… ou en ……………… ? (2 từ)", answer: "carte espèces" },
+            { q: "J'ai un ……………….. de pâtes.", answer: "kilo" },
+            { q: "Tu achètes un ……………….. de crème, s'il te plaît ?", answer: "pot" },
+            { q: "Je n'aime pas le ……………….. de chèvre.", answer: "fromage" },
+            { q: "Combien coûte la ……………….., s'il vous plaît ?", answer: "salade" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 1, page: 36,
+          instruction: "Associez les images et les mots.",
+          vi: "Nối tên đồ dùng bàn ăn với hình ảnh tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "une assiette", r: "image 2 (exemple)" },
+            { l: "une carafe d'eau", r: "image 1" },
+            { l: "un couteau", r: "image 6" },
+            { l: "une cuillère", r: "image 5" },
+            { l: "une fourchette", r: "image 4" },
+            { l: "un verre", r: "image 3" },
+          ],
+        },
+        {
+          num: 2, page: 36,
+          instruction: "Remettez les actions dans l'ordre (au restaurant).",
+          vi: "Sắp xếp các hành động khi đi ăn nhà hàng theo thứ tự đúng.",
+          type: "fill",
+          items: [
+            { q: "lire la carte", answer: "1", example: true },
+            { q: "commander", answer: "2" },
+            { q: "manger l'entrée", answer: "3" },
+            { q: "manger le plat", answer: "4" },
+            { q: "manger le dessert", answer: "5" },
+            { q: "payer l'addition", answer: "6" },
+          ],
+        },
+        {
+          num: 3, page: 36,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn từ đúng theo nghĩa của câu (đồ ăn/thức uống/vật dụng).",
+          type: "choice",
+          items: [
+            { q: "Je paie le restaurant / l'addition.", options: ["le restaurant", "l'addition"], answer: "l'addition" },
+            { q: "Je voudrais une tarte aux pommes / une quiche en dessert.", options: ["une tarte aux pommes", "une quiche"], answer: "une tarte aux pommes" },
+            { q: "En plat du jour, nous avons le magret de canard / le riz au lait.", options: ["le magret de canard", "le riz au lait"], answer: "le magret de canard" },
+            { q: "Je mange la glace / les frites avec la cuillère.", options: ["la glace", "les frites"], answer: "la glace" },
+            { q: "Comme boisson, je voudrais un jus de fruits / une omelette.", options: ["un jus de fruits", "une omelette"], answer: "un jus de fruits" },
+          ],
+        },
+        {
+          num: 4, page: 36, audioSrc: piste(35),
+          instruction: "Écoutez et complétez le dialogue au restaurant.",
+          vi: "Nghe và điền các từ còn thiếu vào đoạn hội thoại tại nhà hàng.",
+          type: "fill",
+          items: [
+            { q: "Le client : Je voudrais ……………….., s'il vous plaît.", answer: "plat du jour" },
+            { q: "Le serveur : Très bien. Il y a un ……………….. à 16 euros avec le ……………….. et le …………….. (3 từ)", answer: "menu plat dessert" },
+            { q: "Le client : Ok, alors je prends le ……………….. aussi. Et de l'……………….., s'il vous plaît. (2 từ)", answer: "riz au lait eau" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 33 voyelles [i]/[y]/[u] + p. 36 ──
+    // intonation). Page 36's activité 2 (jouer le dialogue à deux) is
+    // "Réponses libres (pratique orale, pas de corrigé écrit)" and is
+    // intentionally excluded — no fixed answer to check.
+    phono: [
+      {
+        num: 1, page: 33, audioSrc: piste(31),
+        instruction: "Phonie-graphie : les voyelles [i], [y], [u]. Écoutez les phrases et indiquez combien de fois vous entendez [i], [y], [u] (format : i/y/u). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện của mỗi nguyên âm [i], [y], [u] trong câu (định dạng i/y/u), sau đó lặp lại.",
+        type: "fill",
+        items: [
+          { q: "a. Je voudrais le menu du jour s'il vous plaît.", answer: "1/2/3", example: true },
+          { q: "b. Nous proposons tous les midis des formules avec des légumes.", answer: "2/2/2" },
+          { q: "c. Voici la liste des courses pour l'épicerie.", answer: "4/0/2" },
+          { q: "d. Dimanche, Arthur organise un pique-nique avec ses amis.", answer: "5/1/0" },
+          { q: "e. Tu aimes beaucoup les cerises, les abricots et les kiwis.", answer: "4/1/1" },
+        ],
+      },
+      {
+        num: 2, page: 33, audioSrc: piste(32),
+        instruction: "Écoutez et complétez le texte avec les graphies correctes (i, u, ou).",
+        vi: "Nghe và điền đúng chữ cái tương ứng với nguyên âm [i]/[y]/[u].",
+        type: "fill",
+        items: [
+          { q: "Lund………, (voyelle de \"lundi\")", answer: "i" },
+          { q: "L………cie fait une liste. (voyelle de \"Lucie\")", answer: "u" },
+          { q: "une l………ste de courses. (voyelle de \"liste\")", answer: "i" },
+          { q: "une liste de c………rses. (voyelle de \"courses\")", answer: "ou" },
+          { q: "la b………langerie. (voyelle de \"boulangerie\")", answer: "ou" },
+          { q: "le s………permarché. (voyelle de \"supermarché\")", answer: "u" },
+          { q: "un p………let. (voyelle de \"poulet\")", answer: "ou" },
+          { q: "deux b………teilles de jus. (voyelle de \"bouteilles\")", answer: "ou" },
+          { q: "j………s de pommes. (voyelle de \"jus\")", answer: "u" },
+          { q: "beauc………p de légumes. (voyelle de \"beaucoup\")", answer: "ou" },
+          { q: "lég………mes. (voyelle de \"légumes\")", answer: "u" },
+        ],
+      },
+      {
+        num: 1, page: 36, audioSrc: piste(36),
+        instruction: "Phonie-graphie : l'intonation montante et descendante. Écoutez le dialogue et complétez avec « ? » ou « . » (dans l'ordre, séparés par un espace).",
+        vi: "Nghe và điền dấu chấm hỏi hoặc dấu chấm theo ngữ điệu lên/xuống (theo thứ tự, cách nhau bằng dấu cách).",
+        type: "fill",
+        items: [
+          { q: "a. J'aime bien manger du poisson… Et toi… – Moi je préfère manger de la viande… (3 dấu)", answer: ". ? ." },
+          { q: "b. Qu'est-ce que tu choisis… – La blanquette de veau… (2 dấu)", answer: "? ." },
+          { q: "c. Et tu manges toujours un dessert… – Oui j'adore les desserts… (2 dấu)", answer: "? ." },
+          { q: "d. Tu voudrais un café… Un thé… – Je préfère un thé… Je n'aime pas le café… Et toi… – Je voudrais un café… (6 dấu)", answer: "? ? . . ? ." },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 37 CO+PE, p. 38 Bilan linguistique /40, ──
+    // p. 40-41 DELF A1, p. 42 Jeux). Jeux activité 2 ("liste de courses en
+    // chaîne") is a free spoken group game with no written corrigé and is
+    // intentionally excluded. DELF PE (p.41, formulaire) has no example
+    // production printed in the corrigé ("Réponses libres") and is also
+    // excluded — there is nothing to check against.
+    bilan: [
+      {
+        num: 1, page: 37, audioSrc: piste(37),
+        instruction: "Compréhension orale — « Qu'est-ce qu'on mange ? » Écoutez et répondez aux questions.",
+        vi: "Nghe hội thoại của một cặp vợ chồng bàn về bữa tối và trả lời câu hỏi.",
+        type: "choice",
+        items: [
+          { q: "1. Qui parle ?", options: ["un couple", "des amis"], answer: "un couple" },
+          { q: "2. Qui prépare le plat principal ?", options: ["l'homme", "la femme"], answer: "l'homme" },
+          { q: "3a. Qu'est-ce qu'ils choisissent ?", options: ["une quiche", "une omelette"], answer: "une omelette" },
+          { q: "3b. Quelle salade ?", options: ["une salade de tomates", "une salade verte"], answer: "une salade de tomates" },
+          { q: "3c. Quelle tarte ?", options: ["une tarte aux abricots", "une tarte aux pommes"], answer: "une tarte aux pommes" },
+          { q: "4. Où l'homme va pour acheter de la glace ?", options: ["Au supermarché", "À l'épicerie"], answer: "À l'épicerie" },
+        ],
+      },
+      {
+        num: 2, page: 37,
+        instruction: "Production écrite — Lisez le message et répondez à Lina (« Coucou, qu'est-ce qu'on mange ce soir ? Une quiche à la courgette ou un croque-monsieur végétarien ? Qui achète quoi ? Bisous »).",
+        vi: "Trả lời tin nhắn của Lina, đề xuất món ăn tối và phân công đi mua đồ.",
+        type: "fill",
+        items: [
+          { q: "Rédigez la réponse complète.", answer: "Salut ! Je voudrais manger un croque-monsieur et une salade verte. Tu achètes le pain et les œufs ? Moi, je vais au marché, j'achète le jambon, le fromage et la salade. Je fais une mousse au chocolat pour le dessert. On a du chocolat ?" },
+        ],
+      },
+      {
+        num: 3, page: 38,
+        instruction: "Bilan linguistique — Grammaire : Soulignez la bonne réponse. (/5)",
+        vi: "Chọn dạng số ít/số nhiều đúng.",
+        type: "choice",
+        items: [
+          { q: "Il y a des œuf / œufs dans la quiche ?", options: ["œuf", "œufs"], answer: "œufs" },
+          { q: "On achète un poulet / poulets au marché.", options: ["poulet", "poulets"], answer: "poulet" },
+          { q: "Le panier / paniers est disponible chez le fleuriste.", options: ["panier", "paniers"], answer: "panier" },
+          { q: "Je voudrais trois pot de crème / pots de crème, s'il vous plaît.", options: ["pot de crème", "pots de crème"], answer: "pots de crème" },
+          { q: "Tu achètes une bouteille / bouteilles d'huile d'olive.", options: ["bouteille", "bouteilles"], answer: "bouteille" },
+        ],
+      },
+      {
+        num: 4, page: 38,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases avec chez le, chez la, au, à l', aux. (/5)",
+        vi: "Điền giới từ chỉ nơi chốn/người đúng.",
+        type: "fill",
+        items: [
+          { q: "Je paie ……………….. caisses automatiques.", answer: "aux" },
+          { q: "Le dimanche, nous allons ……………….. boulanger.", answer: "chez le" },
+          { q: "Vous faites vos courses ……………….. supermarché ?", answer: "au" },
+          { q: "Pour l'huile, on va ……………….. épicerie bio.", answer: "à l'" },
+          { q: "Tu achètes le fromage ……………….. fromagère ?", answer: "chez la" },
+        ],
+      },
+      {
+        num: 5, page: 38,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases avec du, de la, de l', des, de. (/5)",
+        vi: "Điền lượng từ/mạo từ partitif đúng.",
+        type: "fill",
+        items: [
+          { q: "On mange ............. poisson aujourd'hui ?", answer: "du" },
+          { q: "Je voudrais ............. eau, s'il vous plaît.", answer: "de l'" },
+          { q: "Nous avons ............. pommes de terre ?", answer: "des" },
+          { q: "Il y a ............. salade pour le dîner.", answer: "de la" },
+          { q: "Vous mangez beaucoup ............. légumes !", answer: "de" },
+        ],
+      },
+      {
+        num: 6, page: 38,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases avec les verbes choisir ou finir. (/5)",
+        vi: "Chia động từ \"choisir\"/\"finir\" đúng.",
+        type: "fill",
+        items: [
+          { q: "Tu ne ……………….………… pas ton assiette ? Ce n'est pas bien !", answer: "finis" },
+          { q: "Je ……………….………… le restaurant pour demain, ok ?", answer: "choisis" },
+          { q: "On ……………….………… de manger et on paie.", answer: "finit" },
+          { q: "Quel dessert vous ……………….………… les enfants ?", answer: "choisissez" },
+          { q: "Nous ……………….………… les courses au supermarché et nous allons chez le boucher.", answer: "finissons" },
+        ],
+      },
+      {
+        num: 7, page: 38,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases. (/5)",
+        vi: "Điền từ vựng về cửa hàng và thực phẩm.",
+        type: "fill",
+        items: [
+          { q: "Pour acheter le pain, je vais à la ................................................................. .", answer: "boulangerie" },
+          { q: "Le fromager travaille dans une ................................................................... .", answer: "fromagerie" },
+          { q: "Pour le poisson, je vais chez la .................................................................... .", answer: "poissonnière" },
+          { q: "Je ne paie pas en espèces, je paie par ....................................................... .", answer: "carte" },
+          { q: "À la boucherie, j'achète de la ...................................................................... .", answer: "viande" },
+        ],
+      },
+      {
+        num: 8, page: 38,
+        instruction: "Bilan linguistique — Vocabulaire : Associez (contenants). (/5)",
+        vi: "Nối đơn vị đựng với thực phẩm tương ứng.",
+        type: "match",
+        pairs: [
+          { l: "une boîte de", r: "thon" },
+          { l: "un paquet de", r: "riz" },
+          { l: "une bouteille de", r: "jus de pomme" },
+          { l: "un kilo de", r: "poires" },
+          { l: "un pot de", r: "crème" },
+        ],
+      },
+      {
+        num: 9, page: 38,
+        instruction: "Bilan linguistique — Vocabulaire : Classez les noms de plats dans le tableau (plat principal ou dessert). (/5)",
+        vi: "Xếp tên món ăn vào bảng theo món chính hoặc tráng miệng.",
+        type: "choice",
+        items: [
+          { q: "le magret de canard", options: ["plat principal", "dessert"], answer: "plat principal" },
+          { q: "le riz au lait", options: ["plat principal", "dessert"], answer: "dessert" },
+          { q: "la mousse au chocolat", options: ["plat principal", "dessert"], answer: "dessert" },
+          { q: "la quiche", options: ["plat principal", "dessert"], answer: "plat principal" },
+          { q: "la blanquette de veau", options: ["plat principal", "dessert"], answer: "plat principal" },
+        ],
+      },
+      {
+        num: 10, page: 38,
+        instruction: "Bilan linguistique — Vocabulaire : Associez les débuts et les fins de phrases. (/5)",
+        vi: "Nối đầu câu với cuối câu phù hợp (thứ tự khi đi ăn nhà hàng).",
+        type: "match",
+        pairs: [
+          { l: "Je voudrais payer,", r: "je demande l'addition." },
+          { l: "Je voudrais de l'eau,", r: "je demande une carafe d'eau." },
+          { l: "Je finis le plat principal et", r: "je commande un dessert." },
+          { l: "Pour choisir mes plats,", r: "je regarde la carte." },
+          { l: "Je mange mon steak-frites", r: "avec un couteau et une fourchette." },
+        ],
+      },
+      {
+        // Page 40 — DELF A1, CO. Le corrigé imprimé donne un indice entre
+        // parenthèses pour les questions 2 et 4 seulement.
+        num: 11, page: 40, audioSrc: piste(38),
+        instruction: "DELF A1 — Compréhension de l'oral (4 points). Vous écoutez un message sur votre répondeur téléphonique.",
+        vi: "Nghe tin nhắn thoại và trả lời câu hỏi trắc nghiệm (nơi đến, ngày hẹn, giờ đến, cần mang theo gì).",
+        type: "fill",
+        items: [
+          { q: "Question 1", answer: "B." },
+          { q: "Question 2 (indice : mercredi)", answer: "C." },
+          { q: "Question 3", answer: "B." },
+          { q: "Question 4 (indice : à 13 h)", answer: "A." },
+        ],
+      },
+      {
+        // Page 40-41 — DELF A1, CE. ⚠️ Note : le texte de l'option C de la
+        // question 4 est tronqué dans le corrigé imprimé (« C. Acheter d… ») ;
+        // reconstitué en « Acheter des fruits et légumes » d'après l'annonce
+        // « Marché au bureau » (voir cahier_unite_3.md).
+        num: 12, page: 40,
+        instruction: "DELF A1 — Compréhension des écrits (6 points). Vous travaillez au Canada et lisez des annonces sur le panneau d'affichage du bureau.",
+        vi: "Đọc các thông báo trên bảng tin công ty và trả lời câu hỏi — câu 4 có đáp án C bị cắt chữ trong bản gốc, đã được suy luận lại.",
+        type: "fill",
+        items: [
+          { q: "1. (indice : Cuisiner en groupe)", answer: "B." },
+          { q: "2. (indice : 19h30)", answer: "B." },
+          { q: "3. (indice : Au déjeuner)", answer: "A." },
+          { q: "4. Que pouvez-vous faire une fois par mois ? (⚠️ option C reconstituée : Acheter des fruits et légumes)", answer: "C." },
+          { q: "5. (indice : à 15h)", answer: "C." },
+        ],
+      },
+      {
+        num: 13, page: 41,
+        instruction: "DELF A1 — Production orale. Partie 3 de l'épreuve : jeu de rôle « Au restaurant » (vous êtes en vacances en France, vous allez au restaurant avec vos amis, vous posez des questions sur les plats et les prix, vous choisissez et vous payez).",
+        vi: "Đóng vai đối thoại tại nhà hàng — gọi món, hỏi giá và thanh toán.",
+        type: "fill",
+        items: [
+          { q: "Exemple de dialogue complet (modèle du corrigé) :", answer: "Vous : Bonjour monsieur ! Vous avez de la place pour trois personnes, s'il vous plaît ? Merci beaucoup. Quel est le plat du jour ? Ah, non merci, je suis végétarienne. Est-ce que vous avez des plats sans viande et sans poisson ? D'accord, je vais prendre le croque-monsieur, s'il vous plaît. Combien ça coûte ? Je vais prendre la formule plat et dessert, s'il vous plaît. Est-ce que je peux payer par carte bancaire ? Je voudrais bien 3 boules de glace, s'il vous plait : fraise, vanille et chocolat. Je vais prendre de l'eau, s'il vous plaît. Merci !" },
+        ],
+      },
+      {
+        // Page 42 — Jeux, activité 1. ⚠️ Note : la grille de mots croisés
+        // repose sur des images (8 mots) ; seul le mot n°1 (poisson) est
+        // lisible dans le texte extrait du corrigé (voir cahier_unite_3.md).
+        num: 14, page: 42,
+        instruction: "Jeux — Regardez les images et complétez la grille avec les noms d'aliments (mots croisés).",
+        vi: "Nhìn hình và điền tên thực phẩm vào ô chữ — chỉ 1/8 từ được ghi rõ trong đáp án in.",
+        type: "fill",
+        items: [
+          { q: "1.", answer: "poisson" },
+        ],
+      },
+      {
+        num: 15, page: 42,
+        instruction: "Jeux — Associez les sujets et les verbes (plusieurs possibilités).",
+        vi: "Nối chủ ngữ với động từ chia đúng (có nhiều khả năng).",
+        type: "fill",
+        items: [
+          { q: "Les combinaisons possibles du corrigé :", answer: "ils/elles choisissent, ils/elles vont, nous allons, vous mangez, je/il/elle/on paie, je vais, il/elle/on choisit, il/elle/on va, tu manges" },
+        ],
+      },
+      {
+        num: 16, page: 42,
+        instruction: "Jeux — Complétez les noms (commerçant(e)s, commerces, vaisselle, plats).",
+        vi: "Hoàn thành các từ vựng còn thiếu (nghề bán hàng, cửa hàng, dụng cụ ăn uống, món ăn).",
+        type: "fill",
+        items: [
+          { q: "Commerçant(e) a.", answer: "poissonnière" },
+          { q: "Commerçant(e) b.", answer: "boulanger" },
+          { q: "Commerce a.", answer: "boucherie" },
+          { q: "Commerce b.", answer: "fromagerie" },
+          { q: "Vaisselle a.", answer: "fourchette" },
+          { q: "Vaisselle b.", answer: "assiette" },
+          { q: "Plat a.", answer: "omelette" },
+          { q: "Plat b.", answer: "quiche" },
+        ],
+      },
+    ],
+  },
 };
