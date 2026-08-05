@@ -3305,4 +3305,636 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u6: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g6" ──
+    // g6 has 5 points, all with a matching cahier "Grammaire" page — except
+    // p4 "Pouvoir et Vouloir" which has no dedicated page: its only drill is
+    // exercise 4 embedded in the "fréquence (2)" page (p.68), filed under p4
+    // here by verb content, not under p1 by page header (same pattern as
+    // u5's p4 verbs) — see cahier_unite_6.md.
+    grammar: {
+
+      // p0 — Les verbes pronominaux au présent (cahier p. 67)
+      p0: [
+        {
+          num: 1, page: 67,
+          instruction: "Complétez la conjugaison du verbe s'habiller au présent (Exemple : Je m'habille avant de prendre mon petit déjeuner.).",
+          vi: "Chia đại từ phản thân đúng theo chủ ngữ với động từ \"s'habiller\".",
+          type: "fill",
+          items: [
+            { q: "Il ……… habille pour aller dîner.", answer: "s'" },
+            { q: "Tu ……… habilles pour sortir ce soir ?", answer: "t'" },
+            { q: "Vous ……… habillez pour le travail.", answer: "vous" },
+            { q: "Nous ……… habillons pour faire du jardinage.", answer: "nous" },
+          ],
+        },
+        {
+          num: 2, page: 67, audioSrc: piste(58),
+          instruction: "Écoutez et retrouvez les verbes manquants (dialogue sur la routine du matin).",
+          vi: "Nghe hội thoại và điền các động từ phản thân còn thiếu, theo đúng thứ tự.",
+          type: "fill",
+          items: [
+            { q: "1. (dans l'ordre du dialogue)", answer: "tu te lèves" },
+            { q: "2.", answer: "je me réveille" },
+            { q: "3.", answer: "je me lève" },
+            { q: "4.", answer: "tu te laves" },
+            { q: "5.", answer: "je me lave" },
+            { q: "6.", answer: "je me prépare" },
+            { q: "7.", answer: "je m'habille" },
+            { q: "8.", answer: "je me coiffe" },
+            { q: "9.", answer: "tu te maquilles" },
+          ],
+        },
+        {
+          num: 3, page: 67,
+          instruction: "Complétez les phrases avec les verbes qui conviennent au présent (se réveiller – se doucher – se lever – se promener – se raser).",
+          vi: "Điền động từ phản thân phù hợp vào đoạn văn kể về buổi sáng.",
+          type: "fill",
+          bank: ["se réveiller", "se doucher", "se lever", "se promener", "se raser"],
+          items: [
+            { q: "Tous les matins, je ……… à 8 h.", answer: "je me réveille" },
+            { q: "Je ……… et je ……… avant de prendre mon petit déjeuner. (2 từ)", answer: "je me douche je me rase" },
+            { q: "Ma femme ……… à 8 h 30.", answer: "Ma femme se lève" },
+            { q: "À 9 h, nous partons, et nous ……… .", answer: "nous nous promenons" },
+          ],
+        },
+        {
+          num: 4, page: 67,
+          instruction: "Conjuguez les verbes à la forme négative (Exemple : Ils (se coucher) tard → Ils ne se couchent pas tard.).",
+          vi: "Chia động từ phản thân ở dạng phủ định.",
+          type: "fill",
+          items: [
+            { q: "Mon frère (se laver) ……… le soir.", answer: "ne se lave pas" },
+            { q: "Je (se réveiller) ……… à 7 h.", answer: "ne me réveille pas" },
+            { q: "Alexandra et Géraldine (se maquiller) ……… pour aller au concert.", answer: "ne se maquillent pas" },
+            { q: "Nous (se préparer) ……… dans la salle de bains.", answer: "ne nous préparons pas" },
+            { q: "Tu (se raser) ……… le matin ?", answer: "ne te rases pas" },
+          ],
+        },
+      ],
+
+      // p1 — La fréquence (2) (cahier p. 68)
+      p1: [
+        {
+          num: 1, page: 68,
+          instruction: "Remettez les mots dans l'ordre.",
+          vi: "Sắp xếp lại từ để tạo câu có trạng từ chỉ tần suất.",
+          type: "order",
+          items: [
+            { tokens: ["Christine", "mange", "parfois", "au", "restaurant."],
+              answer: ["Christine", "mange", "parfois", "au", "restaurant."] },
+            { tokens: ["Nous", "lisons", "souvent", "le", "journal."],
+              answer: ["Nous", "lisons", "souvent", "le", "journal."] },
+            { tokens: ["Je", "vais", "au", "sport", "tous", "les", "mardis."],
+              answer: ["Je", "vais", "au", "sport", "tous", "les", "mardis."] },
+            { tokens: ["Le", "samedi,", "vous", "allez", "au", "cinéma."],
+              answer: ["Le", "samedi,", "vous", "allez", "au", "cinéma."] },
+            { tokens: ["Tu", "ne", "fais", "jamais", "la", "vaisselle."],
+              answer: ["Tu", "ne", "fais", "jamais", "la", "vaisselle."] },
+          ],
+        },
+        {
+          num: 2, page: 68,
+          instruction: "Complétez les phrases avec des expressions de fréquence : jamais, toujours, parfois, tous les, rarement, souvent (plusieurs réponses possibles).",
+          vi: "Điền trạng từ tần suất phù hợp (nhiều đáp án đúng có thể chấp nhận).",
+          type: "fill",
+          bank: ["jamais", "toujours", "parfois", "tous les", "rarement", "souvent"],
+          items: [
+            { q: "Paul se brosse ……… les dents après manger.", answer: "toujours / parfois" },
+            { q: "Ma mère jardine ………, elle n'aime pas beaucoup cette activité !", answer: "rarement" },
+            { q: "Je ne cuisine ………, je préfère commander mon repas.", answer: "jamais" },
+            { q: "Jordan et Mickaël font ……… du sport ensemble, mais ils ne se parlent plus.", answer: "parfois / toujours / souvent" },
+            { q: "Tu te promènes ………, je te vois ……… matins. (2 từ)", answer: "souvent tous les" },
+          ],
+        },
+        {
+          num: 3, page: 68,
+          instruction: "Faites des phrases en utilisant les expressions de fréquence (exemples de réponses — production libre guidée).",
+          vi: "Đặt câu tự do với động từ và trạng từ tần suất cho sẵn (đáp án mẫu, không duy nhất).",
+          type: "fill",
+          items: [
+            { q: "(regarder la télévision) Nous ………", answer: "Nous regardons la télévision tous les soirs." },
+            { q: "(écouter la radio) Ils ………", answer: "Ils écoutent souvent la radio." },
+            { q: "(jouer aux jeux vidéo) Tu ………", answer: "Tu joues parfois aux jeux vidéo." },
+            { q: "(faire la lessive) Michel ………", answer: "Michel ne fait jamais la lessive." },
+            { q: "(déjeuner ensemble) Vous ………", answer: "Vous déjeunez toujours ensemble." },
+          ],
+        },
+      ],
+
+      // p2 — Le passé récent (cahier p. 70)
+      p2: [
+        {
+          num: 1, page: 70,
+          instruction: "Conjuguez le verbe venir au présent.",
+          vi: "Chia động từ \"venir\" (đến) ở thì hiện tại, dùng trong cấu trúc \"vừa mới làm gì\" (venir de + infinitif).",
+          type: "fill",
+          items: [
+            { q: "Tu ……… de finir de travailler.", answer: "viens" },
+            { q: "Nous ……… de lire ce livre.", answer: "venons" },
+            { q: "Je ……… de cuisiner.", answer: "viens" },
+            { q: "Vous ……… de regarder le film.", answer: "venez" },
+            { q: "Ils ……… de terminer le ménage.", answer: "viennent" },
+          ],
+        },
+        {
+          num: 2, page: 70, audioSrc: piste(64),
+          instruction: "Écoutez les phrases et cochez la bonne réponse.",
+          vi: "Nghe và xác định câu dùng thì hiện tại hay \"quá khứ gần\" (venir de + infinitif).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["présent", "passé récent"], answer: "présent" },
+            { q: "b.", options: ["présent", "passé récent"], answer: "passé récent" },
+            { q: "c.", options: ["présent", "passé récent"], answer: "présent" },
+            { q: "d.", options: ["présent", "passé récent"], answer: "passé récent" },
+            { q: "e.", options: ["présent", "passé récent"], answer: "passé récent" },
+          ],
+        },
+        {
+          num: 3, page: 70,
+          instruction: "Transformez le présent en passé récent dans ces phrases (Exemple : J'écoute de la musique. → Je viens d'écouter de la musique.).",
+          vi: "Chuyển câu ở thì hiện tại sang cấu trúc \"quá khứ gần\" (venir de + infinitif).",
+          type: "fill",
+          items: [
+            { q: "Je lis un article de journal.", answer: "Je viens de lire un article de journal." },
+            { q: "Ils regardent une série.", answer: "Ils viennent de regarder une série." },
+            { q: "Nous faisons un jogging.", answer: "Nous venons de faire un jogging." },
+            { q: "Tu écoutes l'émission ?", answer: "Tu viens d'écouter l'émission ?" },
+            { q: "Il va au cours de dessin.", answer: "Il vient d'aller au cours de dessin." },
+          ],
+        },
+        {
+          num: 4, page: 70,
+          instruction: "Regardez les images et complétez les phrases avec un passé récent (Exemple : J'ai chaud parce que je viens de bricoler.).",
+          vi: "Nhìn hình và hoàn thành câu giải thích lý do bằng cấu trúc \"quá khứ gần\".",
+          type: "fill",
+          items: [
+            { q: "Manon fait la vaisselle parce qu'elle ……… .", answer: "elle vient de cuisiner" },
+            { q: "Nous nous brossons les dents parce que nous ……… .", answer: "nous venons de manger" },
+            { q: "Il se douche parce qu'il ……… .", answer: "il vient de courir" },
+            { q: "Vous êtes fatigué parce que vous ……… .", answer: "vous venez de travailler" },
+            { q: "Je me coiffe parce que je ……… .", answer: "je viens de me lever" },
+          ],
+        },
+      ],
+
+      // p3 — Les verbes en -ir au présent (2) : dormir, sortir, partir (cahier p. 71)
+      p3: [
+        {
+          num: 1, page: 71,
+          instruction: "Associez le sujet et le verbe.",
+          vi: "Nối chủ ngữ với dạng chia đúng của các động từ dormir, sortir, partir (nhóm động từ -ir đặc biệt).",
+          type: "match",
+          pairs: [
+            { l: "Je", r: "dors" },
+            { l: "Tu", r: "sors" },
+            { l: "Elle", r: "part" },
+            { l: "Nous", r: "dormons" },
+            { l: "Vous", r: "partez" },
+            { l: "Ils", r: "sortent" },
+          ],
+        },
+        {
+          num: 2, page: 71,
+          instruction: "Conjuguez les verbes pour former une phrase (Exemple : Sortir souvent le samedi soir (nous) → Nous sortons souvent le samedi soir.).",
+          vi: "Chia động từ theo chủ ngữ cho sẵn để tạo câu hoàn chỉnh.",
+          type: "fill",
+          items: [
+            { q: "Partir au travail à 7 h (je)", answer: "Je pars au travail à 7 h." },
+            { q: "Dormir beaucoup le week-end (tu)", answer: "Tu dors beaucoup le week-end." },
+            { q: "Sortir de la maison (vous)", answer: "Vous sortez de la maison." },
+            { q: "Dormir le jour et travailler la nuit (elle)", answer: "Elle dort le jour et elle travaille la nuit." },
+            { q: "Partir en vacances (ils)", answer: "Ils partent en vacances." },
+          ],
+        },
+        {
+          num: 3, page: 71, audioSrc: piste(65),
+          instruction: "Écoutez et répondez aux questions. Utilisez les verbes partir, sortir, dormir au présent (exemples de réponses, production libre).",
+          vi: "Nghe câu hỏi và trả lời tự do bằng động từ partir, sortir, dormir.",
+          type: "fill",
+          items: [
+            { q: "Vous sortez le week-end ?", answer: "Oui, je sors le samedi soir." },
+            { q: "Ton ami part travailler à quelle heure ?", answer: "Il part à 8 h." },
+            { q: "En vacances, tu dors où ?", answer: "Je dors à l'hôtel." },
+            { q: "Il sort avec Justine ?", answer: "Oui, il sort avec elle. / Oui, ils sortent ensemble." },
+            { q: "Vous partez en voiture ?", answer: "Non, nous partons en bus." },
+          ],
+        },
+        {
+          num: 4, page: 71,
+          instruction: "Conjuguez les verbes et complétez les phrases (réponses libres, exemples de réponses).",
+          vi: "Hoàn thành câu tự do với động từ chia đúng ngôi.",
+          type: "fill",
+          items: [
+            { q: "Je (sortir) ………", answer: "Je sors tous les soirs." },
+            { q: "Nous (dormir) ………", answer: "Nous dormons beaucoup." },
+            { q: "Tu (partir) ………", answer: "Tu pars en vacances." },
+            { q: "Ils (venir) ………", answer: "Ils viennent chez moi." },
+            { q: "Vous (sortir) ………", answer: "Vous sortez en ville." },
+          ],
+        },
+      ],
+
+      // p4 — Pouvoir et Vouloir (see note above — no dedicated cahier page;
+      // the only drill is p.68 ex.4, under the fréquence (2) page)
+      p4: [
+        {
+          num: 4, page: 68, audioSrc: piste(59),
+          instruction: "Écoutez et complétez les phrases avec le verbe pouvoir ou vouloir au présent.",
+          vi: "Nghe và điền động từ \"pouvoir\" (có thể) hoặc \"vouloir\" (muốn) ở thì hiện tại.",
+          type: "fill",
+          items: [
+            { q: "Thomas, tu ……… m'aider à cuisiner ? Je ne sais pas faire à manger.", answer: "peux" },
+            { q: "Il fait beau, je ……… aller me promener.", answer: "veux" },
+            { q: "Ma petite sœur ……… s'habiller toute seule.", answer: "veut" },
+            { q: "Nous ……… aller au musée, mais c'est fermé aujourd'hui.", answer: "voulons" },
+            { q: "Vous ……… écouter de la musique mais pas trop fort.", answer: "pouvez" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 69 "L'heure, les activités" + p. 72 "La ──
+    // description physique, le caractère"). Custom STEP_GROUPS_U6: v1_vocab
+    // (u6g1/u6gjms/u6g2, "Giờ giấc · ngày tháng · hoạt động hằng ngày"),
+    // v2_vocab (u6g3/u6g4/u6g5, "Việc nhà · thời gian rảnh · sinh hoạt văn
+    // hoá"), v3_vocab (u6g6/u6g7, "Ngoại hình · tính cách"). The cahier has
+    // only ONE vocabulaire page matching v1_vocab's themes (p.69) — its
+    // activity-checklist exercise (1) mixes words from all three vocab
+    // groups (daily routine, housework, leisure, cultural outings) without a
+    // page split, so it is filed entirely under v1_vocab, matching the
+    // book's own single "Vocabulaire" header; v2_vocab has no dedicated
+    // cahier exercise of its own for this unit. v3_vocab maps directly to
+    // the p.72 vocabulaire page (physical description + caractère).
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 69, audioSrc: piste(60),
+          instruction: "Écoutez le dialogue et cochez les activités entendues (parmi : jouer aux jeux vidéo, dessiner, faire une promenade, aller à un concert, voir des amis, voir une exposition, faire du jogging, surfer sur internet, faire du bricolage, faire du jardinage).",
+          vi: "Nghe hội thoại và đánh dấu các hoạt động được nhắc đến.",
+          type: "fill",
+          items: [
+            { q: "Activités entendues (parmi a-j) :", answer: "b, c, e, f, h, j (dessiner, faire une promenade, voir des amis, voir une exposition, surfer sur internet, faire du jardinage)" },
+          ],
+        },
+        {
+          num: 2, page: 69,
+          instruction: "Barrez l'intrus.",
+          vi: "Gạch bỏ từ không cùng nhóm nghĩa với các từ còn lại.",
+          type: "fill",
+          items: [
+            { q: "la peinture – le dessin – le tableau – la musique", answer: "la musique" },
+            { q: "se coiffer – se maquiller – faire la lessive – se préparer", answer: "faire la lessive" },
+            { q: "bricoler – jardiner – parler – cuisiner", answer: "parler" },
+            { q: "regarder la télévision – aller au cinéma – écouter de la musique – voir un film", answer: "écouter de la musique" },
+          ],
+        },
+        {
+          num: 3, page: 69, audioSrc: piste(61),
+          instruction: "Écoutez et cochez les heures entendues (parmi : 7h10, 7h45, 8h15, 8h45, 9h30, 11h15, 12h15, 13h15, 13h30, 17h, 18h, 19h, 19h30).",
+          vi: "Nghe và đánh dấu các giờ được nhắc đến trong bài nghe.",
+          type: "fill",
+          items: [
+            { q: "Heures entendues :", answer: "7 h 10 – 7 h 45 – 9 h 30 – 12 h 15 – 13 h 30 – 18 h – 19 h" },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_6.md) : l'énoncé imprimé donne « c. 13 h 40
+          // : deux heures moins vingt » comme texte de départ (au lieu de
+          // « treize heures quarante »), probablement une coquille du cahier
+          // — mais le corrigé confirme bien « treize heures quarante » comme
+          // réponse à la question c. Énoncé et corrigé reproduits tels quels,
+          // sans les harmoniser.
+          num: 4, page: 69,
+          instruction: "Écrivez les heures d'une manière différente (Exemple : 10 h 30 : dix heures trente → dix heures et demie).",
+          vi: "Viết lại giờ theo cách khác (giờ hành chính ↔ giờ thông dụng) — câu c có khả năng lỗi in trong đề, xem note.",
+          type: "fill",
+          items: [
+            { q: "11 h 50 : onze heures cinquante", answer: "midi moins dix" },
+            { q: "7 h 15 : sept heures quinze", answer: "sept heures et quart" },
+            { q: "13 h 40 : deux heures moins vingt (⚠️ énoncé imprimé ainsi — voir note)", answer: "treize heures quarante" },
+            { q: "6 h 45 : six heures quarante-cinq", answer: "sept heures moins le quart" },
+            { q: "12 h 30 : douze heures trente", answer: "midi et demi" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 1, page: 72,
+          instruction: "Associez les images à la description (Thérèse, Igor, Charles, Marie-France).",
+          vi: "Nối mô tả ngoại hình với tên nhân vật tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Il / Elle a un petit nez et une grande bouche. Il / Elle a les cheveux blancs et raides.", answer: "Thérèse" },
+            { q: "Il / Elle a une barbe et une moustache châtains. Il / Elle est chauve.", answer: "Igor" },
+            { q: "Il / Elle a un grand nez. Il / Elle a les cheveux bruns, frisés et courts. Il / Elle porte des boucles d'oreille.", answer: "Marie-France" },
+            { q: "Il / Elle a une petite bouche. Il / Elle a les cheveux courts, frisés et blonds. Il / Elle n'a pas de moustache.", answer: "Charles" },
+          ],
+        },
+        {
+          num: 2, page: 72,
+          instruction: "Écrivez les contraires (Exemple : timide → sociable).",
+          vi: "Viết từ trái nghĩa (mô tả vóc dáng, tính cách, tóc).",
+          type: "fill",
+          items: [
+            { q: "gros", answer: "mince" },
+            { q: "dynamique", answer: "calme" },
+            { q: "petite", answer: "grande" },
+            { q: "gentil", answer: "méchant" },
+            { q: "courte", answer: "longue" },
+            { q: "frisés", answer: "raides" },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_6.md) : l'exercice imprimé liste six
+          // personnes à décrire (Anna, Jacques, Édouard, David, Ludivine, et
+          // une ligne « f » vierge dans le tableau du cahier) mais seules 5
+          // sont couvertes par le corrigé et la transcription officielle ;
+          // seules ces 5 lignes sont complétées ici.
+          num: 3, page: 72, audioSrc: piste(66),
+          instruction: "Écoutez les descriptions. Écrivez dans le tableau les adjectifs entendus (le corps, les cheveux, le visage, le caractère).",
+          vi: "Nghe mô tả 5 người và điền tính từ vào bảng theo từng mục (vóc dáng, tóc, khuôn mặt, tính cách) — chỉ 5/6 dòng có đáp án, xem note.",
+          type: "fill",
+          items: [
+            { q: "a. Anna — corps / cheveux / visage / caractère", answer: "grande ; blonds et courts ; petits yeux verts ; bavarde, sociable, stressée", example: true },
+            { q: "b. Jacques — corps / cheveux / visage / caractère", answer: "petit, mince ; chauve ; petite moustache grise ; intelligent, généreux" },
+            { q: "c. Édouard — corps / cheveux / visage / caractère", answer: "grand, un peu gros ; cheveux longs, châtains ; pas de moustache ; courageux" },
+            { q: "d. David — corps / cheveux / visage / caractère", answer: "pas très grand ; cheveux noirs ; grand nez, petite bouche, yeux noirs ; sérieux, pas drôle" },
+            { q: "e. Ludivine — corps / cheveux / visage / caractère", answer: "grande, mince ; cheveux frisés, longs, roux ; (non précisé) ; sérieuse (au travail), très sympa (en dehors)" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 69 consonnes [s]/[z] + p. 72 voyelles ──
+    // [ø]/[œ])
+    phono: [
+      {
+        num: 1, page: 69, audioSrc: piste(62),
+        instruction: "Phonie-graphie : les sons [s] et [z]. Écoutez les phrases et indiquez combien de fois vous entendez [s] et [z] (format : s/z). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện âm [s] và [z] trong mỗi câu (định dạng s/z).",
+        type: "fill",
+        items: [
+          { q: "a. Cette journaliste organise ses futures émissions sur son ordinateur.", answer: "6/2" },
+          { q: "b. Elle se lève à six heures trente, se prépare et réveille son petit garçon.", answer: "5/1" },
+          { q: "c. Ce magazine de sport présente tous les nouveaux événements de la semaine.", answer: "3/3" },
+          { q: "d. Nous aimons souvent aller au cinéma avec des amis.", answer: "2/2" },
+          { q: "e. Ils adorent écouter de la musique et vont souvent voir des concerts.", answer: "2/2" },
+        ],
+      },
+      {
+        num: 2, page: 69, audioSrc: piste(63),
+        instruction: "Dictée : complétez le texte.",
+        vi: "Nghe và điền các từ còn thiếu trong đoạn văn (chính tả).",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Le samedi, nous faisons les courses, la cuisine, la lessive et la vaisselle. Mais le dimanche, nous nous reposons, nous écoutons de la musique, nous faisons du sport ou nous allons voir des amis. Parfois, nous visitons une exposition ou nous allons au cinéma." },
+        ],
+      },
+      {
+        num: 1, page: 72, audioSrc: piste(67),
+        instruction: "Phonie-graphie : les voyelles [ø] et [œ]. Écoutez les phrases et indiquez combien de fois vous entendez [ø] et [œ] (format : ø/œ). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện âm [ø] (như trong jeu) và [œ] (như trong sœur).",
+        type: "fill",
+        items: [
+          { q: "a. C'est un jeu dangereux.", answer: "3/0", example: true },
+          { q: "b. C'est un auteur. Il a les cheveux noirs. Il est sérieux et courageux.", answer: "3/1" },
+          { q: "c. C'est un jeune acteur. Il est brun aux yeux bleus.", answer: "2/2" },
+          { q: "d. Ma sœur ne peut pas être seule, elle a peur.", answer: "1/3" },
+          { q: "e. À 18 heures les étudiants peuvent sortir du cours.", answer: "0/2" },
+        ],
+      },
+      {
+        num: 2, page: 72, audioSrc: piste(68),
+        instruction: "Dictée : complétez le texte (Antoine de Saint-Exupéry).",
+        vi: "Nghe và điền từ còn thiếu trong đoạn văn về Antoine de Saint-Exupéry và tác phẩm Le Petit Prince.",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Antoine de Saint-Exupéry est un aviateur, un grand voyageur. C'est aussi un auteur célèbre grâce à son œuvre « Le petit Prince », le seul livre de littérature traduit en 481 langues et dialectes. Les enfants du monde entier peuvent lire cette belle histoire !" },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 73 CE, p. 74-75 Bilan linguistique /40, p. 76-77 ──
+    // DELF A1, p. 78 Jeux). The "Production orale — Jeu de rôle" (p.73,
+    // célébrité interviewée) and Jeux activité 3 ("Avis de recherche") are
+    // free answer ("Réponses libres") and intentionally excluded. DELF PE
+    // (p.77) has no example production printed in the corrigé ("Réponse
+    // libre — pas de corrigé imprimé") and is also excluded.
+    bilan: [
+      {
+        num: 1, page: 73,
+        instruction: "Compréhension écrite — « À plus tard ! » Message de Catherine à Tom. Répondez aux questions.",
+        vi: "Đọc tin nhắn của Catherine gửi Tom và trả lời câu hỏi (ai, khi nào, yêu cầu gì).",
+        type: "fill",
+        items: [
+          { q: "1. Pour qui est le message ?", answer: "Tom (le mari de Catherine)" },
+          { q: "2. Catherine parle... (du matin / de l'après-midi / du soir)", answer: "du soir" },
+          { q: "3. Qu'est-ce qu'elle demande ?", answer: "de s'occuper des enfants et de préparer le dîner" },
+          { q: "5. Combien de temps sort Catherine ?", answer: "3 heures (de 20 h à 23 h)" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_6.md) : le corrigé donne « a. faux – b. faux
+        // – c. vrai » sans reproduire le texte des affirmations dans le même
+        // ordre que l'énoncé du cahier ; chaque lettre a été réassociée à
+        // l'affirmation correspondante de l'énoncé.
+        num: 2, page: 73,
+        instruction: "Compréhension écrite — « À plus tard ! » Vrai ou faux ?",
+        vi: "Đọc tin nhắn và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "4a. Karine doit faire ses devoirs.", answer: false },
+          { q: "4b. Les enfants ne peuvent pas regarder la télé.", answer: false },
+          { q: "4c. Quand Catherine rentre, les enfants sont couchés.", answer: true },
+        ],
+      },
+      {
+        num: 3, page: 74,
+        instruction: "Bilan linguistique — Grammaire : Reliez pour former des phrases. (/5)",
+        vi: "Nối chủ ngữ với phần còn lại của câu.",
+        type: "match",
+        pairs: [
+          { l: "Tous les matins, je", r: "m'occupe des enfants." },
+          { l: "Marie", r: "se coiffe devant le miroir." },
+          { l: "Ma sœur et moi, nous", r: "nous brossons les dents trois fois par jour." },
+          { l: "Tu", r: "te réveilles à 8 heures." },
+          { l: "Vous", r: "vous rasez souvent ?" },
+        ],
+      },
+      {
+        num: 4, page: 74,
+        instruction: "Bilan linguistique — Grammaire : Complétez avec les expressions de fréquence suivantes : tous les, jamais, souvent, le matin, rarement. (/5)",
+        vi: "Điền trạng từ tần suất phù hợp.",
+        type: "fill",
+        bank: ["tous les", "jamais", "souvent", "le matin", "rarement"],
+        items: [
+          { q: "Je vais ……… au tennis, surtout le week-end !", answer: "souvent" },
+          { q: "……… dimanches, je me promène avec mon chien.", answer: "Tous les" },
+          { q: "Ils cuisinent ………, ils préfèrent les plats surgelés.", answer: "rarement" },
+          { q: "Elle ne va ……… au cinéma, elle pense que c'est cher !", answer: "jamais" },
+          { q: "………, elle aime prendre son petit déjeuner tranquillement.", answer: "Le matin" },
+        ],
+      },
+      {
+        num: 5, page: 74,
+        instruction: "Bilan linguistique — Grammaire : Transformez les phrases avec un passé récent. (/5)",
+        vi: "Chuyển câu sang cấu trúc \"quá khứ gần\".",
+        type: "fill",
+        items: [
+          { q: "Je vois une exposition.", answer: "Je viens de voir une exposition." },
+          { q: "Nous faisons la vaisselle.", answer: "Nous venons de faire la vaisselle." },
+          { q: "Tu regardes une série à la télévision.", answer: "Tu viens de regarder une série à la télévision." },
+          { q: "Michel part du cinéma.", answer: "Michel vient de partir du cinéma." },
+          { q: "Ils sortent du cours de dessin.", answer: "Ils viennent de sortir du cours de dessin." },
+        ],
+      },
+      {
+        num: 6, page: 74,
+        instruction: "Bilan linguistique — Grammaire : Soulignez la bonne réponse. (/5)",
+        vi: "Chọn đúng dạng chia động từ.",
+        type: "choice",
+        items: [
+          { q: "Je dors / dort toujours au cinéma.", options: ["dors", "dort"], answer: "dors" },
+          { q: "Tu partez / pars de l'exposition ? Tu n'as pas aimé ?", options: ["partez", "pars"], answer: "pars" },
+          { q: "Il dorment / dort et après il prend sa douche.", options: ["dorment", "dort"], answer: "dort" },
+          { q: "Ta mère pars / part à quelle heure travailler ?", options: ["pars", "part"], answer: "part" },
+          { q: "Vous travaillez ou vous sortez / sortons le dimanche ?", options: ["sortez", "sortons"], answer: "sortez" },
+        ],
+      },
+      {
+        num: 7, page: 75,
+        instruction: "Bilan linguistique — Vocabulaire : Remplacez les activités soulignées par les bonnes activités. (/5)",
+        vi: "Sửa lại câu bằng cách thay hoạt động gạch chân bằng hoạt động hợp lý hơn.",
+        type: "fill",
+        items: [
+          { q: "Nathalie se couche à 9h.", answer: "Nathalie se lève à 9h." },
+          { q: "Mon père se réveille avant d'aller se coucher.", answer: "Mon père se brosse les dents avant d'aller se coucher." },
+          { q: "Je cherche une maison à acheter, alors je fais la lessive.", answer: "Je cherche une maison à acheter, alors je surfe sur internet." },
+          { q: "Christelle fait du bricolage au supermarché.", answer: "Christelle fait les courses au supermarché." },
+          { q: "Ma mère va au cinéma, elle adore les tableaux.", answer: "Ma mère va au musée, elle adore les tableaux." },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_6.md) : les 5 horloges (cadrans) de cet
+        // exercice ne sont pas reproductibles en texte ; chaque réponse du
+        // corrigé propose deux formulations valides (format 24h / format 12h
+        // courant), reproduites telles quelles.
+        num: 8, page: 75,
+        instruction: "Bilan linguistique — Vocabulaire : Écrivez les heures en lettres (exercice basé sur des horloges illustrées). (/5)",
+        vi: "Viết giờ bằng chữ, dựa theo hình đồng hồ minh hoạ — hình không trích xuất được văn bản, xem note.",
+        type: "fill",
+        items: [
+          { q: "a. (horloge illustrée)", answer: "dix heures et quart / vingt-deux heures quinze" },
+          { q: "b. (horloge illustrée)", answer: "minuit / midi" },
+          { q: "c. (horloge illustrée)", answer: "huit heures cinq" },
+          { q: "d. (horloge illustrée)", answer: "neuf heures moins le quart / huit heures quarante-cinq" },
+          { q: "e. (horloge illustrée)", answer: "douze heures cinquante / midi moins dix" },
+        ],
+      },
+      {
+        num: 9, page: 75,
+        instruction: "Bilan linguistique — Vocabulaire : Reliez les contraires. (/5)",
+        vi: "Nối các từ trái nghĩa.",
+        type: "match",
+        pairs: [
+          { l: "grand", r: "petit" },
+          { l: "frisé", r: "raide" },
+          { l: "blond", r: "brun" },
+          { l: "beaucoup de cheveux", r: "chauve" },
+          { l: "gros", r: "mince" },
+        ],
+      },
+      {
+        num: 10, page: 75,
+        instruction: "Bilan linguistique — Vocabulaire : Lisez et cochez vrai ou faux. (/5)",
+        vi: "Đọc và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "Si une personne parle beaucoup, elle est timide.", answer: false },
+          { q: "Si une personne donne beaucoup, elle est généreuse.", answer: true },
+          { q: "Si une personne n'a pas peur, elle est drôle.", answer: false },
+          { q: "Si une personne étudie beaucoup, elle est méchante.", answer: false },
+          { q: "Si une personne a beaucoup d'amis, elle est sociable.", answer: true },
+        ],
+      },
+      {
+        num: 11, page: 76, audioSrc: piste(69),
+        instruction: "DELF A1 — Compréhension de l'oral (4 points). Message vocal de Ludo.",
+        vi: "Nghe tin nhắn thoại của Ludo và chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "1. Qu'est-ce que Ludo fait demain ?", options: ["Il travaille au bureau", "Il va à une exposition", "Il s'occupe de sa fille"], answer: "Il s'occupe de sa fille" },
+          { q: "2. Quand est-ce que Ludo va au supermarché ?", options: ["Le matin", "Le midi", "L'après-midi"], answer: "Le matin" },
+          { q: "3. Qu'est-ce que Ludo vous propose ? (image)", options: ["A", "B", "C"], answer: "B" },
+          { q: "4. Qu'est-ce que vous devez apporter ?", options: ["Un fruit", "Un dessert", "Une boisson"], answer: "Une boisson" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_6.md) : le corrigé pour la question 5 (plan
+        // du chemin, réponse graphique) n'est pas explicitement lisible dans
+        // le texte extrait du corrigé ; la réponse B est retrouvée par
+        // déduction à partir de l'ordre des corrigés de la page — à vérifier
+        // visuellement contre le plan imprimé du cahier.
+        num: 12, page: 76,
+        instruction: "DELF A1 — Compréhension des écrits. Annonce « Casting pour la série Dix pour cent ».",
+        vi: "Đọc thông báo tuyển diễn viên và trả lời câu hỏi — câu 5 (bản đồ) chưa xác nhận chắc chắn, xem note.",
+        type: "choice",
+        items: [
+          { q: "1. La série cherche une femme…", options: ["brune", "châtain", "blonde"], answer: "châtain" },
+          { q: "2. Quel âge doit avoir l'acteur ?", options: ["25 ans", "30 ans", "45 ans"], answer: "45 ans" },
+          { q: "3. Quand est le casting ?", options: ["Le matin", "L'après-midi", "Le soir"], answer: "Le matin" },
+          { q: "4. Comment est-ce que vous allez au casting ?", options: ["À vélo", "En bus", "En métro"], answer: "En bus" },
+          { q: "5. Quel est le chemin pour aller au casting ? (3 plans A/B/C, ⚠️ voir note)", options: ["A", "B", "C"], answer: "B" },
+        ],
+      },
+      {
+        num: 13, page: 77,
+        instruction: "DELF A1 — Production orale. Partie 3 de l'épreuve : jeu de rôle « Au club du quartier » (horaires, jours, prix, professeur, choisir une activité et payer l'inscription).",
+        vi: "Đóng vai hỏi thông tin về một câu lạc bộ khu phố (giờ học, ngày, giá, giáo viên) rồi đăng ký.",
+        type: "fill",
+        items: [
+          { q: "Exemple de dialogue complet (modèle du corrigé) :", answer: "Vous : Bonjour ! – Employé : Bonjour ! – Vous : Votre club propose quelles activités ? – Employé : Nous avons beaucoup d'activités : des activités sportives, des activités culturelles… Qu'est-ce que vous aimez ? – Vous : Vous avez des cours de musique ? – Employé : Non, nous n'avons pas de cours de musique mais nous avons des cours de théâtre et de dessin. Nos professeurs sont très sympas et sérieux. – Vous : J'aime bien le théâtre. C'est aussi pour les débutants ? – Employé : Oui, bien sûr. – Vous : Qui est le professeur ? – Employé : C'est Mme Cébron. C'est une comédienne professionnelle. – Vous : Elle est actrice dans un théâtre ? – Employé : Oui. Elle joue tous les samedis soir. – Vous : Ah, c'est intéressant ! Je voudrais m'inscrire au cours de théâtre. Les cours sont quel jour ? – Employé : Il y a trois cours par semaine : le mercredi après-midi à 15 h, le jeudi soir à 18 h et le samedi matin à 10 h. – Vous : Je travaille la journée, alors jeudi soir c'est bien. Le cours finit à quelle heure ? – Employé : Le cours dure 2 heures, il finit à 20 h. – Vous : Parfait. Et ça coûte combien ? – Employé : C'est 45 euros pour 3 mois. – Vous : Très bien, je peux payer par carte bancaire ? – Employé : Non, désolé, en espèces ou en chèque. – Vous : D'accord, je vais faire un chèque." },
+        ],
+      },
+      {
+        num: 14, page: 78,
+        instruction: "Jeux — Retrouvez le message d'Adrien pour Aurélie (message codé, alphabet substitué a→z).",
+        vi: "Giải mã tin nhắn của Adrien gửi Aurélie (thay thế chữ cái a→z).",
+        type: "fill",
+        items: [
+          { q: "Message décodé :", answer: "Je peux t'inviter au restaurant ?" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_6.md) : le corrigé imprimé montre la grille
+        // remplie, mais le texte brut extrait ne permet de lire distinctement
+        // que 4 des 6 mots attendus ; les 2 mots manquants n'ont pas pu être
+        // identifiés de façon fiable — à vérifier visuellement sur la page.
+        num: 15, page: 78,
+        instruction: "Jeux — Trouvez dans la grille 6 mots pour décrire le caractère d'une personne.",
+        vi: "Tìm trong ô chữ 6 từ mô tả tính cách — chỉ 4/6 từ xác định được rõ ràng, xem note.",
+        type: "fill",
+        items: [
+          { q: "4 des 6 mots identifiables dans le corrigé imprimé :", answer: "calme, drôle, sociable, dynamique" },
+        ],
+      },
+      {
+        num: 16, page: 78,
+        instruction: "Jeux — Qui suis-je ? Associez la description à la célébrité (francophone).",
+        vi: "Đọc mô tả và đoán tên người nổi tiếng (Pháp/Bỉ/Thụy Sĩ) tương ứng.",
+        type: "fill",
+        items: [
+          { q: "Cheveux mi-longs et bruns, mince, timide mais grand(e) acteur(-trice).", answer: "Marion Cotillard" },
+          { q: "Cheveux châtains, Suisse, sportif(-ve).", answer: "Roger Federer" },
+          { q: "Jeune et mince, grande bouche, yeux gris-vert, cheveux courts, Belge, sociable.", answer: "Stromae" },
+          { q: "Jeune et sportif(-ve), cheveux très courts et noirs, généreux(-se) et dynamique, aime le foot.", answer: "Kylian Mbappé" },
+          { q: "Jeune, cheveux blonds et longs, yeux marron, aime la musique, Belge.", answer: "Angèle" },
+        ],
+      },
+    ],
+  },
 };
