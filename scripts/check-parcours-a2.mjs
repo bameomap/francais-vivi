@@ -26,6 +26,15 @@ for (const unit of PARCOURS_UNITS_A2) {
   console.log(`\n── Unité ${unit.num} · ${unit.fr} (${unit.id}) ──`);
   let total = 0;
 
+  // The DELF card scores under "ecouter" but isn't backed by an audio track —
+  // it opens its own exam screen and owns a synthetic sub-lesson id instead.
+  // Derived from the card's destination rather than its name so a rename
+  // doesn't quietly turn this back into a false failure.
+  const synthetic = new Set(
+    defs.filter(s => s.view === "delf-a2" || s.section === "delf-a2")
+        .flatMap(s => s.subIds || [])
+  );
+
   for (const skill of skills) {
     const real = getStepSubIds(unit.id, skill);
     const used = defs
@@ -33,7 +42,7 @@ for (const unit of PARCOURS_UNITS_A2) {
       .flatMap(s => s.subIds || []);
 
     const missing = real.filter(id => !used.includes(id));
-    const unknown = used.filter(id => !real.includes(id));
+    const unknown = used.filter(id => !real.includes(id) && !synthetic.has(id));
     const dupes   = used.filter((id, i) => used.indexOf(id) !== i);
     const bad     = missing.length || unknown.length || dupes.length;
 
@@ -44,7 +53,11 @@ for (const unit of PARCOURS_UNITS_A2) {
       `${bad ? "✗" : "✓"} ${skill.padEnd(8)} real=${String(real.length).padStart(2)} used=${String(used.length).padStart(2)}` +
       (missing.length ? `  THIẾU: ${missing.join(", ")}` : "") +
       (unknown.length ? `  SAI ID: ${unknown.join(", ")}` : "") +
-      (dupes.length   ? `  TRÙNG: ${dupes.join(", ")}`   : "")
+      (dupes.length   ? `  TRÙNG: ${dupes.join(", ")}`   : "") +
+      // Surfaced, not hidden: a synthetic id is legitimate but shouldn't be
+      // invisible, or a genuine typo could hide behind the exemption.
+      (used.filter(id => synthetic.has(id)).length
+        ? `  +DELF: ${used.filter(id => synthetic.has(id)).join(", ")}` : "")
     );
   }
 

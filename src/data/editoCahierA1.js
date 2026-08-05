@@ -5904,7 +5904,9 @@ export const CAHIER_A1 = {
           items: [
             { q: "La réunion de travail était très / beaucoup longue !", options: ["très", "beaucoup"], answer: "très" },
             { q: "J'ai trop / un peu travaillé aujourd'hui. Je suis fatigué.", options: ["trop", "un peu"], answer: "trop" },
-            { q: "J'ai fini de lire le rapport. Il est un peu / beaucoup long.", options: ["un peu", "beaucoup"], answer: "un peu (hoặc très, tùy ngữ cảnh)" },
+            // ⚠️ Le corrigé donne « un peu » ; « très » resterait défendable
+            // selon le contexte, mais seul « un peu » figure dans les options.
+            { q: "J'ai fini de lire le rapport. Il est un peu / beaucoup long.", options: ["un peu", "beaucoup"], answer: "un peu" },
             { q: "C'est un travail assez / trop intéressant mais je pense changer bientôt.", options: ["assez", "trop"], answer: "assez" },
             { q: "J'aime beaucoup / très mon métier.", options: ["beaucoup", "très"], answer: "beaucoup" },
           ],

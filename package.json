@@ -12,7 +12,9 @@
     "check:a2": "node scripts/check-parcours-a2.mjs",
     "align:refs": "node scripts/align-audio/export-refs.mjs",
     "gen:subids": "node scripts/gen-step-subids.mjs",
-    "check:subids": "node scripts/check-step-subids.mjs"
+    "check:subids": "node scripts/check-step-subids.mjs",
+    "check:cahier": "node scripts/check-cahier.mjs",
+    "check": "npm run check:a1 && npm run check:a2 && npm run check:subids && npm run check:cahier"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

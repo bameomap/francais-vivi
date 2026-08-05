@@ -4979,7 +4979,7 @@ export const CAHIER_A2 = {
             { q: "Quand nous ___ à l'aéroport de Montréal, nous ___ très fatigués du voyage. (2 từ)", options: ["avons atterri – étions", "atterrissions – avons été"], answer: "avons atterri – étions" },
             { q: "On ___ à la terrasse de l'hôtel. Tout à coup, la pluie ___ . (2 từ)", options: ["déjeunait – est tombée", "a déjeuné – tombait"], answer: "déjeunait – est tombée" },
             { q: "Au musée d'histoire de Chine, ils ___ une énorme sculpture en pierre, ___ un moment fort de leur voyage. (2 từ)", options: ["ont vu – c'était", "voyaient – ça a été"], answer: "ont vu – c'était" },
-            { q: "Je ___ mon vol sur le site Internet. Tout à coup, mon ordinateur ___ . (2 từ)", options: ["réservais – s'est éteint", "j'ai réservé – s'éteignait"], answer: "je réservais – s'est éteint" },
+            { q: "Je ___ mon vol sur le site Internet. Tout à coup, mon ordinateur ___ . (2 từ)", options: ["réservais – s'est éteint", "j'ai réservé – s'éteignait"], answer: "réservais – s'est éteint" },
           ],
         },
         {
