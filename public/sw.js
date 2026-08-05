@@ -1,6 +1,22 @@
 const CACHE = "vivi-v3";
 const OFFLINE = ["/", "/logo.svg"];
 
+// Course audio lives in its own cache, deliberately *not* versioned with the
+// app shell: a piste's contents never change, so a deploy has no reason to
+// make the learner re-download hundreds of MB over mobile data.
+const AUDIO_CACHE = "vivi-audio-v1";
+// Roughly one full level's livre + cahier audio. Bounded so a learner who
+// works through every level doesn't grow the cache without limit.
+const AUDIO_MAX_ENTRIES = 300;
+
+// cache.keys() returns entries in insertion order, so dropping from the front
+// evicts what was added longest ago.
+async function trimAudioCache(cache) {
+  const keys = await cache.keys();
+  const excess = keys.length - AUDIO_MAX_ENTRIES;
+  if (excess > 0) await Promise.all(keys.slice(0, excess).map(k => cache.delete(k)));
+}
+
 self.addEventListener("install", e =>
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(OFFLINE)).then(() => self.skipWaiting()))
 );
@@ -8,7 +24,9 @@ self.addEventListener("install", e =>
 self.addEventListener("activate", e =>
   e.waitUntil(
     caches.keys()
-      .then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(ks => Promise.all(
+        ks.filter(k => k !== CACHE && k !== AUDIO_CACHE).map(k => caches.delete(k))
+      ))
       .then(() => self.clients.claim())
       .then(() => {
         // Notify all open tabs that a new version is ready
@@ -51,6 +69,32 @@ self.addEventListener("fetch", e => {
           return res;
         })
         .catch(() => caches.match(e.request).then(c => c || caches.match("/")))
+    );
+    return;
+  }
+
+  // Audio: cache-first in its own cache. Replaying a piste is the single most
+  // repeated action in the app, and the files are served cross-origin from
+  // GitHub Pages — without this, every replay is a fresh download.
+  //
+  // Range requests are passed straight through: the player uses them to seek,
+  // and answering one from cache would return a 200 where the browser expects
+  // a 206, which breaks scrubbing (notably in Safari).
+  if (url.pathname.endsWith(".mp3") && !e.request.headers.get("range")) {
+    e.respondWith(
+      caches.open(AUDIO_CACHE).then(cache =>
+        cache.match(e.request).then(cached =>
+          cached || fetch(e.request).then(res => {
+            // `res.ok` is the CORS case; an opaque response (status 0) is what
+            // a no-cors cross-origin fetch yields and is still cacheable.
+            if (res.ok || res.type === "opaque") {
+              const clone = res.clone();
+              cache.put(e.request, clone).then(() => trimAudioCache(cache));
+            }
+            return res;
+          })
+        )
+      )
     );
     return;
   }
