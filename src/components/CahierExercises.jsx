@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { C } from "../constants.js";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
-import { isAnswerCorrect } from "../data/editoCahierA2.js";
+import { isAnswerCorrect } from "../utils/cahierAnswer.js";
 
 // Renders the Cahier d'activités exercises for one step. Every answer comes
 // from the cahier's own Corrigés, so grading is exact rather than AI-judged —

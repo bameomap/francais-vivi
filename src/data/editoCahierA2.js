@@ -6782,17 +6782,6 @@ export const CAHIER_A2 = {
 
 };
 
-// Answers are compared loosely: case, accents on the apostrophe, doubled
-// spaces and trailing punctuation shouldn't cost the learner a point.
-export function normalizeAnswer(s) {
-  return String(s || "")
-    .toLowerCase()
-    .replace(/[''’]/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?;:]+$/g, "")
-    .trim();
-}
-
-export function isAnswerCorrect(given, expected) {
-  return normalizeAnswer(given) === normalizeAnswer(expected);
-}
+// Answer comparison moved to src/utils/cahierAnswer.js — it is shared with the
+// A1 cahier, and living here forced the shared renderer to import this whole
+// module just to compare two strings.

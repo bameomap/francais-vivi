@@ -49,8 +49,13 @@ import editoA2ReadingComprehension from "./data/editoA2Reading.js";
 import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
 import { EDITO_TIMINGS_A2 } from "./data/editoTimingsA2.js";
 import { EDITO_TIMINGS_A1 } from "./data/editoTimingsA1.js";
-import { CAHIER_A2 } from "./data/editoCahierA2.js";
-import { CAHIER_A1 } from "./data/editoCahierA1.js";
+// The two cahiers are ~816 KB of exercise data between them, and a learner
+// only ever needs the one for their current level. Loaded on demand below
+// instead of imported here, which kept both in the eager bundle.
+const loadCahier = (lvl) =>
+  lvl === "a2"
+    ? import("./data/editoCahierA2.js").then(m => m.CAHIER_A2)
+    : import("./data/editoCahierA1.js").then(m => m.CAHIER_A1);
 
 // Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
 // phrasebook are A1-only content, so they're left out until A2 versions exist.
@@ -216,6 +221,16 @@ function AppInner() {
   const [vocabFilter, setVocabFilter]       = useState("all");
   const [level, setLevel]               = useState(() => localStorage.getItem(LEVEL_KEY) || DEFAULT_LEVEL);
   const levelInfo = getLevelInfo(level);
+  // Cahier exercises for the active level. Null until the chunk resolves; every
+  // consuming panel already treats a missing cahier as "no exercises to show",
+  // so the brief gap degrades to the pre-cahier UI rather than an error.
+  const [cahier, setCahier] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    setCahier(null);                       // drop the old level's exercises immediately
+    loadCahier(level).then(c => { if (alive) setCahier(c); });
+    return () => { alive = false; };
+  }, [level]);
   // Switching level resets the in-panel navigation so we never land on a view
   // that belongs to the level we just left (e.g. A1's Fiche while on A2).
   const changeLevel = (id) => {
@@ -877,8 +892,8 @@ function AppInner() {
 
             {/* EDITO VOCAB */}
             {view==="edito" && (level==="a1"
-              ? <EditoVocabPanel onBackToParcours={backToParcours} cahier={CAHIER_A1} />
-              : <EditoVocabPanel onBackToParcours={backToParcours} units={EDITO_VOCAB_A2_UNITS} levelLabel="Edito A2" cahier={CAHIER_A2} />)}
+              ? <EditoVocabPanel onBackToParcours={backToParcours} cahier={cahier} />
+              : <EditoVocabPanel onBackToParcours={backToParcours} units={EDITO_VOCAB_A2_UNITS} levelLabel="Edito A2" cahier={cahier} />)}
 
 
             {/* INPUT */}
@@ -1175,8 +1190,8 @@ function AppInner() {
                   lastUnitKey="parcours_last_unit_a2"
                 />)}
             {view==="grammar"       && (level==="a1"
-              ? <GrammarPanel onBackToParcours={backToParcours} cahier={CAHIER_A1} />
-              : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" cahier={CAHIER_A2} />)}
+              ? <GrammarPanel onBackToParcours={backToParcours} cahier={cahier} />
+              : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" cahier={cahier} />)}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && (level==="a1"
               ? <WritingPanel onBackToParcours={backToParcours} />
@@ -1201,14 +1216,14 @@ function AppInner() {
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
             {view==="reference_hub" && (level==="a1"
-              ? <ReferenceHub onBackToParcours={backToParcours} cahier={CAHIER_A1} />
+              ? <ReferenceHub onBackToParcours={backToParcours} cahier={cahier} />
               : <ReferenceHub
                   onBackToParcours={backToParcours}
                   tabs={REFERENCE_TABS_A2}
                   phonoData={EDITO_A2_PHONO}
                   verbUnits={EDITO_A2_VERB_UNITS}
                   levelLabel="Édito A2"
-                  cahier={CAHIER_A2}
+                  cahier={cahier}
                 />)}
             {/* No onClose: the shell header already provides "← Về" */}
             {view==="level"         && <LevelSelectPanel currentLevel={level} onSelect={changeLevel} />}
@@ -1239,14 +1254,14 @@ function AppInner() {
                   cefr="A2"
                 />)}
             {view==="quiz-unit"     && (level==="a1"
-              ? <UnitQuizPanel onBackToParcours={backToParcours} cahier={CAHIER_A1} />
+              ? <UnitQuizPanel onBackToParcours={backToParcours} cahier={cahier} />
               : <UnitQuizPanel
                   onBackToParcours={backToParcours}
                   units={PARCOURS_UNITS_A2}
                   vocabUnits={EDITO_VOCAB_A2_UNITS}
                   grammarUnits={EDITO_GRAMMAR_A2}
                   cefr="A2"
-                  cahier={CAHIER_A2}
+                  cahier={cahier}
                 />)}
             {view==="revision"      && <RevisionPanel />}
             {view==="fiche"         && <FichePanel onNavigate={(s, v) => goSection(s, v || s)} />}
