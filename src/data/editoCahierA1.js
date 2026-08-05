@@ -5137,4 +5137,636 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u9: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g9" ──
+    // g9 has 4 points, all with a matching cahier "Grammaire" page: p0 La
+    // comparaison (p.103), p1 Passé composé avec être (p.106), p2 L'imparfait
+    // des verbes impersonnels (p.107), p3 Les prépositions devant les noms
+    // de villes/pays (2) (p.104). No skips this unit.
+    grammar: {
+
+      // p0 — La comparaison (cahier p. 103)
+      p0: [
+        {
+          num: 1, page: 103,
+          instruction: "Complétez les phrases avec plus … que/qu' ou moins … que/qu'.",
+          vi: "Điền cấu trúc so sánh hơn/kém (plus … que, moins … que).",
+          type: "fill",
+          items: [
+            { q: "La chambre familiale est ……… grande ……… la chambre simple.", answer: "plus … que" },
+            { q: "Les vacances à la campagne sont ……… calmes ……… à la mer.", answer: "plus … qu'" },
+            { q: "Le camping est ……… confortable ……… l'hôtel.", answer: "moins … que" },
+            { q: "Dans mon pays, il fait ……… chaud en été ……… en hiver.", answer: "plus … qu'" },
+          ],
+        },
+        {
+          num: 2, page: 103,
+          instruction: "Remettez les mots dans l'ordre pour former des phrases.",
+          vi: "Sắp xếp lại từ để tạo câu so sánh.",
+          type: "order",
+          items: [
+            { tokens: ["L'avion", "est", "plus", "rapide", "que", "la", "voiture."],
+              answer: ["L'avion", "est", "plus", "rapide", "que", "la", "voiture."] },
+            { tokens: ["La", "vue", "sur", "la", "mer", "est", "plus", "belle", "que", "la", "vue", "sur", "la", "rue."],
+              answer: ["La", "vue", "sur", "la", "mer", "est", "plus", "belle", "que", "la", "vue", "sur", "la", "rue."] },
+            { tokens: ["Le", "petit-déjeuner", "est", "moins", "cher", "que", "le", "dîner."],
+              answer: ["Le", "petit-déjeuner", "est", "moins", "cher", "que", "le", "dîner."] },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_9.md) : l'énoncé imprimé de l'exercice
+          // donne « d. La tarte aux pommes de l'hôtel est meilleure que la
+          // tarte de la boulangerie » dans la transcription audio, alors
+          // que le texte à trous du cahier mentionne « le croissant » — la
+          // transcription et l'énoncé imprimé ne désignent pas exactement
+          // le même aliment (tarte vs croissant). On reproduit l'énoncé du
+          // cahier (« croissant ») avec la réponse du corrigé (meilleur,
+          // accordé au masculin), qui suit la logique de l'énoncé plutôt
+          // que celle de la transcription.
+          num: 3, page: 103, audioSrc: piste(89),
+          instruction: "Écoutez et complétez les phrases avec l'adjectif et le comparatif.",
+          vi: "Nghe và điền tính từ so sánh phù hợp (chú ý meilleur là dạng so sánh bất quy tắc của bon) — ⚠️ xem note về sự khác biệt tarte/croissant giữa băng ghi âm và đề in.",
+          type: "fill",
+          items: [
+            { q: "Cette chambre d'hôte dans le centre-ville est ……… que cette location à la campagne.", answer: "plus chère" },
+            { q: "Léa préfère les vacances ……… que Naïm.", answer: "moins sportives" },
+            { q: "Ce van est ……… qu'un hôtel.", answer: "aussi confortable" },
+            { q: "Le croissant de l'hôtel est ……… que le croissant de la boulangerie.", answer: "meilleur" },
+          ],
+        },
+        {
+          num: 4, page: 103,
+          instruction: "Reformulez les phrases comme dans l'exemple (Exemple : Le camping est moins cher que l'hôtel. → L'hôtel est plus cher que le camping.).",
+          vi: "Viết lại câu so sánh theo chiều ngược lại (đổi vị trí chủ ngữ).",
+          type: "transform",
+          items: [
+            { q: "Le vélo est plus écologique que la voiture.", answer: "La voiture est moins écologique que le vélo." },
+            { q: "Les vacances en ville sont moins sportives que les vacances à la montagne.", answer: "Les vacances à la montagne sont plus sportives que les vacances en ville." },
+            { q: "Les croissants du supermarché sont moins bons que les croissants de l'hôtel.", answer: "Les croissants de l'hôtel sont meilleurs que les croissants du supermarché." },
+          ],
+        },
+      ],
+
+      // p1 — Le passé composé avec être (cahier p. 106)
+      p1: [
+        {
+          num: 1, page: 106,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn trợ động từ đúng (être hay avoir) ở thì quá khứ kép.",
+          type: "choice",
+          items: [
+            { q: "Je suis / ai parti il y a une semaine.", options: ["suis", "ai"], answer: "suis" },
+            { q: "Nous avons / sommes rentrés en avion.", options: ["avons", "sommes"], answer: "sommes" },
+            { q: "On est / a marché dans le centre historique.", options: ["est", "a"], answer: "a" },
+            { q: "Ils ont / sont allés à Athènes.", options: ["ont", "sont"], answer: "sont" },
+            { q: "Vous avez / êtes nagé tous les jours ?", options: ["avez", "êtes"], answer: "avez" },
+          ],
+        },
+        {
+          num: 2, page: 106,
+          instruction: "Complétez les participes passés avec s, e, es si nécessaire (Exemple : Annah est revenue hier de Madagascar.).",
+          vi: "Điền đúng đuôi cho quá khứ phân từ (chú ý sự hòa hợp với chủ ngữ khi dùng trợ động từ être).",
+          type: "fill",
+          items: [
+            { q: "Qu'est-ce qu'elle a pensé…… de son voyage ?", answer: "pensé (không thêm đuôi — trợ động từ avoir)" },
+            { q: "Mes parents sont allé…… en Martinique pendant les vacances.", answer: "allés" },
+            { q: "Mon mari et moi sommes parti…… à Venise pour notre anniversaire de mariage. Nous avons adoré…… !", answer: "partis … adoré (không thêm đuôi trên adoré — trợ động từ avoir)" },
+            { q: "Elles sont rentré…… de la plage à quelle heure ?", answer: "rentrées" },
+            { q: "Aïcha, tu as fait…… de la plongée pendant tes vacances ?", answer: "fait (không thêm đuôi — trợ động từ avoir)" },
+          ],
+        },
+        {
+          num: 3, page: 106,
+          instruction: "Complétez les phrases au passé composé (Exemple : Louis, d'habitude, tu pars à la mer. Mais l'année dernière, tu es parti à la montagne.).",
+          vi: "Chia động từ ở thì quá khứ kép với trợ động từ être.",
+          type: "fill",
+          items: [
+            { q: "En général, je vais en Corse en bateau. Mais cet été, j'y ……… en avion.", answer: "suis allé(e)" },
+            { q: "D'habitude, il rentre de la plage à 18 h. Mais hier, il ……… à 17h.", answer: "est rentré" },
+            { q: "En général, ma sœur arrive en avance à l'aéroport. Mais cette fois, elle ……… en retard.", answer: "est arrivée" },
+            { q: "D'habitude, mes parents restent dormir à l'hôtel. Mais le week-end dernier, ils ……… chez eux.", answer: "sont restés" },
+          ],
+        },
+        {
+          num: 4, page: 106,
+          instruction: "Complétez avec les verbes au passé composé — Les vacances de Julia.",
+          vi: "Kể lại kỳ nghỉ của Julia bằng cách chia động từ ở thì quá khứ kép.",
+          type: "fill",
+          items: [
+            { q: "Les vacances de Julia — Elle ……… (partir) de Paris lundi matin. Elle ……… (arriver) à Tokyo le soir. Elle ……… (dormir) dans un petit hôtel. Mardi, elle ……… (sortir) tôt et elle ……… (aller) visiter les principaux monuments. Mercredi, elle ……… (monter) sur le mont Fuji. Et jeudi, elle ……… (prendre) l'avion et elle ……… (rentrer) en France.",
+              answer: "est partie – est arrivée – a dormi – est sortie – est allée – est montée – a pris – est rentrée" },
+          ],
+        },
+        {
+          num: 5, page: 106, audioSrc: piste(94),
+          instruction: "Écoutez et répondez aux questions (réponses libres) — Exemple : Tu es revenue à quelle heure ? → Je suis revenue à 9 h.",
+          vi: "Nghe câu hỏi và trả lời tự do ở thì quá khứ kép (đáp án mẫu, không duy nhất).",
+          type: "fill",
+          items: [
+            { q: "a. Vous êtes partis quand ?", answer: "On est partis lundi." },
+            { q: "b. Tu as voyagé comment ?", answer: "J'ai pris l'avion." },
+            { q: "c. Elles ont logé où ?", answer: "Elles ont logé à l'hôtel." },
+            { q: "d. Vous êtes allés où pendant les vacances ?", answer: "Nous avons fait de la randonnée." },
+          ],
+        },
+      ],
+
+      // p2 — Les verbes impersonnels à l'imparfait (cahier p. 107)
+      p2: [
+        {
+          // ⚠️ Note (cahier_unite_9.md) : le corrigé imprimé donne la
+          // séquence « a. passé composé – b. imparfait – c. imparfait –
+          // d. imparfait – e. présent – f. passé composé – g. présent »,
+          // reproduite telle quelle.
+          num: 1, page: 107, audioSrc: piste(95),
+          instruction: "Écoutez les phrases et cochez l'imparfait, le passé composé ou le présent.",
+          vi: "Nghe và xác định câu ở thì nào (imparfait, passé composé, hay hiện tại).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["imparfait", "passé composé", "présent"], answer: "passé composé" },
+            { q: "b.", options: ["imparfait", "passé composé", "présent"], answer: "imparfait" },
+            { q: "c.", options: ["imparfait", "passé composé", "présent"], answer: "imparfait" },
+            { q: "d.", options: ["imparfait", "passé composé", "présent"], answer: "imparfait" },
+            { q: "e.", options: ["imparfait", "passé composé", "présent"], answer: "présent" },
+            { q: "f.", options: ["imparfait", "passé composé", "présent"], answer: "passé composé" },
+            { q: "g.", options: ["imparfait", "passé composé", "présent"], answer: "présent" },
+          ],
+        },
+        {
+          num: 2, page: 107,
+          instruction: "Regardez les images et complétez la météo avec Il y avait ou Il faisait.",
+          vi: "Điền il y avait hoặc il faisait để mô tả thời tiết trong quá khứ.",
+          type: "fill",
+          items: [
+            { q: "a. (image) ……… du soleil.", answer: "Il y avait" },
+            { q: "b. (image) ……… 31 degrés.", answer: "Il faisait" },
+            { q: "c. (image) ……… des nuages.", answer: "Il y avait" },
+            { q: "d. (image) ……… beau.", answer: "Il faisait" },
+            { q: "e. (image) ……… froid.", answer: "Il faisait" },
+          ],
+        },
+        {
+          num: 3, page: 107,
+          instruction: "Transformez les verbes à l'imparfait avec il y avait, c'était, il faisait (Exemple : C'est très joli, ce château ! → C'était très joli, ce château.).",
+          vi: "Chuyển câu miêu tả sang thì imparfait (dùng cho miêu tả trong quá khứ).",
+          type: "transform",
+          items: [
+            { q: "Il fait mauvais.", answer: "Il faisait mauvais." },
+            { q: "C'est magnifique, ces paysages !", answer: "C'était magnifique, ces paysages !" },
+            { q: "Il y a trop de touristes dans ce musée.", answer: "Il y avait trop de touristes dans ce musée." },
+            { q: "Il y a de la neige au sommet de ces montagnes.", answer: "Il y avait de la neige au sommet de ces montagnes." },
+            { q: "La cuisine locale, c'est très bon !", answer: "La cuisine locale, c'était très bon !" },
+          ],
+        },
+        {
+          num: 4, page: 107,
+          instruction: "Complétez la carte postale avec il y avait, il faisait ou c'était.",
+          vi: "Điền il faisait / il y avait / c'était vào bưu thiếp kể chuyện du lịch Rome.",
+          type: "fill",
+          items: [
+            { q: "Chère Vanessa, Je suis en vacances à Rome. C'est super ! Hier, j'ai marché dans le centre-ville. ……… très chaud mais ……… du vent. J'ai visité la chapelle Sixtine. ……… beaucoup de monde mais ……… magnifique ! Le soir, ……… plus frais et on a mangé une pizza en terrasse. ……… délicieux ! J'ai fait beaucoup de photos. Bisous, Julia",
+              answer: "Il faisait – il y avait – Il y avait – c'était – il faisait – C'était" },
+          ],
+        },
+      ],
+
+      // p3 — Les prépositions devant les noms de villes et de pays (2) (cahier p. 104)
+      p3: [
+        {
+          num: 1, page: 104,
+          instruction: "Entourez la réponse correcte.",
+          vi: "Chọn giới từ chỉ nguồn gốc phù hợp với tên quốc gia (de/d'/du/des).",
+          type: "choice",
+          items: [
+            { q: "Adel vient du / d'/ de Tunisie.", options: ["du", "d'", "de"], answer: "de" },
+            { q: "Sihem arrive du / d'/ des Portugal.", options: ["du", "d'", "des"], answer: "du" },
+            { q: "Olga vient du / d'/ de Ukraine.", options: ["du", "d'", "de"], answer: "d'" },
+            { q: "Christine arrive des / d'/ du Philippines.", options: ["des", "d'", "du"], answer: "des" },
+          ],
+        },
+        {
+          num: 2, page: 104,
+          instruction: "Complétez les phrases avec de, des, du ou d'.",
+          vi: "Điền giới từ chỉ nguồn gốc quốc gia phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Ce joli kimono vient ……… Japon.", answer: "du" },
+            { q: "Ce café vient ……… Colombie.", answer: "de" },
+            { q: "Mon pantalon vient ……… Vietnam.", answer: "du" },
+            { q: "Ces mangues viennent ……… Thaïlande.", answer: "de" },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_9.md) : le corrigé imprimé ne couvre
+          // explicitement que 5 des 6 plats énumérés dans la transcription
+          // (tacos, hamburger, pâtisseries, spaghettis, paëlla, sushis). La
+          // réponse f (sushis → Japon) est déduite par élimination et n'est
+          // pas confirmée mot pour mot dans le corrigé extrait.
+          num: 3, page: 104, audioSrc: piste(90),
+          instruction: "Écoutez, choisissez la bonne image et indiquez de quels pays viennent ces plats (Exemple : a. Ils viennent du Mexique.).",
+          vi: "Nghe và xác định món ăn đến từ quốc gia nào — ⚠️ câu f (sushis → Nhật Bản) được suy luận bằng loại trừ, chưa được xác nhận trực tiếp trong đáp án gốc.",
+          type: "fill",
+          items: [
+            { q: "a. (exemple : tacos)", answer: "Ils viennent du Mexique.", example: true },
+            { q: "b. (hamburger)", answer: "Il vient des États-Unis." },
+            { q: "c. (pâtisseries)", answer: "Elles viennent de France." },
+            { q: "d. (spaghettis)", answer: "Ils viennent d'Italie." },
+            { q: "e. (paëlla)", answer: "Elle vient d'Espagne." },
+            { q: "f. (sushis)", answer: "Ils viennent du Japon." },
+          ],
+        },
+        {
+          num: 4, page: 104,
+          instruction: "Complétez les phrases avec les verbes conjugués au présent et du, de/d' ou des (Exemple : Maria vient du Pérou.).",
+          vi: "Chia động từ và điền giới từ chỉ nguồn gốc phù hợp.",
+          type: "fill",
+          items: [
+            { q: "– Vous (venir) ……… Brésil ? – Oui, on (venir) ……… Rio.", answer: "venez du … vient de" },
+            { q: "Tu (arriver) ……… États-Unis lundi, je viens te chercher.", answer: "arrives des" },
+            { q: "Nos parents viennent de rentrer, ils (revenir) ……… Italie.", answer: "reviennent d'" },
+            { q: "Mon avion (arriver) ……… Londres.", answer: "arrive de" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 105 "Les vacances" + p. 108 "La nature"). ──
+    // Custom STEP_GROUPS_U9: v1_vocab (u9g2/g3/g4, "Chỗ ở · đặt phòng ·
+    // phương tiện di chuyển") gets p.105's accommodation/transport-focused
+    // exercises (ex1, ex2); v2_vocab (u9g1/g5/g6/g7/g8/g9, "Điểm đến · hoạt
+    // động · thiên nhiên") gets p.105 ex3 (lieux de vacances — destinations)
+    // and all of p.108 "La nature" (lieux, animaux, activités).
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 105,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn từ đúng để hoàn thành câu về kỳ nghỉ (lều, nông trại, thú cưng, đỗ xe).",
+          type: "choice",
+          items: [
+            { q: "J'ai réservé un camping pour nos vacances. On va dormir sous la tente / le lit double.", options: ["la tente", "le lit double"], answer: "la tente" },
+            { q: "Pour les enfants, loger dans un hôtel / une ferme, c'est idéal ! Ils adorent voir les animaux !", options: ["un hôtel", "une ferme"], answer: "une ferme" },
+            { q: "Les animaux ne sont pas réservés / acceptés dans cet hôtel.", options: ["réservés", "acceptés"], answer: "acceptés" },
+            { q: "Les Français partent / arrivent souvent à la mer.", options: ["partent", "arrivent"], answer: "partent" },
+            { q: "Est-ce qu'il y a un parking / un aéroport pour se garer à côté de l'hôtel ?", options: ["un parking", "un aéroport"], answer: "un parking" },
+          ],
+        },
+        {
+          num: 2, page: 105,
+          instruction: "Barrez l'intrus.",
+          vi: "Gạch bỏ từ không cùng nhóm nghĩa.",
+          type: "fill",
+          items: [
+            { q: "la voiture – le van – la location – l'avion", answer: "la location" },
+            { q: "se baigner – réserver – bronzer – faire du surf", answer: "réserver" },
+            { q: "revenir – arriver – rentrer – payer", answer: "payer" },
+            { q: "cher – sympa – génial – magnifique", answer: "cher" },
+            { q: "un camping – une ferme – une location – une randonnée", answer: "une randonnée" },
+          ],
+        },
+      ],
+
+      v2_vocab: [
+        {
+          // ⚠️ Note (cahier_unite_9.md) : le corrigé imprimé donne
+          // uniquement « a. b. c. d. 2 – 4 – 3 – 1 » (numérotation de
+          // lieux 1 à 4), sans réimprimer les noms — associations déduites
+          // du contenu audio (a→montagne, b→mer, c→ville, d→campagne), non
+          // garanties mot pour mot.
+          num: 3, page: 105, audioSrc: piste(91),
+          instruction: "Écoutez et associez un enregistrement à un lieu de vacances (à la mer – à la montagne – à la campagne – en ville).",
+          vi: "Nghe và xác định địa điểm nghỉ dưỡng (biển, núi, nông thôn, thành phố) — ⚠️ xem note về sự suy luận từ đáp án gốc.",
+          type: "fill",
+          items: [
+            { q: "a.", answer: "à la montagne" },
+            { q: "b.", answer: "à la mer" },
+            { q: "c.", answer: "en ville" },
+            { q: "d.", answer: "à la campagne" },
+          ],
+        },
+        {
+          num: 1, page: 108,
+          instruction: "Associez.",
+          vi: "Nối động từ chỉ hoạt động ngoài trời với nơi chốn phù hợp.",
+          type: "match",
+          pairs: [
+            { l: "faire de la plongée dans", r: "la mer" },
+            { l: "faire une randonnée dans", r: "les champs" },
+            { l: "pique-niquer sur", r: "l'herbe" },
+            { l: "faire du bateau sur", r: "le lac" },
+          ],
+        },
+        {
+          num: 2, page: 108,
+          instruction: "Lisez les définitions et trouvez l'animal (Exemple : Il habite avec une famille et il dort beaucoup : le chat.).",
+          vi: "Đọc định nghĩa và tìm tên con vật tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Elle donne du lait.", answer: "la vache" },
+            { q: "Elle fait des œufs.", answer: "la poule" },
+            { q: "Il chante et vit dans les arbres.", answer: "l'oiseau" },
+            { q: "Il nage et vit dans la mer.", answer: "le poisson" },
+            { q: "Il se promène tous les jours.", answer: "le chien" },
+          ],
+        },
+        {
+          num: 3, page: 108, audioSrc: piste(96),
+          instruction: "Écoutez et associez les dialogues aux images (1. plage — 2. bateau sur la rivière — 3. champs et cultures — 4. forêt).",
+          vi: "Nghe các hội thoại và nối với hình ảnh tương ứng (biển, sông, đồng ruộng, rừng).",
+          type: "fill",
+          items: [
+            { q: "Dialogue 1", answer: "4 (forêt)" },
+            { q: "Dialogue 2", answer: "3 (champs)" },
+            { q: "Dialogue 3", answer: "1 (plage)" },
+            { q: "Dialogue 4", answer: "2 (bateau sur la rivière)" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 105 consonnes [f]/[v] + p. 108 ──
+    // consonnes [k]/[g]).
+    phono: [
+      {
+        num: 1, page: 105, audioSrc: piste(92),
+        instruction: "Phonie-graphie : les consonnes [f] et [v]. Discrimination : combien de fois entendez-vous [f] et [v] ? (format : f/v)",
+        vi: "Nghe và đếm số lần xuất hiện âm [f] và [v].",
+        type: "fill",
+        items: [
+          { q: "a. En février, vous voulez partir en vacances avec votre famille.", answer: "2/5" },
+          { q: "b. Voyager en voiture, c'est facile, mais voyager à vélo, c'est fatiguant !", answer: "2/4" },
+          { q: "c. Vous êtes sportif ou sportive, vivez une nouvelle aventure !", answer: "1/6" },
+          { q: "d. Vendredi vous devez téléphoner pour réserver votre voyage.", answer: "1/6" },
+          { q: "e. Vous préférez visiter un village ou faire une activité différente ?", answer: "3/4" },
+        ],
+      },
+      {
+        num: 2, page: 105, audioSrc: piste(93),
+        instruction: "Phonie-graphie : les consonnes [f] et [v]. Dictée : complétez le texte.",
+        vi: "Nghe và điền từ còn thiếu (chính tả) trong đoạn văn kể về chuyến đi.",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Pendant les vacances, vous avez voyagé en voiture pour visiter des villages en France. Vous avez vu des paysages magnifiques, vous avez fait des activités différentes et vous avez dormi dans une ferme familiale. Une belle aventure avec beaucoup de photos !" },
+        ],
+      },
+      {
+        num: 1, page: 108, audioSrc: piste(97),
+        instruction: "Phonie-graphie : les consonnes [k] et [g]. Discrimination : combien de fois entendez-vous [k] et [g] ? (format : k/g)",
+        vi: "Nghe và đếm số lần xuất hiện âm [k] và [g].",
+        type: "fill",
+        items: [
+          { q: "a.", answer: "3/2" },
+          { q: "b.", answer: "2/2" },
+          { q: "c.", answer: "5/1" },
+          { q: "d.", answer: "3/1" },
+          { q: "e.", answer: "6/0" },
+        ],
+      },
+      {
+        num: 2, page: 108, audioSrc: piste(98),
+        instruction: "Phonie-graphie : les consonnes [k] et [g]. Dictée : complétez le texte.",
+        vi: "Nghe và điền từ còn thiếu (chính tả) trong đoạn văn kể về kỳ nghỉ ở Martinique.",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Je suis en vacances en Martinique. C'est magnifique ! Je marche beaucoup de kilomètres chaque jour. J'ai rencontré un groupe de Mexicains très sympathiques. Un guide nous organise des activités culturelles et nous dégustons des spécialités locales. Les journées sont longues mais agréables." },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 109 CO/PE, p. 110-111 Bilan linguistique /40, ──
+    // p. 112-113 DELF A1, p. 114 Jeux). Production orale p.109/p.113 (jeux
+    // de rôle) and Jeux activité 5 (quiz de géographie, réponses libres)
+    // are free-answer and intentionally excluded.
+    bilan: [
+      {
+        num: 1, page: 109, audioSrc: piste(99),
+        instruction: "Compréhension orale — Photos de vacances. Antoine montre à Ismaël des photos de vacances d'été.",
+        vi: "Nghe hội thoại về ảnh kỳ nghỉ của Antoine và trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "1. Antoine est parti :", answer: "à la montagne." },
+          { q: "2. Il a passé ses vacances avec :", answer: "sa famille." },
+          { q: "4. Antoine a aimé :", answer: "l'hébergement." },
+          { q: "5. Il y avait :", answer: "du soleil." },
+        ],
+      },
+      {
+        num: 2, page: 109,
+        instruction: "Compréhension orale — Vrai ou faux ?",
+        vi: "Nghe và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "3. Antoine n'a pas aimé les randonnées.", answer: false },
+        ],
+      },
+      {
+        num: 3, page: 109,
+        instruction: "Production écrite — Répondez au courriel d'Antoine. Utilisez le passé composé et l'imparfait. (40-50 mots)",
+        vi: "Viết thư trả lời Antoine kể về kỳ nghỉ của mình, dùng thì passé composé và imparfait (40-50 từ) — bài mẫu tham khảo.",
+        type: "fill",
+        items: [
+          { q: "Exemple de production (corrigé) :", answer: "Salut Antoine, oui, c'était super ces vacances ! Cette année, je suis allé à la mer. Il a fait beau les deux premiers jours mais après, le temps était un peu gris. On a dormi sous la tente, c'était sympa. On se voit bientôt ? Bisous, Marc." },
+        ],
+      },
+      {
+        num: 4, page: 110,
+        instruction: "Bilan linguistique — Grammaire : Lisez le tableau et soulignez la bonne réponse. (/5)",
+        vi: "Đọc bảng so sánh hai nhà hàng và chọn đáp án đúng.",
+        type: "choice",
+        items: [
+          { q: "Le restaurant Chez Jeanne est plus / moins grand que le café de la Plage.", options: ["plus", "moins"], answer: "moins" },
+          { q: "Le restaurant Chez Jeanne est plus / aussi vieux que le café de la Plage.", options: ["plus", "aussi"], answer: "plus" },
+          { q: "Le café de la Plage est moins / plus cher que le restaurant Chez Jeanne.", options: ["moins", "plus"], answer: "plus" },
+          { q: "L'eau est plus / aussi chère au café de la Plage qu'au restaurant Chez Jeanne.", options: ["plus", "aussi"], answer: "aussi" },
+          { q: "Le service est plus / moins rapide au café de la Plage.", options: ["plus", "moins"], answer: "plus" },
+        ],
+      },
+      {
+        num: 5, page: 110,
+        instruction: "Bilan linguistique — Grammaire : Associez. (/4)",
+        vi: "Nối để hoàn thành câu chỉ nguồn gốc quốc gia.",
+        type: "match",
+        pairs: [
+          { l: "On arrive de", r: "Colombie." },
+          { l: "Elle revient du", r: "Cameroun." },
+          { l: "Nous rentrons d'", r: "Espagne." },
+          { l: "Ils viennent des", r: "États-Unis." },
+        ],
+      },
+      {
+        num: 6, page: 110,
+        instruction: "Bilan linguistique — Grammaire : Conjuguez au passé composé. (/6)",
+        vi: "Chia động từ ở thì quá khứ kép.",
+        type: "fill",
+        items: [
+          { q: "Elle ……… (revenir) de Chine hier.", answer: "est revenue" },
+          { q: "Ils ……… (aller) au restaurant.", answer: "sont allés" },
+          { q: "Vous ……… (marcher) toute la journée ?", answer: "avez marché" },
+          { q: "Il ……… (naître) en 1999.", answer: "est né" },
+          { q: "Marie, tu ……… (sortir) hier soir ?", answer: "es sortie" },
+          { q: "Nous ……… (rentrer) du Canada.", answer: "sommes rentrés" },
+        ],
+      },
+      {
+        num: 7, page: 111,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases avec les verbes impersonnels à l'imparfait. (/5)",
+        vi: "Chia động từ vô nhân xưng ở thì imparfait.",
+        type: "fill",
+        items: [
+          { q: "J'ai visité le village de Giverny. ……… (être) très joli !", answer: "C'était" },
+          { q: "On a fait une promenade en bateau. ……… (faire) un peu froid.", answer: "Il faisait" },
+          { q: "Quand je suis arrivé à Moscou, ……… (avoir) de la neige partout !", answer: "il y avait" },
+          { q: "On a voyagé et dormi dans un van. ……… (être) économique !", answer: "C'était" },
+          { q: "Au Mucem, ……… (avoir) beaucoup de touristes.", answer: "il y avait" },
+        ],
+      },
+      {
+        num: 8, page: 111,
+        instruction: "Bilan linguistique — Vocabulaire : Lisez les phrases et cochez vrai ou faux. (/5)",
+        vi: "Đọc và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "Une chambre simple est pour deux personnes.", answer: false },
+          { q: "Dans une chambre d'hôte, je dors sous une tente.", answer: false },
+          { q: "À la mer, je peux me baigner et bronzer.", answer: true },
+          { q: "À la montagne, je peux faire du ski.", answer: true },
+          { q: "Pour prendre le train, il faut aller à l'aéroport.", answer: false },
+        ],
+      },
+      {
+        num: 9, page: 111,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases avec les verbes qui conviennent. (/5)",
+        vi: "Điền động từ phù hợp.",
+        type: "fill",
+        items: [
+          { q: "Je voudrais ……… une chambre double s'il vous plaît.", answer: "réserver" },
+          { q: "Pour mes vacances en Bretagne, je vais ……… la cuisine locale.", answer: "goûter" },
+          { q: "À la plage, je n'aime pas ……… . Je me mets toujours à l'ombre.", answer: "bronzer" },
+          { q: "Je ne peux pas me ……… parce que j'ai oublié mon maillot de bain.", answer: "baigner" },
+          { q: "Je suis désolé, nous ne pouvons pas ……… les chiens dans notre hôtel.", answer: "accepter" },
+        ],
+      },
+      {
+        num: 10, page: 111,
+        instruction: "Bilan linguistique — Vocabulaire : Lisez la définition et écrivez le mot qui correspond. (/5)",
+        vi: "Đọc định nghĩa và viết từ vựng tương ứng.",
+        type: "fill",
+        items: [
+          { q: "On pratique cette activité sous la mer et on admire les poissons.", answer: "la plongée" },
+          { q: "On pratique cette activité en forêt ou dans la montagne. On marche.", answer: "la randonnée" },
+          { q: "C'est une route dans la forêt ou les champs pour les marcheurs.", answer: "un chemin" },
+          { q: "C'est la nourriture des vaches. C'est vert.", answer: "l'herbe" },
+          { q: "C'est un déjeuner froid dans la nature.", answer: "un pique-nique" },
+        ],
+      },
+      {
+        num: 11, page: 111,
+        instruction: "Bilan linguistique — Vocabulaire : Soulignez la bonne réponse. (/5)",
+        vi: "Chọn từ đúng.",
+        type: "choice",
+        items: [
+          { q: "Le chant de cet oiseau / ce lapin est magnifique.", options: ["cet oiseau", "ce lapin"], answer: "cet oiseau" },
+          { q: "Ma fille a fait une randonnée à cheval / poule sur la plage.", options: ["cheval", "poule"], answer: "cheval" },
+          { q: "J'ai admiré des villages entourés de champs / lacs.", options: ["champs", "lacs"], answer: "champs" },
+          { q: "Nous avons fait du bateau sur la forêt / rivière.", options: ["forêt", "rivière"], answer: "rivière" },
+          { q: "Mon ami m'a offert des fleurs / arbres pour mon anniversaire.", options: ["fleurs", "arbres"], answer: "fleurs" },
+        ],
+      },
+      {
+        num: 12, page: 112, audioSrc: piste(100),
+        instruction: "DELF A1 — Compréhension de l'oral (4 points). Message vocal de Flora (vacances en Normandie).",
+        vi: "Nghe tin nhắn thoại của Flora về kỳ nghỉ ở Normandie và trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "1. Vous partez de Rouen quand ?", answer: "C. Jeudi." },
+          { q: "2. Vous allez à la mer comment ?", answer: "C. En voiture." },
+          { q: "3. Flora vous demande de vous occuper...", answer: "C. de l'hébergement." },
+          { q: "4. Vous allez dormir où ? (image)", answer: "A" },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_9.md) : pour la question 2, la
+        // transcription ne précise pas explicitement le moyen de transport
+        // pour se rendre à la mer — la réponse imprimée « C. En voiture »
+        // est probablement déduite du fait que Flora loue une voiture,
+        // mais ce lien n'est pas totalement explicite dans le texte audio
+        // (voir l'exercice précédent, DELF Compréhension de l'oral).
+        num: 13, page: 112,
+        instruction: "DELF A1 — Compréhension des écrits. Brochure « Bretagne Passion : Week-end touristique à Saint-Malo ».",
+        vi: "Đọc chương trình cuối tuần du lịch Saint-Malo và trả lời câu hỏi.",
+        type: "fill",
+        items: [
+          { q: "1. Qu'est-ce que vous pouvez faire samedi matin ? (image)", answer: "A" },
+          { q: "2. Le samedi à midi, vous pouvez...", answer: "C. goûter la cuisine locale." },
+          { q: "3. Vous partez à Dinard à quelle heure ?", answer: "B. À 15 h." },
+          { q: "4. Dimanche, vous pouvez…", answer: "C. marcher en forêt." },
+          { q: "5. Dimanche, vous déjeunez où ?", answer: "C. Au bord d'une rivière." },
+        ],
+      },
+      {
+        num: 14, page: 113,
+        instruction: "DELF A1 — Production écrite (15 points). Racontez vos vacances à la mer à votre ami(e) français(e) (40 mots minimum).",
+        vi: "Viết thư kể về kỳ nghỉ ở biển (tối thiểu 40 từ) — bài mẫu tham khảo.",
+        type: "fill",
+        items: [
+          { q: "Exemple de production (corrigé) :", answer: "Chère Rose ! Je suis en vacances à la mer avec ma femme et notre fille, Yasmine. Nous avons loué un appartement à côté de la plage. Il est très confortable. Yasmine se baigne tous les jours. Nous faisons aussi du vélo et nous nous reposons. Et toi, tes vacances se passent bien ? Je t'embrasse. J. B." },
+        ],
+      },
+      {
+        num: 15, page: 113,
+        instruction: "DELF A1 — Production orale. Dialogue simulé à l'office du tourisme.",
+        vi: "Đóng vai hỏi thông tin tại văn phòng du lịch và chọn hoạt động, thanh toán vé — bài mẫu tham khảo.",
+        type: "fill",
+        items: [
+          { q: "Exemple de dialogue (corrigé) :", answer: "Vous : Bonjour ! – Employé : Bonjour ! – Vous : Je suis en vacances en Bretagne pendant 4 jours. Qu'est-ce qu'il y a à voir en ce moment ? – Employé : Vous visitez la Bretagne seul ou avec votre famille ? – Vous : Avec ma famille. J'ai 2 enfants. Ils ont 6 et 9 ans. – Employé : Nous avons deux activités très intéressantes à faire avec des enfants. Il y a le Grand Aquarium à Saint-Malo et la Cité de la pêche. – Vous : La Cité de la pêche, qu'est-ce que c'est ? – Employé : Vous visitez un bateau de pêche. Vous apprenez le métier de pêcheur, le nom des poissons... – Vous : On peut goûter aussi les spécialités de la mer ? – Employé : Oui, mais il faut payer en plus. – Vous : Et c'est où ? – Employé : C'est à Guilvinec. – Vous : Et à l'aquarium, il y a beaucoup d'animaux ? – Employé : Oui, beaucoup, c'est très grand. – Vous : Il est ouvert tous les jours ? – Employé : Oui, tous les jours. – Vous : Le soir, il ferme à quelle heure ? – Employé : Il ferme à 19 heures. – Vous : Combien coûte le billet ? – Employé : 12 euros pour les adultes et 8 euros pour les enfants. – Vous : Je vais acheter 4 billets pour l'aquarium. Deux adultes et deux enfants, s'il vous plaît. – Employé : Nous organisons aussi une visite guidée de la vieille ville de Rennes. – Vous : C'est très intéressant mais mes enfants n'aiment pas marcher. – Employé : Ah d'accord ! – Vous : Je peux payer l'aquarium par carte ? – Employé : Bien sûr. – Vous : Ça fait combien au total ? – Employé : Alors ça fait 40 euros. Vous pouvez taper votre code. Voici vos billets ! – Vous : Merci beaucoup ! Bonne journée ! – Employé : Bonne journée et bonne visite !" },
+        ],
+      },
+      {
+        num: 16, page: 114,
+        instruction: "Jeux — Devinettes.",
+        vi: "Đoán từ vựng chủ đề kỳ nghỉ qua các câu đố so sánh.",
+        type: "fill",
+        items: [
+          { q: "C'est un moyen de transport plus écologique et moins cher que l'avion.", answer: "le train" },
+          { q: "C'est un mode d'hébergement dans la nature et moins confortable que l'hôtel.", answer: "le camping" },
+          { q: "C'est une destination de vacances plus populaire que la campagne.", answer: "la mer" },
+          { q: "C'est une activité en mer plus sportive que bronzer ou se baigner.", answer: "le surf" },
+          { q: "C'est un animal aussi apprécié que le chien mais plus indépendant.", answer: "le chat" },
+        ],
+      },
+      {
+        num: 17, page: 114,
+        instruction: "Jeux — Complétez les mots croisés avec les participes passés des verbes suivants au masculin singulier (partir, sortir, revenir, arriver, naître).",
+        vi: "Điền quá khứ phân từ (giống đực, số ít) của các động từ cho sẵn.",
+        type: "fill",
+        items: [
+          { q: "5 participes passés à retrouver :", answer: "parti – revenu – sorti – arrivé – né" },
+        ],
+      },
+      {
+        num: 18, page: 114,
+        instruction: "Jeux — Remettez les lettres dans l'ordre pour trouver des animaux.",
+        vi: "Xếp lại chữ cái để tìm tên con vật.",
+        type: "fill",
+        items: [
+          { q: "ISEUAO", answer: "oiseau" },
+          { q: "HAECV", answer: "vache" },
+          { q: "ARDANC", answer: "canard" },
+          { q: "NSOIOPS", answer: "poisson" },
+          { q: "VLEHAC", answer: "cheval" },
+        ],
+      },
+      {
+        num: 19, page: 114,
+        instruction: "Jeux — Associez 2 étiquettes pour retrouver les 5 hébergements.",
+        vi: "Ghép 2 mảnh chữ để tìm 5 loại hình lưu trú.",
+        type: "fill",
+        items: [
+          { q: "5 hébergements à retrouver :", answer: "camping – tente – hôtel – location – ferme" },
+        ],
+      },
+    ],
+  },
 };
