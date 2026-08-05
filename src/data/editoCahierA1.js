@@ -2039,4 +2039,630 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u4: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g4" ──
+    // g4 has 4 points, and all 4 have a matching cahier Grammaire page —
+    // no skips this unit.
+    grammar: {
+
+      // p0 — C'est / Il-Elle est (cahier p. 43)
+      p0: [
+        {
+          num: 1, page: 43,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn \"c'est/ce sont\" (giới thiệu, kèm danh từ) hoặc \"il/elle est\" (mô tả trực tiếp).",
+          type: "choice",
+          items: [
+            { q: "Il est / C'est un touriste.", options: ["Il est", "C'est"], answer: "C'est" },
+            { q: "Il est / C'est allemand.", options: ["Il est", "C'est"], answer: "Il est" },
+            { q: "Elle est / C'est la ville de Toulouse sur la photo ?", options: ["Elle est", "C'est"], answer: "C'est" },
+            { q: "Rouen ? C'est / Elle est une ville française.", options: ["C'est", "Elle est"], answer: "C'est" },
+            { q: "Ce sont / C'est des artistes internationaux.", options: ["Ce sont", "C'est"], answer: "Ce sont" },
+          ],
+        },
+        {
+          num: 2, page: 43,
+          instruction: "Complétez les phrases avec c'est ou il/elle est.",
+          vi: "Điền \"c'est\" hoặc \"il/elle est\" phù hợp với ngữ cảnh.",
+          type: "fill",
+          items: [
+            { q: "……………….. la rue Victor-Hugo.", answer: "C'est" },
+            { q: "L'artiste s'appelle Snek et ……………….. grenoblois.", answer: "il est" },
+            { q: "« Street Art Fest Grenoble – Alpes », ……………….. un festival international.", answer: "c'est" },
+            { q: "Toulouse, ……………….. la ville rose.", answer: "c'est" },
+            { q: "Ici, ……………….. l'école du quartier.", answer: "c'est" },
+          ],
+        },
+        {
+          num: 3, page: 43,
+          instruction: "Associez pour former une phrase.",
+          vi: "Nối phần đầu câu với phần cuối câu phù hợp.",
+          type: "match",
+          pairs: [
+            { l: "C'est", r: "une visite d'une heure." },
+            { l: "Ce sont", r: "des artistes parisiens." },
+            { l: "Il est", r: "dynamique le centre-ville ?" },
+            { l: "Elle est", r: "grande, la place de la République ?" },
+          ],
+        },
+        {
+          num: 4, page: 43, audioSrc: piste(39),
+          instruction: "Écoutez et complétez les phrases avec c'est ou ce sont, il/elle est.",
+          vi: "Nghe hội thoại về khu phố của Pedro và điền \"c'est/ce sont/il est/elle est\" đúng.",
+          type: "fill",
+          items: [
+            { q: "Pedro : Voilà, ici, ……………….. mon quartier.", answer: "c'est" },
+            { q: "Andréa : ……………….. sympa ?", answer: "c'est" },
+            { q: "Pedro : Oui, ……………….. très agréable et il y a beaucoup de monuments historiques !", answer: "il est" },
+            { q: "Andréa : Ah oui, ……………….. beau le bâtiment ici, qu'est-ce que c'est ?", answer: "il est" },
+            { q: "Pedro : ……………….. la mairie !", answer: "c'est" },
+            { q: "Pedro : Et là, à côté, ……………….. les jardins de Sainte-Cécile !", answer: "ce sont" },
+            { q: "Andréa : C'est ta rue ? ……………….. belle !", answer: "Elle est" },
+          ],
+        },
+      ],
+
+      // p1 — L'impératif (cahier p. 46)
+      p1: [
+        {
+          num: 1, page: 46,
+          instruction: "Lisez et classez les phrases dans le tableau (présent de l'indicatif ou impératif).",
+          vi: "Xếp câu vào bảng theo thì hiện tại chỉ định hay thức mệnh lệnh.",
+          type: "choice",
+          items: [
+            { q: "a. Tu prends le bus ?", options: ["présent", "impératif"], answer: "présent", example: true },
+            { q: "b. Allez tout droit.", options: ["présent", "impératif"], answer: "impératif" },
+            { q: "c. Nous n'avons pas de ticket.", options: ["présent", "impératif"], answer: "présent" },
+            { q: "d. Regarde le bâtiment ici !", options: ["présent", "impératif"], answer: "impératif" },
+            { q: "e. Vous montez dans le tram.", options: ["présent", "impératif"], answer: "présent" },
+          ],
+        },
+        {
+          num: 2, page: 46,
+          instruction: "Conjuguez les verbes à l'impératif.",
+          vi: "Chia động từ ở thức mệnh lệnh theo chủ ngữ tu/nous/vous.",
+          type: "fill",
+          items: [
+            { q: "Tu – prendre", answer: "Prends." },
+            { q: "Nous – traverser", answer: "Traversons." },
+            { q: "Vous – être", answer: "Soyez." },
+            { q: "Tu – aller", answer: "Va." },
+            { q: "Nous – avoir", answer: "Ayons." },
+            { q: "Vous – acheter", answer: "Achetez." },
+          ],
+        },
+        {
+          num: 3, page: 46,
+          instruction: "Transformez les phrases à l'impératif (Exemple : Vous tournez à droite. → Tournez à droite.).",
+          vi: "Chuyển câu từ thì hiện tại sang thức mệnh lệnh.",
+          type: "fill",
+          items: [
+            { q: "Tu fais attention dans la rue, s'il te plaît.", answer: "Fais attention dans la rue, s'il te plaît !" },
+            { q: "Nous prenons le bus aujourd'hui.", answer: "Prenons le bus aujourd'hui." },
+            { q: "Vous allez à pied à la gare.", answer: "Allez à pied à la gare." },
+            { q: "Tu es calme en voiture.", answer: "Sois calme en voiture." },
+            { q: "Nous regardons le plan sur le téléphone.", answer: "Regardons le plan sur le téléphone." },
+            { q: "Vous cherchez l'itinéraire sur Internet.", answer: "Cherchez l'itinéraire sur Internet." },
+          ],
+        },
+        {
+          num: 4, page: 46, audioSrc: piste(43),
+          instruction: "Écoutez et complétez les dialogues.",
+          vi: "Nghe và điền động từ mệnh lệnh vào đoạn hội thoại chỉ đường.",
+          type: "fill",
+          items: [
+            { q: "– C'est simple ! ……………….. tout droit et ……………….. la première à droite. (2 từ)", answer: "Allez prenez" },
+            { q: "– Non, ce n'est pas loin, ………………..!", answer: "marchons" },
+            { q: "– Oui, c'est un peu loin. …………….., il y a l'arrêt de tram B, …………….. dans le tram et …………….. à la gare. (3 từ)", answer: "Regarde monte descends" },
+          ],
+        },
+        {
+          num: 5, page: 46,
+          instruction: "Complétez avec la forme correcte du verbe prendre au présent.",
+          vi: "Chia động từ \"prendre\" ở thì hiện tại.",
+          type: "fill",
+          items: [
+            { q: "Mathieu et Adeline ……………………………… le tram.", answer: "prennent" },
+            { q: "Mes parents et moi, nous ……………………………… le train dimanche !", answer: "prenons" },
+            { q: "Je ne ……………………………… pas le métro aujourd'hui.", answer: "prends" },
+            { q: "Vous ……………………………… la voiture.", answer: "prenez" },
+            { q: "Romain, il ne ……………………………… pas souvent le bus.", answer: "prend" },
+          ],
+        },
+      ],
+
+      // p2 — Les connecteurs : pour, parce que, mais, avec, sans (cahier p. 47)
+      p2: [
+        {
+          num: 1, page: 47,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn liên từ đúng (pour/parce que/mais/avec/sans).",
+          type: "choice",
+          items: [
+            { q: "Pour aller loin, la voiture c'est pratique mais / parce que ce n'est pas écologique.", options: ["mais", "parce que"], answer: "mais" },
+            { q: "On préfère le centre-ville parce que / sans voitures.", options: ["parce que", "sans"], answer: "sans" },
+            { q: "Avec / sans ma femme, on prend le bus le matin.", options: ["Avec", "sans"], answer: "Avec" },
+            { q: "Pour / Parce qu' aller à l'école, nous ne prenons pas la trottinette.", options: ["Pour", "Parce qu'"], answer: "Pour" },
+            { q: "Je ne vais pas à pied à l'université pour / parce que c'est loin.", options: ["pour", "parce que"], answer: "parce que" },
+          ],
+        },
+        {
+          num: 2, page: 47, audioSrc: piste(44),
+          instruction: "Écoutez et complétez avec pour, parce que/parce qu', mais, avec.",
+          vi: "Nghe và điền liên từ đúng.",
+          type: "fill",
+          items: [
+            { q: "Je vais chez mes grands-parents en train ……………….. mes cousins.", answer: "avec" },
+            { q: "Je n'achète pas de ticket ……………….. j'ai ma carte.", answer: "parce que" },
+            { q: "……………….. aller chez toi, je prends le tram ?", answer: "Pour" },
+            { q: "Je n'aime pas ton itinéraire ……………….. il est long !", answer: "parce qu'" },
+            { q: "Il y a beaucoup de pollution dans cette ville ……………….. elle est magnifique.", answer: "mais" },
+          ],
+        },
+        {
+          num: 3, page: 47,
+          instruction: "Associez pour former des phrases.",
+          vi: "Nối phần đầu và phần cuối câu bằng liên từ phù hợp.",
+          type: "match",
+          pairs: [
+            { l: "Aller à la montagne sans", r: "voiture, c'est compliqué." },
+            { l: "On fait souvent du covoiturage avec", r: "mes amis." },
+            { l: "Prends le vélo pour", r: "aller au centre-ville." },
+            { l: "Je préfère prendre le train parce que", r: "je prends souvent le bus." },
+            { l: "J'ai une voiture mais", r: "c'est écologique." },
+            { l: "Comment se déplacer sans", r: "polluer ?" },
+          ],
+        },
+        {
+          num: 4, page: 47,
+          instruction: "Complétez avec pour, parce que/parce qu', avec, sans.",
+          vi: "Điền liên từ vào các đoạn hội thoại về phương tiện di chuyển.",
+          type: "fill",
+          items: [
+            { q: "– Oui, c'est très facile ……………….. il y a le tram, le bus et le métro.", answer: "parce qu'" },
+            { q: "– Oui, moi aussi, c'est super de parler ……………….. des gens différents.", answer: "avec" },
+            { q: "– Dans la ville, je marche à pied mais ……………….. aller au travail, je prends mon vélo.", answer: "pour" },
+            { q: "– Oui, je prends le tram pour aller à l'université ……………….. je prends ma voiture pour faire mes courses.", answer: "mais" },
+            { q: "– Oui, j'aime beaucoup ma trottinette ……………….. c'est pratique et écologique.", answer: "parce que" },
+            { q: "– Oui, je vais souvent à la montagne et ce n'est pas pratique ……………….. voiture.", answer: "sans" },
+          ],
+        },
+      ],
+
+      // p3 — La fréquence (1) : toujours, souvent, jamais (cahier p. 44)
+      p3: [
+        {
+          num: 1, page: 44,
+          instruction: "Soulignez la bonne réponse.",
+          vi: "Chọn trạng từ tần suất đúng (toujours/souvent/jamais) theo ngữ cảnh.",
+          type: "choice",
+          items: [
+            { q: "Lundi, mardi et mercredi, Jonathan va à la bibliothèque. Il va toujours / souvent à la bibliothèque.", options: ["toujours", "souvent"], answer: "toujours" },
+            { q: "Annabelle marche beaucoup le samedi et le dimanche. Elle marche jamais / souvent le week-end.", options: ["jamais", "souvent"], answer: "souvent" },
+            { q: "À Paris, il y a toujours / jamais beaucoup de touristes.", options: ["toujours", "jamais"], answer: "toujours" },
+            { q: "On ne va toujours / jamais au musée le mardi. Les musées ferment le mardi dans mon pays.", options: ["toujours", "jamais"], answer: "jamais" },
+            { q: "José est professeur d'histoire. Il visite souvent / jamais des monuments historiques.", options: ["souvent", "jamais"], answer: "souvent" },
+          ],
+        },
+        {
+          num: 2, page: 44, audioSrc: piste(40),
+          instruction: "Écoutez et cochez la bonne réponse.",
+          vi: "Nghe và đánh dấu tần suất đúng (souvent/toujours/jamais) cho mỗi hoạt động.",
+          type: "choice",
+          items: [
+            { q: "Il va au théâtre.", options: ["souvent", "toujours", "jamais"], answer: "jamais" },
+            { q: "Il fait les courses au centre-ville.", options: ["souvent", "toujours", "jamais"], answer: "souvent" },
+            { q: "Il va à la bibliothèque.", options: ["souvent", "toujours", "jamais"], answer: "toujours" },
+            { q: "Il va au cinéma en semaine.", options: ["souvent", "toujours", "jamais"], answer: "jamais" },
+            { q: "Il marche le dimanche.", options: ["souvent", "toujours", "jamais"], answer: "souvent" },
+          ],
+        },
+        {
+          num: 3, page: 44,
+          instruction: "Lisez les descriptions de Linda et Isabelle et cochez vrai ou faux.",
+          vi: "Đọc đoạn văn mô tả sở thích của Linda và Isabelle rồi xác định đúng/sai.",
+          type: "truefalse",
+          items: [
+            { q: "Linda marche souvent dans la nature.", answer: true },
+            { q: "Linda ne va jamais à la montagne le week-end.", answer: false },
+            { q: "Linda va toujours au musée le dimanche.", answer: false },
+            { q: "Isabelle visite souvent des villes.", answer: true },
+            { q: "Isabelle ne visite jamais d'églises.", answer: false },
+            { q: "Isabelle va toujours marcher dans la nature le week-end.", answer: false },
+          ],
+        },
+        {
+          num: 4, page: 44,
+          instruction: "Transformez les phrases avec les mots proposés (Exemple : Jacques marche toujours le dimanche.).",
+          vi: "Viết lại câu, thêm trạng từ tần suất đã cho.",
+          type: "fill",
+          items: [
+            { q: "Le théâtre propose un programme intéressant. (souvent)", answer: "Le théâtre propose souvent un programme intéressant." },
+            { q: "Ma mère va à la bibliothèque le samedi. (jamais)", answer: "Ma mère ne va jamais à la bibliothèque le samedi." },
+            { q: "Je prends le pont Saint-Laurent. (toujours)", answer: "Je prends toujours le pont Saint-Laurent." },
+            { q: "Avec ma classe, on va au musée. (souvent)", answer: "Avec ma classe, on va souvent au musée." },
+            { q: "Nous allons au théâtre. (jamais)", answer: "Nous n'allons jamais au théâtre." },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 45 "La ville" + p. 48 "Les transports et ──
+    // les nombres (3)"). Custom STEP_GROUPS_U4: v1_vocab (u4g1-u4g4, "Đường
+    // phố · khu phố · địa danh · con người"), v2_vocab (u4g10, "La
+    // fréquence (1)"), v3_vocab (u4g5-u4g9, "Phương tiện · chỉ đường · số
+    // đếm lớn"). v2_vocab (u4g10, frequency adverbs) has NO dedicated cahier
+    // Vocabulaire page — "la fréquence" is only drilled on the Grammaire
+    // page p.44 (folded into grammar p3 above) — so v2_vocab is
+    // intentionally left without cahier exercises here.
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 45,
+          instruction: "Observez les images et soulignez la bonne réponse.",
+          vi: "Nhìn hình và chọn từ đúng về địa điểm trong thành phố.",
+          type: "choice",
+          items: [
+            { q: "Il est à la gare / banque.", options: ["gare", "banque"], answer: "gare" },
+            { q: "Son appartement n'est pas loin du fleuve / boulevard.", options: ["fleuve", "boulevard"], answer: "fleuve" },
+            { q: "Ils sont au théâtre / musée.", options: ["théâtre", "musée"], answer: "théâtre" },
+            { q: "Ils habitent en ville / banlieue.", options: ["ville", "banlieue"], answer: "banlieue" },
+            { q: "Ils marchent sur le quai / pont.", options: ["quai", "pont"], answer: "quai" },
+            { q: "Il habite place / avenue de la Liberté.", options: ["place", "avenue"], answer: "avenue" },
+          ],
+        },
+        {
+          num: 2, page: 45,
+          instruction: "Complétez les phrases avec les mots proposés.",
+          vi: "Điền từ vựng chỉ địa điểm công cộng vào chỗ trống.",
+          type: "fill",
+          bank: ["théâtre", "bibliothèque", "musée", "parcs", "école", "jardins", "gare"],
+          items: [
+            { q: "Je prends le train à la ……………………………… de Nice.", answer: "gare" },
+            { q: "On va à la ……………………………… ? Je voudrais lire le livre de Gaël Faye !", answer: "bibliothèque" },
+            { q: "Mon mari est acteur, il travaille au ……………………………… du centre-ville.", answer: "théâtre" },
+            { q: "J'adore marcher dans des ……………………………… et des ……………………………… en ville. (2 từ)", answer: "parcs jardins" },
+            { q: "Comment ça va à l'……………………………… , les enfants ?", answer: "école" },
+            { q: "L'exposition au ……………………………… d'art moderne est intéressante ?", answer: "musée" },
+          ],
+        },
+        {
+          num: 3, page: 45, audioSrc: piste(41),
+          instruction: "Écoutez et associez les phrases aux images.",
+          vi: "Nghe và nối câu với hình ảnh tương ứng.",
+          type: "match",
+          pairs: [
+            { l: "Phrase 1", r: "image 3" },
+            { l: "Phrase 2", r: "image 2" },
+            { l: "Phrase 3", r: "image 1" },
+            { l: "Phrase 4", r: "image 5" },
+            { l: "Phrase 5", r: "image 4" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 1, page: 48,
+          instruction: "Regardez l'image et complétez la légende avec des mots de la liste (il y a deux intrus : en métro, en train).",
+          vi: "Nhìn hình và điền phương tiện di chuyển đúng (có 2 từ dư trong danh sách: en métro, en train).",
+          type: "fill",
+          bank: ["à pied", "à trottinette", "à vélo", "en bus", "en métro", "en train", "en voiture"],
+          items: [
+            { q: "a.", answer: "en trottinette" },
+            { q: "b.", answer: "à pied" },
+            { q: "c.", answer: "en vélo" },
+            { q: "d.", answer: "en bus" },
+            { q: "e.", answer: "en voiture" },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_4.md) : la fin de l'énoncé « f » du corrigé
+          // imprimé (« deux millions deux cent vingt-deux ») ne correspond pas
+          // littéralement à 2 222 — probable coquille du manuel, reproduite
+          // telle quelle.
+          num: 2, page: 48,
+          instruction: "Associez le nombre en chiffres à son écriture en lettres.",
+          vi: "Nối số viết bằng chữ số với cách đọc bằng chữ — phần f có khả năng là lỗi in trong sách gốc (⚠️ voir note).",
+          type: "match",
+          pairs: [
+            { l: "2 222 000", r: "deux millions deux cent vingt-deux mille" },
+            { l: "2 000 222 000", r: "deux milliards deux cent vingt-deux millions" },
+            { l: "2 000 222", r: "deux mille deux cent vingt-deux" },
+            { l: "2 222 000 000", r: "deux milliards deux cents vingt-deux mille" },
+            { l: "222", r: "deux cent vingt-deux" },
+            { l: "2 222", r: "deux millions deux cent vingt-deux" },
+          ],
+        },
+        {
+          num: 3, page: 48, audioSrc: piste(45),
+          instruction: "Écoutez et complétez avec les mots et les nombres.",
+          vi: "Nghe và điền từ + số vào chỗ trống.",
+          type: "fill",
+          items: [
+            { q: "……………………………… personnes utilisent les transports en commun dans notre ville.", answer: "1 300 420" },
+            { q: "Tu regardes souvent ton ……………………………… sur internet ?", answer: "itinéraire" },
+            { q: "À Bordeaux, il y a ……………………………… habitants.", answer: "256 045" },
+            { q: "Votre ……………………………… s'il vous plaît.", answer: "ticket" },
+            { q: "Faites du ………………………………, c'est pratique et écologique !", answer: "covoiturage" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 45 [ɛ̃]/[ɑ̃] + p. 48 [ɑ̃]/[ɔ̃]) ──
+    phono: [
+      {
+        num: 1, page: 45, audioSrc: piste(42),
+        instruction: "Phonie-graphie : les voyelles nasales [ɛ̃] et [ɑ̃]. Écoutez les phrases et indiquez combien de fois vous entendez [ɛ̃] et [ɑ̃] (format : ɛ̃/ɑ̃). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện nguyên âm mũi [ɛ̃] và [ɑ̃] trong câu (định dạng ɛ̃/ɑ̃), sau đó lặp lại.",
+        type: "fill",
+        items: [
+          { q: "a. J'habite dans un quartier sympa.", answer: "2/1", example: true },
+          { q: "b. Martin va souvent dans les magasins.", answer: "2/2" },
+          { q: "c. Le dimanche, les habitants marchent dans les jardins du centre-ville.", answer: "1/4" },
+          { q: "d. En France, de juin à septembre, c'est l'été !", answer: "1/3" },
+          { q: "e. Tous les matins, je prends les transports en commun.", answer: "2/2" },
+        ],
+      },
+      {
+        num: 2, page: 48, audioSrc: piste(46),
+        instruction: "Phonie-graphie : les voyelles nasales [ɑ̃] et [ɔ̃]. Écoutez les phrases et indiquez combien de fois vous entendez [ɑ̃] et [ɔ̃] (format : ɑ̃/ɔ̃). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện nguyên âm mũi [ɑ̃] và [ɔ̃] trong câu (định dạng ɑ̃/ɔ̃), sau đó lặp lại.",
+        type: "fill",
+        items: [
+          { q: "a. Nous prenons souvent les transports.", answer: "2/1", example: true },
+          { q: "b. Pendant les vacances nous allons en Espagne en avion.", answer: "5/2" },
+          { q: "c. Avec la carte de transport, les étudiants vont à l'université à Lyon.", answer: "2/2" },
+          { q: "d. Au Luxembourg, les transports en commun sont gratuits.", answer: "3/1" },
+          { q: "e. Nous utilisons des applications pour visiter la France.", answer: "1/2" },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 49 CE+PO, p. 50-51 Bilan linguistique /40, ──
+    // p. 52-53 DELF A1, p. 54 Jeux). The "Production orale — Jeu de rôle"
+    // (p.49) and Jeux activité 1 ("Dites le début d'un mot…") are free
+    // answer ("Réponses libres") and intentionally excluded.
+    bilan: [
+      {
+        num: 1, page: 49,
+        instruction: "Compréhension écrite — « J'attends votre visite ! » Lisez le post de Lena et répondez : vrai ou faux ?",
+        vi: "Đọc bài đăng của Lena về thành phố Rennes và xác định đúng/sai (câu 1a-1c).",
+        type: "truefalse",
+        items: [
+          { q: "1a. Lena habite à Rennes.", answer: true },
+          { q: "1b. Lena n'aime pas son quartier.", answer: false },
+          { q: "1c. À Rennes, il y a beaucoup de monuments.", answer: true },
+        ],
+      },
+      {
+        num: 2, page: 49,
+        instruction: "Compréhension écrite — « J'attends votre visite ! » Répondez aux questions (choix).",
+        vi: "Đọc bài đăng của Lena và chọn đáp án đúng (câu 2a-2c).",
+        type: "choice",
+        items: [
+          { q: "2a. Lena…", options: ["habite loin de la place de la Mairie", "n'habite pas loin de la place de la Mairie", "habite place de la Mairie"], answer: "n'habite pas loin de la place de la Mairie" },
+          { q: "2b. Le week-end, Lena…", options: ["prend souvent le vélo pour aller dans la nature", "ne prend jamais le vélo pour aller dans la nature", "prend toujours le train pour visiter une ville"], answer: "prend souvent le vélo pour aller dans la nature" },
+          { q: "2c. Pour aller à Rennes, Lena propose de…", options: ["prendre la voiture", "prendre le train", "prendre le bus"], answer: "prendre le train" },
+        ],
+      },
+      {
+        num: 3, page: 49,
+        instruction: "Compréhension écrite — De la gare, on peut aller chez Lena… (2 réponses)",
+        vi: "Đọc bài đăng của Lena và tìm 2 cách đi từ ga đến nhà Lena.",
+        type: "fill",
+        items: [
+          { q: "2d. De la gare, on peut aller chez Lena…", answer: "à pied ; en métro" },
+        ],
+      },
+      {
+        num: 4, page: 50,
+        instruction: "Bilan linguistique — Grammaire : Complétez avec c'est, ce sont, il/elle est. (/5)",
+        vi: "Điền \"c'est/ce sont/il est/elle est\" đúng.",
+        type: "fill",
+        items: [
+          { q: "Il s'appelle Banksy. ……………….. un artiste de street art.", answer: "C'est" },
+          { q: "Voici la mairie de Paris. ……………….. grande !", answer: "Elle est" },
+          { q: "Québec et Montréal, ……………….. des villes sympas.", answer: "ce sont" },
+          { q: "J'adore le musée d'Arts de Nantes. ……………….. très intéressant.", answer: "Il est" },
+          { q: "Mon quartier, ……………….. le quartier Saint-Jean.", answer: "c'est" },
+        ],
+      },
+      {
+        num: 5, page: 50,
+        instruction: "Bilan linguistique — Grammaire : Mettez les éléments de la phrase dans l'ordre. (/5)",
+        vi: "Sắp xếp các phần câu theo đúng thứ tự.",
+        type: "fill",
+        items: [
+          { q: "à la bibliothèque ? / Tu ne vas / jamais /", answer: "Tu ne vas jamais à la bibliothèque ?" },
+          { q: "pour aller / Je prends / à l'école / toujours / le bus", answer: "Je prends toujours le bus pour aller à l'école." },
+          { q: "souvent / Avec mes parents, / au musée. / on va", answer: "Avec mes parents, on va souvent au musée." },
+          { q: "souvent / des visites guidées / L'Office du tourisme / organise", answer: "L'Office du tourisme organise souvent des visites guidées." },
+          { q: "Vous n'allez / au théâtre ? / jamais", answer: "Vous n'allez jamais au théâtre ?" },
+        ],
+      },
+      {
+        num: 6, page: 50,
+        instruction: "Bilan linguistique — Grammaire : Transformez les phrases à l'impératif. (/5)",
+        vi: "Chuyển câu sang thức mệnh lệnh.",
+        type: "fill",
+        items: [
+          { q: "Tu vas à l'école à pied.", answer: "Va à l'école à pied." },
+          { q: "Nous montons dans le bus.", answer: "Montons dans le bus." },
+          { q: "Vous êtes sympas.", answer: "Soyez sympas." },
+          { q: "Tu as du courage.", answer: "Aie du courage." },
+          { q: "Tu ne regardes pas sur internet.", answer: "Ne regarde pas sur Internet." },
+        ],
+      },
+      {
+        num: 7, page: 50,
+        instruction: "Bilan linguistique — Grammaire : Complétez les phrases avec pour, mais, sans, avec, parce qu'. (/5)",
+        vi: "Điền liên từ đúng.",
+        type: "fill",
+        items: [
+          { q: "Attendez, je prends le tram ……………….. vous !", answer: "avec" },
+          { q: "……………….. voiture, c'est difficile d'aller à mon travail.", answer: "Sans" },
+          { q: "Quels transports vous utilisez ……………….. aller chez vous ?", answer: "pour" },
+          { q: "Je préfère habiter en ville ……………….. il y a beaucoup de choses à faire.", answer: "parce qu'" },
+          { q: "Mon appartement est au centre-ville ……………….. il est calme.", answer: "mais" },
+        ],
+      },
+      {
+        num: 8, page: 51,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases avec les noms de lieux de la ville. (/5)",
+        vi: "Điền tên địa điểm trong thành phố.",
+        type: "fill",
+        items: [
+          { q: "Je n'habite pas au centre-ville, j'habite en ……………….. .", answer: "banlieue" },
+          { q: "On va au ……………….. ? Il y a une exposition de Picasso, elle est super !", answer: "musée" },
+          { q: "Je vais chercher le livre de Murakami à la ……………….. .", answer: "bibliothèque" },
+          { q: "Tu prends le train à la ……………….. de Grenoble ?", answer: "gare" },
+          { q: "Les enfants vont à l'……………….. et les étudiants à l'université.", answer: "école" },
+        ],
+      },
+      {
+        num: 9, page: 51,
+        instruction: "Bilan linguistique — Vocabulaire : Répondez par vrai ou faux. (/5)",
+        vi: "Xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "Le pont est un bâtiment.", answer: false },
+          { q: "Le centre-ville est un quartier de la ville.", answer: true },
+          { q: "Les policiers travaillent à la poste.", answer: false },
+          { q: "On marche sur un fleuve.", answer: false },
+          { q: "Il y a beaucoup de touristes à Paris.", answer: true },
+        ],
+      },
+      {
+        num: 10, page: 51,
+        instruction: "Bilan linguistique — Vocabulaire : Complétez les phrases avec les mots proposés. (/5)",
+        vi: "Điền từ vựng về giao thông.",
+        type: "fill",
+        bank: ["train", "arrêt", "à pied", "ticket", "covoiturage"],
+        items: [
+          { q: "Je prends le bus à l'……………………………… Gambetta.", answer: "arrêt" },
+          { q: "Avant de monter dans le bus, achète un ……………………………… .", answer: "ticket" },
+          { q: "Pour aller dans une autre ville, je prends le ……………………………… .", answer: "train" },
+          { q: "En ………………………………, il y a plusieurs personnes dans la voiture.", answer: "covoiturage" },
+          { q: "J'aime marcher, je vais souvent à mon école ……………………………… .", answer: "à pied" },
+        ],
+      },
+      {
+        num: 11, page: 51,
+        instruction: "Bilan linguistique — Vocabulaire : Écrivez les nombres en chiffres. (/5)",
+        vi: "Viết số bằng chữ số.",
+        type: "fill",
+        items: [
+          { q: "trois cent quarante-cinq", answer: "345" },
+          { q: "six mille trois cent vingt-neuf", answer: "6 329" },
+          { q: "mille six cent soixante et un", answer: "1 661" },
+          { q: "huit milliards", answer: "8 000 000 000" },
+          { q: "un million sept cent mille", answer: "1 700 000" },
+        ],
+      },
+      {
+        num: 12, page: 52, audioSrc: piste(47),
+        instruction: "DELF A1 — Compréhension de l'oral (4 points). Message à l'arrêt de tram (retard du tram B, alternative bus 2 ou 3).",
+        vi: "Nghe thông báo trễ tàu điện tại trạm dừng và trả lời câu hỏi (một số câu có lựa chọn bằng hình ảnh).",
+        type: "fill",
+        items: [
+          { q: "1. (indice : tram B)", answer: "B." },
+          { q: "2. (indice : 1 heure)", answer: "A." },
+          { q: "3. Quelle image correspond ?", answer: "image « prendre le bus »" },
+          { q: "4. Quelle image correspond ?", answer: "image « à côté de la pharmacie »" },
+        ],
+      },
+      {
+        // Page 52-53 — DELF A1, CE. ⚠️ Note : la question 5 propose A. votre
+        // diplôme / B. votre passeport / C. votre car[te], mais le texte de
+        // l'annonce (« apportez votre carte ! ») pointe logiquement vers C,
+        // pas B — le corrigé imprimé n'a pas pu être confirmé lettre par
+        // lettre pour cette question (voir cahier_unite_4.md).
+        num: 13, page: 52,
+        instruction: "DELF A1 — Compréhension des écrits (6 points). Panneau de l'office du tourisme (exposition « Histoire de Grenoble »).",
+        vi: "Đọc thông báo phòng du lịch về triển lãm và trả lời câu hỏi — câu 5 có nghi vấn giữa đáp án B/C in trong sách (⚠️ voir note).",
+        type: "fill",
+        items: [
+          { q: "1. (indice : le mercredi)", answer: "C." },
+          { q: "2. (indice : à 18h)", answer: "B." },
+          { q: "3. (indice : téléphoner)", answer: "A." },
+          { q: "4. Quel itinéraire correspond aux indications du panneau ?", answer: "traverser le pont, tout droit, première à gauche" },
+          { q: "5. Vous devez apporter… (⚠️ corrigé imprimé : B ; texte de l'annonce suggère C, votre carte)", answer: "B." },
+        ],
+      },
+      {
+        num: 14, page: 53,
+        instruction: "DELF A1 — Production écrite (15 points). Vous écrivez une lettre à votre ami(e) belge pour l'inviter à visiter votre ville (sorties à faire ensemble, 40 mots minimum).",
+        vi: "Viết thư mời bạn người Bỉ đến thăm thành phố của mình.",
+        type: "fill",
+        items: [
+          { q: "Exemple de production complet (modèle du corrigé) :", answer: "Salut Alexis, tu vas bien ? Maintenant, j'habite à Grenoble ! Je t'invite chez moi pendant les vacances d'hiver. Tu viens ? Nous allons visiter la ville, il y a un très beau musée. Nous pouvons faire des randonnées dans la montagne et du ski. À bientôt." },
+        ],
+      },
+      {
+        num: 15, page: 53,
+        instruction: "DELF A1 — Production orale. Partie 3 de l'épreuve : jeu de rôle « À la gare » (réserver un billet de train, demander des renseignements, choisir et payer).",
+        vi: "Đóng vai hội thoại tại ga tàu — hỏi thông tin, đặt vé và thanh toán.",
+        type: "fill",
+        items: [
+          { q: "Exemple de dialogue complet (modèle du corrigé) :", answer: "Vous : Bonjour ! Je suis en vacances en France pour visiter le pays. Je suis à Paris, mais je veux aller dans le Sud. Non, je n'ai pas envie de me baigner. Toulouse, c'est loin de Paris ? Très bien, je veux partir demain. Combien coûte le trajet ? 137 euros ? C'est très cher ! Et combien coûte le trajet Paris-Lyon ? Je vais prendre un billet pour Lyon alors. Le matin, c'est possible ? C'est très bien, je vais réserver ce billet, s'il vous plaît. Je peux payer par carte ? Je vais payer en espèces alors. Merci, au revoir !" },
+        ],
+      },
+      {
+        num: 16, page: 54,
+        instruction: "Jeux — Trouvez l'intrus.",
+        vi: "Tìm từ không cùng nhóm trong mỗi hàng.",
+        type: "fill",
+        items: [
+          { q: "cent – million – mille – école", answer: "école" },
+          { q: "train – métro – mairie – bus", answer: "mairie" },
+          { q: "rue – boulevard – fontaine – avenue", answer: "fontaine" },
+          { q: "centre-ville – musée – théâtre – bibliothèque", answer: "centre-ville" },
+          { q: "touriste – arrêt – ligne – station", answer: "touriste" },
+        ],
+      },
+      {
+        // Page 54 — Jeux, activité 3. ⚠️ Note : seuls 2 des 9 bâtiments
+        // annoncés sont récupérables depuis le texte extrait de la grille
+        // (voir cahier_unite_4.md).
+        num: 17, page: 54,
+        instruction: "Jeux — Trouvez dans la grille les noms de 9 bâtiments de la ville.",
+        vi: "Tìm 9 tên công trình trong thành phố trong ô chữ — chỉ 2/9 từ được ghi rõ trong đáp án in.",
+        type: "fill",
+        items: [
+          { q: "2 des 9 bâtiments identifiables dans le corrigé imprimé :", answer: "commissariat, théâtre" },
+        ],
+      },
+      {
+        num: 18, page: 54,
+        instruction: "Jeux — Découpez les verbes à l'impératif.",
+        vi: "Cắt/nhận diện các động từ ở thức mệnh lệnh trong chuỗi chữ liền nhau.",
+        type: "fill",
+        items: [
+          { q: "9 verbes à l'impératif à retrouver :", answer: "Prends, allez, aie, va, regardons, tourne, sois, ayons, demande" },
+        ],
+      },
+      {
+        num: 19, page: 54,
+        instruction: "Jeux — Regardez l'image et choisissez une destination : dites la distance en kilomètres, votre partenaire trouve la bonne ville.",
+        vi: "Theo cặp, đọc khoảng cách (km) và đoán tên thành phố tương ứng trên bản đồ.",
+        type: "fill",
+        items: [
+          { q: "9 915 km", answer: "Lima" },
+          { q: "2 871 km", answer: "Moscou" },
+          { q: "8 735 km", answer: "Las Vegas" },
+          { q: "3 115 km", answer: "Tambov" },
+          { q: "8 019 km", answer: "Vancouver" },
+          { q: "17 313 km", answer: "Sydney" },
+          { q: "8 559 km", answer: "Washington" },
+          { q: "10 010 km", answer: "Hong-Kong" },
+          { q: "8 771 km", answer: "Rio de Janeiro" },
+          { q: "9 658 km", answer: "Shanghai" },
+        ],
+      },
+    ],
+  },
 };
