@@ -4551,4 +4551,590 @@ export const CAHIER_A1 = {
       },
     ],
   },
+
+  u8: {
+
+    // ── Grammaire, keyed by grammar point index in editoGrammar.js's "g8" ──
+    // g8 has 5 points, all with a matching cahier "Grammaire" page — except
+    // p4 "Verbe boire" which has no dedicated page and no embedded drill
+    // (the only "boire" conjugation in this unit's cahier appears already
+    // at the passé composé, p.91 ex.2c, not the présent) — see
+    // cahier_unite_8.md.
+    grammar: {
+
+      // p0 — Le passé composé (2) : participes irréguliers (cahier p. 91)
+      p0: [
+        {
+          num: 1, page: 91, audioSrc: piste(80),
+          instruction: "Écoutez et cochez si vous entendez le présent ou le passé composé.",
+          vi: "Nghe và xác định câu ở thì hiện tại hay quá khứ kép.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["présent", "passé composé"], answer: "présent" },
+            { q: "b.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "c.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "d.", options: ["présent", "passé composé"], answer: "passé composé" },
+            { q: "e.", options: ["présent", "passé composé"], answer: "présent" },
+            { q: "f.", options: ["présent", "passé composé"], answer: "passé composé" },
+          ],
+        },
+        {
+          num: 2, page: 91,
+          instruction: "Conjuguez les verbes au passé composé.",
+          vi: "Chia động từ ở thì quá khứ kép (chú ý các quá khứ phân từ bất quy tắc).",
+          type: "fill",
+          items: [
+            { q: "Il (muscler) ……… son dos.", answer: "a musclé" },
+            { q: "Alice (faire) ……… une radio.", answer: "a fait" },
+            { q: "Nous (boire) ……… du sirop.", answer: "avons bu" },
+            { q: "Elles (acheter) ……… des vitamines.", answer: "ont acheté" },
+            { q: "Je (pouvoir) ……… prendre rendez-vous.", answer: "ai pu" },
+            { q: "Vous (finir) ……… de vous reposer.", answer: "avez fini" },
+          ],
+        },
+        {
+          num: 3, page: 91,
+          instruction: "Transformez le texte au passé composé.",
+          vi: "Chuyển toàn bộ đoạn văn từ thì hiện tại sang thì quá khứ kép.",
+          type: "fill",
+          items: [
+            { q: "Aujourd'hui, je vais au restaurant avec des amis. Je prends une blanquette de veau avec une salade. Plus tard, je vais à la maison, et je commence à me sentir mal. J'ai très mal au ventre. J'appelle le docteur. Il pense à une indigestion. Il me dit de boire beaucoup d'eau, et de me reposer. Je suis malade pendant trois jours !", answer: "Hier, je suis allé au restaurant avec des amis. J'ai pris une blanquette de veau avec une salade. Plus tard, je suis allé à la maison, et j'ai commencé à me sentir mal. J'ai eu très mal au ventre. J'ai appelé le docteur. Il a pensé à une indigestion. Il m'a dit de boire beaucoup d'eau et de me reposer. J'ai été malade pendant trois jours !" },
+          ],
+        },
+        {
+          num: 4, page: 91,
+          instruction: "Écrivez le participe passé des verbes.",
+          vi: "Viết quá khứ phân từ của các động từ (đặc biệt các động từ bất quy tắc).",
+          type: "fill",
+          items: [
+            { q: "nager", answer: "nagé" },
+            { q: "prendre", answer: "pris" },
+            { q: "dormir", answer: "dormi" },
+            { q: "avoir", answer: "eu" },
+            { q: "vouloir", answer: "voulu" },
+            { q: "faire", answer: "fait" },
+          ],
+        },
+      ],
+
+      // p1 — Le pronom Y (cahier p. 92)
+      p1: [
+        {
+          num: 1, page: 92,
+          instruction: "Remettez les mots dans l'ordre pour former une phrase.",
+          vi: "Sắp xếp lại từ để tạo câu có đại từ y (thay thế bổ ngữ chỉ nơi chốn).",
+          type: "order",
+          items: [
+            { tokens: ["Tu", "y", "vas", "souvent."], answer: ["Tu", "y", "vas", "souvent."] },
+            { tokens: ["J'y", "suis."], answer: ["J'y", "suis."] },
+            { tokens: ["Nous", "y", "allons", "pour", "passer", "à", "la", "radio."],
+              answer: ["Nous", "y", "allons", "pour", "passer", "à", "la", "radio."] },
+            { tokens: ["Je", "n'y", "travaille", "pas."], answer: ["Je", "n'y", "travaille", "pas."] },
+            { tokens: ["Les", "médicaments", "y", "sont."], answer: ["Les", "médicaments", "y", "sont."] },
+          ],
+        },
+        {
+          num: 2, page: 92,
+          instruction: "Associez les questions et les réponses.",
+          vi: "Nối câu hỏi với câu trả lời phù hợp có sử dụng đại từ y.",
+          type: "match",
+          pairs: [
+            { l: "Est-ce que tu vas chez le médecin aujourd'hui ?", r: "Non, je n'y vais pas." },
+            { l: "Est-ce que ta serviette de bain est dans ton sac ?", r: "Oui, elle y est." },
+            { l: "Est-ce que ton père travaille à l'hôpital ?", r: "Oui, il y travaille tous les jours." },
+            { l: "Est-ce que ton frère arrive à nager un kilomètre ?", r: "Non, il n'y arrive pas." },
+            { l: "Est-ce que vous participez au match de tennis ?", r: "Non, nous n'y participons pas." },
+          ],
+        },
+        {
+          num: 3, page: 92,
+          instruction: "Remplacez les éléments soulignés par le pronom y (Exemple : Tu vas à l'hôpital. → Tu y vas.).",
+          vi: "Thay cụm từ chỉ nơi chốn được gạch chân bằng đại từ y.",
+          type: "fill",
+          items: [
+            { q: "Mon père fait son jogging dans ce parc.", answer: "Mon père y fait son jogging." },
+            { q: "L'infirmier travaille à l'hôpital.", answer: "L'infirmier y travaille." },
+            { q: "J'achète mes vitamines sur Internet.", answer: "J'y achète mes vitamines." },
+            { q: "Il joue au tennis.", answer: "Il y joue." },
+            { q: "Marie pratique le Pilates chez elle.", answer: "Marie y pratique le Pilates." },
+            { q: "Nous prenons les médicaments à la pharmacie.", answer: "Nous y prenons les médicaments." },
+          ],
+        },
+        {
+          // ⚠️ Note (cahier_unite_8.md) : le corrigé imprimé donne la
+          // séquence « 1. 2. 3. 4. 5. 6. a – d – c – f – e – b », reproduite
+          // telle quelle.
+          num: 4, page: 92, audioSrc: piste(81),
+          instruction: "Écoutez et associez un enregistrement à une photo (6 photos : nager, dormir, se promener, faire du sport, jouer au foot, faire des radios).",
+          vi: "Nghe và nối đoạn ghi âm với hình ảnh minh họa tương ứng.",
+          type: "fill",
+          items: [
+            { q: "Enregistrement 1", answer: "a. (On y nage.)" },
+            { q: "Enregistrement 2", answer: "d. (On y fait du sport.)" },
+            { q: "Enregistrement 3", answer: "c. (On y promène.)" },
+            { q: "Enregistrement 4", answer: "f. (On y fait des radios.)" },
+            { q: "Enregistrement 5", answer: "e. (On y joue au foot.)" },
+            { q: "Enregistrement 6", answer: "b. (On y dort.)" },
+          ],
+        },
+      ],
+
+      // p2 — L'obligation personnelle : devoir, il faut (cahier p. 94)
+      p2: [
+        {
+          num: 1, page: 94, audioSrc: piste(84),
+          instruction: "Écoutez les phrases et cochez l'obligation ou l'interdiction.",
+          vi: "Nghe và xác định câu diễn đạt sự bắt buộc hay cấm đoán.",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["obligation", "interdiction"], answer: "obligation" },
+            { q: "b.", options: ["obligation", "interdiction"], answer: "interdiction" },
+            { q: "c.", options: ["obligation", "interdiction"], answer: "obligation" },
+            { q: "d.", options: ["obligation", "interdiction"], answer: "interdiction" },
+            { q: "e.", options: ["obligation", "interdiction"], answer: "obligation" },
+            { q: "f.", options: ["obligation", "interdiction"], answer: "interdiction" },
+          ],
+        },
+        {
+          num: 2, page: 94,
+          instruction: "Conjuguez les verbes pour exprimer des obligations ou des interdictions.",
+          vi: "Chia động từ devoir và il faut để diễn đạt bắt buộc/cấm đoán.",
+          type: "fill",
+          items: [
+            { q: "Tu (devoir) ……… marcher plus souvent.", answer: "dois" },
+            { q: "Il (ne pas falloir) ……… manger tous ces bonbons.", answer: "ne faut pas" },
+            { q: "Vous (ne pas devoir) ……… aller au fast-food après le sport.", answer: "ne devez pas" },
+            { q: "Il (falloir) ……… prendre une serviette.", answer: "faut" },
+            { q: "Il (ne pas devoir) ……… téléphoner et courir en même temps.", answer: "ne doit pas" },
+          ],
+        },
+        {
+          num: 3, page: 94,
+          instruction: "Complétez les phrases avec il faut ou devoir.",
+          vi: "Điền il faut hoặc dạng chia của devoir phù hợp.",
+          type: "fill",
+          items: [
+            { q: "Vous ……… faire du vélo tous les jours.", answer: "devez" },
+            { q: "(ne pas) ……… manger trop de chocolat.", answer: "Il ne faut pas" },
+            { q: "Je ……… avoir mon certificat médical.", answer: "dois" },
+            { q: "Nous (ne pas) ……… entrer dans la salle avec des chaussures de ville.", answer: "ne devons pas" },
+            { q: "……… mettre ses affaires au vestiaire.", answer: "Il faut" },
+          ],
+        },
+        {
+          num: 4, page: 94,
+          instruction: "Formulez une obligation ou une interdiction par image (Exemple : Vous devez enlever vos chaussures avant d'entrer dans le gymnase.).",
+          vi: "Nhìn hình và diễn đạt một quy tắc bắt buộc hoặc cấm đoán.",
+          type: "fill",
+          items: [
+            { q: "a. (image : fruits et légumes)", answer: "Vous devez manger cinq fruits et légumes par jour. / Il faut manger équilibré." },
+            { q: "b. (image : se laver les mains)", answer: "Il faut se laver les mains avant de manger." },
+            { q: "c. (image : sport à l'école)", answer: "Il faut faire 30 minutes de sport par jour à l'école." },
+            { q: "d. (image : fumer barré)", answer: "Il est interdit de fumer. / Vous ne devez pas fumer." },
+            { q: "e. (image : manger barré)", answer: "Il est interdit de manger dans la salle. / Il ne faut pas manger dans la salle." },
+          ],
+        },
+      ],
+
+      // p3 — Le conseil : pouvoir + infinitif, impératif (cahier p. 95)
+      p3: [
+        {
+          num: 1, page: 95, audioSrc: piste(85),
+          instruction: "Écoutez et associez les conseils de même sens (Conseil n°1 : Va courir. / n°2 : Tu peux t'hydrater. / n°3 : Tu peux te laver les mains. / n°4 : Vous pouvez faire du sport. / n°5 : Arrêtez de manger du sucre. / n°6 : Va voir un professionnel.).",
+          vi: "Nghe các lời khuyên và nối với câu có cùng nghĩa.",
+          type: "fill",
+          items: [
+            { q: "Utilise du savon pour les mains.", answer: "conseil n° 3" },
+            { q: "Tu peux faire de la course à pied.", answer: "conseil n° 4" },
+            { q: "Tu peux voir un coach.", answer: "conseil n° 6" },
+            { q: "Vous pouvez manger moins sucré.", answer: "conseil n° 5" },
+            { q: "Bois de l'eau.", answer: "conseil n° 2" },
+          ],
+        },
+        {
+          num: 2, page: 95,
+          instruction: "Conjuguez les verbes à l'impératif pour exprimer un conseil.",
+          vi: "Chia động từ ở thức mệnh lệnh (impératif) để đưa ra lời khuyên.",
+          type: "fill",
+          items: [
+            { q: "(prendre / vous) ……… une douche après le sport.", answer: "Prenez" },
+            { q: "(acheter / tu) ……… plus de légumes au supermarché.", answer: "Achète" },
+            { q: "(jouer / tu) ……… au tennis.", answer: "Joue" },
+            { q: "(perdre / vous) ……… du poids pour être en forme.", answer: "Perdez" },
+            { q: "(respecter / tu) ……… les règles.", answer: "Respecte" },
+          ],
+        },
+        {
+          num: 3, page: 95,
+          instruction: "Écrivez les phrases de l'exercice 2 avec le verbe pouvoir pour exprimer un conseil (Exemple : (faire / tu) Fais de l'activité physique. → Tu peux faire de l'activité physique.).",
+          vi: "Viết lại các câu của bài 2 dùng pouvoir + động từ nguyên mẫu để khuyên nhẹ nhàng hơn.",
+          type: "fill",
+          items: [
+            { q: "Prenez une douche après le sport. (vous)", answer: "Vous pouvez prendre une douche après le sport." },
+            { q: "Achète plus de légumes au supermarché. (tu)", answer: "Tu peux acheter plus de légumes au supermarché." },
+            { q: "Joue au tennis. (tu)", answer: "Tu peux jouer au tennis." },
+            { q: "Perdez du poids pour être en forme. (vous)", answer: "Vous pouvez perdre du poids pour être en forme." },
+            { q: "Respecte les règles. (tu)", answer: "Tu peux respecter les règles." },
+          ],
+        },
+        {
+          num: 4, page: 95,
+          instruction: "Exprimez des conseils. Sofia est étudiante et elle a une mauvaise hygiène de vie. Donnez à Sofia 5 conseils pour aller mieux (Exemple : Fais du sport !).",
+          vi: "Đưa ra 5 lời khuyên tự do cho một người có lối sống chưa lành mạnh (đáp án mẫu, không duy nhất).",
+          type: "fill",
+          items: [
+            { q: "Conseil 1", answer: "Bois de l'eau." },
+            { q: "Conseil 2", answer: "Mange des fruits." },
+            { q: "Conseil 3", answer: "Tu peux cuisiner des légumes." },
+            { q: "Conseil 4", answer: "Va marcher." },
+            { q: "Conseil 5", answer: "Tu peux faire du yoga." },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire (cahier p. 93 "Le corps et la santé" + p. 96 "Le ──
+    // sport, l'alimentation"). Custom STEP_GROUPS_U8: v1_vocab (u8g1-g7,
+    // "Cơ thể · sức khoẻ · cảm xúc"), v2_vocab (u8g8/u8g10, "Phòng gym · các
+    // môn thể thao"), v3_vocab (u8g9, "L'alimentation"). p.93's vocabulaire
+    // page maps entirely to v1_vocab. p.96's page splits by content: ex1
+    // (sports) and ex3 (lieux liés au sport/salle de sport) go to v2_vocab;
+    // ex2, whose text mixes sport and alimentation words but is filed here
+    // by its culminating theme ("une alimentation saine"), goes to
+    // v3_vocab.
+    vocab: {
+      v1_vocab: [
+        {
+          num: 1, page: 93,
+          instruction: "Regardez les images et dites où ces personnes ont mal (Exemple : Elle a mal à la gorge.).",
+          vi: "Nhìn hình và nói vị trí đau trên cơ thể (dùng cấu trúc avoir mal à).",
+          type: "fill",
+          items: [
+            { q: "a. (image)", answer: "Elle a mal à la tête." },
+            { q: "b. (image)", answer: "Elle a mal au ventre." },
+            { q: "c. (image)", answer: "Il a mal au dos." },
+            { q: "d. (image)", answer: "Il a mal à la jambe." },
+            { q: "e. (image)", answer: "Il a mal au pied." },
+          ],
+        },
+        {
+          num: 2, page: 93,
+          instruction: "Remettez les lettres dans l'ordre pour trouver les parties du visage.",
+          vi: "Xếp lại chữ cái để tìm từ chỉ bộ phận trên khuôn mặt.",
+          type: "fill",
+          items: [
+            { q: "l'elelior", answer: "l'oreille" },
+            { q: "la tdne", answer: "la dent" },
+            { q: "les exyu", answer: "les yeux" },
+            { q: "le nze", answer: "le nez" },
+            { q: "la ceobuh", answer: "la bouche" },
+            { q: "l'eloi", answer: "l'œil" },
+          ],
+        },
+        {
+          num: 3, page: 93,
+          instruction: "Associez les questions et les réponses.",
+          vi: "Nối câu hỏi với câu trả lời phù hợp (chiều cao, cân nặng, triệu chứng, sốt, khám bệnh).",
+          type: "match",
+          pairs: [
+            { l: "Vous mesurez combien ?", r: "Je mesure 1,68 m." },
+            { l: "Quel est votre poids ?", r: "Je pèse 65 kg." },
+            { l: "Qu'est-ce qui vous arrive ?", r: "J'ai mal à la gorge." },
+            { l: "Vous avez de la fièvre ?", r: "Oui, j'ai 39° C." },
+            { l: "Tu as pris rendez-vous chez le docteur ?", r: "Oui, il fait la visite à domicile." },
+          ],
+        },
+        {
+          num: 4, page: 93, audioSrc: piste(82),
+          instruction: "Écoutez et écrivez l'émotion entendue (a. bâillement — b. cri de joie — c. lamentation — d. cri d'inquiétude).",
+          vi: "Nghe và xác định cảm xúc thể hiện qua âm thanh (mệt mỏi, vui, buồn, lo lắng).",
+          type: "fill",
+          items: [
+            { q: "a. (bâillement) j'ai très mal dormi.", answer: "être fatigué(e)" },
+            { q: "b. (cri de joie) cool, j'ai perdu deux kilos.", answer: "être content(e)" },
+            { q: "c. (lamentation) je suis malheureuse.", answer: "être triste" },
+            { q: "d. (cri d'inquiétude) oh là là, mon fils est à l'hôpital.", answer: "être inquiet / inquiète" },
+          ],
+        },
+      ],
+
+      v2_vocab: [
+        {
+          // ⚠️ Note (cahier_unite_8.md) : l'énoncé propose 7 sports pour 5
+          // images, avec « deux intrus » précisés dans la consigne ;
+          // d'après le corrigé, les intrus sont la course à pied et le
+          // tennis.
+          num: 1, page: 96,
+          instruction: "Associez un sport à une image (le judo – le yoga – le rugby – la gymnastique – la musculation – la course à pied – le tennis). Il y a deux intrus.",
+          vi: "Nối tên môn thể thao với hình ảnh — chú ý có 2 từ dư không dùng đến, xem note.",
+          type: "fill",
+          items: [
+            { q: "a. (image)", answer: "le rugby" },
+            { q: "b. (image)", answer: "la gymnastique" },
+            { q: "c. (image)", answer: "la musculation" },
+            { q: "d. (image)", answer: "le yoga" },
+            { q: "e. (image)", answer: "le judo" },
+          ],
+        },
+        {
+          num: 3, page: 96, audioSrc: piste(86),
+          instruction: "Écoutez et cochez l'endroit où se passe la situation (à la salle de sport – au sauna – chez le docteur – au vestiaire – au supermarché).",
+          vi: "Nghe và xác định địa điểm diễn ra tình huống.",
+          type: "fill",
+          items: [
+            { q: "a.", answer: "au vestiaire" },
+            { q: "b.", answer: "au sauna" },
+            { q: "c.", answer: "chez le docteur" },
+            { q: "d.", answer: "à la salle de sport" },
+            { q: "e.", answer: "au supermarché" },
+          ],
+        },
+      ],
+
+      v3_vocab: [
+        {
+          num: 2, page: 96,
+          instruction: "Complétez le texte avec les mots proposés (un coach – l'activité physique – musculation – une alimentation saine – la natation – la salle de sport).",
+          vi: "Điền từ vựng về thể thao và dinh dưỡng vào đoạn văn.",
+          type: "fill",
+          bank: ["un coach", "l'activité physique", "musculation", "une alimentation saine", "la natation", "la salle de sport"],
+          items: [
+            { q: "1. (dans l'ordre du texte)", answer: "l'activité physique" },
+            { q: "2.", answer: "la natation" },
+            { q: "3.", answer: "la salle de sport" },
+            { q: "4.", answer: "un coach" },
+            { q: "5.", answer: "musculation" },
+            { q: "6.", answer: "une alimentation saine" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonie-graphie (cahier p. 93 consonne [ʁ], dictée seule + p. 96 ──
+    // consonnes [b]/[v], discrimination seule).
+    phono: [
+      {
+        // ⚠️ Note (cahier_unite_8.md) : le titre imprimé de cette section
+        // n'a pas pu être extrait précisément (symbole IPA non reconnu) ;
+        // vu le mot-clé « RANDONNÉE » et la densité du son [ʁ] dans le
+        // texte, il s'agit très probablement de la consonne [ʁ] — à
+        // vérifier visuellement contre la page imprimée.
+        num: 1, page: 93, audioSrc: piste(83),
+        instruction: "Phonie-graphie : la consonne [ʁ] (probable, voir note). Dictée : complétez le texte.",
+        vi: "Nghe và điền từ còn thiếu trong đoạn văn kể về một chuyến đi bộ đường dài (chú ý âm \"r\" tiếng Pháp) — tiêu đề âm vị chưa xác nhận 100%, xem note.",
+        type: "fill",
+        items: [
+          { q: "Texte complet à retrouver :", answer: "Bonjour, je vais vous raconter une histoire particulière. Le mois dernier, j'ai fait une randonnée dans le Vercors, à côté de Grenoble. J'ai marché pendant des heures. Puis j'ai rencontré un groupe de personnes de nationalités différentes. Nous avons beaucoup parlé. Nous avons dormi sous des arbres. Le matin, au réveil, nous avons découvert un petit ours endormi près de nous. Nous avons bougé tout doucement pour ne pas le réveiller." },
+        ],
+      },
+      {
+        num: 1, page: 96, audioSrc: piste(87),
+        instruction: "Phonie-graphie : les consonnes [b] et [v]. Écoutez les phrases et indiquez combien de fois vous entendez [b] et [v] (format : b/v). Puis répétez.",
+        vi: "Nghe và đếm số lần xuất hiện âm [b] và [v] trong mỗi câu.",
+        type: "fill",
+        items: [
+          { q: "a. Après une activité sportive, je prends un bon bain.", answer: "2/2" },
+          { q: "b. Pour être en bonne santé, vous devez boire beaucoup d'eau !", answer: "3/2" },
+          { q: "c. Mes voisins ont changé d'habitudes alimentaires. Ils vont beaucoup mieux !", answer: "2/2" },
+          { q: "d. En vacances, nous voyageons en voiture et nous visitons souvent les villages à vélo.", answer: "0/7" },
+          { q: "e. Pour leur bien-être, ils doivent bouger beaucoup et ne plus boire de vin !", answer: "4/2" },
+        ],
+      },
+    ],
+
+    // ── Bilan (cahier p. 97 CE, p. 98-99 Bilan linguistique /40, p. 100- ──
+    // 101 DELF A1, p. 102 Jeux). Production orale p.97 (jeu de rôle) and
+    // Jeux activités 1, 4, 5 (opinions personnelles, questions de
+    // personnalité, mimes) are free answer ("Réponses libres") and
+    // intentionally excluded. Bilan Vocabulaire ex.1 (p.99, image-based)
+    // has no printed corrigé retrievable at all and is also excluded.
+    bilan: [
+      {
+        num: 1, page: 97,
+        instruction: "Compréhension écrite — Ordonnance du Docteur Marc Antoine. Répondez aux questions.",
+        vi: "Đọc đơn thuốc của bác sĩ và trả lời câu hỏi (thông tin bệnh nhân, chỉ định điều trị).",
+        type: "fill",
+        items: [
+          { q: "1. Qui a écrit ce document ?", answer: "Le médecin (le docteur Marc Antoine)." },
+          { q: "2. Comment faire pour prendre rendez-vous ?", answer: "On peut téléphoner ou prendre rendez-vous sur internet (doctolib.com)." },
+          { q: "4. Dominique a mal :", answer: "au bras." },
+          { q: "5. Qu'est-ce que Dominique doit faire ?", answer: "Dominique doit prendre du paracétamol et faire une radio." },
+        ],
+      },
+      {
+        num: 2, page: 97,
+        instruction: "Compréhension écrite — Vrai ou faux ?",
+        vi: "Đọc đơn thuốc và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "3a. Dominique est un homme.", answer: false },
+          { q: "3b. Dominique pèse 70 kg.", answer: false },
+          { q: "3c. Sa date de naissance est le 22/08/1980.", answer: true },
+        ],
+      },
+      {
+        num: 3, page: 98,
+        instruction: "Bilan linguistique — Grammaire : Réécrivez ces phrases avec le sujet proposé. (/5)",
+        vi: "Viết lại câu với chủ ngữ cho sẵn.",
+        type: "fill",
+        items: [
+          { q: "J'ai dû aller à la pharmacie. (Mes parents)", answer: "Mes parents ont dû aller à la pharmacie." },
+          { q: "Mes parents ont été malades. (Hugo)", answer: "Hugo a été malade." },
+          { q: "Tu as fait une radio ? (Vous)", answer: "Vous avez fait une radio ?" },
+          { q: "Melissa a pris du sirop. (Mes sœurs)", answer: "Mes sœurs ont pris du sirop." },
+          { q: "Nous avons mangé des légumes. (Tu)", answer: "Tu as mangé des légumes." },
+        ],
+      },
+      {
+        num: 4, page: 98,
+        instruction: "Bilan linguistique — Grammaire : Utilisez le pronom Y pour éviter les répétitions. (/5)",
+        vi: "Dùng đại từ y để tránh lặp từ.",
+        type: "fill",
+        items: [
+          { q: "Elle est à l'hôpital parce qu'elle fait une radio à l'hôpital.", answer: "Elle est à l'hôpital parce qu'elle y fait une radio." },
+          { q: "Je vais à la pharmacie parce que j'achète mes médicaments à la pharmacie.", answer: "Je vais à la pharmacie parce que j'y achète mes médicaments." },
+          { q: "Nous allons à Paris parce que nous courons le marathon de Paris.", answer: "Nous allons à Paris parce que nous y courons le marathon." },
+          { q: "Rose part chez le médecin parce qu'elle a rendez-vous chez le médecin.", answer: "Rose part chez le médecin parce qu'elle y a rendez-vous." },
+          { q: "Tu vas au stade parce que tu joues au football au stade.", answer: "Tu vas au stade parce que tu y joues au football." },
+        ],
+      },
+      {
+        num: 5, page: 98,
+        instruction: "Bilan linguistique — Grammaire : Écrivez le règlement du bowling. Formulez une obligation ou une interdiction. (/5)",
+        vi: "Viết nội quy sân bowling bằng câu bắt buộc/cấm đoán.",
+        type: "fill",
+        items: [
+          { q: "fumer à l'intérieur.", answer: "Il ne faut pas fumer à l'intérieur. / Vous ne devez pas fumer à l'intérieur." },
+          { q: "utiliser les boules à l'extérieur de la piste.", answer: "Il ne faut pas utiliser les boules à l'extérieur de la piste." },
+          { q: "porter des chaussures spéciales.", answer: "Il faut porter des chaussures spéciales. / Vous devez porter des chaussures spéciales." },
+          { q: "courir sur la piste.", answer: "Il ne faut pas courir sur la piste. / Vous ne devez pas courir sur la piste." },
+          { q: "gagner la partie.", answer: "Il faut gagner la partie. / Vous devez gagner la partie." },
+        ],
+      },
+      {
+        num: 6, page: 98,
+        instruction: "Bilan linguistique — Grammaire : Transformez ces phrases en utilisant l'impératif. (/5)",
+        vi: "Chuyển câu sang thức mệnh lệnh.",
+        type: "fill",
+        items: [
+          { q: "Tu dois faire beaucoup de sport.", answer: "Fais beaucoup de sport." },
+          { q: "Vous devez aller voir le docteur.", answer: "Allez voir un docteur." },
+          { q: "Tu dois pratiquer la relaxation.", answer: "Pratique la relaxation." },
+          { q: "Vous devez acheter de la nourriture saine.", answer: "Achetez de la nourriture saine." },
+          { q: "Tu dois éteindre ton téléphone pour courir.", answer: "Éteins ton téléphone pour courir." },
+        ],
+      },
+      {
+        num: 7, page: 99,
+        instruction: "Bilan linguistique — Vocabulaire : Cochez dans le tableau les émotions positives ou négatives. (/5)",
+        vi: "Xác định cảm xúc tích cực hay tiêu cực.",
+        type: "choice",
+        items: [
+          { q: "Je suis fatigué, j'ai mal dormi hier soir.", options: ["positive", "négative"], answer: "négative" },
+          { q: "Elle est heureuse de retourner courir.", options: ["positive", "négative"], answer: "positive" },
+          { q: "Nous sommes tristes, nous avons perdu le match.", options: ["positive", "négative"], answer: "négative" },
+          { q: "Il est stressé d'aller voir le dentiste.", options: ["positive", "négative"], answer: "négative" },
+          { q: "Nous sommes contents de cette application.", options: ["positive", "négative"], answer: "positive" },
+        ],
+      },
+      {
+        num: 8, page: 99,
+        instruction: "Bilan linguistique — Vocabulaire : Trouvez les lettres manquantes et complétez les activités sportives. (/5)",
+        vi: "Điền chữ cái còn thiếu để hoàn thành tên môn thể thao.",
+        type: "fill",
+        items: [
+          { q: "la – – m – – – t i – – – ", answer: "la gymnastique" },
+          { q: "le – – d –", answer: "le judo" },
+          { q: "la n – t – – i – –", answer: "la natation" },
+          { q: "la – a – – h –", answer: "la marche" },
+          { q: "la – u – – u – – – i o –", answer: "la musculation" },
+        ],
+      },
+      {
+        num: 9, page: 99,
+        instruction: "Bilan linguistique — Vocabulaire : Lisez les phrases et cochez vrai ou faux. (/5)",
+        vi: "Đọc và xác định đúng/sai.",
+        type: "truefalse",
+        items: [
+          { q: "Le docteur écrit le certificat médical.", answer: true },
+          { q: "Il a une alimentation saine, il mange 4 fois par semaine au fast-food.", answer: false },
+          { q: "Je prends une serviette pour aller à la piscine.", answer: true },
+          { q: "Les tomates sont des produits gras.", answer: false },
+          { q: "Vous avez besoin d'un coach pour aller au supermarché.", answer: false },
+        ],
+      },
+      {
+        // ⚠️ Note (cahier_unite_8.md) : le corrigé pour cet exercice n'a
+        // pas pu être extrait clairement en texte (exercice à cocher Oui/
+        // Non sur 5 images d'objets) ; les réponses ci-dessous sont
+        // déduites de la transcription audio (4 objets « Oui » cités sur 5
+        // proposés — l'objet 4 est vraisemblablement un intrus non
+        // mentionné, donc « Non »), à vérifier contre les images imprimées.
+        num: 10, page: 100, audioSrc: piste(88),
+        instruction: "DELF A1 — Compréhension de l'oral (5 points). Message avec des objets pour une activité sportive.",
+        vi: "Nghe tin nhắn và xác định vật dụng nào được nhắc đến (Có/Không) — đáp án suy luận từ lời thoại, xem note.",
+        type: "truefalse",
+        items: [
+          { q: "1. Serviette de bain", answer: true },
+          { q: "2. Bouteille d'eau", answer: true },
+          { q: "3. Corde à sauter", answer: true },
+          { q: "4. (objet 4)", answer: false },
+          { q: "5. Livre", answer: true },
+        ],
+      },
+      {
+        num: 11, page: 100,
+        instruction: "DELF A1 — Compréhension des écrits. Email de Gabriel, ami suisse.",
+        vi: "Đọc email của Gabriel và trả lời câu hỏi về sức khỏe, thể thao.",
+        type: "choice",
+        items: [
+          { q: "1. Comment se sent Gabriel ?", options: ["A. Content.", "B. Stressé.", "C. Fatigué."], answer: "C. Fatigué." },
+          { q: "2. Combien de temps Gabriel doit marcher ?", options: ["A. 15 minutes.", "B. 30 minutes.", "C. 1 heure."], answer: "B. 30 minutes." },
+          { q: "3. Quel sport veut faire Gabriel ? (image)", options: ["A", "B", "C"], answer: "C" },
+          { q: "4. Gabriel a mal…", options: ["A. au dos.", "B. à la jambe.", "C. à la tête."], answer: "A. au dos." },
+          { q: "5. Quel sport fait la sœur de Gabriel ? (image)", options: ["A", "B", "C"], answer: "B" },
+        ],
+      },
+      {
+        num: 12, page: 101,
+        instruction: "DELF A1 — Production écrite (10 points). Formulaire d'inscription au club de sport.",
+        vi: "Điền mẫu đơn đăng ký câu lạc bộ thể thao.",
+        type: "fill",
+        items: [
+          { q: "Exemple de production complet (modèle du corrigé) :", answer: "Prénom : Hawa — Âge : 26 ans — Nationalité : turque — Adresse (numéro et rue) : 76 rue de Galliera — Ville : Paris — Pays : France — Téléphone : 07 40 51 77 20 — Sports pratiqués : football, tennis — Date d'inscription : 12 janvier" },
+        ],
+      },
+      {
+        num: 13, page: 101,
+        instruction: "DELF A1 — Production orale. Échange d'informations à partir de cartes-mots : Natation ? Yoga ? Content ? Médecin ? Sport ? Dentiste ?",
+        vi: "Đặt câu hỏi trao đổi thông tin dựa trên từ khóa (sức khỏe, thể thao).",
+        type: "fill",
+        items: [
+          { q: "Exemples de questions (modèle du corrigé) :", answer: "Natation : Tu sais nager ? — Yoga : Tu aimes le yoga ? — Content : Tu es content aujourd'hui ? — Médecin : Quelle est ta profession ? — Sport : Quel est ton sport préféré ? — Dentiste : Tu as rendez-vous chez le dentiste ?" },
+        ],
+      },
+      {
+        num: 14, page: 102,
+        instruction: "Jeux — Lisez de droite à gauche et trouvez les 6 parties du corps.",
+        vi: "Đọc từ phải sang trái và tìm 6 bộ phận cơ thể trong ô chữ.",
+        type: "fill",
+        items: [
+          { q: "6 parties du corps à retrouver :", answer: "ventre, bras, pied, dos, jambe, gorge" },
+        ],
+      },
+      {
+        num: 15, page: 102,
+        instruction: "Jeux — Devinettes des sports.",
+        vi: "Đoán tên môn thể thao qua các gợi ý mô tả.",
+        type: "fill",
+        items: [
+          { q: "On y joue avec un ballon. Il y a deux équipes et onze joueurs par équipe. On voit souvent ce sport à la télévision. Il y a beaucoup de sportifs célèbres.", answer: "football" },
+          { q: "C'est un sport qui se pratique dans une salle de sport, seul(e) ou avec l'aide d'un coach.", answer: "musculation" },
+          { q: "On y joue à deux ou à quatre. On a besoin de raquettes et de balles. Il faut courir. Roland-Garros est associé à ce sport.", answer: "tennis" },
+          { q: "C'est un sport qui se pratique sur un tapis avec deux personnes. Il faut porter une tenue spéciale. C'est un sport japonais.", answer: "judo" },
+          { q: "On y joue en équipe et avec un ballon. On utilise surtout les mains. On parle souvent de ce sport à 15. Il vient d'Angleterre.", answer: "rugby" },
+        ],
+      },
+    ],
+  },
 };
