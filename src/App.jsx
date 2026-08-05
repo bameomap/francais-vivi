@@ -50,6 +50,7 @@ import { EDITO_AUDIO_A2 } from "./data/editoAudioA2.js";
 import { EDITO_TIMINGS_A2 } from "./data/editoTimingsA2.js";
 import { EDITO_TIMINGS_A1 } from "./data/editoTimingsA1.js";
 import { CAHIER_A2 } from "./data/editoCahierA2.js";
+import { CAHIER_A1 } from "./data/editoCahierA1.js";
 
 // Référence tabs available at A2 — the cheatsheet, per-unit verb tables and
 // phrasebook are A1-only content, so they're left out until A2 versions exist.
@@ -876,7 +877,7 @@ function AppInner() {
 
             {/* EDITO VOCAB */}
             {view==="edito" && (level==="a1"
-              ? <EditoVocabPanel onBackToParcours={backToParcours} />
+              ? <EditoVocabPanel onBackToParcours={backToParcours} cahier={CAHIER_A1} />
               : <EditoVocabPanel onBackToParcours={backToParcours} units={EDITO_VOCAB_A2_UNITS} levelLabel="Edito A2" cahier={CAHIER_A2} />)}
 
 
@@ -1173,7 +1174,7 @@ function AppInner() {
                   lastUnitKey="parcours_last_unit_a2"
                 />)}
             {view==="grammar"       && (level==="a1"
-              ? <GrammarPanel onBackToParcours={backToParcours} />
+              ? <GrammarPanel onBackToParcours={backToParcours} cahier={CAHIER_A1} />
               : <EditoGrammarPanel data={EDITO_GRAMMAR_A2} emojis={GRAMMAR_A2_EMOJIS} levelLabel="Édito A2" cahier={CAHIER_A2} />)}
             {view==="defi"          && <DefiPanel/>}
             {view==="writing"       && (level==="a1"
@@ -1199,7 +1200,7 @@ function AppInner() {
             {view==="srs"           && <SRSPanel currentWords={words} />}
             {view==="srs-saved"     && <SRSPanel currentWords={words} autoStartSaved />}
             {view==="reference_hub" && (level==="a1"
-              ? <ReferenceHub onBackToParcours={backToParcours} />
+              ? <ReferenceHub onBackToParcours={backToParcours} cahier={CAHIER_A1} />
               : <ReferenceHub
                   onBackToParcours={backToParcours}
                   tabs={REFERENCE_TABS_A2}
@@ -1237,7 +1238,7 @@ function AppInner() {
                   cefr="A2"
                 />)}
             {view==="quiz-unit"     && (level==="a1"
-              ? <UnitQuizPanel onBackToParcours={backToParcours} />
+              ? <UnitQuizPanel onBackToParcours={backToParcours} cahier={CAHIER_A1} />
               : <UnitQuizPanel
                   onBackToParcours={backToParcours}
                   units={PARCOURS_UNITS_A2}

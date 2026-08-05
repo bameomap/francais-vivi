@@ -15,6 +15,10 @@ french.png
 # over GitHub's push limit; see materials/README.md)
 EDITO A2/
 Sujet DELF A1/
+A1 Cahier/
+Edito A1 by Unite md/
+Nouvel_Edito_A1_audios_cahier/
+Guide-pedagogique-Edito-A1-2022.pdf
 
 # Alignment scratch: downloaded mp3s, exported transcripts, the venv.
 # Only the generated src/data/editoTimingsA2.js is committed.

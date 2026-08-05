@@ -10,6 +10,7 @@ import { EDITO_GRAMMAR } from "../data/editoGrammar.js";
 import TranslateSection from "./TranslateSection.jsx";
 import GrammarBlocks from "./GrammarBlocks.jsx";
 import { parseRuleToBlocks } from "../utils/parseGrammarRule.js";
+import CahierExercises from "./CahierExercises.jsx";
 
 const LEVELS = ["A1","A2","B1","B2","C1","C2"];
 const GTYPES = [
@@ -349,7 +350,7 @@ export function GrammarExplanation({ rules, text }) {
 }
 
 // ── Edito unit list (primary grammar view) ────────────────
-function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) {
+function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours, cahier = null }) {
   const [selectedUnit, setSelectedUnit] = useState(null);
 
   useEffect(() => {
@@ -556,6 +557,12 @@ function EditoGrammarView({ defaultUnitIndex, fromParcours, onBackToParcours }) 
                         );
                       })}
                     </div>
+                    {cahier?.[gUnitId]?.grammar?.[subId]?.length > 0 && (
+                      <div style={{ marginTop:"0.75rem" }}>
+                        <div style={{ fontSize:"0.63rem", textTransform:"uppercase", letterSpacing:0.8, color:C.gray, marginBottom:"0.4rem", fontWeight:600 }}>✏️ Bài tập Cahier</div>
+                        <CahierExercises exercises={cahier[gUnitId].grammar[subId]} color={C.purple} />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -878,7 +885,7 @@ function DetectiveView() {
   );
 }
 
-export default function GrammarPanel({ onBackToParcours }) {
+export default function GrammarPanel({ onBackToParcours, cahier = null }) {
   const [panelTab, setPanelTab] = useState("edito");
   const [fromParcours, setFromParcours] = useState(false);
   const [initUnit, setInitUnit] = useState(null);
@@ -938,7 +945,7 @@ export default function GrammarPanel({ onBackToParcours }) {
         </div>
       </div>
       {tabBar}
-      {panelTab === "edito"     && <EditoGrammarView defaultUnitIndex={initUnit} fromParcours={fromParcours} onBackToParcours={onBackToParcours} />}
+      {panelTab === "edito"     && <EditoGrammarView defaultUnitIndex={initUnit} fromParcours={fromParcours} onBackToParcours={onBackToParcours} cahier={cahier} />}
       {panelTab === "custom"    && <CustomExerciseView />}
     </div>
   );
