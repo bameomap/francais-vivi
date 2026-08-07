@@ -4,7 +4,6 @@ import ProductionBox from "./ProductionBox.jsx";
 import { getSubDone, markSubDone, unmarkSubDone } from "../utils/parcours.js";
 import CahierExercises from "./CahierExercises.jsx";
 import SpeakBtn from "./ui/SpeakBtn.jsx";
-import { EDITO_AUDIO_A2 } from "../data/editoAudioA2.js";
 import { CAHIER_A2 } from "../data/editoCahierA2.js";
 import { PARCOURS_UNITS_A2 } from "../data/parcoursDataA2.js";
 
@@ -107,7 +106,6 @@ function ProductionCard({ p, color, unitId }) {
 export default function DelfA2Panel({
   onBackToParcours,
   units  = PARCOURS_UNITS_A2,
-  audio  = EDITO_AUDIO_A2,
   cahier = CAHIER_A2,
 }) {
   const [unitId,       setUnitId]       = useState(units[0]?.id || null);
@@ -130,13 +128,19 @@ export default function DelfA2Panel({
 
   const unit = units.find(u => u.id === unitId) || units[0];
   const delf = cahier?.[unitId]?.delf;
-  // Only used to key progress: the DELF card scores under the livre's DELF
-  // listening sub-lesson so the unit tally stays at 38.
-  const coTrack = (audio?.[unitId] || []).find(t => t.section === "DELF");
 
-  // Progress rides on the same sub-lesson the écoute step used, so the unit
-  // tally is unchanged by moving DELF onto its own screen.
-  const isDone = coTrack ? !!getSubDone(unitId, "ecouter")[coTrack.id] : false;
+  // The sub-lesson this screen scores under. It scores as part of "ecouter"
+  // so the unit tally is unchanged by DELF having its own screen, and the id
+  // is the one the Parcours card already claims (see the b_delf card's subIds
+  // in parcoursDataA2.js) — every A2 unit has one.
+  //
+  // This used to be looked up as the livre's DELF listening track in
+  // EDITO_AUDIO_A2 instead. Only b1 and b3 have such a track, so for the
+  // other ten units the lookup came back empty, the whole "mark done" control
+  // below was hidden, and the DELF card could never be completed — leaving
+  // those units permanently short of 100%.
+  const delfSubId = `${unitId}-delf`;
+  const isDone = !!getSubDone(unitId, "ecouter")[delfSubId];
 
   if (!unit) return null;
 
@@ -199,24 +203,22 @@ export default function DelfA2Panel({
         ))}
 
         {/* Done */}
-        {coTrack && (
-          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.5rem" }}>
-            {isDone ? (
-              <>
-                <span style={{ background: C.green, color: "#fff", borderRadius: 20, padding: "0.15rem 0.6rem", fontSize: "0.66rem", fontWeight: 700 }}>✓ Đã làm</span>
-                <button onClick={() => { unmarkSubDone(unitId, "ecouter", coTrack.id); refresh(); }}
-                  style={{ background: C.white, color: C.green, border: `1px solid ${C.green}66`, borderRadius: 20, padding: "0.15rem 0.6rem", fontSize: "0.66rem", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
-                  ↻ Làm lại
-                </button>
-              </>
-            ) : (
-              <button onClick={() => { markSubDone(unitId, "ecouter", coTrack.id); refresh(); }}
-                style={{ background: C.white, color: C.blue, border: `1.5px solid ${C.blue}66`, borderRadius: 20, padding: "0.25rem 0.8rem", fontSize: "0.7rem", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
-                ✓ Đánh dấu đã làm xong
+        <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.5rem" }}>
+          {isDone ? (
+            <>
+              <span style={{ background: C.green, color: "#fff", borderRadius: 20, padding: "0.15rem 0.6rem", fontSize: "0.66rem", fontWeight: 700 }}>✓ Đã làm</span>
+              <button onClick={() => { unmarkSubDone(unitId, "ecouter", delfSubId); refresh(); }}
+                style={{ background: C.white, color: C.green, border: `1px solid ${C.green}66`, borderRadius: 20, padding: "0.15rem 0.6rem", fontSize: "0.66rem", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
+                ↻ Làm lại
               </button>
-            )}
-          </div>
-        )}
+            </>
+          ) : (
+            <button onClick={() => { markSubDone(unitId, "ecouter", delfSubId); refresh(); }}
+              style={{ background: C.white, color: C.blue, border: `1.5px solid ${C.blue}66`, borderRadius: 20, padding: "0.25rem 0.8rem", fontSize: "0.7rem", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
+              ✓ Đánh dấu đã làm xong
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
