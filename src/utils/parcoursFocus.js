@@ -12,8 +12,16 @@
 const KEY = "parcours_sub_ids";
 
 export function setParcoursFocus(subIds, stepId = null) {
-  if (subIds?.length) localStorage.setItem(KEY, JSON.stringify({ ids: subIds, step: stepId }));
-  else localStorage.removeItem(KEY);
+  // A step with no subIds still has an identity worth carrying. Unité 0 is the
+  // one A1 unit left on the flat STEP_GROUPS: its cards own whole skills and
+  // so pass no subIds, and while nothing was stored the vocab panel never
+  // learned which step opened it — so u0's cahier exercises could not appear
+  // at all, however correctly they were keyed.
+  if (subIds?.length || stepId) {
+    localStorage.setItem(KEY, JSON.stringify({ ids: subIds || [], step: stepId }));
+  } else {
+    localStorage.removeItem(KEY);
+  }
 }
 
 // Read once and clear. Returns { ids: string[], step: string|null } or null.
@@ -29,9 +37,15 @@ export function takeParcoursFocus() {
     localStorage.removeItem(KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    const ids = Array.isArray(parsed) ? parsed : parsed?.ids;   // tolerate the older array form
-    if (!Array.isArray(ids) || !ids.length) return null;
-    return { ids, step: Array.isArray(parsed) ? null : (parsed.step || null) };
+    const ids  = Array.isArray(parsed) ? parsed : parsed?.ids;   // tolerate the older array form
+    const step = Array.isArray(parsed) ? null : (parsed?.step || null);
+
+    // `ids` is null — never [] — when there is nothing to narrow to. Every
+    // panel reads it as `focusIds ? filter(...) : showEverything`, so an empty
+    // array would narrow the view down to nothing instead of leaving it whole.
+    const narrowed = Array.isArray(ids) && ids.length ? ids : null;
+    if (!narrowed && !step) return null;
+    return { ids: narrowed, step };
   } catch {
     localStorage.removeItem(KEY);
     return null;

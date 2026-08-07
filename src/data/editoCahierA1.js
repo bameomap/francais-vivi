@@ -51,6 +51,231 @@ const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
 const piste = (n) => `${AUDIO_BASE}/${String(n).padStart(3, "0")}_Edito_A1_Cahier.mp3`;
 
 export const CAHIER_A1 = {
+
+  // ════════ Unité 0 · Bienvenue ! (cahier p. 3-6) ════════
+  // The warm-up unit: greetings, the alphabet, numbers, days and months, and
+  // the phrases you need to ask the teacher something. Four pages, no Bilan
+  // and no DELF section — so there is no `bilan` key here.
+  //
+  // u0 is the one A1 unit still on the flat STEP_GROUPS (getStepGroupsFor
+  // returns the default), so its vocab exercises are keyed by the plain step
+  // id "vocab" rather than the v1_vocab/v2_vocab ids the cycle units use.
+  u0: {
+
+    // ── Grammaire, keyed by the grammar point index in editoGrammar.js's "g0" ──
+    // g0 has 5 points. The cahier's Bienvenue pages only drill two of them:
+    // p2 (pronouns) and p3 (numbers and dates). p0 "être", p1 "avoir" and
+    // p4 "négation" are introduced in the livre but get no exercise here —
+    // their first cahier drills are in Unité 1.
+    grammar: {
+
+      // p2 — Đại từ nhân xưng (cahier p. 5, "Je m'appelle…")
+      p2: [
+        {
+          num: 1, page: 5,
+          instruction: "Complétez les phrases avec les pronoms moi, toi, vous.",
+          vi: "Điền đại từ nhấn mạnh moi / toi / vous vào chỗ trống.",
+          type: "fill",
+          items: [
+            { q: "– Moi, je m'appelle Karina. Et ……… ? / – ………, c'est Camille. (2 từ)", answer: "toi / Moi" },
+            { q: "– Bonjour madame Braibant. – Bonjour monsieur Zain. Vous allez bien ? – Oui, très bien. Et ……… ?", answer: "vous" },
+            { q: "– Salut, tu vas bien ? – Oui, très bien ! Merci. Et ……… ?", answer: "toi" },
+          ],
+        },
+      ],
+
+      // p3 — Số đếm 0–31 và Ngày tháng (cahier p. 5 "Un, deux, trois !" + p. 6 "Aujourd'hui, c'est le…")
+      p3: [
+        {
+          num: 1, page: 5,
+          instruction: "Écrivez les chiffres.",
+          vi: "Viết chữ số tương ứng với số viết bằng chữ.",
+          type: "fill",
+          items: [
+            { q: "trois",  answer: "3" },
+            { q: "un",     answer: "1" },
+            { q: "cinq",   answer: "5" },
+            { q: "sept",   answer: "7" },
+            { q: "zéro",   answer: "0" },
+            { q: "neuf",   answer: "9" },
+            { q: "deux",   answer: "2" },
+            { q: "quatre", answer: "4" },
+            { q: "huit",   answer: "8" },
+            { q: "six",    answer: "6" },
+          ],
+        },
+        {
+          num: 2, page: 5, audioSrc: piste(4),
+          instruction: "Écoutez et soulignez le nombre entendu.",
+          vi: "Nghe và chọn số bạn nghe được — luyện phân biệt các cặp dễ nhầm (2/12, 20/30…).",
+          type: "choice",
+          items: [
+            { q: "a.", options: ["2", "12"],   answer: "12" },
+            { q: "b.", options: ["3", "13"],   answer: "3" },
+            { q: "c.", options: ["4", "14"],   answer: "4" },
+            { q: "d.", options: ["5", "15"],   answer: "15" },
+            { q: "e.", options: ["6", "16"],   answer: "6" },
+            { q: "f.", options: ["20", "21"],  answer: "21" },
+            { q: "g.", options: ["20", "30"],  answer: "30" },
+            { q: "h.", options: ["17", "27"],  answer: "27" },
+            { q: "i.", options: ["19", "29"],  answer: "19" },
+            { q: "j.", options: ["8", "18"],   answer: "8" },
+          ],
+        },
+        {
+          num: 1, page: 6,
+          instruction: "Complétez les jours de la semaine dans l'emploi du temps (LUNDI … SAMEDI …).",
+          vi: "Điền các ngày còn thiếu trong tuần vào thời khoá biểu.",
+          type: "fill",
+          items: [
+            { q: "LUNDI – ……… – ……… – ……… – ……… – SAMEDI – ……… (5 từ, theo thứ tự)",
+              answer: "mardi / mercredi / jeudi / vendredi / dimanche" },
+          ],
+        },
+        {
+          num: 2, page: 6,
+          instruction: "Remettez les mois de l'année dans l'ordre (janvier = 1).",
+          vi: "Đánh số thứ tự các tháng trong năm.",
+          type: "fill",
+          items: [
+            { q: "janvier",   answer: "1", example: true },
+            { q: "février",   answer: "2" },
+            { q: "mars",      answer: "3" },
+            { q: "avril",     answer: "4" },
+            { q: "mai",       answer: "5" },
+            { q: "juin",      answer: "6" },
+            { q: "juillet",   answer: "7" },
+            { q: "août",      answer: "8" },
+            { q: "septembre", answer: "9" },
+            { q: "octobre",   answer: "10" },
+            { q: "novembre",  answer: "11" },
+            { q: "décembre",  answer: "12" },
+          ],
+        },
+        {
+          num: 3, page: 6,
+          instruction: "Complétez les phrases avec les éléments proposés : Demain – Aujourd'hui – le 14 Juillet – le 21 juin – dimanche.",
+          vi: "Điền từ/cụm phù hợp về ngày lễ và mốc thời gian.",
+          type: "fill",
+          items: [
+            { q: "La fête nationale, c'est ……… ?",            answer: "le 14 Juillet" },
+            { q: "Demain, c'est ……… !",                       answer: "dimanche" },
+            { q: "La fête de la Musique ? C'est ……… .",        answer: "le 21 juin" },
+            { q: "………, c'est le 1er Mai !",                   answer: "Demain" },
+            { q: "C'est vendredi, ………, c'est le week-end !",   answer: "Aujourd'hui" },
+          ],
+        },
+      ],
+    },
+
+    // ── Vocabulaire ──
+    // u0 keeps the flat STEP_GROUPS, so the single vocab step's id is "vocab".
+    vocab: {
+      vocab: [
+        {
+          num: 1, page: 3,
+          instruction: "Associez les dialogues et les images (4 images numérotées 1-4).",
+          vi: "Nối mỗi đoạn hội thoại với hình minh hoạ tương ứng.",
+          type: "fill",
+          items: [
+            { q: "a. – Bonjour monsieur Bertoni ! – Bonjour madame Hurip ! Vous allez bien ?", answer: "4" },
+            { q: "b. – Salut, ça va ? – Oui et toi ?",                                        answer: "1" },
+            { q: "c. – Bonjour Madame ! – Bonjour Yannick, ça va ?",                           answer: "2" },
+            { q: "d. – Au revoir les enfants ! – Au revoir Madame !",                          answer: "3" },
+          ],
+        },
+        {
+          num: 2, page: 3, audioSrc: piste(1),
+          instruction: "Écoutez et complétez les dialogues avec les éléments proposés : À bientôt – Merci – Bonjour – Salut – Au revoir.",
+          vi: "Nghe và điền lời chào phù hợp vào mỗi đoạn hội thoại.",
+          type: "fill",
+          items: [
+            { q: "– ……… Stéphanie ! Ça va ? – Oui, ça va bien, et toi ?",           answer: "Salut" },
+            { q: "– ………, monsieur Bens. Vous allez bien ? – Très bien, merci !",    answer: "Bonjour" },
+            { q: "– Bonne journée, Mano ! – ……… maman !",                            answer: "Merci" },
+            { q: "– ………, monsieur ! – À demain, Coco !",                             answer: "Au revoir" },
+            { q: "– Au revoir, les enfants ! – ……… !",                               answer: "À bientôt" },
+          ],
+        },
+        {
+          // ⚠️ Item e: the book contradicts itself. Its own audio transcription
+          // reads « Moi, c'est Julian, J-U-L-I-A-N » — the name and the
+          // letter-by-letter spelling both say Julian — while the corrigé
+          // prints « Giulian ».
+          //
+          // This file follows the corrigé everywhere else, but the task here
+          // is "listen and underline the name that was spelled", so the
+          // transcript is the more direct evidence of what is on the tape, and
+          // it agrees with itself twice over. Marking "Giulian" correct would
+          // fail a learner who did exactly what the instruction asked.
+          // Not settled against the recording itself — flagged rather than
+          // quietly decided.
+          num: 1, page: 4, audioSrc: piste(2),
+          instruction: "Écoutez et soulignez les prénoms épelés.",
+          vi: "Nghe cách đánh vần và chọn đúng cách viết tên. ⚠️ Câu e: đáp án in trong sách ghi « Giulian » nhưng lời thoại đánh vần J-U-L-I-A-N — ở đây theo băng.",
+          type: "choice",
+          items: [
+            { q: "Je m'appelle…",  options: ["Lynda", "Linda"],     answer: "Lynda" },
+            { q: "Moi, c'est…",    options: ["Martin", "Marthin"],  answer: "Martin" },
+            { q: "Salut, c'est…",  options: ["Colline", "Corinne"], answer: "Colline" },
+            { q: "Je m'appelle…",  options: ["Klara", "Ciara"],     answer: "Klara" },
+            { q: "Moi, c'est…",    options: ["Julian", "Giulian"],  answer: "Julian" },
+          ],
+        },
+        {
+          num: 2, page: 4, audioSrc: piste(3),
+          instruction: "Écoutez et complétez les noms de villes sur la carte.",
+          vi: "Nghe đánh vần và viết đầy đủ tên các thành phố của Pháp.",
+          type: "fill",
+          items: [
+            { q: "a. Stra– –our–", answer: "Strasbourg" },
+            { q: "b. N– –t– s",    answer: "Nantes" },
+            { q: "c. D– –on",      answer: "Dijon" },
+            { q: "d. Bor–e–u–",    answer: "Bordeaux" },
+            { q: "e. T– –lous–",   answer: "Toulouse" },
+            { q: "f. Ma–sei– –e",  answer: "Marseille" },
+          ],
+        },
+        {
+          num: 1, page: 6, audioSrc: piste(6),
+          instruction: "Écoutez et associez les émoticônes avec les phrases (5 émoticônes numérotées 1-5).",
+          vi: "Nghe các câu hay dùng trong lớp học và nối với biểu tượng cảm xúc tương ứng.",
+          type: "fill",
+          items: [
+            { q: "a. Comment ça s'écrit, s'il vous plaît ?",   answer: "5" },
+            { q: "b. Vous pouvez répéter, s'il vous plaît ?",  answer: "4" },
+            { q: "c. Excusez-moi, je suis en retard.",         answer: "3" },
+            { q: "d. Comment on dit… en français ?",           answer: "1" },
+            { q: "e. Je ne comprends pas.",                    answer: "2" },
+          ],
+        },
+      ],
+    },
+
+    // ── Phonétique ──
+    phono: [
+      {
+        // ⚠️ Le corrigé imprime « J'endends /z/ : a, c, e – J'entends /n/ : b, c » :
+        // « c » figure dans les deux colonnes et « d » (31 €, "trente et un
+        // euros") n'apparaît nulle part. C'est une coquille du cahier. Les
+        // réponses ci-dessous suivent la liaison réellement entendue —
+        // /z/ pour a, c, e et /n/ pour b, d — en la signalant plutôt qu'en
+        // reproduisant une clé impossible à obtenir.
+        num: 3, page: 5, audioSrc: piste(5),
+        instruction: "Écoutez et classez les nombres dans le tableau : j'entends le son [z] ou le son [n] ?",
+        vi: "Nghe và phân loại theo âm nối: [z] (onze euros, dix euros, trois euros) hay [n] (un euro, trente et un euros). ⚠️ Đáp án in trong sách bị lỗi — xem ghi chú trong mã nguồn.",
+        type: "choice",
+        items: [
+          { q: "a. 11 €", options: ["[z]", "[n]"], answer: "[z]" },
+          { q: "b. 1 €",  options: ["[z]", "[n]"], answer: "[n]" },
+          { q: "c. 10 €", options: ["[z]", "[n]"], answer: "[z]" },
+          { q: "d. 31 €", options: ["[z]", "[n]"], answer: "[n]" },
+          { q: "e. 3 €",  options: ["[z]", "[n]"], answer: "[z]" },
+        ],
+      },
+    ],
+  },
+
   u1: {
 
     // ── Grammaire, keyed by the grammar point index in editoGrammar.js's "g1" ──
