@@ -4,15 +4,7 @@ import { getStreak, getProgress, getMistakes } from "../utils/storage.js";
 import { getSRSStats } from "../utils/srs.js";
 import { getXPData, getLevel, getNextLevel, LEVELS } from "../utils/xp.js";
 import { computeOverallProgress } from "../utils/parcours.js";
-import { getSyncToken, setSyncToken, clearSyncToken, pushToCloud, pullFromCloud } from "../utils/cloudSync.js";
-
-// ── Keys that should be backed up / restored ──────────────────
-const BACKUP_KEYS = [
-  "srs_data", "module_progress", "streak_data", "xp_data", "badges_earned",
-  "vocab_sets", "mistake_log", "weak_spots_log", "study_history",
-  "writing_history", "defi_history", "analyse_history", "parcours_last_unit",
-  "pour_note_expansions_v2", "grammar_last_unit", "user_name", "onboarded",
-];
+import { getSyncToken, setSyncToken, clearSyncToken, pushToCloud, pullFromCloud, BACKUP_KEYS } from "../utils/cloudSync.js";
 // Also back up dynamic lecture cache keys (lecture_cache_*)
 function collectBackup() {
   const data = {};

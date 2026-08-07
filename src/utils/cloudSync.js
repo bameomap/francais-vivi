@@ -27,6 +27,17 @@ export const SYNC_KEYS = [
   // lecture caches collected dynamically below
 ];
 
+// Keys for the manual export/restore in ProfilPanel ("Xuất dữ liệu").
+// Derived from SYNC_KEYS rather than listed separately: the two were
+// maintained by hand and drifted apart, and both had lost the Parcours
+// completion history — so neither the cloud sync nor the downloaded file was
+// actually backing it up.
+//
+// user_name is the one difference. Sync leaves it device-local (two devices
+// may be set up by different people), but a file the learner exports and
+// restores themselves should carry it.
+export const BACKUP_KEYS = [...SYNC_KEYS, "user_name"];
+
 /** Collect all keys that should be synced (including dynamic ones). */
 function collectData() {
   const out = {};

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { SYNC_KEYS } from "./cloudSync.js";
+import { SYNC_KEYS, BACKUP_KEYS } from "./cloudSync.js";
 import { PROGRESS_KEY } from "./parcours.js";
 
 // cloudSync is the only backup a learner has. Everything the app can rebuild
@@ -39,5 +39,32 @@ describe("SYNC_KEYS", () => {
     for (const key of ["dark_mode", "sync_token", "user_name"]) {
       expect(SYNC_KEYS).not.toContain(key);
     }
+  });
+});
+
+// The manual export in ProfilPanel used to keep a second, hand-maintained copy
+// of this list. The two drifted, and both had dropped the Parcours history —
+// so the downloaded backup file was missing it too, exactly like the cloud one.
+describe("BACKUP_KEYS", () => {
+  it("covers everything the cloud syncs", () => {
+    for (const key of SYNC_KEYS) expect(BACKUP_KEYS).toContain(key);
+  });
+
+  it("includes the Parcours progress key", () => {
+    expect(BACKUP_KEYS).toContain(PROGRESS_KEY);
+  });
+
+  it("adds user_name, which sync deliberately leaves device-local", () => {
+    expect(BACKUP_KEYS).toContain("user_name");
+    expect(SYNC_KEYS).not.toContain("user_name");
+  });
+
+  it("never carries the sync token itself", () => {
+    // Exporting it would put a credential in a file the learner may share.
+    expect(BACKUP_KEYS).not.toContain("sync_token");
+  });
+
+  it("has no duplicates", () => {
+    expect(new Set(BACKUP_KEYS).size).toBe(BACKUP_KEYS.length);
   });
 });
