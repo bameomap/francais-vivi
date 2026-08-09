@@ -5,6 +5,7 @@ import DelfCEPanel, { SkillGroup } from "./DelfCEPanel.jsx";
 import ProductionBox from "./ProductionBox.jsx";
 import { DELF_A1_CE } from "../data/delfA1Reussite.js";
 import { CO_PREPARE } from "../data/delfA1CO.js";
+import { CO_MATCH } from "../data/delfA1COMatch.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
 
 // « Le DELF A1 100 % réussite » — the book, as one screen with the book's own
@@ -124,7 +125,13 @@ function IntroTab({ alwaysVi }) {
   );
 }
 
-// ── 3 · Nghe ─────────────────────────────────────────────────────
+// ── 3 · Écouter ──────────────────────────────────────────────────
+// The generated drills and the hand-written matching ones are one list, in the
+// book's own order — which activité came from which pipeline is our problem,
+// not the learner's.
+const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH]
+  .sort((a, b) => a.piste - b.piste);
+
 function EcouterTab({ done, onDone, alwaysVi }) {
   return (
     <div>
@@ -143,12 +150,12 @@ function EcouterTab({ done, onDone, alwaysVi }) {
       </Card>
 
       <SkillGroup title="SE PRÉPARER" sub="Nghe từng kỹ năng nhỏ · audio của sách"
-        color={C.blue} items={CO_PREPARE} done={done} onDone={onDone} alwaysVi={alwaysVi} />
+        color={C.blue} items={CO_DRILLS} done={done} onDone={onDone} alwaysVi={alwaysVi} />
 
       <Card accent={C.gray2}>
         <div style={{ fontSize: "0.7rem", color: C.gray, lineHeight: 1.6 }}>
-          Còn thiếu: các activité dạng nối (reliez), điền bảng và chọn hình của phần Nghe, cùng toàn bộ
-          phần S'ENTRAÎNER (p.28–37) — cần thêm kiểu câu hỏi và cắt hình như bên Đọc.
+          Còn thiếu: các activité dạng điền bảng và chọn hình của phần Nghe, cùng toàn bộ phần
+          S'ENTRAÎNER (p.28–37) — cần cắt hình như bên mục Lire.
         </div>
       </Card>
     </div>

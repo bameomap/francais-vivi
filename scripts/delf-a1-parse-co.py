@@ -102,28 +102,47 @@ def parse_prepare():
 
     out = []
     for it in items:
-        rows, questions, lead, pending = it["rows"], [], None, None
-        for row in rows:
+        questions, lead, pending, buf = [], None, None, []
+
+        def flush():
+            """Emit the question being accumulated, if it has enough choices."""
+            nonlocal pending, buf
+            if pending and len(buf) >= 2:
+                questions.append({"lead": lead, "q": pending, "options": buf})
+            pending, buf = None, []
+
+        for row in it["rows"]:
             lm = LEAD.match(row)
             if lm:
+                flush()
                 lead, row = lm.group(1), lm.group(2)
                 if not row:
-                    pending = None
                     continue
-            n_marks = len(CHOICE.findall(" " + row))
-            if n_marks >= 2:
-                # A row is either "question A x. A y. A z." or the choices on
-                # their own under the question. Splitting on the marker puts the
-                # stem first — empty when the row is choices only, which is why
-                # this can't just partition on the first " A ".
-                parts = CHOICE.split(" " + row)
-                stem, choices = clean(parts[0]), [clean(p) for p in parts[1:] if clean(p)]
-                if not stem and pending:
-                    stem, pending = pending, None
-                if stem and len(choices) >= 2:
-                    questions.append({"lead": lead, "q": stem, "options": choices})
+
+            parts = CHOICE.split(" " + row)
+            stem = clean(parts[0])
+            choices = [clean(p) for p in parts[1:] if clean(p)]
+
+            if len(choices) >= 2:
+                # "question A x. A y. A z." — or, when the stem comes out empty,
+                # the three choices ruled across the line under their question.
+                if stem:
+                    flush()
+                    pending = stem
+                buf.extend(choices)
+                flush()
+            elif len(choices) == 1:
+                # The book also sets long choices one per line. Collect them
+                # under whichever question is still open.
+                if stem:
+                    flush()
+                    pending = stem
+                buf.extend(choices)
             elif row.endswith("?") or row.endswith(":"):
+                flush()
                 pending = row.rstrip(":").strip()
+        flush()
+
         it["questions"] = questions
         out.append(it)
     return out
@@ -132,8 +151,14 @@ def parse_prepare():
 def parse_keyed(pages, key=r"Activité (\d+), p\.\s*(\d+)"):
     """{activity number: the block of text printed under its heading}.
 
-    The heading also carries the page the activité is on, which is the only
-    place that number appears in machine-readable form.
+    The heading carries the page the activité is on, and that matters for more
+    than metadata: the transcriptions and corrigés sections number activités
+    per paper, so "Activité 12" appears once for the listening drills and again
+    for the speaking ones. Without checking the page, the speaking block
+    silently overwrites the listening one and the app ends up showing the
+    transcript of a completely different exercise. Blocks whose page falls
+    outside the listening drills are therefore dropped, not merely ignored for
+    PAGE_OF.
     """
     global PAGE_OF
     raw = "\n".join(page_text(p) for p in pages)
@@ -143,14 +168,14 @@ def parse_keyed(pages, key=r"Activité (\d+), p\.\s*(\d+)"):
         if m:
             if cur is not None:
                 blocks[cur] = "\n".join(buf).strip()
+            page = (int(m.group(2))
+                    if m.lastindex and m.lastindex >= 2 and m.group(2).isdigit() else None)
+            if page is not None and page not in PREPARE_PAGES:
+                cur, buf = None, []          # another paper's activité — skip it
+                continue
             cur, buf = int(m.group(1)), []
-            # The transcriptions section also carries "Activité N, p. 96"
-            # headings for the speaking paper, whose numbering restarts. Only
-            # believe a page that falls inside the listening drills.
-            if m.lastindex and m.lastindex >= 2 and m.group(2).isdigit():
-                page = int(m.group(2))
-                if page in PREPARE_PAGES:
-                    PAGE_OF[cur] = page
+            if page is not None:
+                PAGE_OF[cur] = page
             continue
         if cur is not None:
             buf.append(line.rstrip())

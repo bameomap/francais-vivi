@@ -7,7 +7,7 @@
 // drifted is dropped rather than shipped with a wrong key. The drills built on
 // matching tables, timetables or pictures (reliez…, complétez le tableau,
 // notez le numéro sous l'image) need question types this screen does not have
-// yet, so 17 of the book's 58 are here so far.
+// yet, so 20 of the book's 58 are here so far.
 //
 // Audio is the book's own tracks, held in a PRIVATE Vercel Blob store and
 // streamed through /api/delf-audio — they are copyrighted, so they are neither
@@ -101,6 +101,23 @@ export const CO_PREPARE = [
     ],
   },
   {
+    id: "co-a13", label: "Activité 13", page: 14,
+    setup: "Écoutez les messages et cochez les bonnes réponses.",
+    audio: "/api/delf-audio?p=13", piste: 13,
+    transcript: "1. Salut ! C’est Sébastien. Est-ce que tu es chez\ntoi ? Je te téléphone pour le rendez-vous de\nmardi. On se retrouve chez moi à midi, d’accord ?\nÀ mardi !\n2. C’est Sountou. Tu viens avec moi au marché ?\nSi tu es d’accord, rendez-vous devant le marché à\n10 h. Et on va au restaurant aussi ? Appelle-moi !\n3. Salut ! Je fais des courses au centre commercial.\nIl y a des réductions au magasin Dupont. Viens\ntout de suite ! Je t’attends à l’entrée du magasin.",
+    questions: [
+      { lead: "Message n° 1", q: "Quel est le lieu du rendez-vous ?",
+        options: ["Chez vous.", "Chez Bastien.", "Chez Sébastien."],
+        answer: "Chez Sébastien." },
+      { lead: "Message n° 2", q: "Quel est le lieu du rendez-vous ?",
+        options: ["Chez Sountou.", "Devant le marché.", "Devant le restaurant."],
+        answer: "Devant le marché." },
+      { lead: "Message n° 3", q: "Quel est le lieu du rendez-vous ?",
+        options: ["À droite du magasin Dupont.", "À l'entrée du magasin Dupont.", "À l'entrée du centre commercial."],
+        answer: "À l'entrée du magasin Dupont." },
+    ],
+  },
+  {
     id: "co-a15", label: "Activité 15", page: 15,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=15", piste: 15,
@@ -115,6 +132,23 @@ export const CO_PREPARE = [
       { lead: "Message n° 3", q: "Quelle est la température à Bordeaux ?",
         options: ["15 degrés.", "23 degrés.", "25 degrés."],
         answer: "23 degrés." },
+    ],
+  },
+  {
+    id: "co-a17", label: "Activité 17", page: 15,
+    setup: "Écoutez les messages et cochez les bonnes réponses.",
+    audio: "/api/delf-audio?p=17", piste: 17,
+    transcript: "1. Samedi, devant la mairie, une grande exposition\nest organisée par l’association du village. Pour\ntoute information supplémentaire, je vous\nrappelle que les bureaux de l’association sont au\nnuméro 35 du boulevard Victor Hugo.\n2. Le directeur de l’entreprise des biscuits\nLOLO va à l’école Jules Ferry aujourd’hui pour\nrencontrer les élèves et présenter les activités de\nson entreprise. Il va offrir des biscuits aux enfants\net aux professeurs, c’est sûr !\n3. Au marché, les nouveaux fruits de la saison\nsont arrivés. Il y a des pommes et des bananes !\nEt grosse réduction sur les salades. Le marché,\nc’est le samedi de 8 h à 13 h sur la place du village.",
+    questions: [
+      { lead: "Message n° 1", q: "",
+        options: ["Devant la mairie.", "Dans les bureaux de l'association.", "Dans la maison des associations."],
+        answer: "Devant la mairie." },
+      { lead: "Message n° 2", q: "",
+        options: ["À l'école.", "À la mairie.", "À l'entreprise."],
+        answer: "À l'école." },
+      { lead: "Message n° 3", q: "",
+        options: ["Des salades.", "Des pommes de terre.", "Des pommes et des bananes."],
+        answer: "Des pommes et des bananes." },
     ],
   },
   {
@@ -138,7 +172,7 @@ export const CO_PREPARE = [
     id: "co-a19", label: "Activité 19", page: 15,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=19", piste: 19,
-    transcript: "1. Où habitez-vous ?\n2. Comment s’appelle votre femme ?\n3. Quand allez-vous au cinéma ?\n4. Comment est-ce que vous allez à votre bureau ?\n5. Combien avez-vous de frères et de sœurs ?\n6. Quelle est votre profession ?\n7. Vous lisez quoi ?\n8. Quelle est votre nationalité ?\n9. Quel est votre film préféré ?\n10. Qu’est-ce que vous faites le dimanche ?",
+    transcript: "1. Oui, c’est Brigitte. Je suis avec Catherine. On\nmange. Est-ce que tu viens au concert samedi ?\nAppelle-moi ! À bientôt.\n2. Salut, c’est Samuel. Je mange chez Amélie et\non se demande comment s’appelle ton école de\nthéâtre. Rappelle-nous. Merci !\n3. Allô ! C’est Lucie. Je suis à la caisse. Est-ce que\nj’achète de la viande pour ce soir ? Appelle-moi\nvite ! Bisous.",
     questions: [
       { lead: "Message n° 1", q: "Où sont Brigitte et Catherine ?",
         options: ["Chez Brigitte.", "Chez Catherine.", "Au restaurant."],
@@ -172,7 +206,7 @@ export const CO_PREPARE = [
     id: "co-a24", label: "Activité 24", page: 16,
     setup: "Écoutez le message et répondez aux questions.",
     audio: "/api/delf-audio?p=24", piste: 24,
-    transcript: "1. Quel âge avez-vous ?\n2. Quelle est la date de votre anniversaire ?\n3. Est-ce que vous faites du vélo ?\n4. Combien d’enfants est-ce que vous avez ?\n5. Quand partez-vous en vacances ?\n6. Où est-ce que vous allez en vacances ?\n7. Le samedi, vous faites quoi ?",
+    transcript: "Chers clients, bienvenue dans votre centre\ncommercial. Grande promotion sur les livres. La\npromotion commence à 10 h dans votre magasin\nFnoc. 15 % de réduction sur tous les livres. Après,\nréductions spéciales sur les légumes dans votre\nmagasin PrixFrancs.",
     questions: [
       { q: "1. La promotion est pour quels articles ?",
         options: ["Les jouets.", "Les livres.", "Les légumes."],
@@ -192,7 +226,7 @@ export const CO_PREPARE = [
     id: "co-a25", label: "Activité 25", page: 17,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=25", piste: 25,
-    transcript: "1. Quel âge avez-vous ?\n2. Quelle est la date de votre anniversaire ?\n3. La date de mon anniversaire est le 13 mai.\n4. La date de mon anniversaire ? C’est le 13 mai.\n5. Est-ce que vous aimez la télévision ?\n6. Vous aimez la télévision.\n7. Combien de frères avez-vous ?\n8. Vous avez deux frères. Moi, j’ai un frère.\n9. Le samedi, vous faites quoi ?\n10. Le samedi, vous allez au parc. Avec qui ?\n11. J’aime les chats. Pourquoi ? Je ne sais pas.",
+    transcript: "1. Mesdames, Messieurs, votre attention s’il vous\nplaît. Le vol AF793 à destination de Rome partira\nporte H.\n2. Mesdames, Messieurs, votre attention s’il vous\nplaît. Le train TGV 1210 à destination de Nantes\npartira avec 10 minutes de retard.\n3. Mesdames, Messieurs, votre attention s’il vous\nplaît. Le train TGV 1002 à destination de Rennes\npartira à 9 h 03.",
     questions: [
       { lead: "Message n° 1", q: "Quel est le numéro du vol ?",
         options: ["AF613.", "AF713.", "AF793."],
@@ -209,7 +243,7 @@ export const CO_PREPARE = [
     id: "co-a26", label: "Activité 26", page: 18,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=26", piste: 26,
-    transcript: "– L’exercice 2 est un échange d’informations.\nVous me posez des questions pour me connaître.\nUtilisez les mots pour poser vos questions.\n– Quelle est votre nationalité ?\n– Je suis française. Et vous ?\n– Moi, je suis syrien. Combien de langues est-ce\nque vous parlez ?\n– Je parle français, anglais et un peu italien.\n– Oh, d’accord. Moi aussi je parle anglais, un peu\nfrançais mais pas italien. Je parle espagnol. À\nquelle heure vous vous levez ?\n– Je me lève à 6 h 30 tous les jours.\n– C’est tôt !\n– Oui, c’est vrai. Je travaille tôt.\n– Est-ce que vous avez un appartement ou une\nmaison ?\n– J’ai une maison.\n– Moi, j’habite dans un appartement. Et comment\nest-ce que vous venez à l’école ?\n– Je viens en métro, c’est rapide !\n– Oh, moi aussi !\n– Merci. L’exercice 2 est terminé. Nous passons\nmaintenant à l’exercice 3.",
+    transcript: "1. Bonjour. Madame Clara Dupont au téléphone,\nsecrétaire de madame la directrice. Êtes-vous\ndisponible pour un rendez-vous mardi ? J’attends\nvotre appel.\n2. Bonjour. Monsieur Legrand. Je vous appelle\npour prendre un rendez-vous pour parler des\nnotes de votre fils. Ses notes de mathématiques\nsont très basses. Merci.\n3. Allô ? C’est Madame Fournier de l’Agence\npour l’emploi. Votre rendez-vous de jeudi à 10 h\nau restaurant est confirmé. N’oubliez pas vos\ndocuments. Merci.",
     questions: [
       { lead: "Message n° 1", q: "Quelle est la profession de Clara Dupont ?",
         options: ["Médecin.", "Secrétaire.", "Directrice."],
@@ -277,7 +311,7 @@ export const CO_PREPARE = [
     id: "co-a37", label: "Activité 37", page: 20,
     setup: "Écoutez les dialogues et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=37", piste: 37,
-    transcript: "– L’exercice 3 est un dialogue simulé. Nous\nsommes dans une épicerie. Vous voulez acheter\ndes produits. Vous êtes le client et je suis la\nvendeuse. Nous commençons.\n– Bonjour Madame.\n– Bonjour Monsieur.\n– Je voudrais acheter du sucre et des tomates s’il\nvous plaît.\n– Oui, combien de kilos de sucre ?\n– 2 kilos de sucre s’il vous plaît.\n– D’accord et combien de tomates ?\n– 1 kilo de tomates s’il vous plaît. Quel est le prix\ndu kilo de tomates ?\n– 1,30 €.\n– Merci. Et combien coûte le sucre ?\n– Le sucre ? C’est 3 € pour les 2 kilos.\n– Merci.\n– Est-ce que vous voulez autre chose Monsieur ?\n– Oui, je voudrais aussi du pain s’il vous plaît. Est-ce\nque vous avez des baguettes ?\n– Oui, combien de baguettes est-ce que vous\nvoulez ?\n– Seulement 1 baguette. Quel est le prix ?\n– La baguette coûte 70 centimes.\n– Merci. Quel est le prix total pour le sucre, les\ntomates et la baguette s’il vous plaît ?\n– Alors, le prix total est de 5 €. Comment est-ce\nque vous payez Monsieur ?\n– Je paye en espèces. Et voilà 5 €.\n– Merci Monsieur. Et voilà vos produits.\n– Merci beaucoup. Au revoir Madame et bonne\njournée.\n– Au revoir Monsieur. Merci Youssef. L’épreuve\nest terminée.\n142\nÉpreuve blanche 1\nExercice 1, p. 112, PISTE 88\nBonjour chère cousine, c’est Gilles. Je suis dans\nta ville pour mon travail avec mon directeur. On\npeut se voir demain après 19 h ? Je t’invite dans\nun petit restaurant sympa près de mon hôtel.\nEnvoie-moi un texto avant 17 h si tu es d’accord\net je réserve une table pour 20 h. Bisous\nExercice 2, p. 112, PISTE 89\nChers clients, courez vite au rayon librairie ! Depuis\n14 h et jusqu’à 16 h seulement, pour un livre acheté,\nun deuxième offert. Et n’oubliez pas de demander à\nla caisse un bon pour participer au grand tirage au\nsort à 19 h et gagner deux entrées gratuites pour le\nfestival du livre qui commence demain.\nExercice 3, p. 113, PISTE 90\nBonjour, c’est José, le secrétaire du directeur.\nVous avez rendez-vous avec le médecin du travail\nlundi prochain. Pour votre rendez-vous, venez\nà 10 h au 2 e étage. Vous pouvez parler de votre\naccident d’hier. Racontez votre visite à l’hôpital\net montrez votre ordonnance. Si vous avez des\nquestions, appelez-moi vendredi. Bonne journée.\nExercice 4, p. 113, PISTE 91\n1. – Bonjour, je voudrais m’inscrire s’il vous plaît.\n– Vous avez une pièce d’identité?\n– Oui, et j’ai aussi une carte d’étudiant.\n2. – Vous ne pouvez pas emprunter 6 DVD.\n– Ah bon ! C’est écrit sur le panneau.\n– Non, c’est 6 livres et 3 DVD.\n3. – Bonjour, je cherche une méthode pour\napprendre le chinois.\n– Toutes nos méthodes sont classées au rayon 25\nderrière vous.\n– Ah merci ! Je n’avais pas fait attention.\n4. – C’est fermé ? Mais ça fait longtemps ?\n– Non, regardez le panneau, c’est une fermeture\nexceptionnelle.\n– Ah bon merci, je reviendrai demain.\nExercice 5, p. 114, PISTE 92\nAllô ? Est-ce que tu peux m’aider à faire le sac\npour ce week-end ? Prends des gants s’il te plaît.\nIl faut aussi des serviettes. Elles sont sur mon lit,\ndans ma chambre. Mets aussi le dentifrice et les\nbrosses à dents dans le sac. Pour nos vêtements,\nje vais apporter une valise. Merci.\nÉpreuve blanche 2\nExercice 1, p. 121, PISTE 93\nSalut, c’est Cyril. Qu’est-ce que tu fais vendredi ?\nMoi, je rentre de vacances jeudi. Tu veux aller au\ncinéma ? Regarde le programme des films sur le\nsite internet. Après, écris-moi un message. Je ne\npeux pas répondre au téléphone. Je vais t’apporter\nun tee-shirt souvenir de mes vacances. À bientôt !\nExercice 2, p. 121, PISTE 94\nCe week-end, c’est la fête des mères. Venez dans\nnotre magasin. Nous sommes ouverts de 10 h\nà 19 h. Et il y a 15 % de réduction sur tous les\nproduits ! Venez vite ! Il y a plein d’idées pour vos\ncadeaux. Nous avons beaucoup de parfums pour\nles mamans. Et on vous propose un prix spécial de\n25 euros sur tous les chapeaux.\nExercice 3, p. 122, PISTE 95\nBienvenue dans l’entreprise ! Vous êtes dans le\nbâtiment principal, rue Louis Pasteur. Pour le\nrestaurant du personnel, allez rue Napoléon.\nAvec le téléphone sur votre bureau, vous pouvez\nappeler le service informatique. Appelez le 6806.\nNotez cette information : l’entreprise est fermée\nen décembre. Pour terminer, votre contrat est\ndisponible au service du personnel. Bonne journée !\nExercice 4, p. 122, PISTE 96\n1. – Tiens, mon stylo vert.\n– Oh, merci. Qu’est-ce que je dois écrire en vert ?\n– Tu écris la date en haut de la feuille.\n2. – Tous les jours, il y a de la viande au restaurant\nde l’université.\n– C’est vrai. Tu n’aimes pas la viande ?\n– Non, je ne mange pas de viande. Je vais sortir\npour manger dehors.\n3. – Regarde, c’est la professeure d’histoire. Elle\nest à l’entrée de la bibliothèque.\n– Ah oui, je la connais. C’est aussi ma professeure\nde géographie.\n4. – Madame, je ne comprends pas l’exercice.\n– Oui ? Alors viens au tableau. On va faire\nl’exercice.\n– D’accord. Je prends mon livre ?\n– Oui, prends ton livre.\nExercice 5, p. 123, PISTE 97\nAllô ? Je suis devant le menu du restaurant.\nQu’est-ce que tu veux ? Pour le plat, il y a du\npoisson avec du riz. Il y a aussi une boisson avec\ndu lait. Et pour le dessert, c’est de la glace avec\nune banane. Le restaurant vend aussi des verres.\nIls sont très beaux. Appelle-moi !\n143",
+    transcript: "1. – Je vous présente Anne, la nouvelle élève.\nAnne, vous avez 16 ans, c’est ça ?\n– Non, j’ai 17 ans. Dans cette classe, les élèves ont\n16 ans ou 17 ans ?\n– Ici, les élèves ont 16 ans ou 17 ans. Des élèves\nont 18 ans aussi.\n2. – Bonjour ! C’est vous, l’assistant de français ?\n– Bonjour ! Oui, je suis assistant de français et je\nm’appelle Marc. C’est ici la salle 33 ?\n– Oui, ici, c’est la salle 33. Bienvenue ! Vous\npouvez vous présenter s’il vous plaît ?\n– Bien sûr ! Je suis français, j’ai 23 ans et je vais\ntravailler avec vous pendant cette 4 e année.\n3. – Demain, j’ai 60 ans. Les élèves préparent une\nfête pour mon anniversaire. Je suis contente. Toi,\nPaul, tu es plus jeune ?\n– Non, je ne suis pas plus jeune. Moi, j’ai 61 ans.\n– 61 ans ? D’accord. C’est ta dernière année dans\nl’école alors.\n– C’est ça.",
     questions: [
       { lead: "Dialogue n° 1", q: "Quel âge a Anne ?",
         options: ["16 ans.", "17 ans.", "18 ans."],
@@ -305,6 +339,23 @@ export const CO_PREPARE = [
       { lead: "Message n° 3", q: "Qui est Clémence ?",
         options: ["La maman de Gauthier.", "La professeure de Gauthier.", "Une copine de classe de Gauthier."],
         answer: "Une copine de classe de Gauthier." },
+    ],
+  },
+  {
+    id: "co-a46", label: "Activité 46", page: 22,
+    setup: "Écoutez les dialogues et cochez les bonnes réponses.",
+    audio: "/api/delf-audio?p=46", piste: 46,
+    transcript: "1. – Camille, qu’est-ce que tu fais ici ?\n– Je fais mes devoirs pour le cours d’histoire.\n– Dans la salle du cours de français ?\n– Oui, il n’y a personne !\n2. – Augustin, tu vas à la salle de sport ?\n– Non, je dois étudier. Je vais à la bibliothèque.\n– D’accord. Et après, tu viens faire du sport avec\nmoi ?\n– Non, après, je vais chez moi. Je suis fatigué.\n3. – Clément, où est-ce que tu vas ?\n– Je vais chez moi maintenant pour faire mes\ndevoirs. Et toi ?\n– Moi aussi ! J’ai des devoirs de mathématiques\npour demain.\n– À demain !",
+    questions: [
+      { lead: "Dialogue n° 1", q: "Où est Camille ?",
+        options: ["Dans la salle du cours d'histoire.", "Dans la salle du cours d'anglais.", "Dans la salle du cours de français."],
+        answer: "Dans la salle du cours de français." },
+      { lead: "Dialogue n° 2", q: "Où va Augustin pour étudier ?",
+        options: ["Chez lui.", "À la salle de sport.", "À la bibliothèque."],
+        answer: "À la bibliothèque." },
+      { lead: "Dialogue n° 3", q: "Où sont Lou et Clément ?",
+        options: ["À l'entrée de l'école.", "À la sortie de l'école.", "Dans la classe de mathématiques."],
+        answer: "À la sortie de l'école." },
     ],
   },
 ];
