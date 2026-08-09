@@ -33,6 +33,7 @@ const GlobalSearch         = lazy(() => import("./components/GlobalSearch.jsx"))
 const LevelSelectPanel     = lazy(() => import("./components/LevelSelectPanel.jsx"));
 const ProductionOralePanel = lazy(() => import("./components/ProductionOralePanel.jsx"));
 const DelfA2Panel          = lazy(() => import("./components/DelfA2Panel.jsx"));
+const DelfCEPanel          = lazy(() => import("./components/DelfCEPanel.jsx"));
 const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
@@ -90,6 +91,7 @@ const SECTION_TITLE = {
   prononciation:"La Prononciation",
   delf:"DELF A1",
   "delf-a2":"DELF A2 blanc",
+  "delf-ce":"DELF A1 · Đọc hiểu",
   profil:"Mon Profil",
   level:"Trình độ",
 };
@@ -784,6 +786,17 @@ function AppInner() {
               </div>
               <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
             </button>
+
+            {/* ── DELF A1 — Đọc hiểu, theo bộ « 100 % réussite » ── */}
+            <button className="card-hover" onClick={()=>goSection("delf","delf-ce")}
+              style={{ display:"flex", alignItems:"center", gap:12, width:"100%", marginTop:8, background:`linear-gradient(135deg, ${C.ink}, ${C.blue})`, border:"none", borderRadius:16, padding:"14px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", boxShadow:"0 4px 16px rgba(26,39,68,0.28)", animation:"fadeUp 0.3s ease 0.44s both" }}>
+              <span style={{ fontSize:26, lineHeight:1 }}>📖</span>
+              <div style={{ flex:1 }}>
+                <div style={{ fontFamily:"'Playfair Display',Georgia,serif", fontWeight:700, fontSize:15, color:"#fff", lineHeight:1.2 }}>DELF A1 · Đọc hiểu</div>
+                <div style={{ fontSize:11, color:"rgba(255,255,255,0.85)", marginTop:1 }}>28 tài liệu · 4 dạng bài · 100 % réussite</div>
+              </div>
+              <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
+            </button>
           </div>
           )}
 
@@ -1272,6 +1285,7 @@ function AppInner() {
             {view==="fiche"         && <FichePanel onNavigate={(s, v) => goSection(s, v || s)} />}
             {view==="delf"          && <DelfPanel />}
             {view==="delf-a2"       && <DelfA2Panel onBackToParcours={backToParcours} />}
+            {view==="delf-ce"       && <DelfCEPanel onBack={()=>goSection("home","home")} />}
             {view==="stats"         && <StatsPanel />}
             {view==="sentence"      && <SentenceBuilder />}
            </Suspense>
