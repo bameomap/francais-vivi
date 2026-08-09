@@ -68,6 +68,56 @@ function Heading({ children, sub }) {
   );
 }
 
+// A marked line inside a card, for lists that would otherwise be one card each.
+function Bullet({ marker, children, last, bold }) {
+  return (
+    <div style={{ display: "flex", gap: 8, alignItems: "baseline", marginBottom: last ? 0 : "0.5rem" }}>
+      <span style={{ flexShrink: 0, width: 12, textAlign: "center" }}>{marker}</span>
+      <div style={{ flex: 1, minWidth: 0, fontSize: "0.74rem", color: C.ink,
+                    fontFamily: "Georgia,serif", lineHeight: 1.5, fontWeight: bold ? 600 : 400 }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+const Dot = ({ color }) => (
+  <span style={{ display: "inline-block", width: 5, height: 5, borderRadius: 5, background: color }} />
+);
+
+// How a paper works is read once and then only ever scrolled past, so it lives
+// behind its own title rather than above every visit.
+function PaperNote({ title, sub, children }) {
+  return (
+    <details style={{ marginBottom: "0.7rem" }}>
+      <summary style={{ cursor: "pointer", listStyle: "none", display: "flex",
+                        alignItems: "baseline", gap: 8, padding: "0.1rem 0" }}>
+        <span style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "0.98rem",
+                       fontWeight: 700, color: C.ink }}>
+          {title}
+        </span>
+        <span style={{ flex: 1, minWidth: 0, fontSize: "0.63rem", color: C.gray }}>{sub}</span>
+        <span style={{ flexShrink: 0, fontSize: "0.62rem", color: C.blue, fontWeight: 700 }}>Méthode ▾</span>
+      </summary>
+      <div style={{ marginTop: "0.5rem" }}>{children}</div>
+    </details>
+  );
+}
+
+// A note about coverage: worth being able to find, not worth a card.
+function Missing({ children }) {
+  return (
+    <details style={{ marginTop: "0.7rem" }}>
+      <summary style={{ cursor: "pointer", fontSize: "0.63rem", color: C.gray2 }}>
+        Phần chưa có trong app
+      </summary>
+      <div style={{ marginTop: "0.35rem", fontSize: "0.68rem", color: C.gray, lineHeight: 1.6 }}>
+        {children}
+      </div>
+    </details>
+  );
+}
+
 function Grid({ rows, alwaysVi, total }) {
   return (
     <Card accent={C.gold}>
@@ -102,27 +152,32 @@ function IntroTab({ alwaysVi }) {
         <div style={{ fontSize: "0.7rem", color: C.gray, lineHeight: 1.55 }}>{INTRO.levels}</div>
       </Card>
 
+      {/* One card per sentence spent more height on borders than on text, so
+          the lists live inside a single card each. */}
       <Heading sub="Comment ça se passe ?">Les 4 épreuves</Heading>
-      {INTRO.day.map((d, i) => (
-        <Card key={i} accent={[C.blue, C.green, C.accent, C.gold][i]}>
-          <Line fr={d.fr} vi={d.vi} alwaysVi={alwaysVi} bold />
-        </Card>
-      ))}
+      <Card accent={C.blue}>
+        {INTRO.day.map((d, i) => (
+          <Bullet key={i} marker={<Dot color={[C.blue, C.green, C.accent, C.gold][i]} />}
+            last={i === INTRO.day.length - 1} bold>
+            {d.fr}<Gloss vi={d.vi} always={alwaysVi} />
+          </Bullet>
+        ))}
+      </Card>
       <Card accent={C.gray2}>
         <Line fr={INTRO.note.fr} vi={INTRO.note.vi} alwaysVi={alwaysVi} />
-      </Card>
-
-      <Heading sub="Réussir">Comment on obtient le diplôme</Heading>
-      <Card accent={C.green}>
         <Line fr={INTRO.pass.fr} vi={INTRO.pass.vi} alwaysVi={alwaysVi} />
       </Card>
 
       <Heading sub="Livre p.69–70">Stratégies</Heading>
-      {INTRO.strategy.map((s, i) => (
-        <Card key={i}>
-          <Line fr={`${i + 1}. ${s.fr}`} vi={s.vi} alwaysVi={alwaysVi} />
-        </Card>
-      ))}
+      <Card accent={C.green}>
+        {INTRO.strategy.map((s, i) => (
+          <Bullet key={i} last={i === INTRO.strategy.length - 1}
+            marker={<span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: "0.6rem",
+                                   fontWeight: 700, color: C.green }}>{i + 1}</span>}>
+            {s.fr}<Gloss vi={s.vi} always={alwaysVi} />
+          </Bullet>
+        ))}
+      </Card>
     </div>
   );
 }
@@ -152,34 +207,27 @@ function EcouterTab({ done, onDone, alwaysVi }) {
   const [obj, setObj] = useState(1);
   const drills = CO_DRILLS.filter(i => i.objectif === obj);
   const train  = CO_EXERCICES.filter(i => i.objectif === obj);
-  const section = CO_OBJECTIFS.find(o => o.num === obj);
 
   return (
     <div>
-      <Heading sub="20 minutes · 25 points · 5 exercices · Livre p.9–40">
-        Compréhension de l'oral
-      </Heading>
-      <Card accent={C.blue}>
-        <Line
-          fr="Vous écoutez 5 documents, 2 fois chacun. Avant chaque écoute, une cloche annonce le début du document."
-          vi="Nghe 5 tài liệu, mỗi tài liệu 2 lần. Trước mỗi lần nghe có tiếng chuông báo hiệu — đó là lúc ngừng đọc câu hỏi và tập trung nghe."
-          alwaysVi={alwaysVi} />
-        <Line
-          fr="Lisez les questions pendant les 30 secondes avant la première écoute."
-          vi="Dùng 30 giây trước lần nghe đầu để đọc câu hỏi — đừng ngồi đợi."
-          alwaysVi={alwaysVi} />
-      </Card>
+      <PaperNote title="Compréhension de l'oral" sub="20 min · 25 pts · Livre p.9–40">
+        <Card accent={C.blue}>
+          <Line
+            fr="Vous écoutez 5 documents, 2 fois chacun. Avant chaque écoute, une cloche annonce le début du document."
+            vi="Nghe 5 tài liệu, mỗi tài liệu 2 lần. Trước mỗi lần nghe có tiếng chuông báo hiệu — đó là lúc ngừng đọc câu hỏi và tập trung nghe."
+            alwaysVi={alwaysVi} />
+          <Line
+            fr="Lisez les questions pendant les 30 secondes avant la première écoute."
+            vi="Dùng 30 giây trước lần nghe đầu để đọc câu hỏi — đừng ngồi đợi."
+            alwaysVi={alwaysVi} />
+        </Card>
+      </PaperNote>
 
+      {/* The selected chip already names the objectif, so no title repeats it. */}
       <ObjectifPicker items={CO_OBJECTIFS} value={obj} onChange={setObj}
         countOf={n => CO_DRILLS.filter(i => i.objectif === n).length
                     + CO_EXERCICES.filter(i => i.objectif === n).length}
         doneOf={n => [...CO_DRILLS, ...CO_EXERCICES].filter(i => i.objectif === n && done[i.id]).length} />
-
-      <div style={{ marginBottom: "0.8rem" }}>
-        <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1rem", fontWeight: 700, color: C.ink }}>
-          {section.num} · {section.fr}
-        </div>
-      </div>
 
       <SkillGroup title="SE PRÉPARER" sub="Nghe từng kỹ năng nhỏ" color={C.blue}
         items={drills} done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
@@ -187,12 +235,10 @@ function EcouterTab({ done, onDone, alwaysVi }) {
       <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi" color={C.green}
         items={train} done={done} onDone={onDone} alwaysVi={alwaysVi} />
 
-      <Card accent={C.gray2}>
-        <div style={{ fontSize: "0.7rem", color: C.gray, lineHeight: 1.6 }}>
-          Còn thiếu ở phần Nghe: các activité SE PRÉPARER dạng điền bảng và chọn hình. Exercices 1, 4,
-          7, 10 và 13 là bài mẫu của sách (in sẵn đáp án, không có trong Corrigés) nên chưa đưa vào.
-        </div>
-      </Card>
+      <Missing>
+        Các activité SE PRÉPARER dạng điền bảng và chọn hình. Exercices 1, 4, 7, 10 và 13 là bài mẫu
+        của sách (in sẵn đáp án, không có trong Corrigés) nên chưa đưa vào.
+      </Missing>
     </div>
   );
 }
@@ -465,27 +511,26 @@ export default function DelfBookPanel({ onBack }) {
 
   return (
     <div style={{ animation: "fadeUp 0.3s ease" }}>
-      <div style={{ background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, padding: "0.9rem 1rem 0.95rem" }}>
-        {onBack && (
-          <button onClick={onBack}
-            style={{ background: "rgba(255,255,255,0.15)", border: "none", color: "#fff", fontSize: "0.72rem",
-                     fontWeight: 600, cursor: "pointer", padding: "0.2rem 0.65rem", borderRadius: 20,
-                     marginBottom: "0.6rem", fontFamily: "inherit" }}>
-            ← Trang chủ
-          </button>
-        )}
-        <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+      {/* The hero used four stacked lines for what is really one: the book's
+          name, where you are in it, and the two controls. */}
+      <div style={{ background: `linear-gradient(135deg, ${C.heroFrom} 0%, ${C.heroTo} 100%)`, padding: "0.55rem 1rem 0.6rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {onBack && (
+            <button onClick={onBack} title="Về trang chủ"
+              style={{ flexShrink: 0, background: "rgba(255,255,255,0.15)", border: "none", color: "#fff",
+                       fontSize: "0.8rem", fontWeight: 700, cursor: "pointer", lineHeight: 1,
+                       padding: "0.3rem 0.55rem", borderRadius: 20, fontFamily: "inherit" }}>
+              ←
+            </button>
+          )}
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: "0.55rem", letterSpacing: "0.18em",
-                          color: "rgba(255,255,255,0.6)", textTransform: "uppercase", marginBottom: 4 }}>
-              Didier FLE · 2022
-            </div>
-            <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1.15rem", color: "#fff",
-                          fontWeight: 800, lineHeight: 1.15 }}>
+            <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1rem", color: "#fff",
+                          fontWeight: 800, lineHeight: 1.2, whiteSpace: "nowrap",
+                          overflow: "hidden", textOverflow: "ellipsis" }}>
               Le DELF A1 100 % réussite
             </div>
-            <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.7)", marginTop: 4 }}>
-              {finished}/{total} bài tự chấm đã làm
+            <div style={{ fontSize: "0.62rem", color: "rgba(255,255,255,0.65)" }}>
+              Didier FLE 2022 · {finished}/{total} bài tự chấm
             </div>
           </div>
           <button onClick={() => setAlways(v => !v)}
@@ -497,7 +542,7 @@ export default function DelfBookPanel({ onBack }) {
             {alwaysVi ? "VI ✓" : "VI"}
           </button>
         </div>
-        <div style={{ height: 4, background: "rgba(255,255,255,0.2)", borderRadius: 4, marginTop: 8, overflow: "hidden" }}>
+        <div style={{ height: 3, background: "rgba(255,255,255,0.2)", borderRadius: 4, marginTop: 7, overflow: "hidden" }}>
           <div style={{ height: "100%", width: `${total ? (finished / total) * 100 : 0}%`, background: C.green, borderRadius: 4 }} />
         </div>
       </div>

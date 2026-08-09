@@ -63,13 +63,10 @@ export default function DelfCEPanel({ done, onDone, alwaysVi, data = DELF_A1_CE 
           return [...s.prepare, ...s.train].filter(i => !i.worked && done[i.id]).length;
         }} />
 
-      <div style={{ marginBottom: "0.8rem" }}>
-        <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1rem", fontWeight: 700, color: C.ink }}>
-          Exercice {section.num} — {section.fr}
-        </div>
-        <div style={{ fontSize: "0.66rem", color: C.gray, lineHeight: 1.55, marginTop: 2 }}>
-          {section.domaine} · 5 câu · 5 điểm — {section.supports}
-        </div>
+      {/* The selected chip already names the objectif, so this is just the
+          detail the chip has no room for. */}
+      <div style={{ fontSize: "0.64rem", color: C.gray, lineHeight: 1.5, marginBottom: "0.7rem" }}>
+        {section.domaine} · 5 câu · 5 điểm — {section.supports}
       </div>
 
       <SkillGroup title="SE PRÉPARER" sub="Luyện từng kỹ năng nhỏ" color={C.blue}
