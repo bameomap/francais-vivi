@@ -13,6 +13,8 @@ import { C } from "../constants.js";
 const LETTERS = ["A", "B", "C"];
 
 // ── A gloss you have to ask for ──────────────────────────────────
+// The « ? » sits inline at the end of the French, so an unopened gloss costs a
+// few pixels on a line that already exists instead of a row of its own.
 export function Gloss({ vi, always, size = "0.68rem" }) {
   const [open, setOpen] = useState(false);
   if (!vi) return null;
@@ -27,8 +29,9 @@ export function Gloss({ vi, always, size = "0.68rem" }) {
     <button onClick={() => setOpen(true)} title="Xem nghĩa tiếng Việt"
       style={{ background: "none", border: `1px solid ${C.border}`, borderRadius: 20,
                color: C.gray2, cursor: "pointer", fontFamily: "inherit",
-               fontSize: "0.6rem", fontWeight: 700, lineHeight: 1,
-               padding: "0.1rem 0.32rem", marginTop: 3 }}>
+               fontSize: "0.58rem", fontWeight: 700, lineHeight: 1,
+               padding: "0.08rem 0.3rem", marginLeft: 5,
+               display: "inline-block", verticalAlign: "middle" }}>
       ?
     </button>
   );
@@ -138,8 +141,9 @@ function Question({ q, n, value, onPick, checked, reveal, color, alwaysVi }) {
           {q.lead && (
             <div style={{ fontSize: "0.68rem", color: C.gray2, fontWeight: 700, marginBottom: 1 }}>{q.lead}</div>
           )}
-          <div style={{ fontSize: "0.76rem", color: C.ink, fontFamily: "Georgia,serif", lineHeight: 1.5 }}>{q.q}</div>
-          <Gloss vi={q.vi} always={alwaysVi} />
+          <div style={{ fontSize: "0.76rem", color: C.ink, fontFamily: "Georgia,serif", lineHeight: 1.5 }}>
+            {q.q}<Gloss vi={q.vi} always={alwaysVi} />
+          </div>
         </div>
         {q.pts && (
           <span style={{ flexShrink: 0, fontSize: "0.58rem", color: C.gray2, fontWeight: 700 }}>
@@ -237,14 +241,13 @@ export default function DelfItemCard({ item, color, done, onDone, alwaysVi, defa
       {open && (
         <div style={{ padding: "0 0.75rem 0.75rem" }}>
           {/* The collapsed header already shows the consigne when the item has
-              no separate title, so don't print it twice. */}
-          {item.title && (
-            <div style={{ fontSize: "0.72rem", color: C.ink, fontFamily: "Georgia,serif",
-                          fontStyle: "italic", marginBottom: "0.15rem" }}>
-              {item.setup}
-            </div>
-          )}
-          <div style={{ marginBottom: "0.5rem" }}><Gloss vi={item.setupVi} always={alwaysVi} /></div>
+              no separate title, so don't print it twice — but the gloss still
+              needs somewhere to hang. */}
+          <div style={{ fontSize: "0.72rem", color: C.ink, fontFamily: "Georgia,serif",
+                        fontStyle: "italic", marginBottom: "0.5rem" }}>
+            {item.title ? item.setup : null}
+            <Gloss vi={item.setupVi} always={alwaysVi} />
+          </div>
 
           {item.tip && (
             <div style={{ background: C.blueL, borderRadius: 8, padding: "0.4rem 0.55rem",
@@ -298,29 +301,28 @@ export default function DelfItemCard({ item, color, done, onDone, alwaysVi, defa
                              cursor: "pointer", fontFamily: "inherit" }}>
                     ↻ Làm lại
                   </button>
+                  {/* The transcript stays shut until the answers are in — opening
+                      it early turns a listening exercise into a reading one. It
+                      shares this row rather than claiming one of its own. */}
+                  {item.transcript && (
+                    <button onClick={() => setScript(v => !v)}
+                      style={{ background: script ? `${color}18` : C.cream, border: `1px solid ${color}55`,
+                               borderRadius: 20, padding: "0.15rem 0.6rem", fontSize: "0.66rem",
+                               fontWeight: 700, color: C.ink, cursor: "pointer", fontFamily: "inherit" }}>
+                      {script ? "Ẩn lời thoại" : "📄 Lời thoại"}
+                    </button>
+                  )}
                 </>
               )}
               <span style={{ marginLeft: "auto", fontSize: "0.6rem", color: C.gray2 }}>Livre p.{item.page}</span>
             </div>
           )}
 
-          {/* The transcript stays shut until the answers are in — opening it
-              early turns a listening exercise into a reading one. */}
-          {item.transcript && (checked || item.worked) && (
-            <div style={{ marginTop: "0.6rem" }}>
-              <button onClick={() => setScript(s => !s)}
-                style={{ background: script ? `${color}18` : C.cream, border: `1px solid ${color}55`,
-                         borderRadius: 20, padding: "0.2rem 0.7rem", fontSize: "0.66rem", fontWeight: 700,
-                         color: C.ink, cursor: "pointer", fontFamily: "inherit" }}>
-                {script ? "Ẩn lời thoại ▲" : "📄 Lời thoại ▼"}
-              </button>
-              {script && (
-                <div style={{ marginTop: "0.45rem", background: C.cream, borderRadius: 9,
-                              padding: "0.55rem 0.65rem", fontSize: "0.74rem", color: C.ink,
-                              lineHeight: 1.7, fontFamily: "Georgia,serif", whiteSpace: "pre-line" }}>
-                  {item.transcript}
-                </div>
-              )}
+          {script && item.transcript && (
+            <div style={{ marginTop: "0.5rem", background: C.cream, borderRadius: 9,
+                          padding: "0.55rem 0.65rem", fontSize: "0.74rem", color: C.ink,
+                          lineHeight: 1.7, fontFamily: "Georgia,serif", whiteSpace: "pre-line" }}>
+              {item.transcript}
             </div>
           )}
         </div>

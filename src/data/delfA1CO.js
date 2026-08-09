@@ -9,17 +9,16 @@
 // notez le numéro sous l'image) need question types this screen does not have
 // yet, so 17 of the book's 58 are here so far.
 //
-// Audio comes from public/delf-a1-audio, a symlink to the book's own tracks in
-// the same style as public/audio for Édito — one piste per activité.
-
-const piste = n => "/delf-a1-audio/delf_a1_2022_piste_" + String(n).padStart(2, "0") + ".mp3";
+// Audio is the book's own tracks, held in a PRIVATE Vercel Blob store and
+// streamed through /api/delf-audio — they are copyrighted, so they are neither
+// public assets nor committed to this repo.
 
 export const CO_PREPARE = [
 
   {
     id: "co-a1", label: "Activité 1", page: 12,
     setup: "Écoutez les messages et cochez le prénom correct.",
-    audio: piste(1), piste: 1,
+    audio: "/api/delf-audio?p=1", piste: 1,
     transcript: "1. Bonjour. C’est Virginie. Tu veux aller à la piscine\nmercredi après-midi ? Tu peux venir avec Julie.\nJ’attends ton appel. À bientôt.\n2. Salut, c’est Anne. Avec Laura, nous allons\nau cinéma samedi pour voir le nouveau film\nde Josiane Balasko. Est-ce que tu veux venir ?\nRappelle-moi !\n3. Bonjour. J’organise la fête d’anniversaire de\nLuigi. C’est le samedi 24 septembre. Est-ce que\ntu es disponible ? Appelle-moi ! Ah, au fait, c’est\nVincent. À bientôt.",
     questions: [
       { lead: "Message n° 1", q: "Qui parle ?",
@@ -36,7 +35,7 @@ export const CO_PREPARE = [
   {
     id: "co-a2", label: "Activité 2", page: 12,
     setup: "Écoutez les messages et cochez le prénom correct.",
-    audio: piste(2), piste: 2,
+    audio: "/api/delf-audio?p=2", piste: 2,
     transcript: "1. Salut, c’est Adrien. Samedi, c’est mon\nanniversaire. Je t’invite au restaurant. Si tu es\nd’accord, rendez-vous à 19 h chez moi. Tu peux\nvenir avec Amandine !\n2. Bonjour, c’est moi, Valérie. Je suis devant le\nmusée. J’attends Isabelle. Elle est en retard. Tu\nes toujours d’accord pour le rendez-vous de 16 h\navec Juliette ? À tout à l’heure.\n3. Allô ? C’est Louis. On peut aller se promener\ndans la forêt dimanche s’il fait beau. Charlie est\nd’accord. Et j’invite Pierre, un ami du club de\ntennis. Rappelle-moi !",
     questions: [
       { lead: "Message n° 1", q: "C'est l'anniversaire de qui ?",
@@ -53,7 +52,7 @@ export const CO_PREPARE = [
   {
     id: "co-a3", label: "Activité 3", page: 12,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(3), piste: 3,
+    audio: "/api/delf-audio?p=3", piste: 3,
     transcript: "1. C’est Valentin. Il y a une nouvelle exposition\nau musée des sciences. Mardi, je vais au théâtre.\nEst-ce que tu veux venir avec moi voir l’exposition\nmercredi ?\n2. Allô ? C’est Léa. Je t’appelle pour te dire que le\nfilm est à 16 h 30. Est-ce que tu peux acheter les\nbillets ? Je fais des courses et j’arrive. Merci !\n3. Salut. C’est Diana. Est-ce que tu peux apporter\nun gâteau à la fête d’anniversaire de Samuel ?\nMoi, j’apporte des boissons. Merci !",
     questions: [
       { lead: "Message n° 1", q: "Valentin vous appelle pour aller où ?",
@@ -70,7 +69,7 @@ export const CO_PREPARE = [
   {
     id: "co-a5", label: "Activité 5", page: 13,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(5), piste: 5,
+    audio: "/api/delf-audio?p=5", piste: 5,
     transcript: "1. Mes deux frères et moi, nous allons au parc cet\naprès-midi. Est-ce que tu veux venir ?\n2. Marc et Sophie viennent à la fête. Maintenant,\nil y a 16 personnes sur la liste !\n3. Est-ce que tu peux acheter 10 tomates pour le\nrepas de ce soir ? Merci !",
     questions: [
       { lead: "Message n° 1", q: "Martine a combien de frères ?",
@@ -87,7 +86,7 @@ export const CO_PREPARE = [
   {
     id: "co-a6", label: "Activité 6", page: 13,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(6), piste: 6,
+    audio: "/api/delf-audio?p=6", piste: 6,
     transcript: "1. C’est Alexandre. Je suis au magasin et j’achète\ndeux kilos et demi de pommes de terre. Est-ce\nque c’est bien ça ?\n2. J’ai vingt et une paires de chaussures. C’est\nbeaucoup !\n3. Je veux entrer dans ce magasin. Il y a 75 % de\nréduction !",
     questions: [
       { lead: "Message n° 1", q: "Combien de kilos de pommes de terre est-ce qu'Alexandre achète ?",
@@ -104,7 +103,7 @@ export const CO_PREPARE = [
   {
     id: "co-a15", label: "Activité 15", page: 15,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(15), piste: 15,
+    audio: "/api/delf-audio?p=15", piste: 15,
     transcript: "1. Après la pluie et les températures basses, enfin\n18 degrés à Paris !\n2. N’oubliez pas votre manteau, votre écharpe et\nvos gants ! Seulement 4 degrés à Lille !\n3. Aujourd’hui, un climat agréable avec 15 degrés\nà Paris, 19 degrés à Lyon et 23 degrés à Bordeaux.",
     questions: [
       { lead: "Message n° 1", q: "Quelle est la température à Paris ?",
@@ -121,7 +120,7 @@ export const CO_PREPARE = [
   {
     id: "co-a18", label: "Activité 18", page: 16,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(18), piste: 18,
+    audio: "/api/delf-audio?p=18", piste: 18,
     transcript: "1. Le chanteur Kendji Girac est à Toulouse pour\nun grand concert. Aujourd’hui, vendredi 22 avril,\nKendji Girac est avec nous. Son concert est à 20 h,\nce soir, dans la salle Gainsbourg.\n2. Le cinéma Terre’in présente le nouveau film\nde Luc Besson avec la présence des acteurs. C’est\nce soir. Vous pouvez acheter les billets sur le site\ninternet du cinéma.\n3. La poste est fermée ! Vous ne pouvez plus\nenvoyer de colis pendant les vacances. Mais la\nboîte aux lettres est toujours disponible. Vous\npouvez donc envoyer vos lettres pendant les\nvacances.\n133",
     questions: [
       { lead: "Message n° 1", q: "Quelle est la date du concert ?",
@@ -138,7 +137,7 @@ export const CO_PREPARE = [
   {
     id: "co-a19", label: "Activité 19", page: 15,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(19), piste: 19,
+    audio: "/api/delf-audio?p=19", piste: 19,
     transcript: "1. Où habitez-vous ?\n2. Comment s’appelle votre femme ?\n3. Quand allez-vous au cinéma ?\n4. Comment est-ce que vous allez à votre bureau ?\n5. Combien avez-vous de frères et de sœurs ?\n6. Quelle est votre profession ?\n7. Vous lisez quoi ?\n8. Quelle est votre nationalité ?\n9. Quel est votre film préféré ?\n10. Qu’est-ce que vous faites le dimanche ?",
     questions: [
       { lead: "Message n° 1", q: "Où sont Brigitte et Catherine ?",
@@ -155,7 +154,7 @@ export const CO_PREPARE = [
   {
     id: "co-a23", label: "Activité 23", page: 16,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(23), piste: 23,
+    audio: "/api/delf-audio?p=23", piste: 23,
     transcript: "1. Chers clients, pendant 30 minutes, grande\npromotion sur tous les poissons avec 40 % de\nréduction ! Oui, 40 % de réduction ! Pendant\nseulement 30 minutes ! Vite !\n134\n2. Après la réduction spéciale sur les pantalons,\nrendez-vous au rayon jouets pour les garçons.\nRéduction de 20 % maintenant sur les jouets pour\nles garçons. Pour les filles, c’est cet après-midi.\n3. Chers clients, rendez-vous à l’entrée du\nmagasin pour découvrir nos promotions spéciales\nsur tous nos produits. Ne partez pas ! Rendez-\nvous à l’entrée !",
     questions: [
       { lead: "Message n° 1", q: "Combien de temps est-ce que la promotion dure ?",
@@ -172,7 +171,7 @@ export const CO_PREPARE = [
   {
     id: "co-a24", label: "Activité 24", page: 16,
     setup: "Écoutez le message et répondez aux questions.",
-    audio: piste(24), piste: 24,
+    audio: "/api/delf-audio?p=24", piste: 24,
     transcript: "1. Quel âge avez-vous ?\n2. Quelle est la date de votre anniversaire ?\n3. Est-ce que vous faites du vélo ?\n4. Combien d’enfants est-ce que vous avez ?\n5. Quand partez-vous en vacances ?\n6. Où est-ce que vous allez en vacances ?\n7. Le samedi, vous faites quoi ?",
     questions: [
       { q: "1. La promotion est pour quels articles ?",
@@ -192,7 +191,7 @@ export const CO_PREPARE = [
   {
     id: "co-a25", label: "Activité 25", page: 17,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(25), piste: 25,
+    audio: "/api/delf-audio?p=25", piste: 25,
     transcript: "1. Quel âge avez-vous ?\n2. Quelle est la date de votre anniversaire ?\n3. La date de mon anniversaire est le 13 mai.\n4. La date de mon anniversaire ? C’est le 13 mai.\n5. Est-ce que vous aimez la télévision ?\n6. Vous aimez la télévision.\n7. Combien de frères avez-vous ?\n8. Vous avez deux frères. Moi, j’ai un frère.\n9. Le samedi, vous faites quoi ?\n10. Le samedi, vous allez au parc. Avec qui ?\n11. J’aime les chats. Pourquoi ? Je ne sais pas.",
     questions: [
       { lead: "Message n° 1", q: "Quel est le numéro du vol ?",
@@ -209,7 +208,7 @@ export const CO_PREPARE = [
   {
     id: "co-a26", label: "Activité 26", page: 18,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(26), piste: 26,
+    audio: "/api/delf-audio?p=26", piste: 26,
     transcript: "– L’exercice 2 est un échange d’informations.\nVous me posez des questions pour me connaître.\nUtilisez les mots pour poser vos questions.\n– Quelle est votre nationalité ?\n– Je suis française. Et vous ?\n– Moi, je suis syrien. Combien de langues est-ce\nque vous parlez ?\n– Je parle français, anglais et un peu italien.\n– Oh, d’accord. Moi aussi je parle anglais, un peu\nfrançais mais pas italien. Je parle espagnol. À\nquelle heure vous vous levez ?\n– Je me lève à 6 h 30 tous les jours.\n– C’est tôt !\n– Oui, c’est vrai. Je travaille tôt.\n– Est-ce que vous avez un appartement ou une\nmaison ?\n– J’ai une maison.\n– Moi, j’habite dans un appartement. Et comment\nest-ce que vous venez à l’école ?\n– Je viens en métro, c’est rapide !\n– Oh, moi aussi !\n– Merci. L’exercice 2 est terminé. Nous passons\nmaintenant à l’exercice 3.",
     questions: [
       { lead: "Message n° 1", q: "Quelle est la profession de Clara Dupont ?",
@@ -226,7 +225,7 @@ export const CO_PREPARE = [
   {
     id: "co-a27", label: "Activité 27", page: 18,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(27), piste: 27,
+    audio: "/api/delf-audio?p=27", piste: 27,
     transcript: "1. Bonjour, c’est Madame Lambert, de l’Agence\npour l’emploi. Nous avons une offre pour être\npompier à Lille. Allez sur notre site internet pour\nvoir l’offre. C’est la seule offre « pompier ». Au\nrevoir.\n2. Oui, c’est Madame Joly du collège Vauban.\nVotre fille est absente de ma classe de français.\nPouvez-vous me rappeler s’il vous plaît ? Merci.\n3. Bonjour, c’est Madame Morin de l’Agence pour\nl’emploi. Il y a des offres pour « serveur » et une\noffre pour « vendeur ». Vous avez rendez-vous\npour l’offre « vendeur » avec moi demain. Merci.",
     questions: [
       { lead: "Message n° 1", q: "L'offre est pour quelle profession ?",
@@ -243,7 +242,7 @@ export const CO_PREPARE = [
   {
     id: "co-a28", label: "Activité 28", page: 17,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(28), piste: 28,
+    audio: "/api/delf-audio?p=28", piste: 28,
     transcript: "1. Bonjour. Monsieur Clément au téléphone. Je\nprépare notre entretien de demain. Envoyez-moi\nune photocopie de votre carte d’identité s’il vous\nplaît. Merci. À demain.\n2. Bonjour, c’est Monsieur Dumont de l’Agence\npour l’emploi. J’ai votre CV mais je n’ai pas votre\nlettre de motivation. Est-ce que vous pouvez me\nl’envoyer par courriel ? C’est urgent. Merci.\n3. Pour la réunion avec le directeur du théâtre,\nn’oubliez pas le programme du concert. Le\ndirecteur veut voir la liste des chanteurs. La\nréunion doit durer 30 minutes maximum. Merci.",
     questions: [
       { lead: "Message n° 1", q: "Quel document devez-vous envoyer ?",
@@ -260,7 +259,7 @@ export const CO_PREPARE = [
   {
     id: "co-a29", label: "Activité 29", page: 18,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(29), piste: 29,
+    audio: "/api/delf-audio?p=29", piste: 29,
     transcript: "1. Bonjour, c’est Madame Lopez, la secrétaire\nde monsieur le directeur. Monsieur le directeur\nsouhaite une réunion avec l’équipe. C’est urgent !\nÀ partir de jeudi, il est en voyage. C’est possible\nune réunion aujourd’hui ? Vous pouvez organiser\nla réunion ?\n2. Bonjour. C’est le magasin Nature & Jardin. Nous\navons votre CV et votre lettre de motivation.\nEst-ce que vous pouvez venir à un entretien ?\nMerci de nous répondre par téléphone avant le 16\nmai. Bonne journée.\n3. Allô ? C’est Benoît de l’Agence pour l’emploi.\nJe vous rappelle votre rendez-vous de vendredi.\nN’oubliez pas de m’envoyer votre CV pour jeudi\nau plus tard. Vous pouvez m’appeler si vous avez\ndes questions. Attention, je suis absent mercredi.\nAu revoir.",
     questions: [
       { lead: "Message n° 1", q: "Vous devez organiser la réunion…",
@@ -277,7 +276,7 @@ export const CO_PREPARE = [
   {
     id: "co-a37", label: "Activité 37", page: 20,
     setup: "Écoutez les dialogues et cochez les bonnes réponses.",
-    audio: piste(37), piste: 37,
+    audio: "/api/delf-audio?p=37", piste: 37,
     transcript: "– L’exercice 3 est un dialogue simulé. Nous\nsommes dans une épicerie. Vous voulez acheter\ndes produits. Vous êtes le client et je suis la\nvendeuse. Nous commençons.\n– Bonjour Madame.\n– Bonjour Monsieur.\n– Je voudrais acheter du sucre et des tomates s’il\nvous plaît.\n– Oui, combien de kilos de sucre ?\n– 2 kilos de sucre s’il vous plaît.\n– D’accord et combien de tomates ?\n– 1 kilo de tomates s’il vous plaît. Quel est le prix\ndu kilo de tomates ?\n– 1,30 €.\n– Merci. Et combien coûte le sucre ?\n– Le sucre ? C’est 3 € pour les 2 kilos.\n– Merci.\n– Est-ce que vous voulez autre chose Monsieur ?\n– Oui, je voudrais aussi du pain s’il vous plaît. Est-ce\nque vous avez des baguettes ?\n– Oui, combien de baguettes est-ce que vous\nvoulez ?\n– Seulement 1 baguette. Quel est le prix ?\n– La baguette coûte 70 centimes.\n– Merci. Quel est le prix total pour le sucre, les\ntomates et la baguette s’il vous plaît ?\n– Alors, le prix total est de 5 €. Comment est-ce\nque vous payez Monsieur ?\n– Je paye en espèces. Et voilà 5 €.\n– Merci Monsieur. Et voilà vos produits.\n– Merci beaucoup. Au revoir Madame et bonne\njournée.\n– Au revoir Monsieur. Merci Youssef. L’épreuve\nest terminée.\n142\nÉpreuve blanche 1\nExercice 1, p. 112, PISTE 88\nBonjour chère cousine, c’est Gilles. Je suis dans\nta ville pour mon travail avec mon directeur. On\npeut se voir demain après 19 h ? Je t’invite dans\nun petit restaurant sympa près de mon hôtel.\nEnvoie-moi un texto avant 17 h si tu es d’accord\net je réserve une table pour 20 h. Bisous\nExercice 2, p. 112, PISTE 89\nChers clients, courez vite au rayon librairie ! Depuis\n14 h et jusqu’à 16 h seulement, pour un livre acheté,\nun deuxième offert. Et n’oubliez pas de demander à\nla caisse un bon pour participer au grand tirage au\nsort à 19 h et gagner deux entrées gratuites pour le\nfestival du livre qui commence demain.\nExercice 3, p. 113, PISTE 90\nBonjour, c’est José, le secrétaire du directeur.\nVous avez rendez-vous avec le médecin du travail\nlundi prochain. Pour votre rendez-vous, venez\nà 10 h au 2 e étage. Vous pouvez parler de votre\naccident d’hier. Racontez votre visite à l’hôpital\net montrez votre ordonnance. Si vous avez des\nquestions, appelez-moi vendredi. Bonne journée.\nExercice 4, p. 113, PISTE 91\n1. – Bonjour, je voudrais m’inscrire s’il vous plaît.\n– Vous avez une pièce d’identité?\n– Oui, et j’ai aussi une carte d’étudiant.\n2. – Vous ne pouvez pas emprunter 6 DVD.\n– Ah bon ! C’est écrit sur le panneau.\n– Non, c’est 6 livres et 3 DVD.\n3. – Bonjour, je cherche une méthode pour\napprendre le chinois.\n– Toutes nos méthodes sont classées au rayon 25\nderrière vous.\n– Ah merci ! Je n’avais pas fait attention.\n4. – C’est fermé ? Mais ça fait longtemps ?\n– Non, regardez le panneau, c’est une fermeture\nexceptionnelle.\n– Ah bon merci, je reviendrai demain.\nExercice 5, p. 114, PISTE 92\nAllô ? Est-ce que tu peux m’aider à faire le sac\npour ce week-end ? Prends des gants s’il te plaît.\nIl faut aussi des serviettes. Elles sont sur mon lit,\ndans ma chambre. Mets aussi le dentifrice et les\nbrosses à dents dans le sac. Pour nos vêtements,\nje vais apporter une valise. Merci.\nÉpreuve blanche 2\nExercice 1, p. 121, PISTE 93\nSalut, c’est Cyril. Qu’est-ce que tu fais vendredi ?\nMoi, je rentre de vacances jeudi. Tu veux aller au\ncinéma ? Regarde le programme des films sur le\nsite internet. Après, écris-moi un message. Je ne\npeux pas répondre au téléphone. Je vais t’apporter\nun tee-shirt souvenir de mes vacances. À bientôt !\nExercice 2, p. 121, PISTE 94\nCe week-end, c’est la fête des mères. Venez dans\nnotre magasin. Nous sommes ouverts de 10 h\nà 19 h. Et il y a 15 % de réduction sur tous les\nproduits ! Venez vite ! Il y a plein d’idées pour vos\ncadeaux. Nous avons beaucoup de parfums pour\nles mamans. Et on vous propose un prix spécial de\n25 euros sur tous les chapeaux.\nExercice 3, p. 122, PISTE 95\nBienvenue dans l’entreprise ! Vous êtes dans le\nbâtiment principal, rue Louis Pasteur. Pour le\nrestaurant du personnel, allez rue Napoléon.\nAvec le téléphone sur votre bureau, vous pouvez\nappeler le service informatique. Appelez le 6806.\nNotez cette information : l’entreprise est fermée\nen décembre. Pour terminer, votre contrat est\ndisponible au service du personnel. Bonne journée !\nExercice 4, p. 122, PISTE 96\n1. – Tiens, mon stylo vert.\n– Oh, merci. Qu’est-ce que je dois écrire en vert ?\n– Tu écris la date en haut de la feuille.\n2. – Tous les jours, il y a de la viande au restaurant\nde l’université.\n– C’est vrai. Tu n’aimes pas la viande ?\n– Non, je ne mange pas de viande. Je vais sortir\npour manger dehors.\n3. – Regarde, c’est la professeure d’histoire. Elle\nest à l’entrée de la bibliothèque.\n– Ah oui, je la connais. C’est aussi ma professeure\nde géographie.\n4. – Madame, je ne comprends pas l’exercice.\n– Oui ? Alors viens au tableau. On va faire\nl’exercice.\n– D’accord. Je prends mon livre ?\n– Oui, prends ton livre.\nExercice 5, p. 123, PISTE 97\nAllô ? Je suis devant le menu du restaurant.\nQu’est-ce que tu veux ? Pour le plat, il y a du\npoisson avec du riz. Il y a aussi une boisson avec\ndu lait. Et pour le dessert, c’est de la glace avec\nune banane. Le restaurant vend aussi des verres.\nIls sont très beaux. Appelle-moi !\n143",
     questions: [
       { lead: "Dialogue n° 1", q: "Quel âge a Anne ?",
@@ -294,7 +293,7 @@ export const CO_PREPARE = [
   {
     id: "co-a45", label: "Activité 45", page: 22,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
-    audio: piste(45), piste: 45,
+    audio: "/api/delf-audio?p=45", piste: 45,
     transcript: "1. Bonjour Madame Buisson. Je suis le professeur\nd’histoire de votre fille. Julie, est-ce que tu as ton\ncahier avec toi ? Je veux le montrer à ta maman.\n2. Lola ? Tu es dans ta chambre ? Est-ce que\ntu peux me montrer les explications de ton\nprofesseur de dessin, Madame Rossignol ? Je ne\ncomprends pas ta note.\n3. – Clémence, tu veux venir avec moi à la\nbibliothèque pour étudier pour l’examen d’anglais\nde tout à l’heure ?\n– Bien sûr Gauthier.",
     questions: [
       { lead: "Message n° 1", q: "Qui est Madame Buisson ?",

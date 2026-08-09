@@ -23,13 +23,14 @@ const load = (k, fallback) => {
   catch { return fallback; }
 };
 
+// The book's own six parts, under the book's own names.
 const TABS = [
-  { id: "intro",  label: "Giới thiệu", icon: "📘" },
-  { id: "lire",   label: "Đọc",        icon: "📖" },
-  { id: "ecouter",label: "Nghe",       icon: "🎧" },
-  { id: "ecrire", label: "Viết",       icon: "✍️" },
-  { id: "parler", label: "Nói",        icon: "🗣️" },
-  { id: "blanc",  label: "Thi thử",    icon: "⏱️" },
+  { id: "intro",  label: "Introduction",      icon: "📘" },
+  { id: "lire",   label: "Lire",              icon: "📖" },
+  { id: "ecouter",label: "Écouter",           icon: "🎧" },
+  { id: "ecrire", label: "Écrire",            icon: "✍️" },
+  { id: "parler", label: "Parler",            icon: "🗣️" },
+  { id: "blanc",  label: "Épreuves blanches", icon: "⏱️" },
 ];
 
 // ── shared bits ──────────────────────────────────────────────────
@@ -47,9 +48,8 @@ function Line({ fr, vi, alwaysVi, bold }) {
     <div style={{ marginBottom: "0.5rem" }}>
       <div style={{ fontSize: "0.75rem", color: C.ink, lineHeight: 1.55, fontWeight: bold ? 700 : 400,
                     fontFamily: "Georgia,serif" }}>
-        {fr}
+        {fr}<Gloss vi={vi} always={alwaysVi} />
       </div>
-      <Gloss vi={vi} always={alwaysVi} />
     </div>
   );
 }
@@ -79,8 +79,9 @@ function Grid({ rows, alwaysVi, total }) {
             {r.pts}
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: "0.73rem", color: C.ink, lineHeight: 1.45 }}>{r.fr}</div>
-            <Gloss vi={r.vi} always={alwaysVi} />
+            <div style={{ fontSize: "0.73rem", color: C.ink, lineHeight: 1.45 }}>
+              {r.fr}<Gloss vi={r.vi} always={alwaysVi} />
+            </div>
           </div>
         </div>
       ))}

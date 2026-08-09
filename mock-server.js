@@ -1,6 +1,26 @@
 // Simple mock server for local UI testing (port 3000)
 // Run: node mock-server.js
 import http from "http";
+import fs from "fs";
+
+// The DELF listening tracks live in a private Blob store, so they are only
+// reachable through the real /api/delf-audio function. Vite proxies /api here,
+// which means without this the Écouter tab has no sound locally. Rather than
+// mock it, run the actual handler — it needs BLOB_READ_WRITE_TOKEN from
+// .env.local, which `vercel blob create-store` already wrote.
+let delfAudio = null;
+try {
+  for (const line of fs.readFileSync(".env.local", "utf8").split("\n")) {
+    const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
+    if (m) process.env[m[1]] = m[2].replace(/^"|"$/g, "");
+  }
+  // The SDK refuses OIDC credentials unless BLOB_STORE_ID is set too; the
+  // static token is the simpler path off-platform.
+  delete process.env.VERCEL_OIDC_TOKEN;
+  ({ default: delfAudio } = await import("./api/delf-audio.js"));
+} catch (e) {
+  console.warn("delf-audio disabled locally:", e.message);
+}
 
 const MOCK = {
   être: {
@@ -32,6 +52,17 @@ const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") { res.writeHead(204); res.end(); return; }
+
+  if (req.url.startsWith("/api/delf-audio")) {
+    if (!delfAudio) { res.writeHead(503); res.end(); return; }
+    // Give the Vercel handler the request shape it expects.
+    req.query = Object.fromEntries(new URL(req.url, "http://localhost").searchParams);
+    res.status = c => { res.statusCode = c; return res; };
+    res.json = o => { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(o)); };
+    delfAudio(req, res);
+    return;
+  }
+
   if (req.method !== "POST" || !req.url.startsWith("/api/proxy")) {
     res.writeHead(404); res.end(); return;
   }

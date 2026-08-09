@@ -22,10 +22,9 @@ HEADER = '''// Compréhension de l'oral — SE PRÉPARER drills, « Le DELF A1 1
 // notez le numéro sous l'image) need question types this screen does not have
 // yet, so {kept} of the book's 58 are here so far.
 //
-// Audio comes from public/delf-a1-audio, a symlink to the book's own tracks in
-// the same style as public/audio for Édito — one piste per activité.
-
-const piste = n => "/delf-a1-audio/delf_a1_2022_piste_" + String(n).padStart(2, "0") + ".mp3";
+// Audio is the book's own tracks, held in a PRIVATE Vercel Blob store and
+// streamed through /api/delf-audio — they are copyrighted, so they are neither
+// public assets nor committed to this repo.
 
 export const CO_PREPARE = [
 '''
@@ -44,7 +43,7 @@ def main():
         out.append("  {")
         out.append(f'    id: "co-a{a["num"]}", label: "Activité {a["num"]}", page: {a["page"]},')
         out.append(f'    setup: {js(a["consigne"])},')
-        out.append(f'    audio: piste({a["piste"]}), piste: {a["piste"]},')
+        out.append(f'    audio: "/api/delf-audio?p={a["piste"]}", piste: {a["piste"]},')
         out.append(f'    transcript: {js(a["transcript"])},')
         out.append("    questions: [")
         for q in a["questions"]:
