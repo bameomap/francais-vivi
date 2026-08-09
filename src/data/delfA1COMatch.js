@@ -13,7 +13,7 @@ const piste = n => `/api/delf-audio?p=${n}`;
 
 export const CO_MATCH = [
   {
-    id: "co-a7", label: "Activité 7", page: 13,
+    objectif: 1, id: "co-a7", label: "Activité 7", page: 13,
     setup: "Écoutez la conversation et reliez les informations.",
     setupVi: "Nghe hội thoại rồi nối tên người với ngày sinh.",
     audio: piste(7), piste: 7,
@@ -25,7 +25,7 @@ export const CO_MATCH = [
     ],
   },
   {
-    id: "co-a8", label: "Activité 8", page: 13,
+    objectif: 1, id: "co-a8", label: "Activité 8", page: 13,
     setup: "Écoutez les messages et reliez les propositions.",
     setupVi: "Nghe các tin nhắn rồi nối tên người với số điện thoại.",
     audio: piste(8), piste: 8,
@@ -37,7 +37,7 @@ export const CO_MATCH = [
     ],
   },
   {
-    id: "co-a12", label: "Activité 12", page: 14,
+    objectif: 1, id: "co-a12", label: "Activité 12", page: 14,
     setup: "Écoutez les messages et reliez les propositions.",
     setupVi: "Nghe rồi nối mỗi tin nhắn với nơi được nhắc tới.",
     audio: piste(12), piste: 12,
@@ -49,7 +49,7 @@ export const CO_MATCH = [
     ],
   },
   {
-    id: "co-a16", label: "Activité 16", page: 15,
+    objectif: 2, id: "co-a16", label: "Activité 16", page: 15,
     setup: "Écoutez les messages et reliez les propositions.",
     setupVi: "Nghe rồi xác định mỗi tin nhắn là mời, khuyến cáo hay thông tin.",
     audio: piste(16), piste: 16,
@@ -61,7 +61,7 @@ export const CO_MATCH = [
     ],
   },
   {
-    id: "co-a21", label: "Activité 21", page: 16,
+    objectif: 2, id: "co-a21", label: "Activité 21", page: 16,
     setup: "Écoutez les messages et reliez les propositions.",
     setupVi: "Nghe ngữ điệu rồi xác định câu khẳng định, câu hỏi hay câu cảm thán — chỉ khác nhau ở giọng đọc.",
     audio: piste(21), piste: 21,
@@ -76,7 +76,7 @@ export const CO_MATCH = [
     ],
   },
   {
-    id: "co-a35", label: "Activité 35", page: 20,
+    objectif: 3, id: "co-a35", label: "Activité 35", page: 20,
     setup: "Écoutez les messages et reliez les propositions.",
     setupVi: "Nghe rồi cho biết mỗi người gọi để làm gì.",
     audio: piste(35), piste: 35,

@@ -253,6 +253,18 @@ CROPS = [
     dict(id="ex4-q4-ab", page=59, dir=OPT, x=FULL,
          top="4 - Vous êtes à la gare", bottom="b. A"),
     dict(id="ex4-q4-c", page=60, dir=OPT, x=FULL, top=60, bottom=326),
+
+    # ---- Compréhension de l'oral · S'ENTRAÎNER picture options ----
+    dict(id="co-ex2-q2", page=29, dir=OPT, x=FULL,
+         top="2 - Qu'est-ce que vous devez apporter", bottom="b. A"),
+    dict(id="co-ex3-q3", page=29, dir=OPT, x=FULL,
+         top="3 - Fabiola va préparer une salade avec quoi", bottom="b. A"),
+    dict(id="co-ex5-q1", page=30, dir=OPT, x=FULL,
+         top="1 - Où est le grand concert de ce soir", bottom="b. A"),
+    dict(id="co-ex5-q4", page=31, dir=OPT, x=FULL,
+         top="4 - Quelle est la météo pour ce soir", bottom="b. A"),
+    dict(id="co-ex6-q1", page=31, dir=OPT, x=FULL,
+         top="1 - Quel est le numéro du train", bottom="b. A"),
 ]
 
 

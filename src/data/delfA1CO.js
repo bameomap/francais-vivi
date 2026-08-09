@@ -17,6 +17,7 @@ export const CO_PREPARE = [
 
   {
     id: "co-a1", label: "Activité 1", page: 12,
+    objectif: 1,
     setup: "Écoutez les messages et cochez le prénom correct.",
     audio: "/api/delf-audio?p=1", piste: 1,
     transcript: "1. Bonjour. C’est Virginie. Tu veux aller à la piscine\nmercredi après-midi ? Tu peux venir avec Julie.\nJ’attends ton appel. À bientôt.\n2. Salut, c’est Anne. Avec Laura, nous allons\nau cinéma samedi pour voir le nouveau film\nde Josiane Balasko. Est-ce que tu veux venir ?\nRappelle-moi !\n3. Bonjour. J’organise la fête d’anniversaire de\nLuigi. C’est le samedi 24 septembre. Est-ce que\ntu es disponible ? Appelle-moi ! Ah, au fait, c’est\nVincent. À bientôt.",
@@ -34,6 +35,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a2", label: "Activité 2", page: 12,
+    objectif: 1,
     setup: "Écoutez les messages et cochez le prénom correct.",
     audio: "/api/delf-audio?p=2", piste: 2,
     transcript: "1. Salut, c’est Adrien. Samedi, c’est mon\nanniversaire. Je t’invite au restaurant. Si tu es\nd’accord, rendez-vous à 19 h chez moi. Tu peux\nvenir avec Amandine !\n2. Bonjour, c’est moi, Valérie. Je suis devant le\nmusée. J’attends Isabelle. Elle est en retard. Tu\nes toujours d’accord pour le rendez-vous de 16 h\navec Juliette ? À tout à l’heure.\n3. Allô ? C’est Louis. On peut aller se promener\ndans la forêt dimanche s’il fait beau. Charlie est\nd’accord. Et j’invite Pierre, un ami du club de\ntennis. Rappelle-moi !",
@@ -51,6 +53,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a3", label: "Activité 3", page: 12,
+    objectif: 1,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=3", piste: 3,
     transcript: "1. C’est Valentin. Il y a une nouvelle exposition\nau musée des sciences. Mardi, je vais au théâtre.\nEst-ce que tu veux venir avec moi voir l’exposition\nmercredi ?\n2. Allô ? C’est Léa. Je t’appelle pour te dire que le\nfilm est à 16 h 30. Est-ce que tu peux acheter les\nbillets ? Je fais des courses et j’arrive. Merci !\n3. Salut. C’est Diana. Est-ce que tu peux apporter\nun gâteau à la fête d’anniversaire de Samuel ?\nMoi, j’apporte des boissons. Merci !",
@@ -68,6 +71,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a5", label: "Activité 5", page: 13,
+    objectif: 1,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=5", piste: 5,
     transcript: "1. Mes deux frères et moi, nous allons au parc cet\naprès-midi. Est-ce que tu veux venir ?\n2. Marc et Sophie viennent à la fête. Maintenant,\nil y a 16 personnes sur la liste !\n3. Est-ce que tu peux acheter 10 tomates pour le\nrepas de ce soir ? Merci !",
@@ -85,6 +89,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a6", label: "Activité 6", page: 13,
+    objectif: 1,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=6", piste: 6,
     transcript: "1. C’est Alexandre. Je suis au magasin et j’achète\ndeux kilos et demi de pommes de terre. Est-ce\nque c’est bien ça ?\n2. J’ai vingt et une paires de chaussures. C’est\nbeaucoup !\n3. Je veux entrer dans ce magasin. Il y a 75 % de\nréduction !",
@@ -102,6 +107,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a13", label: "Activité 13", page: 14,
+    objectif: 1,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=13", piste: 13,
     transcript: "1. Salut ! C’est Sébastien. Est-ce que tu es chez\ntoi ? Je te téléphone pour le rendez-vous de\nmardi. On se retrouve chez moi à midi, d’accord ?\nÀ mardi !\n2. C’est Sountou. Tu viens avec moi au marché ?\nSi tu es d’accord, rendez-vous devant le marché à\n10 h. Et on va au restaurant aussi ? Appelle-moi !\n3. Salut ! Je fais des courses au centre commercial.\nIl y a des réductions au magasin Dupont. Viens\ntout de suite ! Je t’attends à l’entrée du magasin.",
@@ -119,6 +125,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a15", label: "Activité 15", page: 15,
+    objectif: 2,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=15", piste: 15,
     transcript: "1. Après la pluie et les températures basses, enfin\n18 degrés à Paris !\n2. N’oubliez pas votre manteau, votre écharpe et\nvos gants ! Seulement 4 degrés à Lille !\n3. Aujourd’hui, un climat agréable avec 15 degrés\nà Paris, 19 degrés à Lyon et 23 degrés à Bordeaux.",
@@ -136,6 +143,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a17", label: "Activité 17", page: 15,
+    objectif: 2,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=17", piste: 17,
     transcript: "1. Samedi, devant la mairie, une grande exposition\nest organisée par l’association du village. Pour\ntoute information supplémentaire, je vous\nrappelle que les bureaux de l’association sont au\nnuméro 35 du boulevard Victor Hugo.\n2. Le directeur de l’entreprise des biscuits\nLOLO va à l’école Jules Ferry aujourd’hui pour\nrencontrer les élèves et présenter les activités de\nson entreprise. Il va offrir des biscuits aux enfants\net aux professeurs, c’est sûr !\n3. Au marché, les nouveaux fruits de la saison\nsont arrivés. Il y a des pommes et des bananes !\nEt grosse réduction sur les salades. Le marché,\nc’est le samedi de 8 h à 13 h sur la place du village.",
@@ -153,6 +161,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a18", label: "Activité 18", page: 16,
+    objectif: 2,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=18", piste: 18,
     transcript: "1. Le chanteur Kendji Girac est à Toulouse pour\nun grand concert. Aujourd’hui, vendredi 22 avril,\nKendji Girac est avec nous. Son concert est à 20 h,\nce soir, dans la salle Gainsbourg.\n2. Le cinéma Terre’in présente le nouveau film\nde Luc Besson avec la présence des acteurs. C’est\nce soir. Vous pouvez acheter les billets sur le site\ninternet du cinéma.\n3. La poste est fermée ! Vous ne pouvez plus\nenvoyer de colis pendant les vacances. Mais la\nboîte aux lettres est toujours disponible. Vous\npouvez donc envoyer vos lettres pendant les\nvacances.\n133",
@@ -170,6 +179,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a19", label: "Activité 19", page: 15,
+    objectif: 2,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=19", piste: 19,
     transcript: "1. Oui, c’est Brigitte. Je suis avec Catherine. On\nmange. Est-ce que tu viens au concert samedi ?\nAppelle-moi ! À bientôt.\n2. Salut, c’est Samuel. Je mange chez Amélie et\non se demande comment s’appelle ton école de\nthéâtre. Rappelle-nous. Merci !\n3. Allô ! C’est Lucie. Je suis à la caisse. Est-ce que\nj’achète de la viande pour ce soir ? Appelle-moi\nvite ! Bisous.",
@@ -187,6 +197,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a23", label: "Activité 23", page: 16,
+    objectif: 2,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=23", piste: 23,
     transcript: "1. Chers clients, pendant 30 minutes, grande\npromotion sur tous les poissons avec 40 % de\nréduction ! Oui, 40 % de réduction ! Pendant\nseulement 30 minutes ! Vite !\n134\n2. Après la réduction spéciale sur les pantalons,\nrendez-vous au rayon jouets pour les garçons.\nRéduction de 20 % maintenant sur les jouets pour\nles garçons. Pour les filles, c’est cet après-midi.\n3. Chers clients, rendez-vous à l’entrée du\nmagasin pour découvrir nos promotions spéciales\nsur tous nos produits. Ne partez pas ! Rendez-\nvous à l’entrée !",
@@ -204,6 +215,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a24", label: "Activité 24", page: 16,
+    objectif: 2,
     setup: "Écoutez le message et répondez aux questions.",
     audio: "/api/delf-audio?p=24", piste: 24,
     transcript: "Chers clients, bienvenue dans votre centre\ncommercial. Grande promotion sur les livres. La\npromotion commence à 10 h dans votre magasin\nFnoc. 15 % de réduction sur tous les livres. Après,\nréductions spéciales sur les légumes dans votre\nmagasin PrixFrancs.",
@@ -224,6 +236,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a25", label: "Activité 25", page: 17,
+    objectif: 2,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=25", piste: 25,
     transcript: "1. Mesdames, Messieurs, votre attention s’il vous\nplaît. Le vol AF793 à destination de Rome partira\nporte H.\n2. Mesdames, Messieurs, votre attention s’il vous\nplaît. Le train TGV 1210 à destination de Nantes\npartira avec 10 minutes de retard.\n3. Mesdames, Messieurs, votre attention s’il vous\nplaît. Le train TGV 1002 à destination de Rennes\npartira à 9 h 03.",
@@ -241,6 +254,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a26", label: "Activité 26", page: 18,
+    objectif: 3,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=26", piste: 26,
     transcript: "1. Bonjour. Madame Clara Dupont au téléphone,\nsecrétaire de madame la directrice. Êtes-vous\ndisponible pour un rendez-vous mardi ? J’attends\nvotre appel.\n2. Bonjour. Monsieur Legrand. Je vous appelle\npour prendre un rendez-vous pour parler des\nnotes de votre fils. Ses notes de mathématiques\nsont très basses. Merci.\n3. Allô ? C’est Madame Fournier de l’Agence\npour l’emploi. Votre rendez-vous de jeudi à 10 h\nau restaurant est confirmé. N’oubliez pas vos\ndocuments. Merci.",
@@ -258,6 +272,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a27", label: "Activité 27", page: 18,
+    objectif: 3,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=27", piste: 27,
     transcript: "1. Bonjour, c’est Madame Lambert, de l’Agence\npour l’emploi. Nous avons une offre pour être\npompier à Lille. Allez sur notre site internet pour\nvoir l’offre. C’est la seule offre « pompier ». Au\nrevoir.\n2. Oui, c’est Madame Joly du collège Vauban.\nVotre fille est absente de ma classe de français.\nPouvez-vous me rappeler s’il vous plaît ? Merci.\n3. Bonjour, c’est Madame Morin de l’Agence pour\nl’emploi. Il y a des offres pour « serveur » et une\noffre pour « vendeur ». Vous avez rendez-vous\npour l’offre « vendeur » avec moi demain. Merci.",
@@ -275,6 +290,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a28", label: "Activité 28", page: 17,
+    objectif: 3,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=28", piste: 28,
     transcript: "1. Bonjour. Monsieur Clément au téléphone. Je\nprépare notre entretien de demain. Envoyez-moi\nune photocopie de votre carte d’identité s’il vous\nplaît. Merci. À demain.\n2. Bonjour, c’est Monsieur Dumont de l’Agence\npour l’emploi. J’ai votre CV mais je n’ai pas votre\nlettre de motivation. Est-ce que vous pouvez me\nl’envoyer par courriel ? C’est urgent. Merci.\n3. Pour la réunion avec le directeur du théâtre,\nn’oubliez pas le programme du concert. Le\ndirecteur veut voir la liste des chanteurs. La\nréunion doit durer 30 minutes maximum. Merci.",
@@ -292,6 +308,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a29", label: "Activité 29", page: 18,
+    objectif: 3,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=29", piste: 29,
     transcript: "1. Bonjour, c’est Madame Lopez, la secrétaire\nde monsieur le directeur. Monsieur le directeur\nsouhaite une réunion avec l’équipe. C’est urgent !\nÀ partir de jeudi, il est en voyage. C’est possible\nune réunion aujourd’hui ? Vous pouvez organiser\nla réunion ?\n2. Bonjour. C’est le magasin Nature & Jardin. Nous\navons votre CV et votre lettre de motivation.\nEst-ce que vous pouvez venir à un entretien ?\nMerci de nous répondre par téléphone avant le 16\nmai. Bonne journée.\n3. Allô ? C’est Benoît de l’Agence pour l’emploi.\nJe vous rappelle votre rendez-vous de vendredi.\nN’oubliez pas de m’envoyer votre CV pour jeudi\nau plus tard. Vous pouvez m’appeler si vous avez\ndes questions. Attention, je suis absent mercredi.\nAu revoir.",
@@ -309,6 +326,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a37", label: "Activité 37", page: 20,
+    objectif: 4,
     setup: "Écoutez les dialogues et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=37", piste: 37,
     transcript: "1. – Je vous présente Anne, la nouvelle élève.\nAnne, vous avez 16 ans, c’est ça ?\n– Non, j’ai 17 ans. Dans cette classe, les élèves ont\n16 ans ou 17 ans ?\n– Ici, les élèves ont 16 ans ou 17 ans. Des élèves\nont 18 ans aussi.\n2. – Bonjour ! C’est vous, l’assistant de français ?\n– Bonjour ! Oui, je suis assistant de français et je\nm’appelle Marc. C’est ici la salle 33 ?\n– Oui, ici, c’est la salle 33. Bienvenue ! Vous\npouvez vous présenter s’il vous plaît ?\n– Bien sûr ! Je suis français, j’ai 23 ans et je vais\ntravailler avec vous pendant cette 4 e année.\n3. – Demain, j’ai 60 ans. Les élèves préparent une\nfête pour mon anniversaire. Je suis contente. Toi,\nPaul, tu es plus jeune ?\n– Non, je ne suis pas plus jeune. Moi, j’ai 61 ans.\n– 61 ans ? D’accord. C’est ta dernière année dans\nl’école alors.\n– C’est ça.",
@@ -326,6 +344,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a45", label: "Activité 45", page: 22,
+    objectif: 4,
     setup: "Écoutez les messages et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=45", piste: 45,
     transcript: "1. Bonjour Madame Buisson. Je suis le professeur\nd’histoire de votre fille. Julie, est-ce que tu as ton\ncahier avec toi ? Je veux le montrer à ta maman.\n2. Lola ? Tu es dans ta chambre ? Est-ce que\ntu peux me montrer les explications de ton\nprofesseur de dessin, Madame Rossignol ? Je ne\ncomprends pas ta note.\n3. – Clémence, tu veux venir avec moi à la\nbibliothèque pour étudier pour l’examen d’anglais\nde tout à l’heure ?\n– Bien sûr Gauthier.",
@@ -343,6 +362,7 @@ export const CO_PREPARE = [
   },
   {
     id: "co-a46", label: "Activité 46", page: 22,
+    objectif: 4,
     setup: "Écoutez les dialogues et cochez les bonnes réponses.",
     audio: "/api/delf-audio?p=46", piste: 46,
     transcript: "1. – Camille, qu’est-ce que tu fais ici ?\n– Je fais mes devoirs pour le cours d’histoire.\n– Dans la salle du cours de français ?\n– Oui, il n’y a personne !\n2. – Augustin, tu vas à la salle de sport ?\n– Non, je dois étudier. Je vais à la bibliothèque.\n– D’accord. Et après, tu viens faire du sport avec\nmoi ?\n– Non, après, je vais chez moi. Je suis fatigué.\n3. – Clément, où est-ce que tu vas ?\n– Je vais chez moi maintenant pour faire mes\ndevoirs. Et toi ?\n– Moi aussi ! J’ai des devoirs de mathématiques\npour demain.\n– À demain !",

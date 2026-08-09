@@ -37,6 +37,34 @@ export function Gloss({ vi, always, size = "0.68rem" }) {
   );
 }
 
+// One row of chips for the book's objectifs, with progress on each so it is
+// obvious where to go back to.
+export function ObjectifPicker({ items, value, onChange, countOf, doneOf }) {
+  return (
+    <div style={{ display: "flex", gap: "0.35rem", overflowX: "auto", paddingBottom: "0.45rem", marginBottom: "0.7rem" }}>
+      {items.map(o => {
+        const on = o.num === value;
+        const total = countOf ? countOf(o.num) : 0;
+        const finished = doneOf ? doneOf(o.num) : 0;
+        return (
+          <button key={o.num} onClick={() => onChange(o.num)}
+            style={{ flexShrink: 0, background: on ? C.ink : C.white, color: on ? "#fff" : C.ink2,
+                     border: `1px solid ${on ? C.ink : C.border}`, borderRadius: 20,
+                     padding: "0.28rem 0.7rem", fontSize: "0.69rem", fontWeight: 700,
+                     cursor: "pointer", fontFamily: "inherit" }}>
+            {o.num}. {o.fr}
+            {total > 0 && (
+              <span style={{ marginLeft: 5, opacity: 0.7, fontWeight: 600 }}>
+                {finished}/{total}
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── The document being read ──────────────────────────────────────
 export function DocBlock({ doc }) {
   if (!doc) return null;

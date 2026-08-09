@@ -34,6 +34,16 @@ def js(v):
     return json.dumps(v, ensure_ascii=False)
 
 
+# The book groups the listening drills under five objectifs (p.12/14/17/20/24).
+# Carrying the number lets the screen show one objectif at a time instead of a
+# single scroll of 26 cards.
+OBJECTIF_OF_ACTIVITE = [(13, 1), (25, 2), (36, 3), (48, 4), (58, 5)]
+
+
+def objectif(num, table):
+    return next(o for last, o in table if num <= last)
+
+
 def main():
     data = json.load(sys.stdin)
     acts = data["activites"]
@@ -42,6 +52,7 @@ def main():
     for a in acts:
         out.append("  {")
         out.append(f'    id: "co-a{a["num"]}", label: "Activité {a["num"]}", page: {a["page"]},')
+        out.append(f'    objectif: {objectif(a["num"], OBJECTIF_OF_ACTIVITE)},')
         out.append(f'    setup: {js(a["consigne"])},')
         out.append(f'    audio: "/api/delf-audio?p={a["piste"]}", piste: {a["piste"]},')
         out.append(f'    transcript: {js(a["transcript"])},')

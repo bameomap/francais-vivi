@@ -1,11 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import { C } from "../constants.js";
-import DelfItemCard, { Gloss } from "./DelfItemCard.jsx";
+import DelfItemCard, { Gloss, ObjectifPicker } from "./DelfItemCard.jsx";
 import DelfCEPanel, { SkillGroup } from "./DelfCEPanel.jsx";
 import ProductionBox from "./ProductionBox.jsx";
 import { DELF_A1_CE } from "../data/delfA1Reussite.js";
 import { CO_PREPARE } from "../data/delfA1CO.js";
 import { CO_MATCH } from "../data/delfA1COMatch.js";
+import { CO_TRAIN } from "../data/delfA1COTrain.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
 
 // « Le DELF A1 100 % réussite » — the book, as one screen with the book's own
@@ -129,10 +130,25 @@ function IntroTab({ alwaysVi }) {
 // The generated drills and the hand-written matching ones are one list, in the
 // book's own order — which activité came from which pipeline is our problem,
 // not the learner's.
-const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH]
-  .sort((a, b) => a.piste - b.piste);
+const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH].sort((a, b) => a.piste - b.piste);
+
+// The book's five listening objectifs (p.12, 14, 17, 20, 24). Showing one at a
+// time keeps this screen to a handful of cards instead of the thirty-odd it
+// would otherwise open with.
+const CO_OBJECTIFS = [
+  { num: 1, fr: "Identifier un événement" },
+  { num: 2, fr: "Identifier une activité" },
+  { num: 3, fr: "Comprendre des instructions" },
+  { num: 4, fr: "Identifier des situations" },
+  { num: 5, fr: "Identifier des objets" },
+];
 
 function EcouterTab({ done, onDone, alwaysVi }) {
+  const [obj, setObj] = useState(1);
+  const drills = CO_DRILLS.filter(i => i.objectif === obj);
+  const train  = CO_TRAIN.filter(i => i.objectif === obj);
+  const section = CO_OBJECTIFS.find(o => o.num === obj);
+
   return (
     <div>
       <Heading sub="20 minutes · 25 points · 5 exercices · Livre p.9–40">
@@ -149,13 +165,27 @@ function EcouterTab({ done, onDone, alwaysVi }) {
           alwaysVi={alwaysVi} />
       </Card>
 
-      <SkillGroup title="SE PRÉPARER" sub="Nghe từng kỹ năng nhỏ · audio của sách"
-        color={C.blue} items={CO_DRILLS} done={done} onDone={onDone} alwaysVi={alwaysVi} />
+      <ObjectifPicker items={CO_OBJECTIFS} value={obj} onChange={setObj}
+        countOf={n => CO_DRILLS.filter(i => i.objectif === n).length
+                    + CO_TRAIN.filter(i => i.objectif === n).length}
+        doneOf={n => [...CO_DRILLS, ...CO_TRAIN].filter(i => i.objectif === n && done[i.id]).length} />
+
+      <div style={{ marginBottom: "0.8rem" }}>
+        <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1rem", fontWeight: 700, color: C.ink }}>
+          {section.num} · {section.fr}
+        </div>
+      </div>
+
+      <SkillGroup title="SE PRÉPARER" sub="Nghe từng kỹ năng nhỏ" color={C.blue}
+        items={drills} done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
+
+      <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi · 4 điểm" color={C.green}
+        items={train} done={done} onDone={onDone} alwaysVi={alwaysVi} />
 
       <Card accent={C.gray2}>
         <div style={{ fontSize: "0.7rem", color: C.gray, lineHeight: 1.6 }}>
-          Còn thiếu: các activité dạng điền bảng và chọn hình của phần Nghe, cùng toàn bộ phần
-          S'ENTRAÎNER (p.28–37) — cần cắt hình như bên mục Lire.
+          Còn thiếu ở phần Nghe: các activité dạng điền bảng và chọn hình, cùng Exercices 1, 4, 7, 10
+          (bài mẫu in sẵn đáp án) và 11–15 (nối hình, OUI/NON) — cần cắt hình như bên mục Lire.
         </div>
       </Card>
     </div>
