@@ -265,6 +265,21 @@ CROPS = [
          top="4 - Quelle est la météo pour ce soir", bottom="b. A"),
     dict(id="co-ex6-q1", page=31, dir=OPT, x=FULL,
          top="1 - Quel est le numéro du train", bottom="b. A"),
+
+    # Exercices 11 and 12 give six drawings, A–F, to match against four
+    # dialogues. The whole grid is one document rather than six choices, so it
+    # is cut as the exercice's document. Exercice 11's grid straddles a page
+    # break, hence two halves.
+    dict(id="co-ex11-abc", page=34, dir=DOC, x=FULL,
+         top="Exercice 11", bottom="A. n°"),
+    dict(id="co-ex11-def", page=35, dir=DOC, x=FULL, top=55, bottom=232),
+    dict(id="co-ex12", page=35, dir=DOC, x=FULL,
+         top="Exercice 12", bottom="D. n°"),
+
+    # Exercices 14 and 15 show five numbered objects with a OUI/NON pair under
+    # each. Same idea: the grid is the document, the questions are the numbers.
+    dict(id="co-ex14", page=36, dir=DOC, x=FULL, top=628, bottom=800),
+    dict(id="co-ex15", page=37, dir=DOC, x=FULL, top=170, bottom=355),
 ]
 
 

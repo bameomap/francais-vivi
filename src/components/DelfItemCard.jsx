@@ -70,11 +70,17 @@ export function DocBlock({ doc }) {
   if (!doc) return null;
 
   if (doc.kind === "image") {
+    const style = {
+      width: "100%", maxWidth: 460, display: "block", margin: "0 auto",
+      borderRadius: 10, border: `1px solid ${C.border}`, background: "#fff",
+    };
     return (
       <figure style={{ margin: 0, marginBottom: "0.7rem" }}>
-        <img src={doc.src} alt={doc.alt || ""} loading="lazy"
-          style={{ width: "100%", maxWidth: 460, display: "block", margin: "0 auto",
-                   borderRadius: 10, border: `1px solid ${C.border}`, background: "#fff" }} />
+        <img src={doc.src} alt={doc.alt || ""} loading="lazy" style={style} />
+        {/* A grid that straddles a page break in the book is cut in halves. */}
+        {doc.src2 && (
+          <img src={doc.src2} alt="" loading="lazy" style={{ ...style, marginTop: 6 }} />
+        )}
       </figure>
     );
   }
@@ -253,7 +259,11 @@ export default function DelfItemCard({ item, color, done, onDone, alwaysVi, defa
                        padding: "0.05rem 0.4rem" }}>
           {item.label}
         </span>
-        <span style={{ flex: 1, minWidth: 0, fontSize: "0.72rem", color: C.ink2, lineHeight: 1.4 }}>
+        {/* Collapsed, a card is a one-line index entry — a long consigne is
+            clamped rather than allowed to grow the row to five lines. */}
+        <span style={{ flex: 1, minWidth: 0, fontSize: "0.72rem", color: C.ink2, lineHeight: 1.4,
+                       display: "-webkit-box", WebkitLineClamp: open ? "unset" : 2,
+                       WebkitBoxOrient: "vertical", overflow: "hidden" }}>
           {item.audio ? "🎧 " : ""}{item.title || item.setup}
         </span>
         {item.worked && (

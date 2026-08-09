@@ -7,6 +7,7 @@ import { DELF_A1_CE } from "../data/delfA1Reussite.js";
 import { CO_PREPARE } from "../data/delfA1CO.js";
 import { CO_MATCH } from "../data/delfA1COMatch.js";
 import { CO_TRAIN } from "../data/delfA1COTrain.js";
+import { CO_GRID } from "../data/delfA1COGrid.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
 
 // « Le DELF A1 100 % réussite » — the book, as one screen with the book's own
@@ -132,6 +133,10 @@ function IntroTab({ alwaysVi }) {
 // not the learner's.
 const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH].sort((a, b) => a.piste - b.piste);
 
+// Same for the exam-format exercices: the generated ones and the hand-written
+// picture grids belong in the book's order, not their pipeline's.
+const CO_EXERCICES = [...CO_TRAIN, ...CO_GRID].sort((a, b) => a.piste - b.piste);
+
 // The book's five listening objectifs (p.12, 14, 17, 20, 24). Showing one at a
 // time keeps this screen to a handful of cards instead of the thirty-odd it
 // would otherwise open with.
@@ -146,7 +151,7 @@ const CO_OBJECTIFS = [
 function EcouterTab({ done, onDone, alwaysVi }) {
   const [obj, setObj] = useState(1);
   const drills = CO_DRILLS.filter(i => i.objectif === obj);
-  const train  = CO_TRAIN.filter(i => i.objectif === obj);
+  const train  = CO_EXERCICES.filter(i => i.objectif === obj);
   const section = CO_OBJECTIFS.find(o => o.num === obj);
 
   return (
@@ -167,8 +172,8 @@ function EcouterTab({ done, onDone, alwaysVi }) {
 
       <ObjectifPicker items={CO_OBJECTIFS} value={obj} onChange={setObj}
         countOf={n => CO_DRILLS.filter(i => i.objectif === n).length
-                    + CO_TRAIN.filter(i => i.objectif === n).length}
-        doneOf={n => [...CO_DRILLS, ...CO_TRAIN].filter(i => i.objectif === n && done[i.id]).length} />
+                    + CO_EXERCICES.filter(i => i.objectif === n).length}
+        doneOf={n => [...CO_DRILLS, ...CO_EXERCICES].filter(i => i.objectif === n && done[i.id]).length} />
 
       <div style={{ marginBottom: "0.8rem" }}>
         <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "1rem", fontWeight: 700, color: C.ink }}>
@@ -179,13 +184,13 @@ function EcouterTab({ done, onDone, alwaysVi }) {
       <SkillGroup title="SE PRÉPARER" sub="Nghe từng kỹ năng nhỏ" color={C.blue}
         items={drills} done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
 
-      <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi · 4 điểm" color={C.green}
+      <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi" color={C.green}
         items={train} done={done} onDone={onDone} alwaysVi={alwaysVi} />
 
       <Card accent={C.gray2}>
         <div style={{ fontSize: "0.7rem", color: C.gray, lineHeight: 1.6 }}>
-          Còn thiếu ở phần Nghe: các activité dạng điền bảng và chọn hình, cùng Exercices 1, 4, 7, 10
-          (bài mẫu in sẵn đáp án) và 11–15 (nối hình, OUI/NON) — cần cắt hình như bên mục Lire.
+          Còn thiếu ở phần Nghe: các activité SE PRÉPARER dạng điền bảng và chọn hình. Exercices 1, 4,
+          7, 10 và 13 là bài mẫu của sách (in sẵn đáp án, không có trong Corrigés) nên chưa đưa vào.
         </div>
       </Card>
     </div>
@@ -453,7 +458,7 @@ export default function DelfBookPanel({ onBack }) {
   const { total, finished } = useMemo(() => {
     const all = [
       ...DELF_A1_CE.sections.flatMap(s => [...s.prepare, ...s.train]).filter(i => !i.worked),
-      ...CO_PREPARE,
+      ...CO_DRILLS, ...CO_EXERCICES,
     ];
     return { total: all.length, finished: all.filter(i => done[i.id]).length };
   }, [done]);
