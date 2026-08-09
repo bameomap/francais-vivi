@@ -29,3 +29,4 @@ scripts/align-audio/.venv
 # with scripts/delf-a1-crop.py rather than committing ~100 MB of originals.
 materials/100% DELF Level/
 delf-a1-contact-sheet.png
+public/delf-a1-audio
