@@ -9,6 +9,7 @@ import { CO_MATCH } from "../data/delfA1COMatch.js";
 import { CO_TRAIN } from "../data/delfA1COTrain.js";
 import { CO_GRID } from "../data/delfA1COGrid.js";
 import { BLANC1_CO, BLANC2_CO } from "../data/delfA1BlancCO.js";
+import { BLANC1_CE, BLANC2_CE } from "../data/delfA1BlancCE.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
 
 // « Le DELF A1 100 % réussite » — the book, as one screen with the book's own
@@ -450,8 +451,12 @@ function BlancTab({ done, onDone, alwaysVi }) {
         <div key={ex.id} style={{ marginTop: "1rem" }}>
           <Heading sub={ex.pages}>{ex.label}</Heading>
 
-          <SkillGroup title="ÉPREUVE 1" sub="Compréhension de l'oral · 25 pts" color={C.blue}
+          <SkillGroup title="ÉPREUVE 1" sub="Compréhension de l'oral · 20 min · 25 pts" color={C.blue}
             items={n === 0 ? BLANC1_CO : BLANC2_CO}
+            done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
+
+          <SkillGroup title="ÉPREUVE 2" sub="Compréhension des écrits · 30 min · 25 pts" color={C.green}
+            items={n === 0 ? BLANC1_CE : BLANC2_CE}
             done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
 
           <FormCard f={ex.form} alwaysVi={alwaysVi} />
@@ -486,9 +491,6 @@ function BlancTab({ done, onDone, alwaysVi }) {
         </div>
       ))}
 
-      <Missing>
-        Phần Đọc (compréhension des écrits) của hai đề thi thử — cần cắt tài liệu và hình như bên mục Lire.
-      </Missing>
     </div>
   );
 }
@@ -509,7 +511,7 @@ export default function DelfBookPanel({ onBack }) {
   const { total, finished } = useMemo(() => {
     const all = [
       ...DELF_A1_CE.sections.flatMap(s => [...s.prepare, ...s.train]).filter(i => !i.worked),
-      ...CO_DRILLS, ...CO_EXERCICES, ...BLANC1_CO, ...BLANC2_CO,
+      ...CO_DRILLS, ...CO_EXERCICES, ...BLANC1_CO, ...BLANC2_CO, ...BLANC1_CE, ...BLANC2_CE,
     ];
     return { total: all.length, finished: all.filter(i => done[i.id]).length };
   }, [done]);

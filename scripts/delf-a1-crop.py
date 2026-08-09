@@ -313,6 +313,30 @@ CROPS = [
     dict(id="b2-ex4-abc", page=122, dir=DOC, x=BLANC_L, top=610, bottom=800),
     dict(id="b2-ex4-def", page=123, dir=DOC, x=BLANC_R, top=55, bottom=240),
     dict(id="b2-ex5", page=123, dir=DOC, x=BLANC_R, top=355, bottom=712),
+
+    # ---- Épreuve blanche 1 · compréhension des écrits ----
+    # Documents first, then the picture-choice rows. Both are cut whole: an
+    # email mock-up or a wall of sticky notes is artwork, not prose.
+    dict(id="b1ce-ex1-doc", page=115, dir=DOC, x=BLANC_R, top=196, bottom=364),
+    dict(id="b1ce-ex1-q2",  page=115, dir=OPT, x=BLANC_R, top=426, bottom=560),
+    dict(id="b1ce-ex1-q5",  page=115, dir=OPT, x=BLANC_R, top=660, bottom=794),
+    dict(id="b1ce-ex2-doc", page=116, dir=DOC, x=(330, 542), top=70, bottom=292),
+    dict(id="b1ce-ex2-q5",  page=116, dir=OPT, x=BLANC_L, top=342, bottom=800),
+    dict(id="b1ce-ex3-doc", page=117, dir=DOC, x=BLANC_R, top=120, bottom=300),
+    dict(id="b1ce-ex4-doc", page=117, dir=DOC, x=BLANC_R, top=615, bottom=800),
+    dict(id="b1ce-ex4-q2",  page=118, dir=OPT, x=BLANC_L, top=124, bottom=246),
+
+    # ---- Épreuve blanche 2 · compréhension des écrits ----
+    dict(id="b2ce-ex1-doc", page=124, dir=DOC, x=BLANC_L, top=198, bottom=360),
+    dict(id="b2ce-ex1-q1",  page=124, dir=OPT, x=BLANC_L, top=386, bottom=504),
+    dict(id="b2ce-ex1-q4",  page=124, dir=OPT, x=BLANC_L, top=640, bottom=759),
+    dict(id="b2ce-ex2-doc", page=125, dir=DOC, x=BLANC_R, top=118, bottom=318),
+    # Choices A and B sit at the foot of p.125, C at the head of p.126.
+    dict(id="b2ce-ex2-q5-ab", page=125, dir=OPT, x=BLANC_R, top=560, bottom=795),
+    dict(id="b2ce-ex2-q5-c",  page=126, dir=OPT, x=BLANC_L, top=55, bottom=300),
+    dict(id="b2ce-ex3-doc", page=126, dir=DOC, x=BLANC_L, top=392, bottom=600),
+    dict(id="b2ce-ex4-doc", page=127, dir=DOC, x=BLANC_R, top=120, bottom=348),
+    dict(id="b2ce-ex4-q5",  page=127, dir=OPT, x=BLANC_R, top=556, bottom=691),
 ]
 
 
