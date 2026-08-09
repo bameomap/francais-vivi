@@ -138,8 +138,13 @@ def crop(spec):
         # on below it. So grow past the label until just short of whatever comes
         # next, capped so a crop can't run all the way down to the folio.
         y1 = label[4] + 3
-        below = [l[2] for l in lines_of(page) if l[2] > label[4] + 1]
-        y1 = max(y1, min(min(below) - 4 if below else 9e9, label[4] + 60))
+        # Round photos put their label beside the picture at mid-height, so the
+        # crop has to grow past it. Where the label sits *under* its picture the
+        # baseline is already the bottom edge, and growing would swallow the
+        # next question — those specs pass grow=False.
+        if spec.get("grow", True):
+            below = [l[2] for l in lines_of(page) if l[2] > label[4] + 1]
+            y1 = max(y1, min(min(below) - 4 if below else 9e9, label[4] + 60))
 
     x0, x1 = spec.get("x", (48, 548))
 
@@ -184,7 +189,11 @@ def trim_white(img, tol=248):
 DOC = "docs"      # the document being read
 OPT = "options"   # a question's three picture choices
 
-FULL = (55, 542)   # the text column, edge to edge
+FULL  = (55, 542)   # the text column, edge to edge
+# The épreuves blanches run a coloured sidebar down the outer edge, which
+# swaps sides with the page parity — so the text column does too.
+BLANC_L = (72, 548)   # sidebar on the left  (even pages)
+BLANC_R = (60, 536)   # sidebar on the right (odd pages)
 
 CROPS = [
     # ---- Documents the reader has to read as a picture ----
@@ -280,6 +289,30 @@ CROPS = [
     # each. Same idea: the grid is the document, the questions are the numbers.
     dict(id="co-ex14", page=36, dir=DOC, x=FULL, top=628, bottom=800),
     dict(id="co-ex15", page=37, dir=DOC, x=FULL, top=170, bottom=355),
+
+    # ---- Épreuve blanche 1 · compréhension de l'oral ----
+    # This one's A/B/C labels are drawn into the artwork rather than set as
+    # text, so there is no anchor to stop at — the next "B." belongs to
+    # question 4.
+    dict(id="b1-ex1-q3", page=112, dir=OPT, x=BLANC_L, top=364, bottom=468),
+    dict(grow=False, id="b1-ex2-q1", page=112, dir=OPT, x=BLANC_L,
+         top="1. Où faut-il courir", bottom="B."),
+    dict(grow=False, id="b1-ex2-q3", page=113, dir=OPT, x=BLANC_R,
+         top="3. Où est-ce que vous pouvez avoir un bon", bottom="B."),
+    dict(id="b1-ex4-abc", page=113, dir=DOC, x=BLANC_R, top=545, bottom=800),
+    dict(id="b1-ex4-def", page=114, dir=DOC, x=BLANC_L, top=55, bottom=240),
+    dict(id="b1-ex5", page=114, dir=DOC, x=BLANC_L, top=375, bottom=720),
+
+    # ---- Épreuve blanche 2 · compréhension de l'oral ----
+    dict(grow=False, id="b2-ex1-q4", page=121, dir=OPT, x=BLANC_R,
+         top="4. Quel souvenir est-ce que Cyril va acheter", bottom="B."),
+    dict(grow=False, id="b2-ex2-q3", page=121, dir=OPT, x=BLANC_R,
+         top="3. Quel cadeau est-ce que vous pouvez trouver", bottom="B."),
+    dict(grow=False, id="b2-ex2-q4", page=122, dir=OPT, x=BLANC_L,
+         top="4. Qu'est-ce qui coûte 25 euros", bottom="B."),
+    dict(id="b2-ex4-abc", page=122, dir=DOC, x=BLANC_L, top=610, bottom=800),
+    dict(id="b2-ex4-def", page=123, dir=DOC, x=BLANC_R, top=55, bottom=240),
+    dict(id="b2-ex5", page=123, dir=DOC, x=BLANC_R, top=355, bottom=712),
 ]
 
 

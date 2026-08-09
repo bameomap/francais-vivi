@@ -15,6 +15,7 @@ immediately as a letter/text mismatch rather than passing silently.
     python3 scripts/delf-a1-parse-co-train.py > /tmp/co-train.json
 """
 
+import argparse
 import json
 import re
 import sys
@@ -25,13 +26,24 @@ HERE = Path(__file__).resolve().parent
 _prep = SourceFileLoader("delf_prep", str(HERE / "delf-a1-parse-co.py")).load_module()
 lines_of, page_text, clean, key_of = _prep._text._crop.lines_of, _prep.page_text, _prep.clean, _prep.key_of
 
+# Defaults cover S'ENTRAÎNER; the épreuves blanches have the same layout on
+# other pages, so the ranges are arguments rather than constants.
 TRAIN_PAGES  = range(28, 38)      # S'ENTRAÎNER, compréhension de l'oral
 ANSWER_PAGES = range(146, 148)    # CORRIGÉS
 SCRIPT_PAGES = range(132, 144)    # TRANSCRIPTIONS
+PREFIX       = "co-ex"            # id prefix for picture-choice crops
 
 EX_HEAD  = re.compile(r"^Exercice (\d+)$")
-STEM     = re.compile(r"^(\d+)\s*-\s*(.+)$")
-CHOICE   = re.compile(r"^([abc])\.\s*(?:A\s*)?(.*)$")
+
+# The drills number questions "1 - …" and label choices "a." "b." "c."; the
+# épreuves blanches use "1. …" with capital letters. Same grid either way.
+STYLES = {
+    "drill": (re.compile(r"^(\d+)\s*-\s*(.+)$"),
+              re.compile(r"^([abc])\.\s*(?:A\s*)?(.*)$")),
+    "blanc": (re.compile(r"^(\d+)\s*\.\s*(.+)$"),
+              re.compile(r"^([ABC])\.\s*(.*)$")),
+}
+STEM, CHOICE = STYLES["drill"]
 BAND     = 4.0                    # points; choices on one row share a baseline
 CONSIGNE = re.compile(r"^(Lisez les questions|Vous (allez )?(écoutez|entendez|écouter))", re.I)
 TIP      = "•u"  # the bullet glyphs the method notes start with
@@ -56,7 +68,7 @@ def merge_row(row):
             out[-1][1] = text          # the orphaned text of the previous letter
         elif out:
             out[-1][1] = f"{out[-1][1]} {text}".strip()
-    return [(letter, clean(re.sub(r"^A\s+", "", txt))) for letter, txt in out if txt]
+    return [(letter.lower(), clean(re.sub(r"^A\s+", "", txt))) for letter, txt in out if txt]
 
 
 def rows_of(page):
@@ -102,13 +114,17 @@ def parse_train():
                             for t in texts[1:] if "point" in t), None)
                 continue
 
-            # A row of bare "a." "b." "c." with nothing after them is a picture
-            # question: the choices are drawings, and only their labels are text.
-            bare = [t for t in texts if re.fullmatch(r"[abc]\.(\s*A)?", t)]
-            if stem and len(bare) >= 2:
+            # A row of bare "a." "b." "c." and NOTHING else is a picture
+            # question: the choices are drawings, and only their labels are
+            # text. The "nothing else" matters — in the épreuves blanches a
+            # normal choice sets its letter and its wording as two pieces on the
+            # same baseline, so a bare-label count alone would call every
+            # question a picture one.
+            bare = [t for t in texts if re.fullmatch(r"[abcABC]\.(\s*A)?", t)]
+            if stem and len(bare) >= 2 and len(bare) == len([t for t in texts if t]):
                 cur["questions"].append({
                     "q": stem, "kind": "image", "pts": pts,
-                    "crop": f"co-ex{cur['num']}-q{len(cur['questions']) + 1}",
+                    "crop": f"{PREFIX}{cur['num']}-q{len(cur['questions']) + 1}",
                 })
                 stem, pts = None, None
                 continue
@@ -125,7 +141,8 @@ def parse_train():
     return items
 
 
-ANS = re.compile(r"(\d+)\s*\.\s*([abc])\s*\.\s*(.+?)(?=\s+\d+\s*\.\s*[abc]\s*\.|$)")
+# The drills key answers as "1. b. Louis."; the épreuves blanches use capitals.
+ANS = re.compile(r"(\d+)\s*\.\s*([abcABC])\s*\.\s*(.+?)(?=\s+\d+\s*\.\s*[abcABC]\s*\.|$)")
 
 
 def parse_answers():
@@ -144,7 +161,7 @@ def parse_answers():
             buf.extend(ANS.findall(clean(line)))
     if cur:
         out[cur] = buf
-    return {k: [(l, clean(t)) for _n, l, t in v] for k, v in out.items()}
+    return {k: [(l.lower(), clean(t)) for _n, l, t in v] for k, v in out.items()}
 
 
 def parse_scripts():
@@ -168,6 +185,27 @@ def parse_scripts():
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pages", help="exercice pages, e.g. 112-114")
+    ap.add_argument("--answers", help="corrigés pages, e.g. 156-157")
+    ap.add_argument("--scripts", help="transcription pages, e.g. 142-143")
+    ap.add_argument("--style", choices=list(STYLES), default="drill")
+    ap.add_argument("--prefix", default="co-ex", help="id prefix for picture crops")
+    args = ap.parse_args()
+
+    def rng(spec, fallback):
+        if not spec:
+            return fallback
+        lo, _, hi = spec.partition("-")
+        return range(int(lo), int(hi or lo) + 1)
+
+    global TRAIN_PAGES, ANSWER_PAGES, SCRIPT_PAGES, STEM, CHOICE, PREFIX
+    TRAIN_PAGES  = rng(args.pages, TRAIN_PAGES)
+    ANSWER_PAGES = rng(args.answers, ANSWER_PAGES)
+    SCRIPT_PAGES = rng(args.scripts, SCRIPT_PAGES)
+    STEM, CHOICE = STYLES[args.style]
+    PREFIX = args.prefix
+
     items   = parse_train()
     answers = parse_answers()
     scripts = parse_scripts()
