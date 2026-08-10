@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
-import { C } from "../constants.js";
+import { C, LEVEL_KEY } from "../constants.js";
 import { AUDIO_BOOKS } from "../data/audioBooks.js";
 
 // Every book's listening tracks, one book at a time, for working from the paper
@@ -25,9 +25,22 @@ export default function PistesPanel({ onBack }) {
   const [playing, setPlaying] = useState(false);
   const [q, setQ]             = useState("");
 
-  const book = AUDIO_BOOKS.find(b => b.id === bookId) ?? AUDIO_BOOKS[0];
+  // Books are shown for one level at a time, starting from the level the app
+  // is set to: at A1 the A2 books are noise, and the list is long enough
+  // already. Still switchable, because the other level is one tap away and
+  // locking it would be worse than showing it.
+  const LEVELS = [...new Set(AUDIO_BOOKS.map(b => b.level))];
+  const [level, setLevel] = useState(() => {
+    // The app stores its level lowercase ("a1"); the shelf labels them "A1".
+    let saved;
+    try { saved = (localStorage.getItem(LEVEL_KEY) || "").toUpperCase(); } catch {}
+    return LEVELS.includes(saved) ? saved : LEVELS[0];
+  });
+  const shelf = AUDIO_BOOKS.filter(b => b.level === level);
 
-  useEffect(() => { try { localStorage.setItem(KEY, bookId); } catch {} }, [bookId]);
+  const book = shelf.find(b => b.id === bookId) ?? shelf[0] ?? AUDIO_BOOKS[0];
+
+  useEffect(() => { try { localStorage.setItem(KEY, book.id); } catch {} }, [book.id]);
 
   // The app's own chrome bar is sticky at the top of the same scroll container,
   // so this one has to start below it. Measured rather than hardcoded: a stale
@@ -90,10 +103,21 @@ export default function PistesPanel({ onBack }) {
                    el.removeEventListener("ended", off); };
   }, []);
 
-  // Switching book stops whatever was playing — the old track isn't in the new
-  // list, so leaving it in the player would strand it there.
+  // Switching level or book stops whatever was playing — the old track isn't in
+  // the new list, so leaving it in the player would strand it there.
+  const pickLevel = l => {
+    if (l === level) return;
+    const first = AUDIO_BOOKS.find(b => b.level === l);
+    audioRef.current?.pause();
+    setCurrent(null);
+    setQ("");
+    setLevel(l);
+    if (first) setBookId(first.id);
+    window.scrollTo(0, 0);
+  };
+
   const pickBook = id => {
-    if (id === bookId) return;
+    if (id === book.id) return;
     audioRef.current?.pause();
     setCurrent(null);
     setQ("");
@@ -127,7 +151,21 @@ export default function PistesPanel({ onBack }) {
       {/* Book first: which book you're in changes what every number below
           means, so it can't be buried under the player. */}
       <div style={{ padding: "0.6rem 1rem 0", display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
-        {AUDIO_BOOKS.map(b => {
+        <div style={{ display: "flex", gap: 3, marginRight: 4 }}>
+          {LEVELS.map(l => {
+            const on = l === level;
+            return (
+              <button key={l} onClick={() => pickLevel(l)}
+                style={{ background: on ? C.blue : C.white, color: on ? "#fff" : C.gray,
+                         border: `1px solid ${on ? C.blue : C.border}`, borderRadius: 20,
+                         padding: "0.22rem 0.6rem", fontSize: "0.66rem", fontWeight: 800,
+                         fontFamily: "'JetBrains Mono',monospace", cursor: "pointer" }}>
+                {l}
+              </button>
+            );
+          })}
+        </div>
+        {shelf.map(b => {
           const on = b.id === book.id;
           return (
             <button key={b.id} onClick={() => pickBook(b.id)}
@@ -222,10 +260,12 @@ export default function PistesPanel({ onBack }) {
               )}
 
               <button onClick={() => play(t.src)}
-                style={{ ...CARD, width: "100%", display: "flex", alignItems: "center", gap: 9,
+                style={{ width: "100%", display: "flex", alignItems: "center", gap: 9,
                          padding: "0.4rem 0.55rem", marginBottom: "0.3rem", cursor: "pointer",
-                         fontFamily: "inherit", textAlign: "left",
-                         borderColor: on ? C.blue : C.border,
+                         fontFamily: "inherit", textAlign: "left", borderRadius: 10,
+                         /* one `border`, never shorthand plus borderColor — React
+                            warns, and the two disagree on re-render */
+                         border: `1px solid ${on ? C.blue : C.border}`,
                          background: on ? C.blueL : C.white }}>
                 <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 26,
                                background: on ? C.blue : C.cream, color: on ? "#fff" : C.ink2,
