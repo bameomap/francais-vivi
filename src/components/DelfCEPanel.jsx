@@ -13,7 +13,10 @@ import { DELF_A1_CE } from "../data/delfA1Reussite.js";
 // A pass of the book (SE PRÉPARER or S'ENTRAÎNER), collapsible so a screen
 // opens as two headers rather than a wall of cards. The header carries the
 // count and how many are done, which is the part worth seeing while collapsed.
-export function SkillGroup({ title, sub, color, items, done, onDone, alwaysVi, defaultOpen = true }) {
+// `renderItem` lets a group hold cards that aren't quizzes — the writing tasks
+// are a prompt and a model answer, not something to grade.
+export function SkillGroup({ title, sub, color, items, done, onDone, alwaysVi,
+                             defaultOpen = true, renderItem }) {
   const [open, setOpen] = useState(defaultOpen);
   if (!items.length) return null;
 
@@ -34,17 +37,22 @@ export function SkillGroup({ title, sub, color, items, done, onDone, alwaysVi, d
           {title}
         </span>
         <span style={{ flex: 1, minWidth: 0, fontSize: "0.67rem", color: C.gray }}>{sub}</span>
-        <span style={{ flexShrink: 0, fontSize: "0.63rem", color: finished === items.length ? C.green : C.gray2,
-                       fontWeight: 700 }}>
-          {finished}/{gradable.length}
-        </span>
+        {/* A group of cards that aren't graded has nothing to count. */}
+        {!renderItem && gradable.length > 0 && (
+          <span style={{ flexShrink: 0, fontSize: "0.63rem",
+                         color: finished === gradable.length ? C.green : C.gray2, fontWeight: 700 }}>
+            {finished}/{gradable.length}
+          </span>
+        )}
         <span style={{ flexShrink: 0, color, fontSize: "0.7rem" }}>{open ? "▲" : "▼"}</span>
       </button>
 
-      {open && items.map(item => (
-        <DelfItemCard key={item.id} item={item} color={color} alwaysVi={alwaysVi}
-          done={!!done[item.id]} onDone={() => onDone(item.id)} />
-      ))}
+      {open && items.map(item => renderItem
+        ? <div key={item.id}>{renderItem(item)}</div>
+        : (
+          <DelfItemCard key={item.id} item={item} color={color} alwaysVi={alwaysVi}
+            done={!!done[item.id]} onDone={() => onDone(item.id)} />
+        ))}
     </section>
   );
 }

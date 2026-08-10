@@ -345,6 +345,16 @@ CROPS = [
     dict(id="co-ex13-a", page=36, dir=DOC, x=(55, 350), top=288, bottom=354),
     dict(id="co-ex13-b", page=36, dir=DOC, x=FULL, top=370, bottom=440),
 
+    # ---- Production écrite · SE PRÉPARER ----
+    # Both of these are set in the handwriting face with no usable Unicode
+    # mapping — Activité 5 extracts as "Je m'appel Rémi Blnchr. Je si rnças."
+    # — so they have to be read as pictures.
+    dict(id="pe-a5-doc", page=75, dir=DOC, x=(65, 300), top=628, bottom=785),
+    # Activité 7's three productions run down the right-hand half of the page;
+    # only production A is handwritten, but they are one column and are read
+    # together, so they are cut as one.
+    dict(id="pe-a7-doc", page=76, dir=DOC, x=(308, 548), top=438, bottom=795),
+
     # ---- Épreuve blanche 1 · compréhension de l'oral ----
     # This one's A/B/C labels are drawn into the artwork rather than set as
     # text, so there is no anchor to stop at — the next "B." belongs to

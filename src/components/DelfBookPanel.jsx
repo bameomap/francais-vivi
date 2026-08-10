@@ -14,6 +14,7 @@ import { CO_WORKED } from "../data/delfA1COWorked.js";
 import { BLANC1_CO, BLANC2_CO } from "../data/delfA1BlancCO.js";
 import { BLANC1_CE, BLANC2_CE } from "../data/delfA1BlancCE.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
+import { PE_PREPARE, PE_TASKS, PE_OBJECTIFS } from "../data/delfA1PE.js";
 
 // « Le DELF A1 100 % réussite » — the book, as one screen with the book's own
 // six parts. Everything here is sourced from it and cites its page numbers.
@@ -332,31 +333,51 @@ function EssayCard({ e, alwaysVi, cefr = "A1", minWords = 40 }) {
   );
 }
 
-function EcrireTab({ alwaysVi }) {
+function EcrireTab({ done, onDone, alwaysVi }) {
+  const [obj, setObj] = useState(1);
+  const drills = PE_PREPARE.filter(i => i.objectif === obj);
+  const tasks  = PE_TASKS.filter(i => i.objectif === obj);
+
   return (
     <div>
-      <Heading sub={`${PE.duree} · ${PE.points} points · Livre ${PE.pages}`}>Production écrite</Heading>
-      <Card accent={C.accent}>
-        <Line fr={PE.intro.fr} vi={PE.intro.vi} alwaysVi={alwaysVi} />
-        <Line fr={PE.timing.fr} vi={PE.timing.vi} alwaysVi={alwaysVi} />
-      </Card>
+      <PaperNote title="Production écrite" sub={`${PE.duree} · ${PE.points} pts · Livre ${PE.pages}`}>
+        <Card accent={C.accent}>
+          <Line fr={PE.intro.fr} vi={PE.intro.vi} alwaysVi={alwaysVi} />
+          <Line fr={PE.timing.fr} vi={PE.timing.vi} alwaysVi={alwaysVi} />
+        </Card>
+        <Card accent={C.gray2}>
+          {PE.tips.map((t, i) => (
+            <Bullet key={i} marker={<Dot color={C.accent} />} last={i === PE.tips.length - 1}>
+              {t.fr}<Gloss vi={t.vi} always={alwaysVi} />
+            </Bullet>
+          ))}
+        </Card>
+        <Grid rows={PE.grid} alwaysVi={alwaysVi} total={15} />
+      </PaperNote>
 
-      <Heading sub="Exercice 1 — 10 points, 1 point par ligne">1 · Remplir un formulaire</Heading>
-      {PE.forms.map(f => <FormCard key={f.id} f={f} alwaysVi={alwaysVi} />)}
-      <div style={{ marginBottom: "1rem" }}>
-        {PE.tips.map((t, i) => (
-          <Card key={i}><Line fr={t.fr} vi={t.vi} alwaysVi={alwaysVi} /></Card>
-        ))}
-      </div>
+      <ObjectifPicker items={PE_OBJECTIFS} value={obj} onChange={setObj}
+        countOf={n => PE_PREPARE.filter(i => i.objectif === n).length}
+        doneOf={n => PE_PREPARE.filter(i => i.objectif === n && done[i.id]).length} />
 
-      <Heading sub="Exercice 2 — 15 points, 40 mots minimum">2 · Écrire un texte court</Heading>
-      {PE.essays.map(e => <EssayCard key={e.id} e={e} alwaysVi={alwaysVi} />)}
+      <SkillGroup title="SE PRÉPARER" sub="Đọc kỹ và điền cho đúng" color={C.blue}
+        items={drills} done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
 
-      <Grid rows={PE.grid} alwaysVi={alwaysVi} total={15} />
+      {/* The writing tasks can't be graded, so they get the prompt, the points
+          the consigne asks for, and the book's model behind a reveal. */}
+      {tasks.length > 0 && (
+        <SkillGroup title="À ÉCRIRE" sub="Tự viết rồi so với bài mẫu" color={C.accent}
+          items={tasks} alwaysVi={alwaysVi} defaultOpen={false} done={done} onDone={onDone}
+          renderItem={t => <EssayCard e={t} alwaysVi={alwaysVi} minWords={t.minWords ?? 40} />} />
+      )}
+
+      <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi" color={C.green}
+        items={obj === 1 ? PE.forms : PE.essays} alwaysVi={alwaysVi} done={done} onDone={onDone}
+        renderItem={x => obj === 1
+          ? <FormCard f={x} alwaysVi={alwaysVi} />
+          : <EssayCard e={x} alwaysVi={alwaysVi} />} />
     </div>
   );
 }
-
 // ── 5 · Nói ──────────────────────────────────────────────────────
 function SpeakCard({ p, alwaysVi }) {
   const [shown, setShown] = useState(false);
@@ -565,7 +586,7 @@ export default function DelfBookPanel({ onBack }) {
         {tab === "intro"   && <IntroTab alwaysVi={alwaysVi} />}
         {tab === "lire"    && <DelfCEPanel done={done} onDone={markDone} alwaysVi={alwaysVi} />}
         {tab === "ecouter" && <EcouterTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
-        {tab === "ecrire"  && <EcrireTab alwaysVi={alwaysVi} />}
+        {tab === "ecrire"  && <EcrireTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
         {tab === "parler"  && <ParlerTab alwaysVi={alwaysVi} />}
         {tab === "blanc"   && <BlancTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
 
