@@ -32,16 +32,14 @@ import os from "node:os";
 const run = promisify(execFile);
 const ROOT = path.resolve(import.meta.dirname, "..");
 
-// Where each set's originals live, and how its files are named. The Édito A1
-// Livre set is short: the publisher's originals were never kept, and the 42
-// files here are what had been published to the old public `audio` branch,
-// rescued out of it before that branch was deleted.
+// Where each set's originals live, and how its files are named. Three sets sit
+// under materials/; the Édito A1 Livre set predates that convention and has
+// always been at the repo root, gitignored.
 const SETS = [
   {
     id: "edito-a1-livre",
-    dir: path.join(ROOT, "materials/A1/Nouvel_Edito_A1_audios_livre"),
+    dir: path.join(ROOT, "Nouvel_Edito_A1_audios_manuel"),
     match: /^(\d+)_Edito_A1_Livre\.mp3$/,
-    note: "42 only — the publisher's full set was never kept",
   },
   {
     id: "edito-a1-cahier",

@@ -14,7 +14,7 @@ import { get } from "@vercel/blob";
 // probe, not a mistake, so it gets a 400 rather than a round trip to the store.
 const BOOKS = {
   "delf-a1":        { max: 97,  name: n => `delf-a1/piste-${String(n).padStart(2, "0")}.m4a` },
-  "edito-a1-livre": { max: 152 },
+  "edito-a1-livre": { max: 162 },
   "edito-a1-cahier":{ max: 111 },
   "edito-a2-livre": { max: 121 },
   "edito-a2-cahier":{ max: 127 },

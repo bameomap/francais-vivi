@@ -17,10 +17,7 @@
 // where it has them; everything else is listed by number under the unit it
 // falls in, because the audio runs in book order and a track between two known
 // anchors belongs to the earlier one.
-//
-// Édito A1 Livre is the one incomplete set — the publisher's originals were
-// never kept, only the 42 tracks that had been published to the old public
-// `audio` branch. `partial` says so on its card.
+
 
 import { PISTES } from "./delfA1Pistes.js";
 import { EDITO_AUDIO } from "./editoAudio.js";
@@ -161,7 +158,6 @@ export const AUDIO_BOOKS = [
     level: "A1",
     title: "Édito A1 · Livre",
     publisher: "Didier · 2e édition",
-    partial: "Bộ gốc của nhà xuất bản không còn — chỉ giữ được 42 file đã tải lên từ trước.",
     icon: "📘",
     tracks: fromLivre("edito-a1-livre", EDITO_AUDIO, EDITO_A1_UNITS),
   },
