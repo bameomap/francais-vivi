@@ -24,12 +24,20 @@ const BOOKS = {
 // content type, length and range it would from a static file.
 const PASS_THROUGH = ["content-type", "content-length", "content-range", "etag", "accept-ranges"];
 
+// A rejection must not be cacheable anywhere. What counts as out of range
+// changes when a book grows — edito-a1-livre went from 152 tracks to 162 — and
+// a stored "bad piste" would outlive the reason it was ever true.
+const fail = (res, code, error) => {
+  res.setHeader("Cache-Control", "no-store");
+  return res.status(code).json({ error });
+};
+
 export default async function handler(req, res) {
   const book = BOOKS[String(req.query.b ?? "")];
   const n = Number(req.query.p);
-  if (!book) return res.status(400).json({ error: "bad book" });
+  if (!book) return fail(res, 400, "bad book");
   if (!Number.isInteger(n) || n < 1 || n > book.max) {
-    return res.status(400).json({ error: "bad piste" });
+    return fail(res, 400, "bad piste");
   }
   // « 100 % réussite » was uploaded before this route existed and keeps its
   // original key; everything since is <book>/NNN.m4a.
@@ -46,7 +54,7 @@ export default async function handler(req, res) {
       ...(ifNoneMatch ? { ifNoneMatch } : {}),
     });
 
-    if (!result) return res.status(404).json({ error: "not found" });
+    if (!result) return fail(res, 404, "not found");
 
     // A week in the browser: the tracks never change and a listening exercise
     // gets replayed a lot. Private, because these are not ours to hand out.
@@ -63,7 +71,7 @@ export default async function handler(req, res) {
     res.status(result.headers?.get("content-range") ? 206 : 200);
 
     const body = result.stream;
-    if (!body) return res.status(502).json({ error: "no stream" });
+    if (!body) return fail(res, 502, "no stream");
     if (typeof body.pipe === "function") return body.pipe(res);
 
     const reader = body.getReader();
@@ -75,6 +83,6 @@ export default async function handler(req, res) {
     return res.end();
   } catch (err) {
     console.error("audio", pathname, err?.message);
-    return res.status(502).json({ error: "blob read failed" });
+    return fail(res, 502, "blob read failed");
   }
 }

@@ -23,6 +23,7 @@ export default function PistesPanel({ onBack }) {
   });
   const [current, setCurrent] = useState(null);   // src of the playing track
   const [playing, setPlaying] = useState(false);
+  const [failed, setFailed]   = useState(null);   // message, when a track won't play
   const [q, setQ]             = useState("");
 
   // Books are shown for one level at a time, starting from the level the app
@@ -111,8 +112,17 @@ export default function PistesPanel({ onBack }) {
       return;
     }
     setCurrent(src);
+    setFailed(null);
     el.src = src;
-    el.play().catch(() => {});
+    // play() rejects for two very different reasons. Only NotAllowedError is the
+    // autoplay policy; anything else means the track itself failed, and the
+    // element's own `error` event describes that better than this does. Naming
+    // the wrong cause is worse than naming none.
+    el.play().catch(err => {
+      if (err?.name === "NotAllowedError") {
+        setFailed("Trình duyệt chặn tự phát — bấm ▶ trên thanh phát.");
+      }
+    });
   };
 
   const step = d => {
@@ -124,12 +134,24 @@ export default function PistesPanel({ onBack }) {
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
-    const on = () => setPlaying(true), off = () => setPlaying(false);
+    const on = () => { setPlaying(true); setFailed(null); };
+    const off = () => setPlaying(false);
+    // Without this the failure is silent: the row highlights, nothing plays,
+    // and there is nothing on screen saying why.
+    const bad = () => {
+      setPlaying(false);
+      setFailed(el.error?.code === 2
+        ? "Không tải được file — kiểm tra mạng rồi thử lại."
+        : "Không phát được file này. Thử tải lại app (kéo xuống để làm mới).");
+    };
     el.addEventListener("play", on);
     el.addEventListener("pause", off);
     el.addEventListener("ended", off);
+    el.addEventListener("error", bad);
+    el.addEventListener("stalled", bad);
     return () => { el.removeEventListener("play", on); el.removeEventListener("pause", off);
-                   el.removeEventListener("ended", off); };
+                   el.removeEventListener("ended", off); el.removeEventListener("error", bad);
+                   el.removeEventListener("stalled", bad); };
   }, []);
 
   // Switching level or book stops whatever was playing — the old track isn't in
@@ -139,6 +161,7 @@ export default function PistesPanel({ onBack }) {
     const first = AUDIO_BOOKS.find(b => b.level === l);
     audioRef.current?.pause();
     setCurrent(null);
+    setFailed(null);
     setQ("");
     setLevel(l);
     setOpen(new Set());
@@ -150,6 +173,7 @@ export default function PistesPanel({ onBack }) {
     if (id === book.id) return;
     audioRef.current?.pause();
     setCurrent(null);
+    setFailed(null);
     setQ("");
     setOpen(new Set());
     setBookId(id);
@@ -240,6 +264,13 @@ export default function PistesPanel({ onBack }) {
             </div>
           )}
           <audio ref={audioRef} controls style={{ width: "100%", height: 34 }} />
+          {failed && (
+            <div style={{ marginTop: "0.35rem", background: C.redL, borderRadius: 8,
+                          padding: "0.3rem 0.5rem", fontSize: "0.65rem", color: C.red,
+                          lineHeight: 1.45 }}>
+              ⚠ {failed}
+            </div>
+          )}
         </div>
 
         <input value={q} onChange={e => setQ(e.target.value)}
