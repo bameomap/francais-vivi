@@ -34,7 +34,7 @@ const LevelSelectPanel     = lazy(() => import("./components/LevelSelectPanel.js
 const ProductionOralePanel = lazy(() => import("./components/ProductionOralePanel.jsx"));
 const DelfA2Panel          = lazy(() => import("./components/DelfA2Panel.jsx"));
 const DelfBookPanel        = lazy(() => import("./components/DelfBookPanel.jsx"));
-const DelfPistesPanel      = lazy(() => import("./components/DelfPistesPanel.jsx"));
+const PistesPanel          = lazy(() => import("./components/PistesPanel.jsx"));
 const EditoGrammarPanel    = lazy(() => import("./components/EditoGrammarPanel.jsx"));
 import { addWordToSRS, getSRSStats, getMasteredSet, getAllCards, resetSRS } from "./utils/srs.js";
 import { getXPData, getLevel, getNextLevel, checkBadges, BADGE_DEFS } from "./utils/xp.js";
@@ -93,7 +93,7 @@ const SECTION_TITLE = {
   delf:"DELF A1",
   "delf-a2":"DELF A2 blanc",
   "delf-ce":"100 % réussite A1",
-  "delf-pistes":"Les 97 pistes",
+  "pistes":"Fichiers audio",
   profil:"Mon Profil",
   level:"Trình độ",
 };
@@ -800,13 +800,13 @@ function AppInner() {
               <span style={{ fontSize:18, color:"rgba(255,255,255,0.7)" }}>→</span>
             </button>
 
-            {/* ── The book's 97 tracks, for studying from the paper book ── */}
-            <button className="card-hover" onClick={()=>goSection("delf","delf-pistes")}
+            {/* ── Every book's listening files, for studying from the paper book ── */}
+            <button className="card-hover" onClick={()=>goSection("delf","pistes")}
               style={{ display:"flex", alignItems:"center", gap:12, width:"100%", marginTop:8, background:C.white, border:`1px solid ${C.border}`, borderRadius:16, padding:"11px 16px", cursor:"pointer", fontFamily:"inherit", textAlign:"left", animation:"fadeUp 0.3s ease 0.48s both" }}>
               <span style={{ fontSize:22, lineHeight:1 }}>🎧</span>
               <div style={{ flex:1 }}>
-                <div style={{ fontWeight:700, fontSize:13, color:C.ink, lineHeight:1.2 }}>Les 97 pistes</div>
-                <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>Toàn bộ file nghe của sách — dùng khi học bằng PDF</div>
+                <div style={{ fontWeight:700, fontSize:13, color:C.ink, lineHeight:1.2 }}>Fichiers audio</div>
+                <div style={{ fontSize:11, color:C.gray, marginTop:1 }}>File nghe của 100 % réussite &amp; Édito — dùng khi học bằng PDF</div>
               </div>
               <span style={{ fontSize:16, color:C.gray2 }}>→</span>
             </button>
@@ -1302,7 +1302,7 @@ function AppInner() {
             {view==="delf"          && <DelfPanel />}
             {view==="delf-a2"       && <DelfA2Panel onBackToParcours={backToParcours} />}
             {view==="delf-ce"       && <DelfBookPanel onBack={()=>goSection("home","home")} />}
-            {view==="delf-pistes"   && <DelfPistesPanel onBack={()=>goSection("home","home")} />}
+            {view==="pistes"        && <PistesPanel onBack={()=>goSection("home","home")} />}
             {view==="stats"         && <StatsPanel />}
             {view==="sentence"      && <SentenceBuilder />}
            </Suspense>
