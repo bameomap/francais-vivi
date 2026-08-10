@@ -73,6 +73,34 @@ export default function PistesPanel({ onBack }) {
                                      .toLowerCase().includes(low));
   }, [q, book]);
 
+  // A book is 100+ rows across a dozen units. Every section starts shut so the
+  // screen opens as a table of contents; you unfold the unit you're on.
+  const [open, setOpen] = useState(() => new Set());
+  const toggle = key => setOpen(o => {
+    const next = new Set(o);
+    next.has(key) ? next.delete(key) : next.add(key);
+    return next;
+  });
+
+  // `part` alone repeats — the two épreuves blanches share "Compréhension de
+  // l'oral" — so a section is identified by both halves of its heading.
+  const keyOf = g => `${g.part}|${g.skill}`;
+
+  // The rows regrouped, since they're rendered a section at a time now.
+  const sections = useMemo(() => {
+    const out = [];
+    for (const t of hits) {
+      if (!out.length || out.at(-1).group !== t.group) out.push({ group: t.group, tracks: [] });
+      out.at(-1).tracks.push(t);
+    }
+    return out;
+  }, [hits]);
+
+  // Searching has to open what it found, or a hit inside a shut section looks
+  // like no hit at all. Same for the track that's playing after a jump.
+  const searching = q.trim() !== "";
+  const currentKey = current && book.tracks.find(t => t.src === current)?.group;
+
   const track = book.tracks.find(t => t.src === current);
 
   const play = src => {
@@ -113,6 +141,7 @@ export default function PistesPanel({ onBack }) {
     setCurrent(null);
     setQ("");
     setLevel(l);
+    setOpen(new Set());
     if (first) setBookId(first.id);
     window.scrollTo(0, 0);
   };
@@ -122,12 +151,12 @@ export default function PistesPanel({ onBack }) {
     audioRef.current?.pause();
     setCurrent(null);
     setQ("");
+    setOpen(new Set());
     setBookId(id);
     window.scrollTo(0, 0);
   };
 
   const first = book.tracks[0], last = book.tracks.at(-1);
-  let lastGroup = null;
 
   return (
     <div style={{ paddingBottom: "5rem" }}>
@@ -238,64 +267,88 @@ export default function PistesPanel({ onBack }) {
           </div>
         )}
 
-        {hits.map(t => {
-          const head = t.group !== lastGroup ? t.group : null;
-          lastGroup = t.group;
-          const on = t.src === current;
+        {sections.map(sec => {
+          const key = keyOf(sec.group);
+          const isOpen = open.has(key) || searching || sec.group === currentKey;
+          const playingHere = sec.tracks.some(t => t.src === current);
           return (
-            <div key={t.src}>
-              {head && (
-                <div style={{ display: "flex", alignItems: "baseline", gap: 8,
-                              margin: "0.9rem 0 0.4rem" }}>
-                  <span style={{ flexShrink: 0, fontFamily: "'JetBrains Mono',monospace",
-                                 fontSize: "0.58rem", fontWeight: 800, letterSpacing: "0.05em",
-                                 color: "#fff", background: C.gray2, borderRadius: 7,
-                                 padding: "0.1rem 0.4rem" }}>
-                    {head.part}
-                  </span>
-                  <span style={{ flex: 1, minWidth: 0, fontSize: "0.68rem", fontWeight: 700, color: C.ink }}>
-                    {head.skill}
-                  </span>
-                  <span style={{ flexShrink: 0, fontSize: "0.6rem", color: C.gray2 }}>{head.pages}</span>
-                </div>
-              )}
-
-              <button onClick={() => play(t.src)}
-                style={{ width: "100%", display: "flex", alignItems: "center", gap: 9,
-                         padding: "0.4rem 0.55rem", marginBottom: "0.3rem", cursor: "pointer",
-                         fontFamily: "inherit", textAlign: "left", borderRadius: 10,
-                         /* one `border`, never shorthand plus borderColor — React
-                            warns, and the two disagree on re-render */
-                         border: `1px solid ${on ? C.blue : C.border}`,
-                         background: on ? C.blueL : C.white }}>
-                <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 26,
-                               background: on ? C.blue : C.cream, color: on ? "#fff" : C.ink2,
-                               display: "flex", alignItems: "center", justifyContent: "center",
-                               fontSize: "0.7rem" }}>
-                  {on && playing ? "❚❚" : "▶"}
-                </span>
+            <section key={key}>
+              <button onClick={() => toggle(key)}
+                style={{ width: "100%", display: "flex", alignItems: "baseline", gap: 8,
+                         margin: "0.55rem 0 0.35rem", background: "none", border: "none",
+                         padding: "0.1rem 0", cursor: "pointer", fontFamily: "inherit",
+                         textAlign: "left" }}>
                 <span style={{ flexShrink: 0, fontFamily: "'JetBrains Mono',monospace",
-                               fontSize: "0.68rem", fontWeight: 800, color: on ? C.blue : C.gray2,
-                               minWidth: 24 }}>
-                  {t.piste}
+                               fontSize: "0.58rem", fontWeight: 800, letterSpacing: "0.05em",
+                               color: "#fff", background: playingHere ? C.blue : C.gray2,
+                               borderRadius: 7, padding: "0.1rem 0.4rem" }}>
+                  {sec.group.part}
                 </span>
-                <span style={{ flex: 1, minWidth: 0 }}>
-                  <span style={{ display: "block", fontSize: "0.74rem", color: C.ink,
-                                 fontFamily: "Georgia,serif", overflow: "hidden",
-                                 textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                    {t.label}
+                <span style={{ flex: 1, minWidth: 0, fontSize: "0.68rem", fontWeight: 700,
+                               color: C.ink, overflow: "hidden", textOverflow: "ellipsis",
+                               whiteSpace: "nowrap" }}>
+                  {sec.group.skill}
+                </span>
+                {sec.group.pages && (
+                  <span style={{ flexShrink: 0, fontSize: "0.6rem", color: C.gray2 }}>
+                    {sec.group.pages}
                   </span>
-                  {t.sub && (
-                    <span style={{ display: "block", fontSize: "0.6rem", color: C.gray2 }}>{t.sub}</span>
-                  )}
-                </span>
-                {t.page && (
-                  <span style={{ flexShrink: 0, fontSize: "0.63rem", color: C.gray2 }}>p.{t.page}</span>
                 )}
+                <span style={{ flexShrink: 0, fontSize: "0.6rem", color: C.gray2,
+                               fontFamily: "'JetBrains Mono',monospace" }}>
+                  {sec.tracks.length}
+                </span>
+                <span style={{ flexShrink: 0, fontSize: "0.65rem", color: C.blue }}>
+                  {isOpen ? "▲" : "▼"}
+                </span>
               </button>
-            </div>
+
+              {isOpen && sec.tracks.map(t => {
+                const on = t.src === current;
+                return (
+                  <button key={t.src} onClick={() => play(t.src)}
+                    style={{ width: "100%", display: "flex", alignItems: "center", gap: 9,
+                             padding: "0.4rem 0.55rem", marginBottom: "0.3rem", cursor: "pointer",
+                             fontFamily: "inherit", textAlign: "left", borderRadius: 10,
+                             /* one `border`, never shorthand plus borderColor — React
+                                warns, and the two disagree on re-render */
+                             border: `1px solid ${on ? C.blue : C.border}`,
+                             background: on ? C.blueL : C.white }}>
+                    <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 26,
+                                   background: on ? C.blue : C.cream, color: on ? "#fff" : C.ink2,
+                                   display: "flex", alignItems: "center", justifyContent: "center",
+                                   fontSize: "0.7rem" }}>
+                      {on && playing ? "❚❚" : "▶"}
+                    </span>
+                    <span style={{ flexShrink: 0, fontFamily: "'JetBrains Mono',monospace",
+                                   fontSize: "0.68rem", fontWeight: 800,
+                                   color: on ? C.blue : C.gray2, minWidth: 24 }}>
+                      {t.piste}
+                    </span>
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <span style={{ display: "block", fontSize: "0.74rem", color: C.ink,
+                                     fontFamily: "Georgia,serif", overflow: "hidden",
+                                     textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {t.label}
+                      </span>
+                      {t.sub && (
+                        <span style={{ display: "block", fontSize: "0.6rem", color: C.gray2 }}>
+                          {t.sub}
+                        </span>
+                      )}
+                    </span>
+                    {t.page && (
+                      <span style={{ flexShrink: 0, fontSize: "0.63rem", color: C.gray2 }}>
+                        p.{t.page}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </section>
           );
         })}
+
       </div>
     </div>
   );
