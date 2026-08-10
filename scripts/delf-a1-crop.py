@@ -355,6 +355,15 @@ CROPS = [
     # together, so they are cut as one.
     dict(id="pe-a7-doc", page=76, dir=DOC, x=(308, 548), top=438, bottom=795),
 
+    # ---- Production orale · SE PRÉPARER ----
+    # Drills whose prompt is a drawing: identity cards to describe, a family
+    # tree, activities to name, a day to narrate, a receipt to pay.
+    dict(id="po-a3-doc", page=90, dir=DOC, x=(60, 218), top=405, bottom=790),
+    dict(id="po-a4-doc", page=91, dir=DOC, x=(310, 548), top=88, bottom=262),
+    dict(id="po-a5-doc", page=91, dir=DOC, x=FULL, top=318, bottom=598),
+    dict(id="po-a8-doc", page=92, dir=DOC, x=FULL, top=285, bottom=500),
+    dict(id="po-a34-doc", page=101, dir=DOC, x=FULL, top=640, bottom=800),
+
     # ---- Épreuve blanche 1 · compréhension de l'oral ----
     # This one's A/B/C labels are drawn into the artwork rather than set as
     # text, so there is no anchor to stop at — the next "B." belongs to

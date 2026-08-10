@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { C } from "../constants.js";
-import DelfItemCard, { Gloss, ObjectifPicker } from "./DelfItemCard.jsx";
+import DelfItemCard, { Gloss, ObjectifPicker, DocBlock } from "./DelfItemCard.jsx";
 import DelfCEPanel, { SkillGroup } from "./DelfCEPanel.jsx";
 import ProductionBox from "./ProductionBox.jsx";
 import { DELF_A1_CE } from "../data/delfA1Reussite.js";
@@ -15,6 +15,7 @@ import { BLANC1_CO, BLANC2_CO } from "../data/delfA1BlancCO.js";
 import { BLANC1_CE, BLANC2_CE } from "../data/delfA1BlancCE.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
 import { PE_PREPARE, PE_TASKS, PE_OBJECTIFS } from "../data/delfA1PE.js";
+import { PO_PREPARE, PO_AUDIO, PO_TASKS, PO_TRAIN, PO_OBJECTIFS } from "../data/delfA1PO.js";
 
 // « Le DELF A1 100 % réussite » — the book, as one screen with the book's own
 // six parts. Everything here is sourced from it and cites its page numbers.
@@ -379,6 +380,10 @@ function EcrireTab({ done, onDone, alwaysVi }) {
   );
 }
 // ── 5 · Nói ──────────────────────────────────────────────────────
+// One card for everything you say out loud: the book's own S'ENTRAÎNER
+// exercices and the SE PRÉPARER drills that ask you to speak freely. Both are a
+// prompt, a recorder, and the book's model answer — only the trimmings differ,
+// so the parts a given item doesn't have are simply left out.
 function SpeakCard({ p, alwaysVi }) {
   const [shown, setShown] = useState(false);
   return (
@@ -387,22 +392,37 @@ function SpeakCard({ p, alwaysVi }) {
         <span style={{ flexShrink: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: "0.6rem",
                        fontWeight: 700, color: C.gold, border: `1px solid ${C.gold}66`,
                        borderRadius: 20, padding: "0.03rem 0.38rem" }}>{p.label}</span>
-        <span style={{ flex: 1, minWidth: 0, fontSize: "0.78rem", fontWeight: 700, color: C.ink }}>{p.title}</span>
+        {p.title && (
+          <span style={{ flex: 1, minWidth: 0, fontSize: "0.78rem", fontWeight: 700, color: C.ink }}>{p.title}</span>
+        )}
+        {p.pts && <span style={{ fontSize: "0.6rem", color: C.gray2, fontWeight: 700 }}>{p.pts} pts</span>}
       </div>
-      <Gloss vi={p.titleVi} always={alwaysVi} />
+      {p.titleVi && <Gloss vi={p.titleVi} always={alwaysVi} />}
       <div style={{ marginTop: "0.35rem" }}>
         <Line fr={p.setup} vi={p.setupVi} alwaysVi={alwaysVi} />
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem", marginBottom: "0.6rem" }}>
-        {p.prompts.map((q, i) => (
-          <span key={i} style={{ background: C.cream, border: `1px solid ${C.border}`, borderRadius: 8,
-                                 padding: "0.15rem 0.5rem", fontSize: "0.7rem", color: C.ink,
-                                 fontFamily: "Georgia,serif" }}>
-            {q}
-          </span>
-        ))}
-      </div>
+      {p.doc && <DocBlock doc={p.doc} />}
+
+      {p.audio && (
+        <div style={{ marginBottom: "0.6rem" }}>
+          <audio controls preload="none" src={p.audio} style={{ width: "100%", height: 34 }} />
+          <div style={{ fontSize: "0.6rem", color: C.gray2, marginTop: 2 }}>piste {p.piste}</div>
+        </div>
+      )}
+
+      {(p.prompts || p.must) && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem", marginBottom: "0.6rem" }}>
+          {(p.prompts || p.must).map((q, i) => (
+            <span key={i} style={{ background: p.prompts ? C.cream : C.goldL,
+                                   border: `1px ${p.prompts ? "solid" : "dashed"} ${p.prompts ? C.border : C.gold + "66"}`,
+                                   borderRadius: 8, padding: "0.15rem 0.5rem", fontSize: "0.7rem",
+                                   color: C.ink, fontFamily: "Georgia,serif" }}>
+              {q}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* Speech recognition grades what was actually said, not what was typed. */}
       <ProductionBox task={p.setup} mode="oral" cefr="A1" color={C.gold}
@@ -433,16 +453,72 @@ function SpeakCard({ p, alwaysVi }) {
   );
 }
 
-function ParlerTab({ alwaysVi }) {
+// Listen-and-repeat, and Youssef's mock oral: the recording is the lesson, so
+// the text stays shut until you've tried to follow it by ear.
+function ListenCard({ p, alwaysVi }) {
+  const [shown, setShown] = useState(false);
+  return (
+    <Card accent={C.blue}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 4 }}>
+        <span style={{ flexShrink: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: "0.6rem",
+                       fontWeight: 700, color: C.blue, border: `1px solid ${C.blue}55`,
+                       borderRadius: 20, padding: "0.03rem 0.38rem" }}>{p.label}</span>
+      </div>
+      <Line fr={p.setup} vi={p.setupVi} alwaysVi={alwaysVi} />
+
+      <audio controls preload="none" src={`/api/delf-audio?p=${p.piste}`}
+        style={{ width: "100%", height: 34 }} />
+      <div style={{ fontSize: "0.6rem", color: C.gray2, marginTop: 2 }}>piste {p.piste} · Livre p.{p.page}</div>
+
+      <button onClick={() => setShown(s => !s)}
+        style={{ marginTop: "0.55rem", background: shown ? `${C.blue}14` : C.cream,
+                 border: `1px solid ${C.blue}55`, borderRadius: 20, padding: "0.22rem 0.75rem",
+                 fontSize: "0.68rem", fontWeight: 700, color: C.ink, cursor: "pointer", fontFamily: "inherit" }}>
+        {shown ? "Ẩn lời thoại ▲" : "📄 Lời thoại ▼"}
+      </button>
+      {shown && (
+        <div style={{ marginTop: "0.55rem", background: C.cream, borderRadius: 9, padding: "0.6rem 0.7rem",
+                      fontSize: "0.76rem", color: C.ink, lineHeight: 1.7, fontFamily: "Georgia,serif",
+                      whiteSpace: "pre-line" }}>
+          {p.text}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+function ParlerTab({ done, onDone, alwaysVi }) {
+  const [obj, setObj] = useState(1);
+  const of = list => list.filter(i => i.objectif === obj);
+
   return (
     <div>
-      <Heading sub={`${PO.duree} · ${PO.points} points · Livre ${PO.pages}`}>Production orale</Heading>
-      <Card accent={C.gold}>
-        <Line fr={PO.intro.fr} vi={PO.intro.vi} alwaysVi={alwaysVi} />
-        <Line fr={PO.timing.fr} vi={PO.timing.vi} alwaysVi={alwaysVi} />
-      </Card>
-      {PO.parts.map(p => <SpeakCard key={p.id} p={p} alwaysVi={alwaysVi} />)}
-      <Grid rows={PO.grid} alwaysVi={alwaysVi} total={25} />
+      <PaperNote title="Production orale" sub={`${PO.points} pts · Livre ${PO.pages}`}>
+        <Card accent={C.gold}>
+          <Line fr={PO.intro.fr} vi={PO.intro.vi} alwaysVi={alwaysVi} />
+          <Line fr={PO.timing.fr} vi={PO.timing.vi} alwaysVi={alwaysVi} />
+        </Card>
+        <Grid rows={PO.grid} alwaysVi={alwaysVi} total={25} />
+      </PaperNote>
+
+      <ObjectifPicker items={PO_OBJECTIFS} value={obj} onChange={setObj}
+        countOf={n => PO_PREPARE.filter(i => i.objectif === n).length}
+        doneOf={n => PO_PREPARE.filter(i => i.objectif === n && done[i.id]).length} />
+
+      <SkillGroup title="SE PRÉPARER" sub="Chọn đúng — luyện trước khi mở miệng" color={C.blue}
+        items={of(PO_PREPARE)} done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
+
+      <SkillGroup title="ÉCOUTER" sub="Nghe thí sinh thật thi và bắt chước" color={C.blue}
+        items={of(PO_AUDIO)} alwaysVi={alwaysVi} defaultOpen={false} done={done} onDone={onDone}
+        renderItem={p => <ListenCard p={p} alwaysVi={alwaysVi} />} />
+
+      <SkillGroup title="À DIRE" sub="Tự nói rồi so với bài mẫu" color={C.gold}
+        items={of(PO_TASKS)} alwaysVi={alwaysVi} defaultOpen={false} done={done} onDone={onDone}
+        renderItem={p => <SpeakCard p={p} alwaysVi={alwaysVi} />} />
+
+      <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi" color={C.green}
+        items={of(PO_TRAIN)} alwaysVi={alwaysVi} done={done} onDone={onDone}
+        renderItem={p => <SpeakCard p={p} alwaysVi={alwaysVi} />} />
     </div>
   );
 }
@@ -587,7 +663,7 @@ export default function DelfBookPanel({ onBack }) {
         {tab === "lire"    && <DelfCEPanel done={done} onDone={markDone} alwaysVi={alwaysVi} />}
         {tab === "ecouter" && <EcouterTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
         {tab === "ecrire"  && <EcrireTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
-        {tab === "parler"  && <ParlerTab alwaysVi={alwaysVi} />}
+        {tab === "parler"  && <ParlerTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
         {tab === "blanc"   && <BlancTab done={done} onDone={markDone} alwaysVi={alwaysVi} />}
 
         <div style={{ marginTop: "1.2rem", fontSize: "0.62rem", color: C.gray2, lineHeight: 1.6 }}>
