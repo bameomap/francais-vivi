@@ -65,7 +65,8 @@ export default function PistesPanel({ onBack }) {
     if (/^\d+$/.test(s)) {
       const n = Number(s);
       return book.tracks.filter(t => t.piste === n || t.page === n ||
-                                     String(t.piste).startsWith(s) || String(t.page).startsWith(s));
+                                     String(t.piste).startsWith(s) ||
+                                     (t.page != null && String(t.page).startsWith(s)));
     }
     const low = s.toLowerCase();
     return book.tracks.filter(t => `${t.label} ${t.sub} ${t.group.part} ${t.group.skill}`
@@ -197,7 +198,7 @@ export default function PistesPanel({ onBack }) {
               </span>
               <span style={{ flex: 1, minWidth: 0, fontSize: "0.72rem", color: C.ink,
                              overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                {track.label} · p.{track.page}
+                {track.label}{track.page ? ` · p.${track.page}` : ""}
               </span>
               <button onClick={() => step(-1)} disabled={track.src === first.src}
                 style={btn(track.src === first.src)}>⏮</button>
@@ -288,7 +289,9 @@ export default function PistesPanel({ onBack }) {
                     <span style={{ display: "block", fontSize: "0.6rem", color: C.gray2 }}>{t.sub}</span>
                   )}
                 </span>
-                <span style={{ flexShrink: 0, fontSize: "0.63rem", color: C.gray2 }}>p.{t.page}</span>
+                {t.page && (
+                  <span style={{ flexShrink: 0, fontSize: "0.63rem", color: C.gray2 }}>p.{t.page}</span>
+                )}
               </button>
             </div>
           );

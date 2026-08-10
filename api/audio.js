@@ -1,27 +1,41 @@
 import { get } from "@vercel/blob";
 
-// Streams the « 100 % réussite » listening tracks out of a private Blob store.
+// Streams a book's listening tracks out of the PRIVATE Blob store.
 //
-// The tracks are the book's own audio, so they are not public assets: the store
-// is private and the only way to read a private blob is through a function.
-// That also keeps them out of this repo, which is public.
+// Every track this app plays is a publisher's audio. None of it is a public
+// asset and none of it is in this repo, which is public: the store is private,
+// and the only way to read a private blob is through a function like this one.
 //
 // Range requests are forwarded rather than swallowed. Without that, dragging the
-// audio scrubber does nothing — the browser asks for a byte range, gets the
-// whole file back, and gives up on seeking.
+// scrubber does nothing — the browser asks for a byte range, gets the whole file
+// back, and gives up on seeking.
 
-const MAX_PISTE = 97;          // the book ships 97 tracks; anything else is a probe
+// The books, and how many tracks each has. A request outside the range is a
+// probe, not a mistake, so it gets a 400 rather than a round trip to the store.
+const BOOKS = {
+  "delf-a1":        { max: 97,  name: n => `delf-a1/piste-${String(n).padStart(2, "0")}.m4a` },
+  "edito-a1-livre": { max: 152 },
+  "edito-a1-cahier":{ max: 111 },
+  "edito-a2-livre": { max: 121 },
+  "edito-a2-cahier":{ max: 127 },
+};
 
 // Copied straight through from the blob response so the browser sees the same
 // content type, length and range it would from a static file.
 const PASS_THROUGH = ["content-type", "content-length", "content-range", "etag", "accept-ranges"];
 
 export default async function handler(req, res) {
+  const book = BOOKS[String(req.query.b ?? "")];
   const n = Number(req.query.p);
-  if (!Number.isInteger(n) || n < 1 || n > MAX_PISTE) {
+  if (!book) return res.status(400).json({ error: "bad book" });
+  if (!Number.isInteger(n) || n < 1 || n > book.max) {
     return res.status(400).json({ error: "bad piste" });
   }
-  const pathname = `delf-a1/piste-${String(n).padStart(2, "0")}.m4a`;
+  // « 100 % réussite » was uploaded before this route existed and keeps its
+  // original key; everything since is <book>/NNN.m4a.
+  const pathname = book.name
+    ? book.name(n)
+    : `${req.query.b}/${String(n).padStart(3, "0")}.m4a`;
 
   try {
     const range = req.headers.range;
@@ -60,7 +74,7 @@ export default async function handler(req, res) {
     }
     return res.end();
   } catch (err) {
-    console.error("delf-audio", pathname, err?.message);
+    console.error("audio", pathname, err?.message);
     return res.status(502).json({ error: "blob read failed" });
   }
 }

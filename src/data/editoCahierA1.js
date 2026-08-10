@@ -47,8 +47,7 @@
  * is shown filled in and not scored.
  */
 
-const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
-const piste = (n) => `${AUDIO_BASE}/${String(n).padStart(3, "0")}_Edito_A1_Cahier.mp3`;
+const piste = (n) => `/api/audio?b=edito-a1-cahier&p=${n}`;
 
 export const CAHIER_A1 = {
 

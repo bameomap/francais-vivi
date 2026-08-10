@@ -17,12 +17,10 @@ export function shuffleArray(arr) {
   return a;
 }
 
-// Build audio URL from track number
-// Files hosted on GitHub Pages (branch: audio) — direct CDN, no redirect, works on iOS
-const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
-function url(n) {
-  return `${AUDIO_BASE}/${n}_Edito_A1_Livre.mp3`;
-}
+// The tracks are the publisher's, so they live in a PRIVATE Blob store and are
+// streamed through /api/audio — never in this repo, which is public.
+// See scripts/upload-audio.mjs.
+const url = (n) => `/api/audio?b=edito-a1-livre&p=${n}`;
 
 export const EDITO_AUDIO = {
 

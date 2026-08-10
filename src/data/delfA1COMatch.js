@@ -9,7 +9,7 @@
 // multiple-choice drills, where the checkbox glyph marks the choices, but a
 // matching table has no such marker to key on.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 
 export const CO_MATCH = [
   {

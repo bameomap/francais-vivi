@@ -8,15 +8,19 @@
 // already holds — the DELF index, the Édito listening sets, the cahier
 // exercises — so a track can't drift out of step with the exercise built on it.
 //
-// The books do not share a hosting story, and the registry is where that stays:
+// All of it is the publishers' and none of it is in this repo, which is public:
+// every book streams from the same PRIVATE Blob store through /api/audio.
+// See scripts/upload-audio.mjs.
 //
-//   « 100 % réussite » — copyrighted, in a PRIVATE Vercel Blob store, streamed
-//     through /api/delf-audio. The repo is public; the audio is not in it.
-//   Édito — on the `audio` branch, served by GitHub Pages.
+// Every track the publishers shipped is in the store, not just the ones the app
+// built exercises on. The exercise data still supplies the title and the page
+// where it has them; everything else is listed by number under the unit it
+// falls in, because the audio runs in book order and a track between two known
+// anchors belongs to the earlier one.
 //
-// Only the Édito tracks the app has built exercises on are uploaded (42 of the
-// A1 Livre set, 40 of A2's 121), so those two books list what is actually
-// playable rather than what the book prints. `partial` says so on the card.
+// Édito A1 Livre is the one incomplete set — the publisher's originals were
+// never kept, only the 42 tracks that had been published to the old public
+// `audio` branch. `partial` says so on its card.
 
 import { PISTES } from "./delfA1Pistes.js";
 import { EDITO_AUDIO } from "./editoAudio.js";
@@ -25,52 +29,42 @@ import { CAHIER_A1 } from "./editoCahierA1.js";
 import { CAHIER_A2 } from "./editoCahierA2.js";
 import { EDITO_A1_UNITS } from "./editoA1Units.js";
 import { EDITO_A2_UNITS } from "./editoA2Units.js";
+import { EDITO_PISTES } from "./editoPistes.js";
 
 // A track is { piste, label, sub, page, src, group } — group is what the list
 // prints as a heading, and is shared by reference so rows can be compared with
 // !== to know when to start a new one.
-const trackNumOf = src => Number(String(src).match(/(\d+)_Edito/)?.[1] ?? 0);
+const trackNumOf = src => Number(new URLSearchParams(String(src).split("?")[1]).get("p"));
 
-// ── Édito · Livre ────────────────────────────────────────────────
-// Keyed by unit; the entries already carry the section, the page and a title.
-function fromLivre(set, units, unitLabel) {
-  const groups = new Map();
-  const out = [];
+// ── Édito ────────────────────────────────────────────────────────
+// Two shapes of source data, one output. The Livre set is keyed by unit and
+// each entry already carries a section, a page and a title. The cahier's audio
+// hangs off individual exercises, nested several levels down and often reused
+// across exercises on one page, so it is collected by walking the unit.
+
+function livreKnown(set, units, unitLabel) {
+  const known = new Map();
   for (const [key, entries] of Object.entries(set)) {
     const n = Number(key.slice(1));
     const unit = units.find(u => u.unit === n);
-    if (!groups.has(key)) {
-      groups.set(key, { part: `${unitLabel} ${n}`, skill: unit?.title ?? "", pages: "" });
-    }
     for (const e of entries) {
-      out.push({
-        piste: e.trackNum,
+      known.set(e.trackNum, {
         label: e.title,
         sub: e.section ? `Section ${e.section}` : "",
         page: e.page,
-        src: e.audioSrc,
-        group: groups.get(key),
+        unit: n,
+        unitTitle: unit?.title ?? "",
       });
     }
   }
-  // Each unit's pages are whatever its own tracks turned out to span.
-  for (const [key, g] of groups) {
-    const pp = out.filter(t => t.group === g).map(t => t.page).filter(Boolean);
-    if (pp.length) g.pages = `p.${Math.min(...pp)}–${Math.max(...pp)}`;
-  }
-  return out.sort((a, b) => a.piste - b.piste);
+  return known;
 }
 
-// ── Édito · Cahier ───────────────────────────────────────────────
-// The cahier's audio hangs off individual exercises, nested several levels
-// down and often reused across exercises on the same page, so the tracks are
-// collected by walking the unit and de-duplicated by piste.
-function fromCahier(set, units, unitLabel) {
-  const out = [];
+function cahierKnown(set, units) {
+  const known = new Map();
   for (const [key, unitData] of Object.entries(set)) {
     const n = Number(key.slice(1));
     const unit = units.find(u => u.unit === n);
-    const group = { part: `${unitLabel} ${n}`, skill: unit?.title ?? "", pages: "" };
     const seen = new Map();
 
     const walk = node => {
@@ -83,29 +77,63 @@ function fromCahier(set, units, unitLabel) {
           // Same track, another exercise on it — keep the page, add the number.
           if (node.num && !prev.nums.includes(node.num)) prev.nums.push(node.num);
         } else {
-          seen.set(piste, { piste, page: node.page, src: node.audioSrc, nums: [node.num].filter(Boolean) });
+          seen.set(piste, { page: node.page, nums: [node.num].filter(Boolean) });
         }
       }
       Object.values(node).forEach(walk);
     };
     walk(unitData);
 
-    const tracks = [...seen.values()].sort((a, b) => a.piste - b.piste);
-    for (const t of tracks) {
-      out.push({
-        piste: t.piste,
+    for (const [piste, t] of seen) {
+      known.set(piste, {
         label: t.nums.length ? `Exercice ${t.nums.sort((a, b) => a - b).join(", ")}` : "Exercice",
         sub: "",
         page: t.page,
-        src: t.src,
-        group,
+        unit: n,
+        unitTitle: unit?.title ?? "",
       });
     }
-    const pp = tracks.map(t => t.page).filter(Boolean);
-    if (pp.length) group.pages = `p.${Math.min(...pp)}–${Math.max(...pp)}`;
+  }
+  return known;
+}
+
+// Every track in the store, in order, each under the unit it falls in. A track
+// with no exercise data still gets a row — the number is what someone holding
+// the book is looking for, and a gap in the list would read as a missing file.
+function shelf(setId, known, unitLabel) {
+  const groups = new Map();
+  const out = [];
+  let unit = null, unitTitle = "";
+
+  for (const piste of EDITO_PISTES[setId]) {
+    const k = known.get(piste);
+    if (k) { unit = k.unit; unitTitle = k.unitTitle; }
+    const gk = unit ?? 0;
+    if (!groups.has(gk)) {
+      groups.set(gk, unit == null
+        ? { part: "Avant l'unité 1", skill: "", pages: "" }
+        : { part: `${unitLabel} ${unit}`, skill: unitTitle, pages: "" });
+    }
+    out.push({
+      piste,
+      label: k?.label ?? `Piste ${piste}`,
+      sub: k?.sub ?? "",
+      page: k?.page ?? null,
+      src: `/api/audio?b=${setId}&p=${piste}`,
+      group: groups.get(gk),
+    });
+  }
+
+  // Each unit's pages are whatever its own known tracks turned out to span.
+  for (const g of groups.values()) {
+    const pp = out.filter(t => t.group === g).map(t => t.page).filter(Boolean);
+    if (pp.length) g.pages = `p.${Math.min(...pp)}–${Math.max(...pp)}`;
   }
   return out;
 }
+
+const fromLivre = (id, set, units) => shelf(id, livreKnown(set, units, "Unité"), "Unité");
+const fromCahier = (id, set, units) => shelf(id, cahierKnown(set, units), "Unité");
 
 // ── « 100 % réussite » ───────────────────────────────────────────
 // Already an index; only the group shape needs adapting.
@@ -133,9 +161,9 @@ export const AUDIO_BOOKS = [
     level: "A1",
     title: "Édito A1 · Livre",
     publisher: "Didier · 2e édition",
-    partial: "Mới có 42 file — đúng những bài app đã soạn sẵn câu hỏi. Các bài nghe còn lại của sách chưa tải lên.",
+    partial: "Bộ gốc của nhà xuất bản không còn — chỉ giữ được 42 file đã tải lên từ trước.",
     icon: "📘",
-    tracks: fromLivre(EDITO_AUDIO, EDITO_A1_UNITS, "Unité"),
+    tracks: fromLivre("edito-a1-livre", EDITO_AUDIO, EDITO_A1_UNITS),
   },
   {
     id: "edito-a1-cahier",
@@ -144,16 +172,15 @@ export const AUDIO_BOOKS = [
     publisher: "Cahier d'activités",
     note: "Cahier A1 không in số piste; số ở đây suy ra từ chính lời đọc trong file.",
     icon: "📗",
-    tracks: fromCahier(CAHIER_A1, EDITO_A1_UNITS, "Unité"),
+    tracks: fromCahier("edito-a1-cahier", CAHIER_A1, EDITO_A1_UNITS),
   },
   {
     id: "edito-a2-livre",
     level: "A2",
     title: "Édito A2 · Livre",
     publisher: "Didier · 2e édition 2022",
-    partial: "Mới có 40 / 121 file của sách — đúng những bài app đã soạn sẵn câu hỏi. Số còn lại chưa tải lên.",
     icon: "📘",
-    tracks: fromLivre(EDITO_AUDIO_A2, EDITO_A2_UNITS, "Unité"),
+    tracks: fromLivre("edito-a2-livre", EDITO_AUDIO_A2, EDITO_A2_UNITS),
   },
   {
     id: "edito-a2-cahier",
@@ -161,7 +188,7 @@ export const AUDIO_BOOKS = [
     title: "Édito A2 · Cahier",
     publisher: "Cahier d'activités",
     icon: "📗",
-    tracks: fromCahier(CAHIER_A2, EDITO_A2_UNITS, "Unité"),
+    tracks: fromCahier("edito-a2-cahier", CAHIER_A2, EDITO_A2_UNITS),
   },
 ];
 

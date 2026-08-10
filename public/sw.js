@@ -4,7 +4,9 @@ const OFFLINE = ["/", "/logo.svg"];
 // Course audio lives in its own cache, deliberately *not* versioned with the
 // app shell: a piste's contents never change, so a deploy has no reason to
 // make the learner re-download hundreds of MB over mobile data.
-const AUDIO_CACHE = "vivi-audio-v1";
+// v2: the tracks moved from public GitHub Pages URLs to /api/audio, so every
+// v1 entry is a dead URL and worth dropping rather than carrying along.
+const AUDIO_CACHE = "vivi-audio-v2";
 // Roughly one full level's livre + cahier audio. Bounded so a learner who
 // works through every level doesn't grow the cache without limit.
 const AUDIO_MAX_ENTRIES = 300;
@@ -39,8 +41,14 @@ self.addEventListener("activate", e =>
 
 self.addEventListener("fetch", e => {
   const url = new URL(e.request.url);
+
+  // Audio now streams from our own function (the files are the publishers' and
+  // sit in a private store), so it lives under /api/ but must still be cached —
+  // it is the one API route whose response never changes.
+  const isAudio = url.pathname.endsWith(".mp3") || url.pathname === "/api/audio";
+
   // Never touch non-GET or API calls
-  if (e.request.method !== "GET" || url.pathname.startsWith("/api/")) return;
+  if (e.request.method !== "GET" || (url.pathname.startsWith("/api/") && !isAudio)) return;
 
   // In dev, never cache Vite's module graph (source files are non-hashed and
   // change constantly). Let these always hit the network. No effect in prod,
@@ -74,13 +82,13 @@ self.addEventListener("fetch", e => {
   }
 
   // Audio: cache-first in its own cache. Replaying a piste is the single most
-  // repeated action in the app, and the files are served cross-origin from
-  // GitHub Pages — without this, every replay is a fresh download.
+  // repeated action in the app — without this, every replay is a fresh
+  // download, now through a function rather than a CDN.
   //
   // Range requests are passed straight through: the player uses them to seek,
   // and answering one from cache would return a 200 where the browser expects
   // a 206, which breaks scrubbing (notably in Safari).
-  if (url.pathname.endsWith(".mp3") && !e.request.headers.get("range")) {
+  if (isAudio && !e.request.headers.get("range")) {
     e.respondWith(
       caches.open(AUDIO_CACHE).then(cache =>
         // ignoreVary: a piste is identified entirely by its URL, so a stored

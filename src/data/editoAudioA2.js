@@ -20,8 +20,8 @@
  * entirely; see materials/README.md.
  */
 
-const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
-const url = (n) => `${AUDIO_BASE}/${String(n).padStart(3, "0")}_Edito_A2_Livre.mp3`;
+// PRIVATE Blob store, streamed through /api/audio — see scripts/upload-audio.mjs.
+const url = (n) => `/api/audio?b=edito-a2-livre&p=${n}`;
 
 export const EDITO_AUDIO_A2 = {
 

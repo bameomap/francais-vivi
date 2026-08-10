@@ -15,7 +15,7 @@
 // into Exercice 10's blanks), then checked against the transcripts on p.139.
 // The notes are the book's, translated where a Vietnamese gloss helps.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 const DOC = "/delf-a1/docs";
 const OPT = "/delf-a1/options";
 

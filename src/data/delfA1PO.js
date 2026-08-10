@@ -19,7 +19,7 @@
 // PO_TRAIN is the S'ENTRAÎNER half (p.103–106): the nine exercices as the book
 // sets them, three per part of the exam.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 const DOC = "/delf-a1/docs";
 const img = (id, alt) => ({ kind: "image", src: `${DOC}/${id}.webp`, alt });
 

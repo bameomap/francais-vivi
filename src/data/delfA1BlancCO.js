@@ -11,7 +11,7 @@
 // all (the letters are drawn into the artwork), which the geometry parser reads
 // as a question with no choices.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 const OPT = "/delf-a1/options";
 const DOC = "/delf-a1/docs";
 

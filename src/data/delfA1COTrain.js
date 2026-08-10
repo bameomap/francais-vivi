@@ -11,7 +11,7 @@
 // examples, printed pre-ticked with no corrigés entry; 11–15 are built on
 // picture matching and OUI/NON object grids that still need their artwork cut.
 
-const piste = n => "/api/delf-audio?p=" + n;
+const piste = n => "/api/audio?b=delf-a1&p=" + n;
 const IMG = "/delf-a1/options";
 
 export const CO_TRAIN = [

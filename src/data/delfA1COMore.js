@@ -16,7 +16,7 @@
 // The picture drills — notez le numéro sous l'image, cochez les objets
 // entendus — are in delfA1COPictures.js, which needs crops as well as text.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 
 // Repeated option sets, named so a typo in one cell can't quietly change the task.
 const LIEU_TRANSPORT = ["À la gare", "À l'aéroport"];

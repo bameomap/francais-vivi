@@ -15,7 +15,7 @@
 // Exercices 10 and 13 are the book's worked examples — printed with the answers
 // filled in and no corrigés entry — so they are not here.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 const DOC = "/delf-a1/docs";
 
 const DIALOGUES = ["n° 1", "n° 2", "n° 3", "n° 4", "Aucune situation"];

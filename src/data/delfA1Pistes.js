@@ -5,7 +5,7 @@
 // This exists so the book can be worked from on paper: the PDF gives the page,
 // this gives the track. Each row is [piste, kind, number, page] where kind is
 // "A" for Activité and "E" for Exercice; the audio itself streams through
-// /api/delf-audio, since it is copyrighted and lives in a private blob store.
+// /api/audio, since it is copyrighted and lives in a private blob store.
 //
 // The piste number for Activité 21 p.97 is missing from the printed index in
 // the PDF's text layer; it is 79, the only gap in the run.
@@ -125,7 +125,7 @@ export const PISTES = ROWS.map(([piste, kind, num, page]) => ({
   piste,
   label: `${kind === "A" ? "Activité" : "Exercice"} ${num}`,
   page,
-  src: `/api/delf-audio?p=${piste}`,
+  src: `/api/audio?b=delf-a1&p=${piste}`,
   section: SECTIONS.find(s => piste >= s.from && piste <= s.to),
 }));
 

@@ -24,8 +24,7 @@
  * shown filled in and not scored.
  */
 
-const AUDIO_BASE = "https://bameomap.github.io/francais-vivi";
-const piste = (n) => `${AUDIO_BASE}/${String(n).padStart(3, "0")}_Edito_A2_Cahier.mp3`;
+const piste = (n) => `/api/audio?b=edito-a2-cahier&p=${n}`;
 
 export const CAHIER_A2 = {
   b1: {
@@ -493,7 +492,7 @@ export const CAHIER_A2 = {
       coLivre: [
         {
           num: 1, page: 26,
-          audioSrc: "https://bameomap.github.io/francais-vivi/010_Edito_A2_Livre.mp3",
+          audioSrc: `/api/audio?b=edito-a2-livre&p=10`,
           instruction: "Livre p.26 — vous écoutez 6 annonces diffusées dans des lieux publics. (6 points)",
           vi: "Nghe 6 thông báo nơi công cộng. Đọc câu hỏi TRƯỚC khi nghe — mỗi thông báo được nghe 2 lần.",
           type: "choice",
@@ -1187,7 +1186,7 @@ export const CAHIER_A2 = {
       coLivre: [
         {
           num: 1, page: 54,
-          audioSrc: "https://bameomap.github.io/francais-vivi/031_Edito_A2_Livre.mp3",
+          audioSrc: `/api/audio?b=edito-a2-livre&p=31`,
           instruction: "Livre p.54, Exercice 3 — vous écoutez un message téléphonique. (6 points)",
           vi: "Nghe tin nhắn thoại của Manon Ladier rồi trả lời 6 câu hỏi.",
           type: "choice",
@@ -1203,7 +1202,7 @@ export const CAHIER_A2 = {
         },
         {
           num: 2, page: 54,
-          audioSrc: "https://bameomap.github.io/francais-vivi/032_Edito_A2_Livre.mp3",
+          audioSrc: `/api/audio?b=edito-a2-livre&p=32`,
           instruction: "Livre p.54, Exercice 4 — vous écoutez 4 dialogues informels. Associez chacun à sa situation de communication. (7 points)",
           vi: "Nghe 4 đoạn hội thoại và chọn đúng tình huống giao tiếp cho từng đoạn (6 tình huống có sẵn, chỉ 4 đúng).",
           type: "choice",

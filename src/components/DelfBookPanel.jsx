@@ -466,7 +466,7 @@ function ListenCard({ p, alwaysVi }) {
       </div>
       <Line fr={p.setup} vi={p.setupVi} alwaysVi={alwaysVi} />
 
-      <audio controls preload="none" src={`/api/delf-audio?p=${p.piste}`}
+      <audio controls preload="none" src={`/api/audio?b=delf-a1&p=${p.piste}`}
         style={{ width: "100%", height: 34 }} />
       <div style={{ fontSize: "0.6rem", color: C.gray2, marginTop: 2 }}>piste {p.piste} · Livre p.{p.page}</div>
 

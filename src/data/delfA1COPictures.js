@@ -17,7 +17,7 @@
 // it is asked as one question per message ("les deux / seulement celui de
 // gauche / …") instead of two half-questions. Same information, same key.
 
-const piste = n => `/api/delf-audio?p=${n}`;
+const piste = n => `/api/audio?b=delf-a1&p=${n}`;
 const DOC = "/delf-a1/docs";
 const OPT = "/delf-a1/options";
 
