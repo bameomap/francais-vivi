@@ -17,7 +17,10 @@ export function SkillGroup({ title, sub, color, items, done, onDone, alwaysVi, d
   const [open, setOpen] = useState(defaultOpen);
   if (!items.length) return null;
 
-  const finished = items.filter(i => done[i.id]).length;
+  // The book's worked examples come with the answers printed, so they can't be
+  // finished — counting them would leave the group stuck short of its total.
+  const gradable = items.filter(i => !i.worked);
+  const finished = gradable.filter(i => done[i.id]).length;
 
   return (
     <section style={{ marginBottom: "1rem" }}>
@@ -33,7 +36,7 @@ export function SkillGroup({ title, sub, color, items, done, onDone, alwaysVi, d
         <span style={{ flex: 1, minWidth: 0, fontSize: "0.67rem", color: C.gray }}>{sub}</span>
         <span style={{ flexShrink: 0, fontSize: "0.63rem", color: finished === items.length ? C.green : C.gray2,
                        fontWeight: 700 }}>
-          {finished}/{items.length}
+          {finished}/{gradable.length}
         </span>
         <span style={{ flexShrink: 0, color, fontSize: "0.7rem" }}>{open ? "▲" : "▼"}</span>
       </button>

@@ -333,6 +333,18 @@ CROPS = [
     dict(id="co-a58-2", page=27, dir=OPT, x=FULL, top=505, bottom=628),
     dict(id="co-a58-3", page=27, dir=OPT, x=FULL, top=638, bottom=761),
 
+    # ---- S'ENTRAÎNER · the worked examples (Exercices 4, 10, 13) ----
+    # The book prints these with the answer already ticked, in green. That is
+    # the point of them, so the tick is kept rather than cropped around.
+    dict(id="co-ex4-q1", page=30, dir=OPT, x=FULL, top=250, bottom=325),
+    dict(id="co-ex4-q3", page=30, dir=OPT, x=FULL, top=447, bottom=522),
+    dict(id="co-ex10", page=34, dir=DOC, x=FULL, top=285, bottom=535),
+    # Exercice 13's first row shares its line with a method note set to the
+    # right of it; the note is quoted as the exercice's tip instead, so the
+    # crop stops short of it.
+    dict(id="co-ex13-a", page=36, dir=DOC, x=(55, 350), top=288, bottom=354),
+    dict(id="co-ex13-b", page=36, dir=DOC, x=FULL, top=370, bottom=440),
+
     # ---- Épreuve blanche 1 · compréhension de l'oral ----
     # This one's A/B/C labels are drawn into the artwork rather than set as
     # text, so there is no anchor to stop at — the next "B." belongs to

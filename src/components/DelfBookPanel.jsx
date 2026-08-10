@@ -10,6 +10,7 @@ import { CO_MORE } from "../data/delfA1COMore.js";
 import { CO_PICTURES } from "../data/delfA1COPictures.js";
 import { CO_TRAIN } from "../data/delfA1COTrain.js";
 import { CO_GRID } from "../data/delfA1COGrid.js";
+import { CO_WORKED } from "../data/delfA1COWorked.js";
 import { BLANC1_CO, BLANC2_CO } from "../data/delfA1BlancCO.js";
 import { BLANC1_CE, BLANC2_CE } from "../data/delfA1BlancCE.js";
 import { INTRO, PE, PO, BLANCS } from "../data/delfA1Book.js";
@@ -108,20 +109,6 @@ function PaperNote({ title, sub, children }) {
   );
 }
 
-// A note about coverage: worth being able to find, not worth a card.
-function Missing({ children }) {
-  return (
-    <details style={{ marginTop: "0.7rem" }}>
-      <summary style={{ cursor: "pointer", fontSize: "0.63rem", color: C.gray2 }}>
-        Phần chưa có trong app
-      </summary>
-      <div style={{ marginTop: "0.35rem", fontSize: "0.68rem", color: C.gray, lineHeight: 1.6 }}>
-        {children}
-      </div>
-    </details>
-  );
-}
-
 function Grid({ rows, alwaysVi, total }) {
   return (
     <Card accent={C.gold}>
@@ -195,7 +182,12 @@ const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH, ...CO_MORE, ...CO_PICTURES]
 
 // Same for the exam-format exercices: the generated ones and the hand-written
 // picture grids belong in the book's order, not their pipeline's.
-const CO_EXERCICES = [...CO_TRAIN, ...CO_GRID].sort((a, b) => a.piste - b.piste);
+// The book's worked examples belong in the run too — Exercice 1 comes before
+// Exercice 2, solved or not.
+const CO_EXERCICES = [...CO_TRAIN, ...CO_GRID, ...CO_WORKED].sort((a, b) => a.piste - b.piste);
+
+// Worked examples can't be finished, so they don't count towards an objectif.
+const gradable = items => items.filter(i => !i.worked);
 
 // The book's five listening objectifs (p.12, 14, 17, 20, 24). Showing one at a
 // time keeps this screen to a handful of cards instead of the thirty-odd it
@@ -230,20 +222,15 @@ function EcouterTab({ done, onDone, alwaysVi }) {
 
       {/* The selected chip already names the objectif, so no title repeats it. */}
       <ObjectifPicker items={CO_OBJECTIFS} value={obj} onChange={setObj}
-        countOf={n => CO_DRILLS.filter(i => i.objectif === n).length
-                    + CO_EXERCICES.filter(i => i.objectif === n).length}
-        doneOf={n => [...CO_DRILLS, ...CO_EXERCICES].filter(i => i.objectif === n && done[i.id]).length} />
+        countOf={n => gradable([...CO_DRILLS, ...CO_EXERCICES]).filter(i => i.objectif === n).length}
+        doneOf={n => gradable([...CO_DRILLS, ...CO_EXERCICES])
+                       .filter(i => i.objectif === n && done[i.id]).length} />
 
       <SkillGroup title="SE PRÉPARER" sub="Nghe từng kỹ năng nhỏ" color={C.blue}
         items={drills} done={done} onDone={onDone} alwaysVi={alwaysVi} defaultOpen={false} />
 
       <SkillGroup title="S'ENTRAÎNER" sub="Đề đúng format thi" color={C.green}
         items={train} done={done} onDone={onDone} alwaysVi={alwaysVi} />
-
-      <Missing>
-        Exercices 1, 4, 7, 10 và 13 là bài mẫu của sách — in sẵn đáp án kèm lời giải thích,
-        không có trong Corrigés — nên chưa đưa vào.
-      </Missing>
     </div>
   );
 }
