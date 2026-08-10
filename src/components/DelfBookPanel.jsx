@@ -6,6 +6,8 @@ import ProductionBox from "./ProductionBox.jsx";
 import { DELF_A1_CE } from "../data/delfA1Reussite.js";
 import { CO_PREPARE } from "../data/delfA1CO.js";
 import { CO_MATCH } from "../data/delfA1COMatch.js";
+import { CO_MORE } from "../data/delfA1COMore.js";
+import { CO_PICTURES } from "../data/delfA1COPictures.js";
 import { CO_TRAIN } from "../data/delfA1COTrain.js";
 import { CO_GRID } from "../data/delfA1COGrid.js";
 import { BLANC1_CO, BLANC2_CO } from "../data/delfA1BlancCO.js";
@@ -188,7 +190,8 @@ function IntroTab({ alwaysVi }) {
 // The generated drills and the hand-written matching ones are one list, in the
 // book's own order — which activité came from which pipeline is our problem,
 // not the learner's.
-const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH].sort((a, b) => a.piste - b.piste);
+const CO_DRILLS = [...CO_PREPARE, ...CO_MATCH, ...CO_MORE, ...CO_PICTURES]
+  .sort((a, b) => a.piste - b.piste);
 
 // Same for the exam-format exercices: the generated ones and the hand-written
 // picture grids belong in the book's order, not their pipeline's.
@@ -238,8 +241,8 @@ function EcouterTab({ done, onDone, alwaysVi }) {
         items={train} done={done} onDone={onDone} alwaysVi={alwaysVi} />
 
       <Missing>
-        Các activité SE PRÉPARER dạng điền bảng và chọn hình. Exercices 1, 4, 7, 10 và 13 là bài mẫu
-        của sách (in sẵn đáp án, không có trong Corrigés) nên chưa đưa vào.
+        Exercices 1, 4, 7, 10 và 13 là bài mẫu của sách — in sẵn đáp án kèm lời giải thích,
+        không có trong Corrigés — nên chưa đưa vào.
       </Missing>
     </div>
   );

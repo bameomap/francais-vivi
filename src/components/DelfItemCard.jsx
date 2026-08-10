@@ -163,7 +163,9 @@ export function DocBlock({ doc }) {
 function Question({ q, n, value, onPick, checked, reveal, color, alwaysVi }) {
   const isImage = q.kind === "image";
   const ok = value != null && value === q.answer;
-  const choices = isImage ? LETTERS : q.options;
+  // A picture question labels its drawings A, B, C unless it says otherwise —
+  // some of the book's have only two drawings, or number them instead.
+  const choices = isImage ? (q.options || LETTERS) : q.options;
   const show = checked || reveal;
 
   return (

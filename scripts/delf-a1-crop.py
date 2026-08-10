@@ -290,6 +290,49 @@ CROPS = [
     dict(id="co-ex14", page=36, dir=DOC, x=FULL, top=628, bottom=800),
     dict(id="co-ex15", page=37, dir=DOC, x=FULL, top=170, bottom=355),
 
+    # ---- SE PRÉPARER · the picture drills (p.13–27) ----
+    # Same idea as the two above: the grid is the document and its labels are
+    # the questions. Every one of these gives raw y coordinates rather than
+    # anchors, because the only text inside them is the label row we are
+    # cutting *down to* — an anchor would stop at the top of the drawing.
+    dict(id="co-a10", page=13, dir=DOC, x=FULL, top=712, bottom=812),
+    dict(id="co-a14", page=14, dir=DOC, x=FULL, top=660, bottom=800),
+    dict(id="co-a30", page=18, dir=DOC, x=FULL, top=292, bottom=395),
+    # Activité 32's six drawings straddle the page break, as do 33's three maps.
+    dict(id="co-a32-abc", page=18, dir=DOC, x=FULL, top=648, bottom=802),
+    dict(id="co-a32-def", page=19, dir=DOC, x=FULL, top=40, bottom=240),
+    dict(id="co-a33-ab", page=19, dir=DOC, x=FULL, top=290, bottom=542),
+    dict(id="co-a33-c", page=19, dir=DOC, x=FULL, top=548, bottom=788),
+    dict(id="co-a39", page=21, dir=DOC, x=FULL, top=126, bottom=260),
+    dict(id="co-a40", page=21, dir=DOC, x=FULL, top=298, bottom=412),
+    # The answer blanks for Activité 42 run down the right half of the column;
+    # only the photo on the left is the document.
+    dict(id="co-a42", page=21, dir=DOC, x=(62, 305), top=636, bottom=800),
+    dict(id="co-a47-abc", page=23, dir=DOC, x=FULL, top=140, bottom=292),
+    dict(id="co-a47-def", page=23, dir=DOC, x=FULL, top=296, bottom=444),
+    dict(id="co-a48-abc", page=23, dir=DOC, x=FULL, top=498, bottom=653),
+    dict(id="co-a48-def", page=23, dir=DOC, x=FULL, top=657, bottom=803),
+    # Activité 49 sets its three messages as three small A/B pairs scattered
+    # across the page, so each is cut as that question's own picture choice.
+    dict(id="co-a49-q1", page=24, dir=OPT, x=(95, 265), top=218, bottom=328),
+    dict(id="co-a49-q2", page=24, dir=OPT, x=(342, 500), top=218, bottom=326),
+    dict(id="co-a49-q3", page=24, dir=OPT, x=(220, 378), top=347, bottom=433),
+    dict(id="co-a50", page=24, dir=DOC, x=FULL, top=480, bottom=615),
+    dict(id="co-a51", page=24, dir=DOC, x=FULL, top=664, bottom=800),
+    dict(id="co-a52", page=25, dir=DOC, x=FULL, top=124, bottom=270),
+    dict(id="co-a53", page=25, dir=DOC, x=FULL, top=315, bottom=478),
+    dict(id="co-a54-q1", page=25, dir=OPT, x=(330, 500), top=548, bottom=637),
+    dict(id="co-a54-q2", page=25, dir=OPT, x=(330, 500), top=642, bottom=716),
+    dict(id="co-a54-q3", page=25, dir=OPT, x=(330, 500), top=722, bottom=800),
+    dict(id="co-a55", page=26, dir=DOC, x=FULL, top=126, bottom=225),
+    dict(id="co-a56", page=26, dir=DOC, x=FULL, top=275, bottom=495),
+    # Frida's six plates are on p.26, Richard's on p.27 — one grid each.
+    dict(id="co-a57-frida", page=26, dir=DOC, x=FULL, top=572, bottom=792),
+    dict(id="co-a57-richard", page=27, dir=DOC, x=FULL, top=90, bottom=308),
+    dict(id="co-a58-1", page=27, dir=OPT, x=FULL, top=372, bottom=496),
+    dict(id="co-a58-2", page=27, dir=OPT, x=FULL, top=505, bottom=628),
+    dict(id="co-a58-3", page=27, dir=OPT, x=FULL, top=638, bottom=761),
+
     # ---- Épreuve blanche 1 · compréhension de l'oral ----
     # This one's A/B/C labels are drawn into the artwork rather than set as
     # text, so there is no anchor to stop at — the next "B." belongs to
